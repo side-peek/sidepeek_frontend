@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom"
-import GlobalStyles from "./styles/GlobalStyles.tsx"
 import { ThemeProvider } from "styled-components"
-import { theme } from "./styles/theme.ts"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { theme } from "@styles/theme.ts"
+import GlobalStyles from "@styles/GlobalStyles"
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -1,71 +1,42 @@
-// tsconfig.json
-
 {
   "compilerOptions": {
-    // ECMAScript 목표 버전 설정
     "target": "ES2020",
-
-    //클래스 필드를 ECMAScript-표준 시맨틱으로 내보냅니다.
     "useDefineForClassFields": true,
-
-    // 컴파일 과정에 사용될 라이브러리 파일 설정
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-
-    // 선언 파일들의 타입 체크를 생략
     "skipLibCheck": true,
 
     /* Bundler mode */
     "module": "ESNext",
     "moduleResolution": "bundler",
 
-    // TypeScript에서 .ts, .mts, .tsx와 같은 명시적인 확장자가 붙은 파일을 import 할 수 있게 한다
     "allowImportingTsExtensions": true,
-
-    // 확장자가 .json인 모듈의 import를 허용하는 설정
     "resolveJsonModule": true,
-
-    // 각 파일을 별도 모듈로 변환
     "isolatedModules": true,
-
-    // 타입스크립트를 컴파일하면, JavaScript 변환 파일을 만들어 내지 않도록 하는 설정
     "noEmit": true,
-
-    // tsx 파일을 jsx로 어떻게 컴파일할 것인지
     "jsx": "react-jsx",
 
     /* Linting */
-
-    // 타입스크립트의 각종 타입 체킹 동작을 전부 활성화
     "strict": true,
-    // 쓰지않는 지역변수 있으면 에러내기
     "noUnusedLocals": true,
-
-    // 쓰지않는 파라미터 있으면 에러내기
     "noUnusedParameters": true,
-
-    // switch문 이상하면 에러내기.
-    //  예를들어 switch 문에서 비어 있지 않은 Case라면 반드시 break 문이나 return 문으로
-    //  해당 Case를 종료시키도록 에러를 내준다
     "noFallthroughCasesInSwitch": true,
-
-    // 파일의 이름을 대소문자 판별하게 하는 옵션
-    //  프로그래밍 세계에선 같은 알파벳이라도 대소문자를 모두 구분하기 때문에 이 옵션은 가능한 true 권장
     "forceConsistentCasingInFileNames": false,
-
-    // import 구문의 모듈 해석 시에 기준이 되는 경로를 지정(상대경로가 복잡하니까 절대경로 설정)
-
-    // 기본 경로
     "baseUrl": "src",
-
-    // 'baseUrl'을 기준으로 상대 위치로 가져오기를 다시 매핑하는 항목 설정
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["src/*"],
+      "@components/*": ["components/*"],
+      "@apis/*": ["apis/*"],
+      "@assets/*": ["assets/*"],
+      "@hooks/*": ["hooks/*"],
+      "@pages/*": ["pages/*"],
+      "@stores/*": ["stores/*"],
+      "@constants/*": ["constants/*"],
+      "@styles/*": ["styles/*"],
+      "@types/*": ["types/*"],
+      "@utils/*": ["utils/*"]
     }
   },
 
-  // 컴파일할 파일들을 지정하는 속성 (와일드 카드 패턴으로 묶어 표현)
   "include": ["src"],
-
-  // 여러 개의 하위 프로젝트로 구성된 프로젝트의 의존 관계를 지정하는 속성
   "references": [{ "path": "./tsconfig.node.json" }]
 }
