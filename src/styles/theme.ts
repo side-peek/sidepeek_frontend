@@ -6,6 +6,8 @@ const themeConfig = {
   styles: {
     global: (props: StyleFunctionProps) => ({
       html: {
+        width: "100%",
+        height: "100%",
         fontSize: "62.5%",
       },
       body: {
