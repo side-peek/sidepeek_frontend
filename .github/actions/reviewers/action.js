@@ -2,7 +2,7 @@ import { getInput, setFailed } from "@actions/core"
 import { context, getOctokit } from "@actions/github"
 
 try {
-  const candidates = getInput("reviewers")
+  const candidates = getInput("reviewers").split(", ")
   const reviewers = selectRandomReviewer(candidates)
   const token = getInput("github_token")
   const octokit = getOctokit(token)
