@@ -31,7 +31,7 @@ jobs:
           npm ci
 
       - name: Assign reviewers randomly
-        uses: ./.github/actions/core
+        uses: ./.github/actions/reviewers
         with:
           github_token: ${{secrets.token}}
           reviewers: ${{vars.reviewers}}
