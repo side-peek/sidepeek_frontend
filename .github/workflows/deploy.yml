@@ -30,6 +30,11 @@ jobs:
           echo 'npm cache existed'
           npm ci
 
+      - name: Assign assignee
+        uses: hkusu/review-assign-action@v1
+        with:
+          assignees: ${{ github.actor }}
+
       - name: Assign reviewers randomly
         uses: ./.github/actions/reviewers
         with:
