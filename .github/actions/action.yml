@@ -1,0 +1,11 @@
+name: "core"
+
+inputs:
+  reviewers:
+    required: true
+  github_token:
+    required: true
+
+runs:
+  using: "node16"
+  main: "action.js"
