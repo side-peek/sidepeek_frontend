@@ -1,16 +1,21 @@
 import { extendTheme } from "@chakra-ui/react"
 import { StyleFunctionProps, mode } from "@chakra-ui/theme-tools"
 
+import "./fonts/index.css"
+
 const themeConfig = {
   config: { initialColorMode: "light", useSystemColorMode: false },
   styles: {
     global: (props: StyleFunctionProps) => ({
       html: {
+        width: "100%",
+        height: "100%",
         fontSize: "62.5%",
       },
       body: {
         bg: mode("white", "black.300")(props),
         color: mode("black", "white")(props),
+        fontFamily: "SCDream_Regular",
       },
     }),
   },
