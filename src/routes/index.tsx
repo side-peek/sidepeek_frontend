@@ -17,12 +17,12 @@ export const router = createBrowserRouter([
         <Outlet />
       </>
     ),
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
         index: true,
         element: <HomePage />,
-        errorElement: <ErrorPage />,
       },
       {
         path: "/project",

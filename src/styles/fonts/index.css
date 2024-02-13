@@ -1,0 +1,44 @@
+@font-face {
+  font-family: "SCDream_Thin";
+  src: url("./SCDream1.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "SCDream_ExtraLight";
+  src: url("./SCDream2.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "SCDream_Light";
+  src: url("./SCDream3.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "SCDream_Regular";
+  src: url("./SCDream4.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "SCDream_Medium";
+  src: url("./SCDream5.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "SCDream_Bold";
+  src: url("./SCDream6.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "SCDream_ExtraBold";
+  src: url("./SCDream7.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "SCDream_Heavy";
+  src: url("./SCDream8.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "SCDream_Black";
+  src: url("./SCDream9.otf") format("opentype");
+}
