@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom"
+import { Outlet, createBrowserRouter } from "react-router-dom"
 
 import ErrorPage from "@pages/ErrorPage/ErrorPage"
 import HomePage from "@pages/HomePage/HomePage"
@@ -11,24 +11,36 @@ import SignUpPage from "@pages/SignUpPage/SignUpPage"
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <HomePage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/project",
-    element: <ProjectListPage />,
+    element: (
+      <>
+        {/* <Header /> */}
+        <Outlet />
+      </>
+    ),
     children: [
       {
-        path: ":projectId",
-        element: <ProjectDetailPage />,
+        path: "/",
+        index: true,
+        element: <HomePage />,
+        errorElement: <ErrorPage />,
       },
       {
-        path: ":projectId/edit",
-        element: <ProjectEditPage />,
+        path: "/project",
+        element: <ProjectListPage />,
+        children: [
+          {
+            path: ":projectId",
+            element: <ProjectDetailPage />,
+          },
+          {
+            path: ":projectId/edit",
+            element: <ProjectEditPage />,
+          },
+        ],
       },
     ],
   },
+
   {
     path: "/profile/:userId",
     element: <ProfilePage />,
