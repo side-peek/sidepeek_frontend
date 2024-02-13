@@ -37,7 +37,6 @@ const ErrorPage = () => {
           _hover={{ opacity: 0.5 }}
           height="5rem"
           width="15rem"
-          fontFamily="SCDream_Medium"
           onClick={goHome}>
           홈으로
         </Button>
