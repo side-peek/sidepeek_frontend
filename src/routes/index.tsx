@@ -1,6 +1,7 @@
 import { Outlet, createBrowserRouter } from "react-router-dom"
 
 import App from "@/App"
+import TestPage from "@/pages/TestPage/TestPage"
 
 import ErrorPage from "@pages/ErrorPage/ErrorPage"
 import HomePage from "@pages/HomePage/HomePage"
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUpPage />,
+      },
+      {
+        path: "/test",
+        element: <TestPage />,
       },
     ],
   },
