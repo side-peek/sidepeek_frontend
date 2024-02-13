@@ -32,8 +32,7 @@
   font-family: "SCDream_ExtraBold";
   src: url("./SCDream7.otf") format("opentype");
 }
-
-@font-face {
+` @font-face {
   font-family: "SCDream_Heavy";
   src: url("./SCDream8.otf") format("opentype");
 }
