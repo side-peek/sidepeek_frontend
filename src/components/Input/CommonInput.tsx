@@ -1,7 +1,7 @@
 import { Input } from "@chakra-ui/react"
 
-const InputComponent = () => {
+const CommonInput = () => {
   return <Input placeholder="basic"></Input>
 }
 
-export default InputComponent
+export default CommonInput
