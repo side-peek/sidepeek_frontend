@@ -30,7 +30,7 @@ const ErrorPage = () => {
       </Text>
       <Center>
         <Button
-          bg="#0C356A"
+          bg="blue.100"
           color="white"
           size="lg"
           borderRadius="1rem"
