@@ -5,32 +5,30 @@ import { Input, InputGroup, InputRightElement, Stack } from "@chakra-ui/react"
 import { CommonInputProps } from "./types/types"
 
 const CommonInput = ({
-  // isInvalid = false,
+  type,
+  required,
+  register,
+  variant = "outline",
   width = "20rem",
   size = "md",
-  register,
-  required,
-  placeholder,
-  variant = "outline",
-  stackStyle,
-  type,
   borderRadius = "0rem",
+  placeholder,
+  stackStyle,
   ...rest
 }: CommonInputProps) => {
   return (
     <Stack style={stackStyle}>
       <InputGroup width={width}>
         <Input
-          // paddingLeft="1rem"
-          // isInvalid={isInvalid}
+          type={type}
+          required={required}
+          {...register}
           size={size}
           variant={variant}
           placeholder={placeholder}
-          required={required}
-          type={type}
           borderRadius={borderRadius}
-          _focus={{ boxShadow: "none", borderColor: "black" }}
-          {...register}
+          borderColor="black.400"
+          _focus={{ boxShadow: "none", borderColor: "black.100" }}
           {...rest}></Input>
         <InputRightElement
           pointerEvents="none"
