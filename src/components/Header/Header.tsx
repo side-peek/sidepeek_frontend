@@ -20,7 +20,11 @@ import Menu from "./components/Menu"
 
 const Header = () => {
   return (
-    <Center bg="#fff">
+    <Center
+      w="100%"
+      position="fixed"
+      bg="#fff"
+      boxShadow="md">
       <Flex
         flex="1"
         h="headerHeight"
@@ -38,7 +42,10 @@ const Header = () => {
           />
         </Link>
         {/* 검색창 */}
-        <Center>
+        <Box
+          pl="1.5rem"
+          alignSelf="end"
+          pb="2rem">
           <InputGroup>
             <InputRightElement>
               <Icon
@@ -48,11 +55,12 @@ const Header = () => {
               />
             </InputRightElement>
             <Input
+              size="lg"
               variant="flushed"
               placeholder="검색어를 입력하세요"
             />
           </InputGroup>
-        </Center>
+        </Box>
         <Spacer />
         {/* 메뉴 */}
         <Box>
