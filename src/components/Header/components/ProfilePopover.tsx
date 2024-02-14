@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 import {
   Divider,
   Heading,
@@ -9,7 +11,6 @@ import {
   PopoverHeader,
   PopoverTrigger,
 } from "@chakra-ui/react"
-import { ReactNode } from "react"
 
 interface IProfilePopover {
   ProfileButton: ReactNode

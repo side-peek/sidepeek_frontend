@@ -1,5 +1,6 @@
 import { BellIcon } from "@chakra-ui/icons"
 import { Avatar, HStack, IconButton } from "@chakra-ui/react"
+
 import NotificationPopover from "./NotificationPopover"
 import ProfilePopover from "./ProfilePopover"
 

@@ -1,15 +1,16 @@
+import { Search2Icon } from "@chakra-ui/icons"
 import {
   Box,
   Button,
+  Center,
+  Flex,
   Input,
   InputGroup,
   InputRightElement,
-  Center,
   Spacer,
-  Flex,
 } from "@chakra-ui/react"
+
 import Menu from "./components/Menu"
-import { Search2Icon } from "@chakra-ui/icons"
 
 const Header = () => {
   return (
