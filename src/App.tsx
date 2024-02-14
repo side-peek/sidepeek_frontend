@@ -1,12 +1,11 @@
-import { Outlet } from "react-router-dom"
+import { RouterProvider } from "react-router-dom"
 
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react"
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
-import { theme } from "@styles/theme"
-
-import GlobalStyles from "./styles/GlobalStyles"
+import { router } from "./routes"
+import { theme } from "./styles/theme"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,9 +24,8 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={theme}>
-        <GlobalStyles />
         <ColorModeScript initialColorMode="light" />
-        <Outlet />
+        <RouterProvider router={router} />
       </ChakraProvider>
     </QueryClientProvider>
   )
