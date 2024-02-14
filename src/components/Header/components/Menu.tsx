@@ -1,5 +1,6 @@
-import { BellIcon } from "@chakra-ui/icons"
-import { Avatar, HStack, IconButton } from "@chakra-ui/react"
+import { FaRegBell } from "react-icons/fa"
+
+import { Avatar, HStack, Icon, IconButton } from "@chakra-ui/react"
 
 import NotificationPopover from "./NotificationPopover"
 import ProfilePopover from "./ProfilePopover"
@@ -12,19 +13,20 @@ const Menu = () => {
           <IconButton
             aria-label="notification popover"
             icon={
-              <BellIcon
-                w={6}
-                h={6}
+              <Icon
+                as={FaRegBell}
+                w="3rem"
+                h="3rem"
               />
             }
             bg={"transparent"}
             _before={{
               content: "''",
               position: "absolute",
-              top: "25%",
-              right: "25%",
-              width: "0.5rem",
-              height: "0.5rem",
+              top: "5%",
+              right: "10%",
+              width: "1rem",
+              height: "1rem",
               bg: "red",
               borderRadius: "full",
             }}
@@ -35,7 +37,7 @@ const Menu = () => {
         ProfileButton={
           <Avatar
             as="button"
-            size="sm"
+            size="md"
             aria-label="profile popover"
             transition="all 0.2s"
             _hover={{ filter: "brightness(90%)" }}
