@@ -1,14 +1,10 @@
 import { useNavigate } from "react-router-dom"
 
 import { Button, Center, Img, Text } from "@chakra-ui/react"
-import { User } from "api-models"
 
 import errorgif from "@assets/images/error.gif"
 
 const ErrorPage = () => {
-  const s: User = 1
-  console.log(s)
-
   const navigate = useNavigate()
   const goHome = () => {
     navigate("/")
