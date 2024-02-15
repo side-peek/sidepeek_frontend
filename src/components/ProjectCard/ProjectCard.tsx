@@ -1,4 +1,7 @@
-import { Box, Flex, Heading, Image, Stack, Text } from "@chakra-ui/react"
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io"
+import { MdRemoveRedEye } from "react-icons/md"
+
+import { Box, Flex, Heading, Icon, Image, Stack, Text } from "@chakra-ui/react"
 
 interface ProjectCardProps {
   imgUrl: string
@@ -9,7 +12,6 @@ interface ProjectCardProps {
   content: string
 }
 
-// 추후 아이콘 컴포넌트 추가시 넣을 예정
 const ProjectCard = ({
   imgUrl,
   viewCount,
@@ -20,7 +22,6 @@ const ProjectCard = ({
 }: ProjectCardProps) => {
   return (
     <Box
-      position="relative"
       width="100%"
       padding="1rem"
       cursor="pointer">
@@ -54,18 +55,44 @@ const ProjectCard = ({
           </Text>
         </Box>
       </Box>
-
       <Stack
-        mt="5"
+        mt="4"
         paddingLeft=".5rem"
         spacing="1">
         <Flex alignItems="center">
           <Heading size="md">{title}</Heading>
-          <Text
+          <Flex
             ml="auto"
             paddingRight={5}>
-            {viewCount} {isFullHeart} {heartCount}
-          </Text>
+            <Icon
+              as={MdRemoveRedEye}
+              w="1.3rem"
+              h="1.3rem"
+            />
+            <Text
+              paddingLeft=".5rem"
+              paddingRight=".5rem">
+              {viewCount}
+            </Text>
+            {isFullHeart ? (
+              <Icon
+                as={IoMdHeart}
+                w="1.3rem"
+                h="1.3rem"
+              />
+            ) : (
+              <Icon
+                as={IoMdHeartEmpty}
+                w="1.3rem"
+                h="1.3rem"
+              />
+            )}
+            <Text
+              paddingLeft=".5rem"
+              paddingRight=".5rem">
+              {heartCount}
+            </Text>
+          </Flex>
         </Flex>
         <Text
           width="95%"
