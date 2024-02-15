@@ -12,13 +12,13 @@ import {
   PopoverTrigger,
 } from "@chakra-ui/react"
 
-interface INotificationPopover {
+interface NotificationPopoverProps {
   NotificationIconButton: ReactNode
 }
 
 const NotificationPopover = ({
   NotificationIconButton,
-}: INotificationPopover) => {
+}: NotificationPopoverProps) => {
   return (
     <Popover>
       <PopoverTrigger>{NotificationIconButton}</PopoverTrigger>

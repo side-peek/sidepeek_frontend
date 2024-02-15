@@ -1,21 +1,17 @@
 import { IoSearch } from "react-icons/io5"
-import { Link as ReactRouterLink } from "react-router-dom"
 
 import {
   Box,
   Center,
   Flex,
   Icon,
-  Image,
   Input,
   InputGroup,
   InputRightElement,
-  Link,
   Spacer,
 } from "@chakra-ui/react"
 
-import SidePeekLogoSVG from "@assets/svgs/sidepeek_logo.svg"
-
+import HeaderLogo from "./components/HeaderLogo"
 import Menu from "./components/Menu"
 
 const Header = () => {
@@ -23,7 +19,7 @@ const Header = () => {
     <Center
       w="100%"
       position="fixed"
-      bg="#fff"
+      bg="white"
       boxShadow="md">
       <Flex
         flex="1"
@@ -33,14 +29,9 @@ const Header = () => {
         gap="1.6rem"
         px="1.6rem">
         {/* 로고 */}
-        <Link
-          as={ReactRouterLink}
-          to="/">
-          <Image
-            src={SidePeekLogoSVG}
-            alt="side peek logo"
-          />
-        </Link>
+        <Box>
+          <HeaderLogo />
+        </Box>
         {/* 검색창 */}
         <Box
           pl="1.5rem"

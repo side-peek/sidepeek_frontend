@@ -12,11 +12,11 @@ import {
   PopoverTrigger,
 } from "@chakra-ui/react"
 
-interface IProfilePopover {
+interface ProfilePopoverProps {
   ProfileButton: ReactNode
 }
 
-const ProfilePopover = ({ ProfileButton }: IProfilePopover) => {
+const ProfilePopover = ({ ProfileButton }: ProfilePopoverProps) => {
   return (
     <Popover>
       <PopoverTrigger>{ProfileButton}</PopoverTrigger>
