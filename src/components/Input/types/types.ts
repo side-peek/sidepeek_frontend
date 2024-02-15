@@ -1,16 +1,17 @@
-import { CSSProperties } from "react"
+import { CSSProperties, ReactNode } from "react"
 import { UseFormRegisterReturn } from "react-hook-form"
 
 export interface CommonInputProps {
-  //   isInvalid?: boolean
-  register?: UseFormRegisterReturn
-  required: boolean
+  type: "text" | "email" | "password"
+  register: UseFormRegisterReturn
+  required?: boolean
   placeholder?: string
   variant?: "outline" | "filled" | "flushed" | "unstyled"
-  size?: "xs" | "sm" | "md" | "lg"
   width?: string
-  stackStyle?: CSSProperties
-  type: "text" | "email" | "password"
+  size?: "xs" | "sm" | "md" | "lg"
+  fontSize?: string
   borderRadius?: string
+  stackStyle?: CSSProperties
+  children?: ReactNode
   [key: string]: unknown
 }
