@@ -1,4 +1,4 @@
-import { Outlet, createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter } from "react-router-dom"
 
 import ErrorPage from "@pages/ErrorPage/ErrorPage"
 import HomePage from "@pages/HomePage/HomePage"
@@ -10,14 +10,11 @@ import ProjectListPage from "@pages/ProjectListPage/ProjectListPage"
 import SignUpPage from "@pages/SignUpPage/SignUpPage"
 import TestPage from "@pages/TestPage/TestPage"
 
+import DefaultLayout from "@styles/layouts/DefaultLayout"
+
 export const router = createBrowserRouter([
   {
-    element: (
-      <>
-        {/* <Header /> */}
-        <Outlet />
-      </>
-    ),
+    element: <DefaultLayout />,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -40,23 +37,14 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: "/login",
-        element: <LoginPage />,
-      },
-      {
-        path: "/signup",
-        element: <SignUpPage />,
-      },
-      {
         path: "/test",
         element: <TestPage />,
       },
+      {
+        path: "/profile/:userId",
+        element: <ProfilePage />,
+      },
     ],
-  },
-
-  {
-    path: "/profile/:userId",
-    element: <ProfilePage />,
   },
   {
     path: "/login",
