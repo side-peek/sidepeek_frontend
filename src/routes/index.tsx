@@ -1,8 +1,5 @@
 import { createBrowserRouter } from "react-router-dom"
 
-import { AUTH_USER_TEST_DATA } from "@/constants/user"
-import useAuthStore from "@/stores/useAuthStore"
-
 import ErrorPage from "@pages/ErrorPage/ErrorPage"
 import HomePage from "@pages/HomePage/HomePage"
 import LoginPage from "@pages/LoginPage/LoginPage"
@@ -19,9 +16,6 @@ export const router = createBrowserRouter([
   {
     element: <DefaultLayout />,
     errorElement: <ErrorPage />,
-    loader: async () => {
-      useAuthStore.getState().updateUser(AUTH_USER_TEST_DATA)
-    },
     children: [
       {
         path: "/",
