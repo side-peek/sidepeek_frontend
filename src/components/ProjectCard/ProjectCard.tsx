@@ -1,7 +1,16 @@
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io"
 import { MdRemoveRedEye } from "react-icons/md"
 
-import { Box, Flex, Heading, Icon, Image, Stack, Text } from "@chakra-ui/react"
+import {
+  Box,
+  Center,
+  Flex,
+  Heading,
+  Icon,
+  Image,
+  Stack,
+  Text,
+} from "@chakra-ui/react"
 
 interface ProjectCardProps {
   imgUrl: string
@@ -35,7 +44,7 @@ const ProjectCard = ({
           alt="projectImg"
           width="100%"
         />
-        <Box
+        <Center
           className="hover-overlay"
           position="absolute"
           top="0"
@@ -44,36 +53,29 @@ const ProjectCard = ({
           height="100%"
           opacity={0}
           backgroundColor="rgba(0, 0, 0, 0.5)"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
           transition="opacity 0.3s">
           <Text
             color="white"
-            fontSize="2rem">
+            fontSize="2xl">
             더보기
           </Text>
-        </Box>
+        </Center>
       </Box>
       <Stack
         mt="4"
-        paddingLeft=".5rem"
+        paddingLeft="0.5rem"
         spacing="1">
         <Flex alignItems="center">
           <Heading size="md">{title}</Heading>
           <Flex
             ml="auto"
-            paddingRight={5}>
+            gap="0.5rem">
             <Icon
               as={MdRemoveRedEye}
               w="1.3rem"
               h="1.3rem"
             />
-            <Text
-              paddingLeft=".5rem"
-              paddingRight=".5rem">
-              {viewCount}
-            </Text>
+            <Text>{viewCount}</Text>
             {isFullHeart ? (
               <Icon
                 as={IoMdHeart}
@@ -87,11 +89,7 @@ const ProjectCard = ({
                 h="1.3rem"
               />
             )}
-            <Text
-              paddingLeft=".5rem"
-              paddingRight=".5rem">
-              {heartCount}
-            </Text>
+            <Text>{heartCount}</Text>
           </Flex>
         </Flex>
         <Text
