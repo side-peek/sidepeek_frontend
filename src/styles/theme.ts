@@ -81,6 +81,9 @@ const themeConfig = {
     toast: 90,
     tooltip: 100,
   },
+  sizes: {
+    headerHeight: "9.5rem",
+  },
   semanticTokens: {},
 }
 
