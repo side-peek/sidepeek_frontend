@@ -2,7 +2,7 @@ import { MouseEventHandler } from "react"
 
 import { Tag, TagCloseButton, TagLabel } from "@chakra-ui/react"
 
-import { CustomTagProps } from "../types/customTagProps"
+import { CustomTagProps } from "../types/customTag"
 
 interface CloseButtonTagProps extends Omit<CustomTagProps, "onClickLabel"> {
   onClickCloseButton: MouseEventHandler

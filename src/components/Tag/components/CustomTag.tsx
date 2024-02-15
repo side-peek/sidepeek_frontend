@@ -1,6 +1,6 @@
 import { Tag, TagLabel } from "@chakra-ui/react"
 
-import { CustomTagProps } from "../types/customTagProps"
+import { CustomTagProps } from "../types/customTag"
 
 const CustomTag = ({
   label,
