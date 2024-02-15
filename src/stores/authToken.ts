@@ -12,7 +12,7 @@ class AuthToken {
   setToken(newToken: string) {
     try {
       const stringifiedData = JSON.stringify(newToken)
-      sessionStorage.setItem(this.KEY, stringifiedData)
+      localStorage.setItem(this.KEY, stringifiedData)
       this.token = newToken
     } catch (e) {
       this.token = ""
@@ -21,7 +21,7 @@ class AuthToken {
 
   getToken() {
     try {
-      const res = sessionStorage.getItem(this.KEY)
+      const res = localStorage.getItem(this.KEY)
       if (!res) {
         return this.token
       }
@@ -33,7 +33,7 @@ class AuthToken {
   }
 
   removeToken() {
-    sessionStorage.removeItem(this.KEY)
+    localStorage.removeItem(this.KEY)
   }
 }
 

@@ -30,7 +30,13 @@ const useAuthStore = create<AuthUserStore>()(
         }))
       },
 
-      setLogout: () => {},
+      setLogout: () => {
+        authToken.removeToken()
+        set(() => ({
+          isLoggedIn: false,
+          user: AUTH_USER_INITIAL_USER_DATA,
+        }))
+      },
     }),
     {
       name: PERSIST_STORAGE_KEY,
