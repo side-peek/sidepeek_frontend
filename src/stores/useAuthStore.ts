@@ -9,6 +9,7 @@ interface AuthUserStore {
   user: User
   setLogin: (user: User, token: string) => void
   setLogout: () => void
+  updateUser: (user: User) => void
 }
 
 const useAuthStore = create<AuthUserStore>()((set) => ({
@@ -25,6 +26,12 @@ const useAuthStore = create<AuthUserStore>()((set) => ({
     authToken.removeToken()
     set(() => ({
       user: AUTH_USER_INITIAL_USER_DATA,
+    }))
+  },
+
+  updateUser: (user: User) => {
+    set(() => ({
+      user: user,
     }))
   },
 }))

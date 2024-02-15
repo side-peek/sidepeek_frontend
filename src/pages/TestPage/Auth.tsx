@@ -5,7 +5,11 @@ import useAuthStore from "@/stores/useAuthStore"
 
 const Auth = () => {
   const { user, setLogin, setLogout } = useAuthStore()
-  console.log(user)
+  if (user.id) {
+    console.log("로그인 상태")
+  } else {
+    console.log("로그아웃 상태")
+  }
 
   const handleLogin = () => {
     setLogin(AUTH_USER_TEST_DATA, "123")
