@@ -1,11 +1,13 @@
+import { User } from "api-models"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
+
+import AUTH_USER_INITIAL_USER_DATA from "@/constants/user"
 
 import authToken from "./authToken"
 
 const PERSIST_STORAGE_KEY = "useAuthStoreKey"
 
-interface User {}
 interface AuthUserStore {
   isLoggedIn: boolean
   user: User
@@ -18,7 +20,7 @@ const useAuthStore = create<AuthUserStore>()(
   persist(
     (set) => ({
       isLoggedIn: false,
-      user: "",
+      user: AUTH_USER_INITIAL_USER_DATA,
 
       setLogin: (user, token) => {
         authToken.setToken(token)
