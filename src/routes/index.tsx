@@ -1,6 +1,7 @@
 import { Outlet, createBrowserRouter } from "react-router-dom"
-import App from "@/App"
+
 import TestPage from "@/pages/TestPage/TestPage"
+
 import ErrorPage from "@pages/ErrorPage/ErrorPage"
 import HomePage from "@pages/HomePage/HomePage"
 import LoginPage from "@pages/LoginPage/LoginPage"
