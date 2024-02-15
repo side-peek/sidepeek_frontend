@@ -16,7 +16,7 @@ const CustomTag = ({
         variant={variant}
         colorScheme={colorScheme}
         onClick={onClickLabel}
-        padding="0.5rem">
+        padding="0.75rem">
         <TagLabel>{label}</TagLabel>
       </Tag>
     </>
