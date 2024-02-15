@@ -1,4 +1,5 @@
 const { VITE_AUTH_JWT_TOKEN_STORAGE_KEY } = import.meta.env
+
 class AuthToken {
   private token: string
   private KEY: string
@@ -11,7 +12,7 @@ class AuthToken {
   setToken(newToken: string) {
     try {
       const stringifiedData = JSON.stringify(newToken)
-      localStorage.setItem(this.KEY, stringifiedData)
+      sessionStorage.setItem(this.KEY, stringifiedData)
       this.token = newToken
     } catch (e) {
       this.token = ""
@@ -20,7 +21,7 @@ class AuthToken {
 
   getToken() {
     try {
-      const res = localStorage.getItem(this.KEY)
+      const res = sessionStorage.getItem(this.KEY)
       if (!res) {
         return this.token
       }
@@ -32,7 +33,7 @@ class AuthToken {
   }
 
   removeToken() {
-    localStorage.removeItem(this.KEY)
+    sessionStorage.removeItem(this.KEY)
   }
 }
 
