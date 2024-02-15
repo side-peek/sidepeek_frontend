@@ -16,9 +16,9 @@ import {
   Text,
 } from "@chakra-ui/react"
 
-import githubSVG from "@assets/github.svg"
-import backSpaceSVG from "@assets/keyboard_backspace.svg"
-import sidePeekSVG from "@assets/sidepeek_logo.svg"
+import GithubSVG from "@assets/svgs/github.svg"
+import BackSpaceSVG from "@assets/svgs/keyboard_backspace.svg"
+import SidePeekSVG from "@assets/svgs/sidepeek_logo.svg"
 
 const LoginPage = () => {
   const navigate = useNavigate()
@@ -37,7 +37,7 @@ const LoginPage = () => {
           background="transparent"
           onClick={() => navigate(-1)}>
           <Image
-            src={backSpaceSVG}
+            src={BackSpaceSVG}
             alt="backspace"
           />
         </Button>
@@ -52,7 +52,7 @@ const LoginPage = () => {
                 w="15rem"
                 ratio={5 / 1.3}>
                 <Image
-                  src={sidePeekSVG}
+                  src={SidePeekSVG}
                   alt="side-peek logo"
                 />
               </AspectRatio>
@@ -112,7 +112,7 @@ const LoginPage = () => {
             color="white"
             leftIcon={
               <Image
-                src={githubSVG}
+                src={GithubSVG}
                 alt="github icon"
                 w={26}
                 h={26}
