@@ -1,5 +1,11 @@
+import Auth from "./Auth"
+
 const TestPage = () => {
-  return <div>TestPage</div>
+  return (
+    <>
+      <Auth />
+    </>
+  )
 }
 
 export default TestPage
