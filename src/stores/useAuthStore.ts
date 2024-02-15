@@ -2,7 +2,7 @@ import { User } from "api-models"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 
-import AUTH_USER_INITIAL_USER_DATA from "@/constants/user"
+import { AUTH_USER_INITIAL_USER_DATA } from "@/constants/user"
 
 import authToken from "./authToken"
 

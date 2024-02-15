@@ -1,13 +1,14 @@
 import { Button, Center } from "@chakra-ui/react"
 
-import AUTH_USER_INITIAL_USER_DATA from "@/constants/user"
+import { AUTH_USER_TEST_DATA } from "@/constants/user"
 import useAuthStore from "@/stores/useAuthStore"
 
 const LoginPage = () => {
-  const { setLogin, setLogout } = useAuthStore()
+  const { user, setLogin, setLogout } = useAuthStore()
+  console.log(user)
 
   const handleLogin = () => {
-    setLogin(AUTH_USER_INITIAL_USER_DATA, "123")
+    setLogin(AUTH_USER_TEST_DATA, "123")
   }
 
   const handleLogout = () => {
