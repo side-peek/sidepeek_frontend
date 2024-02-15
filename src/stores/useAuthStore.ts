@@ -1,7 +1,7 @@
 import { User } from "api-models"
 import { create } from "zustand"
 
-import { AUTH_USER_INITIAL_USER_DATA } from "@/constants/user"
+import { AUTH_USER_INITIAL_DATA } from "@/constants/user"
 
 import authToken from "./authToken"
 
@@ -13,7 +13,7 @@ interface AuthUserStore {
 }
 
 const useAuthStore = create<AuthUserStore>()((set) => ({
-  user: AUTH_USER_INITIAL_USER_DATA,
+  user: AUTH_USER_INITIAL_DATA,
 
   setLogin: (user, token) => {
     authToken.setToken(token)
@@ -25,12 +25,11 @@ const useAuthStore = create<AuthUserStore>()((set) => ({
   setLogout: () => {
     authToken.removeToken()
     set(() => ({
-      user: AUTH_USER_INITIAL_USER_DATA,
+      user: AUTH_USER_INITIAL_DATA,
     }))
   },
 
   updateUser: (user: User) => {
-    console.log(user)
     set(() => ({
       user: user,
     }))

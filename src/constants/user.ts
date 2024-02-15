@@ -1,6 +1,6 @@
 import { User } from "api-models"
 
-export const AUTH_USER_INITIAL_USER_DATA: User = {
+export const AUTH_USER_INITIAL_DATA: User = {
   id: "",
   nickname: "",
   provider: "",

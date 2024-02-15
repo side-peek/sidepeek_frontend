@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-import { Button, Center } from "@chakra-ui/react"
+import { Button, Center, Text } from "@chakra-ui/react"
 
 import { AUTH_USER_TEST_DATA } from "@/constants/user"
 import authToken from "@/stores/authToken"
@@ -8,11 +8,6 @@ import useAuthStore from "@/stores/useAuthStore"
 
 const Auth = () => {
   const { user, setLogin, setLogout, updateUser } = useAuthStore()
-  if (user.id) {
-    console.log("로그인 상태")
-  } else {
-    console.log("로그아웃 상태")
-  }
 
   const handleLogin = () => {
     setLogin(AUTH_USER_TEST_DATA, "123")
@@ -40,6 +35,7 @@ const Auth = () => {
         onClick={handleLogin}>
         로그인
       </Button>
+      <Text fontSize="10rem">{user.id}</Text>
       <Button
         bg="blue.100"
         color="white"
