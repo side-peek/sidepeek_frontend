@@ -1,6 +1,4 @@
-import { Outlet, createBrowserRouter } from "react-router-dom"
-
-import App from "@/App"
+import { createBrowserRouter } from "react-router-dom"
 
 import ErrorPage from "@pages/ErrorPage/ErrorPage"
 import HomePage from "@pages/HomePage/HomePage"
@@ -10,51 +8,50 @@ import ProjectDetailPage from "@pages/ProjectDetailPage/ProjectDetailPage"
 import ProjectEditPage from "@pages/ProjectEditPage/ProjectEditPage"
 import ProjectListPage from "@pages/ProjectListPage/ProjectListPage"
 import SignUpPage from "@pages/SignUpPage/SignUpPage"
+import TestPage from "@pages/TestPage/TestPage"
+
+import DefaultLayout from "@styles/layouts/DefaultLayout"
 
 export const router = createBrowserRouter([
   {
-    Component: App,
+    element: <DefaultLayout />,
     errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
-        element: (
-          <>
-            {/* <Header /> */}
-            <Outlet />
-          </>
-        ),
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "/project",
+        element: <ProjectListPage />,
         children: [
           {
-            index: true,
-            element: <HomePage />,
-          },
-          {
-            path: "/project",
-            element: <ProjectListPage />,
-          },
-          {
-            path: "/project/:projectId",
+            path: ":projectId",
             element: <ProjectDetailPage />,
           },
           {
-            path: "/project/:projectId/edit",
+            path: ":projectId/edit",
             element: <ProjectEditPage />,
-          },
-          {
-            path: "/profile/:userId",
-            element: <ProfilePage />,
           },
         ],
       },
       {
-        path: "/login",
-        element: <LoginPage />,
+        path: "/test",
+        element: <TestPage />,
       },
       {
-        path: "/signup",
-        element: <SignUpPage />,
+        path: "/profile/:userId",
+        element: <ProfilePage />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/signup",
+    element: <SignUpPage />,
   },
 ])
