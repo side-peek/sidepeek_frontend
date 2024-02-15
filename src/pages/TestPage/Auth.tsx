@@ -1,10 +1,13 @@
+import { useEffect } from "react"
+
 import { Button, Center } from "@chakra-ui/react"
 
 import { AUTH_USER_TEST_DATA } from "@/constants/user"
+import authToken from "@/stores/authToken"
 import useAuthStore from "@/stores/useAuthStore"
 
 const Auth = () => {
-  const { user, setLogin, setLogout } = useAuthStore()
+  const { user, setLogin, setLogout, updateUser } = useAuthStore()
   if (user.id) {
     console.log("로그인 상태")
   } else {
@@ -18,6 +21,11 @@ const Auth = () => {
   const handleLogout = () => {
     setLogout()
   }
+  useEffect(() => {
+    if (authToken.getToken()) {
+      updateUser(AUTH_USER_TEST_DATA)
+    }
+  }, [updateUser])
 
   return (
     <Center gap={2}>
