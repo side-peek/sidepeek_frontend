@@ -36,7 +36,8 @@ const CommonInput = ({
         fontSize="1rem"
         borderRadius="0rem"
         _focus={{ boxShadow: "none" }}
-        {...props}></Input>
+        {...props}
+      />
       <InsideElement>{children}</InsideElement>
     </InputGroup>
   )
