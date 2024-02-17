@@ -1,5 +1,4 @@
 const { VITE_AUTH_JWT_TOKEN_STORAGE_KEY } = import.meta.env
-
 class AuthToken {
   private token: string
   private KEY: string
