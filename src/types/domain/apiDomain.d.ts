@@ -1,6 +1,6 @@
 declare module "api-models" {
   export interface User {
-    id: number
+    id: string
     nickname: string
     provider: string
     email: string
@@ -18,24 +18,24 @@ declare module "api-models" {
   }
 
   export interface UserSkills {
-    id: number
-    user_id: number
-    skill_id: number
+    id: string
+    user_id: string
+    skill_id: string
   }
 
   export interface Authorization {
-    id: number
+    id: string
     refresh_token: string
   }
 
   export interface Files {
-    id: number
+    id: string
     type: string
     url: string
   }
 
   export interface Project {
-    id: number
+    id: string
     name: string
     sub_name?: string
     overview: string
@@ -50,41 +50,41 @@ declare module "api-models" {
     updated_at: string
     deleted_at?: string
     is_deleted: boolean
-    view_count: number
-    like_count: number
+    view_count: string
+    like_count: string
   }
 
   export interface ProjectTags {
-    id: number
-    project_id: number
-    tag_id: number
+    id: string
+    project_id: string
+    tag_id: string
   }
 
   export interface ProjectSkills {
-    id: number
-    project_id: number
-    skill_id: number
+    id: string
+    project_id: string
+    skill_id: string
   }
 
   export interface ProjectFiles {
-    id: number
-    project_id: number
-    file_id: number
+    id: string
+    project_id: string
+    file_id: string
   }
 
   export interface ProjectMembers {
-    id: number
-    project_id: number
-    member_id?: number
+    id: string
+    project_id: string
+    member_id?: string
     authority: string
     role: string
     nickname: string
   }
 
   export interface Comment {
-    id: number
-    user_id: number
-    project_id: number
+    id: string
+    user_id: string
+    project_id: string
     is_anonymous: boolean
     content: string
     created_at: string
@@ -92,21 +92,21 @@ declare module "api-models" {
   }
 
   export interface Likes {
-    id: number
-    user_id: number
-    project_id: number
+    id: string
+    user_id: string
+    project_id: string
     created_at: string
     updated_at: string
   }
 
   export interface Skill {
-    id: number
+    id: string
     name: string
     icon_url?: string
   }
 
   export interface Tag {
-    id: number
+    id: string
     name: string
   }
 }
