@@ -17,21 +17,3 @@ export const AUTH_USER_INITIAL_DATA: User = {
   deleted_at: "",
   is_deleted: false,
 }
-
-export const AUTH_USER_TEST_DATA: User = {
-  id: "123",
-  nickname: "123",
-  provider: "123",
-  email: "123",
-  password: "123",
-  profile_image_url: "123",
-  introduction: "123",
-  job: "123",
-  career: "123",
-  github_url: "123",
-  blog_url: "123",
-  created_at: "123",
-  updated_at: "123",
-  deleted_at: "123",
-  is_deleted: false,
-}
