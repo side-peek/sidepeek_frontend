@@ -32,6 +32,35 @@ jobs:
           echo 'npm cache existed'
           npm ci
 
+      - name: lint
+        run: npm run lint
+
+      - name: build
+        run: npm run build
+
+      - name: If build fail
+        if: ${{ failure() }}
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const pull_number = ${{ github.event.pull_request.number }}
+            const updated_title = `[BUILD FAIL] ${{ github.event.pull_request.title }}`
+            await github.rest.pulls.createReview({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pull_number,
+              body: '빌드에 실패해서 PR이 자동으로 닫힙니다.',
+              event: 'REQUEST_CHANGES'
+            })
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pull_number,
+              title: updated_title,
+              state: 'closed'
+            })
+
       - name: Assign assignee
         uses: hkusu/review-assign-action@v1
         with:
