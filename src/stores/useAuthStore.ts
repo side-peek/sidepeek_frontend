@@ -30,7 +30,6 @@ const useAuthStore = create<AuthUserStore>()((set) => ({
   },
 
   updateUser: (user: User) => {
-    console.log(user)
     set(() => ({
       user: user,
     }))
