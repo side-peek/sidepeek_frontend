@@ -108,13 +108,7 @@ declare module "api-models" {
     updatedAt: string
   }
 
-  export type TechStack = {
-    id: number
-    skill: Skill
-    category: string
-  }
-
-  export type Skill = {
+  export interface Skill {
     id: number
     name: string
     iconImageUrl?: string
