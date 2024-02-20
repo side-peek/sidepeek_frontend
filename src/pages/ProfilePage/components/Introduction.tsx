@@ -9,9 +9,10 @@ interface IntroductionProps {
 const Introduction = ({ aboutMe }: IntroductionProps) => {
   return (
     <Box
-      w="40rem"
+      w="32rem"
       //   border="2px solid red"
-      p="2rem">
+      px="1rem"
+      py="3rem">
       <Text
         fontSize="xl"
         fontFamily="SCDream_Bold">
