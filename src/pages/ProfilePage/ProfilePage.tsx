@@ -13,7 +13,7 @@ const ProfilePage = () => {
           bg="grey.300"
           w="100%"
           h="100vh"></Box>
-        <Bar></Bar>
+        <Bar />
       </Box>
     </>
   )

@@ -1,5 +1,6 @@
 import { Box, Center, Flex, StackDivider, VStack } from "@chakra-ui/react"
 
+import Introduction from "./Introduction"
 import ProfileCard from "./ProfileCard"
 
 const Bar = () => {
@@ -21,14 +22,16 @@ const Bar = () => {
         //   border="2rem solid darkgrey"
       >
         <Flex
-          h="40rem"
+          minH="30rem"
           alignItems="center">
           <ProfileCard
             nickName="테스트 계정"
             year={1}
           />
         </Flex>
-        <Box h="40rem"></Box>
+        <Box>
+          <Introduction aboutMe="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요" />
+        </Box>
         <Box h="40rem"></Box>
       </VStack>
     </Center>
