@@ -83,6 +83,7 @@ const themeConfig = {
   },
   sizes: {
     headerHeight: "9.5rem",
+    coverHeight: "25rem",
   },
   semanticTokens: {},
 }
