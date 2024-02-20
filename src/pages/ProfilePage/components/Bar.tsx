@@ -1,4 +1,6 @@
-import { Box, Center, StackDivider, VStack } from "@chakra-ui/react"
+import { Box, Center, Flex, StackDivider, VStack } from "@chakra-ui/react"
+
+import ProfileCard from "./ProfileCard"
 
 const Bar = () => {
   return (
@@ -18,7 +20,14 @@ const Bar = () => {
         bg="#ffffff"
         //   border="2rem solid darkgrey"
       >
-        <Box h="40rem"></Box>
+        <Flex
+          h="40rem"
+          alignItems="center">
+          <ProfileCard
+            nickName="테스트 계정"
+            year={1}
+          />
+        </Flex>
         <Box h="40rem"></Box>
         <Box h="40rem"></Box>
       </VStack>
