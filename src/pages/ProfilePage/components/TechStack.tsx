@@ -6,7 +6,6 @@ const TechStack = () => {
   return (
     <Box
       w="32rem"
-      //   border="2px solid red"
       px="1rem"
       py="3rem">
       <Text

@@ -1,21 +1,25 @@
 import { Box } from "@chakra-ui/react"
 
 import Bar from "./components/Bar"
+import Projects from "./components/Projects"
 
 const ProfilePage = () => {
   return (
-    <>
-      <Box position="relative">
+    <Box height="100vh">
+      <Box
+        bg="blue.100"
+        h="coverHeight"
+        position="relative"
+      />
+      <Box>
         <Box
-          bg="blue.100"
-          h="coverHeight"></Box>
-        <Box
-          bg="grey.300"
-          w="100%"
-          h="100vh"></Box>
-        <Bar />
+          width="80%"
+          margin="auto">
+          <Bar />
+          <Projects />
+        </Box>
       </Box>
-    </>
+    </Box>
   )
 }
 

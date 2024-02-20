@@ -9,19 +9,14 @@ const Bar = () => {
     <Center
       bg="white"
       position="absolute"
-      //   h="102rem"
       w="36rem"
-      top="15rem"
-      left="15rem"
+      top="25rem"
       border="1px solid darkgrey"
       borderRadius="20px">
       <VStack
         divider={<StackDivider borderColor="darkgrey" />}
-        // h="100rem"
         w="32rem"
-        bg="#ffffff"
-        //   border="2rem solid darkgrey"
-      >
+        bg="#ffffff">
         <Flex
           minH="30rem"
           alignItems="center">
