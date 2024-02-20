@@ -1,0 +1,22 @@
+export const ENDPOINTS = {
+  GITHUB_LOGIN: "/v1/auth/login/github",
+  EMAIL_LOGIN: "/v1/auth/login",
+  EMAIL_REFRESH: "/v1/auth/refresh",
+  EMAIL_AUTH: "/v1/auth/login/github",
+  EMAIL_SIGNUP: "/v1/users/signup",
+  GET_USER_NICKNAME: "/v1/users?keyword=",
+  GET_USER_PROFILE: <T>(userId: T) => `/v1/users/${userId}`,
+  PUT_USER_PROFILE: <T>(userId: T) => `/v1/users/${userId}`,
+  PUT_USER_PASSWORD: <T>(userId: T) => `/v1/users/${userId}/password`,
+  EMAIL_DOUBLE_CHECK: "/v1/users/email/check",
+  NICKNAME_DOUBLE_CHECK: "/v1/users/nickname/check",
+  GET_SKILLS: <T>(keyword: T) =>
+    `/v1/skills${keyword ? `?keyword=${keyword}` : ""}`,
+  UPLOAD_PROJECT_FILES: "/v1/projects/files",
+  UPLOAD_PROJECT: "/v1/projects",
+  PUT_PROJECT: <T>(projectId: T) => `/api/v1/projects/${projectId}`,
+  DELETE_PROJECT: <T>(projectId: T) => `/api/v1/projects/${projectId}`,
+  GET_PROJECT_DETAILS: <T>(projectId: T) => `/v1/projects/${projectId}`,
+  GET_ALL_PROJECTS: "/v1/projects",
+  UPLOAD_LIKE: "/v1/likes",
+}
