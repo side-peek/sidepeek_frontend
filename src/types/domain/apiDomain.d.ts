@@ -96,31 +96,32 @@ declare module "api-models" {
     content: string
     imageUrls: string[]
   }
+
   export type Member = {
     userId?: number
     category: string
     nickname: string
   }
 
-  export type ProjectTags = {
+  export type ProjectTag = {
     id: string
     projectId: string
     tagId: string
   }
 
-  export type ProjectSkills = {
+  export type ProjectSkill = {
     id: string
     projectId: string
     skillId: string
   }
 
-  export type ProjectFiles = {
+  export type ProjectFile = {
     id: string
     projectId: string
     fileId: string
   }
 
-  export type ProjectMembers = {
+  export type ProjectMember = {
     id: string
     projectId: string
     memberId?: string
@@ -139,7 +140,7 @@ declare module "api-models" {
     updatedAt: string
   }
 
-  export type Likes = {
+  export type Like = {
     id: string
     userId: string
     projectId: string
@@ -165,33 +166,33 @@ declare module "api-models" {
   }
 
   /* 인증 관련 */
-  export type emailAuthPayload = {
+  export type getEmailAuthPayload = {
     accessToken: string
   }
 
-  export type emailAuthResponseType = UserSummary
+  export type getEmailAuthResponseType = UserSummary
 
-  export type emailRefreshPayload = {
+  export type postEmailRefreshPayload = {
     refreshToken: string
   }
 
-  export type emailRefreshResponseType = {
+  export type postEmailRefreshResponseType = {
     accessToken: string
   }
 
-  export type emailLoginPayload = {
+  export type postEmailLoginPayload = {
     email: string
     password: string
   }
 
-  export type emailLoginResponseType = {
+  export type postEmailLoginResponseType = {
     accessToken: string
     refreshToken: string
     user: UserSummary
   }
 
   /* 회원 관련 */
-  export type emailSignUpPayload = {
+  export type postEmailSignUpPayload = {
     email: string
     password: string
     nickname: string
