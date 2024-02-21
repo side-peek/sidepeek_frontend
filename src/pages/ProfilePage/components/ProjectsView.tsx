@@ -1,12 +1,21 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
+import {
+  Box,
+  Grid,
+  GridItem,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+} from "@chakra-ui/react"
 
-// import ProjectCard from "@components/ProjectCard/ProjectCard"
+import ProjectCard from "@components/ProjectCard/ProjectCard"
 
 const ProjectsView = () => {
   return (
     <Box
       height="100%"
-      // mt="-30rem"
+      mt="2rem"
       // width="100%"
       // position="absolute"
       // overflow="hidden"
@@ -30,7 +39,46 @@ const ProjectsView = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <p>one!</p>
+            {/* <Box>
+              <ProjectCard imgUrl="https://picsum.photos/200" />
+            </Box> */}
+            <Grid
+              mt="0.5rem"
+              templateColumns="repeat(auto-fit, minmax(24rem, 1fr))"
+              gap={3}
+              // sx={{ "& > *": { border: "2px solid red" } }}
+            >
+              {Array.from({ length: 30 }, (_, idx) => idx + 1).map((idx) => (
+                <GridItem key={idx}>
+                  <ProjectCard
+                    imgUrl="https://picsum.photos/200"
+                    viewCount={idx}
+                    heartCount={idx}
+                    isFullHeart={true}
+                    title="테스트입니다"
+                    content="테스트입니다"
+                  />
+                </GridItem>
+              ))}
+              {/* <GridItem>
+                <ProjectCard imgUrl="https://picsum.photos/200" />
+              </GridItem>
+              <GridItem>
+                <ProjectCard imgUrl="https://picsum.photos/200" />
+              </GridItem>
+              <GridItem>
+                <ProjectCard imgUrl="https://picsum.photos/200" />
+              </GridItem>
+              <GridItem>
+                <ProjectCard imgUrl="https://picsum.photos/200" />
+              </GridItem>
+              <GridItem>
+                <ProjectCard imgUrl="https://picsum.photos/200" />
+              </GridItem>
+              <GridItem>
+                <ProjectCard imgUrl="https://picsum.photos/200" />
+              </GridItem> */}
+            </Grid>
           </TabPanel>
           <TabPanel>
             <p>two!</p>
@@ -41,13 +89,6 @@ const ProjectsView = () => {
         </TabPanels>
       </Tabs>
     </Box>
-
-    // <Box
-    //   position="absolute"
-    //   left="30rem"
-    //   top="30rem">
-    //   {/* <ProjectCard imgUrl="https://picsum.photos/200" /> */}
-    // </Box>
   )
 }
 

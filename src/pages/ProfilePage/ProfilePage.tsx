@@ -15,14 +15,16 @@ const ProfilePage = () => {
         width="80%"
         margin="auto">
         <Box
-          width="36rem"
+          minW="38rem"
           zIndex={999}
-          bg="red">
+          // bg="red"
+        >
           <Bar />
         </Box>
         <Box
           width="80%"
-          bg="blue">
+          // bg="blue"
+        >
           <ProjectsView />
         </Box>
       </Flex>
