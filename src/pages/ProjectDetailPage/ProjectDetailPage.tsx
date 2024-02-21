@@ -51,8 +51,8 @@ const ProjectDetailPage = () => {
         size="lg"
         fontFamily="SCDream_Bold">
         <TabList>
-          <Tab>기능</Tab>
-          <Tab>트러블 슈팅</Tab>
+          <Tab _hover={{ opacity: 0.5 }}>기능</Tab>
+          <Tab _hover={{ opacity: 0.5 }}>트러블 슈팅</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
