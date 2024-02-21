@@ -4,6 +4,19 @@ import { StyleFunctionProps, mode } from "@chakra-ui/theme-tools"
 import "./fonts/index.css"
 
 const themeConfig = {
+  components: {
+    Tabs: {
+      variants: {
+        enclosed: {
+          tab: {
+            _selected: {
+              color: "blue.100",
+            },
+          },
+        },
+      },
+    },
+  },
   config: { initialColorMode: "light", useSystemColorMode: false },
   styles: {
     global: (props: StyleFunctionProps) => ({

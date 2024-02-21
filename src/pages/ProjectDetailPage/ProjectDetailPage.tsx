@@ -46,14 +46,13 @@ const ProjectDetailPage = () => {
         width: "100%",
         margin: "0 auto",
       }}>
-      <Tabs variant="enclosed">
+      <Tabs
+        variant="enclosed"
+        size="lg"
+        fontFamily="SCDream_Bold">
         <TabList>
-          <Tab _selected={{ color: "blue.100", fontFamily: "SCDream_Bold" }}>
-            기능
-          </Tab>
-          <Tab _selected={{ color: "blue.100", fontFamily: "SCDream_Bold" }}>
-            트러블 슈팅
-          </Tab>
+          <Tab>기능</Tab>
+          <Tab>트러블 슈팅</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
