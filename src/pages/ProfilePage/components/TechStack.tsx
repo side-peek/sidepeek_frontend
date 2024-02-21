@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Text } from "@chakra-ui/react"
+import { Box, Flex, Text } from "@chakra-ui/react"
 
 import CustomTag from "@components/Tag/components/CustomTag"
 
@@ -18,38 +18,31 @@ const TechStack = () => {
         fontSize="lg">
         프론트엔드
       </Text>
-      <Grid
-        mt="0.5rem"
-        templateColumns="repeat(4, 1fr)"
-        gap={3}>
-        <GridItem>
-          <CustomTag label="React" />
-        </GridItem>
-        <GridItem>
-          <CustomTag label="React" />
-        </GridItem>
-        <GridItem>
-          <CustomTag label="React" />
-        </GridItem>
-        <GridItem>
-          <CustomTag label="React" />
-        </GridItem>
-        <GridItem>
-          <CustomTag label="React" />
-        </GridItem>
-        <GridItem>
-          <CustomTag label="React" />
-        </GridItem>
-      </Grid>
-      <Text
+
+      <Flex
+        flexWrap="wrap"
+        sx={{ "& > *": { mr: "0.8rem", mb: "0.8rem" } }}
+        mt="0.5rem">
+        <CustomTag label="React" />
+        <CustomTag label="React" />
+        <CustomTag label="React" />
+        <CustomTag label="fsdafasdfas" />
+        <CustomTag label="React" />
+        <CustomTag label="Refdasfdsact" />
+        <CustomTag label="React" />
+        <CustomTag label="React" />
+        <CustomTag label="React" />
+        <CustomTag label="React" />
+      </Flex>
+      {/* <Text
         mt="1rem"
         fontSize="lg">
         백엔드
       </Text>
       <Grid
         mt="0.5rem"
-        templateColumns="repeat(4, 1fr)"
-        gap={3}>
+        templateColumns="repeat(4,  1fr)"
+        gap={0}>
         <GridItem>
           <CustomTag label="Spring" />
         </GridItem>
@@ -65,7 +58,7 @@ const TechStack = () => {
         <GridItem>
           <CustomTag label="Spring" />
         </GridItem>
-      </Grid>
+      </Grid> */}
     </Box>
   )
 }
