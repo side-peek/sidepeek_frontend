@@ -8,9 +8,10 @@ const Bar = () => {
   return (
     <Center
       bg="white"
-      position="absolute"
       w="36rem"
-      top="25rem"
+      //   w="20%"
+      //   top="25rem"
+      mt="-10rem"
       border="1px solid darkgrey"
       borderRadius="20px">
       <VStack

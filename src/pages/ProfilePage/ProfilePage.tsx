@@ -1,7 +1,7 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Flex } from "@chakra-ui/react"
 
 import Bar from "./components/Bar"
-import Projects from "./components/Projects"
+import ProjectsView from "./components/ProjectsView"
 
 const ProfilePage = () => {
   return (
@@ -11,14 +11,21 @@ const ProfilePage = () => {
         h="coverHeight"
         position="relative"
       />
-      <Box>
+      <Flex
+        width="80%"
+        margin="auto">
+        <Box
+          width="36rem"
+          zIndex={999}
+          bg="red">
+          <Bar />
+        </Box>
         <Box
           width="80%"
-          margin="auto">
-          <Bar />
-          <Projects />
+          bg="blue">
+          <ProjectsView />
         </Box>
-      </Box>
+      </Flex>
     </Box>
   )
 }
