@@ -2,7 +2,7 @@ import axios, { AxiosError, isAxiosError } from "axios"
 
 import authToken from "@stores/authToken"
 
-import { emailRefresh } from "./auth/emailRefresh"
+import { postEmailRefresh } from "./auth/postEmailRefresh"
 
 const { VITE_BASE_URL } = import.meta.env
 
@@ -23,7 +23,7 @@ authInstance.interceptors.request.use(
     }
 
     if (!accessToken) {
-      const currentAccessToken = await emailRefresh({ refreshToken })
+      const currentAccessToken = await postEmailRefresh({ refreshToken })
       authToken.setAccessToken(currentAccessToken)
       config.headers.Authorization = `Bearer ${currentAccessToken}`
     }
@@ -43,7 +43,7 @@ authInstance.interceptors.response.use(
       const refreshToken = authToken.getRefreshToken()
 
       try {
-        const currentAccessToken = await emailRefresh({ refreshToken })
+        const currentAccessToken = await postEmailRefresh({ refreshToken })
         authToken.setAccessToken(currentAccessToken)
         originalRequest.headers.Authorization = `Bearer ${currentAccessToken}`
 
