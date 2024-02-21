@@ -1,9 +1,10 @@
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
 import "@toast-ui/editor/dist/i18n/ko-kr"
 import "@toast-ui/editor/dist/toastui-editor.css"
 
 import ProjectDetailViewer from "./ProjectDetailViewer"
 
-const markdown = `## 🎫 관련 이슈
+const feature = `## 🎫 관련 이슈
 <!--이슈 태스크를 모두 완료하고 닫는다면 Resolves #번호-->
 <!--이슈 태스크를 모두 완료하지는 못 했지만 닫는다면 Closes #번호-->
 <!--이슈 태스크를 일부 완료하고 열어둔다면 Fixes #번호-->
@@ -31,16 +32,38 @@ Resolves #28
  - 블로그는 오늘 안으로 올리겟습니다!
  - 🚨 .env 설정에 AWS 키 설정이 필요합니다!`
 
+const markdown = `## 리트리버
+<img src="https://github.com/side-peek/sidepeek_frontend/assets/106851561/d8928c19-1ad8-4e08-bb2a-60606f52db5c" width="500" />
+<img src="https://velog.velcdn.com/images/gnsdh8616/post/6fd04a97-05d1-4c51-a20d-74872e48b37b/image.png" width="400" />
+`
+
 const ProjectDetailPage = () => {
   return (
     <div
       style={{
-        paddingTop: "10rem",
-        maxWidth: "124rem",
+        paddingTop: "15rem",
+        maxWidth: "100rem",
         width: "100%",
         margin: "0 auto",
       }}>
-      <ProjectDetailViewer content={markdown} />
+      <Tabs variant="enclosed">
+        <TabList>
+          <Tab _selected={{ color: "blue.100", fontFamily: "SCDream_Bold" }}>
+            기능
+          </Tab>
+          <Tab _selected={{ color: "blue.100", fontFamily: "SCDream_Bold" }}>
+            트러블 슈팅
+          </Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <ProjectDetailViewer content={feature} />
+          </TabPanel>
+          <TabPanel>
+            <ProjectDetailViewer content={markdown} />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
     </div>
   )
 }
