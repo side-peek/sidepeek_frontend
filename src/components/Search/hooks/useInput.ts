@@ -8,5 +8,5 @@ export const useInput = (initialValue = "") => {
     setInputValue(inputValue)
   }, [])
 
-  return { inputValue, onInput }
+  return [inputValue, onInput] as const
 }
