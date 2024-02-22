@@ -7,9 +7,13 @@ export const useOutsideClick = <T extends HTMLElement>(
 
   useEffect(() => {
     const listener = (e: MouseEvent) => {
-      if (!ref.current || ref.current === e.target) {
+      if (!ref.current || !(e.target instanceof HTMLElement)) {
         return
       }
+      if (ref.current === e.target || ref.current.contains(e.target)) {
+        return
+      }
+
       handler(e)
     }
     document.addEventListener("mousedown", listener)
