@@ -1,6 +1,9 @@
 import { rest } from "msw"
 
+import projectHandlers from "@pages/HomePage/mocks"
+
 export const handlers = [
+  ...projectHandlers,
   rest.get("/api/v1/skills", (_, res, ctx) => {
     return res(
       ctx.status(200),
