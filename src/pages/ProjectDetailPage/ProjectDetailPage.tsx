@@ -1,12 +1,11 @@
+import { useState } from "react"
+
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
-import { Editor } from "@tinymce/tinymce-react"
-
-import { pluginOption, toolbarOption } from "./constants/options"
-import textPatterns from "./constants/textPatterns"
-
-const apiKey = import.meta.env.VITE_TINYMCE_API_KEY
+import MDEditor from "@uiw/react-md-editor"
 
 const ProjectDetailPage = () => {
+  const [text, setText] = useState("")
+  console.log(text)
   return (
     <div
       style={{
@@ -15,15 +14,9 @@ const ProjectDetailPage = () => {
         width: "100%",
         margin: "0 auto",
       }}>
-      <Editor
-        apiKey={apiKey}
-        init={{
-          menubar: false,
-          text_patterns: textPatterns,
-          plugins: pluginOption,
-          toolbar: toolbarOption,
-        }}
-        initialValue="내용을 입력해주세요"
+      <MDEditor
+        value={text}
+        onChange={setText}
       />
 
       <Tabs
@@ -35,8 +28,26 @@ const ProjectDetailPage = () => {
           <Tab _hover={{ opacity: 0.5 }}>트러블 슈팅</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel></TabPanel>
-          <TabPanel></TabPanel>
+          <TabPanel>
+            {
+              <div>
+                <MDEditor.Markdown
+                  source={text}
+                  style={{ whiteSpace: "pre-wrap" }}
+                />
+              </div>
+            }
+          </TabPanel>
+          <TabPanel>
+            {
+              <div>
+                <MDEditor.Markdown
+                  source={text}
+                  style={{ whiteSpace: "pre-wrap" }}
+                />
+              </div>
+            }
+          </TabPanel>
         </TabPanels>
       </Tabs>
     </div>
