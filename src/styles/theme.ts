@@ -5,6 +5,7 @@ import "./fonts/index.css"
 
 const themeConfig = {
   config: { initialColorMode: "light", useSystemColorMode: false },
+
   styles: {
     global: (props: StyleFunctionProps) => ({
       html: {
