@@ -1,4 +1,5 @@
 declare module "api-models" {
+  /* FIXME: 초기 ERD 모델 (아직 정해지지 않아서 일단 남겨놓습니다)
   export type User = {
     id: number
     nickname: string
@@ -15,7 +16,7 @@ declare module "api-models" {
     updatedAt: string
     deletedAt?: string
     isDeleted: boolean
-  }
+  } */
 
   export type UserInfo = {
     nickname: string
@@ -33,47 +34,6 @@ declare module "api-models" {
     nickname: string
     profileImageUrl: string | null
   }
-
-  //FIXME: TechStacks와 겹침
-  export type UserSkills = {
-    id: number
-    userId: string
-    skillId: string
-  }
-
-  export type Authorization = {
-    id: number
-    refreshToken: string
-  }
-
-  export type Files = {
-    id: number
-    type: string
-    url: string
-  }
-
-  /* FIXME: 초기 ERD 모델 (아직 정해지지 않아서 일단 남겨놓습니다)
-  
-  export type Project = {
-    id: string
-    name: string
-    subName?: string
-    overview: string
-    startDate?: string
-    endDate?: string
-    description: string
-    // 일단 정해진 형식이 없으므로 string
-    troubleshooting?: string
-    serviceUrl?: string
-    sourceUrl?: string
-    createdAt: string
-    updatedAt: string
-    deletedAt?: string
-    is_deleted: boolean
-    viewCount: string
-    likeCount: string
-  } 
-  */
 
   export type Project = {
     name: string
