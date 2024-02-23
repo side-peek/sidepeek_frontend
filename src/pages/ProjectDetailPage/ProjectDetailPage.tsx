@@ -6,8 +6,17 @@ import { TbWorld } from "react-icons/tb"
 
 import { Button, Image } from "@chakra-ui/react"
 import { Box, Center, Flex, Icon, IconButton, Text } from "@chakra-ui/react"
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
+import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules"
+import { Swiper, SwiperSlide } from "swiper/react"
 
 import projectThumbnail from "@/assets/images/project.png"
+
+import dog from "@assets/images/dog.jpeg"
+
+import "./style.css"
 
 const ProjectDetailPage = () => {
   return (
@@ -124,14 +133,31 @@ const ProjectDetailPage = () => {
                 </Flex>
               </Flex>
             </Flex>
-            <Box>
-              <Image
-                maxW="110%"
-                maxH="33rem"
-                borderRadius="1rem"
-                src={projectThumbnail}
-                alt="project thumbnail"
-              />
+            <Box maxW="40rem">
+              <Swiper
+                rewind={true}
+                cssMode={true}
+                navigation={true}
+                pagination={{ clickable: true }}
+                modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+                className="mySwiper">
+                <SwiperSlide>
+                  <Image
+                    w="100%"
+                    h="100%"
+                    borderRadius="1rem"
+                    src={projectThumbnail}
+                    alt="project thumbnail"
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Image
+                    borderRadius="1rem"
+                    src={dog}
+                    alt="project thumbnail"
+                  />
+                </SwiperSlide>
+              </Swiper>
             </Box>
           </Flex>
         </Center>
