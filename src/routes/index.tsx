@@ -25,17 +25,16 @@ export const router = createBrowserRouter([
       {
         path: "/project",
         element: <ProjectListPage />,
-        children: [
-          {
-            path: ":projectId",
-            element: <ProjectDetailPage />,
-          },
-          {
-            path: ":projectId/edit",
-            element: <ProjectEditPage />,
-          },
-        ],
       },
+      {
+        path: "/project/:projectId",
+        element: <ProjectDetailPage />,
+      },
+      {
+        path: "/project/:projectId/edit",
+        element: <ProjectEditPage />,
+      },
+
       {
         path: "/test",
         element: <TestPage />,
