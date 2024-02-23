@@ -36,10 +36,13 @@ const ProjectDetailPage = () => {
           <Flex
             gap="0.7rem"
             alignItems="center"
-            cursor="pointer">
+            cursor="pointer"
+            _hover={{ opacity: "0.5" }}>
             <IconButton
+              background="none"
               fontSize="2.7rem"
               aria-label="good"
+              _hover={{ background: "none" }}
               icon={<IoMdHeartEmpty />}
             />
             <Text fontSize="xl">7</Text>
@@ -47,10 +50,13 @@ const ProjectDetailPage = () => {
           <Flex
             gap="0.7rem"
             alignItems="center"
+            _hover={{ opacity: "0.5" }}
             cursor="pointer">
             <IconButton
               fontSize="2.7rem"
               aria-label="good"
+              background="none"
+              _hover={{ background: "none" }}
               icon={<FaRegComment />}
             />
             <Text fontSize="xl">2</Text>
@@ -102,14 +108,9 @@ const ProjectDetailPage = () => {
                     size="lg"
                     bgColor="blue.100"
                     color="white"
+                    fontSize="xl"
                     p="2.2rem 1.5rem"
-                    leftIcon={<TbWorld />}
-                    sx={{
-                      "& > *": {
-                        bgColor: "blue.100",
-                        fontSize: "2xl",
-                      },
-                    }}>
+                    leftIcon={<TbWorld />}>
                     WEB
                   </Button>
                   <Button
