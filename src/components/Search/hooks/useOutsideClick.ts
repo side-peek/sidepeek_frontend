@@ -1,8 +1,9 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export const useOutsideClick = <T extends HTMLElement>(
-  handler: (e: MouseEvent) => void,
+  initialState = false,
 ) => {
+  const [isFocused, setIsFocused] = useState(initialState)
   const ref = useRef<T>(null)
 
   useEffect(() => {
@@ -11,15 +12,15 @@ export const useOutsideClick = <T extends HTMLElement>(
         return
       }
       if (ref.current === e.target || ref.current.contains(e.target)) {
+        setIsFocused(true)
         return
       }
-
-      handler(e)
+      setIsFocused(false)
     }
     document.addEventListener("mousedown", listener)
     return () => {
       document.removeEventListener("mousedown", listener)
     }
-  }, [ref, handler])
-  return ref
+  }, [ref])
+  return [ref, isFocused] as const
 }
