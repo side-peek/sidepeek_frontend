@@ -1,6 +1,6 @@
 declare module "api-models" {
   export type User = {
-    id: string
+    id: number
     nickname: string
     provider: string
     email: string
@@ -36,18 +36,18 @@ declare module "api-models" {
 
   //FIXME: TechStacks와 겹침
   export type UserSkills = {
-    id: string
+    id: number
     userId: string
     skillId: string
   }
 
   export type Authorization = {
-    id: string
+    id: number
     refreshToken: string
   }
 
   export type Files = {
-    id: string
+    id: number
     type: string
     url: string
   }
@@ -104,25 +104,25 @@ declare module "api-models" {
   }
 
   export type ProjectTag = {
-    id: string
+    id: number
     projectId: string
     tagId: string
   }
 
   export type ProjectSkill = {
-    id: string
+    id: number
     projectId: string
     skillId: string
   }
 
   export type ProjectFile = {
-    id: string
+    id: number
     projectId: string
     fileId: string
   }
 
   export type ProjectMember = {
-    id: string
+    id: number
     projectId: string
     memberId?: string
     authority: string
@@ -131,7 +131,7 @@ declare module "api-models" {
   }
 
   export type Comment = {
-    id: string
+    id: number
     userId: string
     projectId: string
     isAnonymous: boolean
@@ -141,7 +141,7 @@ declare module "api-models" {
   }
 
   export type Like = {
-    id: string
+    id: number
     userId: string
     projectId: string
     createdAt: string
@@ -155,13 +155,13 @@ declare module "api-models" {
   }
 
   export type Skill = {
-    id: string
+    id: number
     name: string
     iconImageUrl?: string
   }
 
   export type Tag = {
-    id: string
+    id: number
     name: string
   }
 
