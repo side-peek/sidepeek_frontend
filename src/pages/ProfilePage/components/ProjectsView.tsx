@@ -7,11 +7,14 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
+  useMediaQuery,
 } from "@chakra-ui/react"
 
 import ProjectCard from "@components/ProjectCard/ProjectCard"
 
 const ProjectsView = () => {
+  const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
+  console.log(isLargerThan1200)
   return (
     <Box
       height="100%"
@@ -27,9 +30,10 @@ const ProjectsView = () => {
           h="6rem"
           sx={{
             "& > *": {
-              fontSize: "1.8rem",
+              fontSize: isLargerThan1200 ? "1.8rem" : "1rem",
               px: "3rem",
-              borderTopRadius: "20px",
+              borderTopLeftRadius: isLargerThan1200 ? "20px" : "20px",
+              borderTopRightRadius: isLargerThan1200 ? "20px" : "20px",
               _selected: { fontFamily: "SCDream_Bold", color: "#000000" },
             },
           }}>
