@@ -50,15 +50,8 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: pull_number,
-              body: '빌드에 실패해서 PR이 자동으로 닫힙니다.',
+              body: '빌드에 실패했습니다. 로그를 확인해주세요.',
               event: 'REQUEST_CHANGES'
-            })
-            await github.rest.pulls.update({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: pull_number,
-              title: updated_title,
-              state: 'closed'
             })
 
       - name: Assign assignee
