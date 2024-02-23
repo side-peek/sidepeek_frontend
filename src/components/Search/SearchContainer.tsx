@@ -16,6 +16,7 @@ const SearchContainer = () => {
   const [searchList, setSearchList] = useState<Skill[]>([])
 
   const targetRef = useOutsideClick<HTMLDivElement>(() => setIsFocused(false))
+
   return (
     <SearchContext.Provider
       value={{
