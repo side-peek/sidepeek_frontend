@@ -1,11 +1,11 @@
 declare module "api-models" {
+  /* FIXME: 초기 ERD 모델 (아직 정해지지 않아서 일단 남겨놓습니다)
   export type User = {
-    id: string
+    id: number
     nickname: string
     provider: string
     email: string
     password?: string
-    profileImageUrl?: string
     profileImageUrl?: string
     introduction?: string
     job?: string
@@ -16,7 +16,7 @@ declare module "api-models" {
     updatedAt: string
     deletedAt?: string
     isDeleted: boolean
-  }
+  } */
 
   export type UserInfo = {
     nickname: string
@@ -33,18 +33,6 @@ declare module "api-models" {
     id: number
     nickname: string
     profileImageUrl: string | null
-  }
-
-  //FIXME: TechStacks와 겹침
-  export type UserSkills = {
-    id: string
-    userId: string
-    skillId: string
-  }
-
-  export type Authorization = {
-    id: string
-    refreshToken: string
   }
 
   export type Project = {
@@ -127,7 +115,7 @@ declare module "api-models" {
   }
 
   export type Skill = {
-    id: string
+    id: number
     name: string
     iconImageUrl?: string
   }
