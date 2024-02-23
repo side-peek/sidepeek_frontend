@@ -1,10 +1,13 @@
-import { FaRegComment } from "react-icons/fa"
+import { FaGithub, FaRegComment } from "react-icons/fa"
 import { IoMdHeartEmpty } from "react-icons/io"
 import { LiaEyeSolid } from "react-icons/lia"
 import { PiClipboardText } from "react-icons/pi"
+import { TbWorld } from "react-icons/tb"
 
-import { Image } from "@chakra-ui/react"
+import { Button, Image } from "@chakra-ui/react"
 import { Box, Center, Flex, Icon, IconButton, Text } from "@chakra-ui/react"
+
+import projectThumbnail from "@/assets/images/project.png"
 
 const ProjectDetailPage = () => {
   return (
@@ -81,21 +84,52 @@ const ProjectDetailPage = () => {
             justifyContent="center"
             w="90%">
             <Flex>
-              <Box w="80%">
+              <Flex
+                flexDirection="column"
+                justifyContent="space-between"
+                w="80%"
+                minHeight="20rem">
                 <Text fontSize="xl">
                   Styled는 자신의 ootd를 공유하며 소통하고자하는 사람들의 니즈를
                   충족하고자 기획된, OOTD만을 위한 패션 특화 소셜 네트워크
                   서비스입니다.
                 </Text>
-              </Box>
+                <Flex
+                  gap="2rem"
+                  pl="5rem">
+                  <Button
+                    borderRadius="2rem"
+                    size="lg"
+                    bgColor="blue.100"
+                    color="white"
+                    p="2.2rem 1.5rem"
+                    leftIcon={<TbWorld />}
+                    sx={{
+                      "& > *": {
+                        bgColor: "blue.100",
+                        fontSize: "2xl",
+                      },
+                    }}>
+                    WEB
+                  </Button>
+                  <Button
+                    p="2.2rem 1.5rem"
+                    borderRadius="2rem"
+                    colorScheme="blue"
+                    size="lg"
+                    leftIcon={<FaGithub />}>
+                    Github
+                  </Button>
+                </Flex>
+              </Flex>
             </Flex>
             <Box>
               <Image
-                maxW="43rem"
+                maxW="110%"
                 maxH="33rem"
                 borderRadius="1rem"
-                src="https://bit.ly/dan-abramov"
-                alt="Dan Abramov"
+                src={projectThumbnail}
+                alt="project thumbnail"
               />
             </Box>
           </Flex>
