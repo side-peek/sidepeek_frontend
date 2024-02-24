@@ -3,8 +3,8 @@ import { Box, Center, Divider, Flex } from "@chakra-ui/react"
 import LogoButton from "@components/LogoButton/LogoButton"
 
 import BackButton from "./components/BackButton"
-import LoginForm from "./components/LoginForm"
-import SignUpNav from "./components/SignUpNav"
+import CreateAccount from "./components/CreateAccount"
+import LoginForm from "./components/LoginForm/LoginForm"
 import SocialLogin from "./components/SocialLogin"
 
 const LoginPage = () => {
@@ -27,7 +27,7 @@ const LoginPage = () => {
           <LoginForm />
           <Divider />
           <SocialLogin />
-          <SignUpNav />
+          <CreateAccount />
         </Flex>
       </Box>
     </Center>
