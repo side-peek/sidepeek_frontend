@@ -18,7 +18,7 @@ declare module "api-models" {
     isDeleted: boolean
   } */
 
-  export type UserInfo = {
+  export type UserInfoProperties = {
     nickname: string
     introduction: string
     profileImageUrl: string
@@ -26,7 +26,10 @@ declare module "api-models" {
     career: string
     githubUrl: string
     blogUrl: string
-    techStacks: TechStack[]
+    techStacks: TechStackType[]
+  }
+  export interface UserInfo {
+    userInfo: UserInfoProperties
   }
 
   export type UserSummary = {
@@ -108,7 +111,7 @@ declare module "api-models" {
     updatedAt: string
   }
 
-  export type TechStack = {
+  export type TechStackType = {
     id: number
     skill: Skill
     category: string
