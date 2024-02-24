@@ -2,6 +2,9 @@ import { rest } from "msw"
 
 import { ProjectDetailHandlers } from "@pages/ProjectDetailPage/mocks"
 
+import { postEmailLogin } from "./auth/postEmailLogin.mock"
+import { postEmailRefresh } from "./auth/postEmailRefresh.mock"
+
 export const handlers = [
   rest.get("/api/v1/skills", (_, res, ctx) => {
     return res(
@@ -22,5 +25,7 @@ export const handlers = [
       }),
     )
   }),
-  [...ProjectDetailHandlers],
+  ...ProjectDetailHandlers,
+  postEmailRefresh,
+  postEmailLogin,
 ]
