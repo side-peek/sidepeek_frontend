@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <Center
       w="100%"
-      position="fixed"
+      position="sticky"
       bg="white"
       boxShadow="md">
       <Flex

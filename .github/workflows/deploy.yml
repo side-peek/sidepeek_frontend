@@ -32,6 +32,28 @@ jobs:
           echo 'npm cache existed'
           npm ci
 
+      - name: lint
+        run: npm run lint
+
+      - name: build
+        run: npm run build
+
+      - name: If build fail
+        if: ${{ failure() }}
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const pull_number = ${{ github.event.pull_request.number }}
+            const updated_title = `[BUILD FAIL] ${{ github.event.pull_request.title }}`
+            await github.rest.pulls.createReview({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pull_number,
+              body: '빌드에 실패했습니다. 로그를 확인해주세요.',
+              event: 'REQUEST_CHANGES'
+            })
+
       - name: Assign assignee
         uses: hkusu/review-assign-action@v1
         with:
