@@ -1,38 +1,71 @@
-const { VITE_AUTH_JWT_TOKEN_STORAGE_KEY } = import.meta.env
+const { VITE_AUTH_JWT_TOKEN_STORAGE_KEY, VITE_REFRESH_JWT_TOKEN_STORAGE_KEY } =
+  import.meta.env
+
 class AuthToken {
-  private token: string
-  private KEY: string
+  private accessToken: string
+  private refreshToken: string
+  private ACCESS_KEY: string
+  private REFRESH_KEY: string
 
   constructor() {
-    this.token = ""
-    this.KEY = VITE_AUTH_JWT_TOKEN_STORAGE_KEY
+    this.accessToken = ""
+    this.refreshToken = ""
+    this.ACCESS_KEY = VITE_AUTH_JWT_TOKEN_STORAGE_KEY
+    this.REFRESH_KEY = VITE_REFRESH_JWT_TOKEN_STORAGE_KEY
   }
 
-  setToken(newToken: string) {
+  setAccessToken(newToken: string) {
     try {
       const stringifiedData = JSON.stringify(newToken)
-      localStorage.setItem(this.KEY, stringifiedData)
-      this.token = newToken
+      localStorage.setItem(this.ACCESS_KEY, stringifiedData)
+      this.accessToken = newToken
     } catch (e) {
-      this.token = ""
+      this.accessToken = ""
     }
   }
 
-  getToken() {
+  setRefreshToken(newToken: string) {
     try {
-      const res = localStorage.getItem(this.KEY)
-      if (!res) {
-        return this.token
-      }
-      this.token = JSON.parse(res)
-      return this.token
+      const stringifiedData = JSON.stringify(newToken)
+      localStorage.setItem(this.REFRESH_KEY, stringifiedData)
+      this.refreshToken = newToken
     } catch (e) {
-      return this.token
+      this.refreshToken = ""
     }
   }
 
-  removeToken() {
-    localStorage.removeItem(this.KEY)
+  getAccessToken() {
+    try {
+      const res = localStorage.getItem(this.ACCESS_KEY)
+      if (!res) {
+        return this.accessToken
+      }
+      this.accessToken = JSON.parse(res)
+      return this.accessToken
+    } catch (e) {
+      return this.accessToken
+    }
+  }
+
+  getRefreshToken() {
+    try {
+      const res = localStorage.getItem(this.REFRESH_KEY)
+      if (!res) {
+        return this.refreshToken
+      }
+      this.refreshToken = JSON.parse(res)
+      return this.refreshToken
+    } catch (e) {
+      return this.refreshToken
+    }
+  }
+
+  removeAccessToken() {
+    localStorage.removeItem(this.ACCESS_KEY)
+  }
+
+  removeRefreshToken() {
+    localStorage.removeItem(this.REFRESH_KEY)
   }
 }
 
