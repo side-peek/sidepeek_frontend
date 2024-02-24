@@ -10,8 +10,6 @@ import { Skill } from "api-models"
 type SearchContextValue<T> = {
   inputValue: string
   onInput: ChangeEventHandler<HTMLInputElement>
-  isFocused: boolean
-  setIsFocused: Dispatch<SetStateAction<boolean>>
   searchList: T
   setSearchList: Dispatch<SetStateAction<T>>
 }

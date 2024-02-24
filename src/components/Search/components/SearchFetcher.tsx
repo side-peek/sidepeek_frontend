@@ -8,7 +8,7 @@ const SearchFetcher = ({ children }: { children?: ReactNode }) => {
   const { data } = useSearchQuery(inputValue)
 
   useEffect(() => {
-    if (data === undefined) {
+    if (!data) {
       return
     }
     setSearchList(data)

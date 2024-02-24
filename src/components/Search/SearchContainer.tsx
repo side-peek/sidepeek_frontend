@@ -11,17 +11,14 @@ import { useOutsideClick } from "./hooks/useOutsideClick"
 import { SearchContext } from "./stores/SearchContext/SearchContext"
 
 const SearchContainer = () => {
-  const [isFocused, setIsFocused] = useState(false)
   const [inputValue, onInput] = useInput("")
   const [searchList, setSearchList] = useState<Skill[]>([])
 
-  const targetRef = useOutsideClick<HTMLDivElement>(() => setIsFocused(false))
+  const [targetRef, isFocused] = useOutsideClick<HTMLDivElement>()
 
   return (
     <SearchContext.Provider
       value={{
-        isFocused,
-        setIsFocused,
         inputValue,
         onInput,
         searchList,
@@ -47,3 +44,4 @@ const SearchContainer = () => {
 }
 
 export default SearchContainer
+//onClickItem props로 전달하기
