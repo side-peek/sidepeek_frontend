@@ -5,7 +5,7 @@ import Introduction from "./Introduction"
 import ProfileCard from "./ProfileCard"
 import TechStack from "./TechStack"
 
-interface ProfileBarProps {
+export interface ProfileBarProps {
   nickName: string | undefined
   profileImageUrl: string | undefined
   career: string | undefined
@@ -15,7 +15,7 @@ interface ProfileBarProps {
   techStacks: TechStackType[] | undefined
 }
 
-const Bar = ({
+const ProfileBar = ({
   nickName,
   profileImageUrl,
   career,
@@ -42,7 +42,7 @@ const Bar = ({
           minH="30rem"
           alignItems="center">
           <ProfileCard
-            nickName={nickName}
+            nickname={nickName}
             profileImageUrl={profileImageUrl}
             career={career}
           />
@@ -62,4 +62,4 @@ const Bar = ({
   )
 }
 
-export default Bar
+export default ProfileBar

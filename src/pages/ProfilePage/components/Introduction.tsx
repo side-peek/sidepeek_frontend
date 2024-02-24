@@ -8,7 +8,11 @@ interface IntroductionProps {
   blogUrl: string | undefined
 }
 
-const Introduction = ({ aboutMe, githubUrl, blogUrl }: IntroductionProps) => {
+const ProfileIntroduction = ({
+  aboutMe,
+  githubUrl,
+  blogUrl,
+}: IntroductionProps) => {
   return (
     <Box
       w="32rem"
@@ -39,4 +43,4 @@ const Introduction = ({ aboutMe, githubUrl, blogUrl }: IntroductionProps) => {
   )
 }
 
-export default Introduction
+export default ProfileIntroduction

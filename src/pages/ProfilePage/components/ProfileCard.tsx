@@ -2,13 +2,13 @@ import { Avatar, Text, VStack } from "@chakra-ui/react"
 
 interface ProfileCardProps {
   profileImageUrl?: string
-  nickName?: string
+  nickname?: string
   career?: string
 }
 
 const ProfileCard = ({
   profileImageUrl = "https://bit.ly/broken-link",
-  nickName,
+  nickname,
   career,
 }: ProfileCardProps) => {
   return (
@@ -22,7 +22,7 @@ const ProfileCard = ({
         mt="4"
         fontSize="3xl"
         fontFamily="SCDream_Bold">
-        {nickName}
+        {nickname}
       </Text>
       <Text
         mt="-3"
