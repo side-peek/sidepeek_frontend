@@ -33,7 +33,10 @@ const ProjectDetailPage = () => {
               <div>
                 <MDEditor.Markdown
                   source={text}
-                  style={{ whiteSpace: "pre-wrap" }}
+                  style={{
+                    whiteSpace: "pre-wrap",
+                    lineHeight: "0.5",
+                  }}
                 />
               </div>
             }
@@ -43,7 +46,7 @@ const ProjectDetailPage = () => {
               <div>
                 <MDEditor.Markdown
                   source={text}
-                  style={{ whiteSpace: "pre-wrap" }}
+                  style={{ whiteSpace: "pre-wrap", lineHeight: "0.5" }}
                 />
               </div>
             }
