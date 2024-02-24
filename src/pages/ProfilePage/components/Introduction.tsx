@@ -1,12 +1,14 @@
 import { ImGithub } from "react-icons/im"
 
-import { Box, HStack, Text } from "@chakra-ui/react"
+import { Box, HStack, Link, Text } from "@chakra-ui/react"
 
 interface IntroductionProps {
-  aboutMe: string
+  aboutMe: string | undefined
+  githubUrl: string | undefined
+  blogUrl: string | undefined
 }
 
-const Introduction = ({ aboutMe }: IntroductionProps) => {
+const Introduction = ({ aboutMe, githubUrl, blogUrl }: IntroductionProps) => {
   return (
     <Box
       w="32rem"
@@ -26,11 +28,12 @@ const Introduction = ({ aboutMe }: IntroductionProps) => {
 
       <HStack mt="1.5rem">
         <ImGithub size="2rem" />
-        <Text>github링크</Text>
+        {/* <Text>github링크</Text> */}
+        <Link href={githubUrl}>GitHub 링크</Link>
       </HStack>
       <HStack mt="0.8rem">
         <ImGithub size="2rem" />
-        <Text>블로그 링크</Text>
+        <Link href={blogUrl}>Blog 링크</Link>
       </HStack>
     </Box>
   )

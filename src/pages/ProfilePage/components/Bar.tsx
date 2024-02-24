@@ -1,10 +1,30 @@
 import { Box, Center, Flex, StackDivider, VStack } from "@chakra-ui/react"
+import { TechStackType } from "api-models"
 
 import Introduction from "./Introduction"
 import ProfileCard from "./ProfileCard"
 import TechStack from "./TechStack"
 
-const Bar = () => {
+interface ProfileBarProps {
+  nickName: string | undefined
+  profileImageUrl: string | undefined
+  career: string | undefined
+  introduction: string | undefined
+  githubUrl: string | undefined
+  blogUrl: string | undefined
+  techStacks: TechStackType[] | undefined
+}
+
+const Bar = ({
+  nickName,
+  profileImageUrl,
+  career,
+  introduction,
+  githubUrl,
+  blogUrl,
+  techStacks,
+}: ProfileBarProps) => {
+  console.log(nickName, "여기")
   return (
     <Center
       bg="white"
@@ -22,15 +42,20 @@ const Bar = () => {
           minH="30rem"
           alignItems="center">
           <ProfileCard
-            nickName="테스트 계정"
-            year={1}
+            nickName={nickName}
+            profileImageUrl={profileImageUrl}
+            career={career}
           />
         </Flex>
         <Box>
-          <Introduction aboutMe="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요" />
+          <Introduction
+            aboutMe={introduction}
+            githubUrl={githubUrl}
+            blogUrl={blogUrl}
+          />
         </Box>
         <Box>
-          <TechStack />
+          <TechStack techStacks={techStacks} />
         </Box>
       </VStack>
     </Center>

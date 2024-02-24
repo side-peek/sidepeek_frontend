@@ -1,5 +1,9 @@
 import { Box, Flex, VStack, useMediaQuery } from "@chakra-ui/react"
 
+import { useQuery } from "@tanstack/react-query"
+
+import { getUserDetail } from "@/api/user/getUserDetail"
+
 import Bar from "./components/Bar"
 import ProfileCard from "./components/ProfileCard"
 import ProjectsView from "./components/ProjectsView"
@@ -7,6 +11,31 @@ import ProjectsView from "./components/ProjectsView"
 const ProfilePage = () => {
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
 
+  const { isLoading, data } = useQuery({
+    queryKey: ["userInfo"],
+    queryFn: () => getUserDetail({ userId: 1 }),
+    gcTime: 0,
+  })
+
+  const {
+    nickname,
+    profileImageUrl,
+    career,
+    introduction,
+    githubUrl,
+    blogUrl,
+    techStacks,
+  } = data?.userInfo || {}
+
+  if (isLoading)
+    return (
+      <Box
+        w="100vw"
+        h="100vh"
+        bg="#909090">
+        Loading...
+      </Box>
+    )
   return (
     <Box height="100vh">
       <Box
@@ -24,7 +53,15 @@ const ProfilePage = () => {
               zIndex={999}
               // bg="red"
             >
-              <Bar />
+              <Bar
+                nickName={nickname}
+                profileImageUrl={profileImageUrl}
+                career={career}
+                introduction={introduction}
+                githubUrl={githubUrl}
+                blogUrl={blogUrl}
+                techStacks={techStacks}
+              />
             </Box>
             <Box
               width="80%"
@@ -39,9 +76,9 @@ const ProfilePage = () => {
             w="100%"
             mt="-6rem">
             <ProfileCard
-              profileImageUrl="https://bit.ly/broken-link"
-              nickName="테스트"
-              year={2}
+              nickName={nickname}
+              profileImageUrl={profileImageUrl}
+              career={career}
             />
 
             <Box
