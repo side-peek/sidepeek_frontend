@@ -1,5 +1,7 @@
 import { rest } from "msw"
 
+import { ProjectDetailHandlers } from "@pages/ProjectDetailPage/mocks"
+
 export const handlers = [
   rest.get("/api/v1/skills", (_, res, ctx) => {
     return res(
@@ -20,4 +22,5 @@ export const handlers = [
       }),
     )
   }),
+  [...ProjectDetailHandlers],
 ]
