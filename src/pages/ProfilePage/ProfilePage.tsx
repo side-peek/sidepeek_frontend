@@ -4,8 +4,8 @@ import { useQuery } from "@tanstack/react-query"
 
 import { getUserDetail } from "@/api/user/getUserDetail"
 
-import LargeScreenProfile from "./components/LargeScreenProfile/LargeScreenProfile"
-import SmallScreenProfile from "./components/SmallScreenProfile/SmallScreenProfile"
+import LargeScreenProfile from "./LargeScreenProfile/LargeScreenProfileView"
+import SmallScreenProfile from "./SmallScreenProfile/SmallScreenProfileView"
 
 const ProfilePage = () => {
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")

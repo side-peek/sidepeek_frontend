@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react"
 import { TechStackType } from "api-models"
 
-import ProfileBar from "../ProfileBar"
-import ProjectsView from "../ProjectsView"
+import ProfileBar from "../components/ProfileBar"
+import ProjectsView from "../components/ProjectsView"
 
 export interface ProfileBarProps {
   nickname: string | undefined
@@ -14,7 +14,7 @@ export interface ProfileBarProps {
   techStacks: TechStackType[] | undefined
 }
 
-const LargeScreenProfile = ({
+const LargeScreenProfileView = ({
   nickname,
   profileImageUrl,
   career,
@@ -27,17 +27,18 @@ const LargeScreenProfile = ({
     <>
       <Box
         minW="38rem"
-        zIndex={999}
-        // bg="red"
-      >
+        zIndex={999}>
         <ProfileBar
-          nickName={nickname}
-          profileImageUrl={profileImageUrl}
-          career={career}
-          introduction={introduction}
-          githubUrl={githubUrl}
-          blogUrl={blogUrl}
-          techStacks={techStacks}
+          {...{
+            nickname,
+            profileImageUrl,
+            career,
+            introduction,
+            githubUrl,
+            blogUrl,
+            techStacks,
+          }}
+          nickname={nickname}
         />
       </Box>
       <Box width="80%">
@@ -47,4 +48,4 @@ const LargeScreenProfile = ({
   )
 }
 
-export default LargeScreenProfile
+export default LargeScreenProfileView

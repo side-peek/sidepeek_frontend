@@ -40,43 +40,12 @@ const TechStack = ({ techStacks }: TechStackProps) => {
                 .map((techStack) => (
                   <CustomTag
                     key={techStack.id}
-                    label={
-                      // <Flex>
-                      //   <Img
-                      //     w="1rem"
-                      //     mr="0.3rem"
-                      //     src={techStack.skill.iconImageUrl}
-                      //   />
-                      //   {techStack.skill.name}
-                      // </Flex>
-                      techStack.skill.name
-                    }
+                    label={techStack.skill.name}
                   />
                 ))}
           </Flex>
         </Box>
       ))}
-      {/* <Text
-        mt="1rem"
-        fontSize="lg">
-        프론트엔드
-      </Text>
-
-      <Flex
-        flexWrap="wrap"
-        sx={{ "& > *": { mr: "0.8rem", mb: "0.8rem" } }}
-        mt="0.5rem">
-        <CustomTag label="React" />
-        <CustomTag label="React" />
-        <CustomTag label="React" />
-        <CustomTag label="fsdafasdfas" />
-        <CustomTag label="React" />
-        <CustomTag label="Refdasfdsact" />
-        <CustomTag label="React" />
-        <CustomTag label="React" />
-        <CustomTag label="React" />
-        <CustomTag label="React" />
-      </Flex> */}
     </Box>
   )
 }

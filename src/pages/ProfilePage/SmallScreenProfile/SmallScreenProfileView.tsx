@@ -1,7 +1,7 @@
 import { Box, VStack } from "@chakra-ui/react"
 
-import ProfileCard from "../ProfileCard"
-import ProjectsView from "../ProjectsView"
+import ProfileCard from "../components/ProfileCard"
+import ProjectsView from "../components/ProjectsView"
 
 interface ProfileCardProps {
   profileImageUrl?: string
@@ -23,10 +23,7 @@ const SmallScreenProfile = ({
         career={career}
       />
 
-      <Box
-        width="100%"
-        // bg="blue"
-      >
+      <Box width="100%">
         <ProjectsView />
       </Box>
     </VStack>
