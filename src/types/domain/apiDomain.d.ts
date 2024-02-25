@@ -52,6 +52,11 @@ declare module "api-models" {
     troubleShooting: string
   }
 
+  export type Description = {
+    content: string
+    imageUrls: string[]
+  }
+
   export type Member = {
     userId?: number
     category: string
