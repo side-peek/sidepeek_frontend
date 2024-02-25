@@ -1,3 +1,4 @@
+import { FaSquarePen } from "react-icons/fa6"
 import { ImGithub } from "react-icons/im"
 
 import { Box, HStack, Link, Text } from "@chakra-ui/react"
@@ -16,7 +17,6 @@ const ProfileIntroduction = ({
   return (
     <Box
       w="32rem"
-      //   border="2px solid red"
       px="1rem"
       py="3rem">
       <Text
@@ -32,11 +32,11 @@ const ProfileIntroduction = ({
 
       <HStack mt="1.5rem">
         <ImGithub size="2rem" />
-        {/* <Text>github링크</Text> */}
+
         <Link href={githubUrl}>GitHub 링크</Link>
       </HStack>
       <HStack mt="0.8rem">
-        <ImGithub size="2rem" />
+        <FaSquarePen size="2.2rem" />
         <Link href={blogUrl}>Blog 링크</Link>
       </HStack>
     </Box>
