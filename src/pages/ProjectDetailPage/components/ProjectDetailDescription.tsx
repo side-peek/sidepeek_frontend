@@ -9,38 +9,20 @@ interface ProjectDetailDescriptionProps {
 const ProjectDetailDescription = ({
   projects,
 }: ProjectDetailDescriptionProps) => {
-  console.log(projects)
-  //   const [text, setText] = useState("")
-  //   const [description, setDescription] = useState({
-  //     content: "",
-  //   })
-  //   console.log(description)
-
-  //   useEffect(() => {
-  //     setDescription({ content: text })
-  //   }, [text])
-
   const ViewStyleParams = {
     whiteSpace: "pre-wrap",
-    padding: "1rem",
-    lineHeight: "0.5",
+    padding: "2rem",
+    lineHeight: "1.3",
   }
 
   return (
     <div
       style={{
-        paddingTop: "15rem",
+        paddingTop: "10rem",
         maxWidth: "100rem",
         width: "100%",
         margin: "0 auto",
       }}>
-      {/* <MDEditor
-        data-color-mode="light"
-        value={text}
-        onChange={setText}
-        height="50rem"
-      /> */}
-
       <Tabs
         variant="enclosed"
         size="lg"
@@ -57,7 +39,7 @@ const ProjectDetailDescription = ({
                 data-color-mode="light">
                 <MDEditor.Markdown
                   source={projects.description}
-                  {...ViewStyleParams}
+                  style={{ ...ViewStyleParams }}
                 />
               </div>
             }
@@ -69,7 +51,7 @@ const ProjectDetailDescription = ({
                 data-color-mode="light">
                 <MDEditor.Markdown
                   source={projects.troubleShooting}
-                  {...ViewStyleParams}
+                  style={{ ...ViewStyleParams }}
                 />
               </div>
             }
