@@ -3,7 +3,7 @@ import { TechStackType } from "api-models"
 
 import ProfileCard from "./ProfileCard"
 import ProfileIntroduction from "./ProfileIntroduction"
-import TechStack from "./TechStack"
+import TechStack from "./ProfileTechStack"
 
 export interface ProfileBarProps {
   nickname: string | undefined

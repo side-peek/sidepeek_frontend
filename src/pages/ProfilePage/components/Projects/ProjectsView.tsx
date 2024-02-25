@@ -10,19 +10,25 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react"
 
+import { useQuery } from "@tanstack/react-query"
+
+import { getAllProjects } from "@/api/project/getAllProjects"
+
 import ProjectCard from "@components/ProjectCard/ProjectCard"
 
 const ProjectsView = () => {
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
-  console.log(isLargerThan1200)
+  const { data: projects } = useQuery({
+    queryKey: ["projects"],
+    queryFn: () => getAllProjects(),
+    gcTime: 0,
+  })
+  console.log(projects)
+
   return (
     <Box
       height="100%"
-      mt="2rem"
-      // width="100%"
-      // position="absolute"
-      // overflow="hidden"
-    >
+      mt="2rem">
       <Tabs
         size="lg"
         variant="enclosed">
@@ -43,15 +49,10 @@ const ProjectsView = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            {/* <Box>
-              <ProjectCard imgUrl="https://picsum.photos/200" />
-            </Box> */}
             <Grid
               mt="0.5rem"
               templateColumns="repeat(auto-fit, minmax(24rem, 1fr))"
-              gap={3}
-              // sx={{ "& > *": { border: "2px solid red" } }}
-            >
+              gap={0}>
               {Array.from({ length: 30 }, (_, idx) => idx + 1).map((idx) => (
                 <GridItem key={idx}>
                   <ProjectCard
