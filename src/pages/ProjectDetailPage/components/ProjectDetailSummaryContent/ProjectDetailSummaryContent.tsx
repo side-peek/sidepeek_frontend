@@ -19,8 +19,8 @@ const ProjectDetailSummaryContent = ({
 }: ProjectDetailSummaryContentProps) => {
   return (
     <Flex
-      justifyContent="center"
-      gap="10rem">
+      justifyContent="space-between"
+      w="90%">
       <ProjectDetailSummaryLeft
         deployUrl={deployUrl}
         githubUrl={githubUrl}

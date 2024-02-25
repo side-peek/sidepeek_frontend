@@ -10,7 +10,7 @@ export const DUMMY_PROJECT_DETAIL = {
       overviewImageUrl: [
         {
           id: 1,
-          url: "https://i.postimg.cc/Gm4MwbY2/image.png",
+          url: "https://i.postimg.cc/HnFs3QyH/image.png",
         },
         {
           id: 2,
@@ -18,7 +18,7 @@ export const DUMMY_PROJECT_DETAIL = {
         },
         {
           id: 2,
-          url: "https://user-images.githubusercontent.com/37354708/144370579-763a962c-5076-413c-9ea6-1043985791f6.png",
+          url: "https://i.postimg.cc/NjqjHktk/image.png",
         },
       ],
       thumbnailUrl:

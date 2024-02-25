@@ -15,7 +15,10 @@ interface ProjectDetailSummaryRightProps {
 const swiperParams = {
   navigation: true,
   loop: true,
-  pagination: true,
+  pagination: {
+    clickable: true,
+  },
+
   modules: [Navigation, Pagination, Mousewheel, Keyboard],
 }
 
