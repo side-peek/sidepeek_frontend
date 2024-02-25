@@ -5,13 +5,12 @@ import { MdArrowForwardIos } from "react-icons/md"
 import { Box, Icon, IconButton, Image } from "@chakra-ui/react"
 import { ProjectOverViewUrl } from "api-models"
 import "swiper/css"
-import "swiper/css/navigation"
 import "swiper/css/pagination"
 import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules"
 import { SwiperSlide } from "swiper/react"
 import { Swiper as SwiperCore } from "swiper/types"
 
-import { StyledSwiper } from "./SwiperSlide.styles"
+import { StyledSwiper } from "../../styles/SwiperSlide.styles"
 
 interface ProjectDetailSummaryRightProps {
   overviewImageUrl: ProjectOverViewUrl[]
@@ -22,7 +21,6 @@ const swiperParams = {
   pagination: {
     clickable: true,
   },
-
   modules: [Navigation, Pagination, Mousewheel, Keyboard],
 }
 

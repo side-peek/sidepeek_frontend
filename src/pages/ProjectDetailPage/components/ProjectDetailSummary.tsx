@@ -21,41 +21,35 @@ const ProjectDetailSummary = ({ projects }: ProjectDetailSummaryProps) => {
     overview,
   } = projects[0]
   return (
-    <>
-      <Flex
-        maxW="128rem"
-        bg="#f5f5f5"
-        w="100%"
-        h="53rem"
-        flexDirection="column"
-        m="0 auto"
-        p="2rem">
-        <Flex flexDirection="column">
-          <ProjectDetailSummaryTop
-            likeCount={likeCount}
-            viewCount={viewCount}
-            commentCount={commentCount}
-          />
+    <Flex
+      maxW="128rem"
+      bg="#f5f5f5"
+      flexDirection="column"
+      m="0 auto"
+      p="2rem">
+      <Flex flexDirection="column">
+        <ProjectDetailSummaryTop
+          likeCount={likeCount}
+          viewCount={viewCount}
+          commentCount={commentCount}
+        />
 
-          <Center
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            gap="5rem">
-            <ProjectDetailSummaryTitle
-              name={name}
-              subName={subName}
-            />
-            <ProjectDetailSummaryContent
-              overviewImageUrl={overviewImageUrl}
-              overview={overview}
-              deployUrl={deployUrl}
-              githubUrl={githubUrl}
-            />
-          </Center>
-        </Flex>
+        <Center
+          flexDirection="column"
+          gap="5rem">
+          <ProjectDetailSummaryTitle
+            name={name}
+            subName={subName}
+          />
+          <ProjectDetailSummaryContent
+            overviewImageUrl={overviewImageUrl}
+            overview={overview}
+            deployUrl={deployUrl}
+            githubUrl={githubUrl}
+          />
+        </Center>
       </Flex>
-    </>
+    </Flex>
   )
 }
 

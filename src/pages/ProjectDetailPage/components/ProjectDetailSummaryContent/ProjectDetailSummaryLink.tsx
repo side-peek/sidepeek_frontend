@@ -22,7 +22,7 @@ const ProjectDetailSummaryLink = ({
         borderRadius="2rem"
         size="lg"
         bgColor="blue.100"
-        color="white"
+        color="#fff"
         fontSize="xl"
         p="2.2rem 1.5rem"
         _hover={{ opacity: "0.5" }}
@@ -31,11 +31,12 @@ const ProjectDetailSummaryLink = ({
         WEB
       </Button>
       <Button
-        p="2.2rem 1.5rem"
         borderRadius="2rem"
-        bgColor="blue.600"
-        color="white"
         size="lg"
+        bgColor="blue.600"
+        color="#fff"
+        fontSize="xl"
+        p="2.2rem 1.5rem"
         _hover={{ opacity: "0.5" }}
         leftIcon={<FaGithub />}
         onClick={() => handleOpenNewTab(githubUrl)}>

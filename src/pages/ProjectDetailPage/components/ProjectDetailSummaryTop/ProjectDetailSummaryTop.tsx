@@ -20,6 +20,7 @@ const ProjectDetailSummaryTop = ({
     TODO: 1. 좋아요 요청
           2. 댓글 클릭시 댓글 창으로 스크롤
           3. 클립보드 클릭시 완료 모달/토스트 띄우기
+          4. 클립보드 url baseurl로 바꾸기
   */
 
   const location = useLocation()
