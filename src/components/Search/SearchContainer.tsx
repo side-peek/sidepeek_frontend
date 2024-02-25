@@ -1,45 +1,34 @@
-import { useState } from "react"
-
 import { List, ListItem } from "@chakra-ui/react"
-import { Skill } from "api-models"
 
 import SearchBar from "./components/SearchBar"
-import SearchFetcher from "./components/SearchFetcher"
 import SearchLayout from "./components/SearchLayout"
 import { useInput } from "./hooks/useInput"
 import { useOutsideClick } from "./hooks/useOutsideClick"
-import { SearchContext } from "./stores/SearchContext/SearchContext"
+import { useSkillSearch } from "./hooks/useSearch"
 
 const SearchContainer = () => {
   const [inputValue, onInput] = useInput("")
-  const [searchList, setSearchList] = useState<Skill[]>([])
+  const searchList = useSkillSearch(inputValue)
 
   const [targetRef, isFocused] = useOutsideClick<HTMLDivElement>()
 
   return (
-    <SearchContext.Provider
-      value={{
-        inputValue,
-        onInput,
-        searchList,
-        setSearchList,
-      }}>
-      <SearchLayout
-        width="200px"
-        ref={targetRef}>
-        <SearchBar placeholder="찾고싶은 기술을 입력해주세요" />
-        <SearchFetcher>
-          {isFocused && (
-            <List>
-              {searchList?.map((skill) => {
-                return <ListItem key={skill.id}>{skill.name}</ListItem>
-              })}
-              <ListItem>{inputValue}</ListItem>
-            </List>
-          )}
-        </SearchFetcher>
-      </SearchLayout>
-    </SearchContext.Provider>
+    <SearchLayout
+      width="200px"
+      ref={targetRef}>
+      <SearchBar
+        inputValue={inputValue}
+        onInput={onInput}
+      />
+      {isFocused && (
+        <List>
+          {searchList?.map((skill) => {
+            return <ListItem key={skill.id}>{skill.name}</ListItem>
+          })}
+          <ListItem>{inputValue}</ListItem>
+        </List>
+      )}
+    </SearchLayout>
   )
 }
 
