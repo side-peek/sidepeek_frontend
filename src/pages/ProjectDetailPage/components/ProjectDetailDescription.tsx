@@ -1,4 +1,4 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
 import MDEditor from "@uiw/react-md-editor"
 import { Project } from "api-models"
 
@@ -6,23 +6,21 @@ interface ProjectDetailDescriptionProps {
   projects: Project
 }
 
+const ViewStyleParams = {
+  whiteSpace: "pre-wrap",
+  padding: "2rem",
+  lineHeight: "1.3",
+}
+
 const ProjectDetailDescription = ({
   projects,
 }: ProjectDetailDescriptionProps) => {
-  const ViewStyleParams = {
-    whiteSpace: "pre-wrap",
-    padding: "2rem",
-    lineHeight: "1.3",
-  }
-
   return (
-    <div
-      style={{
-        paddingTop: "10rem",
-        maxWidth: "100rem",
-        width: "100%",
-        margin: "0 auto",
-      }}>
+    <Box
+      paddingTop="10rem"
+      maxW="100rem"
+      w="100%"
+      margin="0 auto">
       <Tabs
         variant="enclosed"
         size="lg"
@@ -34,31 +32,27 @@ const ProjectDetailDescription = ({
         <TabPanels>
           <TabPanel>
             {
-              <div
-                className="markdownDiv"
-                data-color-mode="light">
+              <Box data-color-mode="light">
                 <MDEditor.Markdown
                   source={projects.description}
                   style={{ ...ViewStyleParams }}
                 />
-              </div>
+              </Box>
             }
           </TabPanel>
           <TabPanel>
             {
-              <div
-                className="markdownDiv"
-                data-color-mode="light">
+              <Box data-color-mode="light">
                 <MDEditor.Markdown
                   source={projects.troubleShooting}
                   style={{ ...ViewStyleParams }}
                 />
-              </div>
+              </Box>
             }
           </TabPanel>
         </TabPanels>
       </Tabs>
-    </div>
+    </Box>
   )
 }
 
