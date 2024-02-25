@@ -1,12 +1,13 @@
+import { ChangeEventHandler } from "react"
+
 import { Input, InputProps } from "@chakra-ui/react"
 
-import { useSearchContext } from "../stores/useSearchContext"
+interface SearchBarProps extends InputProps {
+  inputValue: string
+  onInput: ChangeEventHandler<HTMLInputElement>
+}
 
-interface SearchBarProps extends InputProps {}
-
-const SearchBar = ({ ...props }: SearchBarProps) => {
-  const { inputValue, onInput } = useSearchContext()
-
+const SearchBar = ({ inputValue, onInput, ...props }: SearchBarProps) => {
   return (
     <Input
       type="text"
