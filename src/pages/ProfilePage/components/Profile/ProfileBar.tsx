@@ -26,15 +26,16 @@ const ProfileBar = ({
 }: ProfileBarProps) => {
   return (
     <Center
-      bg="white"
+      bg="default"
       w="36rem"
       mt="-10rem"
-      border="1px solid darkgrey"
+      border="1px solid"
+      borderColor="grey.200"
       borderRadius="20px">
       <VStack
-        divider={<StackDivider borderColor="darkgrey" />}
+        divider={<StackDivider borderColor="grey.200" />}
         w="32rem"
-        bg="#ffffff">
+        bg="default">
         <Flex
           minH="30rem"
           alignItems="center">
