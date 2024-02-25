@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react"
-import { TechStackType } from "api-models"
+import { TechStack } from "api-models"
 
 import ProfileBar from "../components/Profile/ProfileBar"
 import ProjectsView from "../components/Projects/ProjectsView"
@@ -11,7 +11,7 @@ export interface ProfileBarProps {
   introduction: string | undefined
   githubUrl: string | undefined
   blogUrl: string | undefined
-  techStacks: TechStackType[] | undefined
+  techStacks: TechStack[] | undefined
 }
 
 const LargeScreenProfileView = ({

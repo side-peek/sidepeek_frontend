@@ -1,10 +1,10 @@
 import { Box, Flex, Text } from "@chakra-ui/react"
-import { TechStackType } from "api-models"
+import { TechStack } from "api-models"
 
 import CustomTag from "@components/Tag/components/CustomTag"
 
 interface TechStackProps {
-  techStacks: TechStackType[] | undefined
+  techStacks: TechStack[] | undefined
 }
 
 const ProfileTechStack = ({ techStacks }: TechStackProps) => {

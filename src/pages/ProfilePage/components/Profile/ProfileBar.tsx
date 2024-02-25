@@ -1,9 +1,9 @@
 import { Box, Center, Flex, StackDivider, VStack } from "@chakra-ui/react"
-import { TechStackType } from "api-models"
+import { TechStack } from "api-models"
 
 import ProfileCard from "./ProfileCard"
 import ProfileIntroduction from "./ProfileIntroduction"
-import TechStack from "./ProfileTechStack"
+import ProfileTechStack from "./ProfileTechStack"
 
 export interface ProfileBarProps {
   nickname: string | undefined
@@ -12,7 +12,7 @@ export interface ProfileBarProps {
   introduction: string | undefined
   githubUrl: string | undefined
   blogUrl: string | undefined
-  techStacks: TechStackType[] | undefined
+  techStacks: TechStack[] | undefined
 }
 
 const ProfileBar = ({
@@ -52,7 +52,7 @@ const ProfileBar = ({
           />
         </Box>
         <Box>
-          <TechStack techStacks={techStacks} />
+          <ProfileTechStack techStacks={techStacks} />
         </Box>
       </VStack>
     </Center>

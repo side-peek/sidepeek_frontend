@@ -26,7 +26,7 @@ declare module "api-models" {
     career: string
     githubUrl: string
     blogUrl: string
-    techStacks: TechStackType[]
+    techStacks: TechStack[]
   }
   export interface UserInfo {
     userInfo: UserInfoProperties
@@ -111,7 +111,7 @@ declare module "api-models" {
     updatedAt: string
   }
 
-  export type TechStackType = {
+  export type TechStack = {
     id: number
     skill: Skill
     category: string
