@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react"
 import { TechStack } from "api-models"
 
-import ProfileBar from "../components/Profile/ProfileBar"
+import ProfileBar from "../components/Profile/ProfileBarView"
 import ProjectsView from "../components/Projects/ProjectsView"
 
 export interface ProfileBarProps {
@@ -38,7 +38,6 @@ const LargeScreenProfileView = ({
             blogUrl,
             techStacks,
           }}
-          nickname={nickname}
         />
       </Box>
       <Box width="80%">

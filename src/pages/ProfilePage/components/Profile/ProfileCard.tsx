@@ -14,7 +14,6 @@ const ProfileCard = ({
   return (
     <VStack>
       <Avatar
-        //   size="2xl"
         w="12rem"
         h="12rem"
         src={profileImageUrl}></Avatar>

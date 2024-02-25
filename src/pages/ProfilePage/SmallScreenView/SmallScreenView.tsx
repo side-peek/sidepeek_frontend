@@ -22,7 +22,6 @@ const SmallScreenProfile = ({
         profileImageUrl={profileImageUrl}
         career={career}
       />
-
       <Box width="100%">
         <ProjectsView />
       </Box>

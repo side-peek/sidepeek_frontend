@@ -1,7 +1,7 @@
-import { Box, Flex, Text } from "@chakra-ui/react"
+import { Box, Text } from "@chakra-ui/react"
 import { TechStack } from "api-models"
 
-import CustomTag from "@components/Tag/components/CustomTag"
+import ProfileTechStackByCategory from "./ProfileTechStackByCategory"
 
 interface TechStackProps {
   techStacks: TechStack[] | undefined
@@ -23,27 +23,11 @@ const ProfileTechStack = ({ techStacks }: TechStackProps) => {
         기술스택
       </Text>
       {categories.map((category, idx) => (
-        <Box key={idx}>
-          <Text
-            mt="1rem"
-            fontSize="lg">
-            {category}
-          </Text>
-          <Flex
-            flexWrap="wrap"
-            sx={{ "& > *": { mr: "0.8rem", mb: "0.8rem" } }}
-            mt="0.5rem">
-            {techStacks &&
-              techStacks
-                .filter((techStack) => techStack.category === category)
-                .map((techStack) => (
-                  <CustomTag
-                    key={techStack.id}
-                    label={techStack.skill.name}
-                  />
-                ))}
-          </Flex>
-        </Box>
+        <ProfileTechStackByCategory
+          key={idx}
+          category={category}
+          techStacks={techStacks}
+        />
       ))}
     </Box>
   )
