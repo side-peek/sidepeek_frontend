@@ -20,6 +20,7 @@ const themeConfig = {
     }),
   },
   colors: {
+    default: "#ffffff",
     blue: {
       100: "#0C356A",
       200: "#0174BE",
