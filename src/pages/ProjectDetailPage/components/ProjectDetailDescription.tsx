@@ -1,19 +1,31 @@
-import { useEffect, useState } from "react"
-
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
 import MDEditor from "@uiw/react-md-editor"
+import { Project } from "api-models"
 
-const ProjectDetailDescription = () => {
-  const [text, setText] = useState("")
-  const [description, setDescription] = useState({
-    content: "",
-  })
+interface ProjectDetailDescriptionProps {
+  projects: Project
+}
 
-  useEffect(() => {
-    setDescription({ content: text })
-  }, [text])
+const ProjectDetailDescription = ({
+  projects,
+}: ProjectDetailDescriptionProps) => {
+  console.log(projects)
+  //   const [text, setText] = useState("")
+  //   const [description, setDescription] = useState({
+  //     content: "",
+  //   })
+  //   console.log(description)
 
-  console.log(description)
+  //   useEffect(() => {
+  //     setDescription({ content: text })
+  //   }, [text])
+
+  const ViewStyleParams = {
+    whiteSpace: "pre-wrap",
+    padding: "1rem",
+    lineHeight: "0.5",
+  }
+
   return (
     <div
       style={{
@@ -22,12 +34,12 @@ const ProjectDetailDescription = () => {
         width: "100%",
         margin: "0 auto",
       }}>
-      <MDEditor
+      {/* <MDEditor
         data-color-mode="light"
         value={text}
         onChange={setText}
         height="50rem"
-      />
+      /> */}
 
       <Tabs
         variant="enclosed"
@@ -44,11 +56,8 @@ const ProjectDetailDescription = () => {
                 className="markdownDiv"
                 data-color-mode="light">
                 <MDEditor.Markdown
-                  source={text}
-                  style={{
-                    whiteSpace: "pre-wrap",
-                    lineHeight: "0.5",
-                  }}
+                  source={projects.description}
+                  {...ViewStyleParams}
                 />
               </div>
             }
@@ -59,12 +68,8 @@ const ProjectDetailDescription = () => {
                 className="markdownDiv"
                 data-color-mode="light">
                 <MDEditor.Markdown
-                  source={text}
-                  style={{
-                    whiteSpace: "pre-wrap",
-                    lineHeight: "0.5",
-                    backgroundColor: "white",
-                  }}
+                  source={projects.troubleShooting}
+                  {...ViewStyleParams}
                 />
               </div>
             }
