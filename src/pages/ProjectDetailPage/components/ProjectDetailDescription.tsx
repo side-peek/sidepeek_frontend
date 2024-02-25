@@ -1,4 +1,12 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
+import {
+  Box,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
+} from "@chakra-ui/react"
 import MDEditor from "@uiw/react-md-editor"
 import { Project } from "api-models"
 
@@ -9,7 +17,8 @@ interface ProjectDetailDescriptionProps {
 const ViewStyleParams = {
   whiteSpace: "pre-wrap",
   padding: "2rem",
-  lineHeight: "1.3",
+  lineHeight: "1.5",
+  fontFamily: "SCDream_Regular",
 }
 
 const ProjectDetailDescription = ({
@@ -17,17 +26,23 @@ const ProjectDetailDescription = ({
 }: ProjectDetailDescriptionProps) => {
   return (
     <Box
-      paddingTop="10rem"
-      maxW="100rem"
+      padding="5rem"
       w="100%"
+      maxW="100rem"
       margin="0 auto">
       <Tabs
-        variant="enclosed"
         size="lg"
+        variant="enclosed"
         fontFamily="SCDream_Bold">
         <TabList>
-          <Tab _hover={{ opacity: 0.5 }}>기능</Tab>
-          <Tab _hover={{ opacity: 0.5 }}>트러블 슈팅</Tab>
+          <Tab
+            borderTopRadius="1rem"
+            bgSize="2rem">
+            <Text _hover={{ opacity: 0.5 }}>기능</Text>
+          </Tab>
+          <Tab borderTopRadius="1rem">
+            <Text _hover={{ opacity: 0.5 }}>트러블 슈팅</Text>
+          </Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
