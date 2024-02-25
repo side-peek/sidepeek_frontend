@@ -25,6 +25,7 @@ const ProjectDetailSummaryLink = ({
         color="white"
         fontSize="xl"
         p="2.2rem 1.5rem"
+        _hover={{ opacity: "0.5" }}
         leftIcon={<TbWorld />}
         onClick={() => handleOpenNewTab(deployUrl)}>
         WEB
@@ -32,8 +33,10 @@ const ProjectDetailSummaryLink = ({
       <Button
         p="2.2rem 1.5rem"
         borderRadius="2rem"
-        colorScheme="blue"
+        bgColor="blue.600"
+        color="white"
         size="lg"
+        _hover={{ opacity: "0.5" }}
         leftIcon={<FaGithub />}
         onClick={() => handleOpenNewTab(githubUrl)}>
         Github
