@@ -5,7 +5,17 @@ import { PiClipboardText } from "react-icons/pi"
 
 import { Flex, Icon, IconButton, Text } from "@chakra-ui/react"
 
-const ProjectDetailSummaryTop = () => {
+interface ProjectDetailSummaryTopProps {
+  likeCount: number
+  viewCount: number
+  commentCount: number
+}
+
+const ProjectDetailSummaryTop = ({
+  likeCount,
+  viewCount,
+  commentCount,
+}: ProjectDetailSummaryTopProps) => {
   return (
     <Flex
       gap="1.5rem"
@@ -17,7 +27,7 @@ const ProjectDetailSummaryTop = () => {
           fontSize="2.7rem"
           as={LiaEyeSolid}
         />
-        <Text fontSize="xl">20</Text>
+        <Text fontSize="xl">{viewCount}</Text>
       </Flex>
       <Flex
         gap="0.7rem"
@@ -31,7 +41,7 @@ const ProjectDetailSummaryTop = () => {
           _hover={{ background: "none" }}
           icon={<IoMdHeartEmpty />}
         />
-        <Text fontSize="xl">7</Text>
+        <Text fontSize="xl">{likeCount}</Text>
       </Flex>
       <Flex
         gap="0.7rem"
@@ -45,7 +55,7 @@ const ProjectDetailSummaryTop = () => {
           _hover={{ background: "none" }}
           icon={<FaRegComment />}
         />
-        <Text fontSize="xl">2</Text>
+        <Text fontSize="xl">{commentCount}</Text>
       </Flex>
 
       <IconButton

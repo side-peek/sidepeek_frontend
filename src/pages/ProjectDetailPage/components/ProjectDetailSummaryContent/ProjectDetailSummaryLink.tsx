@@ -3,11 +3,18 @@ import { TbWorld } from "react-icons/tb"
 
 import { Button, Flex } from "@chakra-ui/react"
 
-const ProjectDetailSummaryLink = () => {
+interface ProjectDetailSummaryLinkProps {
+  deployUrl: string
+  githubUrl: string
+}
+
+const ProjectDetailSummaryLink = ({
+  deployUrl,
+  githubUrl,
+}: ProjectDetailSummaryLinkProps) => {
+  console.log(deployUrl, githubUrl)
   return (
-    <Flex
-      gap="2rem"
-      pl="5rem">
+    <Flex gap="2rem">
       <Button
         borderRadius="2rem"
         size="lg"

@@ -1,18 +1,26 @@
 import { Box, Text } from "@chakra-ui/react"
 
-const ProjectDetailSummaryTitle = () => {
+interface ProjectDetailSummaryTitleProps {
+  name: string
+  subName: string
+}
+
+const ProjectDetailSummaryTitle = ({
+  name,
+  subName,
+}: ProjectDetailSummaryTitleProps) => {
   return (
     <Box>
       <Text
         fontFamily="SCDream_Bold"
         fontSize="3xl"
         textAlign="center">
-        스타일드
+        {name}
       </Text>
       <Text
         fontSize="2xl"
         textAlign="center">
-        스타일 No.1
+        {subName}
       </Text>
     </Box>
   )

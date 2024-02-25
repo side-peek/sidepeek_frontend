@@ -36,6 +36,7 @@ declare module "api-models" {
   }
 
   export type Project = {
+    id: string
     name: string
     subName: string
     overview: string
@@ -48,6 +49,9 @@ declare module "api-models" {
     endDate: string
     ownerId: number
     members: Member[]
+    viewCount: number
+    commentCount: number
+    likeCount: number
     description: Description
     troubleShooting: Description
   }
@@ -238,3 +242,5 @@ declare module "api-models" {
     projectId: number
   }
 }
+// 맞아요 음.. 그러면 타입을 하나 둬야겠네요 하나더
+// 원래 그게 맞긴해요 일단 제가 메모해놓을게요

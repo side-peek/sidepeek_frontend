@@ -5,13 +5,17 @@ import "swiper/css/pagination"
 import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 
-import projectThumbnail from "@/assets/images/project.png"
-
 import dog from "@assets/images/dog.jpeg"
 
 import "../../styles/index.css"
 
-const ProjectDetailSummaryRight = () => {
+interface ProjectDetailSummaryRightProps {
+  thumbnailUrl: string
+}
+
+const ProjectDetailSummaryRight = ({
+  thumbnailUrl,
+}: ProjectDetailSummaryRightProps) => {
   return (
     <Box maxW="40rem">
       <Swiper
@@ -24,7 +28,7 @@ const ProjectDetailSummaryRight = () => {
         <SwiperSlide>
           <Image
             borderRadius="1rem"
-            src={projectThumbnail}
+            src={thumbnailUrl}
             alt="project thumbnail"
           />
         </SwiperSlide>

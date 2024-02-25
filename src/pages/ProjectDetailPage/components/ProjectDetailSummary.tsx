@@ -1,10 +1,25 @@
 import { Center, Flex } from "@chakra-ui/react"
+import { Project } from "api-models"
 
 import ProjectDetailSummaryContent from "./ProjectDetailSummaryContent/ProjectDetailSummaryContent"
 import ProjectDetailSummaryTitle from "./ProjectDetailSummaryTitle/ProjectDetailSummaryTitle"
 import ProjectDetailSummaryTop from "./ProjectDetailSummaryTop/ProjectDetailSummaryTop"
 
-const ProjectDetailSummary = () => {
+interface ProjectDetailSummaryProps {
+  projects: Project[]
+}
+const ProjectDetailSummary = ({ projects }: ProjectDetailSummaryProps) => {
+  const {
+    deployUrl,
+    githubUrl,
+    name,
+    subName,
+    thumbnailUrl,
+    viewCount,
+    likeCount,
+    commentCount,
+    overview,
+  } = projects[0]
   return (
     <>
       <Flex
@@ -17,15 +32,27 @@ const ProjectDetailSummary = () => {
         m="0 auto"
         p="2rem">
         <Flex flexDirection="column">
-          <ProjectDetailSummaryTop />
+          <ProjectDetailSummaryTop
+            likeCount={likeCount}
+            viewCount={viewCount}
+            commentCount={commentCount}
+          />
 
           <Center
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
             gap="5rem">
-            <ProjectDetailSummaryTitle />
-            <ProjectDetailSummaryContent />
+            <ProjectDetailSummaryTitle
+              name={name}
+              subName={subName}
+            />
+            <ProjectDetailSummaryContent
+              overview={overview}
+              deployUrl={deployUrl}
+              githubUrl={githubUrl}
+              thumbnailUrl={thumbnailUrl}
+            />
           </Center>
         </Flex>
       </Flex>
