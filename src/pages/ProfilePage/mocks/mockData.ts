@@ -1,3 +1,26 @@
+export const DUMMY_PROJECTS = {
+  projects: [
+    {
+      id: 1,
+      name: "사이드픽👀",
+      subName: "요즘 사이드 플젝 뭐함? 사이드픽 👀",
+      thumbnailUrl: "https://thumbnail-images.sidepeek.com/1.png",
+      viewCount: 20,
+      likeCount: 7,
+      isLiked: false,
+    },
+    {
+      id: 2,
+      name: "냠냠디저트",
+      subName: "냠냠디저트 맛집 공유 플랫폼",
+      thumbnailUrl: "https://thumbnail-images.yumyumdesert.com/1.png",
+      viewCount: 95,
+      likeCount: 7,
+      isLiked: true,
+    },
+  ],
+}
+
 export const DUMMY_USER_INFO = {
   userInfo: {
     nickname: "sehee",

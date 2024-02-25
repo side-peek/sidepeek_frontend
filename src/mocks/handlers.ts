@@ -1,3 +1,3 @@
-import { userInfoHandlers } from "@pages/ProfilePage/mocks"
+import { projectsHandlers, userInfoHandlers } from "@pages/ProfilePage/mocks"
 
-export const handlers = [...userInfoHandlers]
+export const handlers = [...userInfoHandlers, ...projectsHandlers]
