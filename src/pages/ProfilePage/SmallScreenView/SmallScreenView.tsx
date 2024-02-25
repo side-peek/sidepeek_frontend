@@ -1,7 +1,7 @@
 import { Box, VStack } from "@chakra-ui/react"
 
 import ProfileCard from "../components/Profile/ProfileCard"
-import ProjectsView from "../components/Projects/ProjectsView"
+import ProjectsView from "../components/Projects/Projects.view"
 
 interface ProfileCardProps {
   profileImageUrl?: string

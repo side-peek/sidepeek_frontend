@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react"
 import { TechStack } from "api-models"
 
-import ProfileBar from "../components/Profile/ProfileBarView"
-import ProjectsView from "../components/Projects/ProjectsView"
+import ProfileBar from "../components/Profile/ProfileBar.view"
+import ProjectsView from "../components/Projects/Projects.view"
 
 export interface ProfileBarProps {
   nickname: string | undefined
