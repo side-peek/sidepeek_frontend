@@ -48,13 +48,8 @@ declare module "api-models" {
     endDate: string
     ownerId: number
     members: Member[]
-    description: Description
-    troubleShooting: Description
-  }
-
-  export type Description = {
-    content: string
-    imageUrls: string[]
+    description: string
+    troubleShooting: string
   }
 
   export type Member = {
