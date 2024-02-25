@@ -1,24 +1,10 @@
-import {
-  Box,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Text,
-} from "@chakra-ui/react"
-import MDEditor from "@uiw/react-md-editor"
+import { Box, Tab, TabList, TabPanels, Tabs, Text } from "@chakra-ui/react"
 import { Project } from "api-models"
+
+import ProjectDetailDescriptionContent from "./ProjectDetailDescriptionContent"
 
 interface ProjectDetailDescriptionProps {
   projects: Project
-}
-
-const ViewStyleParams = {
-  whiteSpace: "pre-wrap",
-  padding: "2rem",
-  lineHeight: "1.5",
-  fontFamily: "SCDream_Regular",
 }
 
 const ProjectDetailDescription = ({
@@ -45,26 +31,8 @@ const ProjectDetailDescription = ({
           </Tab>
         </TabList>
         <TabPanels>
-          <TabPanel>
-            {
-              <Box data-color-mode="light">
-                <MDEditor.Markdown
-                  source={projects.description}
-                  style={{ ...ViewStyleParams }}
-                />
-              </Box>
-            }
-          </TabPanel>
-          <TabPanel>
-            {
-              <Box data-color-mode="light">
-                <MDEditor.Markdown
-                  source={projects.troubleShooting}
-                  style={{ ...ViewStyleParams }}
-                />
-              </Box>
-            }
-          </TabPanel>
+          <ProjectDetailDescriptionContent content={projects.description} />
+          <ProjectDetailDescriptionContent content={projects.troubleShooting} />
         </TabPanels>
       </Tabs>
     </Box>
