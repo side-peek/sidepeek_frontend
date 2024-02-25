@@ -18,6 +18,7 @@ const ProjectDetailSummaryLeft = ({
       flexDirection="column"
       gap="5rem">
       <ProjectDetailSummaryText overview={overview} />
+
       <ProjectDetailSummaryLink
         deployUrl={deployUrl}
         githubUrl={githubUrl}

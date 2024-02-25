@@ -4,9 +4,9 @@ import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
 import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules"
-import { Swiper, SwiperSlide } from "swiper/react"
+import { SwiperSlide } from "swiper/react"
 
-import "../../styles/index.css"
+import { StyledSwiper } from "./SwiperSlide.styles"
 
 interface ProjectDetailSummaryRightProps {
   overviewImageUrl: ProjectOverViewUrl[]
@@ -29,7 +29,7 @@ const ProjectDetailSummaryRight = ({
     <Box
       maxW="43rem"
       maxH="33rem">
-      <Swiper {...swiperParams}>
+      <StyledSwiper {...swiperParams}>
         {overviewImageUrl.map((overviewImg) => (
           <SwiperSlide key={overviewImg.id}>
             <Image
@@ -39,7 +39,7 @@ const ProjectDetailSummaryRight = ({
             />
           </SwiperSlide>
         ))}
-      </Swiper>
+      </StyledSwiper>
     </Box>
   )
 }

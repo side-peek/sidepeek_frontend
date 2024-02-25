@@ -17,7 +17,7 @@ export const DUMMY_PROJECT_DETAIL = {
           url: "https://i.postimg.cc/MTqbTwc1/image.png",
         },
         {
-          id: 2,
+          id: 3,
           url: "https://i.postimg.cc/NjqjHktk/image.png",
         },
       ],
