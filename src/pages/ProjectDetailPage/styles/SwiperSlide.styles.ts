@@ -15,6 +15,12 @@ export const StyledSwiper = styled(Swiper)`
     height: 100%;
     object-fit: cover;
   }
+
+  .swiper-pagination-bullet {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+  }
 `
 
 export const NextButton = styled.button``
