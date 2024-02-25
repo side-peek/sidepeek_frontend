@@ -12,7 +12,10 @@ const ProjectDetailSummaryLink = ({
   deployUrl,
   githubUrl,
 }: ProjectDetailSummaryLinkProps) => {
-  console.log(deployUrl, githubUrl)
+  const handleOpenNewTab = (url: string) => {
+    window.open(url, "_blank", "noopener, noreferrer")
+  }
+
   return (
     <Flex gap="2rem">
       <Button
@@ -22,7 +25,8 @@ const ProjectDetailSummaryLink = ({
         color="white"
         fontSize="xl"
         p="2.2rem 1.5rem"
-        leftIcon={<TbWorld />}>
+        leftIcon={<TbWorld />}
+        onClick={() => handleOpenNewTab(deployUrl)}>
         WEB
       </Button>
       <Button
@@ -30,7 +34,8 @@ const ProjectDetailSummaryLink = ({
         borderRadius="2rem"
         colorScheme="blue"
         size="lg"
-        leftIcon={<FaGithub />}>
+        leftIcon={<FaGithub />}
+        onClick={() => handleOpenNewTab(githubUrl)}>
         Github
       </Button>
     </Flex>
