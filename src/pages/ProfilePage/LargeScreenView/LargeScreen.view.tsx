@@ -14,7 +14,7 @@ export interface ProfileBarProps {
   techStacks: TechStack[] | undefined
 }
 
-const LargeScreenProfileView = ({
+const LargeScreenView = ({
   nickname,
   profileImageUrl,
   career,
@@ -47,4 +47,4 @@ const LargeScreenProfileView = ({
   )
 }
 
-export default LargeScreenProfileView
+export default LargeScreenView

@@ -8,7 +8,7 @@ interface ProfileCardProps {
   nickname?: string
   career?: string
 }
-const SmallScreenProfile = ({
+const SmallScreenView = ({
   nickname,
   profileImageUrl,
   career,
@@ -29,4 +29,4 @@ const SmallScreenProfile = ({
   )
 }
 
-export default SmallScreenProfile
+export default SmallScreenView

@@ -1,21 +1,13 @@
 import { Box, Flex, useMediaQuery } from "@chakra-ui/react"
 
-import { useQuery } from "@tanstack/react-query"
-
-import { getUserDetail } from "@/api/user/getUserDetail"
-
-import LargeScreenProfile from "./LargeScreenView/LargeScreenView"
-import SmallScreenProfile from "./SmallScreenView/SmallScreenView"
+import LargeScreenView from "./LargeScreenView/LargeScreen.view"
+import SmallScreenView from "./SmallScreenView/SmallScreen.view"
+import { useUserInfo } from "./components/Profile/Profile.model"
 
 const ProfilePage = () => {
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
 
-  const { isLoading, data } = useQuery({
-    queryKey: ["userInfo"],
-    queryFn: () => getUserDetail({ userId: 1 }),
-    gcTime: 0,
-  })
-  console.log(data)
+  const { isLoading, data } = useUserInfo({ userId: 1 })
 
   const {
     nickname,
@@ -47,7 +39,7 @@ const ProfilePage = () => {
         width="80%"
         margin="auto">
         {isLargerThan1200 ? (
-          <LargeScreenProfile
+          <LargeScreenView
             {...{
               nickname,
               profileImageUrl,
@@ -59,7 +51,7 @@ const ProfilePage = () => {
             }}
           />
         ) : (
-          <SmallScreenProfile {...{ nickname, profileImageUrl, career }} />
+          <SmallScreenView {...{ nickname, profileImageUrl, career }} />
         )}
       </Flex>
     </Box>
