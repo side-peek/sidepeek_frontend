@@ -5,15 +5,8 @@ import styled from "styled-components"
 export const StyledSwiper = styled(Swiper)`
   width: 100%;
   height: 100%;
-
   .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: "#d4d4d4";
   }
 
   .swiper-slide img {
