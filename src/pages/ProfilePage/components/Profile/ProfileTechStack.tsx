@@ -7,11 +7,10 @@ interface TechStackProps {
   techStacks: TechStackType[] | undefined
 }
 
-const TechStack = ({ techStacks }: TechStackProps) => {
+const ProfileTechStack = ({ techStacks }: TechStackProps) => {
   const categories = Array.from(
     new Set(techStacks && techStacks.map((techStack) => techStack.category)),
   )
-  console.log(categories)
 
   return (
     <Box
@@ -50,4 +49,4 @@ const TechStack = ({ techStacks }: TechStackProps) => {
   )
 }
 
-export default TechStack
+export default ProfileTechStack
