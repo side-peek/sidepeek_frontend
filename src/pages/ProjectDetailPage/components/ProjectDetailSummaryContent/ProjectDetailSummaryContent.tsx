@@ -1,4 +1,5 @@
 import { Flex } from "@chakra-ui/react"
+import { ProjectOverViewUrl } from "api-models"
 
 import ProjectDetailSummaryLeft from "./ProjectDetailSummaryLeft"
 import ProjectDetailSummaryRight from "./ProjectDetailSummaryRight"
@@ -6,25 +7,26 @@ import ProjectDetailSummaryRight from "./ProjectDetailSummaryRight"
 interface ProjectDetailSummaryContentProps {
   deployUrl: string
   githubUrl: string
-  thumbnailUrl: string
+  overviewImageUrl: ProjectOverViewUrl[]
   overview: string
 }
+
 const ProjectDetailSummaryContent = ({
   deployUrl,
   githubUrl,
-  thumbnailUrl,
+  overviewImageUrl,
   overview,
 }: ProjectDetailSummaryContentProps) => {
   return (
     <Flex
-      justifyContent="space-between"
-      width="90%">
+      justifyContent="center"
+      gap="10rem">
       <ProjectDetailSummaryLeft
         deployUrl={deployUrl}
         githubUrl={githubUrl}
         overview={overview}
       />
-      <ProjectDetailSummaryRight thumbnailUrl={thumbnailUrl} />
+      <ProjectDetailSummaryRight overviewImageUrl={overviewImageUrl} />
     </Flex>
   )
 }

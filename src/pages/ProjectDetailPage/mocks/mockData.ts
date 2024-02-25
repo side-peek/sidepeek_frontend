@@ -7,6 +7,20 @@ export const DUMMY_PROJECT_DETAIL = {
       subName: "요즘 사이드 플젝 뭐함? 사이드픽 👀",
       overview:
         "데브코스 5기 육개짱팀의 좌충우돌 우당탕탕 프로젝트 개발 일대기",
+      overviewImageUrl: [
+        {
+          id: 1,
+          url: "https://i.postimg.cc/Gm4MwbY2/image.png",
+        },
+        {
+          id: 2,
+          url: "https://i.postimg.cc/MTqbTwc1/image.png",
+        },
+        {
+          id: 2,
+          url: "https://user-images.githubusercontent.com/37354708/144370579-763a962c-5076-413c-9ea6-1043985791f6.png",
+        },
+      ],
       thumbnailUrl:
         "https://user-images.githubusercontent.com/37354708/144370579-763a962c-5076-413c-9ea6-1043985791f6.png",
       githubUrl: "https://github.com/side-peek",

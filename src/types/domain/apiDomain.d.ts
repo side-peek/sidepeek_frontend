@@ -41,7 +41,7 @@ declare module "api-models" {
     subName: string
     overview: string
     thumbnailUrl: string
-    overviewImageUrl: string[]
+    overviewImageUrl: ProjectOverViewUrl[]
     githubUrl: string
     deployUrl: string
     techStacks: TechStack[]
@@ -92,6 +92,11 @@ declare module "api-models" {
     authority: string
     role: string
     nickname: string
+  }
+
+  export type ProjectOverViewUrl = {
+    id: number
+    url: string
   }
 
   export type Comment = {

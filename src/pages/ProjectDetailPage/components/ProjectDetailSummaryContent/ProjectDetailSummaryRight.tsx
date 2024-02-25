@@ -1,44 +1,41 @@
 import { Box, Image } from "@chakra-ui/react"
+import { ProjectOverViewUrl } from "api-models"
 import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
 import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 
-import dog from "@assets/images/dog.jpeg"
-
 import "../../styles/index.css"
 
 interface ProjectDetailSummaryRightProps {
-  thumbnailUrl: string
+  overviewImageUrl: ProjectOverViewUrl[]
+}
+
+const swiperParams = {
+  navigation: true,
+  loop: true,
+  pagination: true,
+  modules: [Navigation, Pagination, Mousewheel, Keyboard],
 }
 
 const ProjectDetailSummaryRight = ({
-  thumbnailUrl,
+  overviewImageUrl,
 }: ProjectDetailSummaryRightProps) => {
   return (
-    <Box maxW="40rem">
-      <Swiper
-        rewind={true}
-        cssMode={true}
-        navigation={true}
-        pagination={{ clickable: true }}
-        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-        className="mySwiper">
-        <SwiperSlide>
-          <Image
-            borderRadius="1rem"
-            src={thumbnailUrl}
-            alt="project thumbnail"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image
-            borderRadius="1rem"
-            src={dog}
-            alt="project thumbnail"
-          />
-        </SwiperSlide>
+    <Box
+      maxW="43rem"
+      maxH="33rem">
+      <Swiper {...swiperParams}>
+        {overviewImageUrl.map((overviewImg) => (
+          <SwiperSlide key={overviewImg.id}>
+            <Image
+              borderRadius="1rem"
+              src={overviewImg.url}
+              alt="project thumbnail"
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </Box>
   )

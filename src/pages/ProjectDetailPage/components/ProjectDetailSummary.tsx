@@ -14,7 +14,7 @@ const ProjectDetailSummary = ({ projects }: ProjectDetailSummaryProps) => {
     githubUrl,
     name,
     subName,
-    thumbnailUrl,
+    overviewImageUrl,
     viewCount,
     likeCount,
     commentCount,
@@ -27,7 +27,6 @@ const ProjectDetailSummary = ({ projects }: ProjectDetailSummaryProps) => {
         bg="#f5f5f5"
         w="100%"
         h="53rem"
-        gap="15rem"
         flexDirection="column"
         m="0 auto"
         p="2rem">
@@ -48,10 +47,10 @@ const ProjectDetailSummary = ({ projects }: ProjectDetailSummaryProps) => {
               subName={subName}
             />
             <ProjectDetailSummaryContent
+              overviewImageUrl={overviewImageUrl}
               overview={overview}
               deployUrl={deployUrl}
               githubUrl={githubUrl}
-              thumbnailUrl={thumbnailUrl}
             />
           </Center>
         </Flex>
