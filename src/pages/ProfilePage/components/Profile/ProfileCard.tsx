@@ -1,5 +1,7 @@
 import { Avatar, Text, VStack } from "@chakra-ui/react"
 
+import ProfileActionsButtons from "./ProfileActionsButtons"
+
 interface ProfileCardProps {
   profileImageUrl?: string
   nickname?: string
@@ -28,6 +30,7 @@ const ProfileCard = ({
         fontSize="2xl">
         {career} 개발자
       </Text>
+      <ProfileActionsButtons />
     </VStack>
   )
 }
