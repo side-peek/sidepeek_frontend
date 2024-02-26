@@ -20,7 +20,7 @@ const ProjectDetailSummaryContent = ({
   return (
     <Flex
       justifyContent="space-between"
-      w="90%">
+      w="100%">
       <ProjectDetailSummaryLeft
         deployUrl={deployUrl}
         githubUrl={githubUrl}
