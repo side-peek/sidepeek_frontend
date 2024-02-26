@@ -1,8 +1,7 @@
 import { useRef } from "react"
-import { MdArrowBackIosNew } from "react-icons/md"
-import { MdArrowForwardIos } from "react-icons/md"
+import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md"
 
-import { Box, Icon, IconButton, Image } from "@chakra-ui/react"
+import { Box, Image } from "@chakra-ui/react"
 import { ProjectOverViewUrl } from "api-models"
 import "swiper/css"
 import "swiper/css/pagination"
@@ -11,6 +10,7 @@ import { SwiperSlide } from "swiper/react"
 import { Swiper as SwiperCore } from "swiper/types"
 
 import { StyledSwiper } from "../../styles/SwiperSlide.styles"
+import ProjectDetailSummaryRightIcon from "./ProjectDetailSummaryRightIcon"
 
 interface ProjectDetailSummaryRightProps {
   overviewImageUrl: ProjectOverViewUrl[]
@@ -47,44 +47,24 @@ const ProjectDetailSummaryRight = ({
           </SwiperSlide>
         ))}
       </StyledSwiper>
-      <IconButton
-        aria-label="notification popover"
-        position="absolute"
-        top="44%"
-        left="-6%"
-        bgColor="#d9d9d9"
-        height="5rem"
-        width="5rem"
-        borderRadius="50%"
-        zIndex="5"
+      <ProjectDetailSummaryRightIcon
+        direction="left"
+        aria-label="leftIcon"
         onClick={() => swiperRef.current?.slidePrev()}
         icon={
-          <Icon
-            as={MdArrowBackIosNew}
-            w="3rem"
-            h="3rem"
-            color="#7a7a7a"
+          <MdArrowBackIosNew
+            style={{ width: "2rem", height: "2rem", color: "#7a7a7a" }}
           />
         }
       />
 
-      <IconButton
-        aria-label="notification popover"
-        position="absolute"
-        top="44%"
-        right="-6%"
-        bgColor="#d9d9d9"
-        height="5rem"
-        width="5rem"
-        borderRadius="50%"
-        zIndex="5"
+      <ProjectDetailSummaryRightIcon
+        direction="right"
+        aria-label="rightIcon"
         onClick={() => swiperRef.current?.slideNext()}
         icon={
-          <Icon
-            as={MdArrowForwardIos}
-            w="3rem"
-            h="3rem"
-            color="#7a7a7a"
+          <MdArrowForwardIos
+            style={{ width: "2rem", height: "2rem", color: "#7a7a7a" }}
           />
         }
       />

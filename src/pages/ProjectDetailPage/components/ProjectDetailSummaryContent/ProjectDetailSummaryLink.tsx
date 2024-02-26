@@ -41,7 +41,8 @@ const ProjectDetailSummaryLink = ({
           leftIcon={link.icons}
           bgColor={link.bgColor}
           linkName={link.linkName}
-          onClick={link.onClick}></ProjectDetailSummaryLinkButton>
+          onClick={link.onClick}
+        />
       ))}
     </Flex>
   )
