@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react"
 import { TechStack } from "api-models"
 
-import ProfileBar from "../components/Profile/ProfileBar.view"
+import ProfileBarView from "../components/Profile/ProfileBar.view"
 import ProjectsView from "../components/Projects/Projects.view"
 
 export interface ProfileBarProps {
@@ -28,7 +28,7 @@ const LargeScreenView = ({
       <Box
         minW="38rem"
         zIndex={999}>
-        <ProfileBar
+        <ProfileBarView
           {...{
             nickname,
             profileImageUrl,
