@@ -22,17 +22,6 @@ import ProjectCard from "@components/ProjectCard/ProjectCard"
 
 import Banner from "./components/Banner/Banner"
 
-export interface projectType {
-  id: number
-  name: string
-  subName: string
-  thumbnailUrl: string
-  viewCount: number
-  likeCount: number
-  isLiked: boolean
-  isDeploy: boolean
-}
-
 const HomePage = () => {
   const [isDeploy, setIsDeploy] = useState(false)
   const [isSelect, setIsSelect] = useState<
