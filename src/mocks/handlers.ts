@@ -1,6 +1,6 @@
 import { rest } from "msw"
 
-import { ProjectDetailHandlers } from "@pages/ProjectDetailPage/mocks"
+import { projectDetailHandlers } from "@pages/ProjectDetailPage/mocks"
 
 import { postEmailLogin } from "./auth/postEmailLogin.mock"
 import { postEmailRefresh } from "./auth/postEmailRefresh.mock"
@@ -25,7 +25,7 @@ export const handlers = [
       }),
     )
   }),
-  ...ProjectDetailHandlers,
+  ...projectDetailHandlers,
   postEmailRefresh,
   postEmailLogin,
 ]
