@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom"
 
-import { Button, Flex, useMediaQuery } from "@chakra-ui/react"
+import { Flex, useMediaQuery } from "@chakra-ui/react"
+
+import StyledButton from "@pages/ProfilePage/styles/StyledButton"
 
 import { handleEditProfile, handleNewProject } from "./Profile.controller"
 
@@ -13,28 +15,12 @@ const ProfileActionsButtons = () => {
       direction={isLargerThan1200 ? "column" : "row"}
       gap={3}
       mt="1rem">
-      <Button
-        w="11rem"
-        h="3.5rem"
-        fontSize="1.3rem"
-        color="default"
-        bg="blue.100"
-        borderRadius="10px"
-        _hover={{ bg: "blue.100" }}
-        onClick={() => handleNewProject(navigate)}>
+      <StyledButton onClick={() => handleNewProject(navigate)}>
         새 프로젝트
-      </Button>
-      <Button
-        w="11rem"
-        h="3.5rem"
-        fontSize="1.3rem"
-        color="default"
-        bg="blue.100"
-        borderRadius="10px"
-        _hover={{ bg: "blue.100" }}
-        onClick={() => handleEditProfile(navigate)}>
+      </StyledButton>
+      <StyledButton onClick={() => handleEditProfile(navigate)}>
         프로필 수정
-      </Button>
+      </StyledButton>
     </Flex>
   )
 }
