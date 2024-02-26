@@ -15,7 +15,7 @@ export interface ProfileBarProps {
   techStacks: TechStack[] | undefined
 }
 
-const ProfileBar = ({
+const ProfileBarView = ({
   nickname,
   profileImageUrl,
   career,
@@ -37,8 +37,10 @@ const ProfileBar = ({
         w="32rem"
         bg="default">
         <Flex
-          minH="30rem"
-          alignItems="center">
+          minH="36rem"
+          alignItems="center"
+          justifyContent="center"
+          direction="column">
           <ProfileCard
             nickname={nickname}
             profileImageUrl={profileImageUrl}
@@ -60,4 +62,4 @@ const ProfileBar = ({
   )
 }
 
-export default ProfileBar
+export default ProfileBarView
