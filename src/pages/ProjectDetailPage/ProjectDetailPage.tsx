@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom"
 
 import ProjectDetailSummary from "./components/ProjectDetailSummary"
-import useProjectDetail from "./hooks/query/useProjectDetail"
+import useProjectDetailQuery from "./hooks/queries/useProjectDetailQuery"
 
 const ProjectDetailPage = () => {
   const { projectId } = useParams()
 
-  const { data } = useProjectDetail(Number(projectId))
+  const { data } = useProjectDetailQuery(Number(projectId))
   if (!data) {
     return
   }
