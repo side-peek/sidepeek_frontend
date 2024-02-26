@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 
 import {
   Box,
+  Button,
+  Center,
   Checkbox,
   Container,
   Grid,
@@ -92,6 +94,15 @@ const HomePage = () => {
                   </GridItem>
                 ))}
           </Grid>
+          <Center marginTop="2rem">
+            <Button
+              width="8rem"
+              height="3rem"
+              backgroundColor="blue.100"
+              color="white">
+              더보기
+            </Button>
+          </Center>
         </Stack>
         <Box height="20rem" />
       </Container>
