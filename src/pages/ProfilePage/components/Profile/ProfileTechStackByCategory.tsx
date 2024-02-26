@@ -3,6 +3,7 @@ import { TechStack } from "api-models"
 
 import CustomTag from "@components/Tag/components/CustomTag"
 
+// TODO: props 타입이 undefined가 될수 있다는게 뭔가 이상함 이렇게 안하면 케찹 터짐. 해결해보기
 interface ProfileTechStackByCategoryProps {
   category: string
   techStacks: TechStack[] | undefined

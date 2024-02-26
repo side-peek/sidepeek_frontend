@@ -1,11 +1,17 @@
-import { Box, Center, Flex, StackDivider, VStack } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react"
 import { TechStack } from "api-models"
+
+import StyledProfileBarBox from "@pages/ProfilePage/styles/StyledProfileBarBox"
+import StyledProfileBarContainer from "@pages/ProfilePage/styles/StyledProfileBarContainer"
+import StyledProfileCardBox from "@pages/ProfilePage/styles/StyledProfileCardBox"
+import { ProfileActionsButtonsProps } from "@pages/ProfilePage/types/types"
 
 import ProfileCard from "./ProfileCard"
 import ProfileIntroduction from "./ProfileIntroduction"
 import ProfileTechStack from "./ProfileTechStack"
 
-export interface ProfileBarProps {
+// TODO: props 타입이 undefined가 될수 있다는게 뭔가 이상함 이렇게 안하면 케찹 터짐. 해결해보기
+export interface ProfileBarProps extends ProfileActionsButtonsProps {
   nickname: string | undefined
   profileImageUrl: string | undefined
   career: string | undefined
@@ -23,30 +29,23 @@ const ProfileBarView = ({
   githubUrl,
   blogUrl,
   techStacks,
+  handleNewProject,
+  handleEditProfile,
 }: ProfileBarProps) => {
   return (
-    <Center
-      bg="default"
-      w="36rem"
-      mt="-10rem"
-      border="1px solid"
-      borderColor="grey.200"
-      borderRadius="20px">
-      <VStack
-        divider={<StackDivider borderColor="grey.200" />}
-        w="32rem"
-        bg="default">
-        <Flex
-          minH="36rem"
-          alignItems="center"
-          justifyContent="center"
-          direction="column">
+    <StyledProfileBarContainer>
+      <StyledProfileBarBox>
+        <StyledProfileCardBox>
           <ProfileCard
-            nickname={nickname}
-            profileImageUrl={profileImageUrl}
-            career={career}
+            {...{
+              nickname,
+              profileImageUrl,
+              career,
+              handleNewProject,
+              handleEditProfile,
+            }}
           />
-        </Flex>
+        </StyledProfileCardBox>
         <Box>
           <ProfileIntroduction
             aboutMe={introduction}
@@ -57,8 +56,8 @@ const ProfileBarView = ({
         <Box>
           <ProfileTechStack techStacks={techStacks} />
         </Box>
-      </VStack>
-    </Center>
+      </StyledProfileBarBox>
+    </StyledProfileBarContainer>
   )
 }
 

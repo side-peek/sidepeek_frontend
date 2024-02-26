@@ -3,6 +3,7 @@ import { ImGithub } from "react-icons/im"
 
 import { Box, HStack, Link, Text } from "@chakra-ui/react"
 
+// TODO: props 타입이 undefined가 될수 있다는게 뭔가 이상함 이렇게 안하면 케찹 터짐. 해결해보기
 interface IntroductionProps {
   aboutMe: string | undefined
   githubUrl: string | undefined

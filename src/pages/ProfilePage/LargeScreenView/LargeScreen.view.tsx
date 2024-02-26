@@ -3,8 +3,9 @@ import { TechStack } from "api-models"
 
 import ProfileBarView from "../components/Profile/ProfileBar.view"
 import ProjectsView from "../components/Projects/Projects.view"
+import { ProfileActionsButtonsProps } from "../types/types"
 
-export interface ProfileBarProps {
+export interface ProfileBarProps extends ProfileActionsButtonsProps {
   nickname: string | undefined
   profileImageUrl: string | undefined
   career: string | undefined
@@ -22,6 +23,8 @@ const LargeScreenView = ({
   githubUrl,
   blogUrl,
   techStacks,
+  handleNewProject,
+  handleEditProfile,
 }: ProfileBarProps) => {
   return (
     <>
@@ -37,6 +40,8 @@ const LargeScreenView = ({
             githubUrl,
             blogUrl,
             techStacks,
+            handleNewProject,
+            handleEditProfile,
           }}
         />
       </Box>
