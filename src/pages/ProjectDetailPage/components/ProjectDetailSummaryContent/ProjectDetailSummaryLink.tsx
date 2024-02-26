@@ -1,47 +1,48 @@
 import { FaGithub } from "react-icons/fa"
 import { TbWorld } from "react-icons/tb"
 
-import { Button, Flex } from "@chakra-ui/react"
+import { Flex } from "@chakra-ui/react"
+
+import ProjectDetailSummaryLinkButton from "./ProjectDetailSummaryLinkButton"
 
 interface ProjectDetailSummaryLinkProps {
   deployUrl: string
   githubUrl: string
 }
 
+const handleOpenNewTab = (url: string) => {
+  window.open(url, "_blank", "noopener, noreferrer")
+}
+
 const ProjectDetailSummaryLink = ({
   deployUrl,
   githubUrl,
 }: ProjectDetailSummaryLinkProps) => {
-  const handleOpenNewTab = (url: string) => {
-    window.open(url, "_blank", "noopener, noreferrer")
-  }
+  const LINK_LIST = [
+    {
+      icons: <TbWorld />,
+      onClick: () => handleOpenNewTab(deployUrl),
+      bgColor: "blue.100",
+      linkName: "WEB",
+    },
+    {
+      icons: <FaGithub />,
+      onClick: () => handleOpenNewTab(githubUrl),
+      bgColor: "blue.600",
+      linkName: "Github",
+    },
+  ]
 
   return (
     <Flex gap="2rem">
-      <Button
-        borderRadius="2rem"
-        size="lg"
-        bgColor="blue.100"
-        color="#fff"
-        fontSize="xl"
-        p="2.2rem 1.5rem"
-        _hover={{ opacity: "0.5" }}
-        leftIcon={<TbWorld />}
-        onClick={() => handleOpenNewTab(deployUrl)}>
-        WEB
-      </Button>
-      <Button
-        borderRadius="2rem"
-        size="lg"
-        bgColor="blue.600"
-        color="#fff"
-        fontSize="xl"
-        p="2.2rem 1.5rem"
-        _hover={{ opacity: "0.5" }}
-        leftIcon={<FaGithub />}
-        onClick={() => handleOpenNewTab(githubUrl)}>
-        Github
-      </Button>
+      {LINK_LIST.map((link) => (
+        <ProjectDetailSummaryLinkButton
+          key={link.linkName}
+          leftIcon={link.icons}
+          bgColor={link.bgColor}
+          linkName={link.linkName}
+          onClick={link.onClick}></ProjectDetailSummaryLinkButton>
+      ))}
     </Flex>
   )
 }
