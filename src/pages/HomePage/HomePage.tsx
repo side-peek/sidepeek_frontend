@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react"
 import { Link } from "react-router-dom"
 
 import {
+  Box,
   Checkbox,
   Container,
   Grid,
@@ -17,6 +18,7 @@ import { useQuery } from "@tanstack/react-query"
 import ProjectCard from "@components/ProjectCard/ProjectCard"
 
 import { getProjectList } from "./api/getProjectList"
+import Banner from "./components/Banner/Banner"
 
 export interface projectType {
   id: number
@@ -55,7 +57,10 @@ const HomePage = () => {
 
   return (
     <>
-      <div style={{ backgroundColor: "blue", height: "52rem" }}>hi</div>
+      {/* 임시로 다섯개 잘라서 넣었습니다*/}
+      <Banner
+        bannerList={projectList === undefined ? [] : projectList.slice(0, 5)}
+      />
       <Container maxW="80%">
         <Stack marginTop="15rem">
           <HStack spacing={5}>
@@ -97,7 +102,9 @@ const HomePage = () => {
                 ))}
           </Grid>
         </Stack>
+        <Box height="20rem" />
       </Container>
+      {/* 푸터 들어갈 자리 */}
     </>
   )
 }
