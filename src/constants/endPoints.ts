@@ -13,7 +13,7 @@ export const ENDPOINTS = {
     `${VARIABLE_URL}/users/${userId}/password`,
   EMAIL_DOUBLE_CHECK: `${VARIABLE_URL}/users/email/check`,
   NICKNAME_DOUBLE_CHECK: `${VARIABLE_URL}/users/nickname/check`,
-  GET_SKILLS: (keyword: number) =>
+  GET_SKILLS: (keyword: string) =>
     `${VARIABLE_URL}/skills${keyword ? `?keyword=${keyword}` : ""}`,
   UPLOAD_PROJECT_FILES: `${VARIABLE_URL}/projects/files`,
   UPLOAD_PROJECT: `${VARIABLE_URL}/projects`,
