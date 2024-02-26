@@ -1,48 +1,24 @@
 import { Link, useNavigate } from "react-router-dom"
 
 import { HStack, Heading, Image, Spacer, Stack } from "@chakra-ui/react"
+import { AllProject } from "api-models"
 import "swiper/css"
 import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
 import { Autoplay, Navigation, Pagination } from "swiper/modules"
-import { Swiper, SwiperSlide } from "swiper/react"
+import { SwiperSlide } from "swiper/react"
 
-import styled from "styled-components"
-
-import { projectType } from "@pages/HomePage/HomePage"
+import { CustomSwiper } from "./Banner.style"
 
 interface bannerListProps {
-  bannerList: projectType[]
+  bannerList: AllProject[]
 }
-
-const CustomBanner = styled(Swiper)`
-  .swiper-button-prev,
-  .swiper-button-next {
-    opacity: 0;
-    border-radius: 10rem;
-    color: white;
-
-    &:hover {
-      opacity: 0.8;
-      transition: 0.2s ease-out;
-    }
-
-    &:after {
-      font-size: 2.2rem !important;
-      font-weight: 600 !important;
-    }
-  }
-
-  .swiper-pagination-bullet {
-    background: yellow !important;
-  }
-`
 
 const Banner = ({ bannerList }: bannerListProps) => {
   const navigate = useNavigate()
   return (
-    <CustomBanner
+    <CustomSwiper
       modules={[Navigation, Pagination, Autoplay]}
       navigation
       pagination={{ clickable: true }}
@@ -80,7 +56,7 @@ const Banner = ({ bannerList }: bannerListProps) => {
           </HStack>
         </SwiperSlide>
       ))}
-    </CustomBanner>
+    </CustomSwiper>
   )
 }
 export default Banner

@@ -12,12 +12,14 @@ import {
   Spacer,
   Stack,
 } from "@chakra-ui/react"
+import { AllProject } from "api-models"
 
 import { useQuery } from "@tanstack/react-query"
 
+import { getAllProjects } from "@/api/project/getAllProjects"
+
 import ProjectCard from "@components/ProjectCard/ProjectCard"
 
-import { getProjectList } from "./api/getProjectList"
 import Banner from "./components/Banner/Banner"
 
 export interface projectType {
@@ -39,8 +41,8 @@ const HomePage = () => {
 
   // 프로젝트 전체 목록 조회
   const { data } = useQuery({
-    queryKey: ["project"],
-    queryFn: async () => await getProjectList(),
+    queryKey: ["projects"],
+    queryFn: () => getAllProjects(),
   })
 
   const projectList = data?.projects.filter((project) =>
@@ -86,7 +88,7 @@ const HomePage = () => {
             gap={4}>
             {projectList === undefined
               ? "프로젝트가 없습니다"
-              : projectList.map((project: projectType) => (
+              : projectList.map((project: AllProject) => (
                   <GridItem key={project.id}>
                     <Link to={`/project/${project.id}`}>
                       <ProjectCard
