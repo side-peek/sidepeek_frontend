@@ -17,7 +17,7 @@ const ProjectDetailSummaryRightIcon = ({
     <IconButton
       top="44%"
       position="absolute"
-      bgColor="#d9d9d9"
+      bgColor="grey.300"
       height="5rem"
       width="5rem"
       borderRadius="50%"

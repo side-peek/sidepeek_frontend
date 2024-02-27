@@ -12,7 +12,7 @@ const ProjectDetailSummaryLinkButton = ({
     <Button
       borderRadius="2rem"
       size="lg"
-      color="#fff"
+      color="white"
       fontSize="xl"
       p="2.2rem 1.5rem"
       _hover={{ opacity: "0.5" }}

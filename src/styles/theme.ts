@@ -43,7 +43,9 @@ const themeConfig = {
     grey: {
       100: "#F0F0F0",
       200: "#ECECEC",
-      300: "#D4D4D4",
+      300: "#D9D9D9",
+      400: "#D4D4D4",
+      500: "#7a7a7a",
     },
     whiteSmoke: "#f5f5f5",
   },
