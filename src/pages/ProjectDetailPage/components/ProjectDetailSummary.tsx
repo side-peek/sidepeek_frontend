@@ -21,7 +21,7 @@ const ProjectDetailSummary = ({ projects }: ProjectDetailSummaryProps) => {
     overview,
   } = projects[0]
   return (
-    <Box bg="#f5f5f5">
+    <Box bg="whiteSmoke">
       <Flex
         maxW="128rem"
         flexDirection="column"

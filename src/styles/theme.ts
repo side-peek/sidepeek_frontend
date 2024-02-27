@@ -45,6 +45,7 @@ const themeConfig = {
       200: "#ECECEC",
       300: "#D4D4D4",
     },
+    whiteSmoke: "#f5f5f5",
   },
   fontWeights: {
     thin: 200,
