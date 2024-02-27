@@ -16,14 +16,14 @@ try {
     pull_number: pull_number - 1,
   })
 
-  console.log(response)
-
-  await octokit.rest.pulls.requestReviewers({
-    owner,
-    repo,
-    pull_number,
-    reviewers: reviewers,
-  })
+  if (response.data.users.length < 2) {
+    await octokit.rest.pulls.requestReviewers({
+      owner,
+      repo,
+      pull_number,
+      reviewers: reviewers,
+    })
+  }
 } catch (error) {
   setFailed(error.message)
 }
