@@ -1,8 +1,6 @@
 name: deploy
 
-on:
-  pull_request:
-    types: [opened, ready_for_review]
+on: pull_request
 
 jobs:
   deploy:
@@ -15,7 +13,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Cache node modules
         uses: actions/cache@v3
@@ -45,13 +43,11 @@ jobs:
           github-token: ${{ github.token }}
           script: |
             const pull_number = ${{ github.event.pull_request.number }}
-            const updated_title = `[BUILD FAIL] ${{ github.event.pull_request.title }}`
             await github.rest.pulls.createReview({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: pull_number,
-              body: '빌드에 실패했습니다. 로그를 확인해주세요.',
-              event: 'REQUEST_CHANGES'
+              body: '빌드에 실패했습니다. Commits 탭에서 에러를 확인하고 먼저 수정해주세요.',
             })
 
       - name: Assign assignee
