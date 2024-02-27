@@ -17,7 +17,6 @@ export const StyledSwiper = styled(Swiper)`
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 50%;
+    background-color: #ffc436;
   }
 `
-
-export const NextButton = styled.button``
