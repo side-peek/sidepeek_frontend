@@ -13,7 +13,7 @@ try {
   const response = await octokit.rest.pulls.listRequestedReviewers({
     owner,
     repo,
-    pull_number: pull_number - 1,
+    pull_number,
   })
 
   if (response.data.users.length < 2) {
