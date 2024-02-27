@@ -10,6 +10,14 @@ try {
   const { owner, repo } = context.repo
   const pull_number = context.issue.number
 
+  const response = await octokit.rest.pulls.listRequestedReviewers({
+    owner,
+    repo,
+    pull_number: pull_number - 1,
+  })
+
+  console.log(response)
+
   await octokit.rest.pulls.requestReviewers({
     owner,
     repo,
