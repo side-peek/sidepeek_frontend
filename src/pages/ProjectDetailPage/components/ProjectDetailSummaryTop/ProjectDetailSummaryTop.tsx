@@ -1,10 +1,13 @@
 import { FaRegComment } from "react-icons/fa"
 import { IoMdHeartEmpty } from "react-icons/io"
-import { LiaEyeSolid } from "react-icons/lia"
+import { MdRemoveRedEye } from "react-icons/md"
 import { PiClipboardText } from "react-icons/pi"
 import { useLocation } from "react-router-dom"
 
-import { Flex, Icon, IconButton, Text } from "@chakra-ui/react"
+import { Flex } from "@chakra-ui/react"
+
+import ProjectDetailSummaryTopIcon from "./ProjectDetailSummaryTopIcon"
+import ProjectDetailSummaryTopIconButton from "./ProjectDetailSummaryTopIconButton"
 
 interface ProjectDetailSummaryTopProps {
   likeCount: number
@@ -31,57 +34,33 @@ const ProjectDetailSummaryTop = ({
       console.log(err)
     }
   }
-
   return (
     <Flex
       gap="1.5rem"
       justifyContent="flex-end">
-      <Flex
-        gap="0.7rem"
-        alignItems="center">
-        <Icon
-          fontSize="2.7rem"
-          as={LiaEyeSolid}
-        />
-        <Text fontSize="xl">{viewCount}</Text>
-      </Flex>
-      <Flex
-        gap="0.7rem"
-        alignItems="center"
-        cursor="pointer"
-        _hover={{ opacity: "0.5" }}>
-        <IconButton
-          background="none"
-          fontSize="2.7rem"
-          aria-label="good"
-          _hover={{ background: "none" }}
-          icon={<IoMdHeartEmpty />}
-        />
-        <Text fontSize="xl">{likeCount}</Text>
-      </Flex>
+      <ProjectDetailSummaryTopIcon
+        count={viewCount}
+        icon={MdRemoveRedEye}
+      />
 
-      <Flex
-        gap="0.7rem"
-        alignItems="center"
-        _hover={{ opacity: "0.5" }}
-        cursor="pointer">
-        <IconButton
-          fontSize="2.7rem"
-          aria-label="good"
-          background="none"
-          _hover={{ background: "none" }}
-          icon={<FaRegComment />}
-        />
-        <Text fontSize="xl">{commentCount}</Text>
-      </Flex>
-      <IconButton
+      <ProjectDetailSummaryTopIconButton
+        count={likeCount}
+        icon={<IoMdHeartEmpty />}
+        aria-label="good"
+        fontSize="2.7rem"
+      />
+      <ProjectDetailSummaryTopIconButton
+        count={commentCount}
+        icon={<FaRegComment />}
+        aria-label="comment"
+        fontSize="2.3rem"
+      />
+      <ProjectDetailSummaryTopIconButton
         onClick={() =>
           handleCopyClipBoard(`localhost:5173${location.pathname}`)
         }
+        aria-label="clipboard"
         fontSize="2.7rem"
-        aria-label="good"
-        background="none"
-        _hover={{ opacity: "0.5" }}
         icon={<PiClipboardText />}
       />
     </Flex>
