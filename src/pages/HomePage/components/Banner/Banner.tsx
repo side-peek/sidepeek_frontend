@@ -1,6 +1,14 @@
 import { Link, useNavigate } from "react-router-dom"
 
-import { HStack, Heading, Image, Spacer, Stack } from "@chakra-ui/react"
+import {
+  HStack,
+  Heading,
+  Image,
+  Spacer,
+  Stack,
+  Text,
+  useTheme,
+} from "@chakra-ui/react"
 import { AllProject } from "api-models"
 import "swiper/css"
 import "swiper/css"
@@ -12,21 +20,27 @@ import { SwiperSlide } from "swiper/react"
 import { CustomSwiper } from "./Banner.style"
 
 interface bannerListProps {
-  bannerList: AllProject[]
+  bannerList: AllProject[] | undefined
 }
 
 const Banner = ({ bannerList }: bannerListProps) => {
   const navigate = useNavigate()
+  const theme = useTheme()
+
   return (
     <CustomSwiper
+      theme={theme.colors}
       modules={[Navigation, Pagination, Autoplay]}
       navigation
       pagination={{ clickable: true }}
       style={{ height: "52rem" }}
       autoplay={{ delay: 5000, disableOnInteraction: false }}>
-      {bannerList.map((project) => (
+      {bannerList?.map((project) => (
         <SwiperSlide
-          style={{ backgroundColor: "#0C356A", color: "white" }}
+          style={{
+            backgroundColor: `${theme.colors.blue[100]}`,
+            color: "white",
+          }}
           key={project.id}>
           <HStack height="90%">
             <Image
@@ -42,14 +56,13 @@ const Banner = ({ bannerList }: bannerListProps) => {
             <Spacer />
             <Stack
               marginRight="13rem"
-              cursor="pointer"
               textAlign="right">
               <Link to={`/project/${project.id}`}>
-                <Heading
-                  size="md"
+                <Text
+                  fontSize="xl"
                   padding="1rem">
                   {project.subName}
-                </Heading>
+                </Text>
                 <Heading>{project.name}</Heading>
               </Link>
             </Stack>

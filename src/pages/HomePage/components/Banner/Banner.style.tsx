@@ -21,6 +21,6 @@ export const CustomSwiper = styled(Swiper)`
   }
 
   .swiper-pagination-bullet {
-    background: yellow !important;
+    background: ${({ theme }) => theme.yellow[100]} !important;
   }
 `

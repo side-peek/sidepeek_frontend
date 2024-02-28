@@ -11,49 +11,38 @@ import {
   GridItem,
   HStack,
   Select,
+  Skeleton,
   Spacer,
   Stack,
 } from "@chakra-ui/react"
 import { AllProject } from "api-models"
 
-import { useQuery } from "@tanstack/react-query"
-
-import { getAllProjects } from "@/api/project/getAllProjects"
-
 import ProjectCard from "@components/ProjectCard/ProjectCard"
 
 import Banner from "./components/Banner/Banner"
+import useAllProjectQuery from "./hooks/queries/useAllProjectQuery"
+
+type SelectType = "default" | "likeCount" | "viewCount"
 
 const HomePage = () => {
   const [isDeploy, setIsDeploy] = useState(false)
-  const [isSelect, setIsSelect] = useState<
-    "default" | "likeCount" | "viewCount"
-  >("default")
+  const [selectedOption, setSelectedOption] = useState<SelectType>("default")
 
   // 프로젝트 전체 목록 조회
-  const { data } = useQuery({
-    queryKey: ["projects"],
-    queryFn: () => getAllProjects(),
-  })
+  const { allProjectList, isAllProjectLoading } = useAllProjectQuery(isDeploy)
 
-  const projectList = data?.projects.filter((project) =>
-    isDeploy ? project.isDeploy : project,
-  )
-
-  const handleSort = (e: ChangeEvent) => {
-    const value = (e.target as HTMLSelectElement).value as
-      | "default"
-      | "likeCount"
-      | "viewCount"
-    setIsSelect(value)
+  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value as SelectType
+    setSelectedOption(value)
   }
-
   return (
     <>
       {/* 임시로 다섯개 잘라서 넣었습니다*/}
-      <Banner
-        bannerList={projectList === undefined ? [] : projectList.slice(0, 5)}
-      />
+      {isAllProjectLoading ? (
+        <Skeleton height="52rem" />
+      ) : (
+        <Banner bannerList={allProjectList?.slice(0, 5)} />
+      )}
       <Container maxW="80%">
         <Stack marginTop="15rem">
           <HStack spacing={5}>
@@ -67,8 +56,8 @@ const HomePage = () => {
               width="10rem"
               variant="outline"
               marginRight="1rem"
-              onChange={handleSort}
-              value={isSelect}>
+              onChange={handleSelect}
+              value={selectedOption}>
               <option value="default">최신순</option>
               <option value="likeCount">인기순</option>
               <option value="viewCount">조회순</option>
@@ -77,22 +66,41 @@ const HomePage = () => {
           <Grid
             templateColumns="repeat(4, 1fr)"
             gap={4}>
-            {projectList === undefined
-              ? "프로젝트가 없습니다"
-              : projectList.map((project: AllProject) => (
-                  <GridItem key={project.id}>
-                    <Link to={`/project/${project.id}`}>
-                      <ProjectCard
-                        imgUrl={project.thumbnailUrl}
-                        viewCount={project.viewCount}
-                        heartCount={project.likeCount}
-                        isFullHeart={project.isLiked}
-                        title={project.name}
-                        content={project.subName}
-                      />
-                    </Link>
-                  </GridItem>
-                ))}
+            {isAllProjectLoading ? (
+              <>
+                <Skeleton
+                  height="20rem"
+                  borderRadius="1rem"
+                />
+                <Skeleton
+                  height="20rem"
+                  borderRadius="1rem"
+                />
+                <Skeleton
+                  height="20rem"
+                  borderRadius="1rem"
+                />
+                <Skeleton
+                  height="20rem"
+                  borderRadius="1rem"
+                />
+              </>
+            ) : (
+              allProjectList?.map((project: AllProject) => (
+                <GridItem key={project.id}>
+                  <Link to={`/project/${project.id}`}>
+                    <ProjectCard
+                      imgUrl={project.thumbnailUrl}
+                      viewCount={project.viewCount}
+                      heartCount={project.likeCount}
+                      isFullHeart={project.isLiked}
+                      title={project.name}
+                      content={project.subName}
+                    />
+                  </Link>
+                </GridItem>
+              ))
+            )}
           </Grid>
           <Center marginTop="2rem">
             <Button
