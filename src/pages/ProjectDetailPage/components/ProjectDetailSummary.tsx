@@ -29,9 +29,11 @@ const ProjectDetailSummary = ({ projects }: ProjectDetailSummaryProps) => {
         p="2rem">
         <Flex flexDirection="column">
           <ProjectDetailSummaryTop
-            likeCount={likeCount}
-            viewCount={viewCount}
-            commentCount={commentCount}
+            {...{
+              likeCount,
+              viewCount,
+              commentCount,
+            }}
           />
 
           <Center
@@ -42,10 +44,12 @@ const ProjectDetailSummary = ({ projects }: ProjectDetailSummaryProps) => {
               subName={subName}
             />
             <ProjectDetailSummaryContent
-              overviewImageUrl={overviewImageUrl}
-              overview={overview}
-              deployUrl={deployUrl}
-              githubUrl={githubUrl}
+              {...{
+                overviewImageUrl,
+                overview,
+                deployUrl,
+                githubUrl,
+              }}
             />
           </Center>
         </Flex>

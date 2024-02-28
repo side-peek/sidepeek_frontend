@@ -19,8 +19,10 @@ const ProjectDetailSummaryLeft = ({
       justifyContent="space-between">
       <ProjectDetailSummaryText overview={overview} />
       <ProjectDetailSummaryLink
-        deployUrl={deployUrl}
-        githubUrl={githubUrl}
+        {...{
+          deployUrl,
+          githubUrl,
+        }}
       />
     </Flex>
   )
