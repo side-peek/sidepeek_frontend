@@ -11,7 +11,7 @@ import {
   Spacer,
 } from "@chakra-ui/react"
 
-import LogoButton from "@components/LogoButton/LogoButton"
+import LogoButton from "@components/LogoLink/LogoLink"
 
 import Menu from "./components/Menu"
 

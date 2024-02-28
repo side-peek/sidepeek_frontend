@@ -5,7 +5,7 @@ import { Flex, FormControl, Input } from "@chakra-ui/react"
 import LoginButton from "./components/LoginButton"
 import LoginFormLabel from "./components/LoginFormLabel"
 
-type formType = {
+type FormType = {
   email: string
   password: string
 }
@@ -15,9 +15,9 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<formType>()
+  } = useForm<FormType>()
 
-  const onSubmit: SubmitHandler<formType> = (values) => {
+  const onSubmit: SubmitHandler<FormType> = (values) => {
     console.log(values)
   }
 
@@ -27,8 +27,7 @@ const LoginForm = () => {
         direction="column"
         gap="1.6rem"
         justifyContent="center"
-        alignItems="stretch"
-        padding="2rem">
+        alignItems="stretch">
         {/* 로그인 입력 양식 */}
         {/* email */}
         <FormControl isInvalid={Boolean(errors.email)}>

@@ -4,11 +4,11 @@ import { Image, Link } from "@chakra-ui/react"
 
 import SidePeekLogoSVG from "@assets/svgs/sidepeek_logo.svg"
 
-interface LogoButtonProps {
+interface LogoLinkProps {
   logoHeight: string
 }
 
-const LogoButton = ({ logoHeight }: LogoButtonProps) => {
+const LogoLink = ({ logoHeight }: LogoLinkProps) => {
   return (
     <Link
       as={ReactRouterLink}
@@ -23,4 +23,4 @@ const LogoButton = ({ logoHeight }: LogoButtonProps) => {
   )
 }
 
-export default LogoButton
+export default LogoLink
