@@ -1,3 +1,5 @@
+import { rest } from "msw"
+
 import { searchHandlers } from "@components/Search/mocks"
 
 import { projectDetailHandlers } from "@pages/ProjectDetailPage/mocks"
@@ -29,4 +31,4 @@ export const handlers = [
   ...searchHandlers,
   postEmailRefresh,
   postEmailLogin,
-
+]
