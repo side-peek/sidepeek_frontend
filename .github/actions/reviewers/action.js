@@ -10,12 +10,20 @@ try {
   const { owner, repo } = context.repo
   const pull_number = context.issue.number
 
-  await octokit.rest.pulls.requestReviewers({
+  const response = await octokit.rest.pulls.listRequestedReviewers({
     owner,
     repo,
     pull_number,
-    reviewers: reviewers,
   })
+
+  if (response.data.users.length < 2) {
+    await octokit.rest.pulls.requestReviewers({
+      owner,
+      repo,
+      pull_number,
+      reviewers: reviewers,
+    })
+  }
 } catch (error) {
   setFailed(error.message)
 }

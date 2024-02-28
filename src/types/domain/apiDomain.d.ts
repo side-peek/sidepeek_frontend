@@ -36,11 +36,12 @@ declare module "api-models" {
   }
 
   export type Project = {
+    id: string
     name: string
     subName: string
     overview: string
     thumbnailUrl: string
-    overviewImageUrl: string[]
+    overviewImageUrl: ProjectOverViewUrl[]
     githubUrl: string
     deployUrl: string
     techStacks: TechStack[]
@@ -48,8 +49,11 @@ declare module "api-models" {
     endDate: string
     ownerId: number
     members: Member[]
-    description: string
-    troubleShooting: string
+    viewCount: number
+    commentCount: number
+    likeCount: number
+    description: Description
+    troubleShooting: Description
   }
 
   export type Description = {
@@ -88,6 +92,11 @@ declare module "api-models" {
     authority: string
     role: string
     nickname: string
+  }
+
+  export type ProjectOverViewUrl = {
+    id: number
+    url: string
   }
 
   export type Comment = {
@@ -238,3 +247,5 @@ declare module "api-models" {
     projectId: number
   }
 }
+// 맞아요 음.. 그러면 타입을 하나 둬야겠네요 하나더
+// 원래 그게 맞긴해요 일단 제가 메모해놓을게요
