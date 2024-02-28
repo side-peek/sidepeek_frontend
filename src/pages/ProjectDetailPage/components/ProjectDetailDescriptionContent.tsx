@@ -1,4 +1,4 @@
-import { Box, TabPanel } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react"
 import MDEditor from "@uiw/react-md-editor"
 
 const ViewStyleParams = {
@@ -16,14 +16,12 @@ const ProjectDetailDescriptionContent = ({
   content,
 }: ProjectDetailDescriptionContent) => {
   return (
-    <TabPanel>
-      <Box data-color-mode="light">
-        <MDEditor.Markdown
-          source={content}
-          style={{ ...ViewStyleParams }}
-        />
-      </Box>
-    </TabPanel>
+    <Box data-color-mode="light">
+      <MDEditor.Markdown
+        source={content}
+        style={{ ...ViewStyleParams }}
+      />
+    </Box>
   )
 }
 

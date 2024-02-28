@@ -1,4 +1,12 @@
-import { Box, Tab, TabList, TabPanels, Tabs, Text } from "@chakra-ui/react"
+import {
+  Box,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
+} from "@chakra-ui/react"
 import { Project } from "api-models"
 
 import ProjectDetailDescriptionContent from "./ProjectDetailDescriptionContent"
@@ -31,8 +39,14 @@ const ProjectDetailDescription = ({
           </Tab>
         </TabList>
         <TabPanels>
-          <ProjectDetailDescriptionContent content={projects.description} />
-          <ProjectDetailDescriptionContent content={projects.troubleShooting} />
+          <TabPanel>
+            <ProjectDetailDescriptionContent content={projects.description} />
+          </TabPanel>
+          <TabPanel>
+            <ProjectDetailDescriptionContent
+              content={projects.troubleShooting}
+            />
+          </TabPanel>
         </TabPanels>
       </Tabs>
     </Box>
