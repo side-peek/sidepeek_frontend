@@ -5,6 +5,7 @@ import "./fonts/index.css"
 
 const themeConfig = {
   config: { initialColorMode: "light", useSystemColorMode: false },
+
   styles: {
     global: (props: StyleFunctionProps) => ({
       html: {
@@ -12,6 +13,7 @@ const themeConfig = {
         height: "100%",
         fontSize: "62.5%",
       },
+
       body: {
         bg: mode("white", "black.300")(props),
         color: mode("black", "white")(props),
@@ -19,6 +21,7 @@ const themeConfig = {
       },
     }),
   },
+
   colors: {
     blue: {
       100: "#0C356A",
@@ -42,8 +45,11 @@ const themeConfig = {
     grey: {
       100: "#F0F0F0",
       200: "#ECECEC",
-      300: "#D4D4D4",
+      300: "#D9D9D9",
+      400: "#D4D4D4",
+      500: "#7a7a7a",
     },
+    whiteSmoke: "#f5f5f5",
   },
   fontWeights: {
     thin: 200,
