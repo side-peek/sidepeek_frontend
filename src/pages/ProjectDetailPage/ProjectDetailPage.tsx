@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 
-import ProjectDetailDescription from "./components/ProjectDetailDescription"
+import ProjectDetailTabList from "./components/ProjectDetailTabList"
 import useProjectDetail from "./hooks/query/useProjectDetail"
 
 const ProjectDetailPage = () => {
@@ -11,7 +11,7 @@ const ProjectDetailPage = () => {
     return
   }
 
-  return <ProjectDetailDescription projects={data.projects[0]} />
+  return <ProjectDetailTabList projects={data.projects[0]} />
 }
 
 export default ProjectDetailPage

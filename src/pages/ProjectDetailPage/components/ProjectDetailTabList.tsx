@@ -9,15 +9,13 @@ import {
 } from "@chakra-ui/react"
 import { Project } from "api-models"
 
-import ProjectDetailDescriptionContent from "./ProjectDetailDescriptionContent"
+import ProjectDetailTabItem from "./ProjectDetailTabItem"
 
-interface ProjectDetailDescriptionProps {
+interface ProjectDetailTabListProps {
   projects: Project
 }
 
-const ProjectDetailDescription = ({
-  projects,
-}: ProjectDetailDescriptionProps) => {
+const ProjectDetailTabList = ({ projects }: ProjectDetailTabListProps) => {
   return (
     <Box
       padding="5rem"
@@ -40,12 +38,10 @@ const ProjectDetailDescription = ({
         </TabList>
         <TabPanels>
           <TabPanel>
-            <ProjectDetailDescriptionContent content={projects.description} />
+            <ProjectDetailTabItem content={projects.description} />
           </TabPanel>
           <TabPanel>
-            <ProjectDetailDescriptionContent
-              content={projects.troubleShooting}
-            />
+            <ProjectDetailTabItem content={projects.troubleShooting} />
           </TabPanel>
         </TabPanels>
       </Tabs>
@@ -53,4 +49,4 @@ const ProjectDetailDescription = ({
   )
 }
 
-export default ProjectDetailDescription
+export default ProjectDetailTabList
