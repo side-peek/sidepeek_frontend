@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom"
 import ErrorPage from "@pages/ErrorPage/ErrorPage"
 import HomePage from "@pages/HomePage/HomePage"
 import LoginPage from "@pages/LoginPage/LoginPage"
+import ProfileEditPage from "@pages/ProfileEditPage/ProfileEditPage"
 import ProfilePage from "@pages/ProfilePage/ProfilePage"
 import ProjectDetailPage from "@pages/ProjectDetailPage/ProjectDetailPage"
 import ProjectEditPage from "@pages/ProjectEditPage/ProjectEditPage"
@@ -44,6 +45,7 @@ export const router = createBrowserRouter([
         path: "/profile/:userId",
         element: <ProfilePage />,
       },
+      { path: "/profile/edit", element: <ProfileEditPage /> },
     ],
   },
   {
