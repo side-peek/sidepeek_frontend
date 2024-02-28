@@ -1,5 +1,5 @@
 import {
-  Box,
+  Center,
   Tab,
   TabList,
   TabPanel,
@@ -17,9 +17,8 @@ interface ProjectDetailTabListProps {
 
 const ProjectDetailTabList = ({ projects }: ProjectDetailTabListProps) => {
   return (
-    <Box
+    <Center
       padding="5rem"
-      w="100%"
       maxW="100rem"
       margin="0 auto">
       <Tabs
@@ -27,9 +26,7 @@ const ProjectDetailTabList = ({ projects }: ProjectDetailTabListProps) => {
         variant="enclosed"
         fontFamily="SCDream_Bold">
         <TabList>
-          <Tab
-            borderTopRadius="1rem"
-            bgSize="2rem">
+          <Tab borderTopRadius="1rem">
             <Text _hover={{ opacity: 0.5 }}>기능</Text>
           </Tab>
           <Tab borderTopRadius="1rem">
@@ -45,7 +42,7 @@ const ProjectDetailTabList = ({ projects }: ProjectDetailTabListProps) => {
           </TabPanel>
         </TabPanels>
       </Tabs>
-    </Box>
+    </Center>
   )
 }
 
