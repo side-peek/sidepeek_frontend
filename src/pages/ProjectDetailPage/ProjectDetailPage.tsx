@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom"
 
+import { Center } from "@chakra-ui/react"
+
 import ProjectDetailSummary from "./components/ProjectDetailSummary"
 import useProjectDetailQuery from "./hooks/queries/useProjectDetailQuery"
 
@@ -8,7 +10,7 @@ const ProjectDetailPage = () => {
 
   const { data } = useProjectDetailQuery(Number(projectId))
   if (!data) {
-    return
+    return <Center>Loading</Center>
   }
   return <ProjectDetailSummary projects={data.projects} />
 }
