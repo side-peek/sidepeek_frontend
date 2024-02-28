@@ -15,7 +15,6 @@ import {
   Spacer,
   Stack,
 } from "@chakra-ui/react"
-import { AllProject } from "api-models"
 
 import ProjectCard from "@components/ProjectCard/ProjectCard"
 
@@ -29,7 +28,11 @@ const HomePage = () => {
   const [selectedOption, setSelectedOption] = useState<SelectType>("default")
 
   // 프로젝트 전체 목록 조회
-  const { allProjectList, isAllProjectLoading } = useAllProjectQuery(isDeploy)
+  const { allProjectList, isAllProjectLoading } = useAllProjectQuery()
+
+  const projectList = allProjectList?.projects.filter((project) =>
+    isDeploy ? project.isDeploy : project,
+  )
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SelectType
@@ -41,7 +44,7 @@ const HomePage = () => {
       {isAllProjectLoading ? (
         <Skeleton height="52rem" />
       ) : (
-        <Banner bannerList={allProjectList?.slice(0, 5)} />
+        <Banner bannerList={allProjectList?.projects.slice(0, 5)} />
       )}
       <Container maxW="80%">
         <Stack marginTop="15rem">
@@ -86,7 +89,7 @@ const HomePage = () => {
                 />
               </>
             ) : (
-              allProjectList?.map((project: AllProject) => (
+              projectList?.map((project) => (
                 <GridItem key={project.id}>
                   <Link to={`/project/${project.id}`}>
                     <ProjectCard

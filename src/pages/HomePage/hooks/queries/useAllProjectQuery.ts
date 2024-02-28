@@ -2,14 +2,10 @@ import { useQuery } from "@tanstack/react-query"
 
 import { getAllProjects } from "@/api/project/getAllProjects"
 
-const useAllProjectQuery = (isDeploy: boolean) => {
+const useAllProjectQuery = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["projects"],
     queryFn: () => getAllProjects(),
-    select: (projects) =>
-      projects.projects.filter((project) =>
-        isDeploy ? project.isDeploy : project,
-      ),
   })
 
   return {
