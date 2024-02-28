@@ -13,6 +13,7 @@ const themeConfig = {
         height: "100%",
         fontSize: "62.5%",
       },
+
       body: {
         bg: mode("white", "black.300")(props),
         color: mode("black", "white")(props),
@@ -20,6 +21,7 @@ const themeConfig = {
       },
     }),
   },
+
   colors: {
     blue: {
       100: "#0C356A",
