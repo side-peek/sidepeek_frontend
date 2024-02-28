@@ -52,8 +52,8 @@ declare module "api-models" {
     viewCount: number
     commentCount: number
     likeCount: number
-    description: Description
-    troubleShooting: Description
+    description: string
+    troubleShooting: string
   }
 
   export type Description = {
