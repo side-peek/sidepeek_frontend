@@ -18,32 +18,21 @@ const ProjectDetailSummaryLink = ({
   deployUrl,
   githubUrl,
 }: ProjectDetailSummaryLinkProps) => {
-  const LINK_LIST = [
-    {
-      icons: <TbWorld />,
-      onClick: () => handleOpenNewTab(deployUrl),
-      bgColor: "blue.100",
-      linkName: "WEB",
-    },
-    {
-      icons: <FaGithub />,
-      onClick: () => handleOpenNewTab(githubUrl),
-      bgColor: "blue.600",
-      linkName: "Github",
-    },
-  ]
-
   return (
     <Flex gap="2rem">
-      {LINK_LIST.map((link) => (
-        <ProjectDetailSummaryLinkButton
-          key={link.linkName}
-          leftIcon={link.icons}
-          bgColor={link.bgColor}
-          linkName={link.linkName}
-          onClick={link.onClick}
-        />
-      ))}
+      <ProjectDetailSummaryLinkButton
+        linkName="WEB"
+        leftIcon={<TbWorld />}
+        bgColor="blue.100"
+        onClick={() => handleOpenNewTab(deployUrl)}
+      />
+
+      <ProjectDetailSummaryLinkButton
+        leftIcon={<FaGithub />}
+        bgColor="blue.300"
+        linkName="GithUb"
+        onClick={() => handleOpenNewTab(githubUrl)}
+      />
     </Flex>
   )
 }
