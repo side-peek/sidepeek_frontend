@@ -23,5 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
+src/stats.html
+
 .env
 .eslintcache
