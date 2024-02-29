@@ -1,8 +1,7 @@
+import { IoIosArrowRoundBack } from "react-icons/io"
 import { useNavigate } from "react-router-dom"
 
-import { Button, Image } from "@chakra-ui/react"
-
-import BackSpaceSVG from "@assets/svgs/keyboard_backspace.svg"
+import { Button, Icon } from "@chakra-ui/react"
 
 const BackButton = () => {
   const navigate = useNavigate()
@@ -16,9 +15,10 @@ const BackButton = () => {
       p="0"
       background="transparent"
       onClick={() => navigate(-1)}>
-      <Image
-        src={BackSpaceSVG}
-        alt="backspace"
+      <Icon
+        as={IoIosArrowRoundBack}
+        width="4rem"
+        height="4rem"
       />
     </Button>
   )

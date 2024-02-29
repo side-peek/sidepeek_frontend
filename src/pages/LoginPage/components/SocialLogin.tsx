@@ -1,6 +1,6 @@
-import { Box, Button, Heading, Image } from "@chakra-ui/react"
+import { FaGithub } from "react-icons/fa"
 
-import GithubSVG from "@assets/svgs/github.svg"
+import { Box, Button, Heading, Icon } from "@chakra-ui/react"
 
 const SocialLogin = () => {
   return (
@@ -14,19 +14,19 @@ const SocialLogin = () => {
         </Heading>
       </Box>
       <Button
-        p="2rem"
-        fontSize="2rem"
+        p="3rem"
+        fontSize="2.4rem"
+        fontWeight="medium"
         color="white"
-        leftIcon={
-          <Image
-            src={GithubSVG}
-            alt="github icon"
-            w={26}
-            h={26}
-          />
-        }
         backgroundColor="#000"
-        borderRadius="full">
+        borderRadius="full"
+        leftIcon={
+          <Icon
+            as={FaGithub}
+            width="3rem"
+            height="3rem"
+          />
+        }>
         깃허브로 로그인
       </Button>
     </>
