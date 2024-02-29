@@ -56,6 +56,17 @@ declare module "api-models" {
     troubleShooting: string
   }
 
+  export type AllProject = {
+    id: number
+    name: string
+    subName: string
+    thumbnailUrl: string
+    viewCount: number
+    likeCount: number
+    isLiked: boolean
+    isDeploy: boolean
+  }
+
   export type Description = {
     content: string
     imageUrls: string[]
@@ -230,7 +241,7 @@ declare module "api-models" {
   }
 
   export type getAllProjectsResponseType = {
-    projects: Project[]
+    projects: AllProject[]
   }
 
   export type putProjectPayload = {
