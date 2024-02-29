@@ -1,14 +1,17 @@
 @font-face {
   font-family: "SCDream_Regular";
-  src: url("./SCDream4.otf") format("opentype");
+  src: url("/src/assets/fonts/SCDream4.woff2") format("woff2");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "SCDream_Bold";
-  src: url("./SCDream6.otf") format("opentype");
+  src: url("/src/assets/fonts/SCDream6.woff2") format("woff2");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "SCDream_Heavy";
-  src: url("./SCDream8.otf") format("opentype");
+  src: url("/src/assets/fonts/SCDream8.woff2") format("woff2");
+  font-display: swap;
 }
