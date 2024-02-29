@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom"
 
-import { Button, Center, Img, Text } from "@chakra-ui/react"
+import { Button, Center, Text } from "@chakra-ui/react"
 
-import errorgif from "@assets/images/error.gif"
+import errorvideo from "@assets/images/error.mp4"
 
 const ErrorPage = () => {
   const navigate = useNavigate()
@@ -16,12 +16,17 @@ const ErrorPage = () => {
       gap={20}
       position="absolute"
       top="25%">
-      <Img
-        w="30rem"
-        minW="30rem"
-        src={errorgif}
-        alt="에러 페이지 움짤"
-      />
+      <video
+        muted
+        autoPlay
+        loop
+        style={{ maxWidth: "30rem" }}>
+        <source
+          style={{ width: "30rem", maxWidth: "30rem" }}
+          src={errorvideo}
+          type="video/mp4"
+        />
+      </video>
       <Text
         textAlign="center"
         fontSize="4xl"
