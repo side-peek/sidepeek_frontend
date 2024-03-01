@@ -9,7 +9,7 @@ import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules"
 import { SwiperSlide } from "swiper/react"
 import { Swiper as SwiperCore } from "swiper/types"
 
-import { StyledSwiper } from "../../styles/SwiperSlide.styles"
+import { StyledSwiper } from "../../../styles/SwiperSlide.styles"
 import ImageWithFallback from "./ImageWithFallback"
 import ProjectDetailSummaryRightIcon from "./ProjectDetailSummaryRightIcon"
 
