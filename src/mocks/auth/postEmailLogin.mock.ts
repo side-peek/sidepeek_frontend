@@ -3,7 +3,6 @@ import { rest } from "msw"
 
 import { ENDPOINTS } from "@constants/endPoints"
 
-//FIXME: 예시 함수입니다. 원하시는데로 변경해서 사용해주세요!
 export const postEmailLogin = rest.post(
   ENDPOINTS.EMAIL_LOGIN,
   (_, res, ctx) => {
@@ -13,7 +12,7 @@ export const postEmailLogin = rest.post(
       user: {
         id: 0,
         nickname: "admin",
-        profileImageUrl: null,
+        profileImageUrl: "https://picsum.photos/200/300",
       },
     }
     return res(ctx.status(200), ctx.json(response))
