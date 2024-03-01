@@ -24,11 +24,21 @@ const ProjectDetailTabList = ({
         size="lg"
         variant="enclosed"
         fontFamily="SCDream_Bold">
-        <TabList>
-          <Tab borderTopRadius="1rem">
-            <Text _hover={{ opacity: 0.5 }}>기능</Text>
+        <TabList h="6rem">
+          <Tab
+            borderTopRadius="1rem"
+            px="2rem"
+            fontSize="2rem">
+            <Text
+              _hover={{ opacity: 0.5 }}
+              size="5rem">
+              기능
+            </Text>
           </Tab>
-          <Tab borderTopRadius="1rem">
+          <Tab
+            borderTopRadius="1rem"
+            px="2rem"
+            fontSize="2rem">
             <Text _hover={{ opacity: 0.5 }}>트러블 슈팅</Text>
           </Tab>
         </TabList>
