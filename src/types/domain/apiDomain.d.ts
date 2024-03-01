@@ -135,10 +135,6 @@ declare module "api-models" {
   }
 
   /* 인증 관련 */
-  export type getEmailAuthPayload = {
-    accessToken: string
-  }
-
   export type getEmailAuthResponseType = UserSummary
 
   export type postEmailRefreshPayload = {
