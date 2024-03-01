@@ -12,7 +12,7 @@ export const DUMMY_PROJECT_DETAIL = {
     },
     {
       id: 2,
-      url: "https://project-images.sidepeek.com/2.png",
+      url: "https://user-images.githubusercontent.com/37354708/144370579-763a962c-5076-413c-9ea6-1043985791f6.png",
     },
   ],
   githubUrl: "https://github.com/side-peek",
