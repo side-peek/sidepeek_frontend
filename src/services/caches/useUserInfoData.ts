@@ -1,10 +1,11 @@
-import { UserSummary } from "api-models"
+import { useQuery } from "@tanstack/react-query"
 
-import { useQueryClient } from "@tanstack/react-query"
+import { getEmailAuth } from "@/api/auth/getEmailAuth"
 
 import { QUERYKEY } from "@constants/queryKey"
 
 export const useUserInfoData = () => {
-  const queryClient = useQueryClient()
-  return queryClient.getQueryData<UserSummary>([QUERYKEY.USER_INFO])
+  return useQuery<Awaited<ReturnType<typeof getEmailAuth>>>({
+    queryKey: [QUERYKEY.USER_INFO],
+  }).data
 }
