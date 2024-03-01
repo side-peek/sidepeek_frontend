@@ -16,9 +16,10 @@ const ProjectDetailTabList = ({
 }: getProjectDetailResponseType) => {
   return (
     <Center
-      padding="5rem"
-      maxW="100rem"
-      margin="0 auto">
+      w="100%"
+      margin="0 auto"
+      pt="5rem"
+      maxW="128rem">
       <Tabs
         size="lg"
         variant="enclosed"
