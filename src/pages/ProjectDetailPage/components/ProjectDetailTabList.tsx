@@ -7,15 +7,13 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react"
-import { Project } from "api-models"
+import { getProjectDetailResponseType } from "api-models"
 
 import ProjectDetailTabItem from "./ProjectDetailTabItem"
 
-interface ProjectDetailTabListProps {
-  projects: Project
-}
-
-const ProjectDetailTabList = ({ projects }: ProjectDetailTabListProps) => {
+const ProjectDetailTabList = ({
+  projectDetailInfo,
+}: getProjectDetailResponseType) => {
   return (
     <Center
       padding="5rem"
@@ -35,10 +33,10 @@ const ProjectDetailTabList = ({ projects }: ProjectDetailTabListProps) => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <ProjectDetailTabItem content={projects.description} />
+            <ProjectDetailTabItem content={projectDetailInfo.description} />
           </TabPanel>
           <TabPanel>
-            <ProjectDetailTabItem content={projects.troubleShooting} />
+            <ProjectDetailTabItem content={projectDetailInfo.troubleShooting} />
           </TabPanel>
         </TabPanels>
       </Tabs>

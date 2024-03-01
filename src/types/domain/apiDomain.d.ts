@@ -32,7 +32,7 @@ declare module "api-models" {
   export type UserSummary = {
     id: number
     nickname: string
-    profileImageUrl: string | null
+    profileImageUrl?: string
   }
 
   export type Project = {
@@ -44,14 +44,14 @@ declare module "api-models" {
     overviewImageUrl: ProjectOverViewUrl[]
     githubUrl: string
     deployUrl: string
+    viewCount: number
+    likeCount: number
+    commentCount: number
     techStacks: TechStack[]
     startDate: string
     endDate: string
     ownerId: number
     members: Member[]
-    viewCount: number
-    commentCount: number
-    likeCount: number
     description: string
     troubleShooting: string
   }
@@ -73,9 +73,9 @@ declare module "api-models" {
   }
 
   export type Member = {
-    userId?: number
+    id: number
     category: string
-    nickname: string
+    userSummary: UserSummary
   }
 
   export type ProjectTag = {
@@ -130,8 +130,8 @@ declare module "api-models" {
 
   export type TechStack = {
     id: number
-    skill: Skill
     category: string
+    skill: Skill
   }
 
   export type Skill = {
@@ -237,7 +237,7 @@ declare module "api-models" {
   }
 
   export type getProjectDetailResponseType = {
-    projects: Project[]
+    projectDetailInfo: Project
   }
 
   export type getAllProjectsResponseType = {
