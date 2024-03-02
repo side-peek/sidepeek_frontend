@@ -31,6 +31,7 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
     register,
     setError,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({
     mode: "onSubmit",
@@ -38,6 +39,7 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
   const onValid = () => {
     // TODO: 비밀번호 변경 api 요청
     console.log("1")
+    reset()
     onClose()
   }
   const onInvalid = () => {
@@ -58,11 +60,16 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
     }
   }
 
+  const handleClose = () => {
+    reset()
+    onClose()
+  }
+
   return (
     <Modal
       size="lg"
       isOpen={isOpen}
-      onClose={onClose}>
+      onClose={handleClose}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ModalOverlay />
         <ModalContent>
