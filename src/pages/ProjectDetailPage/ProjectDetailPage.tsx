@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 
-import { Center } from "@chakra-ui/layout"
+import { Center, Flex } from "@chakra-ui/layout"
 
 import ProjectDetailContent from "./components/ProjectDetailContent/ProjectDetailContent"
 import ProjectDetailSummary from "./components/ProjectDetailSummary/ProjectDetailSummary"
@@ -19,8 +19,15 @@ const ProjectDetailPage = () => {
   return (
     <>
       <ProjectDetailSummary projectDetailInfo={projectDetailInfo} />
-      <ProjectDetailContent projectDetailInfo={projectDetailInfo} />
-      <ProjectDetailTabList projectDetailInfo={projectDetailInfo} />
+      <Flex
+        direction="column"
+        gap="5rem"
+        maxW="128rem"
+        margin="0 auto"
+        px="5rem">
+        <ProjectDetailContent projectDetailInfo={projectDetailInfo} />
+        <ProjectDetailTabList projectDetailInfo={projectDetailInfo} />
+      </Flex>
     </>
   )
 }

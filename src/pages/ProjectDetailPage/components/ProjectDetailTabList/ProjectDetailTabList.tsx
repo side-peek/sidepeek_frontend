@@ -17,9 +17,7 @@ const ProjectDetailTabList = ({
   return (
     <Center
       w="100%"
-      margin="0 auto"
-      pt="5rem"
-      maxW="128rem">
+      margin="0 auto">
       <Tabs
         size="lg"
         variant="enclosed"

@@ -2,7 +2,6 @@ import { StackDivider, VStack } from "@chakra-ui/react"
 import { getProjectDetailResponseType } from "api-models"
 
 import ProjectDetailDate from "./ProjectDetailDate/ProjectDetailDate"
-import ProjectDetailMembers from "./ProjectDetailMembers/ProjectDetailMembers"
 import ProjectDetailTechStacks from "./ProjectDetailTechStacks/ProjectDetailTechStacks"
 
 const ProjectDetailContent = ({
@@ -12,16 +11,15 @@ const ProjectDetailContent = ({
 
   return (
     <VStack
-      maxW="128rem"
       alignItems="flex-start"
-      divider={<StackDivider borderColor="grey.200" />}
-      spacing={4}
+      divider={<StackDivider borderColor="grey.300" />}
+      spacing={10}
+      w="100%"
       margin="0 auto"
-      mt="5rem"
-      align="stretch">
+      mt="5rem">
       <ProjectDetailTechStacks techStacks={techStacks} />
       <ProjectDetailDate {...{ startDate, endDate }} />
-      <ProjectDetailMembers />
+      {/* <ProjectDetailMembers /> */}
     </VStack>
   )
 }
