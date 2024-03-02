@@ -8,20 +8,19 @@ import ProjectDetailTechStacks from "./ProjectDetailTechStacks/ProjectDetailTech
 const ProjectDetailContent = ({
   projectDetailInfo,
 }: getProjectDetailResponseType) => {
-  const { techStacks } = projectDetailInfo
+  const { techStacks, startDate, endDate } = projectDetailInfo
 
   return (
     <VStack
       maxW="128rem"
       alignItems="flex-start"
-      pt="3rem"
-      pl="3rem"
       divider={<StackDivider borderColor="grey.200" />}
       spacing={4}
       margin="0 auto"
+      mt="5rem"
       align="stretch">
       <ProjectDetailTechStacks techStacks={techStacks} />
-      <ProjectDetailDate />
+      <ProjectDetailDate {...{ startDate, endDate }} />
       <ProjectDetailMembers />
     </VStack>
   )
