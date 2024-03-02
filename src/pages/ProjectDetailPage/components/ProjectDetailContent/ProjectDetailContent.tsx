@@ -14,8 +14,8 @@ const ProjectDetailContent = ({
     <VStack
       maxW="128rem"
       alignItems="flex-start"
-      pt="5rem"
-      pl="5rem"
+      pt="3rem"
+      pl="3rem"
       divider={<StackDivider borderColor="grey.200" />}
       spacing={4}
       margin="0 auto"

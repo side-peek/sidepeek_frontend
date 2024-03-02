@@ -57,6 +57,96 @@ export const DUMMY_PROJECT_DETAIL = {
         iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
       },
     },
+    {
+      id: 25,
+      category: "프론트",
+      skill: {
+        id: 4,
+        name: "React Query",
+        iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
+      },
+    },
+    {
+      id: 26,
+      category: "프론트",
+      skill: {
+        id: 4,
+        name: "React Query",
+        iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
+      },
+    },
+    {
+      id: 27,
+      category: "프론트",
+      skill: {
+        id: 4,
+        name: "React Query",
+        iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
+      },
+    },
+    {
+      id: 28,
+      category: "프론트",
+      skill: {
+        id: 4,
+        name: "React Query",
+        iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
+      },
+    },
+    {
+      id: 29,
+      category: "프론트",
+      skill: {
+        id: 4,
+        name: "React Query",
+        iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
+      },
+    },
+    {
+      id: 30,
+      category: "프론트",
+      skill: {
+        id: 4,
+        name: "React Query",
+        iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
+      },
+    },
+    {
+      id: 31,
+      category: "프론트",
+      skill: {
+        id: 4,
+        name: "React Query",
+        iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
+      },
+    },
+    {
+      id: 32,
+      category: "프론트",
+      skill: {
+        id: 4,
+        name: "React Query",
+        iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
+      },
+    },
+    {
+      id: 33,
+      category: "프론트",
+      skill: {
+        id: 4,
+        name: "React Query",
+        iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
+      },
+    },
+    {
+      id: 34,
+      category: "프론트",
+      skill: {
+        id: 4,
+        name: "React Query",
+        iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
+      },
+    },
   ],
   startDate: "2024-01",
   endDate: "2024-03",
