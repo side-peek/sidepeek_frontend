@@ -8,8 +8,8 @@ const SocialLogin = () => {
       <Box>
         <Heading
           as="h3"
-          fontSize="1.2rem"
-          fontWeight="bold">
+          fontFamily="SCDream_Bold"
+          fontSize="1.2rem">
           소셜 계정으로 로그인
         </Heading>
       </Box>
