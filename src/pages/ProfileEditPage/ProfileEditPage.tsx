@@ -1,16 +1,11 @@
 import { useState } from "react"
 
-import {
-  Button,
-  HStack,
-  StackDivider,
-  VStack,
-  useDisclosure,
-} from "@chakra-ui/react"
+import { HStack, StackDivider, VStack, useDisclosure } from "@chakra-ui/react"
 
 import ChangePWModal from "./components/ChangePWModal"
 import ProfileCard from "./components/ProfileCard"
 import ProfileIntroduction from "./components/ProfileIntroduction"
+import StyledButton from "./styles/StyledButton"
 
 const ProfileEditPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -44,26 +39,8 @@ const ProfileEditPage = () => {
           setProfileInfo={setProfileInfo}
         />
         <HStack>
-          <Button
-            onClick={onOpen}
-            w="11rem"
-            h="3.5rem"
-            fontSize="1.3rem"
-            color="white"
-            bg="blue.100"
-            borderRadius="10px">
-            비밀번호 변경
-          </Button>
-          <Button
-            onClick={handleSubmit}
-            w="11rem"
-            h="3.5rem"
-            fontSize="1.3rem"
-            color="white"
-            bg="blue.100"
-            borderRadius="10px">
-            변경내용 저장
-          </Button>
+          <StyledButton onClick={onOpen}>비밀번호 변경</StyledButton>
+          <StyledButton onClick={handleSubmit}>변경내용 저장</StyledButton>
           <ChangePWModal
             isOpen={isOpen}
             onClose={onClose}
