@@ -4,22 +4,15 @@ import { TechStack } from "api-models"
 
 import CustomTag from "@components/Tag/components/CustomTag"
 
+import getGroupedCategory from "@pages/ProjectDetailPage/utils/getGroupedCategory"
+
 interface ProjectDetailTechStacksProps {
   techStacks: TechStack[]
 }
 const ProjectDetailTechStacks = ({
   techStacks,
 }: ProjectDetailTechStacksProps) => {
-  const groupedByCategory = Object.entries(
-    techStacks.reduce<Record<string, TechStack[]>>((acc, item) => {
-      if (!acc[item.category]) {
-        acc[item.category] = []
-      }
-      acc[item.category].push(item)
-      return acc
-    }, {}),
-  )
-  console.log(groupedByCategory)
+  const groupedByCategory = getGroupedCategory(techStacks)
 
   return (
     <VStack
