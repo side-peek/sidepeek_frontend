@@ -3,7 +3,7 @@ import { ImGithub } from "react-icons/im"
 
 import { Box, HStack, Input, Text, Textarea } from "@chakra-ui/react"
 
-import { ProfileInfo } from "../types/types"
+import { ProfileInfo } from "../../types/types"
 
 interface ProfileIntroductionProps
   extends Pick<ProfileInfo, "introduction" | "githubUrl" | "blogUrl"> {

@@ -8,9 +8,9 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react"
 
-import ChangePWModal from "./components/ChangePWModal"
-import ProfileCard from "./components/ProfileCard"
-import ProfileIntroduction from "./components/ProfileIntroduction"
+import ChangePWModal from "./components/Modal/ChangePWModal"
+import ProfileCard from "./components/Profile/ProfileCard"
+import ProfileIntroduction from "./components/Profile/ProfileIntroduction"
 // import ProfileTechStack from "./components/ProfileTechStack"
 import StyledButton from "./styles/StyledButton"
 

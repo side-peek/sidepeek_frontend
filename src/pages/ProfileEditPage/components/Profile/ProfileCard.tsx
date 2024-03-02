@@ -12,7 +12,7 @@ import {
   Text,
 } from "@chakra-ui/react"
 
-import { ProfileInfo } from "../types/types"
+import { ProfileInfo } from "../../types/types"
 
 interface ProfileCardProps {
   career: string
