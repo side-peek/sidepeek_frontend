@@ -16,7 +16,7 @@ import TestPage from "@pages/TestPage/TestPage"
 
 import DefaultLayout from "@styles/layouts/DefaultLayout"
 
-import { determineAuthLoader } from "./loaders/determineAuthLoader"
+import { determineRedirectLoader } from "./loaders/determineRedirectLoader"
 
 export const router = (queryClient: QueryClient) => {
   return createBrowserRouter([
@@ -56,12 +56,12 @@ export const router = (queryClient: QueryClient) => {
         },
         {
           path: "/login",
-          loader: determineAuthLoader(queryClient, false),
+          loader: determineRedirectLoader(queryClient, false),
           element: <LoginPage />,
         },
         {
           path: "/signup",
-          loader: determineAuthLoader(queryClient, false),
+          loader: determineRedirectLoader(queryClient, false),
           element: <SignUpPage />,
         },
       ],

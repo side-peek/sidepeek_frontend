@@ -10,17 +10,18 @@ import { QUERYKEY } from "@constants/queryKey"
  * 두번째 파라미터로 회원일 경우 페이지 접근을 허락할지 결정하는 boolean 값을,
  * 세번째 파라미터로 권한이 없는 경우 리다이렉트할 url를 넘겨줍니다. (기본값: "/")
  */
-export const determineAuthLoader =
+export const determineRedirectLoader =
   (
     queryClient: QueryClient,
-    isAllowedForUser: boolean,
+    isAllowedForRegister: boolean,
     redirectUrl: string = "/",
   ): LoaderFunction =>
   () => {
-    const isUser = queryClient.getQueryData([QUERYKEY.USER_INFO]) == null
+    const isRegister = queryClient.getQueryData([QUERYKEY.USER_INFO]) == null
 
     const willRedirect =
-      (!isAllowedForUser && isUser) || (isAllowedForUser && !isUser)
+      (!isAllowedForRegister && isRegister) ||
+      (isAllowedForRegister && !isRegister)
 
     if (import.meta.env.DEV && willRedirect) {
       alert(
