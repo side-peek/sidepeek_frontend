@@ -1,6 +1,7 @@
 import { StackDivider, VStack } from "@chakra-ui/react"
 
 import ProfileCard from "./components/ProfileCard"
+import ProfileIntroduction from "./components/ProfileIntroduction"
 
 const ProfileEditPage = () => {
   return (
@@ -12,7 +13,7 @@ const ProfileEditPage = () => {
       m="auto"
       divider={<StackDivider borderColor="blue" />}>
       <ProfileCard />
-      <ProfileCard />
+      <ProfileIntroduction />
     </VStack>
   )
 }
