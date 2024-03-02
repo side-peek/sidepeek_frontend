@@ -22,6 +22,7 @@ interface ProfileCardProps {
 const ProfileCard = ({ career, setProfileInfo }: ProfileCardProps) => {
   return (
     <Flex
+      w="100%"
       h="24rem"
       bg="default"
       ml="2rem"
