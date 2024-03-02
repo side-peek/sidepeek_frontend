@@ -17,10 +17,10 @@ const ProfileEditPage = () => {
       <VStack
         w="80%"
         h="100vh"
-        bg="yellow"
+        // bg="yellow"
         align="start"
         m="auto"
-        divider={<StackDivider borderColor="blue" />}>
+        divider={<StackDivider borderColor="grey.100" />}>
         <ProfileCard />
         <ProfileIntroduction />
         <HStack>

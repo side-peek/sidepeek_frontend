@@ -17,44 +17,41 @@ const ProfileCard = () => {
   const [career, setCareer] = useState("0년차 개발자")
   return (
     <Flex
-      h="30rem"
+      h="24rem"
       bg="default"
-      alignItems="center"
-      ml="2rem">
+      ml="2rem"
+      alignItems="center">
       <Avatar
         w="12rem"
         h="12rem"></Avatar>
-      <Stack
-        ml="2rem"
-        bg="red"
-        w="30rem">
+      <Stack ml="1.5rem">
         <Text
           fontSize="3xl"
           fontFamily="SCDream_Bold">
-          개발자
+          개발자입니다.
         </Text>
         <Menu>
           <MenuButton
             as={Button}
             rightIcon={<AiFillCaretDown />}
-            w="50%">
+            w="12rem">
             {career}
           </MenuButton>
           <MenuList>
             <MenuItem onClick={() => setCareer("0년차 개발자")}>
               0년차 개발자
             </MenuItem>
-            <MenuItem onClick={() => setCareer("1~2년차 개발자")}>
-              1~2년차 개발자
+            <MenuItem onClick={() => setCareer("1~3년차 개발자")}>
+              1~3년차 개발자
             </MenuItem>
-            <MenuItem onClick={() => setCareer("2~3년차 개발자")}>
-              2~3년차 개발자
+            <MenuItem onClick={() => setCareer("4~6년차 개발자")}>
+              4~6년차 개발자
             </MenuItem>
-            <MenuItem onClick={() => setCareer("3~5년차 개발자")}>
-              3~5년차 개발자
+            <MenuItem onClick={() => setCareer("7~9년차 개발자")}>
+              7~9년차 개발자
             </MenuItem>
-            <MenuItem onClick={() => setCareer("5년차 이상 개발자")}>
-              5년차 이상 개발자
+            <MenuItem onClick={() => setCareer("10년차 이상 개발자")}>
+              10년차 이상 개발자
             </MenuItem>
           </MenuList>
         </Menu>
