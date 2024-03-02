@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import {
   Button,
   HStack,
@@ -12,17 +14,34 @@ import ProfileIntroduction from "./components/ProfileIntroduction"
 
 const ProfileEditPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [profileInfo, setProfileInfo] = useState({
+    career: "0년차 개발자",
+    introduction: "",
+    githubUrl: "",
+    blogUrl: "",
+  })
+
+  const handleSubmit = () => {
+    // TODO: 프로필 정보를 저장하는 api 요청
+    console.log(profileInfo)
+  }
   return (
     <>
       <VStack
         w="80%"
         h="100vh"
-        // bg="yellow"
         align="start"
         m="auto"
         divider={<StackDivider borderColor="grey.100" />}>
-        <ProfileCard />
-        <ProfileIntroduction />
+        <ProfileCard
+          career={profileInfo.career}
+          setProfileInfo={setProfileInfo}
+        />
+        <ProfileIntroduction
+          introduction={profileInfo.introduction}
+          githubUrl={profileInfo.githubUrl}
+          blogUrl={profileInfo.blogUrl}
+        />
         <HStack>
           <Button
             onClick={onOpen}
@@ -35,6 +54,7 @@ const ProfileEditPage = () => {
             비밀번호 변경
           </Button>
           <Button
+            onClick={handleSubmit}
             w="11rem"
             h="3.5rem"
             fontSize="1.3rem"

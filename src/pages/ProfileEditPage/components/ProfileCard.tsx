@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { AiFillCaretDown } from "react-icons/ai"
 
 import {
@@ -13,8 +12,14 @@ import {
   Text,
 } from "@chakra-ui/react"
 
-const ProfileCard = () => {
-  const [career, setCareer] = useState("0년차 개발자")
+import { ProfileInfo } from "../types/types"
+
+interface ProfileCardProps {
+  career: string
+  setProfileInfo: React.Dispatch<React.SetStateAction<ProfileInfo>>
+}
+
+const ProfileCard = ({ career, setProfileInfo }: ProfileCardProps) => {
   return (
     <Flex
       h="24rem"
@@ -38,19 +43,49 @@ const ProfileCard = () => {
             {career}
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => setCareer("0년차 개발자")}>
+            <MenuItem
+              onClick={() =>
+                setProfileInfo((profileInfo) => ({
+                  ...profileInfo,
+                  career: "0년차 개발자",
+                }))
+              }>
               0년차 개발자
             </MenuItem>
-            <MenuItem onClick={() => setCareer("1~3년차 개발자")}>
+            <MenuItem
+              onClick={() =>
+                setProfileInfo((profileInfo) => ({
+                  ...profileInfo,
+                  career: "1~3년차 개발자",
+                }))
+              }>
               1~3년차 개발자
             </MenuItem>
-            <MenuItem onClick={() => setCareer("4~6년차 개발자")}>
+            <MenuItem
+              onClick={() =>
+                setProfileInfo((profileInfo) => ({
+                  ...profileInfo,
+                  career: "4~6년차 개발자",
+                }))
+              }>
               4~6년차 개발자
             </MenuItem>
-            <MenuItem onClick={() => setCareer("7~9년차 개발자")}>
+            <MenuItem
+              onClick={() =>
+                setProfileInfo((profileInfo) => ({
+                  ...profileInfo,
+                  career: "7~8년차 개발자",
+                }))
+              }>
               7~9년차 개발자
             </MenuItem>
-            <MenuItem onClick={() => setCareer("10년차 이상 개발자")}>
+            <MenuItem
+              onClick={() =>
+                setProfileInfo((profileInfo) => ({
+                  ...profileInfo,
+                  career: "10년차 이상 개발자",
+                }))
+              }>
               10년차 이상 개발자
             </MenuItem>
           </MenuList>

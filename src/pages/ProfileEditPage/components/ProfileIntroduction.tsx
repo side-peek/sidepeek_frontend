@@ -3,7 +3,16 @@ import { ImGithub } from "react-icons/im"
 
 import { Box, HStack, Input, Text, Textarea } from "@chakra-ui/react"
 
-const ProfileIntroduction = () => {
+import { ProfileInfo } from "../types/types"
+
+interface ProfileIntroductionProps
+  extends Pick<ProfileInfo, "introduction" | "githubUrl" | "blogUrl"> {}
+
+const ProfileIntroduction = ({
+  introduction,
+  githubUrl,
+  blogUrl,
+}: ProfileIntroductionProps) => {
   return (
     <Box
       w="100%"
@@ -17,6 +26,7 @@ const ProfileIntroduction = () => {
       <Textarea
         height="10rem"
         resize="none"
+        value={introduction}
         placeholder="소개글을 입력해주세요"
       />
 
@@ -26,9 +36,9 @@ const ProfileIntroduction = () => {
           <Input
             variant="flushed"
             height="3rem"
+            value={githubUrl}
             placeholder="GitHub 링크를 입력해주세요"
             ml="0.5rem"
-            // borderRadius="0.8rem"
             w="30rem"
           />
         </HStack>
@@ -37,9 +47,9 @@ const ProfileIntroduction = () => {
           <Input
             variant="flushed"
             height="3rem"
+            value={blogUrl}
             placeholder="Blog 링크를 입력해주세요"
             ml="0.5rem"
-            // borderRadius="0.8rem"
             w="30rem"
           />
         </HStack>
