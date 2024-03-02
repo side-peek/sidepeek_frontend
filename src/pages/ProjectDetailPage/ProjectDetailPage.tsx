@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 
 import { Center } from "@chakra-ui/layout"
 
+import ProjectDetailContent from "./components/ProjectDetailContent/ProjectDetailContent"
 import ProjectDetailSummary from "./components/ProjectDetailSummary/ProjectDetailSummary"
 import ProjectDetailTabList from "./components/ProjectDetailTabList/ProjectDetailTabList"
 import useProjectDetailQuery from "./hooks/queries/useProjectDetailQuery"
@@ -18,7 +19,7 @@ const ProjectDetailPage = () => {
   return (
     <>
       <ProjectDetailSummary projectDetailInfo={projectDetailInfo} />
-      {/* <ProjectDetailContent projectDetailInfo={projectDetailInfo} /> */}
+      <ProjectDetailContent projectDetailInfo={projectDetailInfo} />
       <ProjectDetailTabList projectDetailInfo={projectDetailInfo} />
     </>
   )
