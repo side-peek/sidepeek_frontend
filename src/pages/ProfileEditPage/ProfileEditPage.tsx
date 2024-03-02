@@ -41,6 +41,7 @@ const ProfileEditPage = () => {
           introduction={profileInfo.introduction}
           githubUrl={profileInfo.githubUrl}
           blogUrl={profileInfo.blogUrl}
+          setProfileInfo={setProfileInfo}
         />
         <HStack>
           <Button

@@ -6,12 +6,15 @@ import { Box, HStack, Input, Text, Textarea } from "@chakra-ui/react"
 import { ProfileInfo } from "../types/types"
 
 interface ProfileIntroductionProps
-  extends Pick<ProfileInfo, "introduction" | "githubUrl" | "blogUrl"> {}
+  extends Pick<ProfileInfo, "introduction" | "githubUrl" | "blogUrl"> {
+  setProfileInfo: React.Dispatch<React.SetStateAction<ProfileInfo>>
+}
 
 const ProfileIntroduction = ({
   introduction,
   githubUrl,
   blogUrl,
+  setProfileInfo,
 }: ProfileIntroductionProps) => {
   return (
     <Box
@@ -28,6 +31,12 @@ const ProfileIntroduction = ({
         resize="none"
         value={introduction}
         placeholder="소개글을 입력해주세요"
+        onChange={(e) =>
+          setProfileInfo((profileInfo) => ({
+            ...profileInfo,
+            introduction: e.target.value,
+          }))
+        }
       />
 
       <Box mt="2rem">
@@ -40,6 +49,12 @@ const ProfileIntroduction = ({
             placeholder="GitHub 링크를 입력해주세요"
             ml="0.5rem"
             w="30rem"
+            onChange={(e) =>
+              setProfileInfo((profileInfo) => ({
+                ...profileInfo,
+                githubUrl: e.target.value,
+              }))
+            }
           />
         </HStack>
         <HStack>
@@ -51,6 +66,12 @@ const ProfileIntroduction = ({
             placeholder="Blog 링크를 입력해주세요"
             ml="0.5rem"
             w="30rem"
+            onChange={(e) =>
+              setProfileInfo((profileInfo) => ({
+                ...profileInfo,
+                blogUrl: e.target.value,
+              }))
+            }
           />
         </HStack>
       </Box>
