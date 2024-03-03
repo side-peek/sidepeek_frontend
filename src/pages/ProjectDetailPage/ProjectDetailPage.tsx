@@ -2,7 +2,8 @@ import { useParams } from "react-router-dom"
 
 import { Center } from "@chakra-ui/layout"
 
-import ProjectDetailTabList from "./components/ProjectDetailTabList"
+import ProjectDetailMembers from "./components/ProjectDetailMembers/ProjectDetailMembers"
+// import ProjectDetailTabList from "./components/ProjectDetailTabList"
 import useProjectDetailQuery from "./hooks/queries/useProjectDetailQuery"
 
 const ProjectDetailPage = () => {
@@ -14,7 +15,12 @@ const ProjectDetailPage = () => {
     return <Center>Loading...</Center>
   }
 
-  return <ProjectDetailTabList projects={data.projects[0]} />
+  return (
+    <Center mt="10rem">
+      {/* <ProjectDetailTabList projects={data.projects[0]} /> */}
+      <ProjectDetailMembers members={data.projects[0].members} />
+    </Center>
+  )
 }
 
 export default ProjectDetailPage

@@ -73,9 +73,10 @@ declare module "api-models" {
   }
 
   export type Member = {
-    userId?: number
-    category: string
+    id: number
     nickname: string
+    profileImageUrl: string
+    category: string
   }
 
   export type ProjectTag = {

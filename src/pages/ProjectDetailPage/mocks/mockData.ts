@@ -58,10 +58,22 @@ export const DUMMY_PROJECT_DETAIL = {
           category: "프론트",
         },
         {
-          id: null,
+          id: 3,
           nickname: "민호",
           profileImageUrl: null,
+          category: "기획",
+        },
+        {
+          id: 4,
+          nickname: "종혁",
+          profileImageUrl: null,
           category: "프론트",
+        },
+        {
+          id: 5,
+          nickname: "세희",
+          profileImageUrl: null,
+          category: "백",
         },
       ],
 
