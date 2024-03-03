@@ -78,6 +78,7 @@ const themeConfig = {
     base: 0,
     docked: 10,
     dropdown: 20,
+    fixed: 29,
     sticky: 30,
     banner: 40,
     overlay: 50,
