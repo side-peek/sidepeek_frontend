@@ -1,6 +1,7 @@
 import { Flex } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
+import ProjectDetailCommentInput from "./ProjectDetailCommentInput"
 import ProjectDetailCommentList from "./ProjectDetailCommentList"
 
 export interface ProjectDetailCommentProps {
@@ -15,11 +16,9 @@ const ProjectDetailComment = ({ comments }: ProjectDetailCommentProps) => {
       borderRadius="1rem"
       border="1px"
       borderColor="grey.400"
-      px="2rem"
-      py="1.5rem"
       mt="10rem"
       direction="column">
-      <div>input</div>
+      <ProjectDetailCommentInput />
       <ProjectDetailCommentList comments={comments} />
     </Flex>
   )

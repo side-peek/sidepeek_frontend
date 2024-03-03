@@ -10,7 +10,8 @@ const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
   return (
     <Flex
       direction="column"
-      gap="4rem">
+      gap="4rem"
+      p="3rem">
       {comments.map((comment) => (
         <Flex
           justifyContent="space-between"
@@ -19,6 +20,8 @@ const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
             gap="1rem"
             align="center">
             <Avatar
+              cursor="pointer"
+              _hover={{ opacity: "0.5" }}
               src={comment.owner.profileImageUrl}
               width="5rem"
               height="5rem"
