@@ -17,11 +17,16 @@ import { ProfileInfo } from "../../types/types"
 import ChangeNicknameModal from "../Modal/ChangeNicknameModal"
 
 interface ProfileCardProps {
+  nickname: string
   career: string
   setProfileInfo: React.Dispatch<React.SetStateAction<ProfileInfo>>
 }
 
-const ProfileCard = ({ career, setProfileInfo }: ProfileCardProps) => {
+const ProfileCard = ({
+  nickname,
+  career,
+  setProfileInfo,
+}: ProfileCardProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <Flex
@@ -38,11 +43,12 @@ const ProfileCard = ({ career, setProfileInfo }: ProfileCardProps) => {
           fontSize="3xl"
           fontFamily="SCDream_Bold"
           onClick={onOpen}>
-          개발자입니다.
+          {nickname}
         </Text>
         <ChangeNicknameModal
           isOpen={isOpen}
           onClose={onClose}
+          setProfileInfo={setProfileInfo}
         />
         <Menu>
           <MenuButton

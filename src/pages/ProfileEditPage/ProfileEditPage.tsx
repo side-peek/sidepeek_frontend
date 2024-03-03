@@ -18,6 +18,7 @@ const ProfileEditPage = () => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [profileInfo, setProfileInfo] = useState({
+    nickname: "개발자",
     career: "0년차 개발자",
     introduction: "",
     githubUrl: "",
@@ -38,6 +39,7 @@ const ProfileEditPage = () => {
         w="100%"
         divider={<StackDivider borderColor="grey.100" />}>
         <ProfileCard
+          nickname={profileInfo.nickname}
           career={profileInfo.career}
           setProfileInfo={setProfileInfo}
         />

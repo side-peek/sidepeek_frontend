@@ -16,15 +16,22 @@ import {
 
 import CommonInput from "@components/Input/CommonInput"
 
+import { ProfileInfo } from "@pages/ProfileEditPage/types/types"
+
 interface FormValues {
   newNickname: string
 }
 interface ModalProps {
   isOpen: boolean
   onClose: () => void
+  setProfileInfo: React.Dispatch<React.SetStateAction<ProfileInfo>>
 }
 
-const ChangeNicknameModal = ({ isOpen, onClose }: ModalProps) => {
+const ChangeNicknameModal = ({
+  isOpen,
+  onClose,
+  setProfileInfo,
+}: ModalProps) => {
   const {
     register,
     handleSubmit,
@@ -33,8 +40,11 @@ const ChangeNicknameModal = ({ isOpen, onClose }: ModalProps) => {
     formState: { errors },
   } = useForm<FormValues>({ mode: "onSubmit" })
 
-  const onValid = () => {
+  const onValid = (data: FormValues) => {
+    const { newNickname } = data
     console.log("1")
+    // TODO: 낙관적 업데이트 수행 예정. api 요청으로 닉네임 변경해줌
+    setProfileInfo((profileInfo) => ({ ...profileInfo, nickname: newNickname }))
     reset()
     onClose()
   }
@@ -55,7 +65,7 @@ const ChangeNicknameModal = ({ isOpen, onClose }: ModalProps) => {
       })
       onInvalid()
     } else {
-      onValid()
+      onValid(data)
     }
   }
   return (
