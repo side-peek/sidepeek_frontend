@@ -2,8 +2,7 @@ import { useParams } from "react-router-dom"
 
 import { Box, Center } from "@chakra-ui/layout"
 
-import ProjectDetailMembers from "./components/ProjectDetailMemberList/ProjectDetailMemberList"
-// import ProjectDetailTabList from "./components/ProjectDetailTabList"
+import ProjectDetailMemberInfo from "./components/ProjectDetailMemberInfo/ProjectDetailMemberInfo"
 import useProjectDetailQuery from "./hooks/queries/useProjectDetailQuery"
 
 const ProjectDetailPage = () => {
@@ -22,8 +21,7 @@ const ProjectDetailPage = () => {
       margin="0 auto"
       mt="10rem"
       px="5rem">
-      {/* <ProjectDetailTabList projects={data.projects[0]} /> */}
-      <ProjectDetailMembers members={data.projects[0].members} />
+      <ProjectDetailMemberInfo members={data.projects[0].members} />
     </Box>
   )
 }

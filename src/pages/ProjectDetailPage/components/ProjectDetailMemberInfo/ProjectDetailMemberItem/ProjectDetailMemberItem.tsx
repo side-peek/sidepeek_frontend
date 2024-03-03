@@ -9,20 +9,17 @@ const ProjectDetailMemberItem = ({ member }: ProjectDetailMemberItemProps) => {
   return (
     <Flex
       gap="1rem"
-      direction="column"
-      alignItems="center"
-      justifyContent="center">
+      direction="column">
       <Flex
         gap="1rem"
         direction="column"
-        alignItems="center"
-        justifyContent="center">
+        alignItems="center">
         <Avatar
           src={member.profileImageUrl}
           width="6rem"
           height="6rem"
         />
-        <Text fontSize="lg">{member.nickname}</Text>
+        <Text fontSize="xl">{member.nickname}</Text>
       </Flex>
     </Flex>
   )
