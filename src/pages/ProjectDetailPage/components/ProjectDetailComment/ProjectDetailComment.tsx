@@ -12,7 +12,8 @@ const ProjectDetailComment = ({ comments }: ProjectDetailCommentProps) => {
   return (
     <Flex
       margin="0 auto"
-      w="80%"
+      w="50%"
+      maxW="128rem"
       borderRadius="1rem"
       border="1px"
       borderColor="grey.400"
