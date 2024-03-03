@@ -6,7 +6,8 @@ const ProjectDetailCommentIcon = ({ ...props }: ProjectDetailCommentIcon) => {
     <IconButton
       {...props}
       background="none"
-      _hover={{ background: "none" }}
+      _hover={{ background: "none", opacity: "0.5" }}
+      _active={{ background: "none" }}
       fontSize="3xl"
     />
   )
