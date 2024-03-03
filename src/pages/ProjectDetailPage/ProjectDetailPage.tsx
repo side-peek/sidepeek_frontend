@@ -15,7 +15,12 @@ const ProjectDetailPage = () => {
   }
   console.log(data)
 
-  return <ProjectDetailComment comments={data.projects.comments} />
+  return (
+    <ProjectDetailComment
+      max="128rem"
+      comments={data.projects.comments}
+    />
+  )
 }
 
 export default ProjectDetailPage

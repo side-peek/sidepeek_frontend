@@ -81,7 +81,7 @@ export const DUMMY_PROJECT_DETAIL = {
           id: 135892345,
           nickname: "의진",
           profileImageUrl:
-            "https://user-images.githubusercontent.com/uijin.png",
+            "https://mblogthumb-phinf.pstatic.net/MjAyMjAyMDdfMjEy/MDAxNjQ0MTk0Mzk2MzY3.WAeeVCu2V3vqEz_98aWMOjK2RUKI_yHYbuZxrokf-0Ug.sV3LNWlROCJTkeS14PMu2UBl5zTkwK70aKX8B1w2oKQg.JPEG.41minit/1643900851960.jpg?type=w800",
         },
         isOwner: true,
         content: "우와 이 프로젝트 대박인데요?",
@@ -93,11 +93,22 @@ export const DUMMY_PROJECT_DETAIL = {
           id: 325234,
           nickname: "세희",
           profileImageUrl:
-            "https://user-images.githubusercontent.com/sehee.png",
+            "https://image.utoimage.com/preview/cp872722/2022/12/202212008462_500.jpg",
         },
         isOwner: false,
         content: "우와 이 프로젝트 진짜 별로에요!",
         createdAt: "2024-12-12 10:12:00",
+      },
+      {
+        id: 3,
+        owner: {
+          id: 325212334,
+          nickname: "민호",
+          profileImageUrl: "https://user-images.githubusercontent.com/mino.png",
+        },
+        isOwner: true,
+        content: "대박!! 역사에 남을 프로젝트네요 ㅎㅎ 퍼가요~~❤️",
+        createdAt: "2022-12-12 05:12:00",
       },
     ],
 

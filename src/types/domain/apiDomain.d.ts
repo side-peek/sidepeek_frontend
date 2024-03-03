@@ -111,6 +111,12 @@ declare module "api-models" {
     url: string
   }
 
+  export type Owner = {
+    id: number
+    nickname: string
+    profileImageUrl: string
+  }
+
   export type Comment = {
     id: number
     owner: Owner
