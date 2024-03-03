@@ -10,9 +10,11 @@ import {
   MenuList,
   Stack,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react"
 
 import { ProfileInfo } from "../../types/types"
+import ChangeNicknameModal from "../Modal/ChangeNicknameModal"
 
 interface ProfileCardProps {
   career: string
@@ -20,6 +22,7 @@ interface ProfileCardProps {
 }
 
 const ProfileCard = ({ career, setProfileInfo }: ProfileCardProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <Flex
       w="100%"
@@ -33,9 +36,14 @@ const ProfileCard = ({ career, setProfileInfo }: ProfileCardProps) => {
       <Stack ml="1.5rem">
         <Text
           fontSize="3xl"
-          fontFamily="SCDream_Bold">
+          fontFamily="SCDream_Bold"
+          onClick={onOpen}>
           개발자입니다.
         </Text>
+        <ChangeNicknameModal
+          isOpen={isOpen}
+          onClose={onClose}
+        />
         <Menu>
           <MenuButton
             as={Button}

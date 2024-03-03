@@ -70,11 +70,11 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
       size="lg"
       isOpen={isOpen}
       onClose={handleClose}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>비밀번호 변경</ModalHeader>
-          <ModalCloseButton />
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>비밀번호 변경</ModalHeader>
+        <ModalCloseButton />
+        <form onSubmit={handleSubmit(onSubmit)}>
           <ModalBody>
             {/* TODO: 기존 비밀번호 api 불러와서 비교 validation */}
             <Flex
@@ -170,8 +170,8 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
               변경
             </Button>
           </ModalFooter>
-        </ModalContent>
-      </form>
+        </form>
+      </ModalContent>
     </Modal>
   )
 }
