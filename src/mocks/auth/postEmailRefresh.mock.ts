@@ -10,6 +10,6 @@ export const postEmailRefresh = rest.post(
     const response: postEmailRefreshResponseType = {
       accessToken: "mock-accessToken",
     }
-    return res(ctx.status(200), ctx.json(response))
+    return res(ctx.status(401), ctx.json(response))
   },
 )
