@@ -52,6 +52,7 @@ declare module "api-models" {
     viewCount: number
     commentCount: number
     likeCount: number
+    comments: Comment
     description: string
     troubleShooting: string
   }
@@ -112,12 +113,10 @@ declare module "api-models" {
 
   export type Comment = {
     id: number
-    userId: string
-    projectId: string
-    isAnonymous: boolean
+    owner: Owner
+    isOwner: boolean
     content: string
     createdAt: string
-    updatedAt: string
   }
 
   export type Like = {
@@ -143,6 +142,12 @@ declare module "api-models" {
   export type Tag = {
     id: number
     name: string
+  }
+
+  export type Onwer = {
+    id: number
+    nickname: string
+    profileImageUrl: string
   }
 
   /* 인증 관련 */
@@ -237,7 +242,7 @@ declare module "api-models" {
   }
 
   export type getProjectDetailResponseType = {
-    projects: Project[]
+    projects: Project
   }
 
   export type getAllProjectsResponseType = {

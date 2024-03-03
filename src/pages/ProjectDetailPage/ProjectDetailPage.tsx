@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 
 import { Center } from "@chakra-ui/layout"
 
-import ProjectDetailTabList from "./components/ProjectDetailTabList"
+import ProjectDetailComment from "./components/ProjectDetailComment/ProjectDetailComment"
 import useProjectDetailQuery from "./hooks/queries/useProjectDetailQuery"
 
 const ProjectDetailPage = () => {
@@ -13,8 +13,9 @@ const ProjectDetailPage = () => {
   if (!data) {
     return <Center>Loading...</Center>
   }
+  console.log(data)
 
-  return <ProjectDetailTabList projects={data.projects[0]} />
+  return <ProjectDetailComment comments={data.projects.comments} />
 }
 
 export default ProjectDetailPage
