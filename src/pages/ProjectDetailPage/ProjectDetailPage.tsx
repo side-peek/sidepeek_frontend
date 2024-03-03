@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom"
 
-import { Center } from "@chakra-ui/layout"
+import { Box, Center } from "@chakra-ui/layout"
 
-import ProjectDetailMembers from "./components/ProjectDetailMembers/ProjectDetailMembers"
+import ProjectDetailMembers from "./components/ProjectDetailMemberList/ProjectDetailMemberList"
 // import ProjectDetailTabList from "./components/ProjectDetailTabList"
 import useProjectDetailQuery from "./hooks/queries/useProjectDetailQuery"
 
@@ -16,10 +16,15 @@ const ProjectDetailPage = () => {
   }
 
   return (
-    <Center mt="10rem">
+    <Box
+      maxW="128rem"
+      w="100%"
+      margin="0 auto"
+      mt="10rem"
+      px="5rem">
       {/* <ProjectDetailTabList projects={data.projects[0]} /> */}
       <ProjectDetailMembers members={data.projects[0].members} />
-    </Center>
+    </Box>
   )
 }
 
