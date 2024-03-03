@@ -1,4 +1,9 @@
-import { createBrowserRouter } from "react-router-dom"
+import { Suspense } from "react"
+import { Outlet, createBrowserRouter } from "react-router-dom"
+
+import { QueryErrorResetBoundary } from "@tanstack/react-query"
+
+import AuthErrorBoundary from "@components/ErrorBoundary/AuthErrorBoundary/AuthErrorBoundary"
 
 import ErrorPage from "@pages/ErrorPage/ErrorPage"
 import HomePage from "@pages/HomePage/HomePage"
@@ -14,43 +19,58 @@ import DefaultLayout from "@styles/layouts/DefaultLayout"
 
 export const router = createBrowserRouter([
   {
-    element: <DefaultLayout />,
+    element: (
+      <QueryErrorResetBoundary>
+        {(value) => (
+          <AuthErrorBoundary {...value}>
+            <Suspense>
+              <Outlet />
+            </Suspense>
+          </AuthErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
-        index: true,
-        element: <HomePage />,
-      },
-      {
-        path: "/project",
-        element: <ProjectListPage />,
-      },
-      {
-        path: "/project/:projectId",
-        element: <ProjectDetailPage />,
-      },
-      {
-        path: "/project/:projectId/edit",
-        element: <ProjectEditPage />,
-      },
+        element: <DefaultLayout />,
+        children: [
+          {
+            path: "/",
+            index: true,
+            element: <HomePage />,
+          },
+          {
+            path: "/project",
+            element: <ProjectListPage />,
+          },
+          {
+            path: "/project/:projectId",
+            element: <ProjectDetailPage />,
+          },
+          {
+            path: "/project/:projectId/edit",
+            element: <ProjectEditPage />,
+          },
 
-      {
-        path: "/test",
-        element: <TestPage />,
+          {
+            path: "/test",
+            element: <TestPage />,
+          },
+          {
+            path: "/profile/:userId",
+            element: <ProfilePage />,
+          },
+        ],
       },
       {
-        path: "/profile/:userId",
-        element: <ProfilePage />,
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/signup",
+        element: <SignUpPage />,
       },
     ],
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/signup",
-    element: <SignUpPage />,
   },
 ])
