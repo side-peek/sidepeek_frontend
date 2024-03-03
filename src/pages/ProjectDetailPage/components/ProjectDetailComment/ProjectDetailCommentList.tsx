@@ -1,15 +1,16 @@
 import { TiPencil } from "react-icons/ti"
 import { VscChromeClose } from "react-icons/vsc"
 
-import { Avatar, Flex, IconButton, Text } from "@chakra-ui/react"
+import { Avatar, Flex, Text } from "@chakra-ui/react"
 
 import { ProjectDetailCommentProps } from "./ProjectDetailComment"
+import ProjectDetailCommentIcon from "./ProjectDetailCommentIcon"
 
 const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
   return (
     <Flex
       direction="column"
-      gap="3rem">
+      gap="4rem">
       {comments.map((comment) => (
         <Flex
           justifyContent="space-between"
@@ -17,7 +18,11 @@ const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
           <Flex
             gap="1rem"
             align="center">
-            <Avatar src={comment.owner.profileImageUrl} />
+            <Avatar
+              src={comment.owner.profileImageUrl}
+              width="5rem"
+              height="5rem"
+            />
             <Flex
               direction="column"
               gap="0.5rem">
@@ -30,21 +35,15 @@ const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
             </Flex>
           </Flex>
           <Flex
-            gap="0.5rem"
+            gap="2rem"
             align="center">
-            <IconButton
+            <ProjectDetailCommentIcon
               aria-label="edit"
               icon={<TiPencil />}
-              fontSize="2rem"
-              background="none"
-              _hover={{ background: "none" }}
             />
-            <IconButton
+            <ProjectDetailCommentIcon
               aria-label="delete"
               icon={<VscChromeClose />}
-              background="none"
-              fontSize="2rem"
-              _hover={{ background: "none" }}
             />
           </Flex>
         </Flex>
