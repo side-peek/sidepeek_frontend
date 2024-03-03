@@ -52,7 +52,7 @@ declare module "api-models" {
     viewCount: number
     commentCount: number
     likeCount: number
-    comments: Comment
+    comments: Comment[]
     description: string
     troubleShooting: string
   }
