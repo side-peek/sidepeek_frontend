@@ -5,6 +5,7 @@ import "./fonts/index.css"
 
 const themeConfig = {
   config: { initialColorMode: "light", useSystemColorMode: false },
+
   styles: {
     global: (props: StyleFunctionProps) => ({
       html: {
@@ -44,8 +45,11 @@ const themeConfig = {
     grey: {
       100: "#F0F0F0",
       200: "#ECECEC",
-      300: "#D4D4D4",
+      300: "#D9D9D9",
+      400: "#D4D4D4",
+      500: "#7a7a7a",
     },
+    whiteSmoke: "#f5f5f5",
   },
   fontWeights: {
     thin: 200,
@@ -74,6 +78,7 @@ const themeConfig = {
     base: 0,
     docked: 10,
     dropdown: 20,
+    fixed: 29,
     sticky: 30,
     banner: 40,
     overlay: 50,

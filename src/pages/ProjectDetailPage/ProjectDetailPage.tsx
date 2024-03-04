@@ -1,17 +1,20 @@
 import { useParams } from "react-router-dom"
 
-import ProjectDetailDescription from "./components/ProjectDetailDescription"
-import useProjectDetail from "./hooks/query/useProjectDetail"
+import { Center } from "@chakra-ui/layout"
+
+import ProjectDetailTabList from "./components/ProjectDetailTabList"
+import useProjectDetailQuery from "./hooks/queries/useProjectDetailQuery"
 
 const ProjectDetailPage = () => {
   const { projectId } = useParams()
 
-  const { data } = useProjectDetail(Number(projectId))
+  const { data } = useProjectDetailQuery(Number(projectId))
+
   if (!data) {
-    return
+    return <Center>Loading...</Center>
   }
 
-  return <ProjectDetailDescription projects={data.projects[0]} />
+  return <ProjectDetailTabList projects={data.projects[0]} />
 }
 
 export default ProjectDetailPage
