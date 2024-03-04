@@ -1,8 +1,11 @@
 import { SubmitHandler, useForm } from "react-hook-form"
+import { useParams } from "react-router-dom"
 
 import { Button, Flex, FormControl, FormErrorMessage } from "@chakra-ui/react"
 
 import CommonInput from "@components/Input/CommonInput"
+
+import useCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useCommentMutation"
 
 interface CommentType {
   ownerId: number
@@ -15,14 +18,18 @@ const ProjectDetailCommentInput = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CommentType>({
-    defaultValues: {
-      content: "",
-    },
-  })
+  } = useForm<CommentType>()
+  const { projectId } = useParams()
+
+  const { sendComment } = useCommentMutation(Number(projectId))
 
   const onSubmit: SubmitHandler<CommentType> = (text) => {
-    console.log(text)
+    const req = {
+      ownerId: 12,
+      isAnonymous: false,
+      content: text.content,
+    }
+    sendComment.mutate(req)
   }
 
   return (
