@@ -17,6 +17,12 @@ import {
 
 import CommonInput from "@components/Input/CommonInput"
 
+import {
+  CHECK_PASSWORD_VALIDATION_OPTION,
+  CURRENT_PASSWORD_VALIDATION_OPTION,
+  NEW_PASSWORD_VALIDATION_OPTION,
+} from "@pages/ProfileEditPage/constants/validation"
+
 interface FormValues {
   currentPassword: string
   newPassword: string
@@ -94,13 +100,10 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
                 <CommonInput
                   type="password"
                   size="lg"
-                  register={register("currentPassword", {
-                    required: "현재 비밀번호를 입력해주세요",
-                    minLength: {
-                      value: 8,
-                      message: "현재 비밀번호는 8자 이상입니다",
-                    },
-                  })}
+                  register={register(
+                    "currentPassword",
+                    CURRENT_PASSWORD_VALIDATION_OPTION,
+                  )}
                   placeholder="현재 비밀번호"
                   inputWidth="100%"
                 />
@@ -120,13 +123,10 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
                 <CommonInput
                   type="password"
                   size="lg"
-                  register={register("newPassword", {
-                    required: "새로운 비밀번호를 입력해주세요",
-                    minLength: {
-                      value: 8,
-                      message: "새로운 비밀번호는 8자 이상이어야 합니다",
-                    },
-                  })}
+                  register={register(
+                    "newPassword",
+                    NEW_PASSWORD_VALIDATION_OPTION,
+                  )}
                   placeholder="새로운 비밀번호"
                   inputWidth="100%"
                 />
@@ -148,13 +148,10 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
                 <CommonInput
                   type="password"
                   size="lg"
-                  register={register("checkPassword", {
-                    required: "새로운 비밀번호를 한번 더 입력해주세요",
-                    minLength: {
-                      value: 8,
-                      message: "새로운 비밀번호는 8자 이상이어야 합니다",
-                    },
-                  })}
+                  register={register(
+                    "checkPassword",
+                    CHECK_PASSWORD_VALIDATION_OPTION,
+                  )}
                   placeholder="비밀번호 확인"
                   inputWidth="100%"
                 />

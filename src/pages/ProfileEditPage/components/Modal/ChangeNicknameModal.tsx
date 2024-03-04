@@ -16,6 +16,10 @@ import {
 
 import CommonInput from "@components/Input/CommonInput"
 
+import {
+  NICKNAME_NOSPACE_ERROR,
+  NICKNAME_VALIDATION_OPTION,
+} from "@pages/ProfileEditPage/constants/validation"
 import { ProfileInfo } from "@pages/ProfileEditPage/types/types"
 
 interface FormValues {
@@ -59,10 +63,7 @@ const ChangeNicknameModal = ({
     if (
       newNickname.split("").length !== newNickname.split(" ").join("").length
     ) {
-      setError("newNickname", {
-        type: "nickname-space",
-        message: "닉네임에는 공백 사용이 불가합니다",
-      })
+      setError("newNickname", NICKNAME_NOSPACE_ERROR)
       onInvalid()
     } else {
       onValid(data)
@@ -90,13 +91,7 @@ const ChangeNicknameModal = ({
             </Flex>
             <CommonInput
               size="lg"
-              register={register("newNickname", {
-                required: "새로운 닉네임을 입력해주세요",
-                minLength: {
-                  value: 2,
-                  message: "새로운 닉네임은 2자 이상이어야 합니다",
-                },
-              })}
+              register={register("newNickname", NICKNAME_VALIDATION_OPTION)}
               inputWidth="100%"
             />
           </ModalBody>
