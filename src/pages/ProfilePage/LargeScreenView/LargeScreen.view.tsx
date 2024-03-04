@@ -6,13 +6,13 @@ import ProjectsView from "../components/Projects/Projects.view"
 import { ProfileActionsButtonsProps } from "../types/types"
 
 export interface ProfileBarProps extends ProfileActionsButtonsProps {
-  nickname: string | undefined
-  profileImageUrl: string | undefined
-  career: string | undefined
-  introduction: string | undefined
-  githubUrl: string | undefined
-  blogUrl: string | undefined
-  techStacks: TechStack[] | undefined
+  nickname: string
+  profileImageUrl: string
+  career: string
+  introduction: string
+  githubUrl: string
+  blogUrl: string
+  techStacks: TechStack[]
 }
 
 const LargeScreenView = ({

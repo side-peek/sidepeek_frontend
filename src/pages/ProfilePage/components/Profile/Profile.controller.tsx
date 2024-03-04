@@ -10,7 +10,7 @@ import { useUserInfo } from "./Profile.model"
 const ProfileController = () => {
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
 
-  const { isLoading, data } = useUserInfo({ userId: 1 })
+  const { data } = useUserInfo({ userId: 1 })
 
   const navigate = useNavigate()
   const handleNewProject = () => {
@@ -20,17 +20,7 @@ const ProfileController = () => {
     navigate("/test")
   }
 
-  const {
-    nickname,
-    profileImageUrl,
-    career,
-    introduction,
-    githubUrl,
-    blogUrl,
-    techStacks,
-  } = data?.userInfo || {}
-
-  if (isLoading)
+  if (!data)
     return (
       // TODO: 공용 로딩 컴포넌트 개발해야함
       <Box
@@ -40,6 +30,17 @@ const ProfileController = () => {
         Loading...
       </Box>
     )
+
+  const {
+    nickname,
+    profileImageUrl,
+    career,
+    introduction,
+    githubUrl,
+    blogUrl,
+    techStacks,
+  } = data.userInfo
+
   return (
     <Box height="100vh">
       <Box
