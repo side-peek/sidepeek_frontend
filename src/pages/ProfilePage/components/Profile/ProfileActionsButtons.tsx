@@ -1,6 +1,6 @@
 import { Flex, useMediaQuery } from "@chakra-ui/react"
 
-import StyledButton from "@pages/ProfilePage/styles/StyledButton"
+import StyledProfileActionButton from "@pages/ProfilePage/styles/StyledProfileActionButton"
 import { ProfileActionsButtonsProps } from "@pages/ProfilePage/types/types"
 
 const ProfileActionsButtons = ({
@@ -15,8 +15,12 @@ const ProfileActionsButtons = ({
       direction={isLargerThan1200 ? "column" : "row"}
       gap={3}
       mt="1rem">
-      <StyledButton onClick={handleNewProject}>새 프로젝트</StyledButton>
-      <StyledButton onClick={handleEditProfile}>프로필 수정</StyledButton>
+      <StyledProfileActionButton onClick={handleNewProject}>
+        새 프로젝트
+      </StyledProfileActionButton>
+      <StyledProfileActionButton onClick={handleEditProfile}>
+        프로필 수정
+      </StyledProfileActionButton>
     </Flex>
   )
 }
