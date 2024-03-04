@@ -30,7 +30,7 @@ const LargeScreenView = ({
     <>
       <Box
         minW="38rem"
-        zIndex={999}>
+        zIndex="base">
         <ProfileBarView
           {...{
             nickname,
