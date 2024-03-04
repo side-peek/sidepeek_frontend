@@ -208,11 +208,11 @@ declare module "api-models" {
   }
 
   /* 기술 스택 */
-  export type getSearchTechStacksPayload = {
+  export type getTechStacksPayload = {
     keyword?: string
   }
 
-  export type getSearchTechStacksResponseType = {
+  export type getTechStacksResponseType = {
     skills: Skill[]
   }
 
