@@ -33,10 +33,13 @@ const ProfileCard = ({
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // TODO: 1. 파일 -> url api 요청 / 2. setState
     if (e.target.files) {
       console.log(e.target.files[0])
     }
   }
+
+  const careers = ["0년차", "1~3년차", "4~6년차", "7~9년차", "10년차 이상"]
   return (
     <Flex
       w="100%"
@@ -76,54 +79,21 @@ const ProfileCard = ({
             as={Button}
             rightIcon={<AiFillCaretDown />}
             w="12rem">
-            {career}
+            {career} 개발자
           </MenuButton>
           <MenuList>
-            <MenuItem
-              onClick={() =>
-                setProfileInfo((profileInfo) => ({
-                  ...profileInfo,
-                  career: "0년차 개발자",
-                }))
-              }>
-              0년차 개발자
-            </MenuItem>
-            <MenuItem
-              onClick={() =>
-                setProfileInfo((profileInfo) => ({
-                  ...profileInfo,
-                  career: "1~3년차 개발자",
-                }))
-              }>
-              1~3년차 개발자
-            </MenuItem>
-            <MenuItem
-              onClick={() =>
-                setProfileInfo((profileInfo) => ({
-                  ...profileInfo,
-                  career: "4~6년차 개발자",
-                }))
-              }>
-              4~6년차 개발자
-            </MenuItem>
-            <MenuItem
-              onClick={() =>
-                setProfileInfo((profileInfo) => ({
-                  ...profileInfo,
-                  career: "7~8년차 개발자",
-                }))
-              }>
-              7~9년차 개발자
-            </MenuItem>
-            <MenuItem
-              onClick={() =>
-                setProfileInfo((profileInfo) => ({
-                  ...profileInfo,
-                  career: "10년차 이상 개발자",
-                }))
-              }>
-              10년차 이상 개발자
-            </MenuItem>
+            {careers.map((career) => (
+              <MenuItem
+                key={career}
+                onClick={() =>
+                  setProfileInfo((profileInfo) => ({
+                    ...profileInfo,
+                    career: career,
+                  }))
+                }>
+                {career} 개발자
+              </MenuItem>
+            ))}
           </MenuList>
         </Menu>
       </Stack>
