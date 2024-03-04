@@ -13,15 +13,16 @@ import { QUERYKEY } from "@constants/queryKey"
 export const determineRedirectLoader =
   (
     queryClient: QueryClient,
-    isAllowedForRegister: boolean,
+    isAllowedForLoggedInUser: boolean,
     redirectUrl: string = "/",
   ): LoaderFunction =>
   () => {
-    const isRegister = queryClient.getQueryData([QUERYKEY.USER_INFO]) == null
+    const isLoggedInUser =
+      queryClient.getQueryData([QUERYKEY.USER_INFO]) == null
 
     const willRedirect =
-      (!isAllowedForRegister && isRegister) ||
-      (isAllowedForRegister && !isRegister)
+      (!isAllowedForLoggedInUser && isLoggedInUser) ||
+      (isAllowedForLoggedInUser && !isLoggedInUser)
 
     if (import.meta.env.DEV && willRedirect) {
       alert(
