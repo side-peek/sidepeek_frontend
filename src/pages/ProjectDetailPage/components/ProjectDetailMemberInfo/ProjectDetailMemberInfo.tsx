@@ -11,6 +11,7 @@ interface ProjectDetailMemberInfoProps {
 
 const ProjectDetailMemberInfo = ({ members }: ProjectDetailMemberInfoProps) => {
   const groupedByCategory = getGroupedCategory(members)
+  console.log(groupedByCategory)
   return (
     <Flex
       direction="column"
@@ -21,10 +22,11 @@ const ProjectDetailMemberInfo = ({ members }: ProjectDetailMemberInfoProps) => {
         팀원
       </Text>
       <Flex gap="1rem">
-        {groupedByCategory.map((category) => (
+        {groupedByCategory.map(([category, members]) => (
           <ProjectDetailMemberList
-            key={category[0]}
+            key={category}
             category={category}
+            members={members}
           />
         ))}
       </Flex>

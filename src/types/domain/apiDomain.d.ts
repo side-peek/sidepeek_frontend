@@ -238,7 +238,7 @@ declare module "api-models" {
   }
 
   export type getProjectDetailResponseType = {
-    projects: Project[]
+    projects: Project
   }
 
   export type getAllProjectsResponseType = {

@@ -21,7 +21,7 @@ const ProjectDetailPage = () => {
       margin="0 auto"
       mt="10rem"
       px="5rem">
-      <ProjectDetailMemberInfo members={data.projects[0].members} />
+      <ProjectDetailMemberInfo members={data.projects.members} />
     </Box>
   )
 }

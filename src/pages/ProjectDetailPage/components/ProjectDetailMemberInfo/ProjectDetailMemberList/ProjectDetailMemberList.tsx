@@ -4,11 +4,13 @@ import { Member } from "api-models"
 import ProjectDetailMemberItem from "../ProjectDetailMemberItem/ProjectDetailMemberItem"
 
 interface ProjectDetailMemberListProps {
-  category: [string, Member[]]
+  members: Member[]
+  category: string
 }
 
 const ProjectDetailMemberList = ({
   category,
+  members,
 }: ProjectDetailMemberListProps) => {
   return (
     <Flex
@@ -23,7 +25,7 @@ const ProjectDetailMemberList = ({
         gap="2rem"
         p="1rem"
         alignItems="center">
-        {category[1].map((member) => (
+        {members.map((member) => (
           <ProjectDetailMemberItem
             member={member}
             key={member.id}
@@ -33,7 +35,7 @@ const ProjectDetailMemberList = ({
       <Text
         fontFamily="SCDream_Bold"
         fontSize="xl">
-        {category[0]}
+        {category}
       </Text>
     </Flex>
   )
