@@ -5,7 +5,7 @@ import { Button, Flex, FormControl, FormErrorMessage } from "@chakra-ui/react"
 
 import CommonInput from "@components/Input/CommonInput"
 
-import useCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useCommentMutation"
+import usePostCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 
 interface CommentType {
   ownerId: number
@@ -21,7 +21,7 @@ const ProjectDetailCommentInput = () => {
   } = useForm<CommentType>()
   const { projectId } = useParams()
 
-  const { sendComment } = useCommentMutation(Number(projectId))
+  const { sendComment } = usePostCommentMutation(Number(projectId))
 
   const onSubmit: SubmitHandler<CommentType> = (text) => {
     const req = {
