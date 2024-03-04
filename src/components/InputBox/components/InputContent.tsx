@@ -1,11 +1,17 @@
+import { forwardRef } from "react"
+
 import { Box, Input, InputProps } from "@chakra-ui/react"
 
-const InputContent = ({ ...props }: InputProps) => {
+const InputContent = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   return (
     <Box>
-      <Input {...props}></Input>
+      <Input
+        ref={ref}
+        {...props}></Input>
     </Box>
   )
-}
+})
+
+InputContent.displayName = "InputContent"
 
 export default InputContent
