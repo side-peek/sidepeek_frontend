@@ -8,7 +8,7 @@ const StyledProfileBarContainer = ({ children }: React.PropsWithChildren) => {
       mt="-10rem"
       border="1px solid"
       borderColor="grey.200"
-      borderRadius="20px">
+      borderRadius="2rem">
       {children}
     </Center>
   )
