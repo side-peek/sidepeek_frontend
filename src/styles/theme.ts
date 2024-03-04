@@ -90,6 +90,7 @@ const themeConfig = {
   },
   sizes: {
     headerHeight: "9.5rem",
+    footerHeight: "19rem",
   },
   semanticTokens: {},
 }
