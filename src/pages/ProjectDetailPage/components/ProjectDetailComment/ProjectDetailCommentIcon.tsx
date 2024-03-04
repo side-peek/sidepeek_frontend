@@ -8,7 +8,7 @@ const ProjectDetailCommentIcon = ({ ...props }: ProjectDetailCommentIcon) => {
       background="none"
       _hover={{ background: "none", opacity: "0.5" }}
       _active={{ background: "none" }}
-      fontSize="3xl"
+      fontSize="2xl"
     />
   )
 }

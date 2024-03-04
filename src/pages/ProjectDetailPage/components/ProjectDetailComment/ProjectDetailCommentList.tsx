@@ -8,14 +8,14 @@ const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
     <Flex
       direction="column"
       gap="4rem"
-      p="3rem">
+      p="2rem">
       {comments.map((comment) => (
         <Flex
           justifyContent="space-between"
           align="center"
           key={comment.id}>
           <Flex
-            gap="1rem"
+            gap="2rem"
             w="100%"
             align="center">
             <Avatar

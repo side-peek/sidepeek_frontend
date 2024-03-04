@@ -4,10 +4,8 @@ import { TiPencil } from "react-icons/ti"
 import { VscChromeClose } from "react-icons/vsc"
 import { useParams } from "react-router-dom"
 
-import { Button, Flex, Text } from "@chakra-ui/react"
+import { Button, Flex, Text, Textarea } from "@chakra-ui/react"
 import { Comment } from "api-models"
-
-import CommonInput from "@components/Input/CommonInput"
 
 import useDeleteCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
 
@@ -49,29 +47,28 @@ const ProjectDetailCommentContent = ({
         style={{ width: "100%" }}>
         <Flex
           justifyContent="space-between"
-          direction="row"
-          w="100%"
-          gap="0.5rem">
+          w="100%">
           <Flex
             direction="column"
-            gap="1rem">
+            gap="1rem"
+            flex="9.5">
             <Text
               fontFamily="SCDream_Bold"
               fontSize="xl">
               {comment.owner.nickname}
             </Text>
             {isEditing ? (
-              <CommonInput
-                inputWidth="100%"
+              <Textarea
+                rows={1}
+                w="100%"
                 border="none"
                 borderColor="grey.400"
                 fontSize="lg"
                 p="0"
                 isRequired={false}
                 value={comment.content}
-                register={{
-                  ...register("content"),
-                }}
+                resize="none"
+                {...register("content")}
               />
             ) : (
               <Text fontSize="lg">{comment.content}</Text>
@@ -79,16 +76,23 @@ const ProjectDetailCommentContent = ({
           </Flex>
           <Flex
             gap="1rem"
-            align="center">
+            flex="0.5"
+            height="fit-content">
             {isEditing ? (
               <>
                 <Button
                   type="submit"
+                  background="none"
+                  p="0"
+                  fontSize="lg"
                   _hover={{ border: "none", opacity: "0.5" }}>
                   확인
                 </Button>
                 <Button
                   type="button"
+                  background="none"
+                  p="0"
+                  fontSize="lg"
                   _hover={{ border: "none", opacity: "0.5" }}
                   onClick={handleCancelEdit}>
                   취소
