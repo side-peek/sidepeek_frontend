@@ -1,4 +1,4 @@
-import { postCommentType } from "api-models"
+import { postCommentPayload } from "api-models"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
@@ -13,7 +13,8 @@ const usePostCommentMutation = (projectId: number) => {
 
   const sendComment = useMutation({
     mutationKey: [QUERY_KEY_POST_COMMENT, projectId],
-    mutationFn: (data: postCommentType) => postComment({ projectId, ...data }),
+    mutationFn: (data: postCommentPayload) =>
+      postComment({ projectId, ...data }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],

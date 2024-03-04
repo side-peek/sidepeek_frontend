@@ -271,12 +271,15 @@ declare module "api-models" {
 
   /* 댓글 */
 
-  export type postCommentType = {
+  export type postCommentPayload = {
+    projectId?: number
     ownerId: number
     isAnonymous: boolean
     content: string
   }
-  export type postCommentPayload = {
+
+  export type deleteCommentPayload = {
     projectId: number
-  } & postComment
+    id: number
+  }
 }

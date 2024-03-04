@@ -9,6 +9,9 @@ export const postComment = async (
   { projectId, ...body }: postCommentPayload,
   config: AxiosRequestConfig = {},
 ) => {
+  if (!projectId) {
+    return
+  }
   await authInstance.post(ENDPOINTS.POST_COMMENT(projectId), body, {
     ...config,
   })

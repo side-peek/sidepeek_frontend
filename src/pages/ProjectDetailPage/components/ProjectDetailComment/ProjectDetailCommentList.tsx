@@ -1,12 +1,22 @@
 import { TiPencil } from "react-icons/ti"
 import { VscChromeClose } from "react-icons/vsc"
+import { useParams } from "react-router-dom"
 
 import { Avatar, Flex, Text } from "@chakra-ui/react"
+
+import useDeleteCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
 
 import { ProjectDetailCommentProps } from "./ProjectDetailComment"
 import ProjectDetailCommentIcon from "./ProjectDetailCommentIcon"
 
 const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
+  const { projectId } = useParams()
+
+  const { deleteComment } = useDeleteCommentMutation(Number(projectId))
+
+  const handleDelete = (id: number) => {
+    deleteComment.mutate(id)
+  }
   return (
     <Flex
       direction="column"
@@ -47,6 +57,7 @@ const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
             <ProjectDetailCommentIcon
               aria-label="delete"
               icon={<VscChromeClose />}
+              onClick={() => handleDelete(Number(comment.id))}
             />
           </Flex>
         </Flex>

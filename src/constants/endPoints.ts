@@ -26,4 +26,6 @@ export const ENDPOINTS = {
   UPLOAD_LIKE: `${VARIABLE_URL}/likes`,
   POST_COMMENT: (projectId: number) =>
     `${VARIABLE_URL}/projects/${projectId}/comments`,
+  DELETE_COMMENT: (projectId: number, id: number) =>
+    `${VARIABLE_URL}/projects/${projectId}/comments/${id}`,
 }

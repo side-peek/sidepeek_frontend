@@ -1,3 +1,4 @@
+import { Comment } from "api-models"
 import { rest } from "msw"
 
 import { DUMMY_PROJECT_DETAIL } from "./mockData"
@@ -11,4 +12,13 @@ export const projectDetailHandlers = [
   //   DUMMY_PROJECT_DETAIL.projects.comments.push(req.body)
   //   return res(ctx.status(200))
   // }),
+
+  rest.delete("/api/v1/projects/:projectId/comments/:id", (req, res, ctx) => {
+    console.log(req.params.id)
+    const commentIdx = DUMMY_PROJECT_DETAIL.projects.comments.findIndex(
+      (comment: Comment) => Number(comment.id) === Number(req.params.id),
+    )
+    DUMMY_PROJECT_DETAIL.projects.comments.splice(commentIdx, 1)
+    return res(ctx.status(200))
+  }),
 ]
