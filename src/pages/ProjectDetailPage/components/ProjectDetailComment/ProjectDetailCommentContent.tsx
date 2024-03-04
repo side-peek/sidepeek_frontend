@@ -1,5 +1,5 @@
 // TODO: 1. 포커스 자동 조정
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { TiPencil } from "react-icons/ti"
 import { VscChromeClose } from "react-icons/vsc"
@@ -21,7 +21,7 @@ interface ProjectDetailCommentContentProps {
 const ProjectDetailCommentContent = ({
   comment,
 }: ProjectDetailCommentContentProps) => {
-  const { register, handleSubmit } = useForm<CommentType>()
+  const { register, handleSubmit, setValue, reset } = useForm<CommentType>()
   const [isEditing, setIsEditing] = useState(false)
 
   const { projectId } = useParams()
@@ -31,6 +31,10 @@ const ProjectDetailCommentContent = ({
     Number(projectId),
     Number(comment.id),
   )
+
+  useEffect(() => {
+    setValue("content", comment.content)
+  }, [isEditing, setValue, comment.content])
 
   const handleStartEdit = () => {
     setIsEditing(true)
@@ -42,6 +46,7 @@ const ProjectDetailCommentContent = ({
 
   const handleCancelEdit = () => {
     setIsEditing(false)
+    reset()
   }
 
   const onEditSubmit: SubmitHandler<CommentType> = (text) => {
@@ -79,7 +84,6 @@ const ProjectDetailCommentContent = ({
                 fontSize="lg"
                 p="0"
                 isRequired={false}
-                value={comment.content}
                 resize="none"
                 {...register("content")}
               />
