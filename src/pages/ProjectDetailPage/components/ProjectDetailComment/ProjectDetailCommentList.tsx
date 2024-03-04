@@ -1,27 +1,9 @@
-import { useParams } from "react-router-dom"
-
 import { Avatar, Flex } from "@chakra-ui/react"
-
-import useDeleteCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
 
 import { ProjectDetailCommentProps } from "./ProjectDetailComment"
 import ProjectDetailCommentContent from "./ProjectDetailCommentContent"
 
 const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
-  // const { register, handleSubmit, reset } = useForm()
-  const { projectId } = useParams()
-
-  const { deleteComment } = useDeleteCommentMutation(Number(projectId))
-
-  // const submitEdit = (data) => {
-  //   ontimeupdate(commentData.id, data.comment)
-  //   setIsEditing(false)
-  // }
-
-  const handleDelete = (id: number) => {
-    deleteComment.mutate(id)
-  }
-
   return (
     <Flex
       direction="column"
@@ -43,10 +25,7 @@ const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
               width="5rem"
               height="5rem"
             />
-            <ProjectDetailCommentContent
-              comment={comment}
-              handleDelete={handleDelete}
-            />
+            <ProjectDetailCommentContent comment={comment} />
           </Flex>
         </Flex>
       ))}
