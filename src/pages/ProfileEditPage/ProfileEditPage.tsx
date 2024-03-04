@@ -20,7 +20,7 @@ const ProfileEditPage = () => {
   const [profileInfo, setProfileInfo] = useState({
     profileImageUrl: "",
     nickname: "개발자",
-    career: "0년차 개발자",
+    career: "0년차",
     introduction: "",
     githubUrl: "",
     blogUrl: "",
