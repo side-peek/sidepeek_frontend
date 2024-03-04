@@ -1,28 +1,24 @@
 import { ChangeEvent, useState } from "react"
 import { IoMdSearch } from "react-icons/io"
-import { Link } from "react-router-dom"
 
 import {
   Box,
   Center,
   Checkbox,
   Container,
-  Grid,
-  GridItem,
   HStack,
-  Heading,
   Icon,
   Select,
-  Skeleton,
   Spacer,
   Stack,
-  Text,
 } from "@chakra-ui/react"
 
 import CommonInput from "@components/Input/CommonInput"
-import ProjectCard from "@components/ProjectCard/ProjectCard"
+import ProjectList from "@components/ProjectList/ProjectList"
 
 import useAllProjectQuery from "@pages/HomePage/hooks/queries/useAllProjectQuery"
+
+import ResultInfo from "./components/ResultInfo"
 
 type SelectType = "default" | "likeCount" | "viewCount"
 
@@ -76,14 +72,10 @@ const ProjectListPage = () => {
         </Center>
       </Box>
 
-      <Stack
-        marginTop="3rem"
-        alignItems="center">
-        <Heading>'{search}' 검색결과</Heading>
-        <Text fontSize="2xl">
-          {projectList?.length}개의 프로젝트를 발견하였습니다
-        </Text>
-      </Stack>
+      <ResultInfo
+        searchWord={search !== null ? search : ""}
+        resultCount={projectList !== undefined ? projectList?.length : 0}
+      />
 
       <Container maxW="80%">
         <Stack marginTop="15rem">
@@ -105,45 +97,10 @@ const ProjectListPage = () => {
               <option value="viewCount">조회순</option>
             </Select>
           </HStack>
-          <Grid
-            templateColumns="repeat(4, 1fr)"
-            gap={4}>
-            {isAllProjectLoading ? (
-              <>
-                <Skeleton
-                  height="20rem"
-                  borderRadius="1rem"
-                />
-                <Skeleton
-                  height="20rem"
-                  borderRadius="1rem"
-                />
-                <Skeleton
-                  height="20rem"
-                  borderRadius="1rem"
-                />
-                <Skeleton
-                  height="20rem"
-                  borderRadius="1rem"
-                />
-              </>
-            ) : (
-              projectList?.map((project) => (
-                <GridItem key={project.id}>
-                  <Link to={`/project/${project.id}`}>
-                    <ProjectCard
-                      imgUrl={project.thumbnailUrl}
-                      viewCount={project.viewCount}
-                      heartCount={project.likeCount}
-                      isFullHeart={project.isLiked}
-                      title={project.name}
-                      content={project.subName}
-                    />
-                  </Link>
-                </GridItem>
-              ))
-            )}
-          </Grid>
+          <ProjectList
+            isLoading={isAllProjectLoading}
+            projectList={projectList !== undefined ? projectList : []}
+          />
         </Stack>
         <Box height="20rem" />
       </Container>

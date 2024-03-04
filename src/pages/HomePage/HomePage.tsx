@@ -1,5 +1,4 @@
 import { ChangeEvent, useState } from "react"
-import { Link } from "react-router-dom"
 
 import {
   Box,
@@ -7,8 +6,6 @@ import {
   Center,
   Checkbox,
   Container,
-  Grid,
-  GridItem,
   HStack,
   Select,
   Skeleton,
@@ -16,7 +13,7 @@ import {
   Stack,
 } from "@chakra-ui/react"
 
-import ProjectCard from "@components/ProjectCard/ProjectCard"
+import ProjectList from "@components/ProjectList/ProjectList"
 
 import Banner from "./components/Banner/Banner"
 import useAllProjectQuery from "./hooks/queries/useAllProjectQuery"
@@ -66,45 +63,10 @@ const HomePage = () => {
               <option value="viewCount">조회순</option>
             </Select>
           </HStack>
-          <Grid
-            templateColumns="repeat(4, 1fr)"
-            gap={4}>
-            {isAllProjectLoading ? (
-              <>
-                <Skeleton
-                  height="20rem"
-                  borderRadius="1rem"
-                />
-                <Skeleton
-                  height="20rem"
-                  borderRadius="1rem"
-                />
-                <Skeleton
-                  height="20rem"
-                  borderRadius="1rem"
-                />
-                <Skeleton
-                  height="20rem"
-                  borderRadius="1rem"
-                />
-              </>
-            ) : (
-              projectList?.map((project) => (
-                <GridItem key={project.id}>
-                  <Link to={`/project/${project.id}`}>
-                    <ProjectCard
-                      imgUrl={project.thumbnailUrl}
-                      viewCount={project.viewCount}
-                      heartCount={project.likeCount}
-                      isFullHeart={project.isLiked}
-                      title={project.name}
-                      content={project.subName}
-                    />
-                  </Link>
-                </GridItem>
-              ))
-            )}
-          </Grid>
+          <ProjectList
+            isLoading={isAllProjectLoading}
+            projectList={projectList !== undefined ? projectList : []}
+          />
           <Center marginTop="2rem">
             <Button
               width="8rem"
