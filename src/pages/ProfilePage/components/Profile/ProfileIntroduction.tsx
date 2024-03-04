@@ -32,13 +32,21 @@ const ProfileIntroduction = ({
       </Text>
 
       <HStack mt="1.5rem">
-        <ImGithub size="2rem" />
+        <ImGithub size="2.6rem" />
 
-        <Link href={githubUrl}>GitHub 링크</Link>
+        <Link
+          href={githubUrl}
+          fontSize="1.3rem">
+          GitHub 링크
+        </Link>
       </HStack>
       <HStack mt="0.8rem">
-        <FaSquarePen size="2.2rem" />
-        <Link href={blogUrl}>Blog 링크</Link>
+        <FaSquarePen size="2.6rem" />
+        <Link
+          href={blogUrl}
+          fontSize="1.3rem">
+          Blog 링크
+        </Link>
       </HStack>
     </Box>
   )
