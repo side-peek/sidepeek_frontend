@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md"
 
-import { Box } from "@chakra-ui/react"
+import { Box, Image } from "@chakra-ui/react"
 import { ProjectOverViewUrl } from "api-models"
 import "swiper/css"
 import "swiper/css/pagination"
@@ -9,8 +9,9 @@ import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules"
 import { SwiperSlide } from "swiper/react"
 import { Swiper as SwiperCore } from "swiper/types"
 
+import noImage from "@assets/images/noImage.jpg"
+
 import { StyledSwiper } from "../../../styles/SwiperSlide.styles"
-import ImageWithFallback from "./ImageWithFallback"
 import ProjectDetailSummaryRightIcon from "./ProjectDetailSummaryRightIcon"
 
 interface ProjectDetailSummaryRightProps {
@@ -40,7 +41,10 @@ const ProjectDetailSummaryRight = ({
         onBeforeInit={(swiper) => (swiperRef.current = swiper)}>
         {overviewImageUrl.map((overviewImg) => (
           <SwiperSlide key={overviewImg.id}>
-            <ImageWithFallback url={overviewImg.url} />
+            <Image
+              src={overviewImg.url}
+              fallbackSrc={noImage}
+            />
           </SwiperSlide>
         ))}
       </StyledSwiper>
