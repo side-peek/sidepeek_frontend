@@ -11,7 +11,7 @@ import {
   Spacer,
 } from "@chakra-ui/react"
 
-import LogoButton from "@components/LogoLink/LogoLink"
+import LogoLink from "@components/LogoLink/LogoLink"
 
 import Menu from "./components/Menu"
 
@@ -30,7 +30,7 @@ const Header = () => {
         gap="1.6rem"
         px="1.6rem">
         {/* 로고 */}
-        <LogoButton logoHeight="7rem" />
+        <LogoLink logoHeight="7rem" />
         {/* 검색창 */}
         <Box
           pl="1.5rem"
