@@ -17,6 +17,7 @@ const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
   const handleDelete = (id: number) => {
     deleteComment.mutate(id)
   }
+
   return (
     <Flex
       direction="column"
@@ -47,19 +48,21 @@ const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
               <Text fontSize="lg">{comment.content}</Text>
             </Flex>
           </Flex>
-          <Flex
-            gap="2rem"
-            align="center">
-            <ProjectDetailCommentIcon
-              aria-label="edit"
-              icon={<TiPencil />}
-            />
-            <ProjectDetailCommentIcon
-              aria-label="delete"
-              icon={<VscChromeClose />}
-              onClick={() => handleDelete(Number(comment.id))}
-            />
-          </Flex>
+          {comment.isOwner && (
+            <Flex
+              gap="2rem"
+              align="center">
+              <ProjectDetailCommentIcon
+                aria-label="edit"
+                icon={<TiPencil />}
+              />
+              <ProjectDetailCommentIcon
+                aria-label="delete"
+                icon={<VscChromeClose />}
+                onClick={() => handleDelete(Number(comment.id))}
+              />
+            </Flex>
+          )}
         </Flex>
       ))}
     </Flex>
