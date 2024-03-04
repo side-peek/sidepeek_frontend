@@ -12,6 +12,7 @@ import {
   ModalOverlay,
   Spacer,
   Text,
+  useMediaQuery,
 } from "@chakra-ui/react"
 
 import CommonInput from "@components/Input/CommonInput"
@@ -36,6 +37,7 @@ const ChangeNicknameModal = ({
   onClose,
   setProfileInfo,
 }: ModalProps) => {
+  const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
   const {
     register,
     handleSubmit,
@@ -75,7 +77,7 @@ const ChangeNicknameModal = ({
       isOpen={isOpen}
       onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent marginTop={isLargerThan500 ? "15rem" : "50%"}>
         <ModalHeader>닉네임 변경</ModalHeader>
         <ModalCloseButton />
         <form onSubmit={handleSubmit(onSubmit)}>

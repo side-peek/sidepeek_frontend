@@ -13,6 +13,7 @@ import {
   ModalOverlay,
   Spacer,
   Text,
+  useMediaQuery,
 } from "@chakra-ui/react"
 
 import CommonInput from "@components/Input/CommonInput"
@@ -33,6 +34,7 @@ interface ModalProps {
   onClose: () => void
 }
 const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
+  const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
   const {
     register,
     setError,
@@ -78,7 +80,7 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
       isOpen={isOpen}
       onClose={handleClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent marginTop={isLargerThan500 ? "15rem" : "50%"}>
         <ModalHeader>비밀번호 변경</ModalHeader>
         <ModalCloseButton />
         <form onSubmit={handleSubmit(onSubmit)}>
