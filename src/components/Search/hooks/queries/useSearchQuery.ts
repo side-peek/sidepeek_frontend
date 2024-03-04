@@ -6,7 +6,7 @@ import { getSearchTechStacks } from "@/api/skill/getSearchTechStacks"
 export const useSearchQuery = (value: string) => {
   return useQuery({
     queryKey: ["search", value],
-    queryFn: async () => await getSearchTechStacks(value),
+    queryFn: () => getSearchTechStacks(value),
     enabled: value.length > 0,
     select: (data) => {
       return data.skills
