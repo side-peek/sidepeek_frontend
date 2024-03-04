@@ -1,9 +1,6 @@
-import { Suspense } from "react"
-import { Outlet, createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter } from "react-router-dom"
 
-import { QueryErrorResetBoundary } from "@tanstack/react-query"
-
-import AuthErrorBoundary from "@components/ErrorBoundary/AuthErrorBoundary/AuthErrorBoundary"
+import AuthErrorHandlingWrapper from "@components/ErrorBoundary/AuthErrorHandlingWrapper/AuthErrorHandlingWrapper"
 
 import ErrorPage from "@pages/ErrorPage/ErrorPage"
 import HomePage from "@pages/HomePage/HomePage"
@@ -19,18 +16,7 @@ import DefaultLayout from "@styles/layouts/DefaultLayout"
 
 export const router = createBrowserRouter([
   {
-    element: (
-      <QueryErrorResetBoundary>
-        {(value) => (
-          <AuthErrorBoundary {...value}>
-            <Suspense>
-              <Outlet />
-            </Suspense>
-          </AuthErrorBoundary>
-        )}
-      </QueryErrorResetBoundary>
-    ),
-    errorElement: <ErrorPage />,
+    element: <AuthErrorHandlingWrapper />,
     children: [
       {
         element: <DefaultLayout />,
@@ -72,5 +58,9 @@ export const router = createBrowserRouter([
         element: <SignUpPage />,
       },
     ],
+  },
+  {
+    element: <ErrorPage />,
+    path: "*",
   },
 ])
