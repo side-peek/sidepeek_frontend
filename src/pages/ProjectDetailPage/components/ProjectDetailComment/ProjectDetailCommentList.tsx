@@ -1,18 +1,22 @@
-import { TiPencil } from "react-icons/ti"
-import { VscChromeClose } from "react-icons/vsc"
 import { useParams } from "react-router-dom"
 
-import { Avatar, Flex, Text } from "@chakra-ui/react"
+import { Avatar, Flex } from "@chakra-ui/react"
 
 import useDeleteCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
 
 import { ProjectDetailCommentProps } from "./ProjectDetailComment"
-import ProjectDetailCommentIcon from "./ProjectDetailCommentIcon"
+import ProjectDetailCommentContent from "./ProjectDetailCommentContent"
 
 const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
+  // const { register, handleSubmit, reset } = useForm()
   const { projectId } = useParams()
 
   const { deleteComment } = useDeleteCommentMutation(Number(projectId))
+
+  // const submitEdit = (data) => {
+  //   ontimeupdate(commentData.id, data.comment)
+  //   setIsEditing(false)
+  // }
 
   const handleDelete = (id: number) => {
     deleteComment.mutate(id)
@@ -26,9 +30,11 @@ const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
       {comments.map((comment) => (
         <Flex
           justifyContent="space-between"
+          align="center"
           key={comment.id}>
           <Flex
             gap="1rem"
+            w="100%"
             align="center">
             <Avatar
               cursor="pointer"
@@ -37,32 +43,11 @@ const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
               width="5rem"
               height="5rem"
             />
-            <Flex
-              direction="column"
-              gap="0.5rem">
-              <Text
-                fontFamily="SCDream_Bold"
-                fontSize="xl">
-                {comment.owner.nickname}
-              </Text>
-              <Text fontSize="lg">{comment.content}</Text>
-            </Flex>
+            <ProjectDetailCommentContent
+              comment={comment}
+              handleDelete={handleDelete}
+            />
           </Flex>
-          {comment.isOwner && (
-            <Flex
-              gap="2rem"
-              align="center">
-              <ProjectDetailCommentIcon
-                aria-label="edit"
-                icon={<TiPencil />}
-              />
-              <ProjectDetailCommentIcon
-                aria-label="delete"
-                icon={<VscChromeClose />}
-                onClick={() => handleDelete(Number(comment.id))}
-              />
-            </Flex>
-          )}
         </Flex>
       ))}
     </Flex>
