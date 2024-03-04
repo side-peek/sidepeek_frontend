@@ -12,5 +12,25 @@ export const DUMMY_SKILLS: { skills: Skill[] } = {
       name: "spring",
       iconImageUrl: "https://www.iconimageurl.com",
     },
+    {
+      id: 4,
+      name: "spring boot",
+      iconImageUrl: "https://www.iconimageurl.com",
+    },
+    {
+      id: 5,
+      name: "react query",
+      iconImageUrl: "https://www.iconimageurl.com",
+    },
+    {
+      id: 6,
+      name: "github",
+      iconImageUrl: "https://www.iconimageurl.com",
+    },
+    {
+      id: 6,
+      name: "github action",
+      iconImageUrl: "https://www.iconimageurl.com",
+    },
   ],
 }
