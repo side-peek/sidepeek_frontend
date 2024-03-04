@@ -9,9 +9,9 @@ interface TechStackProps {
 }
 
 const ProfileTechStack = ({ techStacks }: TechStackProps) => {
-  const categories = Array.from(
-    new Set(techStacks && techStacks.map((techStack) => techStack.category)),
-  )
+  const categories = [
+    ...new Set(techStacks && techStacks.map((techStack) => techStack.category)),
+  ]
 
   return (
     <Box
