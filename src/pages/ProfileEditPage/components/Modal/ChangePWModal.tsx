@@ -54,6 +54,7 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     // TODO: 기존 비밀번호 api 불러와서 비교 후 다르면 setError하도록 해야함
+    // TODO: 3/4 스크럼 이후 - api 에러코드 보고 분류하기로 함. 프론트단에서 현재 비밀번호와 같은지 판단할 수 없기 때문에 수정 예정임
     const { newPassword, checkPassword } = data
     if (newPassword !== checkPassword) {
       setError("checkPassword", {
