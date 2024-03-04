@@ -1,19 +1,7 @@
-import {
-  ChangeEventHandler,
-  Dispatch,
-  SetStateAction,
-  createContext,
-} from "react"
+import { createContext } from "react"
 
-import { Skill } from "api-models"
-
-type SearchContextValue<T> = {
-  inputValue: string
-  onInput: ChangeEventHandler<HTMLInputElement>
-  searchList: T
-  setSearchList: Dispatch<SetStateAction<T>>
+type SearchContextValue = {
+  isFocused: boolean
 }
 
-export const SearchContext = createContext<SearchContextValue<Skill[]> | null>(
-  null,
-)
+export const SearchContext = createContext<SearchContextValue | null>(null)
