@@ -97,6 +97,7 @@ const ChangeNicknameModal = ({
                   message: "새로운 닉네임은 2자 이상이어야 합니다",
                 },
               })}
+              inputWidth="100%"
             />
           </ModalBody>
 

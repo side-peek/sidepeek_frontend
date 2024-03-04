@@ -4,6 +4,7 @@ import {
   Avatar,
   Button,
   Flex,
+  Input,
   Menu,
   MenuButton,
   MenuItem,
@@ -17,17 +18,25 @@ import { ProfileInfo } from "../../types/types"
 import ChangeNicknameModal from "../Modal/ChangeNicknameModal"
 
 interface ProfileCardProps {
+  profileImageUrl: string
   nickname: string
   career: string
   setProfileInfo: React.Dispatch<React.SetStateAction<ProfileInfo>>
 }
 
 const ProfileCard = ({
+  profileImageUrl,
   nickname,
   career,
   setProfileInfo,
 }: ProfileCardProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      console.log(e.target.files[0])
+    }
+  }
   return (
     <Flex
       w="100%"
@@ -35,9 +44,21 @@ const ProfileCard = ({
       bg="default"
       ml="2rem"
       alignItems="center">
-      <Avatar
-        w="12rem"
-        h="12rem"></Avatar>
+      <form>
+        <label>
+          <Avatar
+            w="12rem"
+            h="12rem">
+            {profileImageUrl}
+          </Avatar>
+          <Input
+            type="file"
+            display="none"
+            onChange={handleSubmit}
+          />
+        </label>
+      </form>
+
       <Stack ml="1.5rem">
         <Text
           fontSize="3xl"

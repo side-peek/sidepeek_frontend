@@ -102,6 +102,7 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
                     },
                   })}
                   placeholder="현재 비밀번호"
+                  inputWidth="100%"
                 />
               </Box>
 
@@ -127,6 +128,7 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
                     },
                   })}
                   placeholder="새로운 비밀번호"
+                  inputWidth="100%"
                 />
               </Box>
 
@@ -154,6 +156,7 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
                     },
                   })}
                   placeholder="비밀번호 확인"
+                  inputWidth="100%"
                 />
               </Box>
             </Flex>
