@@ -15,7 +15,7 @@ const StyledButton = ({ children, onClick, ...props }: StyledButtonProps) => {
       fontSize="1.3rem"
       color="default"
       bg="blue.100"
-      borderRadius="10px"
+      borderRadius="1rem"
       _hover={{ bg: "blue.100" }}
       onClick={onClick}
       {...props}>
