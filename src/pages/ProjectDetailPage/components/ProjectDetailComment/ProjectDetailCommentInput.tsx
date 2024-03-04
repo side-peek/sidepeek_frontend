@@ -7,7 +7,10 @@ import CommonInput from "@components/Input/CommonInput"
 
 import usePostCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 
-interface CommentType {
+// TODO: 1. type폴더로 분리하기
+//       2. onSubmit request 동적으로 수정
+
+export interface CommentType {
   ownerId: number
   isAnonymous: boolean
   content: string

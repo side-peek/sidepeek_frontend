@@ -1,15 +1,18 @@
+// TODO: 1. 포커스 자동 조정
 import { useState } from "react"
-import { useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
 import { TiPencil } from "react-icons/ti"
 import { VscChromeClose } from "react-icons/vsc"
 import { useParams } from "react-router-dom"
 
-import { Button, Flex, Text, Textarea } from "@chakra-ui/react"
+import { Box, Button, Flex, Text, Textarea } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
 import useDeleteCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
+import useEditCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useEditCommentMutation"
 
 import ProjectDetailCommentIcon from "./ProjectDetailCommentIcon"
+import { CommentType } from "./ProjectDetailCommentInput"
 
 interface ProjectDetailCommentContentProps {
   comment: Comment
@@ -18,32 +21,42 @@ interface ProjectDetailCommentContentProps {
 const ProjectDetailCommentContent = ({
   comment,
 }: ProjectDetailCommentContentProps) => {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit } = useForm<CommentType>()
+  const [isEditing, setIsEditing] = useState(false)
 
   const { projectId } = useParams()
 
   const { deleteComment } = useDeleteCommentMutation(Number(projectId))
-
-  const handleDelete = (id: number) => {
-    deleteComment.mutate(id)
-  }
-
-  const [isEditing, setIsEditing] = useState(false)
+  const { editComment } = useEditCommentMutation(
+    Number(projectId),
+    Number(comment.id),
+  )
 
   const handleStartEdit = () => {
     setIsEditing(true)
+  }
+
+  const handleDelete = (id: number) => {
+    deleteComment.mutate(id)
   }
 
   const handleCancelEdit = () => {
     setIsEditing(false)
   }
 
-  const onEdit = () => {}
+  const onEditSubmit: SubmitHandler<CommentType> = (text) => {
+    const req = {
+      ownerId: 12,
+      isAnonymous: false,
+      content: text.content,
+    }
+    editComment.mutate(req)
+  }
 
   return (
-    <Flex w="100%">
+    <Box w="100%">
       <form
-        onSubmit={handleSubmit(onEdit)}
+        onSubmit={handleSubmit(onEditSubmit)}
         style={{ width: "100%" }}>
         <Flex
           justifyContent="space-between"
@@ -117,7 +130,7 @@ const ProjectDetailCommentContent = ({
           </Flex>
         </Flex>
       </form>
-    </Flex>
+    </Box>
   )
 }
 

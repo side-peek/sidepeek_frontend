@@ -28,4 +28,6 @@ export const ENDPOINTS = {
     `${VARIABLE_URL}/projects/${projectId}/comments`,
   DELETE_COMMENT: (projectId: number, id: number) =>
     `${VARIABLE_URL}/projects/${projectId}/comments/${id}`,
+  EDIT_COMMENT: (projectId: number, id: number) =>
+    `${VARIABLE_URL}/projects/${projectId}/comments/${id}`,
 }

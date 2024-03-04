@@ -282,4 +282,12 @@ declare module "api-models" {
     projectId: number
     id: number
   }
+
+  export type editCommentPayload = {
+    projectId?: number
+    id?: number
+    ownerId: number
+    isAnonymous: boolean
+    content: string
+  }
 }
