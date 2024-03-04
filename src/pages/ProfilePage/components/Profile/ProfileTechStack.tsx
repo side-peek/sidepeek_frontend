@@ -23,9 +23,9 @@ const ProfileTechStack = ({ techStacks }: TechStackProps) => {
         fontFamily="SCDream_Bold">
         기술스택
       </Text>
-      {categories.map((category, idx) => (
+      {categories.map((category) => (
         <ProfileTechStackByCategory
-          key={idx}
+          key={category}
           category={category}
           techStacks={techStacks}
         />
