@@ -1,5 +1,5 @@
 // TODO: 1. 기술스택 이미지 URL 추가
-import { Flex, HStack, Text } from "@chakra-ui/react"
+import { Flex, HStack, Text, useMediaQuery } from "@chakra-ui/react"
 import { TechStack } from "api-models"
 
 import CustomTag from "@components/Tag/components/CustomTag"
@@ -13,6 +13,7 @@ const ProjectDetailTechStacks = ({
   techStacks,
 }: ProjectDetailTechStacksProps) => {
   const groupedByCategory = getGroupedCategory(techStacks)
+  const [isLargerThan600] = useMediaQuery(["(min-width: 600px)"])
 
   return (
     <Flex
@@ -30,9 +31,14 @@ const ProjectDetailTechStacks = ({
         {groupedByCategory.map((category) => (
           <Flex
             key={category[0]}
-            direction="column"
-            gap="1rem">
-            <Text fontSize="xl">{category[0]}</Text>
+            direction={isLargerThan600 ? "row" : "column"}
+            gap="2rem">
+            <Text
+              fontSize="xl"
+              minW="8rem"
+              whiteSpace="nowrap">
+              {category[0]}
+            </Text>
             <HStack
               spacing="1rem"
               flexWrap="wrap">

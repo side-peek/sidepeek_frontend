@@ -61,7 +61,7 @@ export const DUMMY_PROJECT_DETAIL = {
       id: 25,
       category: "프론트",
       skill: {
-        id: 4,
+        id: 5,
         name: "React Query",
         iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
       },
@@ -70,7 +70,7 @@ export const DUMMY_PROJECT_DETAIL = {
       id: 26,
       category: "프론트",
       skill: {
-        id: 4,
+        id: 6,
         name: "React Query",
         iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
       },
@@ -79,7 +79,7 @@ export const DUMMY_PROJECT_DETAIL = {
       id: 27,
       category: "프론트",
       skill: {
-        id: 4,
+        id: 7,
         name: "React Query",
         iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
       },
@@ -88,7 +88,7 @@ export const DUMMY_PROJECT_DETAIL = {
       id: 28,
       category: "프론트",
       skill: {
-        id: 4,
+        id: 8,
         name: "React Query",
         iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
       },
@@ -97,7 +97,7 @@ export const DUMMY_PROJECT_DETAIL = {
       id: 29,
       category: "프론트",
       skill: {
-        id: 4,
+        id: 9,
         name: "React Query",
         iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
       },
@@ -106,7 +106,7 @@ export const DUMMY_PROJECT_DETAIL = {
       id: 30,
       category: "프론트",
       skill: {
-        id: 4,
+        id: 10,
         name: "React Query",
         iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
       },
@@ -115,7 +115,7 @@ export const DUMMY_PROJECT_DETAIL = {
       id: 31,
       category: "프론트",
       skill: {
-        id: 4,
+        id: 11,
         name: "React Query",
         iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
       },
@@ -124,7 +124,7 @@ export const DUMMY_PROJECT_DETAIL = {
       id: 32,
       category: "프론트",
       skill: {
-        id: 4,
+        id: 12,
         name: "React Query",
         iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
       },
@@ -133,7 +133,7 @@ export const DUMMY_PROJECT_DETAIL = {
       id: 33,
       category: "프론트",
       skill: {
-        id: 4,
+        id: 13,
         name: "React Query",
         iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
       },
@@ -142,7 +142,7 @@ export const DUMMY_PROJECT_DETAIL = {
       id: 34,
       category: "프론트",
       skill: {
-        id: 4,
+        id: 14,
         name: "React Query",
         iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
       },
