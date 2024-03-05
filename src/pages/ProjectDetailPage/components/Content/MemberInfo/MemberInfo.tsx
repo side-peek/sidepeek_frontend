@@ -1,7 +1,7 @@
 import { Flex, Text } from "@chakra-ui/react"
 import { Member } from "api-models"
 
-import combinateCategory from "@pages/ProjectDetailPage/utils/combinateCategory"
+import membersCategory from "@pages/ProjectDetailPage/utils/membersCategory"
 
 import MemberList from "./MemberList/MemberList"
 
@@ -10,7 +10,7 @@ interface MemberInfoProps {
 }
 
 const MemberInfo = ({ members }: MemberInfoProps) => {
-  const groupedByCategory = combinateCategory(members)
+  const groupedByCategory = membersCategory(members)
   return (
     <Flex
       direction="column"

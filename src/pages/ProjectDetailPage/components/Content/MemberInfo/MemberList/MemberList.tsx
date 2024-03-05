@@ -24,7 +24,8 @@ const MemberList = ({ category, members }: MemberListProps) => {
         alignItems="center">
         {members.map((member) => (
           <MemberCard
-            member={member}
+            profileImageUrl={member.profileImageUrl}
+            nickname={member.nickname}
             key={member.id}
           />
         ))}

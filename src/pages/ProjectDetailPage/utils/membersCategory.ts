@@ -1,6 +1,6 @@
 import { Member } from "api-models"
 
-const combinateCategory = (members: Member[]) => {
+const membersCategory = (members: Member[]) => {
   return Object.entries(
     members.reduce<Record<string, Member[]>>((acc, item) => {
       if (!acc[item.category]) {
@@ -12,4 +12,4 @@ const combinateCategory = (members: Member[]) => {
   )
 }
 
-export default combinateCategory
+export default membersCategory

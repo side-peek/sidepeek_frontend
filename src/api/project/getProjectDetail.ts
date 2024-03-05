@@ -15,7 +15,6 @@ export const getProjectDetail = async (
       ...config,
     },
   )
-  console.log(data)
 
   return data
 }
