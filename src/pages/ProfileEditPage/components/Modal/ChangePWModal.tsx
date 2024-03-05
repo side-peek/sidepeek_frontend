@@ -95,7 +95,7 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
                   <Spacer />
                   {errors.currentPassword?.message && (
                     <Text color="red.100">
-                      {errors.currentPassword.message.toString()}
+                      {errors.currentPassword && errors.currentPassword.message}
                     </Text>
                   )}
                 </Flex>
@@ -118,7 +118,7 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
                   <Spacer />
                   {errors.newPassword?.message && (
                     <Text color="red.100">
-                      {errors.newPassword?.message.toString()}
+                      {errors.newPassword && errors.newPassword?.message}
                     </Text>
                   )}
                 </Flex>
