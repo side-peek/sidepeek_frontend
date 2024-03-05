@@ -20,6 +20,7 @@ import CommonInput from "@components/Input/CommonInput"
 import {
   NICKNAME_NOSPACE_ERROR,
   NICKNAME_VALIDATION_OPTION,
+  RegEx,
 } from "@pages/ProfileEditPage/constants/validation"
 import { ProfileInfo } from "@pages/ProfileEditPage/types/types"
 
@@ -42,7 +43,7 @@ const ChangeNicknameModal = ({
     register,
     handleSubmit,
     setError,
-    reset,
+    // reset,
     formState: { errors },
   } = useForm<FormValues>({ mode: "onSubmit" })
 
@@ -51,7 +52,7 @@ const ChangeNicknameModal = ({
     console.log("1")
     // TODO: 낙관적 업데이트 수행 예정. api 요청으로 닉네임 변경해줌
     setProfileInfo((profileInfo) => ({ ...profileInfo, nickname: newNickname }))
-    reset()
+    // reset()
     onClose()
   }
 
@@ -62,9 +63,7 @@ const ChangeNicknameModal = ({
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     // TODO: api 요청 후 데이터 가공을 통해 새로운 닉네임이 이미 존재하는 닉네임인지 판단하고 분기
     const { newNickname } = data
-    if (
-      newNickname.split("").length !== newNickname.split(" ").join("").length
-    ) {
+    if (RegEx.CHECK_SPACE.test(newNickname)) {
       setError("newNickname", NICKNAME_NOSPACE_ERROR)
       onInvalid()
     } else {

@@ -1,3 +1,7 @@
+export const RegEx = {
+  CHECK_SPACE: /\s/,
+}
+
 export const NICKNAME_VALIDATION_OPTION = {
   required: "새로운 닉네임을 입력해주세요",
   minLength: {
