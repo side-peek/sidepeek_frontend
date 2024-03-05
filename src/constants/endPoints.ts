@@ -22,6 +22,8 @@ export const ENDPOINTS = {
     `${VARIABLE_URL}/projects/${projectId}`,
   GET_PROJECT_DETAILS: (projectId: number) =>
     `${VARIABLE_URL}/projects/${projectId}`,
-  GET_ALL_PROJECTS: `${VARIABLE_URL}/projects`,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  GET_ALL_PROJECTS: (userId: number, sort: string, status: string) =>
+    `${VARIABLE_URL}/projects?sort=${sort}&status=${status}`,
   UPLOAD_LIKE: `${VARIABLE_URL}/likes`,
 }

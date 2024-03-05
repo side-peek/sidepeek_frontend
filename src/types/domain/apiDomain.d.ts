@@ -67,7 +67,6 @@ declare module "api-models" {
     viewCount: number
     likeCount: number
     isLiked: boolean
-    isDeploy: boolean
   }
 
   export type Description = {

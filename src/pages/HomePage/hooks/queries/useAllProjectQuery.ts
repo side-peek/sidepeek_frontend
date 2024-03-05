@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query"
 
 import { getAllProjects } from "@/api/project/getAllProjects"
 
-const useAllProjectQuery = () => {
+const useAllProjectQuery = (userId: number, sort: string, status: string) => {
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["projects"],
-    queryFn: () => getAllProjects(),
+    queryKey: ["projects", userId, sort, status],
+    queryFn: () => getAllProjects(userId, sort, status),
   })
 
   return {

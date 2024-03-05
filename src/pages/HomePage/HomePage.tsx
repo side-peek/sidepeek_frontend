@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 import {
@@ -21,23 +21,31 @@ import ProjectCard from "@components/ProjectCard/ProjectCard"
 import Banner from "./components/Banner/Banner"
 import useAllProjectQuery from "./hooks/queries/useAllProjectQuery"
 
-type SelectType = "default" | "likeCount" | "viewCount"
+type SelectType = "createdAt" | "like" | "view"
 
 const HomePage = () => {
   const [isDeploy, setIsDeploy] = useState(false)
-  const [selectedOption, setSelectedOption] = useState<SelectType>("default")
+  const [selectedOption, setSelectedOption] = useState<SelectType>("createdAt")
 
   // 프로젝트 전체 목록 조회
-  const { allProjectList, isAllProjectLoading } = useAllProjectQuery()
+  const { allProjectList, isAllProjectLoading, refetchAllProject } =
+    useAllProjectQuery(1, selectedOption, isDeploy ? "released" : "")
 
-  const projectList = allProjectList?.projects.filter((project) =>
-    isDeploy ? project.isDeploy : project,
-  )
+  const projectList = allProjectList?.projects
+  console.log(projectList)
+
+  useEffect(() => {
+    setIsDeploy(!isDeploy)
+    refetchAllProject()
+  }, [isDeploy])
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SelectType
     setSelectedOption(value)
+
+    refetchAllProject()
   }
+
   return (
     <>
       {/* 임시로 다섯개 잘라서 넣었습니다*/}
@@ -61,14 +69,15 @@ const HomePage = () => {
               marginRight="1rem"
               onChange={handleSelect}
               value={selectedOption}>
-              <option value="default">최신순</option>
-              <option value="likeCount">인기순</option>
-              <option value="viewCount">조회순</option>
+              <option value="createdAt">최신순</option>
+              <option value="like">인기순</option>
+              <option value="view">조회순</option>
             </Select>
           </HStack>
           <Grid
-            templateColumns="repeat(4, 1fr)"
-            gap={4}>
+            mt="0.5rem"
+            templateColumns="repeat(auto-fill, minmax(24rem, 1fr))"
+            gap={0}>
             {isAllProjectLoading ? (
               <>
                 <Skeleton
