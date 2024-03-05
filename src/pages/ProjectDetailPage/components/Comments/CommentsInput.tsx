@@ -52,7 +52,7 @@ const CommentsInput = () => {
             placeholder={"댓글을 입력하세요"}
             isRequired={false}
             register={{
-              ...register("content", { required: "댓글을 입력해주세요" }),
+              ...register("content"),
             }}
           />
           <FormErrorMessage>

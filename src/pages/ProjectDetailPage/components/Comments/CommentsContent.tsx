@@ -55,6 +55,7 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
       content: text.content,
     }
     editComment.mutate(req)
+    setIsEditing(false)
   }
 
   return (
