@@ -9,7 +9,9 @@ import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules"
 import { SwiperSlide } from "swiper/react"
 import { Swiper as SwiperCore } from "swiper/types"
 
-import { StyledSwiper } from "../../styles/SwiperSlide.styles"
+import noImage from "@assets/images/noImage.jpg"
+
+import { StyledSwiper } from "../../../styles/SwiperSlide.styles"
 import ProjectDetailSummaryRightIcon from "./ProjectDetailSummaryRightIcon"
 
 interface ProjectDetailSummaryRightProps {
@@ -40,9 +42,8 @@ const ProjectDetailSummaryRight = ({
         {overviewImageUrl.map((overviewImg) => (
           <SwiperSlide key={overviewImg.id}>
             <Image
-              borderRadius="1rem"
               src={overviewImg.url}
-              alt="project thumbnail"
+              fallbackSrc={noImage}
             />
           </SwiperSlide>
         ))}
