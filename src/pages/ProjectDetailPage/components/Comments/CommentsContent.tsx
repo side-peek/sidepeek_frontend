@@ -2,19 +2,16 @@
 //       2. autoFocus 구현(옵션으로 사용하면 오류남)
 import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { TiPencil } from "react-icons/ti"
-import { VscChromeClose } from "react-icons/vsc"
 import { useParams } from "react-router-dom"
 import ResizeTextarea from "react-textarea-autosize"
 
-import { Box, Button, Flex, Text, Textarea } from "@chakra-ui/react"
+import { Box, Flex, Text, Textarea } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
-import useDeleteCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
 import useEditCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useEditCommentMutation"
 
 import { FormValues } from "../../types/formValues"
-import CommentsIcon from "./CommentsIcon"
+import CommentsButton from "./CommentsButton"
 
 interface CommentsContentProps {
   comment: Comment
@@ -26,7 +23,6 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
 
   const { projectId } = useParams()
 
-  const { deleteCommentMutation } = useDeleteCommentMutation(Number(projectId))
   const { editCommentMutation } = useEditCommentMutation(
     Number(projectId),
     Number(comment.id),
@@ -38,10 +34,6 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
 
   const handleStartEdit = () => {
     setIsEditing(true)
-  }
-
-  const handleDelete = (id: number) => {
-    deleteCommentMutation.mutate(id)
   }
 
   const handleCancelEdit = () => {
@@ -98,42 +90,14 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
             gap="1rem"
             flex="0.5"
             height="fit-content">
-            {isEditing ? (
-              <>
-                <Button
-                  type="submit"
-                  background="none"
-                  p="0"
-                  fontSize="lg"
-                  _hover={{ border: "none", opacity: "0.5" }}>
-                  확인
-                </Button>
-                <Button
-                  type="button"
-                  background="none"
-                  p="0"
-                  fontSize="lg"
-                  _hover={{ border: "none", opacity: "0.5" }}
-                  onClick={handleCancelEdit}>
-                  취소
-                </Button>
-              </>
-            ) : (
-              comment.isOwner && (
-                <>
-                  <CommentsIcon
-                    aria-label="edit"
-                    icon={<TiPencil />}
-                    onClick={handleStartEdit}
-                  />
-                  <CommentsIcon
-                    aria-label="delete"
-                    icon={<VscChromeClose />}
-                    onClick={() => handleDelete(Number(comment.id))}
-                  />
-                </>
-              )
-            )}
+            <CommentsButton
+              {...{
+                comment,
+                isEditing,
+                handleCancelEdit,
+                handleStartEdit,
+              }}
+            />
           </Flex>
         </Flex>
       </form>

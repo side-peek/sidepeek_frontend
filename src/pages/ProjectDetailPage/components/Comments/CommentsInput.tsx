@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useParams } from "react-router-dom"
 
-import { Button, Flex, FormControl, FormErrorMessage } from "@chakra-ui/react"
+import { Button, Flex, FormControl } from "@chakra-ui/react"
 
 import CommonInput from "@components/Input/CommonInput"
 
@@ -9,12 +9,10 @@ import usePostCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/use
 
 import { FormValues } from "../../types/formValues"
 
-// TODO: 1. type폴더로 분리하기
-//       2. onSubmit request 동적으로 수정
-
 const CommentsInput = () => {
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>()
@@ -22,6 +20,7 @@ const CommentsInput = () => {
 
   const { sendCommentMutation } = usePostCommentMutation(Number(projectId))
 
+  // TODO: 빈 값일때 처리(Toast로 구현)
   const onSubmit: SubmitHandler<FormValues> = (text) => {
     const req = {
       ownerId: 12,
@@ -29,6 +28,7 @@ const CommentsInput = () => {
       content: text.content,
     }
     sendCommentMutation.mutate(req)
+    reset()
   }
 
   return (
@@ -51,9 +51,6 @@ const CommentsInput = () => {
               ...register("content"),
             }}
           />
-          <FormErrorMessage>
-            {errors.content && errors.content.message}
-          </FormErrorMessage>
         </FormControl>
 
         <Button
