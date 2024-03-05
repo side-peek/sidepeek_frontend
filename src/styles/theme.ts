@@ -23,6 +23,7 @@ const themeConfig = {
   },
 
   colors: {
+    default: "#ffffff",
     blue: {
       100: "#0C356A",
       200: "#0174BE",
@@ -90,6 +91,7 @@ const themeConfig = {
   },
   sizes: {
     headerHeight: "9.5rem",
+    coverHeight: "25rem",
     footerHeight: "19rem",
   },
   semanticTokens: {},
