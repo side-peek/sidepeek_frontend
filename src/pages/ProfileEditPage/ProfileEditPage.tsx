@@ -33,7 +33,6 @@ const ProfileEditPage = () => {
   return (
     <VStack
       w="80%"
-      h="100vh"
       align="start"
       m="auto">
       <VStack
