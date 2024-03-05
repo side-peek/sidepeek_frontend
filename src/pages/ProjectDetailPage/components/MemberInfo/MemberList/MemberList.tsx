@@ -1,17 +1,14 @@
 import { Flex, Text } from "@chakra-ui/react"
 import { Member } from "api-models"
 
-import ProjectDetailMemberItem from "../ProjectDetailMemberItem/ProjectDetailMemberItem"
+import MemberItem from "../MemberItem/MemberItem"
 
-interface ProjectDetailMemberListProps {
+interface MemberListProps {
   members: Member[]
   category: string
 }
 
-const ProjectDetailMemberList = ({
-  category,
-  members,
-}: ProjectDetailMemberListProps) => {
+const MemberList = ({ category, members }: MemberListProps) => {
   return (
     <Flex
       direction="column"
@@ -26,7 +23,7 @@ const ProjectDetailMemberList = ({
         p="1rem"
         alignItems="center">
         {members.map((member) => (
-          <ProjectDetailMemberItem
+          <MemberItem
             member={member}
             key={member.id}
           />
@@ -41,4 +38,4 @@ const ProjectDetailMemberList = ({
   )
 }
 
-export default ProjectDetailMemberList
+export default MemberList

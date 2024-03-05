@@ -1,15 +1,15 @@
 import { IconButton, IconButtonProps } from "@chakra-ui/react"
 
-interface ProjectDetailSummaryRightIconProps extends IconButtonProps {
+interface SummaryRightIconProps extends IconButtonProps {
   direction: string
   onClick: () => void
 }
 
-const ProjectDetailSummaryRightIcon = ({
+const SummaryRightIcon = ({
   direction,
   onClick,
   ...props
-}: ProjectDetailSummaryRightIconProps) => {
+}: SummaryRightIconProps) => {
   const directionStyle =
     direction === "left" ? { left: "-6%" } : { right: "-6%" }
 
@@ -29,4 +29,4 @@ const ProjectDetailSummaryRightIcon = ({
   )
 }
 
-export default ProjectDetailSummaryRightIcon
+export default SummaryRightIcon

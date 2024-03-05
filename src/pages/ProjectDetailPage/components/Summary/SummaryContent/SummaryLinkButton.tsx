@@ -1,13 +1,10 @@
 import { Button, ButtonProps } from "@chakra-ui/react"
 
-interface ProjectDetailSummaryLinkButtonProps extends ButtonProps {
+interface SummaryLinkButtonProps extends ButtonProps {
   linkName: string
 }
 
-const ProjectDetailSummaryLinkButton = ({
-  linkName,
-  ...props
-}: ProjectDetailSummaryLinkButtonProps) => {
+const SummaryLinkButton = ({ linkName, ...props }: SummaryLinkButtonProps) => {
   return (
     <Button
       borderRadius="2rem"
@@ -22,4 +19,4 @@ const ProjectDetailSummaryLinkButton = ({
   )
 }
 
-export default ProjectDetailSummaryLinkButton
+export default SummaryLinkButton

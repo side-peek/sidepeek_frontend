@@ -3,15 +3,14 @@ import { Member } from "api-models"
 
 import getGroupedCategory from "@pages/ProjectDetailPage/utils/getGroupedCategory"
 
-import ProjectDetailMemberList from "./ProjectDetailMemberList/ProjectDetailMemberList"
+import MemberList from "./MemberList/MemberList"
 
-interface ProjectDetailMemberInfoProps {
+interface MemberInfoProps {
   members: Member[]
 }
 
-const ProjectDetailMemberInfo = ({ members }: ProjectDetailMemberInfoProps) => {
+const MemberInfo = ({ members }: MemberInfoProps) => {
   const groupedByCategory = getGroupedCategory(members)
-  console.log(groupedByCategory)
   return (
     <Flex
       direction="column"
@@ -23,7 +22,7 @@ const ProjectDetailMemberInfo = ({ members }: ProjectDetailMemberInfoProps) => {
       </Text>
       <Flex gap="1rem">
         {groupedByCategory.map(([category, members]) => (
-          <ProjectDetailMemberList
+          <MemberList
             key={category}
             category={category}
             members={members}
@@ -34,4 +33,4 @@ const ProjectDetailMemberInfo = ({ members }: ProjectDetailMemberInfoProps) => {
   )
 }
 
-export default ProjectDetailMemberInfo
+export default MemberInfo

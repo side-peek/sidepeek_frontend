@@ -1,14 +1,15 @@
 import { Box, Center, Flex } from "@chakra-ui/react"
 import { Project } from "api-models"
 
-import ProjectDetailSummaryContent from "./ProjectDetailSummaryContent/ProjectDetailSummaryContent"
-import ProjectDetailSummaryTitle from "./ProjectDetailSummaryTitle/ProjectDetailSummaryTitle"
-import ProjectDetailSummaryTop from "./ProjectDetailSummaryTop/ProjectDetailSummaryTop"
+import SummaryContent from "./SummaryContent/SummaryContent"
+import SummaryTitle from "./SummaryTitle/SummaryTitle"
+import SummaryTop from "./SummaryTop/SummaryTop"
 
-interface ProjectDetailSummaryProps {
+interface SummaryProps {
   projects: Project[]
 }
-const ProjectDetailSummary = ({ projects }: ProjectDetailSummaryProps) => {
+
+const Summary = ({ projects }: SummaryProps) => {
   const {
     deployUrl,
     githubUrl,
@@ -28,7 +29,7 @@ const ProjectDetailSummary = ({ projects }: ProjectDetailSummaryProps) => {
         m="0 auto"
         p="2rem">
         <Flex flexDirection="column">
-          <ProjectDetailSummaryTop
+          <SummaryTop
             {...{
               likeCount,
               viewCount,
@@ -39,11 +40,11 @@ const ProjectDetailSummary = ({ projects }: ProjectDetailSummaryProps) => {
           <Center
             flexDirection="column"
             gap="5rem">
-            <ProjectDetailSummaryTitle
+            <SummaryTitle
               name={name}
               subName={subName}
             />
-            <ProjectDetailSummaryContent
+            <SummaryContent
               {...{
                 overviewImageUrl,
                 overview,
@@ -58,4 +59,4 @@ const ProjectDetailSummary = ({ projects }: ProjectDetailSummaryProps) => {
   )
 }
 
-export default ProjectDetailSummary
+export default Summary

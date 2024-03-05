@@ -9,10 +9,10 @@ import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules"
 import { SwiperSlide } from "swiper/react"
 import { Swiper as SwiperCore } from "swiper/types"
 
-import { StyledSwiper } from "../../styles/SwiperSlide.styles"
-import ProjectDetailSummaryRightIcon from "./ProjectDetailSummaryRightIcon"
+import { StyledSwiper } from "../../../styles/SwiperSlide.styles"
+import SummaryIcon from "./SummaryIcon"
 
-interface ProjectDetailSummaryRightProps {
+interface SummaryRightProps {
   overviewImageUrl: ProjectOverViewUrl[]
 }
 
@@ -24,9 +24,7 @@ const swiperParams = {
   modules: [Navigation, Pagination, Mousewheel, Keyboard],
 }
 
-const ProjectDetailSummaryRight = ({
-  overviewImageUrl,
-}: ProjectDetailSummaryRightProps) => {
+const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
   const swiperRef = useRef<SwiperCore>()
 
   return (
@@ -47,7 +45,7 @@ const ProjectDetailSummaryRight = ({
           </SwiperSlide>
         ))}
       </StyledSwiper>
-      <ProjectDetailSummaryRightIcon
+      <SummaryIcon
         direction="left"
         aria-label="leftIcon"
         onClick={() => swiperRef.current?.slidePrev()}
@@ -58,7 +56,7 @@ const ProjectDetailSummaryRight = ({
         }
       />
 
-      <ProjectDetailSummaryRightIcon
+      <SummaryIcon
         direction="right"
         aria-label="rightIcon"
         onClick={() => swiperRef.current?.slideNext()}
@@ -72,4 +70,4 @@ const ProjectDetailSummaryRight = ({
   )
 }
 
-export default ProjectDetailSummaryRight
+export default SummaryRight

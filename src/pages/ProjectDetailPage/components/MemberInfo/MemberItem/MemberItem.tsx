@@ -1,11 +1,11 @@
 import { Avatar, Flex, Text } from "@chakra-ui/react"
 import { Member } from "api-models"
 
-interface ProjectDetailMemberItemProps {
+interface MemberItemProps {
   member: Member
 }
 
-const ProjectDetailMemberItem = ({ member }: ProjectDetailMemberItemProps) => {
+const MemberItem = ({ member }: MemberItemProps) => {
   return (
     <Flex
       gap="1rem"
@@ -25,4 +25,4 @@ const ProjectDetailMemberItem = ({ member }: ProjectDetailMemberItemProps) => {
   )
 }
 
-export default ProjectDetailMemberItem
+export default MemberItem
