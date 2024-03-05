@@ -5,22 +5,21 @@ import { TiPencil } from "react-icons/ti"
 import { VscChromeClose } from "react-icons/vsc"
 import { useParams } from "react-router-dom"
 
+// import ResizeTextarea from "react-textarea-autosize"
 import { Box, Button, Flex, Text, Textarea } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
 import useDeleteCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
 import useEditCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useEditCommentMutation"
 
-import ProjectDetailCommentIcon from "./ProjectDetailCommentIcon"
-import { CommentType } from "./ProjectDetailCommentInput"
+import CommentsIcon from "./CommentsIcon"
+import { CommentType } from "./CommentsInput"
 
-interface ProjectDetailCommentContentProps {
+interface CommentsContentProps {
   comment: Comment
 }
 
-const ProjectDetailCommentContent = ({
-  comment,
-}: ProjectDetailCommentContentProps) => {
+const CommentsContent = ({ comment }: CommentsContentProps) => {
   const { register, handleSubmit, setValue, reset } = useForm<CommentType>()
   const [isEditing, setIsEditing] = useState(false)
 
@@ -77,12 +76,14 @@ const ProjectDetailCommentContent = ({
             </Text>
             {isEditing ? (
               <Textarea
+                height="fit-content"
                 rows={1}
                 w="100%"
                 border="none"
                 borderColor="grey.400"
                 fontSize="lg"
                 p="0"
+                // as={ResizeTextarea}
                 isRequired={false}
                 resize="none"
                 {...register("content")}
@@ -118,12 +119,12 @@ const ProjectDetailCommentContent = ({
             ) : (
               comment.isOwner && (
                 <>
-                  <ProjectDetailCommentIcon
+                  <CommentsIcon
                     aria-label="edit"
                     icon={<TiPencil />}
                     onClick={handleStartEdit}
                   />
-                  <ProjectDetailCommentIcon
+                  <CommentsIcon
                     aria-label="delete"
                     icon={<VscChromeClose />}
                     onClick={() => handleDelete(Number(comment.id))}
@@ -138,4 +139,4 @@ const ProjectDetailCommentContent = ({
   )
 }
 
-export default ProjectDetailCommentContent
+export default CommentsContent

@@ -1,9 +1,9 @@
 import { Avatar, Flex } from "@chakra-ui/react"
 
-import { ProjectDetailCommentProps } from "./ProjectDetailComment"
-import ProjectDetailCommentContent from "./ProjectDetailCommentContent"
+import { CommentsProps } from "./Comments"
+import CommentsContent from "./CommentsContent"
 
-const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
+const CommentsList = ({ comments }: CommentsProps) => {
   return (
     <Flex
       direction="column"
@@ -25,7 +25,7 @@ const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
               width="5rem"
               height="5rem"
             />
-            <ProjectDetailCommentContent comment={comment} />
+            <CommentsContent comment={comment} />
           </Flex>
         </Flex>
       ))}
@@ -33,4 +33,4 @@ const ProjectDetailCommentList = ({ comments }: ProjectDetailCommentProps) => {
   )
 }
 
-export default ProjectDetailCommentList
+export default CommentsList

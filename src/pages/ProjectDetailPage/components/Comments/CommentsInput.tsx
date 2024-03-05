@@ -16,7 +16,7 @@ export interface CommentType {
   content: string
 }
 
-const ProjectDetailCommentInput = () => {
+const CommentsInput = () => {
   const {
     register,
     handleSubmit,
@@ -77,4 +77,4 @@ const ProjectDetailCommentInput = () => {
     </form>
   )
 }
-export default ProjectDetailCommentInput
+export default CommentsInput

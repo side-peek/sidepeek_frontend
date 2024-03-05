@@ -1,7 +1,7 @@
 import { IconButton, IconButtonProps } from "@chakra-ui/react"
 
-interface ProjectDetailCommentIcon extends IconButtonProps {}
-const ProjectDetailCommentIcon = ({ ...props }: ProjectDetailCommentIcon) => {
+interface CommentsIconProps extends IconButtonProps {}
+const CommentsIcon = ({ ...props }: CommentsIconProps) => {
   return (
     <IconButton
       {...props}
@@ -13,4 +13,4 @@ const ProjectDetailCommentIcon = ({ ...props }: ProjectDetailCommentIcon) => {
   )
 }
 
-export default ProjectDetailCommentIcon
+export default CommentsIcon
