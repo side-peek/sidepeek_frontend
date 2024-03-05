@@ -1,4 +1,5 @@
 // TODO: 1. 포커스 자동 조정
+//       2. autoFocus 구현(옵션으로 사용하면 오류남)
 import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { TiPencil } from "react-icons/ti"
@@ -25,8 +26,8 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
 
   const { projectId } = useParams()
 
-  const { deleteComment } = useDeleteCommentMutation(Number(projectId))
-  const { editComment } = useEditCommentMutation(
+  const { deleteCommentMutation } = useDeleteCommentMutation(Number(projectId))
+  const { editCommentMutation } = useEditCommentMutation(
     Number(projectId),
     Number(comment.id),
   )
@@ -40,7 +41,7 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
   }
 
   const handleDelete = (id: number) => {
-    deleteComment.mutate(id)
+    deleteCommentMutation.mutate(id)
   }
 
   const handleCancelEdit = () => {
@@ -50,11 +51,11 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
 
   const onEditSubmit: SubmitHandler<CommentType> = (text) => {
     const req = {
-      ownerId: 12,
+      ownerId: comment.owner.id,
       isAnonymous: false,
       content: text.content,
     }
-    editComment.mutate(req)
+    editCommentMutation.mutate(req)
     setIsEditing(false)
   }
 

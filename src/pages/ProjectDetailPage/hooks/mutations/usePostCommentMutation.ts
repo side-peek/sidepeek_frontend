@@ -11,7 +11,7 @@ const QUERY_KEY_POST_COMMENT = "POST_COMMENT_2384902384"
 const usePostCommentMutation = (projectId: number) => {
   const queryClient = useQueryClient()
 
-  const sendComment = useMutation({
+  const sendCommentMutation = useMutation({
     mutationKey: [QUERY_KEY_POST_COMMENT, projectId],
     mutationFn: (data: postCommentPayload) =>
       postComment({ projectId, ...data }),
@@ -22,7 +22,7 @@ const usePostCommentMutation = (projectId: number) => {
     },
   })
 
-  return { sendComment }
+  return { sendCommentMutation }
 }
 
 export default usePostCommentMutation

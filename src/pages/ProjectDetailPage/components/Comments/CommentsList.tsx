@@ -4,6 +4,7 @@ import { CommentsProps } from "./Comments"
 import CommentsContent from "./CommentsContent"
 
 const CommentsList = ({ comments }: CommentsProps) => {
+  // TODO: Avatar 누르면 사용자 프로필 정보페이지로(로그인 한 유저만)
   return (
     <Flex
       direction="column"

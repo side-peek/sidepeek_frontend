@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
-import { deleteCommentAPI } from "@/api/comment/deleteCommentAPI"
+import { deleteComment } from "@/api/comment/deleteComment"
 
 import { QUERY_KEY_GET_PROJECT_DETAIL } from "../queries/useProjectDetailQuery"
 
@@ -9,9 +9,9 @@ const QUERY_KEY_DELETE_COMMENT = "DELETE_COMMENT_234893204832"
 const useDeleteCommentMutation = (projectId: number) => {
   const queryClient = useQueryClient()
 
-  const deleteComment = useMutation({
+  const deleteCommentMutation = useMutation({
     mutationKey: [QUERY_KEY_DELETE_COMMENT, projectId],
-    mutationFn: (id: number) => deleteCommentAPI({ projectId, id }),
+    mutationFn: (id: number) => deleteComment({ projectId, id }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
@@ -19,7 +19,7 @@ const useDeleteCommentMutation = (projectId: number) => {
     },
   })
 
-  return { deleteComment }
+  return { deleteCommentMutation }
 }
 
 export default useDeleteCommentMutation

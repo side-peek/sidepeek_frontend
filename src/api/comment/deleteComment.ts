@@ -5,7 +5,7 @@ import { ENDPOINTS } from "@constants/endPoints"
 
 import { authInstance } from "../axiosInstance"
 
-export const deleteCommentAPI = async (
+export const deleteComment = async (
   { projectId, id }: deleteCommentPayload,
   config: AxiosRequestConfig = {},
 ) => {

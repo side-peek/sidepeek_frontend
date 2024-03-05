@@ -5,7 +5,7 @@ import { ENDPOINTS } from "@constants/endPoints"
 
 import { authInstance } from "../axiosInstance"
 
-export const editCommentAPI = async (
+export const editComment = async (
   { projectId, id, ...body }: editCommentPayload,
   config: AxiosRequestConfig = {},
 ) => {
