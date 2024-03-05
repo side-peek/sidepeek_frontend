@@ -24,6 +24,8 @@ interface ProfileCardProps {
   setProfileInfo: React.Dispatch<React.SetStateAction<ProfileInfo>>
 }
 
+type CareerType = "0년차" | "1~3년차" | "4~6년차" | "7~9년차" | "10년차 이상"
+
 const ProfileCard = ({
   profileImageUrl,
   nickname,
@@ -39,7 +41,13 @@ const ProfileCard = ({
     }
   }
 
-  const careers = ["0년차", "1~3년차", "4~6년차", "7~9년차", "10년차 이상"]
+  const careers: CareerType[] = [
+    "0년차",
+    "1~3년차",
+    "4~6년차",
+    "7~9년차",
+    "10년차 이상",
+  ]
   return (
     <Flex
       w="100%"
