@@ -4,7 +4,6 @@ import { Center } from "@chakra-ui/layout"
 import { Flex } from "@chakra-ui/react"
 
 import Content from "./components/Content/Content"
-import MemberInfo from "./components/MemberInfo/MemberInfo"
 import Summary from "./components/Summary/Summary"
 import useProjectDetailQuery from "./hooks/queries/useProjectDetailQuery"
 
@@ -24,11 +23,9 @@ const ProjectDetailPage = () => {
         maxW="128rem"
         w="100%"
         margin="0 auto"
-        mt="10rem"
-        px="5rem"
+        p="5rem"
         gap="10rem"
         direction="column">
-        <MemberInfo members={projectDetailInfo.members} />
         <Content projectDetailInfo={projectDetailInfo} />
       </Flex>
     </>

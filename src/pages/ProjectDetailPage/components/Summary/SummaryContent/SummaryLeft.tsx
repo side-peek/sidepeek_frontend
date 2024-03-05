@@ -3,12 +3,12 @@ import { Flex } from "@chakra-ui/react"
 import SummaryLink from "./SummaryLink"
 import SummaryOverview from "./SummaryOverview"
 
-interface SummaryUrlProps {
+interface SummaryLeftProps {
   deployUrl: string
   githubUrl: string
   overview: string
 }
-const SummaryUrl = ({ deployUrl, githubUrl, overview }: SummaryUrlProps) => {
+const SummaryLeft = ({ deployUrl, githubUrl, overview }: SummaryLeftProps) => {
   return (
     <Flex
       flexDirection="column"
@@ -24,4 +24,4 @@ const SummaryUrl = ({ deployUrl, githubUrl, overview }: SummaryUrlProps) => {
   )
 }
 
-export default SummaryUrl
+export default SummaryLeft

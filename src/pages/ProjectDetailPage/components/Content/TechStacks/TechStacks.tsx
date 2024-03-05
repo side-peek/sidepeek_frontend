@@ -24,7 +24,6 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
       </Text>
       <Flex
         gap="3rem"
-        pl="5rem"
         direction="column">
         {groupedByCategory.map((category) => (
           <Flex

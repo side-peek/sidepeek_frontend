@@ -8,11 +8,11 @@ const ViewStyleParams = {
   fontFamily: "SCDream_Regular",
 }
 
-interface SummaryTabItemProps {
+interface ExplanationItemProps {
   content: string
 }
 
-const SummaryTabItem = ({ content }: SummaryTabItemProps) => {
+const ExplanationItem = ({ content }: ExplanationItemProps) => {
   return (
     <Box data-color-mode="light">
       <MDEditor.Markdown
@@ -23,4 +23,4 @@ const SummaryTabItem = ({ content }: SummaryTabItemProps) => {
   )
 }
 
-export default SummaryTabItem
+export default ExplanationItem

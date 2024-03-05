@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react"
 import { ProjectOverViewUrl } from "api-models"
 
-import SummaryLink from "./SummaryLink"
+import SummaryLeft from "./SummaryLeft"
 import SummaryRight from "./SummaryRight"
 
 interface SummaryContentProps {
@@ -20,9 +20,9 @@ const SummaryContent = ({
   return (
     <Flex
       justifyContent="space-between"
-      align="flex-end"
+      align="stretch"
       w="100%">
-      <SummaryLink
+      <SummaryLeft
         {...{
           deployUrl,
           githubUrl,
