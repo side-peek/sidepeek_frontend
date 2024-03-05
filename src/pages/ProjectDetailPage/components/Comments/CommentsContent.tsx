@@ -4,8 +4,8 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { TiPencil } from "react-icons/ti"
 import { VscChromeClose } from "react-icons/vsc"
 import { useParams } from "react-router-dom"
+import ResizeTextarea from "react-textarea-autosize"
 
-// import ResizeTextarea from "react-textarea-autosize"
 import { Box, Button, Flex, Text, Textarea } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
@@ -83,7 +83,7 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
                 borderColor="grey.400"
                 fontSize="lg"
                 p="0"
-                // as={ResizeTextarea}
+                as={ResizeTextarea}
                 isRequired={false}
                 resize="none"
                 {...register("content")}

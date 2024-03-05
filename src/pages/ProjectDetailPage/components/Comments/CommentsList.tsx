@@ -17,7 +17,7 @@ const CommentsList = ({ comments }: CommentsProps) => {
           <Flex
             gap="2rem"
             w="100%"
-            align="center">
+            align="flex-start">
             <Avatar
               cursor="pointer"
               _hover={{ opacity: "0.5" }}
