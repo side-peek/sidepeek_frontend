@@ -9,8 +9,10 @@ import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules"
 import { SwiperSlide } from "swiper/react"
 import { Swiper as SwiperCore } from "swiper/types"
 
+import noImage from "@assets/images/noImage.jpg"
+
 import { StyledSwiper } from "../../../styles/SwiperSlide.styles"
-import SummaryIcon from "./SummaryIcon"
+import SummaryRightIcon from "./SummaryRightIcon"
 
 interface SummaryRightProps {
   overviewImageUrl: ProjectOverViewUrl[]
@@ -38,14 +40,13 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
         {overviewImageUrl.map((overviewImg) => (
           <SwiperSlide key={overviewImg.id}>
             <Image
-              borderRadius="1rem"
               src={overviewImg.url}
-              alt="project thumbnail"
+              fallbackSrc={noImage}
             />
           </SwiperSlide>
         ))}
       </StyledSwiper>
-      <SummaryIcon
+      <SummaryRightIcon
         direction="left"
         aria-label="leftIcon"
         onClick={() => swiperRef.current?.slidePrev()}
@@ -56,7 +57,7 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
         }
       />
 
-      <SummaryIcon
+      <SummaryRightIcon
         direction="right"
         aria-label="rightIcon"
         onClick={() => swiperRef.current?.slideNext()}

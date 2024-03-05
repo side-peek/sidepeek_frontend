@@ -20,6 +20,7 @@ const SummaryContent = ({
   return (
     <Flex
       justifyContent="space-between"
+      align="flex-end"
       w="100%">
       <SummaryLink
         {...{

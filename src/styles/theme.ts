@@ -23,6 +23,7 @@ const themeConfig = {
   },
 
   colors: {
+    default: "#ffffff",
     blue: {
       100: "#0C356A",
       200: "#0174BE",
@@ -78,6 +79,7 @@ const themeConfig = {
     base: 0,
     docked: 10,
     dropdown: 20,
+    fixed: 29,
     sticky: 30,
     banner: 40,
     overlay: 50,
@@ -89,6 +91,8 @@ const themeConfig = {
   },
   sizes: {
     headerHeight: "9.5rem",
+    coverHeight: "25rem",
+    footerHeight: "19rem",
   },
   semanticTokens: {},
 }

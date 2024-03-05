@@ -1,15 +1,11 @@
 import { Box, Center, Flex } from "@chakra-ui/react"
-import { Project } from "api-models"
+import { getProjectDetailResponseType } from "api-models"
 
 import SummaryContent from "./SummaryContent/SummaryContent"
 import SummaryTitle from "./SummaryTitle/SummaryTitle"
 import SummaryTop from "./SummaryTop/SummaryTop"
 
-interface SummaryProps {
-  projects: Project[]
-}
-
-const Summary = ({ projects }: SummaryProps) => {
+const Summary = ({ projectDetailInfo }: getProjectDetailResponseType) => {
   const {
     deployUrl,
     githubUrl,
@@ -20,7 +16,7 @@ const Summary = ({ projects }: SummaryProps) => {
     likeCount,
     commentCount,
     overview,
-  } = projects[0]
+  } = projectDetailInfo
   return (
     <Box bg="whiteSmoke">
       <Flex
@@ -41,8 +37,10 @@ const Summary = ({ projects }: SummaryProps) => {
             flexDirection="column"
             gap="5rem">
             <SummaryTitle
-              name={name}
-              subName={subName}
+              {...{
+                name,
+                subName,
+              }}
             />
             <SummaryContent
               {...{

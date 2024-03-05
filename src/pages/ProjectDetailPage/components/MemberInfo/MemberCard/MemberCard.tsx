@@ -6,6 +6,7 @@ interface MemberCardProps {
 }
 
 const MemberCard = ({ member }: MemberCardProps) => {
+  console.log(member)
   return (
     <Flex
       gap="1rem"
