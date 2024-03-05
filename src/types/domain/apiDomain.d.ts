@@ -70,16 +70,6 @@ declare module "api-models" {
     isDeploy: boolean
   }
 
-  export type AllProject = {
-    id: number
-    name: string
-    subName: string
-    thumbnailUrl: string
-    viewCount: number
-    likeCount: number
-    isLiked: boolean
-  }
-
   export type Description = {
     content: string
     imageUrls: string[]
