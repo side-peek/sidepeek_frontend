@@ -1,24 +1,21 @@
 import { ChangeEvent, useState } from "react"
-import { IoMdSearch } from "react-icons/io"
 
 import {
   Box,
-  Center,
   Checkbox,
   Container,
   HStack,
-  Icon,
   Select,
   Spacer,
   Stack,
 } from "@chakra-ui/react"
 
-import CommonInput from "@components/Input/CommonInput"
 import ProjectList from "@components/ProjectList/ProjectList"
 
 import useAllProjectQuery from "@pages/HomePage/hooks/queries/useAllProjectQuery"
 
 import ResultInfo from "./components/ResultInfo"
+import SearchSection from "./components/SearchSection"
 
 type SelectType = "default" | "likeCount" | "viewCount"
 
@@ -27,9 +24,10 @@ const ProjectListPage = () => {
   const search = params.get("search")
 
   const [isDeploy, setIsDeploy] = useState(false)
+
   const [selectedOption, setSelectedOption] = useState<SelectType>("default")
 
-  // 검색 결과 가져오기
+  // 검색 결과 가져오기 (일단 임시로 다 받아왔어용..)
   const { allProjectList, isAllProjectLoading } = useAllProjectQuery()
 
   const projectList = allProjectList?.projects.filter((project) =>
@@ -43,40 +41,11 @@ const ProjectListPage = () => {
 
   return (
     <>
-      <Box
-        height="12rem"
-        backgroundColor="blue.100">
-        <Center
-          position="absolute"
-          left="50%"
-          top="20rem"
-          transform="translate(-50%,-50%)">
-          <CommonInput
-            placeholder="검색어를 입력하세요"
-            borderRadius="5rem"
-            inputWidth="50rem"
-            height="7rem"
-            fontSize="2xl"
-            onChange={() => console.log("change")}
-            backgroundColor="white">
-            <Icon
-              cursor="pointer"
-              as={IoMdSearch}
-              w="5rem"
-              h="5rem"
-              position="absolute"
-              top="1rem"
-              right="1rem"
-            />
-          </CommonInput>
-        </Center>
-      </Box>
-
+      <SearchSection />
       <ResultInfo
         searchWord={search !== null ? search : ""}
         resultCount={projectList !== undefined ? projectList?.length : 0}
       />
-
       <Container maxW="80%">
         <Stack marginTop="15rem">
           <HStack spacing={5}>
