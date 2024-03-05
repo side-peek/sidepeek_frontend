@@ -7,32 +7,28 @@ import CommonInput from "@components/Input/CommonInput"
 
 import usePostCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 
+import { FormValues } from "../../types/formValues"
+
 // TODO: 1. type폴더로 분리하기
 //       2. onSubmit request 동적으로 수정
-
-export interface CommentType {
-  ownerId: number
-  isAnonymous: boolean
-  content: string
-}
 
 const CommentsInput = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CommentType>()
+  } = useForm<FormValues>()
   const { projectId } = useParams()
 
-  const { sendComment } = usePostCommentMutation(Number(projectId))
+  const { sendCommentMutation } = usePostCommentMutation(Number(projectId))
 
-  const onSubmit: SubmitHandler<CommentType> = (text) => {
+  const onSubmit: SubmitHandler<FormValues> = (text) => {
     const req = {
       ownerId: 12,
       isAnonymous: false,
       content: text.content,
     }
-    sendComment.mutate(req)
+    sendCommentMutation.mutate(req)
   }
 
   return (

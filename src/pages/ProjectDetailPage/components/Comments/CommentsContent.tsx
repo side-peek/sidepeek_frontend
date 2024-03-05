@@ -13,15 +13,15 @@ import { Comment } from "api-models"
 import useDeleteCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
 import useEditCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useEditCommentMutation"
 
+import { FormValues } from "../../types/formValues"
 import CommentsIcon from "./CommentsIcon"
-import { CommentType } from "./CommentsInput"
 
 interface CommentsContentProps {
   comment: Comment
 }
 
 const CommentsContent = ({ comment }: CommentsContentProps) => {
-  const { register, handleSubmit, setValue, reset } = useForm<CommentType>()
+  const { register, handleSubmit, setValue, reset } = useForm<FormValues>()
   const [isEditing, setIsEditing] = useState(false)
 
   const { projectId } = useParams()
@@ -49,7 +49,7 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
     reset()
   }
 
-  const onEditSubmit: SubmitHandler<CommentType> = (text) => {
+  const onEditSubmit: SubmitHandler<FormValues> = (text) => {
     const req = {
       ownerId: comment.owner.id,
       isAnonymous: false,
