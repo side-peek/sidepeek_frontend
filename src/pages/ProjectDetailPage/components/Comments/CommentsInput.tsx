@@ -1,9 +1,8 @@
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useParams } from "react-router-dom"
+import ResizeTextarea from "react-textarea-autosize"
 
-import { Button, Flex, FormControl } from "@chakra-ui/react"
-
-import CommonInput from "@components/Input/CommonInput"
+import { Button, Flex, FormControl, Textarea } from "@chakra-ui/react"
 
 import usePostCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 
@@ -39,19 +38,17 @@ const CommentsInput = () => {
         <FormControl
           isInvalid={!!errors.content}
           flex="8.5">
-          <CommonInput
-            inputWidth="100%"
-            border="none"
+          <Textarea
+            rows={1}
             height="8rem"
-            borderBottom="1px"
             borderColor="grey.400"
-            fontSize="2rem"
-            px="3rem"
+            fontSize="xl"
+            p="2.5rem"
+            as={ResizeTextarea}
             placeholder={"댓글을 입력하세요"}
             isRequired={false}
-            register={{
-              ...register("content"),
-            }}
+            resize="none"
+            {...register("content")}
           />
         </FormControl>
 

@@ -15,14 +15,18 @@ const CommentsText = ({ isEditing, register, content }: CommentsTextProps) => {
       rows={1}
       w="100%"
       fontSize="lg"
-      p="2"
+      p="0.2rem"
       as={ResizeTextarea}
       isRequired={false}
       resize="none"
       {...register}
     />
   ) : (
-    <Text fontSize="lg">{content}</Text>
+    <Text
+      fontSize="lg"
+      p="0.2rem">
+      {content}
+    </Text>
   )
 }
 
