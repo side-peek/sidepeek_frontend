@@ -4,15 +4,13 @@ import { TechStack } from "api-models"
 
 import CustomTag from "@components/Tag/components/CustomTag"
 
-import getGroupedCategory from "@pages/ProjectDetailPage/utils/getGroupedCategory"
+import techStacksCategory from "@pages/ProjectDetailPage/utils/techStacksCategory"
 
-interface ProjectDetailTechStacksProps {
+interface TechStacksProps {
   techStacks: TechStack[]
 }
-const ProjectDetailTechStacks = ({
-  techStacks,
-}: ProjectDetailTechStacksProps) => {
-  const groupedByCategory = getGroupedCategory(techStacks)
+const TechStacks = ({ techStacks }: TechStacksProps) => {
+  const groupedByCategory = techStacksCategory(techStacks)
   const [isLargerThan600] = useMediaQuery(["(min-width: 600px)"])
 
   return (
@@ -20,29 +18,28 @@ const ProjectDetailTechStacks = ({
       direction="column"
       gap="3rem">
       <Text
-        fontSize="2xl"
+        fontSize="3xl"
         fontFamily="SCDream_Bold">
         기술 스택
       </Text>
       <Flex
         gap="3rem"
-        pl="5rem"
         direction="column">
-        {groupedByCategory.map((category) => (
+        {groupedByCategory.map(([category, stacks]) => (
           <Flex
-            key={category[0]}
+            key={category}
             direction={isLargerThan600 ? "row" : "column"}
             gap="2rem">
             <Text
               fontSize="xl"
               minW="8rem"
               whiteSpace="nowrap">
-              {category[0]}
+              {category}
             </Text>
             <HStack
               spacing="1rem"
               flexWrap="wrap">
-              {category[1].map((stack) => (
+              {stacks.map((stack) => (
                 <CustomTag
                   label={stack.skill.name}
                   key={stack.skill.id}
@@ -56,4 +53,4 @@ const ProjectDetailTechStacks = ({
   )
 }
 
-export default ProjectDetailTechStacks
+export default TechStacks

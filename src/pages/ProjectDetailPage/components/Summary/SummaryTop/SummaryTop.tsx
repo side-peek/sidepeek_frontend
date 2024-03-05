@@ -6,19 +6,19 @@ import { useLocation } from "react-router-dom"
 
 import { Flex } from "@chakra-ui/react"
 
-import ProjectDetailSummaryTopIcon from "./ProjectDetailSummaryTopIcon"
-import ProjectDetailSummaryTopIconButton from "./ProjectDetailSummaryTopIconButton"
+import SummaryTopIcon from "./SummaryTopIcon"
+import SummaryTopIconButton from "./SummaryTopIconButton"
 
-interface ProjectDetailSummaryTopProps {
+interface SummaryTopProps {
   likeCount: number
   viewCount: number
   commentCount: number
 }
-const ProjectDetailSummaryTop = ({
+const SummaryTop = ({
   likeCount,
   viewCount,
   commentCount,
-}: ProjectDetailSummaryTopProps) => {
+}: SummaryTopProps) => {
   /*
     TODO: 1. 좋아요 요청
           2. 댓글 클릭시 댓글 창으로 스크롤
@@ -27,6 +27,7 @@ const ProjectDetailSummaryTop = ({
   */
 
   const location = useLocation()
+
   const handleCopyClipBoard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text)
@@ -34,28 +35,29 @@ const ProjectDetailSummaryTop = ({
       console.log(err)
     }
   }
+
   return (
     <Flex
       gap="1.5rem"
       justifyContent="flex-end">
-      <ProjectDetailSummaryTopIcon
+      <SummaryTopIcon
         count={viewCount}
         icon={MdRemoveRedEye}
       />
 
-      <ProjectDetailSummaryTopIconButton
+      <SummaryTopIconButton
         count={likeCount}
         icon={<IoMdHeartEmpty />}
         aria-label="good"
         fontSize="2.7rem"
       />
-      <ProjectDetailSummaryTopIconButton
+      <SummaryTopIconButton
         count={commentCount}
         icon={<FaRegComment />}
         aria-label="comment"
         fontSize="2.3rem"
       />
-      <ProjectDetailSummaryTopIconButton
+      <SummaryTopIconButton
         onClick={() =>
           handleCopyClipBoard(`localhost:5173${location.pathname}`)
         }
@@ -67,4 +69,4 @@ const ProjectDetailSummaryTop = ({
   )
 }
 
-export default ProjectDetailSummaryTop
+export default SummaryTop

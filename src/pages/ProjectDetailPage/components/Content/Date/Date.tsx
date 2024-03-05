@@ -2,18 +2,18 @@ import { HStack, Text } from "@chakra-ui/react"
 
 import changeDateForm from "@pages/ProjectDetailPage/utils/changeDateForm"
 
-interface ProjectDetailDateProps {
+interface DateProps {
   startDate: string
   endDate: string
 }
 
-const ProjectDetailDate = ({ startDate, endDate }: ProjectDetailDateProps) => {
+const Date = ({ startDate, endDate }: DateProps) => {
   return (
     <HStack
       spacing="6rem"
       h="10rem">
       <Text
-        fontSize="2xl"
+        fontSize="3xl"
         fontFamily="SCDream_Bold">
         프로젝트 기간
       </Text>
@@ -22,4 +22,4 @@ const ProjectDetailDate = ({ startDate, endDate }: ProjectDetailDateProps) => {
   )
 }
 
-export default ProjectDetailDate
+export default Date

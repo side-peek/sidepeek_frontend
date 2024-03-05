@@ -3,9 +3,9 @@ import { TbWorld } from "react-icons/tb"
 
 import { Flex } from "@chakra-ui/react"
 
-import ProjectDetailSummaryLinkButton from "./ProjectDetailSummaryLinkButton"
+import SummaryLinkButton from "./SummaryLinkButton"
 
-interface ProjectDetailSummaryLinkProps {
+interface SummaryLinkProps {
   deployUrl: string
   githubUrl: string
 }
@@ -14,20 +14,17 @@ const handleOpenNewTab = (url: string) => {
   window.open(url, "_blank", "noopener, noreferrer")
 }
 
-const ProjectDetailSummaryLink = ({
-  deployUrl,
-  githubUrl,
-}: ProjectDetailSummaryLinkProps) => {
+const SummaryLink = ({ deployUrl, githubUrl }: SummaryLinkProps) => {
   return (
     <Flex gap="2rem">
-      <ProjectDetailSummaryLinkButton
+      <SummaryLinkButton
         linkName="WEB"
         leftIcon={<TbWorld />}
         bgColor="blue.100"
         onClick={() => handleOpenNewTab(deployUrl)}
       />
 
-      <ProjectDetailSummaryLinkButton
+      <SummaryLinkButton
         leftIcon={<FaGithub />}
         bgColor="blue.300"
         linkName="GithUb"
@@ -37,4 +34,4 @@ const ProjectDetailSummaryLink = ({
   )
 }
 
-export default ProjectDetailSummaryLink
+export default SummaryLink

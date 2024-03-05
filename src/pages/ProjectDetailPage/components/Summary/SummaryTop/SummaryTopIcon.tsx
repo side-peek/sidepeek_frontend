@@ -2,16 +2,12 @@ import { IconType } from "react-icons/lib"
 
 import { Flex, Icon, IconProps, Text } from "@chakra-ui/react"
 
-interface ProjectDetailSummaryTopIconProps extends IconProps {
+interface SummaryTopIconProps extends IconProps {
   count: number
   icon: IconType
 }
 
-const ProjectDetailSummaryTopIcon = ({
-  count,
-  icon,
-  ...props
-}: ProjectDetailSummaryTopIconProps) => {
+const SummaryTopIcon = ({ count, icon, ...props }: SummaryTopIconProps) => {
   return (
     <Flex
       gap="0.7rem"
@@ -28,4 +24,4 @@ const ProjectDetailSummaryTopIcon = ({
   )
 }
 
-export default ProjectDetailSummaryTopIcon
+export default SummaryTopIcon

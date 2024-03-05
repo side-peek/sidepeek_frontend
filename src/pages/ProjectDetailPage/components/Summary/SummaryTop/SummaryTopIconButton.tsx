@@ -1,13 +1,13 @@
 import { Flex, IconButton, IconButtonProps, Text } from "@chakra-ui/react"
 
-interface ProjectDetailSummaryTopIconButtonProps extends IconButtonProps {
+interface SummaryTopIconButtonProps extends IconButtonProps {
   count?: number
 }
 
-const ProjectDetailSummaryTopIconButton = ({
+const SummaryTopIconButton = ({
   count,
   ...props
-}: ProjectDetailSummaryTopIconButtonProps) => {
+}: SummaryTopIconButtonProps) => {
   return (
     <Flex
       gap="0.7rem"
@@ -24,4 +24,4 @@ const ProjectDetailSummaryTopIconButton = ({
   )
 }
 
-export default ProjectDetailSummaryTopIconButton
+export default SummaryTopIconButton

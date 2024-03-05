@@ -1,14 +1,11 @@
 import { Box, Text } from "@chakra-ui/react"
 
-interface ProjectDetailSummaryTitleProps {
+interface SummaryTitleProps {
   name: string
   subName: string
 }
 
-const ProjectDetailSummaryTitle = ({
-  name,
-  subName,
-}: ProjectDetailSummaryTitleProps) => {
+const SummaryTitle = ({ name, subName }: SummaryTitleProps) => {
   return (
     <Box>
       <Text
@@ -26,4 +23,4 @@ const ProjectDetailSummaryTitle = ({
   )
 }
 
-export default ProjectDetailSummaryTitle
+export default SummaryTitle

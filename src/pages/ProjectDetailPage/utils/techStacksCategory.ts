@@ -1,6 +1,6 @@
 import { TechStack } from "api-models"
 
-const getGroupedCategory = (techStacks: TechStack[]) => {
+const techStacksCategory = (techStacks: TechStack[]) => {
   return Object.entries(
     techStacks.reduce<Record<string, TechStack[]>>((acc, item) => {
       if (!acc[item.category]) {
@@ -12,4 +12,4 @@ const getGroupedCategory = (techStacks: TechStack[]) => {
   )
 }
 
-export default getGroupedCategory
+export default techStacksCategory

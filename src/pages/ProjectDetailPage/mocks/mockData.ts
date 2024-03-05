@@ -154,31 +154,35 @@ export const DUMMY_PROJECT_DETAIL = {
   members: [
     {
       id: 1,
-      category: "PO",
-      userSummary: {
-        id: 1,
-        nickname: "의진",
-        profileImageUrl: "https://user-images.githubusercontent.com/uijin.png",
-      },
+      nickname: "의진",
+      profileImageUrl:
+        "https://user-images.githubusercontent.com/37354708/144370579-763a962c-5076-413c-9ea6-1043985791f6.png",
+      category: "백",
     },
     {
       id: 2,
+      nickname: "동건",
+      profileImageUrl:
+        "https://user-images.githubusercontent.com/37354708/144370579-763a962c-5076-413c-9ea6-1043985791f6.png",
       category: "프론트",
-      userSummary: {
-        id: 2,
-        nickname: "동건",
-        profileImageUrl:
-          "https://user-images.githubusercontent.com/donggun.png",
-      },
     },
     {
       id: 3,
-      category: "오락부짱",
-      userSummary: {
-        id: null,
-        nickname: "민호",
-        profileImageUrl: null,
-      },
+      nickname: "민호",
+      profileImageUrl: null,
+      category: "기획",
+    },
+    {
+      id: 4,
+      nickname: "종혁",
+      profileImageUrl: null,
+      category: "프론트",
+    },
+    {
+      id: 5,
+      nickname: "세희",
+      profileImageUrl: null,
+      category: "백",
     },
   ],
   description:
