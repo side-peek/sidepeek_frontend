@@ -1,6 +1,6 @@
 import { Member } from "api-models"
 
-const getGroupedCategory = (members: Member[]) => {
+const combinateCategory = (members: Member[]) => {
   return Object.entries(
     members.reduce<Record<string, Member[]>>((acc, item) => {
       if (!acc[item.category]) {
@@ -12,4 +12,4 @@ const getGroupedCategory = (members: Member[]) => {
   )
 }
 
-export default getGroupedCategory
+export default combinateCategory
