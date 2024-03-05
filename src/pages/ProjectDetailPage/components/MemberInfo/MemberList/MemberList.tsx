@@ -1,7 +1,7 @@
 import { Flex, Text } from "@chakra-ui/react"
 import { Member } from "api-models"
 
-import MemberItem from "../MemberItem/MemberItem"
+import MemberCard from "../MemberCard/MemberCard"
 
 interface MemberListProps {
   members: Member[]
@@ -23,7 +23,7 @@ const MemberList = ({ category, members }: MemberListProps) => {
         p="1rem"
         alignItems="center">
         {members.map((member) => (
-          <MemberItem
+          <MemberCard
             member={member}
             key={member.id}
           />
