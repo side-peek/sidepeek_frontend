@@ -1,7 +1,4 @@
-import {
-  getProjectDetailPayload,
-  getProjectDetailResponseType,
-} from "api-models"
+import { Project, getProjectDetailPayload } from "api-models"
 import { AxiosRequestConfig } from "axios"
 
 import { ENDPOINTS } from "@constants/endPoints"
@@ -12,12 +9,13 @@ export const getProjectDetail = async (
   { projectId }: getProjectDetailPayload,
   config: AxiosRequestConfig = {},
 ) => {
-  const { data } = await baseInstance.get<getProjectDetailResponseType>(
+  const { data } = await baseInstance.get<Project>(
     ENDPOINTS.GET_PROJECT_DETAILS(projectId),
     {
       ...config,
     },
   )
+  console.log(data)
 
   return data
 }

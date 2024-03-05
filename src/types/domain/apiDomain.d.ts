@@ -44,7 +44,7 @@ declare module "api-models" {
     subName: string
     overview: string
     thumbnailUrl: string
-    overviewImageUrl: string[]
+    overviewImageUrl: ProjectOverViewUrl[]
     githubUrl: string
     deployUrl: string
     techStacks: TechStack[]
@@ -52,8 +52,22 @@ declare module "api-models" {
     endDate: string
     ownerId: number
     members: Member[]
-    description: Description
-    troubleShooting: Description
+    viewCount: number
+    likeCount: number
+    commentCount: number
+    description: string
+    troubleShooting: string
+  }
+
+  export type AllProject = {
+    id: number
+    name: string
+    subName: string
+    thumbnailUrl: string
+    viewCount: number
+    likeCount: number
+    isLiked: boolean
+    isDeploy: boolean
   }
 
   export type AllProject = {
@@ -72,9 +86,9 @@ declare module "api-models" {
   }
 
   export type Member = {
-    userId?: number
+    id: number
     category: string
-    nickname: string
+    userSummary: UserSummary
   }
 
   export type ProjectTag = {
@@ -102,6 +116,11 @@ declare module "api-models" {
     authority: string
     role: string
     nickname: string
+  }
+
+  export type ProjectOverViewUrl = {
+    id: number
+    url: string
   }
 
   export type Comment = {
@@ -231,7 +250,7 @@ declare module "api-models" {
   }
 
   export type getProjectDetailResponseType = {
-    projects: Project[]
+    projectDetailInfo: Project
   }
 
   export type getAllProjectsResponseType = {

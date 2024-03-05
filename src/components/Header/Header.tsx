@@ -11,27 +11,28 @@ import {
   Spacer,
 } from "@chakra-ui/react"
 
-import HeaderLogo from "./components/HeaderLogo"
+import LogoLink from "@components/LogoLink/LogoLink"
+
 import Menu from "./components/Menu"
 
 const Header = () => {
   return (
-    <Center
-      w="100%"
-      position="sticky"
-      bg="white"
-      boxShadow="md">
+    <Center height="headerHeight">
       <Flex
+        position="fixed"
+        top="0"
+        right="0"
+        left="0"
+        zIndex="fixed"
+        bg="white"
+        boxShadow="md"
         flex="1"
-        h="headerHeight"
-        maxW="1280px"
+        height="headerHeight"
         align="center"
         gap="1.6rem"
         px="1.6rem">
         {/* 로고 */}
-        <Box>
-          <HeaderLogo />
-        </Box>
+        <LogoLink logoHeight="7rem" />
         {/* 검색창 */}
         <Box
           pl="1.5rem"
