@@ -42,7 +42,7 @@ const HomePage = () => {
     <>
       {/* 임시로 다섯개 잘라서 넣었습니다*/}
       {isAllProjectLoading ? (
-        <Skeleton height="52rem" />
+        <Skeleton height="35rem" />
       ) : (
         <Banner bannerList={allProjectList?.projects.slice(0, 5)} />
       )}

@@ -33,7 +33,7 @@ const Banner = ({ bannerList }: bannerListProps) => {
       modules={[Navigation, Pagination, Autoplay]}
       navigation
       pagination={{ clickable: true }}
-      style={{ height: "52rem" }}
+      style={{ height: "35rem" }}
       autoplay={{ delay: 5000, disableOnInteraction: false }}>
       {bannerList?.map((project) => (
         <SwiperSlide
