@@ -18,18 +18,20 @@ const ProjectDetailPage = () => {
   }
 
   return (
-    <Flex
-      maxW="128rem"
-      w="100%"
-      margin="0 auto"
-      mt="10rem"
-      px="5rem"
-      gap="10rem"
-      direction="column">
+    <>
       <Summary projectDetailInfo={projectDetailInfo} />
-      <MemberInfo members={projectDetailInfo.members} />
-      <Content projectDetailInfo={projectDetailInfo} />
-    </Flex>
+      <Flex
+        maxW="128rem"
+        w="100%"
+        margin="0 auto"
+        mt="10rem"
+        px="5rem"
+        gap="10rem"
+        direction="column">
+        <MemberInfo members={projectDetailInfo.members} />
+        <Content projectDetailInfo={projectDetailInfo} />
+      </Flex>
+    </>
   )
 }
 
