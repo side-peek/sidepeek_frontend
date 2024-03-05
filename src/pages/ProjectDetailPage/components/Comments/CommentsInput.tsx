@@ -22,12 +22,12 @@ const CommentsInput = () => {
 
   // TODO: 빈 값일때 처리(Toast로 구현)
   const onSubmit: SubmitHandler<FormValues> = (text) => {
-    const req = {
+    const commentRequestValue = {
       ownerId: 12,
       isAnonymous: false,
       content: text.content,
     }
-    sendCommentMutation.mutate(req)
+    sendCommentMutation.mutate(commentRequestValue)
     reset()
   }
 
@@ -36,7 +36,9 @@ const CommentsInput = () => {
       <Flex
         w="100%"
         height="8rem">
-        <FormControl isInvalid={!!errors.content}>
+        <FormControl
+          isInvalid={!!errors.content}
+          flex="8.5">
           <CommonInput
             inputWidth="100%"
             border="none"
@@ -54,7 +56,7 @@ const CommentsInput = () => {
         </FormControl>
 
         <Button
-          w="20%"
+          flex="1.5"
           height="100%"
           p="0"
           bgColor="blue.100"

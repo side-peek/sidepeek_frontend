@@ -1,17 +1,17 @@
 // TODO: 1. 포커스 자동 조정
-//       2. autoFocus 구현(옵션으로 사용하면 오류남)
+//       2. 하나만 수정모드 가능하도록 포커스 벗어날시 해제
 import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useParams } from "react-router-dom"
-import ResizeTextarea from "react-textarea-autosize"
 
-import { Box, Flex, Text, Textarea } from "@chakra-ui/react"
+import { Box, Flex, Text } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
 import useEditCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useEditCommentMutation"
 
 import { FormValues } from "../../types/formValues"
 import CommentsButton from "./CommentsButton"
+import CommentsText from "./CommentsText"
 
 interface CommentsContentProps {
   comment: Comment
@@ -42,12 +42,12 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
   }
 
   const onEditSubmit: SubmitHandler<FormValues> = (text) => {
-    const req = {
+    const commentRequestValue = {
       ownerId: comment.owner.id,
       isAnonymous: false,
       content: text.content,
     }
-    editCommentMutation.mutate(req)
+    editCommentMutation.mutate(commentRequestValue)
     setIsEditing(false)
   }
 
@@ -68,35 +68,22 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
               fontSize="xl">
               {comment.owner.nickname}
             </Text>
-            {isEditing ? (
-              <Textarea
-                height="fit-content"
-                rows={1}
-                w="100%"
-                border="none"
-                borderColor="grey.400"
-                fontSize="lg"
-                p="0"
-                as={ResizeTextarea}
-                isRequired={false}
-                resize="none"
-                {...register("content")}
-              />
-            ) : (
-              <Text fontSize="lg">{comment.content}</Text>
-            )}
+            <CommentsText
+              register={register("content")}
+              isEditing={isEditing}
+              content={comment.content}
+            />
           </Flex>
           <Flex
             gap="1rem"
             flex="0.5"
             height="fit-content">
             <CommentsButton
-              {...{
-                comment,
-                isEditing,
-                handleCancelEdit,
-                handleStartEdit,
-              }}
+              isOwner={comment.isOwner}
+              id={comment.id}
+              isEditing={isEditing}
+              handleCancelEdit={handleCancelEdit}
+              handleStartEdit={handleStartEdit}
             />
           </Flex>
         </Flex>

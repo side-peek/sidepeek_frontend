@@ -3,19 +3,20 @@ import { VscChromeClose } from "react-icons/vsc"
 import { useParams } from "react-router-dom"
 
 import { Button } from "@chakra-ui/react"
-import { Comment } from "api-models"
 
 import useDeleteCommentMutation from "../../hooks/mutations/useDeleteCommentMutation"
 import CommentsIcon from "./CommentsIcon"
 
 interface CommentsButtonProps {
-  comment: Comment
+  isOwner: boolean
+  id: number
   isEditing: boolean
   handleCancelEdit: () => void
   handleStartEdit: () => void
 }
 const CommentsButton = ({
-  comment,
+  isOwner,
+  id,
   isEditing,
   handleCancelEdit,
   handleStartEdit,
@@ -48,7 +49,7 @@ const CommentsButton = ({
       </Button>
     </>
   ) : (
-    comment.isOwner && (
+    isOwner && (
       <>
         <CommentsIcon
           aria-label="edit"
@@ -58,7 +59,7 @@ const CommentsButton = ({
         <CommentsIcon
           aria-label="delete"
           icon={<VscChromeClose />}
-          onClick={() => handleDelete(Number(comment.id))}
+          onClick={() => handleDelete(id)}
         />
       </>
     )
