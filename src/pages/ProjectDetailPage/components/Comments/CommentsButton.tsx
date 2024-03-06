@@ -2,10 +2,9 @@ import { TiPencil } from "react-icons/ti"
 import { VscChromeClose } from "react-icons/vsc"
 import { useParams } from "react-router-dom"
 
-import { Button } from "@chakra-ui/react"
+import { Button, IconButton } from "@chakra-ui/react"
 
 import useDeleteCommentMutation from "../../hooks/mutations/useDeleteCommentMutation"
-import CommentsIcon from "./CommentsIcon"
 
 interface CommentsButtonProps {
   isOwner: boolean
@@ -51,15 +50,17 @@ const CommentsButton = ({
   ) : (
     isOwner && (
       <>
-        <CommentsIcon
+        <IconButton
           aria-label="edit"
           icon={<TiPencil />}
           onClick={handleStartEdit}
+          fontSize="2xl"
         />
-        <CommentsIcon
+        <IconButton
           aria-label="delete"
           icon={<VscChromeClose />}
           onClick={() => handleDelete(id)}
+          fontSize="2xl"
         />
       </>
     )
