@@ -24,4 +24,6 @@ export const projectInputRegisters = {
   startDate: { required: "프로젝트 시작 날짜를 입력해주세요" },
 
   endDate: { required: "프로젝트 완성 날짜를 입력해주세요" },
+
+  techStacks: { required: "하나 이상은 필수입니다" },
 } satisfies Record<keyof ProjectFormValues, RegisterOptions>
