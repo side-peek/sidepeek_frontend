@@ -34,11 +34,11 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
     setValue("content", comment.content)
   }, [isEditing, setValue, comment.content])
 
-  const handleStartEdit = () => {
+  const handleOnEdit = () => {
     setIsEditing(true)
   }
 
-  const handleCancelEdit = () => {
+  const handleOffEdit = () => {
     setIsEditing(false)
     reset()
   }
@@ -101,8 +101,8 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
               isOwner={comment.isOwner}
               id={comment.id}
               isEditing={isEditing}
-              handleCancelEdit={handleCancelEdit}
-              handleStartEdit={handleStartEdit}
+              handleOnEdit={handleOnEdit}
+              handleOffEdit={handleOffEdit}
             />
           </Flex>
         </Flex>

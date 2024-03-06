@@ -10,15 +10,15 @@ interface CommentsButtonProps {
   isOwner: boolean
   id: number
   isEditing: boolean
-  handleCancelEdit: () => void
-  handleStartEdit: () => void
+  handleOnEdit: () => void
+  handleOffEdit: () => void
 }
 const CommentsButton = ({
   isOwner,
   id,
   isEditing,
-  handleCancelEdit,
-  handleStartEdit,
+  handleOnEdit,
+  handleOffEdit,
 }: CommentsButtonProps) => {
   const { projectId } = useParams()
 
@@ -43,7 +43,7 @@ const CommentsButton = ({
         p="0"
         fontSize="lg"
         _hover={{ border: "none", opacity: "0.5" }}
-        onClick={handleCancelEdit}>
+        onClick={handleOffEdit}>
         취소
       </Button>
     </>
@@ -53,7 +53,7 @@ const CommentsButton = ({
         <IconButton
           aria-label="edit"
           icon={<TiPencil />}
-          onClick={handleStartEdit}
+          onClick={handleOnEdit}
           fontSize="2xl"
         />
         <IconButton
