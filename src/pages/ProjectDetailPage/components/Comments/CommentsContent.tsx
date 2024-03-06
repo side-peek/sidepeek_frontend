@@ -43,7 +43,7 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
     reset()
   }
 
-  const onEditSubmit: SubmitHandler<CommentFormValues> = (text) => {
+  const onSubmit: SubmitHandler<CommentFormValues> = (text) => {
     const commentRequestValue = {
       ownerId: comment.user.id,
       isAnonymous: false,
@@ -55,7 +55,7 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
 
   return (
     <Box w="100%">
-      <form onSubmit={handleSubmit(onEditSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Flex
           justifyContent="space-between"
           w="100%">
