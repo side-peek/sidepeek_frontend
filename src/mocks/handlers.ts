@@ -3,6 +3,7 @@ import { rest } from "msw"
 import { searchHandlers } from "@components/Search/mocks"
 
 import allProjectHandlers from "@pages/HomePage/mocks"
+import { projectsHandlers, userInfoHandlers } from "@pages/ProfilePage/mocks"
 import { projectDetailHandlers } from "@pages/ProjectDetailPage/mocks"
 
 import { postEmailLogin } from "./auth/postEmailLogin.mock"
@@ -33,4 +34,6 @@ export const handlers = [
   ...allProjectHandlers,
   postEmailRefresh,
   postEmailLogin,
+  ...userInfoHandlers,
+  ...projectsHandlers,
 ]

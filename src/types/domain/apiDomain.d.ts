@@ -18,7 +18,7 @@ declare module "api-models" {
     isDeleted: boolean
   } */
 
-  export type UserInfo = {
+  export type UserInfoProperties = {
     nickname: string
     introduction: string
     profileImageUrl: string
@@ -28,6 +28,9 @@ declare module "api-models" {
     blogUrl: string
     techStacks: TechStack[]
   }
+  export interface UserInfo {
+    userInfo: UserInfoProperties
+  }
 
   export type UserSummary = {
     id: number
@@ -36,7 +39,7 @@ declare module "api-models" {
   }
 
   export type Project = {
-    id: string
+    id: number
     name: string
     subName: string
     overview: string
@@ -51,7 +54,6 @@ declare module "api-models" {
     members: Member[]
     viewCount: number
     commentCount: number
-    likeCount: number
     comments: Comment[]
     description: string
     troubleShooting: string
@@ -74,9 +76,10 @@ declare module "api-models" {
   }
 
   export type Member = {
-    userId?: number
-    category: string
+    id: number
     nickname: string
+    profileImageUrl: string
+    category: string
   }
 
   export type ProjectTag = {
