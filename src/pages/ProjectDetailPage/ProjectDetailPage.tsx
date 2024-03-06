@@ -1,20 +1,35 @@
 import { useParams } from "react-router-dom"
 
 import { Center } from "@chakra-ui/layout"
+import { Flex } from "@chakra-ui/react"
 
-import ProjectDetailTabList from "./components/ProjectDetailTabList"
+import Content from "./components/Content/Content"
+import Summary from "./components/Summary/Summary"
 import useProjectDetailQuery from "./hooks/queries/useProjectDetailQuery"
 
 const ProjectDetailPage = () => {
   const { projectId } = useParams()
 
-  const { data } = useProjectDetailQuery(Number(projectId))
+  const { projectDetailInfo } = useProjectDetailQuery(Number(projectId))
 
-  if (!data) {
+  if (!projectDetailInfo) {
     return <Center>Loading...</Center>
   }
 
-  return <ProjectDetailTabList projects={data.projects[0]} />
+  return (
+    <>
+      <Summary projectDetailInfo={projectDetailInfo} />
+      <Flex
+        maxW="128rem"
+        w="100%"
+        margin="0 auto"
+        p="5rem"
+        gap="10rem"
+        direction="column">
+        <Content projectDetailInfo={projectDetailInfo} />
+      </Flex>
+    </>
+  )
 }
 
 export default ProjectDetailPage
