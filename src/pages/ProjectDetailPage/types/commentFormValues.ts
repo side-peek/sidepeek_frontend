@@ -1,4 +1,4 @@
-export interface FormValues {
+export interface CommentFormValues {
   ownerId: number
   isAnonymous: boolean
   content: string

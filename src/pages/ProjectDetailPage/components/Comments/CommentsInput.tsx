@@ -6,7 +6,7 @@ import { Button, Flex, FormControl, Textarea } from "@chakra-ui/react"
 
 import usePostCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 
-import { FormValues } from "../../types/formValues"
+import { CommentFormValues } from "../../types/commentFormValues"
 
 const CommentsInput = () => {
   const {
@@ -14,13 +14,13 @@ const CommentsInput = () => {
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>()
+  } = useForm<CommentFormValues>()
   const { projectId } = useParams()
 
   const { sendCommentMutation } = usePostCommentMutation(Number(projectId))
 
   // TODO: 빈 값일때 처리(Toast로 구현)
-  const onSubmit: SubmitHandler<FormValues> = (text) => {
+  const onSubmit: SubmitHandler<CommentFormValues> = (text) => {
     const commentRequestValue = {
       ownerId: 12,
       isAnonymous: false,

@@ -10,7 +10,7 @@ import { Comment } from "api-models"
 import useEditCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useEditCommentMutation"
 import dateToTimeago from "@pages/ProjectDetailPage/utils/datetoTimeago"
 
-import { FormValues } from "../../types/formValues"
+import { CommentFormValues } from "../../types/commentFormValues"
 import CommentsButton from "./CommentsButton"
 import CommentsText from "./CommentsText"
 
@@ -19,7 +19,8 @@ interface CommentsContentProps {
 }
 
 const CommentsContent = ({ comment }: CommentsContentProps) => {
-  const { register, handleSubmit, setValue, reset } = useForm<FormValues>()
+  const { register, handleSubmit, setValue, reset } =
+    useForm<CommentFormValues>()
   const [isEditing, setIsEditing] = useState(false)
 
   const { projectId } = useParams()
@@ -42,7 +43,7 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
     reset()
   }
 
-  const onEditSubmit: SubmitHandler<FormValues> = (text) => {
+  const onEditSubmit: SubmitHandler<CommentFormValues> = (text) => {
     const commentRequestValue = {
       ownerId: comment.user.id,
       isAnonymous: false,
