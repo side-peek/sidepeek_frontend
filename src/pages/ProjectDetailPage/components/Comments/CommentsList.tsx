@@ -4,7 +4,8 @@ import { CommentsProps } from "./Comments"
 import CommentsContent from "./CommentsContent"
 
 const CommentsList = ({ comments }: CommentsProps) => {
-  // TODO: Avatar 누르면 사용자 프로필 정보페이지로(로그인 한 유저만)
+  // TODO: 1. Avatar 누르면 사용자 프로필 정보페이지로(로그인 한 유저만)
+  //       2. timeago 적용
   return (
     <Flex
       direction="column"
@@ -19,13 +20,24 @@ const CommentsList = ({ comments }: CommentsProps) => {
             gap="2rem"
             w="100%"
             align="flex-start">
-            <Avatar
-              cursor="pointer"
-              _hover={{ opacity: "0.5" }}
-              src={comment.owner.profileImageUrl}
-              width="5rem"
-              height="5rem"
-            />
+            {comment.user ? (
+              <Avatar
+                cursor="pointer"
+                _hover={{ opacity: "0.5" }}
+                src={comment.user.profileImageUrl}
+                width="5rem"
+                height="5rem"
+              />
+            ) : (
+              <Avatar
+                cursor="pointer"
+                _hover={{ opacity: "0.5" }}
+                src=""
+                width="5rem"
+                height="5rem"
+              />
+            )}
+
             <CommentsContent comment={comment} />
           </Flex>
         </Flex>

@@ -43,7 +43,7 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
 
   const onEditSubmit: SubmitHandler<FormValues> = (text) => {
     const commentRequestValue = {
-      ownerId: comment.owner.id,
+      ownerId: comment.user.id,
       isAnonymous: false,
       content: text.content,
     }
@@ -63,11 +63,20 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
             direction="column"
             gap="1rem"
             flex="9.5">
-            <Text
-              fontFamily="SCDream_Bold"
-              fontSize="xl">
-              {comment.owner.nickname}
-            </Text>
+            {comment.user ? (
+              <Text
+                fontFamily="SCDream_Bold"
+                fontSize="xl">
+                {comment.user.nickname}
+              </Text>
+            ) : (
+              <Text
+                fontFamily="SCDream_Bold"
+                fontSize="xl">
+                익명
+              </Text>
+            )}
+
             <CommentsText
               register={register("content")}
               isEditing={isEditing}

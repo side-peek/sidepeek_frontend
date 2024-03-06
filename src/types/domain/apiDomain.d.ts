@@ -123,10 +123,12 @@ declare module "api-models" {
 
   export type Comment = {
     id: number
-    owner: Owner
+    user: CommentUser
     isOwner: boolean
+    isAnonymous: boolean
     content: string
     createdAt: string
+    replies: Comment[]
   }
 
   export type Like = {
@@ -154,7 +156,7 @@ declare module "api-models" {
     name: string
   }
 
-  export type Onwer = {
+  export type CommentUser = {
     id: number
     nickname: string
     profileImageUrl: string
