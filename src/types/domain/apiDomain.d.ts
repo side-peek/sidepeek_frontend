@@ -53,6 +53,7 @@ declare module "api-models" {
     ownerId: number
     members: Member[]
     viewCount: number
+    likeCount
     commentCount: number
     comments: Comment[]
     description: string
