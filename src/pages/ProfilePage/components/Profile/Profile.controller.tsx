@@ -42,7 +42,7 @@ const ProfileController = () => {
   } = data.userInfo
 
   return (
-    <Box height="100vh">
+    <Box>
       <Box
         bg="blue.100"
         h="coverHeight"

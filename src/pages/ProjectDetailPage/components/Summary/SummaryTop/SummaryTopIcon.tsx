@@ -13,8 +13,6 @@ const SummaryTopIcon = ({ count, icon, ...props }: SummaryTopIconProps) => {
       gap="0.7rem"
       alignItems="center">
       <Icon
-        background="none"
-        _hover={{ background: "none" }}
         as={icon}
         fontSize="2.7rem"
         {...props}
