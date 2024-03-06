@@ -55,9 +55,7 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
 
   return (
     <Box w="100%">
-      <form
-        onSubmit={handleSubmit(onEditSubmit)}
-        style={{ width: "100%" }}>
+      <form onSubmit={handleSubmit(onEditSubmit)}>
         <Flex
           justifyContent="space-between"
           w="100%">
