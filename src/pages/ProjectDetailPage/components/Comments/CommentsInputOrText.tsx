@@ -3,13 +3,17 @@ import ResizeTextarea from "react-textarea-autosize"
 
 import { Text, Textarea } from "@chakra-ui/react"
 
-interface CommentsTextProps {
+interface CommentsInputOrTextProps {
   isEditing: boolean
   register: UseFormRegisterReturn
   content: string
 }
 
-const CommentsText = ({ isEditing, register, content }: CommentsTextProps) => {
+const CommentsInputOrText = ({
+  isEditing,
+  register,
+  content,
+}: CommentsInputOrTextProps) => {
   return isEditing ? (
     <Textarea
       rows={1}
@@ -30,4 +34,4 @@ const CommentsText = ({ isEditing, register, content }: CommentsTextProps) => {
   )
 }
 
-export default CommentsText
+export default CommentsInputOrText

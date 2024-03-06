@@ -1,6 +1,6 @@
 import { Comment } from "api-models"
 
-import CommentsInput from "./CommentsInput"
+import CommentsForm from "./CommentsForm"
 import CommentsList from "./CommentsList"
 import CommentsLayout from "./Layout/CommentsLayout"
 
@@ -11,7 +11,7 @@ export interface CommentsProps {
 const Comments = ({ comments }: CommentsProps) => {
   return (
     <CommentsLayout>
-      <CommentsInput />
+      <CommentsForm />
       <CommentsList comments={comments} />
     </CommentsLayout>
   )

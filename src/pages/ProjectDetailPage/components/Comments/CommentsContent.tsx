@@ -12,7 +12,7 @@ import dateToTimeago from "@pages/ProjectDetailPage/utils/datetoTimeago"
 
 import { CommentFormValues } from "../../types/commentFormValues"
 import CommentsButton from "./CommentsButton"
-import CommentsText from "./CommentsText"
+import CommentsInputOrText from "./CommentsInputOrText"
 
 interface CommentsContentProps {
   comment: Comment
@@ -87,7 +87,7 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
                 {dateToTimeago(comment.createdAt)}
               </Text>
             </Flex>
-            <CommentsText
+            <CommentsInputOrText
               register={register("content")}
               isEditing={isEditing}
               content={comment.content}

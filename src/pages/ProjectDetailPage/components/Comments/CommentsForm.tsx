@@ -8,7 +8,7 @@ import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations
 
 import { CommentFormValues } from "../../types/commentFormValues"
 
-const CommentsInput = () => {
+const CommentsForm = () => {
   const {
     register,
     reset,
@@ -69,4 +69,4 @@ const CommentsInput = () => {
     </form>
   )
 }
-export default CommentsInput
+export default CommentsForm
