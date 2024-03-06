@@ -64,11 +64,21 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
             gap="1rem"
             flex="9.5">
             {comment.user ? (
-              <Text
-                fontFamily="SCDream_Bold"
-                fontSize="xl">
-                {comment.user.nickname}
-              </Text>
+              <Flex
+                gap="1rem"
+                align="center">
+                <Text
+                  fontFamily="SCDream_Bold"
+                  fontSize="xl">
+                  {comment.user.nickname}
+                </Text>
+                <Text
+                  fontFamily="SCDream_Bold"
+                  color="grey.500"
+                  fontSize="sm">
+                  {comment.createdAt}
+                </Text>
+              </Flex>
             ) : (
               <Text
                 fontFamily="SCDream_Bold"
