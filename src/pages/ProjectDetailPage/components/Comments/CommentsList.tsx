@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom"
 
-import { Avatar, Flex } from "@chakra-ui/react"
+import { Flex } from "@chakra-ui/react"
 
 import { CommentsProps } from "./Comments"
+import CommentsAvatar from "./CommentsAvatar"
 import CommentsContent from "./CommentsContent"
 
 const CommentsList = ({ comments }: CommentsProps) => {
@@ -28,24 +29,14 @@ const CommentsList = ({ comments }: CommentsProps) => {
             w="100%"
             align="flex-start">
             {comment.user ? (
-              <Avatar
+              <CommentsAvatar
                 onClick={() => {
                   handleNavigateProfile(comment.user.id)
                 }}
-                cursor="pointer"
-                _hover={{ opacity: "0.5" }}
                 src={comment.user.profileImageUrl}
-                width="5rem"
-                height="5rem"
               />
             ) : (
-              <Avatar
-                cursor="pointer"
-                _hover={{ opacity: "0.5" }}
-                src=""
-                width="5rem"
-                height="5rem"
-              />
+              <CommentsAvatar src="" />
             )}
 
             <CommentsContent comment={comment} />
