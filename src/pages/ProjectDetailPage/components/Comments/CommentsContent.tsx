@@ -8,6 +8,7 @@ import { Box, Flex, Text } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
 import useEditCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useEditCommentMutation"
+import dateToTimeago from "@pages/ProjectDetailPage/utils/datetoTimeago"
 
 import { FormValues } from "../../types/formValues"
 import CommentsButton from "./CommentsButton"
@@ -84,7 +85,7 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
               <Text
                 color="grey.500"
                 fontSize="md">
-                {comment.createdAt}
+                {dateToTimeago(comment.createdAt, "ko")}
               </Text>
             </Flex>
             <CommentsText
