@@ -9,7 +9,6 @@ export const useGetTechStacksQuery = (value: string) => {
   return useQuery({
     queryKey: [QUERYKEY.TECH_STACKS, value],
     queryFn: () => getTechStacks(value),
-    enabled: value.length > 0,
     select: (data) => {
       return data.skills
     },
