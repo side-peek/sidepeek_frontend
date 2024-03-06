@@ -63,30 +63,30 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
             direction="column"
             gap="1rem"
             flex="9.5">
-            {comment.user ? (
-              <Flex
-                gap="1rem"
-                align="center">
+            <Flex
+              gap="1rem"
+              align="center">
+              {comment.user ? (
+                <>
+                  <Text
+                    fontFamily="SCDream_Bold"
+                    fontSize="xl">
+                    {comment.user.nickname}
+                  </Text>
+                </>
+              ) : (
                 <Text
                   fontFamily="SCDream_Bold"
                   fontSize="xl">
-                  {comment.user.nickname}
+                  익명
                 </Text>
-                <Text
-                  fontFamily="SCDream_Bold"
-                  color="grey.500"
-                  fontSize="sm">
-                  {comment.createdAt}
-                </Text>
-              </Flex>
-            ) : (
+              )}
               <Text
-                fontFamily="SCDream_Bold"
-                fontSize="xl">
-                익명
+                color="grey.500"
+                fontSize="md">
+                {comment.createdAt}
               </Text>
-            )}
-
+            </Flex>
             <CommentsText
               register={register("content")}
               isEditing={isEditing}
