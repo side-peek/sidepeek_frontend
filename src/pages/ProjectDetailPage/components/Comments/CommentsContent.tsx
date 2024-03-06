@@ -85,7 +85,7 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
               <Text
                 color="grey.500"
                 fontSize="md">
-                {dateToTimeago(comment.createdAt, "ko")}
+                {dateToTimeago(comment.createdAt)}
               </Text>
             </Flex>
             <CommentsText

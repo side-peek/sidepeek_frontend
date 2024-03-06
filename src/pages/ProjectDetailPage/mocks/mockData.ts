@@ -85,7 +85,7 @@ export const DUMMY_PROJECT_DETAIL = {
       isOwner: false,
       isAnonymous: false,
       content: "우와 이 프로젝트 대박인데요?",
-      createdAt: "2024-03-02 20:17:00",
+      createdAt: "2024-03-06 19:17:00",
       replies: [
         {
           id: 3,
@@ -99,7 +99,7 @@ export const DUMMY_PROJECT_DETAIL = {
           isOwner: true,
           isAnonymous: false,
           content: "좋게 봐주셔서 감사합니다!",
-          createdAt: "2024-12-12 10:12:00",
+          createdAt: "2023-12-12 10:12:00",
         },
       ],
     },
@@ -109,7 +109,7 @@ export const DUMMY_PROJECT_DETAIL = {
       isOwner: true,
       isAnonymous: true,
       content: "대박!! 역사에 남을 프로젝트네요 ㅎㅎ 퍼가요~~❤️",
-      createdAt: "2024-12-12 10:12:00",
+      createdAt: "2023-07-03 10:12:00",
     },
   ],
 
