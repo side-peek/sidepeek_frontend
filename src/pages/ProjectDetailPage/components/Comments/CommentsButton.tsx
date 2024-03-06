@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 
 import { Button, IconButton } from "@chakra-ui/react"
 
-import useDeleteCommentMutation from "../../hooks/mutations/useDeleteCommentMutation"
+import { useDeleteCommentMutation } from "../../hooks/mutations/useDeleteCommentMutation"
 
 interface CommentsButtonProps {
   isOwner: boolean

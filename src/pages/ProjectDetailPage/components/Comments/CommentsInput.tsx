@@ -4,7 +4,7 @@ import ResizeTextarea from "react-textarea-autosize"
 
 import { Button, Flex, FormControl, Textarea } from "@chakra-ui/react"
 
-import usePostCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
+import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 
 import { CommentFormValues } from "../../types/commentFormValues"
 

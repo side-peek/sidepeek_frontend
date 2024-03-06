@@ -6,7 +6,7 @@ import { QUERY_KEY_GET_PROJECT_DETAIL } from "../queries/useProjectDetailQuery"
 
 const QUERY_KEY_DELETE_COMMENT = "DELETE_COMMENT_234893204832"
 
-const useDeleteCommentMutation = (projectId: number) => {
+export const useDeleteCommentMutation = (projectId: number) => {
   const queryClient = useQueryClient()
 
   const deleteCommentMutation = useMutation({
@@ -21,5 +21,3 @@ const useDeleteCommentMutation = (projectId: number) => {
 
   return { deleteCommentMutation }
 }
-
-export default useDeleteCommentMutation

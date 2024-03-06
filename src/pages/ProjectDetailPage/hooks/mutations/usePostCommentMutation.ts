@@ -8,7 +8,7 @@ import { QUERY_KEY_GET_PROJECT_DETAIL } from "../queries/useProjectDetailQuery"
 
 const QUERY_KEY_POST_COMMENT = "POST_COMMENT_2384902384"
 
-const usePostCommentMutation = (projectId: number) => {
+export const usePostCommentMutation = (projectId: number) => {
   const queryClient = useQueryClient()
 
   const sendCommentMutation = useMutation({
@@ -24,5 +24,3 @@ const usePostCommentMutation = (projectId: number) => {
 
   return { sendCommentMutation }
 }
-
-export default usePostCommentMutation

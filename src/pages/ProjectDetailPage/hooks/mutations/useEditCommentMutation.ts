@@ -8,7 +8,7 @@ import { QUERY_KEY_GET_PROJECT_DETAIL } from "../queries/useProjectDetailQuery"
 
 const QUERY_KEY_EDIT_COMMENT = "EDIT_COMMENT_234893204832"
 
-const useEditCommentMutation = (projectId: number, id: number) => {
+export const useEditCommentMutation = (projectId: number, id: number) => {
   const queryClient = useQueryClient()
 
   const editCommentMutation = useMutation({
@@ -24,5 +24,3 @@ const useEditCommentMutation = (projectId: number, id: number) => {
 
   return { editCommentMutation }
 }
-
-export default useEditCommentMutation

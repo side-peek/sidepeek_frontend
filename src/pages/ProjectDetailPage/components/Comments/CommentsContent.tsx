@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom"
 import { Box, Flex, Text } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
-import useEditCommentMutation from "@pages/ProjectDetailPage/hooks/mutations/useEditCommentMutation"
+import { useEditCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/useEditCommentMutation"
 import dateToTimeago from "@pages/ProjectDetailPage/utils/datetoTimeago"
 
 import { CommentFormValues } from "../../types/commentFormValues"
