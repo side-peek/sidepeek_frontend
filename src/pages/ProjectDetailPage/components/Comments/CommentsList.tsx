@@ -1,11 +1,18 @@
+import { useNavigate } from "react-router-dom"
+
 import { Avatar, Flex } from "@chakra-ui/react"
 
 import { CommentsProps } from "./Comments"
 import CommentsContent from "./CommentsContent"
 
 const CommentsList = ({ comments }: CommentsProps) => {
-  // TODO: 1. Avatar 누르면 사용자 프로필 정보페이지로(로그인 한 유저만)
+  const navigate = useNavigate()
+  // TODO: 1. 익명일때 프로필페이지 못넘어 가는거 Modal or Toast 처리 + 로그인한유저만 넘어가도록 수정
   //       2. timeago 적용
+
+  const handleNavigateProfile = (userId: number) => {
+    navigate(`/profile/${userId}`)
+  }
   return (
     <Flex
       direction="column"
@@ -22,6 +29,9 @@ const CommentsList = ({ comments }: CommentsProps) => {
             align="flex-start">
             {comment.user ? (
               <Avatar
+                onClick={() => {
+                  handleNavigateProfile(comment.user.id)
+                }}
                 cursor="pointer"
                 _hover={{ opacity: "0.5" }}
                 src={comment.user.profileImageUrl}
