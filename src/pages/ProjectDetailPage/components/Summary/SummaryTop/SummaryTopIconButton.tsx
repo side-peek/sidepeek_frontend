@@ -14,11 +14,7 @@ const SummaryTopIconButton = ({
       alignItems="center"
       cursor="pointer"
       _hover={{ opacity: "0.5" }}>
-      <IconButton
-        background="none"
-        _hover={{ background: "none" }}
-        {...props}
-      />
+      <IconButton {...props} />
       <Text fontSize="xl">{count}</Text>
     </Flex>
   )
