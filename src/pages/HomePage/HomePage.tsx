@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react"
+import { ChangeEvent, useCallback, useState } from "react"
 import { Link } from "react-router-dom"
 
 import {
@@ -40,11 +40,6 @@ const HomePage = () => {
 
   const projectList = allProjectList
 
-  useEffect(() => {
-    setIsDeploy(!isDeploy)
-    refetchAllProject()
-  }, [isDeploy, refetchAllProject])
-
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SelectType
     setSelectedOption(value)
@@ -71,7 +66,10 @@ const HomePage = () => {
             <Spacer />
             <Checkbox
               paddingRight="0.3rem"
-              onChange={() => setIsDeploy(!isDeploy)}>
+              onChange={() => {
+                setIsDeploy(!isDeploy)
+                refetchAllProject()
+              }}>
               출시 서비스만 보기
             </Checkbox>
             <Select
@@ -93,7 +91,6 @@ const HomePage = () => {
               <GridItem key={project.id}>
                 <Skeleton
                   width="95%"
-                  height="30rem"
                   borderRadius="1rem"
                   isLoaded={!isAllProjectLoading}>
                   <Link to={`/project/${project.id}`}>
@@ -121,7 +118,7 @@ const HomePage = () => {
             </Button>
           </Center>
         </Stack>
-        <Box height="20rem" />
+        <Box height="15rem" />
       </Container>
     </>
   )
