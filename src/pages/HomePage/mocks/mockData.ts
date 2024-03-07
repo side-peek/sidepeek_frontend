@@ -8,7 +8,6 @@ export const mockData = {
       viewCount: 20,
       likeCount: 7,
       isLiked: false,
-      isDeploy: false,
     },
     {
       id: 2,
@@ -18,7 +17,6 @@ export const mockData = {
       viewCount: 95,
       likeCount: 7,
       isLiked: true,
-      isDeploy: true,
     },
     {
       id: 3,
@@ -28,7 +26,6 @@ export const mockData = {
       viewCount: 20,
       likeCount: 7,
       isLiked: false,
-      isDeploy: false,
     },
     {
       id: 4,
@@ -38,7 +35,6 @@ export const mockData = {
       viewCount: 95,
       likeCount: 7,
       isLiked: true,
-      isDeploy: true,
     },
     {
       id: 5,
@@ -48,7 +44,6 @@ export const mockData = {
       viewCount: 20,
       likeCount: 7,
       isLiked: false,
-      isDeploy: false,
     },
     {
       id: 6,
@@ -58,7 +53,6 @@ export const mockData = {
       viewCount: 95,
       likeCount: 7,
       isLiked: true,
-      isDeploy: true,
     },
     {
       id: 7,
@@ -68,7 +62,6 @@ export const mockData = {
       viewCount: 20,
       likeCount: 7,
       isLiked: false,
-      isDeploy: false,
     },
     {
       id: 8,
@@ -78,7 +71,6 @@ export const mockData = {
       viewCount: 95,
       likeCount: 7,
       isLiked: true,
-      isDeploy: true,
     },
     {
       id: 9,
@@ -88,7 +80,6 @@ export const mockData = {
       viewCount: 95,
       likeCount: 7,
       isLiked: true,
-      isDeploy: true,
     },
     {
       id: 10,
@@ -98,7 +89,6 @@ export const mockData = {
       viewCount: 20,
       likeCount: 7,
       isLiked: false,
-      isDeploy: false,
     },
     {
       id: 11,
@@ -108,7 +98,6 @@ export const mockData = {
       viewCount: 95,
       likeCount: 7,
       isLiked: true,
-      isDeploy: true,
     },
     {
       id: 12,
@@ -119,7 +108,6 @@ export const mockData = {
       viewCount: 100,
       likeCount: 7,
       isLiked: false,
-      isDeploy: false,
     },
     {
       id: 13,
@@ -129,7 +117,6 @@ export const mockData = {
       viewCount: 95,
       likeCount: 9,
       isLiked: true,
-      isDeploy: true,
     },
     {
       id: 14,
@@ -139,7 +126,6 @@ export const mockData = {
       viewCount: 20,
       likeCount: 3,
       isLiked: false,
-      isDeploy: false,
     },
     {
       id: 15,
@@ -149,7 +135,6 @@ export const mockData = {
       viewCount: 95,
       likeCount: 10,
       isLiked: true,
-      isDeploy: true,
     },
   ],
 }

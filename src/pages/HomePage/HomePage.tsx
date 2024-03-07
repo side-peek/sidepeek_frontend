@@ -89,28 +89,13 @@ const HomePage = () => {
             mt="0.5rem"
             templateColumns="repeat(auto-fill, minmax(24rem, 1fr))"
             gap={0}>
-            {isAllProjectLoading ? (
-              <>
+            {projectList?.map((project) => (
+              <GridItem key={project.id}>
                 <Skeleton
-                  height="20rem"
+                  width="95%"
+                  height="30rem"
                   borderRadius="1rem"
-                />
-                <Skeleton
-                  height="20rem"
-                  borderRadius="1rem"
-                />
-                <Skeleton
-                  height="20rem"
-                  borderRadius="1rem"
-                />
-                <Skeleton
-                  height="20rem"
-                  borderRadius="1rem"
-                />
-              </>
-            ) : (
-              projectList?.map((project) => (
-                <GridItem key={project.id}>
+                  isLoaded={!isAllProjectLoading}>
                   <Link to={`/project/${project.id}`}>
                     <ProjectCard
                       imgUrl={project.thumbnailUrl}
@@ -121,9 +106,9 @@ const HomePage = () => {
                       content={project.subName}
                     />
                   </Link>
-                </GridItem>
-              ))
-            )}
+                </Skeleton>
+              </GridItem>
+            ))}
           </Grid>
           <Center marginTop="2rem">
             <Button
@@ -138,7 +123,6 @@ const HomePage = () => {
         </Stack>
         <Box height="20rem" />
       </Container>
-      {/* 푸터 들어갈 자리 */}
     </>
   )
 }
