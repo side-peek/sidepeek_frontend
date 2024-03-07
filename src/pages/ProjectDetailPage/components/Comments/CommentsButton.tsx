@@ -1,68 +1,33 @@
-import { TiPencil } from "react-icons/ti"
-import { VscChromeClose } from "react-icons/vsc"
-import { useParams } from "react-router-dom"
-
-import { Button, IconButton } from "@chakra-ui/react"
-
-import { useDeleteCommentMutation } from "../../hooks/mutations/useDeleteCommentMutation"
+import EditingButton from "./EditingButton"
+import OwnerButton from "./OwnerButton"
 
 interface CommentsButtonProps {
   isOwner: boolean
-  id: number
+  commentId: number
   isEditing: boolean
   handleOnEdit: () => void
   handleOffEdit: () => void
+  handleDelete: (id: number) => void
 }
 const CommentsButton = ({
   isOwner,
-  id,
+  commentId,
   isEditing,
   handleOnEdit,
   handleOffEdit,
+  handleDelete,
 }: CommentsButtonProps) => {
-  const { projectId } = useParams()
-
-  const { deleteCommentMutation } = useDeleteCommentMutation(Number(projectId))
-
-  const handleDelete = (id: number) => {
-    deleteCommentMutation.mutate(id)
-  }
   return isEditing ? (
-    <>
-      <Button
-        type="submit"
-        background="none"
-        p="0"
-        fontSize="lg"
-        _hover={{ border: "none", opacity: "0.5" }}>
-        확인
-      </Button>
-      <Button
-        type="button"
-        background="none"
-        p="0"
-        fontSize="lg"
-        _hover={{ border: "none", opacity: "0.5" }}
-        onClick={handleOffEdit}>
-        취소
-      </Button>
-    </>
+    <EditingButton handleOffEdit={handleOffEdit} />
   ) : (
     isOwner && (
-      <>
-        <IconButton
-          aria-label="edit"
-          icon={<TiPencil />}
-          onClick={handleOnEdit}
-          fontSize="2xl"
-        />
-        <IconButton
-          aria-label="delete"
-          icon={<VscChromeClose />}
-          onClick={() => handleDelete(id)}
-          fontSize="2xl"
-        />
-      </>
+      <OwnerButton
+        {...{
+          handleOnEdit,
+          handleDelete,
+          commentId,
+        }}
+      />
     )
   )
 }

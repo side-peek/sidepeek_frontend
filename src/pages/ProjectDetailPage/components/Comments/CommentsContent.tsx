@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom"
 import { Box, Flex, Text } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
+import { useDeleteCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
 import { useEditCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/useEditCommentMutation"
 import dateToTimeago from "@pages/ProjectDetailPage/utils/datetoTimeago"
 
@@ -30,6 +31,12 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
     Number(comment.id),
   )
 
+  const { deleteCommentMutation } = useDeleteCommentMutation(Number(projectId))
+
+  const handleDelete = (id: number) => {
+    deleteCommentMutation.mutate(id)
+  }
+
   useEffect(() => {
     setValue("content", comment.content)
   }, [isEditing, setValue, comment.content])
@@ -45,12 +52,13 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
 
   const onSubmit: SubmitHandler<CommentFormValues> = (text) => {
     const commentRequestValue = {
-      ownerId: comment.user.id,
+      // TODO: userInfo 요청에서 가져오는 id값
+      ownerId: 99,
       isAnonymous: false,
       content: text.content,
     }
     editCommentMutation.mutate(commentRequestValue)
-    setIsEditing(false)
+    handleOffEdit()
   }
 
   return (
@@ -99,8 +107,9 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
             height="fit-content">
             <CommentsButton
               isOwner={comment.isOwner}
-              id={comment.id}
+              commentId={comment.id}
               isEditing={isEditing}
+              handleDelete={handleDelete}
               handleOnEdit={handleOnEdit}
               handleOffEdit={handleOffEdit}
             />
