@@ -1,16 +1,20 @@
 import { ChangeEvent, useState } from "react"
+import { Link } from "react-router-dom"
 
 import {
   Box,
   Checkbox,
   Container,
+  Grid,
+  GridItem,
   HStack,
   Select,
+  Skeleton,
   Spacer,
   Stack,
 } from "@chakra-ui/react"
 
-import ProjectList from "@components/ProjectList/ProjectList"
+import ProjectCard from "@components/ProjectCard/ProjectCard"
 
 import useAllProjectQuery from "@pages/HomePage/hooks/queries/useAllProjectQuery"
 
@@ -66,14 +70,34 @@ const ProjectListPage = () => {
               <option value="viewCount">조회순</option>
             </Select>
           </HStack>
-          <ProjectList
-            isLoading={isAllProjectLoading}
-            projectList={projectList !== undefined ? projectList : []}
-          />
+          <Grid
+            mt="0.5rem"
+            templateColumns="repeat(auto-fill, minmax(24rem, 1fr))"
+            gap={0}>
+            {projectList?.map((project) => (
+              <GridItem key={project.id}>
+                <Skeleton
+                  width="95%"
+                  height="30rem"
+                  borderRadius="1rem"
+                  isLoaded={!isAllProjectLoading}>
+                  <Link to={`/project/${project.id}`}>
+                    <ProjectCard
+                      imgUrl={project.thumbnailUrl}
+                      viewCount={project.viewCount}
+                      heartCount={project.likeCount}
+                      isFullHeart={project.isLiked}
+                      title={project.name}
+                      content={project.subName}
+                    />
+                  </Link>
+                </Skeleton>
+              </GridItem>
+            ))}
+          </Grid>
         </Stack>
         <Box height="20rem" />
       </Container>
-      {/* 푸터 들어갈 자리 */}
     </>
   )
 }
