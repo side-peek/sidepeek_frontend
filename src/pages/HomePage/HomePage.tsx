@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useCallback, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 import {
@@ -26,18 +26,24 @@ type SelectType = "createdAt" | "like" | "view"
 const HomePage = () => {
   const [isDeploy, setIsDeploy] = useState(false)
   const [selectedOption, setSelectedOption] = useState<SelectType>("createdAt")
+  const limit = 24
 
   // 프로젝트 전체 목록 조회
-  const { allProjectList, isAllProjectLoading, refetchAllProject } =
-    useAllProjectQuery(1, selectedOption, isDeploy ? "released" : "")
+  const {
+    allProjectList,
+    isAllProjectLoading,
+    refetchAllProject,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useAllProjectQuery(selectedOption, isDeploy, limit)
 
-  const projectList = allProjectList?.projects
-  console.log(projectList)
+  const projectList = allProjectList
 
   useEffect(() => {
     setIsDeploy(!isDeploy)
     refetchAllProject()
-  }, [isDeploy])
+  }, [isDeploy, refetchAllProject])
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SelectType
@@ -46,13 +52,18 @@ const HomePage = () => {
     refetchAllProject()
   }
 
+  const loadMoreProjects = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage()
+    }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage])
+
   return (
     <>
-      {/* 임시로 다섯개 잘라서 넣었습니다*/}
       {isAllProjectLoading ? (
         <Skeleton height="35rem" />
       ) : (
-        <Banner bannerList={allProjectList?.projects.slice(0, 5)} />
+        <Banner bannerList={allProjectList?.slice(0, 5)} />
       )}
       <Container maxW="80%">
         <Stack marginTop="15rem">
@@ -119,7 +130,8 @@ const HomePage = () => {
               width="8rem"
               height="3rem"
               backgroundColor="blue.100"
-              color="white">
+              color="white"
+              onClick={loadMoreProjects}>
               더보기
             </Button>
           </Center>
