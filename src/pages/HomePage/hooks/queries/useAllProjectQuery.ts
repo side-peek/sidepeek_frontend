@@ -8,6 +8,7 @@ const useAllProjectQuery = (
   sort: string,
   isReleased: boolean,
   limit: number,
+  keyword: string,
 ) => {
   const {
     data,
@@ -17,9 +18,8 @@ const useAllProjectQuery = (
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: [QUERY_KEYS, sort, isReleased, limit],
-    queryFn: ({ pageParam }) =>
-      getAllProjects({ sort, isReleased, offset: pageParam, limit }),
+    queryKey: [QUERY_KEYS, sort, isReleased, limit, keyword],
+    queryFn: () => getAllProjects({ sort, isReleased, limit, keyword }),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) =>
       lastPage?.projects.length ? allPages.length * limit : null,

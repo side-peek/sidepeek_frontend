@@ -36,7 +36,7 @@ const HomePage = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useAllProjectQuery(selectedOption, isDeploy, limit)
+  } = useAllProjectQuery(selectedOption, isDeploy, limit, "")
 
   const projectList = allProjectList
 

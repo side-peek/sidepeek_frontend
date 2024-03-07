@@ -7,8 +7,8 @@ import { baseInstance } from "../axiosInstance"
 interface getAllProjectsQueryString {
   sort: string
   isReleased: boolean
-  offset: number
   limit: number
+  keyword: string
 }
 
 /**
@@ -17,10 +17,10 @@ interface getAllProjectsQueryString {
 export const getAllProjects = async ({
   sort,
   isReleased,
-  offset,
   limit,
+  keyword,
 }: getAllProjectsQueryString) => {
-  console.log(offset, limit)
+  console.log(limit, keyword)
   const { data } = await baseInstance.get<getAllProjectsResponseType>(
     ENDPOINTS.GET_ALL_PROJECTS(sort, isReleased),
   )
