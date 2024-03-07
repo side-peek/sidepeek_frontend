@@ -18,7 +18,7 @@ declare module "api-models" {
     isDeleted: boolean
   } */
 
-  export type UserInfo = {
+  export type UserInfoProperties = {
     nickname: string
     introduction: string
     profileImageUrl: string
@@ -28,6 +28,9 @@ declare module "api-models" {
     blogUrl: string
     techStacks: TechStack[]
   }
+  export interface UserInfo {
+    userInfo: UserInfoProperties
+  }
 
   export type UserSummary = {
     id: number
@@ -36,7 +39,7 @@ declare module "api-models" {
   }
 
   export type Project = {
-    id: string
+    id: number
     name: string
     subName: string
     overview: string
@@ -50,10 +53,21 @@ declare module "api-models" {
     ownerId: number
     members: Member[]
     viewCount: number
-    commentCount: number
     likeCount: number
-    description: Description
-    troubleShooting: Description
+    commentCount: number
+    description: string
+    troubleShooting: string
+  }
+
+  export type AllProject = {
+    id: number
+    name: string
+    subName: string
+    thumbnailUrl: string
+    viewCount: number
+    likeCount: number
+    isLiked: boolean
+    isDeploy: boolean
   }
 
   export type Description = {
@@ -62,9 +76,10 @@ declare module "api-models" {
   }
 
   export type Member = {
-    userId?: number
-    category: string
+    id: number
     nickname: string
+    profileImageUrl: string
+    category: string
   }
 
   export type ProjectTag = {
@@ -222,11 +237,11 @@ declare module "api-models" {
   }
 
   export type getProjectDetailResponseType = {
-    projects: Project[]
+    projectDetailInfo: Project
   }
 
   export type getAllProjectsResponseType = {
-    projects: Project[]
+    projects: AllProject[]
   }
 
   export type putProjectPayload = {
@@ -243,5 +258,3 @@ declare module "api-models" {
     projectId: number
   }
 }
-// 맞아요 음.. 그러면 타입을 하나 둬야겠네요 하나더
-// 원래 그게 맞긴해요 일단 제가 메모해놓을게요
