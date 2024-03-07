@@ -1,4 +1,4 @@
-import { ReactNode, createContext } from "react"
+import { ReactNode, createContext, useState } from "react"
 
 interface PaginationContext {
   currentPage: number
@@ -25,14 +25,18 @@ const PaginationProvider = ({
   total,
   children,
 }: PaginationProviderProps) => {
-  const currentPage = 1
+  const [currentPage, setCurrentPage] = useState(1)
   const totalPages = Math.ceil(total / limit)
 
   const handlePrevPage = () => {
-    console.log("이전 버튼 클릭")
+    if (currentPage !== 1) {
+      setCurrentPage((currentPage) => currentPage - 1)
+    }
   }
   const handleNextPage = () => {
-    console.log("다음 버튼 클릭")
+    if (currentPage !== totalPages) {
+      setCurrentPage((currentPage) => currentPage + 1)
+    }
   }
 
   return (
