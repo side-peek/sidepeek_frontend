@@ -78,7 +78,6 @@ const ProjectListPage = () => {
               <GridItem key={project.id}>
                 <Skeleton
                   width="95%"
-                  height="30rem"
                   borderRadius="1rem"
                   isLoaded={!isAllProjectLoading}>
                   <Link to={`/project/${project.id}`}>
