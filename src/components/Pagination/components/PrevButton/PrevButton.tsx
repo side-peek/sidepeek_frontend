@@ -4,7 +4,7 @@ import { Button } from "@chakra-ui/react"
 
 import { moveButtonStyles } from "@components/Pagination/styles/moveButtonStyles"
 
-import { PaginationContext } from "../Contexts/Contexts"
+import { PaginationContext } from "../Contexts/contexts"
 
 const PrevButton = () => {
   const { handlePrevPage } = useContext(PaginationContext)

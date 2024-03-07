@@ -1,21 +1,11 @@
-import { ReactNode, createContext, useState } from "react"
+import { createContext, useState } from "react"
 
-interface PaginationContext {
-  currentPage: number
-  totalPages: number
-  handleSelectPage: (page: number) => void
-  handlePrevPage: () => void
-  handleNextPage: () => void
-}
+import {
+  PaginationContextType,
+  PaginationProviderProps,
+} from "@components/Pagination/types/types"
 
-interface PaginationProviderProps {
-  limit: number
-  total: number
-  onPageChange: (page: number) => void
-  children: ReactNode
-}
-
-export const PaginationContext = createContext<PaginationContext>({
+export const PaginationContext = createContext<PaginationContextType>({
   currentPage: 0,
   totalPages: 0,
   handleSelectPage: () => {},
