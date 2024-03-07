@@ -1,5 +1,4 @@
 import { SubmitHandler, useForm } from "react-hook-form"
-import { useParams } from "react-router-dom"
 import ResizeTextarea from "react-textarea-autosize"
 
 import { Button, Flex, FormControl, Textarea } from "@chakra-ui/react"
@@ -7,15 +6,18 @@ import { Button, Flex, FormControl, Textarea } from "@chakra-ui/react"
 import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 
 import { CommentFormValues } from "../../types/commentFormValues"
+import { ProjectIdProps, withProjectId } from "./Hoc/withProjectId"
 
-const CommentsForm = () => {
+interface CommentsFormProps extends ProjectIdProps {}
+
+// eslint-disable-next-line react-refresh/only-export-components
+const CommentsForm = ({ projectId }: CommentsFormProps) => {
   const {
     register,
     reset,
     handleSubmit,
     formState: { errors },
   } = useForm<CommentFormValues>()
-  const { projectId } = useParams()
 
   const { sendCommentMutation } = usePostCommentMutation(Number(projectId))
 
@@ -69,4 +71,5 @@ const CommentsForm = () => {
     </form>
   )
 }
-export default CommentsForm
+// eslint-disable-next-line react-refresh/only-export-components
+export default withProjectId(CommentsForm)

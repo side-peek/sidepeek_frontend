@@ -2,7 +2,6 @@
 //       2. 하나만 수정모드 가능하도록 포커스 벗어날시 해제
 import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { useParams } from "react-router-dom"
 
 import { Box, Flex, Text } from "@chakra-ui/react"
 import { Comment } from "api-models"
@@ -14,17 +13,17 @@ import dateToTimeago from "@pages/ProjectDetailPage/utils/datetoTimeago"
 import { CommentFormValues } from "../../types/commentFormValues"
 import CommentsButton from "./CommentsButton"
 import CommentsInputOrText from "./CommentsInputOrText"
+import { ProjectIdProps, withProjectId } from "./Hoc/withProjectId"
 
-interface CommentsContentProps {
+interface CommentsContentProps extends ProjectIdProps {
   comment: Comment
 }
 
-const CommentsContent = ({ comment }: CommentsContentProps) => {
+// eslint-disable-next-line react-refresh/only-export-components
+const CommentsContent = ({ comment, projectId }: CommentsContentProps) => {
   const { register, handleSubmit, setValue, reset } =
     useForm<CommentFormValues>()
   const [isEditing, setIsEditing] = useState(false)
-
-  const { projectId } = useParams()
 
   const { editCommentMutation } = useEditCommentMutation(
     Number(projectId),
@@ -120,4 +119,5 @@ const CommentsContent = ({ comment }: CommentsContentProps) => {
   )
 }
 
-export default CommentsContent
+// eslint-disable-next-line react-refresh/only-export-components
+export default withProjectId(CommentsContent)
