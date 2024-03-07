@@ -2,6 +2,8 @@ import { useContext, useMemo } from "react"
 
 import { Button } from "@chakra-ui/react"
 
+import { pageButtonStyles } from "@components/Pagination/styles/pageButtonStyles"
+
 import { PaginationContext } from "../Contexts/Contexts"
 
 const PageButtons = () => {
@@ -25,8 +27,8 @@ const PageButtons = () => {
     <div>
       {pages.map((page) => (
         <Button
-          color={page === currentPage ? "red" : "black"}
           key={page}
+          {...pageButtonStyles(page, currentPage)}
           onClick={() => handleSelectPage(page)}>
           {page}
         </Button>

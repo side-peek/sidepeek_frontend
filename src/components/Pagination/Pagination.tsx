@@ -1,3 +1,5 @@
+import { HStack } from "@chakra-ui/react"
+
 import PaginationProvider from "./components/Contexts/Contexts"
 import NextButton from "./components/NextButton/NextButton"
 import PageButtons from "./components/PageButtons/PageButtons"
@@ -12,9 +14,11 @@ const Pagination = () => {
       limit={24}
       total={400}
       onPageChange={handlePageChange}>
-      <PrevButton />
-      <PageButtons />
-      <NextButton />
+      <HStack>
+        <PrevButton />
+        <PageButtons />
+        <NextButton />
+      </HStack>
     </PaginationProvider>
   )
 }
