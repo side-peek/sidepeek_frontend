@@ -25,7 +25,7 @@ const PaginationProvider = ({
   total,
   children,
 }: PaginationProviderProps) => {
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(12)
   const totalPages = Math.ceil(total / limit)
 
   const handlePrevPage = () => {
@@ -41,7 +41,12 @@ const PaginationProvider = ({
 
   return (
     <PaginationContext.Provider
-      value={{ currentPage, totalPages, handlePrevPage, handleNextPage }}>
+      value={{
+        currentPage,
+        totalPages,
+        handlePrevPage,
+        handleNextPage,
+      }}>
       {children}
     </PaginationContext.Provider>
   )
