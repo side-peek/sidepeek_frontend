@@ -3,7 +3,6 @@ import { rest } from "msw"
 
 import { ENDPOINTS } from "@constants/endPoints"
 
-//FIXME: 예시 함수입니다. 원하시는데로 변경해서 사용해주세요!
 export const postEmailRefresh = rest.post(
   ENDPOINTS.EMAIL_REFRESH,
   (_, res, ctx) => {

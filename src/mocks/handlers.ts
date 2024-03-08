@@ -8,6 +8,7 @@ import { projectDetailHandlers } from "@pages/ProjectDetailPage/mocks"
 import { postDoubleCheckEmail } from "@pages/SignUpPage/mocks/postDoubleCheckEmail.mock"
 import { postDoubleCheckNickname } from "@pages/SignUpPage/mocks/postDoubleCheckNickname.mock"
 
+import { getEmailAuth } from "./auth/getEmailAuth.mock"
 import { postEmailLogin } from "./auth/postEmailLogin.mock"
 import { postEmailRefresh } from "./auth/postEmailRefresh.mock"
 
@@ -36,6 +37,7 @@ export const handlers = [
   ...allProjectHandlers,
   postEmailRefresh,
   postEmailLogin,
+  getEmailAuth,
   postDoubleCheckEmail,
   postDoubleCheckNickname,
   ...userInfoHandlers,
