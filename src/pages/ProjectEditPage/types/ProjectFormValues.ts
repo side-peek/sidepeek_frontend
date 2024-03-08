@@ -10,5 +10,5 @@ export type ProjectFormValues = {
   deployUrl: string
   startDate: string //2002-02
   endDate: string //동일
-  techStacks: { category: string; data: Skill[] }[]
+  techStacks: { category: string; stacks: Skill[] }[]
 }
