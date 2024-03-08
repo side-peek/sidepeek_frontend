@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 
 import {
   Box,
-  Button,
   Center,
   Checkbox,
   Container,
@@ -19,6 +18,7 @@ import {
 import ProjectCard from "@components/ProjectCard/ProjectCard"
 
 import Banner from "./components/Banner/Banner"
+import MoreButton from "./components/MoreButton/MoreButton"
 import useAllProjectQuery from "./hooks/queries/useAllProjectQuery"
 
 type SelectType = "createdAt" | "like" | "view"
@@ -108,19 +108,13 @@ const HomePage = () => {
               </Center>
             ))}
           </Grid>
-          <Center marginTop="2rem">
-            <Button
-              width="8rem"
-              height="3rem"
-              backgroundColor="blue.100"
-              color="white"
-              onClick={loadMoreProjects}>
-              더보기
-            </Button>
-          </Center>
         </Stack>
-        <Box height="15rem" />
+        <MoreButton
+          loadMore={loadMoreProjects}
+          isMore={hasNextPage}
+        />
       </Container>
+      <Box height="15rem" />
     </>
   )
 }
