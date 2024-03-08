@@ -9,7 +9,7 @@ export const withProjectId = <P extends ProjectIdProps>(
   WrappedComponent: ComponentType<P>,
 ) => {
   const ComponentWithProjectId = (props: Omit<P, keyof ProjectIdProps>) => {
-    const { projectId } = useParams<Record<string, string>>()
+    const { projectId } = useParams()
 
     if (!projectId) {
       return null
