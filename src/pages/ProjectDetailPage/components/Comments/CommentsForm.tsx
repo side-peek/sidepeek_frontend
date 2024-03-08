@@ -23,10 +23,6 @@ const CommentsForm = ({ projectId }: CommentsFormProps) => {
 
   // TODO: 빈 값일때 처리(Toast로 구현)
   const onSubmit: SubmitHandler<CommentFormValues> = (text) => {
-    if (!text.content) {
-      console.log("빈 값 에러, 토스트 메시지 출력")
-      return
-    }
     const commentRequestValue = {
       ownerId: 12,
       isAnonymous: false,
@@ -54,7 +50,7 @@ const CommentsForm = ({ projectId }: CommentsFormProps) => {
             placeholder={"댓글을 입력하세요"}
             isRequired={false}
             resize="none"
-            {...register("content")}
+            {...register("content", { required: true })}
           />
         </FormControl>
 

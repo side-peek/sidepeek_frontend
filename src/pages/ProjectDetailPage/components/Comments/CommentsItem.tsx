@@ -2,7 +2,6 @@
 //       2. 하나만 수정모드 가능하도록 포커스 벗어날시 해제
 import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { FieldErrors } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
 import { Box, Flex, Text } from "@chakra-ui/react"
@@ -59,10 +58,6 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
   }
 
   const onSubmit: SubmitHandler<CommentFormValues> = (text) => {
-    if (!text.content) {
-      console.log("빈 값 에러, 토스트 메시지 출력")
-      return
-    }
     const commentRequestValue = {
       // TODO: userInfo 요청에서 가져오는 id값
       ownerId: 99,
@@ -71,10 +66,6 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
     }
     editCommentMutation.mutate(commentRequestValue)
     handleOffEdit()
-  }
-
-  const handleError = (errors: FieldErrors<CommentFormValues>) => {
-    console.log(errors)
   }
 
   return (
@@ -93,7 +84,7 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
       )}
 
       <Box w="100%">
-        <form onSubmit={handleSubmit(onSubmit, handleError)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Flex
             justifyContent="space-between"
             w="100%">
@@ -126,7 +117,7 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
                 </Text>
               </Flex>
               <CommentsInputOrText
-                register={register("content")}
+                register={register("content", { required: true })}
                 isEditing={isEditing}
                 content={comment.content}
               />
