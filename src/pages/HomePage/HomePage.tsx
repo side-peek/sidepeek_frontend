@@ -8,12 +8,12 @@ import {
   Checkbox,
   Container,
   Grid,
-  GridItem,
   HStack,
   Select,
   Skeleton,
   Spacer,
   Stack,
+  useMediaQuery,
 } from "@chakra-ui/react"
 
 import ProjectCard from "@components/ProjectCard/ProjectCard"
@@ -27,6 +27,7 @@ const HomePage = () => {
   const [isDeploy, setIsDeploy] = useState(false)
   const [selectedOption, setSelectedOption] = useState<SelectType>("createdAt")
   const limit = 24
+  const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
 
   // 프로젝트 전체 목록 조회
   const {
@@ -60,7 +61,7 @@ const HomePage = () => {
       ) : (
         <Banner bannerList={allProjectList?.slice(0, 5)} />
       )}
-      <Container maxW="80%">
+      <Container maxW={isLargerThan1200 ? "80%" : "95%"}>
         <Stack marginTop="15rem">
           <HStack spacing={5}>
             <Spacer />
@@ -88,7 +89,7 @@ const HomePage = () => {
             templateColumns="repeat(auto-fill, minmax(24rem, 1fr))"
             gap={0}>
             {projectList?.map((project) => (
-              <GridItem key={project.id}>
+              <Center key={project.id}>
                 <Skeleton
                   width="95%"
                   borderRadius="1rem"
@@ -104,7 +105,7 @@ const HomePage = () => {
                     />
                   </Link>
                 </Skeleton>
-              </GridItem>
+              </Center>
             ))}
           </Grid>
           <Center marginTop="2rem">

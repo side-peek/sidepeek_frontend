@@ -7,6 +7,7 @@ import {
   Spacer,
   Stack,
   Text,
+  useMediaQuery,
   useTheme,
 } from "@chakra-ui/react"
 import { AllProject } from "api-models"
@@ -26,6 +27,7 @@ interface bannerListProps {
 const Banner = ({ bannerList }: bannerListProps) => {
   const navigate = useNavigate()
   const theme = useTheme()
+  const [isLargerThan768] = useMediaQuery("(min-width: 768px)")
 
   return (
     <CustomSwiper
@@ -46,16 +48,16 @@ const Banner = ({ bannerList }: bannerListProps) => {
             <Image
               src={project.thumbnailUrl}
               alt="projectImg"
-              height="90%"
+              height={isLargerThan768 ? "90%" : "50%"}
               marginTop="4rem"
               borderRadius="5rem"
-              marginLeft="13rem"
+              marginLeft={isLargerThan768 ? "13rem" : "2rem"}
               cursor="pointer"
               onClick={() => navigate(`/project/${project.id}`)}
             />
             <Spacer />
             <Stack
-              marginRight="13rem"
+              marginRight={isLargerThan768 ? "13rem" : "2rem"}
               textAlign="right">
               <Link to={`/project/${project.id}`}>
                 <Text
