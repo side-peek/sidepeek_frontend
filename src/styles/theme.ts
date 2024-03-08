@@ -1,24 +1,21 @@
-import { defineStyleConfig, extendTheme } from "@chakra-ui/react"
+import { extendTheme } from "@chakra-ui/react"
 import { StyleFunctionProps, mode } from "@chakra-ui/theme-tools"
 
 import "./fonts/index.css"
 
-const Button = defineStyleConfig({
-  baseStyle: {},
-  variants: {
-    smooth: {
-      padding: 3,
-    },
-  },
-  defaultProps: {
-    variant: "smooth",
-  },
-})
-
 const themeConfig = {
   config: { initialColorMode: "light", useSystemColorMode: false },
   components: {
-    Button,
+    Button: {
+      variants: {
+        smooth: {
+          p: "0.3rem",
+        },
+      },
+      defaultProps: {
+        variant: "smooth",
+      },
+    },
   },
 
   styles: {
