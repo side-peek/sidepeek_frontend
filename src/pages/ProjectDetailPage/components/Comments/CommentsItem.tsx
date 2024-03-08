@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
-import { Box, Flex, HStack, Spacer, Text } from "@chakra-ui/react"
+import { Box, Flex, HStack, Spacer, Stack, Text } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
 import { useDeleteCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
@@ -87,10 +87,7 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
           <Flex
             justifyContent="space-between"
             w="100%">
-            <Flex
-              direction="column"
-              gap="1rem"
-              flex="9.5">
+            <Stack gap="1rem">
               <HStack gap="1rem">
                 {comment.user ? (
                   <>
@@ -119,7 +116,7 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
                 isEditing={isEditing}
                 content={comment.content}
               />
-            </Flex>
+            </Stack>
             <Flex
               gap="1rem"
               flex="0.5"
