@@ -1,9 +1,10 @@
 import { SubmitHandler, useForm } from "react-hook-form"
 
-import { Flex, FormControl, Input } from "@chakra-ui/react"
+import { Flex } from "@chakra-ui/react"
+
+import InputController from "@components/InputController/InputController"
 
 import LoginButton from "./components/LoginButton"
-import LoginFormLabel from "./components/LoginFormLabel"
 
 type FormType = {
   email: string
@@ -30,25 +31,25 @@ const LoginForm = () => {
         alignItems="stretch">
         {/* 로그인 입력 양식 */}
         {/* email */}
-        <FormControl isInvalid={Boolean(errors.email)}>
-          <LoginFormLabel error={errors.email}>이메일</LoginFormLabel>
-          <Input
-            type="email"
-            height="5rem"
-            fontSize="2rem"
-            {...register("email", { required: "이메일을 입력해주세요" })}
-          />
-        </FormControl>
+        <InputController
+          type="email"
+          label="이메일"
+          isInvalid={Boolean(errors.email)}
+          errorMessage={errors.email?.message}
+          registerOptions={register("email", {
+            required: "이메일을 입력해주세요",
+          })}
+        />
         {/* paasword */}
-        <FormControl isInvalid={Boolean(errors.password)}>
-          <LoginFormLabel error={errors.password}>비밀번호</LoginFormLabel>
-          <Input
-            type="password"
-            height="5rem"
-            fontSize="2rem"
-            {...register("password", { required: "비밀번호를 입력해주세요" })}
-          />
-        </FormControl>
+        <InputController
+          type="password"
+          label="비밀번호"
+          isInvalid={Boolean(errors.password)}
+          errorMessage={errors.password?.message}
+          registerOptions={register("password", {
+            required: "비밀번호를 입력해주세요",
+          })}
+        />
         <LoginButton />
       </Flex>
     </form>
