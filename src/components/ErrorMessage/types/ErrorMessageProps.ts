@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import React from "react"
-import { FieldErrors, FieldName, Message } from "react-hook-form"
+import {
+  FieldErrors,
+  FieldName,
+  Message,
+  MultipleFieldErrors,
+} from "react-hook-form"
 
 type Assign<T extends object, U extends object> = T & Omit<U, keyof T>
 
@@ -26,7 +31,10 @@ export type ErrorMessageProps<
     errors: TFieldErrors
     name: FieldName<FieldValuesFromFieldErrors<TFieldErrors>>
     message?: Message
-    render?: (data: { message: Message }) => React.ReactNode
+    render?: (data: {
+      message: Message
+      messages?: MultipleFieldErrors
+    }) => React.ReactNode
   },
   AsProps<TAs>
 >
