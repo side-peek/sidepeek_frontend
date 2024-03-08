@@ -25,7 +25,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={theme}>
         <ColorModeScript initialColorMode="light" />
-        <RouterProvider router={router} />
+        <RouterProvider router={router(queryClient)} />
       </ChakraProvider>
     </QueryClientProvider>
   )
