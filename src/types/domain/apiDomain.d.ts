@@ -207,6 +207,10 @@ declare module "api-models" {
     email: string
   }
 
+  export type postDoubleCheckEmailResponseType = {
+    isDuplicated: boolean
+  }
+
   export type postDoubleCheckNicknamePayload = {
     nickname: string
   }
