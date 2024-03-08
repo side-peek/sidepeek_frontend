@@ -10,7 +10,6 @@ import { ProjectIdProps, withProjectId } from "./Hoc/withProjectId"
 
 interface CommentsFormProps extends ProjectIdProps {}
 
-// eslint-disable-next-line react-refresh/only-export-components
 const CommentsForm = ({ projectId }: CommentsFormProps) => {
   const {
     register,
@@ -71,5 +70,4 @@ const CommentsForm = ({ projectId }: CommentsFormProps) => {
     </form>
   )
 }
-// eslint-disable-next-line react-refresh/only-export-components
 export default withProjectId(CommentsForm)

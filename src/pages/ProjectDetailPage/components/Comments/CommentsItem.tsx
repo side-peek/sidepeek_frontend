@@ -21,7 +21,6 @@ interface CommentsItemProps extends ProjectIdProps {
   comment: Comment
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
   const { register, handleSubmit, setValue, reset } =
     useForm<CommentFormValues>()
@@ -142,28 +141,4 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
   )
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export default withProjectId(CommentsItem)
-
-/* <Flex
-justifyContent="space-between"
-align="center"
-key={comment.id}>
-<Flex
-  gap="2rem"
-  w="100%"
-  align="flex-start">
-  {comment.user ? (
-    <CommentsAvatar
-      onClick={() => {
-        handleNavigateProfile(comment.user.id)
-      }}
-      src={comment.user.profileImageUrl}
-    />
-  ) : (
-    <CommentsAvatar src="" />
-  )}
-
-  <CommentsContent comment={comment} />
-</Flex>
-</Flex> */
