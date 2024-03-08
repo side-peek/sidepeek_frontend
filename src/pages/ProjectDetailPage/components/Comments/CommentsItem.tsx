@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
-import { Box, Flex, Text } from "@chakra-ui/react"
+import { Box, Flex, HStack, Spacer, Text } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
 import { useDeleteCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
@@ -91,9 +91,7 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
               direction="column"
               gap="1rem"
               flex="9.5">
-              <Flex
-                gap="1rem"
-                align="center">
+              <HStack gap="1rem">
                 {comment.user ? (
                   <>
                     <Text
@@ -114,7 +112,8 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
                   fontSize="md">
                   {dateToTimeago(comment.createdAt)}
                 </Text>
-              </Flex>
+                <Spacer />
+              </HStack>
               <CommentsInputOrText
                 register={register("content", { required: true })}
                 isEditing={isEditing}
