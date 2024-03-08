@@ -1,22 +1,20 @@
-import { useFieldArray, useFormContext } from "react-hook-form"
-
 import { Box, Button, Flex, Input } from "@chakra-ui/react"
 
-import { ProjectFormValues } from "../../types/ProjectFormValues"
+import CloseButtonTag from "@components/Tag/components/CloseButtonTag"
+
+import { useTechStacksFieldsArray } from "@pages/ProjectEditPage/hooks/useTechStacksFieldsArray"
+
 import StackSearchBox from "./components/StackSearchBox"
 
 const TechStacksFields = () => {
-  const { control, register, setValue, getValues, watch } =
-    useFormContext<ProjectFormValues>()
-
-  const { append, fields } = useFieldArray<ProjectFormValues>({
-    control,
-    name: "techStacks",
-  })
-
-  const appendNewField = () => {
-    append({ category: "", data: [] })
-  }
+  const {
+    fields,
+    register,
+    setCategory,
+    appendNewFields,
+    appendStack,
+    selectedStacks,
+  } = useTechStacksFieldsArray()
 
   return (
     <div>
@@ -24,30 +22,40 @@ const TechStacksFields = () => {
         return (
           <Flex key={field.id}>
             <Input
+              flex="2"
               variant="flushed"
               placeholder="분야를 입력해주세요"
               {...register(`techStacks.${index}.category` as const, {
                 required: "스킬입력은 필수입니다",
               })}
               onChange={(e) => {
-                setValue(`techStacks.${index}.category`, e.target.value)
+                setCategory(index, e.target.value)
               }}
             />
-            <StackSearchBox
-              onClickResultItem={(skill) => {
-                const selectedStack = getValues(`techStacks.${index}.data`)
-                setValue(`techStacks.${index}.data`, [...selectedStack, skill])
-              }}
-            />
-            <Box>
-              {watch(`techStacks.${index}.data`).map((selectedSkill) => {
-                return <div key={selectedSkill.id}>{selectedSkill.name}</div>
-              })}
-            </Box>
+            <Flex
+              flex="8"
+              flexDir="column">
+              <StackSearchBox
+                onClickResultItem={(skill) => {
+                  appendStack(index, skill)
+                }}
+              />
+              <Box>
+                {selectedStacks(index).map((skill) => {
+                  return (
+                    <CloseButtonTag
+                      key={skill.name}
+                      label={skill.name}
+                      onClickCloseButton={() => {}}
+                    />
+                  )
+                })}
+              </Box>
+            </Flex>
           </Flex>
         )
       })}
-      <Button onClick={appendNewField}>+ 기술스택 분류 추가하기</Button>
+      <Button onClick={appendNewFields}>+ 기술스택 분류 추가하기</Button>
     </div>
   )
 }
