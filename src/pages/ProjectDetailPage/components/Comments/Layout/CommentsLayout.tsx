@@ -9,7 +9,7 @@ const CommentsLayout = ({ children }: CommentsLayoutProps) => {
   return (
     <Flex
       margin="0 auto"
-      w="50%"
+      w="100%"
       maxW="128rem"
       borderRadius="1rem"
       border="1px"

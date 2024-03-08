@@ -6,6 +6,16 @@ export const DUMMY_PROJECT_DETAIL = {
   overview: "데브코스 5기 육개짱팀의 좌충우돌 우당탕탕 프로젝트 개발 일대기",
   thumbnailUrl:
     "https://user-images.githubusercontent.com/37354708/144370579-763a962c-5076-413c-9ea6-1043985791f6.png",
+  overviewImageUrl: [
+    {
+      id: 1,
+      url: "https://project-images.sidepeek.com/1.png",
+    },
+    {
+      id: 2,
+      url: "https://user-images.githubusercontent.com/37354708/144370579-763a962c-5076-413c-9ea6-1043985791f6.png",
+    },
+  ],
   githubUrl: "https://github.com/side-peek",
   deployUrl: "https://sidepeek.netlify.app/",
   viewCount: 20,
@@ -15,22 +25,40 @@ export const DUMMY_PROJECT_DETAIL = {
   // 기술 스택
   techStacks: [
     {
-      name: "React",
+      id: 21,
       category: "프론트",
-      iconImageUrl:
-        "https://cdn.iconscout.com/icon/free/png-512/free-react-1-282599.png?f=webp&w=256",
+      skill: {
+        id: 1,
+        name: "React",
+        iconImageUrl: "https://cdn.iconscout.com/icon/react.png",
+      },
     },
     {
-      name: "Spring",
+      id: 22,
       category: "백",
-      iconImageUrl:
-        "https://cdn.iconscout.com/icon/free/png-512/free-spring-16-283031.png?f=webp&w=256",
+      skill: {
+        id: 2,
+        name: "Spring",
+        iconImageUrl: "https://cdn.iconscout.com/icon/spring.png",
+      },
     },
     {
-      name: "GitHub",
+      id: 23,
       category: "협업툴",
-      iconImageUrl:
-        "https://cdn.iconscout.com/icon/free/png-512/free-github-1521500-1288242.png?f=webp&w=256",
+      skill: {
+        id: 3,
+        name: "GitHub",
+        iconImageUrl: "https://cdn.iconscout.com/icon/github.png",
+      },
+    },
+    {
+      id: 24,
+      category: "프론트",
+      skill: {
+        id: 4,
+        name: "React Query",
+        iconImageUrl: "https://cdn.iconscout.com/icon/reactQuery.png",
+      },
     },
   ],
 

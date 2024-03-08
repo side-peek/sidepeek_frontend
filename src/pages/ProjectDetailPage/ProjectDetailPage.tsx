@@ -1,10 +1,11 @@
 import { Center } from "@chakra-ui/layout"
+import { Flex } from "@chakra-ui/react"
 
 import Comments from "./components/Comments/Comments"
-import {
-  ProjectIdProps,
-  withProjectId,
-} from "./components/Comments/Hoc/withProjectId"
+import { withProjectId } from "./components/Comments/Hoc/withProjectId"
+import { ProjectIdProps } from "./components/Comments/Hoc/withProjectId"
+import Content from "./components/Content/Content"
+import Summary from "./components/Summary/Summary"
 import { useProjectDetailQuery } from "./hooks/queries/useProjectDetailQuery"
 
 const ProjectDetailPage = ({ projectId }: ProjectIdProps) => {
@@ -14,7 +15,21 @@ const ProjectDetailPage = ({ projectId }: ProjectIdProps) => {
     return <Center>Loading...</Center>
   }
 
-  return <Comments comments={projectDetailInfo.comments}></Comments>
+  return (
+    <>
+      <Summary projectDetailInfo={projectDetailInfo} />
+      <Flex
+        maxW="128rem"
+        w="100%"
+        margin="0 auto"
+        p="5rem"
+        gap="10rem"
+        direction="column">
+        <Content projectDetailInfo={projectDetailInfo} />
+        <Comments comments={projectDetailInfo.comments}></Comments>
+      </Flex>
+    </>
+  )
 }
 
 export default withProjectId(ProjectDetailPage)
