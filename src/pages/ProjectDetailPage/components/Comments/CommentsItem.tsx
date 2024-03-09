@@ -2,10 +2,9 @@
 //       2. 하나만 수정모드 가능하도록 포커스 벗어날시 해제
 import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { FieldErrors } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
-import { Box, Button, Flex, Text } from "@chakra-ui/react"
+import { Box, Button, HStack, Stack, Text } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
 import { useDeleteCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
@@ -15,6 +14,7 @@ import dateToTimeago from "@pages/ProjectDetailPage/utils/datetoTimeago"
 import { CommentFormValues } from "../../types/commentFormValues"
 import CommentsAvatar from "./CommentsAvatar"
 import CommentsButton from "./CommentsButton"
+import CommentsForm from "./CommentsForm"
 import CommentsInputOrText from "./CommentsInputOrText"
 import { ProjectIdProps, withProjectId } from "./Hoc/withProjectId"
 import ReplyComment from "./ReplyComment"
@@ -79,17 +79,14 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
     handleOffEdit()
   }
 
-  const handleError = (errors: FieldErrors<CommentFormValues>) => {
-    console.log(errors)
-  }
-  console.log(isReply)
   return (
-    <Flex
-      direction="column"
+    <Stack
+      w="100%"
       gap="3rem">
-      <Flex
+      <HStack
         w="100%"
-        gap="2rem">
+        gap="2rem"
+        align="flex-start">
         {comment.user ? (
           <CommentsAvatar
             onClick={() => {
@@ -102,26 +99,23 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
         )}
 
         <Box w="100%">
-          <form onSubmit={handleSubmit(onSubmit, handleError)}>
-            <Flex
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <HStack
               justifyContent="space-between"
               w="100%">
-              <Flex
-                direction="column"
+              <Stack
+                w="100%"
                 gap="1rem"
-                align="flex-start"
-                flex="9.5">
-                <Flex
+                align="flex-start">
+                <HStack
                   gap="1rem"
                   align="center">
                   {comment.user ? (
-                    <>
-                      <Text
-                        fontFamily="SCDream_Bold"
-                        fontSize="xl">
-                        {comment.user.nickname}
-                      </Text>
-                    </>
+                    <Text
+                      fontFamily="SCDream_Bold"
+                      fontSize="xl">
+                      {comment.user.nickname}
+                    </Text>
                   ) : (
                     <Text
                       fontFamily="SCDream_Bold"
@@ -134,7 +128,7 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
                     fontSize="md">
                     {dateToTimeago(comment.createdAt)}
                   </Text>
-                </Flex>
+                </HStack>
                 <CommentsInputOrText
                   register={register("content")}
                   isEditing={isEditing}
@@ -142,9 +136,7 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
                 />
                 {!comment.parentId &&
                   (isReply ? (
-                    <form>
-                      <textarea>gg</textarea>
-                    </form>
+                    <CommentsForm />
                   ) : (
                     <Button
                       onClick={handleOnReply}
@@ -152,11 +144,8 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
                       답글달기
                     </Button>
                   ))}
-              </Flex>
-              <Flex
-                gap="1rem"
-                flex="0.5"
-                height="fit-content">
+              </Stack>
+              <HStack gap="1rem">
                 <CommentsButton
                   isOwner={comment.isOwner}
                   commentId={comment.id}
@@ -165,13 +154,13 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
                   handleOnEdit={handleOnEdit}
                   handleOffEdit={handleOffEdit}
                 />
-              </Flex>
-            </Flex>
+              </HStack>
+            </HStack>
           </form>
         </Box>
-      </Flex>
+      </HStack>
       {comment.replies && <ReplyComment comment={comment.replies} />}
-    </Flex>
+    </Stack>
   )
 }
 

@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
-import { Button, Flex, FormControl, Textarea } from "@chakra-ui/react"
+import { Box, Button, Flex, FormControl, Textarea } from "@chakra-ui/react"
 
 import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 
@@ -29,40 +29,42 @@ const CommentsForm = ({ projectId }: CommentsFormProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Flex w="100%">
-        <FormControl>
-          <Textarea
-            overflow="hidden"
-            _focus={{ boxShadow: "none", borderColor: "grey.400" }}
-            rows={1}
-            height="100%"
-            borderColor="grey.400"
-            fontSize="xl"
-            p="2.5rem"
-            as={ResizeTextarea}
-            placeholder={"댓글을 입력하세요"}
-            isRequired={false}
-            resize="none"
-            {...register("content", { required: true })}
-          />
-        </FormControl>
+    <Box w="100%">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Flex w="100%">
+          <FormControl>
+            <Textarea
+              overflow="hidden"
+              _focus={{ boxShadow: "none", borderColor: "grey.400" }}
+              rows={1}
+              height="100%"
+              borderColor="grey.400"
+              fontSize="xl"
+              p="2.5rem"
+              as={ResizeTextarea}
+              placeholder={"댓글을 입력하세요"}
+              isRequired={false}
+              resize="none"
+              {...register("content", { required: true })}
+            />
+          </FormControl>
 
-        <Button
-          height="revert"
-          p="0"
-          w="5rem"
-          bgColor="blue.100"
-          borderRadius="0"
-          borderTopRightRadius="1rem"
-          color="white"
-          fontSize="xl"
-          _hover={{ opacity: "0.5" }}
-          type="submit">
-          입력
-        </Button>
-      </Flex>
-    </form>
+          <Button
+            height="revert"
+            p="0"
+            w="5rem"
+            bgColor="blue.100"
+            borderRadius="0"
+            borderTopRightRadius="1rem"
+            color="white"
+            fontSize="xl"
+            _hover={{ opacity: "0.5" }}
+            type="submit">
+            입력
+          </Button>
+        </Flex>
+      </form>
+    </Box>
   )
 }
 export default withProjectId(CommentsForm)
