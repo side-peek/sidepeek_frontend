@@ -29,10 +29,6 @@ module.exports = {
     },
   },
   rules: {
-    "react-refresh/only-export-components": [
-      "warn",
-      { allowConstantExport: true },
-    ],
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": [
       2,

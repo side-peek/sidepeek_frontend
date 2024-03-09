@@ -53,8 +53,9 @@ declare module "api-models" {
     ownerId: number
     members: Member[]
     viewCount: number
-    likeCount: number
+    likeCount
     commentCount: number
+    comments: Comment[]
     description: string
     troubleShooting: string
   }
@@ -114,14 +115,21 @@ declare module "api-models" {
     url: string
   }
 
+  export type Owner = {
+    id: number
+    nickname: string
+    profileImageUrl: string
+  }
+
   export type Comment = {
     id: number
-    userId: string
-    projectId: string
+    parentId?: number
+    user: CommentUser
+    isOwner: boolean
     isAnonymous: boolean
     content: string
     createdAt: string
-    updatedAt: string
+    replies: Comment[]
   }
 
   export type Like = {
@@ -147,6 +155,12 @@ declare module "api-models" {
   export type Tag = {
     id: number
     name: string
+  }
+
+  export type CommentUser = {
+    id: number
+    nickname: string
+    profileImageUrl: string
   }
 
   /* 인증 관련 */
@@ -256,5 +270,27 @@ declare module "api-models" {
   //FIXME: 미완성 api
   export type postLikePayload = {
     projectId: number
+  }
+
+  /* 댓글 */
+
+  export type postCommentPayload = {
+    projectId?: number
+    ownerId: number
+    isAnonymous: boolean
+    content: string
+  }
+
+  export type deleteCommentPayload = {
+    projectId: number
+    id: number
+  }
+
+  export type editCommentPayload = {
+    projectId?: number
+    id?: number
+    ownerId: number
+    isAnonymous: boolean
+    content: string
   }
 }

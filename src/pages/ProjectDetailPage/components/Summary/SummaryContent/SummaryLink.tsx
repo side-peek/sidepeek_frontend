@@ -27,7 +27,7 @@ const SummaryLink = ({ deployUrl, githubUrl }: SummaryLinkProps) => {
       <SummaryLinkButton
         leftIcon={<FaGithub />}
         bgColor="blue.300"
-        linkName="GithUb"
+        linkName="Github"
         onClick={() => handleOpenNewTab(githubUrl)}
       />
     </Flex>

@@ -37,7 +37,7 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
       <StyledSwiper
         {...swiperParams}
         onBeforeInit={(swiper) => (swiperRef.current = swiper)}>
-        {overviewImageUrl.map((overviewImg) => (
+        {overviewImageUrl?.map((overviewImg) => (
           <SwiperSlide key={overviewImg.id}>
             <Image
               src={overviewImg.url}
