@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { UseFormRegisterReturn } from "react-hook-form"
+import { RegisterOptions, useFormContext } from "react-hook-form"
 
 import {
   Flex,
@@ -11,34 +11,38 @@ import {
   Spacer,
 } from "@chakra-ui/react"
 
+import { FormKeys } from "./types/formKeys"
+
 interface InputControllerProps extends InputProps {
+  name: FormKeys
   children?: ReactNode
   label?: string
-  registerOptions: UseFormRegisterReturn
-  isInvalid?: boolean
-  errorMessage?: string
+  registerOptions: RegisterOptions
 }
 
 const InputController = ({
   children,
-  isInvalid,
+  name,
   label,
   registerOptions,
-  errorMessage,
   ...props
 }: InputControllerProps) => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext()
   return (
-    <FormControl isInvalid={isInvalid}>
+    <FormControl isInvalid={Boolean(errors[name])}>
       <Flex alignItems="center">
         <FormLabel display="inline-block">{label}</FormLabel>
         <Spacer />
-        <FormErrorMessage>{errorMessage}</FormErrorMessage>
+        <FormErrorMessage>{errors[name]?.message as string}</FormErrorMessage>
       </Flex>
       <Flex alignItems="center">
         <Input
           height="5rem"
           fontSize="2rem"
-          {...registerOptions}
+          {...register(name, registerOptions)}
           {...props}
         />
         {children}
