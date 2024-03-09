@@ -1,13 +1,13 @@
 import { ReactNode } from "react"
 
-import { Flex } from "@chakra-ui/react"
+import { Stack } from "@chakra-ui/react"
 
 interface CommentsLayoutProps {
   children: ReactNode
 }
 const CommentsLayout = ({ children }: CommentsLayoutProps) => {
   return (
-    <Flex
+    <Stack
       margin="0 auto"
       w="100%"
       maxW="128rem"
@@ -17,7 +17,7 @@ const CommentsLayout = ({ children }: CommentsLayoutProps) => {
       direction="column"
       mt="10rem">
       {children}
-    </Flex>
+    </Stack>
   )
 }
 

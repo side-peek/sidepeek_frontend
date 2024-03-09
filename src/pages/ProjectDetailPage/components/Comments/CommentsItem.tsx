@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
-import { Box, Flex, HStack, Spacer, Stack, Text } from "@chakra-ui/react"
+import { Box, HStack, Spacer, Stack, Text } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
 import { useDeleteCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
@@ -68,7 +68,7 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
   }
 
   return (
-    <Flex
+    <HStack
       w="100%"
       gap="2rem">
       {comment.user ? (
@@ -84,19 +84,17 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
 
       <Box w="100%">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Flex
-            justifyContent="space-between"
+          <HStack
+            justify="space-between"
             w="100%">
             <Stack gap="1rem">
               <HStack gap="1rem">
                 {comment.user ? (
-                  <>
-                    <Text
-                      fontFamily="SCDream_Bold"
-                      fontSize="xl">
-                      {comment.user.nickname}
-                    </Text>
-                  </>
+                  <Text
+                    fontFamily="SCDream_Bold"
+                    fontSize="xl">
+                    {comment.user.nickname}
+                  </Text>
                 ) : (
                   <Text
                     fontFamily="SCDream_Bold"
@@ -117,10 +115,7 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
                 content={comment.content}
               />
             </Stack>
-            <Flex
-              gap="1rem"
-              flex="0.5"
-              height="fit-content">
+            <HStack gap="1rem">
               <CommentsButton
                 isOwner={comment.isOwner}
                 commentId={comment.id}
@@ -129,11 +124,11 @@ const CommentsItem = ({ comment, projectId }: CommentsItemProps) => {
                 handleOnEdit={handleOnEdit}
                 handleOffEdit={handleOffEdit}
               />
-            </Flex>
-          </Flex>
+            </HStack>
+          </HStack>
         </form>
       </Box>
-    </Flex>
+    </HStack>
   )
 }
 

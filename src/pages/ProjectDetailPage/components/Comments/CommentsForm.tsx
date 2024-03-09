@@ -15,7 +15,9 @@ const CommentsForm = ({ projectId }: CommentsFormProps) => {
 
   const { sendCommentMutation } = usePostCommentMutation(Number(projectId))
 
-  // TODO: 빈 값일때 처리(Toast로 구현)
+  // TODO: 1. 빈 값일때 처리(Toast로 구현)
+  //       2. 일정 높이 이상일때 높이가 늘어나지 않고 스크롤바
+
   const onSubmit: SubmitHandler<CommentFormValues> = (text) => {
     const commentRequestValue = {
       ownerId: 12,
@@ -28,11 +30,10 @@ const CommentsForm = ({ projectId }: CommentsFormProps) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Flex
-        w="100%"
-        height="8rem">
+      <Flex w="100%">
         <FormControl>
           <Textarea
+            overflow="hidden"
             _focus={{ boxShadow: "none", borderColor: "grey.400" }}
             rows={1}
             height="100%"
@@ -48,7 +49,7 @@ const CommentsForm = ({ projectId }: CommentsFormProps) => {
         </FormControl>
 
         <Button
-          height="7.5rem"
+          height="revert"
           p="0"
           w="5rem"
           bgColor="blue.100"
