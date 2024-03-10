@@ -26,7 +26,6 @@ interface CommentsItemProps {
   handleOffReply: () => void
   handleDelete: (commentId: number) => void
   handleSubmit: UseFormHandleSubmit<EditCommentFormValues>
-  setValue: (text: string) => void
   onSubmitEdit: (comment: EditCommentFormValues) => void
   editTargetCommentId: number
   isReply: boolean
