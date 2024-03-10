@@ -124,7 +124,7 @@ const CommentsItem = ({
                 (isReply ? (
                   comment.id === replyTargetCommentId && (
                     <>
-                      <CommentsForm parentId={comment.parentId} />
+                      <CommentsForm parentId={replyTargetCommentId} />
                       <Button
                         p="0"
                         _hover={{ opacity: "0.5" }}

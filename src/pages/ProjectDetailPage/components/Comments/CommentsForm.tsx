@@ -33,6 +33,7 @@ const CommentsForm = ({ parentId, projectId }: CommentsFormProps) => {
         parentId: parentId ? parentId : null,
         content: text.content,
       }
+      console.log(commentRequestValue)
       sendCommentMutation.mutate(commentRequestValue)
       reset()
     }
