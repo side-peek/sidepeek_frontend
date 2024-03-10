@@ -3,7 +3,7 @@ import { useContext, useMemo } from "react"
 import { Button } from "@chakra-ui/react"
 
 import { MAX_PAGES_COUNT } from "@components/Pagination/constants/constants"
-import { pageButtonStyles } from "@components/Pagination/styles/pageButtonStyles"
+import { setPageButtonStyles } from "@components/Pagination/styles/pageButtonStyles"
 
 import { PaginationContext } from "../Contexts/Contexts"
 
@@ -29,7 +29,7 @@ const PageButtons = () => {
       {pages.map((page) => (
         <Button
           key={page}
-          {...pageButtonStyles(page, currentPage)}
+          {...setPageButtonStyles({ isSelected: page === currentPage })}
           onClick={() => handleSelectPage(page)}>
           {page}
         </Button>
