@@ -26,6 +26,7 @@ interface CommentsItemProps {
   handleOffReply: () => void
   handleDelete: (commentId: number) => void
   handleSubmit: UseFormHandleSubmit<EditCommentFormValues>
+  setValue: (text: string) => void
   onSubmitEdit: (comment: EditCommentFormValues) => void
   editTargetCommentId: number
   isReply: boolean
@@ -45,8 +46,8 @@ const CommentsItem = ({
   isEditing,
   handleNavigateProfile,
   handleDelete,
-  // handleSubmit,
-  // onSubmitEdit,
+  handleSubmit,
+  onSubmitEdit,
   register,
 }: CommentsItemProps) => {
   return (
@@ -78,24 +79,42 @@ const CommentsItem = ({
                 user={comment.user}
                 createdAt={comment.createdAt}
               />
-              {editTargetCommentId === comment.id && isEditing ? (
-                <Textarea
-                  rows={1}
-                  w="100%"
-                  fontSize="lg"
-                  p="0.2rem"
-                  as={ResizeTextarea}
-                  isRequired={false}
-                  resize="none"
-                  {...register}
-                />
-              ) : (
-                <Text
-                  fontSize="lg"
-                  p="0.2rem">
-                  {comment.content}
-                </Text>
-              )}
+              <HStack
+                w="100%"
+                justify="space-between">
+                {editTargetCommentId === comment.id && isEditing ? (
+                  <Box w="100%">
+                    <form onSubmit={handleSubmit(onSubmitEdit)}>
+                      <Textarea
+                        rows={1}
+                        w="100%"
+                        fontSize="lg"
+                        p="0.2rem"
+                        as={ResizeTextarea}
+                        isRequired={false}
+                        resize="none"
+                        {...register}
+                      />
+                    </form>
+                  </Box>
+                ) : (
+                  <Text
+                    fontSize="lg"
+                    p="0.2rem">
+                    {comment.content}
+                  </Text>
+                )}
+                <HStack gap="1rem">
+                  <CommentsButton
+                    editTargetCommentId={editTargetCommentId}
+                    comment={comment}
+                    isEditing={isEditing}
+                    handleDelete={handleDelete}
+                    handleOnEdit={handleOnEdit}
+                    handleOffEdit={handleOffEdit}
+                  />
+                </HStack>
+              </HStack>
 
               {!comment.parentId &&
                 (isReply ? (
@@ -111,16 +130,6 @@ const CommentsItem = ({
                   </Button>
                 ))}
             </Stack>
-            <HStack gap="1rem">
-              <CommentsButton
-                editTargetCommentId={editTargetCommentId}
-                comment={comment}
-                isEditing={isEditing}
-                handleDelete={handleDelete}
-                handleOnEdit={handleOnEdit}
-                handleOffEdit={handleOffEdit}
-              />
-            </HStack>
           </HStack>
         </Box>
       </HStack>

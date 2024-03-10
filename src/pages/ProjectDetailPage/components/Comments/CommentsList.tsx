@@ -13,13 +13,12 @@ import { EditCommentFormValues } from "@pages/ProjectDetailPage/types/EditCommen
 import { CommentFormValues } from "@pages/ProjectDetailPage/types/commentFormValues"
 
 import CommentsItem from "./CommentsItem"
-import { ProjectIdProps } from "./Hoc/withProjectId"
 
 export interface handleOnEditProps extends EditCommentFormValues {
   commentId: number
 }
 
-interface CommentsListProps extends ProjectIdProps {
+interface CommentsListProps {
   comments: Comment[]
 }
 
@@ -72,6 +71,7 @@ const CommentsList = ({ comments }: CommentsListProps) => {
 
   // 수정요청
   const onSubmitEdit: SubmitHandler<EditCommentFormValues> = (newComment) => {
+    console.log(newComment)
     editCommentMutation.mutate(newComment)
   }
 
