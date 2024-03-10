@@ -1,6 +1,5 @@
-// TODO: 1. 포커스 자동 조정
-//       2. 하나만 수정모드 가능하도록 포커스 벗어날시 해제
-//       4. 글자수 제한
+// TODO: 1. 포커스 자동 조정(register commentId 사용)
+//       2. 글자수 제한
 import ResizeTextarea from "react-textarea-autosize"
 
 import { Box, Button, HStack, Stack, Text } from "@chakra-ui/react"

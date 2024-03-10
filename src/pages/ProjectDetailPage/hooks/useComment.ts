@@ -12,15 +12,6 @@ export const useComment = () => {
   const [editTargetCommentId, setEditTargetCommentId] = useState(-1)
   const [replyTargetCommentId, setReplyTargetCommentId] = useState(-1)
 
-  const handleOnReply = (commentId: number) => {
-    setIsReply(true)
-    setReplyTargetCommentId(commentId)
-  }
-
-  const handleOffReply = () => {
-    setIsReply(false)
-  }
-
   const { register, handleSubmit, setValue, reset } =
     useForm<EditCommentFormValues>()
 
@@ -41,34 +32,45 @@ export const useComment = () => {
 
   const handleOffEdit = () => {
     setIsEditing(false)
-    reset()
     setEditTargetCommentId(-1)
+    reset()
+  }
+
+  const handleOnReply = (commentId: number) => {
+    setIsReply(true)
+    setReplyTargetCommentId(commentId)
+  }
+
+  const handleOffReply = () => {
+    setIsReply(false)
   }
 
   const handleDelete = (commentId: number) => {
     deleteCommentMutation.mutate(commentId)
+    handleOffEdit()
+    handleOffReply()
   }
 
-  const onSubmitEdit: SubmitHandler<EditCommentFormValues> = (newComment) => {
-    editCommentMutation.mutate(newComment)
+  const onSubmitEdit: SubmitHandler<EditCommentFormValues> = (
+    commentValues,
+  ) => {
+    editCommentMutation.mutate(commentValues)
     handleOffEdit()
+    handleOffReply()
   }
 
   return {
     isEditing,
-    setIsEditing,
     isReply,
-    setIsReply,
     replyTargetCommentId,
     editTargetCommentId,
-    setEditTargetCommentId,
     handleOnReply,
     handleOffReply,
-    register,
-    handleSubmit,
     handleOnEdit,
     handleOffEdit,
     handleDelete,
+    handleSubmit,
     onSubmitEdit,
+    register,
   }
 }
