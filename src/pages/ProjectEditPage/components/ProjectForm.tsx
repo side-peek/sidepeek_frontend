@@ -1,81 +1,66 @@
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
-
 import { Button, Flex, Input, Text, Textarea } from "@chakra-ui/react"
 
-import { ProjectFormDefaultValues } from "../constants/defaultValues"
-import { ProjectFormValues } from "../types/ProjectFormValues"
-import InputBox from "./ProjectInputBox"
-import TechSkillFields from "./TechStacksFields/TechStackFields"
+import ProjectFormProvider from "../stores/ProjectFormProvider"
+import ProjectInputBox from "./ProjectInputBox"
+import TechStacksFields from "./TechStacksFields/TechStackFields"
 
 const ProjectForm = () => {
-  const methods = useForm<ProjectFormValues>({
-    defaultValues: ProjectFormDefaultValues,
-  })
-
-  const submitEventHandler: SubmitHandler<ProjectFormValues> = (data) => {
-    console.log(data)
-  }
-
   return (
-    <>
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(submitEventHandler)}>
-          <Flex
-            flexDir="column"
-            gap="30px">
-            <InputBox
-              name="thumbnailUrl"
-              label="사진">
-              <input
-                type="file"
-                accept="image/*"
-              />
-            </InputBox>
+    <ProjectFormProvider>
+      <Flex
+        flexDir="column"
+        gap="30px">
+        <ProjectInputBox
+          name="thumbnailUrl"
+          label="사진">
+          <input
+            type="file"
+            accept="image/*"
+          />
+        </ProjectInputBox>
 
-            <InputBox
-              name="name"
-              label="제목"
-              footer="제목은 필수입니다">
-              <Input />
-            </InputBox>
+        <ProjectInputBox
+          name="name"
+          label="제목"
+          footer="제목은 필수입니다">
+          <Input />
+        </ProjectInputBox>
 
-            <InputBox
-              name="subName"
-              label="소제목">
-              <Input />
-            </InputBox>
+        <ProjectInputBox
+          name="subName"
+          label="소제목">
+          <Input />
+        </ProjectInputBox>
 
-            <InputBox
-              name="overview"
-              label="요약">
-              <Textarea
-                resize="none"
-                height="10rem"
-              />
-            </InputBox>
+        <ProjectInputBox
+          name="overview"
+          label="요약">
+          <Textarea
+            resize="none"
+            height="10rem"
+          />
+        </ProjectInputBox>
 
-            <InputBox
-              name="githubUrl"
-              label="Github URL">
-              <Input />
-            </InputBox>
+        <ProjectInputBox
+          name="githubUrl"
+          label="Github URL">
+          <Input />
+        </ProjectInputBox>
 
-            <InputBox
-              name="deployUrl"
-              label="배포 URL">
-              <Input />
-            </InputBox>
+        <ProjectInputBox
+          name="deployUrl"
+          label="배포 URL">
+          <Input />
+        </ProjectInputBox>
 
-            <label htmlFor="techStacks">
-              <Text>기술 스택</Text>
-            </label>
-            <TechSkillFields />
+        <label htmlFor="techStacks">
+          <Text>기술 스택</Text>
+        </label>
+        <TechStacksFields />
 
-            <Button type="submit" />
-          </Flex>
-        </form>
-      </FormProvider>
-    </>
+        <Button type="submit">제출</Button>
+      </Flex>
+    </ProjectFormProvider>
   )
 }
 
