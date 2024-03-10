@@ -57,16 +57,14 @@ const CommentsItem = ({
         w="100%"
         gap="2rem"
         align="flex-start">
-        {comment.user ? (
-          <CommentsAvatar
-            onClick={() => {
+        <CommentsAvatar
+          onClick={() => {
+            if (comment.user && comment.user.id) {
               handleNavigateProfile(comment.user.id)
-            }}
-            src={comment.user.profileImageUrl}
-          />
-        ) : (
-          <CommentsAvatar src="" />
-        )}
+            }
+          }}
+          user={comment.user}
+        />
 
         <Box w="100%">
           <HStack
