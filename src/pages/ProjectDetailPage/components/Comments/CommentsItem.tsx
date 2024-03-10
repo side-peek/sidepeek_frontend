@@ -1,7 +1,7 @@
 // TODO: 1. 포커스 자동 조정
 //       2. 하나만 수정모드 가능하도록 포커스 벗어날시 해제
-// 커스텀 훅(상태, )
-// 글자수 제한
+//       3. 커스텀 훅
+//       4. 글자수 제한
 import { UseFormHandleSubmit, UseFormRegisterReturn } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
@@ -15,19 +15,23 @@ import CommentTitle from "./CommentTitle"
 import CommentsAvatar from "./CommentsAvatar"
 import CommentsButton from "./CommentsButton"
 import CommentsForm from "./CommentsForm"
-import { handleOnEditProps } from "./CommentsList"
 import ReplyComment from "./ReplyComment"
 
 interface CommentsItemProps {
   comment: Comment
-  handleOnEdit: ({ commentId, isAnonymous, content }: handleOnEditProps) => void
+  handleOnEdit: ({
+    commentId,
+    isAnonymous,
+    content,
+  }: EditCommentFormValues) => void
   handleOffEdit: () => void
-  handleOnReply: () => void
+  handleOnReply: (commentId: number) => void
   handleOffReply: () => void
   handleDelete: (commentId: number) => void
   handleSubmit: UseFormHandleSubmit<EditCommentFormValues>
   onSubmitEdit: (comment: EditCommentFormValues) => void
   editTargetCommentId: number
+  replyTargetCommentId: number
   isReply: boolean
   isEditing: boolean
   handleNavigateProfile: (commentUserId: number) => void
@@ -41,6 +45,7 @@ const CommentsItem = ({
   handleOnReply,
   handleOffReply,
   editTargetCommentId,
+  replyTargetCommentId,
   isReply,
   isEditing,
   handleNavigateProfile,
@@ -78,12 +83,12 @@ const CommentsItem = ({
                 user={comment.user}
                 createdAt={comment.createdAt}
               />
-              <HStack
-                w="100%"
-                justify="space-between">
-                {editTargetCommentId === comment.id && isEditing ? (
-                  <Box w="100%">
-                    <form onSubmit={handleSubmit(onSubmitEdit)}>
+              <Box w="100%">
+                <form onSubmit={handleSubmit(onSubmitEdit)}>
+                  <HStack
+                    justify="space-between"
+                    w="100%">
+                    {editTargetCommentId === comment.id && isEditing ? (
                       <Textarea
                         rows={1}
                         w="100%"
@@ -94,36 +99,38 @@ const CommentsItem = ({
                         resize="none"
                         {...register}
                       />
-                    </form>
-                  </Box>
-                ) : (
-                  <Text
-                    fontSize="lg"
-                    p="0.2rem">
-                    {comment.content}
-                  </Text>
-                )}
-                <HStack gap="1rem">
-                  <CommentsButton
-                    editTargetCommentId={editTargetCommentId}
-                    comment={comment}
-                    isEditing={isEditing}
-                    handleDelete={handleDelete}
-                    handleOnEdit={handleOnEdit}
-                    handleOffEdit={handleOffEdit}
-                  />
-                </HStack>
-              </HStack>
+                    ) : (
+                      <Text
+                        fontSize="lg"
+                        p="0.2rem">
+                        {comment.content}
+                      </Text>
+                    )}
+                    <HStack gap="1rem">
+                      <CommentsButton
+                        editTargetCommentId={editTargetCommentId}
+                        comment={comment}
+                        isEditing={isEditing}
+                        handleDelete={handleDelete}
+                        handleOnEdit={handleOnEdit}
+                        handleOffEdit={handleOffEdit}
+                      />
+                    </HStack>
+                  </HStack>
+                </form>
+              </Box>
 
               {!comment.parentId &&
                 (isReply ? (
-                  <>
-                    <CommentsForm />
-                    <Button onClick={handleOffReply}>취소</Button>
-                  </>
+                  comment.id === replyTargetCommentId && (
+                    <>
+                      <CommentsForm />
+                      <Button onClick={handleOffReply}>취소</Button>
+                    </>
+                  )
                 ) : (
                   <Button
-                    onClick={handleOnReply}
+                    onClick={() => handleOnReply(comment.id)}
                     p="0">
                     답글달기
                   </Button>
@@ -132,7 +139,25 @@ const CommentsItem = ({
           </HStack>
         </Box>
       </HStack>
-      {comment.replies && <ReplyComment comment={comment.replies} />}
+      {comment.replies && (
+        <ReplyComment
+          comment={comment.replies}
+          handleOnEdit={handleOnEdit}
+          handleOffEdit={handleOffEdit}
+          handleOnReply={handleOnReply}
+          handleOffReply={handleOffReply}
+          editTargetCommentId={editTargetCommentId}
+          replyTargetCommentId={replyTargetCommentId}
+          isReply={isReply}
+          isEditing={isEditing}
+          handleDelete={handleDelete}
+          handleSubmit={handleSubmit}
+          onSubmitEdit={onSubmitEdit}
+          register={register}
+          key={comment.id}
+          handleNavigateProfile={handleNavigateProfile}
+        />
+      )}
     </Stack>
   )
 }

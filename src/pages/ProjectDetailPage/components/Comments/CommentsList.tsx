@@ -10,43 +10,39 @@ import { Comment } from "api-models"
 import { useDeleteCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
 import { useEditCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/useEditCommentMutation"
 import { EditCommentFormValues } from "@pages/ProjectDetailPage/types/EditCommentFormValues"
-import { CommentFormValues } from "@pages/ProjectDetailPage/types/commentFormValues"
 
 import CommentsItem from "./CommentsItem"
-
-export interface handleOnEditProps extends EditCommentFormValues {
-  commentId: number
-}
 
 interface CommentsListProps {
   comments: Comment[]
 }
 
 const CommentsList = ({ comments }: CommentsListProps) => {
-  const { register, handleSubmit, setValue, reset } =
-    useForm<CommentFormValues>()
+  const [isEditing, setIsEditing] = useState(false)
+  const [isReply, setIsReply] = useState(false)
+  const [editTargetCommentId, setEditTargetCommentId] = useState(-1)
+  const [replyTargetCommentId, setReplyTargetCommentId] = useState(-1)
 
   const navigate = useNavigate()
+
+  const { register, handleSubmit, setValue, reset } =
+    useForm<EditCommentFormValues>()
 
   const handleNavigateProfile = (userId: number) => {
     navigate(`/profile/${userId}`)
   }
 
   const { editCommentMutation } = useEditCommentMutation()
-
   const { deleteCommentMutation } = useDeleteCommentMutation()
-
-  const [isEditing, setIsEditing] = useState(false)
-  const [isReply, setIsReply] = useState(false)
-  const [editTargetCommentId, setEditTargetCommentId] = useState(-1)
 
   const handleOnEdit = ({
     commentId,
     isAnonymous,
     content,
-  }: handleOnEditProps) => {
+  }: EditCommentFormValues) => {
     setIsEditing(true)
     setEditTargetCommentId(commentId)
+    setValue("commentId", commentId)
     setValue("isAnonymous", isAnonymous)
     setValue("content", content)
   }
@@ -57,8 +53,9 @@ const CommentsList = ({ comments }: CommentsListProps) => {
     setEditTargetCommentId(-1)
   }
 
-  const handleOnReply = () => {
+  const handleOnReply = (commentId: number) => {
     setIsReply(true)
+    setReplyTargetCommentId(commentId)
   }
 
   const handleOffReply = () => {
@@ -80,24 +77,27 @@ const CommentsList = ({ comments }: CommentsListProps) => {
       w="100%"
       gap="4rem"
       p="2rem">
-      {comments.map((comment) => (
-        <CommentsItem
-          handleOnEdit={handleOnEdit}
-          handleOffEdit={handleOffEdit}
-          handleOnReply={handleOnReply}
-          handleOffReply={handleOffReply}
-          editTargetCommentId={editTargetCommentId}
-          isReply={isReply}
-          isEditing={isEditing}
-          handleDelete={handleDelete}
-          handleSubmit={handleSubmit}
-          onSubmitEdit={onSubmitEdit}
-          register={register("content", { required: true })}
-          comment={comment}
-          key={comment.id}
-          handleNavigateProfile={handleNavigateProfile}
-        />
-      ))}
+      {comments.map((comment) => {
+        return (
+          <CommentsItem
+            handleOnEdit={handleOnEdit}
+            handleOffEdit={handleOffEdit}
+            handleOnReply={handleOnReply}
+            handleOffReply={handleOffReply}
+            editTargetCommentId={editTargetCommentId}
+            replyTargetCommentId={replyTargetCommentId}
+            isReply={isReply}
+            isEditing={isEditing}
+            handleDelete={handleDelete}
+            handleSubmit={handleSubmit}
+            onSubmitEdit={onSubmitEdit}
+            register={register("content", { required: true })}
+            comment={comment}
+            key={comment.id}
+            handleNavigateProfile={handleNavigateProfile}
+          />
+        )
+      })}
     </Stack>
   )
 }
