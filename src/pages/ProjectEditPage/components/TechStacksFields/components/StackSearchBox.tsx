@@ -6,29 +6,20 @@ import { Skill } from "api-models"
 import SearchBox from "@components/Search/SearchMain"
 import { useInput } from "@components/Search/hooks/useInput"
 import { useTechStacks } from "@components/Search/hooks/useTechStacksSearch"
-import CustomTag from "@components/Tag/components/CustomTag"
 
 interface StackSearchSectionProps {
   children?: ReactNode
-  onClickResultItem: (data: Skill) => void
+  render: ({ techStacks }: { techStacks: Skill[] }) => JSX.Element
 }
 
-const StackSearchBox = ({
-  children,
-  onClickResultItem,
-}: StackSearchSectionProps) => {
+const StackSearchBox = ({ children, render }: StackSearchSectionProps) => {
   const [inputValue, onInput] = useInput("")
-  const [techStacks, filterResult] = useTechStacks(inputValue)
-
-  const labelClickHandler = (techStack: Skill) => {
-    filterResult(techStack)
-    onClickResultItem(techStack)
-  }
+  const [techStacks] = useTechStacks(inputValue)
 
   return (
     <SearchBox>
       <Flex
-        gap="5px"
+        gap="0.5rem"
         flexWrap="wrap">
         <SearchBox.Input
           value={inputValue}
@@ -38,18 +29,8 @@ const StackSearchBox = ({
         {children}
         <SearchBox.Result
           flexDir="row"
-          gap="5px">
-          {techStacks?.map((techStack) => {
-            return (
-              <CustomTag
-                onClickLabel={() => {
-                  labelClickHandler(techStack)
-                }}
-                label={techStack.name}
-                key={techStack.name}
-              />
-            )
-          })}
+          gap="0.5rem">
+          {render({ techStacks })}
         </SearchBox.Result>
       </Flex>
     </SearchBox>
