@@ -6,10 +6,10 @@ import { ENDPOINTS } from "@constants/endPoints"
 import { authInstance } from "../axiosInstance"
 
 export const deleteComment = async (
-  { projectId, id }: deleteCommentPayload,
+  { commentId }: deleteCommentPayload,
   config: AxiosRequestConfig = {},
 ) => {
-  await authInstance.delete(ENDPOINTS.DELETE_COMMENT(projectId, id), {
+  await authInstance.delete(ENDPOINTS.DELETE_COMMENT(commentId), {
     ...config,
   })
 }

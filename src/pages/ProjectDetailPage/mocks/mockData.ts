@@ -105,7 +105,7 @@ export const DUMMY_PROJECT_DETAIL = {
     {
       id: 1,
       user: {
-        id: 3,
+        id: 2123123,
         nickname: "세희",
         profileImageUrl:
           "https://image.utoimage.com/preview/cp872722/2022/12/202212008462_500.jpg",
@@ -119,7 +119,7 @@ export const DUMMY_PROJECT_DETAIL = {
           id: 3,
           parentId: 1,
           user: {
-            id: 1,
+            id: 1238912312,
             nickname: "의진",
             profileImageUrl:
               "https://user-images.githubusercontent.com/uijin.png",
@@ -132,7 +132,7 @@ export const DUMMY_PROJECT_DETAIL = {
       ],
     },
     {
-      id: 2,
+      id: 10,
       user: null,
       isOwner: true,
       isAnonymous: true,

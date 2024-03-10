@@ -123,13 +123,13 @@ declare module "api-models" {
 
   export type Comment = {
     id: number
-    parentId?: number
+    parentId: number | null
     user: CommentUser
     isOwner: boolean
     isAnonymous: boolean
     content: string
     createdAt: string
-    replies: Comment[]
+    replies?: Comment[]
   }
 
   export type Like = {
@@ -275,22 +275,19 @@ declare module "api-models" {
   /* 댓글 */
 
   export type postCommentPayload = {
-    projectId?: number
     ownerId: number
+    projectId: number | null
+    parentId: number | null
+    isAnonymous: boolean
+    content: string
+  }
+
+  export type editCommentPayload = {
     isAnonymous: boolean
     content: string
   }
 
   export type deleteCommentPayload = {
-    projectId: number
-    id: number
-  }
-
-  export type editCommentPayload = {
-    projectId?: number
-    id?: number
-    ownerId: number
-    isAnonymous: boolean
-    content: string
+    commentId: number
   }
 }

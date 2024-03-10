@@ -1,22 +1,29 @@
-import { SubmitHandler, useForm } from "react-hook-form"
+// TODO: 1. 빈 값일때 처리(Toast로 구현)
+//       2. 일정 높이 이상일때 높이가 늘어나지 않고 스크롤바
+import { SubmitHandler } from "react-hook-form"
+import { UseFormHandleSubmit } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
 import { Box, Button, Flex, FormControl, Textarea } from "@chakra-ui/react"
 
 import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
+import { EditCommentFormValues } from "@pages/ProjectDetailPage/types/EditCommentFormValues"
 
 import { CommentFormValues } from "../../types/commentFormValues"
 import { ProjectIdProps, withProjectId } from "./Hoc/withProjectId"
 
-interface CommentsFormProps extends ProjectIdProps {}
+interface CommentsEditFormProps extends ProjectIdProps {
+  register: UseFormRegisterReturn
+  handleSubmit: UseFormHandleSubmit<EditCommentFormValues>
+}
 
-const CommentsForm = ({ projectId }: CommentsFormProps) => {
-  const { register, reset, handleSubmit } = useForm<CommentFormValues>()
+const CommentsEditForm = ({
+  projectId,
+  register,
 
+  handleSubmit,
+}: CommentsEditFormProps) => {
   const { sendCommentMutation } = usePostCommentMutation()
-
-  // TODO: 1. 빈 값일때 처리(Toast로 구현)
-  //       2. 일정 높이 이상일때 높이가 늘어나지 않고 스크롤바
 
   const onSubmit: SubmitHandler<CommentFormValues> = (text) => {
     // TODO: 1. projectId는 url에서
@@ -64,6 +71,20 @@ const CommentsForm = ({ projectId }: CommentsFormProps) => {
             fontSize="xl"
             _hover={{ opacity: "0.5" }}
             type="submit">
+            취소
+          </Button>
+
+          <Button
+            height="revert"
+            p="0"
+            w="5rem"
+            bgColor="blue.100"
+            borderRadius="0"
+            borderTopRightRadius="1rem"
+            color="white"
+            fontSize="xl"
+            _hover={{ opacity: "0.5" }}
+            type="submit">
             입력
           </Button>
         </Flex>
@@ -71,4 +92,4 @@ const CommentsForm = ({ projectId }: CommentsFormProps) => {
     </Box>
   )
 }
-export default withProjectId(CommentsForm)
+export default withProjectId(CommentsEditForm)

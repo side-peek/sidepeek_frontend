@@ -1,32 +1,33 @@
-import EditingButton from "./EditingButton"
+import { Comment } from "api-models"
+
+import { handleOnEditProps } from "./CommentsList"
 import OwnerButton from "./OwnerButton"
 
 interface CommentsButtonProps {
-  isOwner: boolean
-  commentId: number
+  comment: Comment
   isEditing: boolean
-  handleOnEdit: () => void
+  handleOnEdit: ({ commentId, isAnonymous, content }: handleOnEditProps) => void
   handleOffEdit: () => void
   handleDelete: (id: number) => void
+  editTargetCommentId: number
 }
 const CommentsButton = ({
-  isOwner,
-  commentId,
+  comment,
   isEditing,
   handleOnEdit,
   handleOffEdit,
   handleDelete,
+  editTargetCommentId,
 }: CommentsButtonProps) => {
-  return isEditing ? (
-    <EditingButton handleOffEdit={handleOffEdit} />
-  ) : (
-    isOwner && (
+  return (
+    comment.isOwner && (
       <OwnerButton
-        {...{
-          handleOnEdit,
-          handleDelete,
-          commentId,
-        }}
+        handleOnEdit={handleOnEdit}
+        comment={comment}
+        handleDelete={handleDelete}
+        editTargetCommentId={editTargetCommentId}
+        isEditing={isEditing}
+        handleOffEdit={handleOffEdit}
       />
     )
   )

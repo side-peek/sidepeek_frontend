@@ -2,29 +2,47 @@ import { MdDelete } from "react-icons/md"
 import { TiPencil } from "react-icons/ti"
 
 import { IconButton } from "@chakra-ui/react"
+import { Comment } from "api-models"
+
+import { handleOnEditProps } from "./CommentsList"
+import EditingButton from "./EditingButton"
 
 interface OwnerButtonProps {
-  handleOnEdit: () => void
+  handleOnEdit: ({ commentId, isAnonymous, content }: handleOnEditProps) => void
   handleDelete: (id: number) => void
-  commentId: number
+  handleOffEdit: () => void
+  editTargetCommentId: number
+  isEditing: boolean
+  comment: Comment
 }
 const OwnerButton = ({
   handleOnEdit,
   handleDelete,
-  commentId,
+  handleOffEdit,
+  comment,
+  isEditing,
+  editTargetCommentId,
 }: OwnerButtonProps) => {
-  return (
+  return editTargetCommentId === comment.id && isEditing ? (
+    <EditingButton handleOffEdit={handleOffEdit} />
+  ) : (
     <>
       <IconButton
         aria-label="edit"
         icon={<TiPencil />}
-        onClick={handleOnEdit}
+        onClick={() => {
+          handleOnEdit({
+            commentId: comment.id,
+            isAnonymous: comment.isAnonymous,
+            content: comment.content,
+          })
+        }}
         fontSize="2xl"
       />
       <IconButton
         aria-label="delete"
         icon={<MdDelete />}
-        onClick={() => handleDelete(commentId)}
+        onClick={() => handleDelete(comment.id)}
         fontSize="2xl"
       />
     </>

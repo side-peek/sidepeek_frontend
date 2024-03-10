@@ -6,13 +6,23 @@ import { ENDPOINTS } from "@constants/endPoints"
 import { authInstance } from "../axiosInstance"
 
 export const editComment = async (
-  { projectId, id, ...body }: editCommentPayload,
+  data: editCommentPayload,
   config: AxiosRequestConfig = {},
 ) => {
-  if (!projectId || !id) {
+  if (data.projectId) {
+    const newData = {
+      ...data,
+      parentId: null,
+    }
+
+    await authInstance.put(ENDPOINTS.EDIT_COMMENT(data.commentId), newData, {
+      ...config,
+    })
+
     return
   }
-  await authInstance.put(ENDPOINTS.EDIT_COMMENT(projectId, id), body, {
+
+  await authInstance.put(ENDPOINTS.EDIT_COMMENT(data.commentId), data, {
     ...config,
   })
 }

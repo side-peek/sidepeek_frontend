@@ -6,13 +6,10 @@ import { ENDPOINTS } from "@constants/endPoints"
 import { authInstance } from "../axiosInstance"
 
 export const postComment = async (
-  { projectId, ...body }: postCommentPayload,
+  { ...data }: postCommentPayload,
   config: AxiosRequestConfig = {},
 ) => {
-  if (!projectId) {
-    return
-  }
-  await authInstance.post(ENDPOINTS.POST_COMMENT(projectId), body, {
+  await authInstance.post(ENDPOINTS.POST_COMMENT(), data, {
     ...config,
   })
 }
