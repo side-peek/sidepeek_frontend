@@ -22,6 +22,7 @@ import {
   CHECK_PASSWORD_VALIDATION_OPTION,
   CURRENT_PASSWORD_VALIDATION_OPTION,
   NEW_PASSWORD_VALIDATION_OPTION,
+  PASSWORD_MISMATCH_ERROR,
 } from "@pages/ProfileEditPage/constants/validation"
 
 interface FormValues {
@@ -59,10 +60,7 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
     // TODO: 3/4 스크럼 이후 - api 에러코드 보고 분류하기로 함. 프론트단에서 현재 비밀번호와 같은지 판단할 수 없기 때문에 수정 예정임
     const { newPassword, checkPassword } = data
     if (newPassword !== checkPassword) {
-      setError("checkPassword", {
-        type: "password-mismatch",
-        message: "비밀번호가 일치하지 않습니다",
-      })
+      setError("checkPassword", PASSWORD_MISMATCH_ERROR)
       onInvalid()
     } else {
       onValid()

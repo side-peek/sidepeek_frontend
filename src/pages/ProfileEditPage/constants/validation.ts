@@ -38,3 +38,8 @@ export const CHECK_PASSWORD_VALIDATION_OPTION = {
     message: "새로운 비밀번호는 8자 이상이어야 합니다",
   },
 }
+
+export const PASSWORD_MISMATCH_ERROR = {
+  type: "password-mismatch",
+  message: "비밀번호가 일치하지 않습니다",
+}
