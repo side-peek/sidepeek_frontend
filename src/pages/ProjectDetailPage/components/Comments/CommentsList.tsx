@@ -40,21 +40,23 @@ const CommentsList = ({ comments }: CommentsListProps) => {
       {comments.map((comment) => {
         return (
           <CommentsItem
-            handleOnEdit={handleOnEdit}
-            handleOffEdit={handleOffEdit}
-            handleOnReply={handleOnReply}
-            handleOffReply={handleOffReply}
-            editTargetCommentId={editTargetCommentId}
-            replyTargetCommentId={replyTargetCommentId}
-            isReply={isReply}
-            isEditing={isEditing}
-            handleDelete={handleDelete}
-            handleSubmit={handleSubmit}
-            onSubmitEdit={onSubmitEdit}
             register={register("content", { required: true })}
-            comment={comment}
             key={comment.id}
-            handleNavigateProfile={handleNavigateProfile}
+            {...{
+              handleOnEdit,
+              handleOffEdit,
+              handleOnReply,
+              handleOffReply,
+              editTargetCommentId,
+              replyTargetCommentId,
+              isReply,
+              comment,
+              isEditing,
+              handleDelete,
+              handleSubmit,
+              onSubmitEdit,
+              handleNavigateProfile,
+            }}
           />
         )
       })}

@@ -1,42 +1,17 @@
 // TODO: 1. 포커스 자동 조정
 //       2. 하나만 수정모드 가능하도록 포커스 벗어날시 해제
-//       3. 커스텀 훅
 //       4. 글자수 제한
-import { UseFormHandleSubmit, UseFormRegisterReturn } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
 import { Box, Button, HStack, Stack, Text } from "@chakra-ui/react"
 import { Textarea } from "@chakra-ui/react"
-import { Comment } from "api-models"
 
-import { EditCommentFormValues } from "@pages/ProjectDetailPage/types/editCommentFormValues"
-
+import { CommentsItemProps } from "../../types/commentItem"
 import CommentTitle from "./CommentTitle"
 import CommentsAvatar from "./CommentsAvatar"
 import CommentsButton from "./CommentsButton"
 import CommentsForm from "./CommentsForm"
 import ReplyComment from "./ReplyComment"
-
-interface CommentsItemProps {
-  comment: Comment
-  handleOnEdit: ({
-    commentId,
-    isAnonymous,
-    content,
-  }: EditCommentFormValues) => void
-  handleOffEdit: () => void
-  handleOnReply: (commentId: number) => void
-  handleOffReply: () => void
-  handleDelete: (commentId: number) => void
-  handleSubmit: UseFormHandleSubmit<EditCommentFormValues>
-  onSubmitEdit: (comment: EditCommentFormValues) => void
-  editTargetCommentId: number
-  replyTargetCommentId: number
-  isReply: boolean
-  isEditing: boolean
-  handleNavigateProfile: (commentUserId: number) => void
-  register: UseFormRegisterReturn
-}
 
 const CommentsItem = ({
   comment,
@@ -108,12 +83,14 @@ const CommentsItem = ({
                     )}
                     <HStack gap="1rem">
                       <CommentsButton
-                        editTargetCommentId={editTargetCommentId}
-                        comment={comment}
-                        isEditing={isEditing}
-                        handleDelete={handleDelete}
-                        handleOnEdit={handleOnEdit}
-                        handleOffEdit={handleOffEdit}
+                        {...{
+                          editTargetCommentId,
+                          comment,
+                          isEditing,
+                          handleDelete,
+                          handleOnEdit,
+                          handleOffEdit,
+                        }}
                       />
                     </HStack>
                   </HStack>
@@ -147,20 +124,22 @@ const CommentsItem = ({
       {comment.replies && (
         <ReplyComment
           comment={comment.replies}
-          handleOnEdit={handleOnEdit}
-          handleOffEdit={handleOffEdit}
-          handleOnReply={handleOnReply}
-          handleOffReply={handleOffReply}
-          editTargetCommentId={editTargetCommentId}
-          replyTargetCommentId={replyTargetCommentId}
-          isReply={isReply}
-          isEditing={isEditing}
-          handleDelete={handleDelete}
-          handleSubmit={handleSubmit}
-          onSubmitEdit={onSubmitEdit}
-          register={register}
           key={comment.id}
-          handleNavigateProfile={handleNavigateProfile}
+          {...{
+            handleOnEdit,
+            handleOffEdit,
+            handleOnReply,
+            handleOffReply,
+            editTargetCommentId,
+            replyTargetCommentId,
+            isReply,
+            isEditing,
+            handleDelete,
+            handleSubmit,
+            onSubmitEdit,
+            register,
+            handleNavigateProfile,
+          }}
         />
       )}
     </Stack>

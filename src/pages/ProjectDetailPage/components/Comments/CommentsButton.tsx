@@ -1,12 +1,17 @@
 import { Comment } from "api-models"
 
-import { handleOnEditProps } from "./CommentsList"
+import { EditCommentFormValues } from "@pages/ProjectDetailPage/types/EditCommentFormValues"
+
 import OwnerButton from "./OwnerButton"
 
 interface CommentsButtonProps {
   comment: Comment
   isEditing: boolean
-  handleOnEdit: ({ commentId, isAnonymous, content }: handleOnEditProps) => void
+  handleOnEdit: ({
+    commentId,
+    isAnonymous,
+    content,
+  }: EditCommentFormValues) => void
   handleOffEdit: () => void
   handleDelete: (id: number) => void
   editTargetCommentId: number

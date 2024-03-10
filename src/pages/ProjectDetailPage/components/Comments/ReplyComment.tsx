@@ -1,32 +1,11 @@
-import { UseFormRegisterReturn } from "react-hook-form"
-import { UseFormHandleSubmit } from "react-hook-form"
-
 import { Box, Flex } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
-import { EditCommentFormValues } from "@pages/ProjectDetailPage/types/EditCommentFormValues"
-
+import { CommentsItemProps } from "../../types/commentItem"
 import CommentsItem from "./CommentsItem"
 
-interface ReplyCommentProps {
+interface ReplyCommentProps extends Omit<CommentsItemProps, "comment"> {
   comment: Comment[]
-  handleOnEdit: ({
-    commentId,
-    isAnonymous,
-    content,
-  }: EditCommentFormValues) => void
-  handleOffEdit: () => void
-  handleOnReply: (commentId: number) => void
-  handleOffReply: () => void
-  handleDelete: (commentId: number) => void
-  handleSubmit: UseFormHandleSubmit<EditCommentFormValues>
-  onSubmitEdit: (comment: EditCommentFormValues) => void
-  editTargetCommentId: number
-  replyTargetCommentId: number
-  isReply: boolean
-  isEditing: boolean
-  handleNavigateProfile: (commentUserId: number) => void
-  register: UseFormRegisterReturn
 }
 
 const ReplyComment = ({
@@ -54,19 +33,21 @@ const ReplyComment = ({
       <Box w="100%">
         <CommentsItem
           comment={reply}
-          handleOnEdit={handleOnEdit}
-          handleOffEdit={handleOffEdit}
-          handleOnReply={handleOnReply}
-          handleOffReply={handleOffReply}
-          editTargetCommentId={editTargetCommentId}
-          replyTargetCommentId={replyTargetCommentId}
-          isReply={isReply}
-          isEditing={isEditing}
-          handleDelete={handleDelete}
-          handleSubmit={handleSubmit}
-          onSubmitEdit={onSubmitEdit}
-          register={register}
-          handleNavigateProfile={handleNavigateProfile}
+          {...{
+            handleOnEdit,
+            handleOffEdit,
+            handleOnReply,
+            handleOffReply,
+            editTargetCommentId,
+            replyTargetCommentId,
+            isReply,
+            isEditing,
+            handleDelete,
+            handleSubmit,
+            onSubmitEdit,
+            register,
+            handleNavigateProfile,
+          }}
         />
       </Box>
     </Flex>

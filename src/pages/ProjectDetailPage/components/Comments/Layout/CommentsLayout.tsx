@@ -19,8 +19,7 @@ const CommentsLayout = ({ children }: CommentsLayoutProps) => {
         maxW="128rem"
         borderRadius="1rem"
         border="1px"
-        borderColor="grey.400"
-        direction="column">
+        borderColor="grey.400">
         {children}
       </Stack>
     </Stack>
