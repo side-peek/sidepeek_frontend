@@ -6,7 +6,7 @@ import { Skill } from "api-models"
 import SearchBox from "@components/Search/SearchMain"
 import { useInput } from "@components/Search/hooks/useInput"
 import { useTechStacks } from "@components/Search/hooks/useTechStacksSearch"
-import CustomTag from "@components/Tag/components/CustomTag"
+import CommonTag from "@components/Tag/components/CommonTag"
 
 interface StackSearchSectionProps {
   children?: ReactNode
@@ -41,8 +41,8 @@ const StackSearchBox = ({
           gap="5px">
           {techStacks?.map((techStack) => {
             return (
-              <CustomTag
-                onClickLabel={() => {
+              <CommonTag
+                onClick={() => {
                   labelClickHandler(techStack)
                 }}
                 label={techStack.name}
