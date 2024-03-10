@@ -43,7 +43,7 @@ const ChangeNicknameModal = ({
     register,
     handleSubmit,
     setError,
-    // reset,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({ mode: "onSubmit" })
 
@@ -52,7 +52,7 @@ const ChangeNicknameModal = ({
     console.log("1")
     // TODO: 낙관적 업데이트 수행 예정. api 요청으로 닉네임 변경해줌
     setProfileInfo((profileInfo) => ({ ...profileInfo, nickname: newNickname }))
-    // reset()
+    reset()
     onClose()
   }
 
