@@ -124,8 +124,13 @@ const CommentsItem = ({
                 (isReply ? (
                   comment.id === replyTargetCommentId && (
                     <>
-                      <CommentsForm />
-                      <Button onClick={handleOffReply}>취소</Button>
+                      <CommentsForm parentId={comment.parentId} />
+                      <Button
+                        p="0"
+                        _hover={{ opacity: "0.5" }}
+                        onClick={handleOffReply}>
+                        취소
+                      </Button>
                     </>
                   )
                 ) : (

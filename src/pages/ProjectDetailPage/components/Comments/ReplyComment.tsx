@@ -7,11 +7,14 @@ import { Comment } from "api-models"
 import { EditCommentFormValues } from "@pages/ProjectDetailPage/types/EditCommentFormValues"
 
 import CommentsItem from "./CommentsItem"
-import { handleOnEditProps } from "./CommentsList"
 
 interface ReplyCommentProps {
   comment: Comment[]
-  handleOnEdit: ({ commentId, isAnonymous, content }: handleOnEditProps) => void
+  handleOnEdit: ({
+    commentId,
+    isAnonymous,
+    content,
+  }: EditCommentFormValues) => void
   handleOffEdit: () => void
   handleOnReply: (commentId: number) => void
   handleOffReply: () => void
@@ -44,7 +47,7 @@ const ReplyComment = ({
 }: ReplyCommentProps) => {
   return comment.map((reply) => (
     <Flex
-      pl="5rem"
+      pl="3rem"
       gap="2rem"
       w="100%"
       key={reply.id}>

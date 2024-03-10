@@ -14,9 +14,11 @@ import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations
 import { CommentFormValues } from "../../types/commentFormValues"
 import { ProjectIdProps, withProjectId } from "./Hoc/withProjectId"
 
-interface CommentsFormProps extends ProjectIdProps {}
+interface CommentsFormProps extends ProjectIdProps {
+  parentId?: number | null
+}
 
-const CommentsForm = ({ projectId }: CommentsFormProps) => {
+const CommentsForm = ({ parentId, projectId }: CommentsFormProps) => {
   const { register, reset, handleSubmit } = useForm<CommentFormValues>()
   const user = useUserInfoData()
 
@@ -28,7 +30,7 @@ const CommentsForm = ({ projectId }: CommentsFormProps) => {
         ownerId: user.id,
         projectId: Number(projectId),
         isAnonymous: false,
-        parentId: null,
+        parentId: parentId ? parentId : null,
         content: text.content,
       }
       sendCommentMutation.mutate(commentRequestValue)
@@ -42,10 +44,11 @@ const CommentsForm = ({ projectId }: CommentsFormProps) => {
         <Flex w="100%">
           <FormControl>
             <Textarea
-              overflow="hidden"
+              size="xs"
               _focus={{ boxShadow: "none", borderColor: "grey.400" }}
               rows={1}
-              height="100%"
+              overflow="hidden"
+              minH="unset"
               borderColor="grey.400"
               fontSize="xl"
               p="2.5rem"

@@ -49,7 +49,6 @@ export const useComment = () => {
     deleteCommentMutation.mutate(commentId)
   }
 
-  // 수정요청
   const onSubmitEdit: SubmitHandler<EditCommentFormValues> = (newComment) => {
     editCommentMutation.mutate(newComment)
     handleOffEdit()

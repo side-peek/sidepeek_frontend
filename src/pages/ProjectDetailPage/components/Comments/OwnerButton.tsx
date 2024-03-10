@@ -4,11 +4,16 @@ import { TiPencil } from "react-icons/ti"
 import { IconButton } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
-import { handleOnEditProps } from "./CommentsList"
+import { EditCommentFormValues } from "@pages/ProjectDetailPage/types/EditCommentFormValues"
+
 import EditingButton from "./EditingButton"
 
 interface OwnerButtonProps {
-  handleOnEdit: ({ commentId, isAnonymous, content }: handleOnEditProps) => void
+  handleOnEdit: ({
+    commentId,
+    isAnonymous,
+    content,
+  }: EditCommentFormValues) => void
   handleDelete: (id: number) => void
   handleOffEdit: () => void
   editTargetCommentId: number
