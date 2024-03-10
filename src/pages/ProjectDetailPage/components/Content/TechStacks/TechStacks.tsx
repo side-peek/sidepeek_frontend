@@ -2,7 +2,7 @@
 import { Flex, HStack, Text, useMediaQuery } from "@chakra-ui/react"
 import { TechStack } from "api-models"
 
-import CustomTag from "@components/Tag/components/CustomTag"
+import CommonTag from "@components/Tag/components/CommonTag"
 
 import techStacksCategory from "@pages/ProjectDetailPage/utils/techStacksCategory"
 
@@ -41,7 +41,7 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
               spacing="1rem"
               flexWrap="wrap">
               {stacks.map((stack) => (
-                <CustomTag
+                <CommonTag
                   label={stack.skill.name}
                   key={stack.skill.id}
                 />
