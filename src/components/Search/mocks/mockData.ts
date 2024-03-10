@@ -28,7 +28,7 @@ export const DUMMY_SKILLS: { skills: Skill[] } = {
       iconImageUrl: "https://www.iconimageurl.com",
     },
     {
-      id: 6,
+      id: 7,
       name: "github action",
       iconImageUrl: "https://www.iconimageurl.com",
     },
