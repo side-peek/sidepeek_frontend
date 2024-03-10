@@ -10,8 +10,8 @@ import { Textarea } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
 import { EditCommentFormValues } from "@pages/ProjectDetailPage/types/editCommentFormValues"
-import dateToTimeago from "@pages/ProjectDetailPage/utils/datetoTimeago"
 
+import CommentTitle from "./CommentTitle"
 import CommentsAvatar from "./CommentsAvatar"
 import CommentsButton from "./CommentsButton"
 import CommentsForm from "./CommentsForm"
@@ -76,28 +76,10 @@ const CommentsItem = ({
               w="100%"
               gap="1rem"
               align="flex-start">
-              <HStack
-                gap="1rem"
-                align="center">
-                {comment.user ? (
-                  <Text
-                    fontFamily="SCDream_Bold"
-                    fontSize="xl">
-                    {comment.user.nickname}
-                  </Text>
-                ) : (
-                  <Text
-                    fontFamily="SCDream_Bold"
-                    fontSize="xl">
-                    익명
-                  </Text>
-                )}
-                <Text
-                  color="grey.500"
-                  fontSize="md">
-                  {dateToTimeago(comment.createdAt)}
-                </Text>
-              </HStack>
+              <CommentTitle
+                user={comment.user}
+                createdAt={comment.createdAt}
+              />
               {editTargetCommentId === comment.id && isEditing ? (
                 <Textarea
                   rows={1}
