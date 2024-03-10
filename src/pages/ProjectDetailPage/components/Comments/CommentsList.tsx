@@ -1,5 +1,4 @@
-// TODO: 1. 익명일때 프로필페이지 못넘어 가는거 Modal or Toast 처리 + 로그인한유저만 넘어가도록 수정
-import { useState } from "react"
+// TODO: 1. 익명일때 프로필페이
 import { useForm } from "react-hook-form"
 import { SubmitHandler } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
@@ -9,6 +8,7 @@ import { Comment } from "api-models"
 
 import { useDeleteCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
 import { useEditCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/useEditCommentMutation"
+import { useComment } from "@pages/ProjectDetailPage/hooks/useComment"
 import { EditCommentFormValues } from "@pages/ProjectDetailPage/types/EditCommentFormValues"
 
 import CommentsItem from "./CommentsItem"
@@ -18,10 +18,16 @@ interface CommentsListProps {
 }
 
 const CommentsList = ({ comments }: CommentsListProps) => {
-  const [isEditing, setIsEditing] = useState(false)
-  const [isReply, setIsReply] = useState(false)
-  const [editTargetCommentId, setEditTargetCommentId] = useState(-1)
-  const [replyTargetCommentId, setReplyTargetCommentId] = useState(-1)
+  const {
+    isEditing,
+    setIsEditing,
+    isReply,
+    editTargetCommentId,
+    setEditTargetCommentId,
+    replyTargetCommentId,
+    handleOnReply,
+    handleOffReply,
+  } = useComment()
 
   const navigate = useNavigate()
 
@@ -53,22 +59,12 @@ const CommentsList = ({ comments }: CommentsListProps) => {
     setEditTargetCommentId(-1)
   }
 
-  const handleOnReply = (commentId: number) => {
-    setIsReply(true)
-    setReplyTargetCommentId(commentId)
-  }
-
-  const handleOffReply = () => {
-    setIsReply(false)
-  }
-
   const handleDelete = (commentId: number) => {
     deleteCommentMutation.mutate(commentId)
   }
 
   // 수정요청
   const onSubmitEdit: SubmitHandler<EditCommentFormValues> = (newComment) => {
-    console.log(newComment)
     editCommentMutation.mutate(newComment)
   }
 
