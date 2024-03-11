@@ -7,7 +7,7 @@ import ProfileActionsButtons from "./ProfileActionsButtons"
 interface ProfileCardProps extends ProfileActionsButtonsProps {
   profileImageUrl?: string
   nickname?: string
-  career?: string
+  career?: string | null
 }
 
 const ProfileCard = ({

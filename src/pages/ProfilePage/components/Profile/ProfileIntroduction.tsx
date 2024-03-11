@@ -5,9 +5,9 @@ import { Box, HStack, Link, Text } from "@chakra-ui/react"
 
 // TODO: props 타입이 undefined가 될수 있다는게 뭔가 이상함 이렇게 안하면 케찹 터짐. 해결해보기
 interface IntroductionProps {
-  aboutMe: string | undefined
-  githubUrl: string | undefined
-  blogUrl: string | undefined
+  aboutMe?: string | null
+  githubUrl?: string | null
+  blogUrl?: string | null
 }
 
 const ProfileIntroduction = ({
@@ -34,19 +34,23 @@ const ProfileIntroduction = ({
       <HStack mt="1.5rem">
         <ImGithub size="2.6rem" />
 
-        <Link
-          href={githubUrl}
-          fontSize="1.3rem">
-          GitHub 링크
-        </Link>
+        {githubUrl && (
+          <Link
+            href={githubUrl}
+            fontSize="1.3rem">
+            GitHub 링크
+          </Link>
+        )}
       </HStack>
       <HStack mt="0.8rem">
         <FaSquarePen size="2.6rem" />
-        <Link
-          href={blogUrl}
-          fontSize="1.3rem">
-          Blog 링크
-        </Link>
+        {blogUrl && (
+          <Link
+            href={blogUrl}
+            fontSize="1.3rem">
+            Blog 링크
+          </Link>
+        )}
       </HStack>
     </Box>
   )

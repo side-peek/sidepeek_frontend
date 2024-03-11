@@ -12,13 +12,13 @@ import ProfileTechStack from "./ProfileTechStack"
 
 // TODO: props 타입이 undefined가 될수 있다는게 뭔가 이상함 이렇게 안하면 케찹 터짐. 해결해보기
 export interface ProfileBarProps extends ProfileActionsButtonsProps {
-  nickname: string | undefined
-  profileImageUrl: string | undefined
-  career: string | undefined
-  introduction: string | undefined
-  githubUrl: string | undefined
-  blogUrl: string | undefined
-  techStacks: TechStack[] | undefined
+  nickname: string
+  profileImageUrl: string
+  career: string | null
+  introduction: string | null
+  githubUrl: string | null
+  blogUrl: string | null
+  techStacks: TechStack[]
 }
 
 const ProfileBarView = ({
