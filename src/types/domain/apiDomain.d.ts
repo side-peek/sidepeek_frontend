@@ -285,6 +285,7 @@ declare module "api-models" {
   export type editCommentPayload = {
     isAnonymous: boolean
     content: string
+    commentId: number
   }
 
   export type deleteCommentPayload = {
