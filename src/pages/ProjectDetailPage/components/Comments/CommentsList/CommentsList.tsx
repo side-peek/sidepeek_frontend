@@ -5,7 +5,7 @@ import { Comment } from "api-models"
 
 import { useComment } from "@pages/ProjectDetailPage/hooks/useComment"
 
-import CommentsItem from "./CommentsItem"
+import CommentsItem from "../CommentsItem/CommentsItem"
 
 interface CommentsListProps {
   comments: Comment[]

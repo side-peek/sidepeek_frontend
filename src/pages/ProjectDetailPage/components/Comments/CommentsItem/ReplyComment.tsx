@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
-import { CommentsItemProps } from "../../types/commentItem"
+import { CommentsItemProps } from "../../../types/commentItem"
 import CommentsItem from "./CommentsItem"
 
 interface ReplyCommentProps extends Omit<CommentsItemProps, "comment"> {

@@ -1,8 +1,4 @@
-// TODO: 1. 빈 값일때 처리(Toast로 구현)
-//       2. 일정 높이 이상일때 높이가 늘어나지 않고 스크롤바
-//       3. ownerId는 userInfo에서
-//       3. 대댓글일때 parentId를 동적으로 받아야 하는 문제 해결
-//       4. isAnonymous 처리
+// TODO: 익명 처리
 import { SubmitHandler, useForm } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
@@ -11,8 +7,8 @@ import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 
-import { CommentFormValues } from "../../types/commentFormValues"
-import { ProjectIdProps, withProjectId } from "./Hoc/withProjectId"
+import { CommentFormValues } from "../../../types/commentFormValues"
+import { ProjectIdProps, withProjectId } from "../Hoc/withProjectId"
 
 interface CommentsFormProps extends ProjectIdProps {
   parentId?: number | null

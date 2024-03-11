@@ -1,4 +1,3 @@
-// TODO: 전역으로 빼기
 import { Avatar, AvatarProps } from "@chakra-ui/react"
 import { CommentUser } from "api-models"
 

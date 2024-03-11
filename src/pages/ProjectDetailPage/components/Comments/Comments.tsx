@@ -1,7 +1,7 @@
 import { Comment } from "api-models"
 
-import CommentsForm from "./CommentsForm"
-import CommentsList from "./CommentsList"
+import CommentsForm from "./CommentsForm/CommentsForm"
+import CommentsList from "./CommentsList/CommentsList"
 import CommentsLayout from "./Layout/CommentsLayout"
 
 export interface CommentsProps {

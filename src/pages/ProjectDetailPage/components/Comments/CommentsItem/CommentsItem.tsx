@@ -1,15 +1,12 @@
 // TODO: 1. 포커스 자동 조정(register commentId 사용)
 //       2. 글자수 제한
-import ResizeTextarea from "react-textarea-autosize"
+import { Box, Button, HStack, Stack } from "@chakra-ui/react"
 
-import { Box, Button, HStack, Stack, Text } from "@chakra-ui/react"
-import { Textarea } from "@chakra-ui/react"
-
-import { CommentsItemProps } from "../../types/commentItem"
+import { CommentsItemProps } from "../../../types/commentItem"
+import CommentsForm from "../CommentsForm/CommentsForm"
 import CommentTitle from "./CommentTitle"
 import CommentsAvatar from "./CommentsAvatar"
-import CommentsButton from "./CommentsButton"
-import CommentsForm from "./CommentsForm"
+import CommentsEditFormText from "./CommentsEditFormText"
 import ReplyComment from "./ReplyComment"
 
 const CommentsItem = ({
@@ -57,45 +54,19 @@ const CommentsItem = ({
                 user={comment.user}
                 createdAt={comment.createdAt}
               />
-              <Box w="100%">
-                <form onSubmit={handleSubmit(onSubmitEdit)}>
-                  <HStack
-                    justify="space-between"
-                    w="100%">
-                    {editTargetCommentId === comment.id && isEditing ? (
-                      <Textarea
-                        rows={1}
-                        w="100%"
-                        fontSize="lg"
-                        p="0.2rem"
-                        as={ResizeTextarea}
-                        isRequired={false}
-                        resize="none"
-                        {...register}
-                      />
-                    ) : (
-                      <Text
-                        fontSize="lg"
-                        p="0.2rem">
-                        {comment.content}
-                      </Text>
-                    )}
-                    <HStack gap="1rem">
-                      <CommentsButton
-                        {...{
-                          editTargetCommentId,
-                          comment,
-                          isEditing,
-                          handleDelete,
-                          handleOnEdit,
-                          handleOffEdit,
-                        }}
-                      />
-                    </HStack>
-                  </HStack>
-                </form>
-              </Box>
-
+              <CommentsEditFormText
+                {...{
+                  handleSubmit,
+                  onSubmitEdit,
+                  editTargetCommentId,
+                  comment,
+                  isEditing,
+                  register,
+                  handleDelete,
+                  handleOnEdit,
+                  handleOffEdit,
+                }}
+              />
               {!comment.parentId &&
                 (isReply ? (
                   comment.id === replyTargetCommentId && (
