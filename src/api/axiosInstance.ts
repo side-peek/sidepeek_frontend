@@ -1,4 +1,4 @@
-import axios, { isAxiosError } from "axios"
+import axios, { AxiosError, isAxiosError } from "axios"
 
 import authToken from "@stores/authToken"
 
@@ -15,18 +15,20 @@ export const authInstance = axios.create({
 //TODO: 소셜 로그인 로직 추가 예정
 authInstance.interceptors.request.use(
   async (config) => {
-    // const accessToken = authToken.getAccessToken()
-    // const refreshToken = authToken.getRefreshToken()
+    const accessToken = authToken.getAccessToken()
+    const refreshToken = authToken.getRefreshToken()
 
-    // if (!refreshToken) {
-    //   throw new AxiosError("Login Required")
-    // }
+    if (!refreshToken) {
+      throw new AxiosError("Login Required")
+    }
 
-    // if (!accessToken) {
-    //   const currentAccessToken = await postEmailRefresh({ refreshToken })
-    //   authToken.setAccessToken(currentAccessToken)
-    //   config.headers.Authorization = `Bearer ${currentAccessToken}`
-    // }
+    if (!accessToken) {
+      const currentAccessToken = await postEmailRefresh({ refreshToken })
+      authToken.setAccessToken(currentAccessToken)
+      config.headers.Authorization = `Bearer ${currentAccessToken}`
+    }
+
+    config.headers.Authorization = `Bearer ${accessToken}`
     return config
   },
   (error) => {

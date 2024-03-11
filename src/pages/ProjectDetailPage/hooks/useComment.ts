@@ -13,7 +13,7 @@ export const useComment = () => {
   const [editTargetCommentId, setEditTargetCommentId] = useState(-1)
   const [replyTargetCommentId, setReplyTargetCommentId] = useState(-1)
 
-  const { register, handleSubmit, setValue, reset } =
+  const { register, handleSubmit, setValue, reset, setFocus } =
     useForm<editCommentPayload>()
 
   const { editCommentMutation } = useEditCommentMutation()
@@ -29,6 +29,7 @@ export const useComment = () => {
     setValue("commentId", commentId)
     setValue("isAnonymous", isAnonymous)
     setValue("content", content)
+    setFocus("content")
   }
 
   const handleOffEdit = () => {
