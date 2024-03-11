@@ -11,7 +11,9 @@ export const getUserDetail = async (
 ) => {
   const { data } = await baseInstance.get<getUserDetailResponseType>(
     ENDPOINTS.GET_USER_PROFILE(userId),
-    { ...config },
+    {
+      ...config,
+    },
   )
 
   return data
