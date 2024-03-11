@@ -42,6 +42,7 @@ const ProfileIntroduction = ({
         ) : (
           <Text
             fontSize="1.3rem"
+            color="grey.500"
             mt="0.5rem">
             Github 링크가 없습니다
           </Text>
@@ -58,6 +59,7 @@ const ProfileIntroduction = ({
         ) : (
           <Text
             fontSize="1.3rem"
+            color="grey.500"
             mt="0.3rem">
             Blog 링크가 없습니다
           </Text>
