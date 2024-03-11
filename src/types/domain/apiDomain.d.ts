@@ -78,9 +78,8 @@ declare module "api-models" {
 
   export type Member = {
     id: number
-    nickname: string
-    profileImageUrl: string
-    category: string
+    role: string
+    userSummary: UserSummary
   }
 
   export type ProjectTag = {

@@ -17,8 +17,11 @@ interface ExplanationProps {
 
 const Explanation = ({ projects }: ExplanationProps) => {
   return (
-    <Center margin="0 auto">
+    <Center
+      margin="0 auto"
+      w="100%">
       <Tabs
+        w="100%"
         size="lg"
         variant="enclosed"
         fontFamily="SCDream_Bold">
