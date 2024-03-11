@@ -29,11 +29,13 @@ const ProfileCard = ({
         fontFamily="SCDream_Bold">
         {nickname}
       </Text>
-      <Text
-        mt="-3"
-        fontSize="2xl">
-        {career} 개발자
-      </Text>
+      {career && (
+        <Text
+          mt="-3"
+          fontSize="2xl">
+          {career} 개발자
+        </Text>
+      )}
       <ProfileActionsButtons {...{ handleNewProject, handleEditProfile }} />
     </VStack>
   )
