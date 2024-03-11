@@ -1,7 +1,9 @@
-import { Skill } from "api-models"
+import { expect, test } from "vitest"
 
-export const DUMMY_SKILLS: { skills: Skill[] } = {
-  skills: [
+import { filterSelectedStack } from "./filterSelectedStack"
+
+test("서버에서 내려온 기술스택 데이터 중 이미 선택된 기술스택을 제외한다", () => {
+  const original = [
     {
       id: 1,
       name: "react",
@@ -17,20 +19,24 @@ export const DUMMY_SKILLS: { skills: Skill[] } = {
       name: "spring boot",
       iconImageUrl: "https://www.iconimageurl.com",
     },
+  ]
+  const selected = [
     {
-      id: 5,
-      name: "react query",
+      id: 4,
+      name: "spring boot",
+      iconImageUrl: "https://www.iconimageurl.com",
+    },
+  ]
+  expect(filterSelectedStack(original, selected)).toEqual([
+    {
+      id: 1,
+      name: "react",
       iconImageUrl: "https://www.iconimageurl.com",
     },
     {
-      id: 6,
-      name: "github",
+      id: 2,
+      name: "spring",
       iconImageUrl: "https://www.iconimageurl.com",
     },
-    {
-      id: 7,
-      name: "github action",
-      iconImageUrl: "https://www.iconimageurl.com",
-    },
-  ],
-}
+  ])
+})
