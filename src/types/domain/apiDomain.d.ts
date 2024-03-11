@@ -172,6 +172,8 @@ declare module "api-models" {
 
   export type postEmailRefreshResponseType = {
     accessToken: string
+    refreshToken: string
+    user: UserSummary
   }
 
   export type postEmailLoginPayload = {
