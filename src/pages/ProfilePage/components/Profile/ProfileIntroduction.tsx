@@ -33,23 +33,34 @@ const ProfileIntroduction = ({
 
       <HStack mt="1.5rem">
         <ImGithub size="2.6rem" />
-
-        {githubUrl && (
+        {githubUrl ? (
           <Link
             href={githubUrl}
             fontSize="1.3rem">
-            GitHub 링크
+            {githubUrl}
           </Link>
+        ) : (
+          <Text
+            fontSize="1.3rem"
+            mt="0.5rem">
+            Github 링크가 없습니다
+          </Text>
         )}
       </HStack>
       <HStack mt="0.8rem">
         <FaSquarePen size="2.6rem" />
-        {blogUrl && (
+        {blogUrl ? (
           <Link
             href={blogUrl}
             fontSize="1.3rem">
-            Blog 링크
+            {blogUrl}
           </Link>
+        ) : (
+          <Text
+            fontSize="1.3rem"
+            mt="0.3rem">
+            Blog 링크가 없습니다
+          </Text>
         )}
       </HStack>
     </Box>
