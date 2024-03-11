@@ -5,7 +5,7 @@ import ProfileTechStackByCategory from "./ProfileTechStackByCategory"
 
 // TODO: props 타입이 undefined가 될수 있다는게 뭔가 이상함 이렇게 안하면 케찹 터짐. 해결해보기
 interface TechStackProps {
-  techStacks: TechStack[] | undefined
+  techStacks?: TechStack[]
 }
 
 const ProfileTechStack = ({ techStacks }: TechStackProps) => {
