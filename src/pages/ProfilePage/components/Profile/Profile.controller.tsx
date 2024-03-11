@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 import { Box, Flex, useMediaQuery } from "@chakra-ui/react"
 
@@ -10,7 +10,9 @@ import { useUserInfo } from "./Profile.model"
 const ProfileController = () => {
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
 
-  const { data } = useUserInfo({ userId: 1 })
+  const { userId } = useParams()
+
+  const { data } = useUserInfo({ userId: Number(userId) })
 
   const navigate = useNavigate()
   const handleNewProject = () => {
@@ -39,7 +41,7 @@ const ProfileController = () => {
     githubUrl,
     blogUrl,
     techStacks,
-  } = data.userInfo
+  } = data
 
   return (
     <Box>
