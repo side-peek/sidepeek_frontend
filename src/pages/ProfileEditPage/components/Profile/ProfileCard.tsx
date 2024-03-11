@@ -14,7 +14,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react"
 
-import { ProfileInfo } from "../../types/types"
+import { CareerType, ProfileInfo } from "../../types/types"
 import ChangeNicknameModal from "../Modal/ChangeNicknameModal"
 
 interface ProfileCardProps {
@@ -23,8 +23,6 @@ interface ProfileCardProps {
   career: string
   setProfileInfo: React.Dispatch<React.SetStateAction<ProfileInfo>>
 }
-
-type CareerType = "0년차" | "1~3년차" | "4~6년차" | "7~9년차" | "10년차 이상"
 
 const ProfileCard = ({
   profileImageUrl,
