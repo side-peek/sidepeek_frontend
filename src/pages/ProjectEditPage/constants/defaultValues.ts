@@ -9,4 +9,5 @@ export const ProjectFormDefaultValues: ProjectFormValues = {
   deployUrl: "",
   startDate: "",
   endDate: "",
+  techStacks: [],
 }
