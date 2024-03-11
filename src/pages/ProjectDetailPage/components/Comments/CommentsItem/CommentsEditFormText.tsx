@@ -1,32 +1,25 @@
+import { UseFormRegisterReturn } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
 import { Box, HStack, Text, Textarea } from "@chakra-ui/react"
+import { Comment } from "api-models"
 
-import { CommentsItemProps } from "@pages/ProjectDetailPage/types/commentItem"
+import { useComment } from "@pages/ProjectDetailPage/hooks/useComment"
 
-import CommentsButton from "./CommentsButton"
+import OwnerButton from "./OwnerButton"
 
-interface CommentsEditFormTextProps
-  extends Omit<
-    CommentsItemProps,
-    | "handleOnReply"
-    | "handleOffReply"
-    | "replyTargetCommentId"
-    | "handleNavigateProfile"
-    | "isReply"
-  > {}
+interface CommentsEditFormTextProps {
+  comment: Comment
+  register: UseFormRegisterReturn
+}
 
 const CommentsEditFormText = ({
   comment,
-  handleOnEdit,
-  handleOffEdit,
-  handleDelete,
-  handleSubmit,
-  onSubmitEdit,
-  editTargetCommentId,
-  isEditing,
   register,
 }: CommentsEditFormTextProps) => {
+  const { handleSubmit, onSubmitEdit, editTargetCommentId, isEditing } =
+    useComment()
+
   return (
     <Box w="100%">
       <form onSubmit={handleSubmit(onSubmitEdit)}>
@@ -52,16 +45,7 @@ const CommentsEditFormText = ({
             </Text>
           )}
           <HStack gap="1rem">
-            <CommentsButton
-              {...{
-                editTargetCommentId,
-                comment,
-                isEditing,
-                handleDelete,
-                handleOnEdit,
-                handleOffEdit,
-              }}
-            />
+            {comment.isOwner && <OwnerButton comment={comment} />}
           </HStack>
         </HStack>
       </form>

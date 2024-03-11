@@ -1,30 +1,31 @@
-// TODO: 1. 포커스 자동 조정(register commentId 사용)
-//       2. 글자수 제한
-import { Box, Button, HStack, Stack } from "@chakra-ui/react"
+// TODO: 1. 포커스 자동 조정(register edit name 사용)
+import { UseFormRegisterReturn } from "react-hook-form"
 
-import { CommentsItemProps } from "../../../types/commentItem"
+import { Box, Button, HStack, Stack } from "@chakra-ui/react"
+import { Comment } from "api-models"
+
+import { useComment } from "@pages/ProjectDetailPage/hooks/useComment"
+
 import CommentsForm from "../CommentsForm/CommentsForm"
 import CommentTitle from "./CommentTitle"
 import CommentsAvatar from "./CommentsAvatar"
 import CommentsEditFormText from "./CommentsEditFormText"
 import ReplyComment from "./ReplyComment"
 
-const CommentsItem = ({
-  comment,
-  handleOnEdit,
-  handleOffEdit,
-  handleOnReply,
-  handleOffReply,
-  editTargetCommentId,
-  replyTargetCommentId,
-  isReply,
-  isEditing,
-  handleNavigateProfile,
-  handleDelete,
-  handleSubmit,
-  onSubmitEdit,
-  register,
-}: CommentsItemProps) => {
+interface CommentsItemProps {
+  comment: Comment
+  register: UseFormRegisterReturn
+}
+
+const CommentsItem = ({ comment, register }: CommentsItemProps) => {
+  const {
+    replyTargetCommentId,
+    isReply,
+    handleOnReply,
+    handleOffReply,
+    handleNavigateProfile,
+  } = useComment()
+
   return (
     <Stack
       w="100%"
@@ -41,7 +42,6 @@ const CommentsItem = ({
           }}
           user={comment.user}
         />
-
         <Box w="100%">
           <HStack
             justifyContent="space-between"
@@ -56,15 +56,8 @@ const CommentsItem = ({
               />
               <CommentsEditFormText
                 {...{
-                  handleSubmit,
-                  onSubmitEdit,
-                  editTargetCommentId,
                   comment,
-                  isEditing,
                   register,
-                  handleDelete,
-                  handleOnEdit,
-                  handleOffEdit,
                 }}
               />
               {!comment.parentId &&
@@ -94,21 +87,8 @@ const CommentsItem = ({
       {comment.replies && (
         <ReplyComment
           comment={comment.replies}
-          key={comment.id}
           {...{
-            handleOnEdit,
-            handleOffEdit,
-            handleOnReply,
-            handleOffReply,
-            editTargetCommentId,
-            replyTargetCommentId,
-            isReply,
-            isEditing,
-            handleDelete,
-            handleSubmit,
-            onSubmitEdit,
             register,
-            handleNavigateProfile,
           }}
         />
       )}

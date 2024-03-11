@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom"
-
 import { Stack } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
@@ -12,26 +10,8 @@ interface CommentsListProps {
 }
 
 const CommentsList = ({ comments }: CommentsListProps) => {
-  const {
-    isEditing,
-    isReply,
-    editTargetCommentId,
-    replyTargetCommentId,
-    handleOnReply,
-    handleOffReply,
-    register,
-    handleSubmit,
-    handleOnEdit,
-    handleOffEdit,
-    handleDelete,
-    onSubmitEdit,
-  } = useComment()
+  const { register } = useComment()
 
-  const navigate = useNavigate()
-
-  const handleNavigateProfile = (userId: number) => {
-    navigate(`/profile/${userId}`)
-  }
   return (
     <Stack
       w="100%"
@@ -43,19 +23,7 @@ const CommentsList = ({ comments }: CommentsListProps) => {
             register={register("content", { required: true })}
             key={comment.id}
             {...{
-              handleOnEdit,
-              handleOffEdit,
-              handleOnReply,
-              handleOffReply,
-              editTargetCommentId,
-              replyTargetCommentId,
-              isReply,
               comment,
-              isEditing,
-              handleDelete,
-              handleSubmit,
-              onSubmitEdit,
-              handleNavigateProfile,
             }}
           />
         )

@@ -3,30 +3,24 @@ import { TiPencil } from "react-icons/ti"
 
 import { IconButton } from "@chakra-ui/react"
 import { Comment } from "api-models"
-import { editCommentPayload } from "api-models"
+
+import { useComment } from "@pages/ProjectDetailPage/hooks/useComment"
 
 import EditingButton from "./EditingButton"
 
 interface OwnerButtonProps {
-  handleOnEdit: ({
-    commentId,
-    isAnonymous,
-    content,
-  }: editCommentPayload) => void
-  handleDelete: (id: number) => void
-  handleOffEdit: () => void
-  editTargetCommentId: number
-  isEditing: boolean
   comment: Comment
 }
-const OwnerButton = ({
-  handleOnEdit,
-  handleDelete,
-  handleOffEdit,
-  comment,
-  isEditing,
-  editTargetCommentId,
-}: OwnerButtonProps) => {
+
+const OwnerButton = ({ comment }: OwnerButtonProps) => {
+  const {
+    handleOffEdit,
+    editTargetCommentId,
+    isEditing,
+    handleOnEdit,
+    handleDelete,
+  } = useComment()
+
   return editTargetCommentId === comment.id && isEditing ? (
     <EditingButton handleOffEdit={handleOffEdit} />
   ) : (

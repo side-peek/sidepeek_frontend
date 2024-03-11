@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { SubmitHandler } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 
 import { editCommentPayload } from "api-models"
 
@@ -8,12 +9,18 @@ import { useDeleteCommentMutation } from "@pages/ProjectDetailPage/hooks/mutatio
 import { useEditCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/useEditCommentMutation"
 
 export const useComment = () => {
+  const navigate = useNavigate()
   const [isEditing, setIsEditing] = useState(false)
   const [isReply, setIsReply] = useState(false)
   const [editTargetCommentId, setEditTargetCommentId] = useState(-1)
   const [replyTargetCommentId, setReplyTargetCommentId] = useState(-1)
 
-  const { register, handleSubmit, setValue, reset, setFocus } =
+  // 이거 여기다 두는게 맞는지 ㅠ
+  const handleNavigateProfile = (userId: number) => {
+    navigate(`/profile/${userId}`)
+  }
+
+  const { register, handleSubmit, setValue, reset } =
     useForm<editCommentPayload>()
 
   const { editCommentMutation } = useEditCommentMutation()
@@ -29,7 +36,6 @@ export const useComment = () => {
     setValue("commentId", commentId)
     setValue("isAnonymous", isAnonymous)
     setValue("content", content)
-    setFocus("content")
   }
 
   const handleOffEdit = () => {
@@ -72,5 +78,6 @@ export const useComment = () => {
     handleSubmit,
     onSubmitEdit,
     register,
+    handleNavigateProfile,
   }
 }

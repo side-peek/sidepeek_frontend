@@ -17,8 +17,6 @@ interface CommentsFormProps extends ProjectIdProps {
 const CommentsForm = ({ parentId, projectId }: CommentsFormProps) => {
   const { register, reset, handleSubmit } = useForm<CommentFormValues>()
   const user = useUserInfoData()
-
-  console.log(user)
   const { sendCommentMutation } = usePostCommentMutation()
 
   const onSubmit: SubmitHandler<CommentFormValues> = (text) => {

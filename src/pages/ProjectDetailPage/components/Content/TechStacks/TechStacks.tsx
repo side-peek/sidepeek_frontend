@@ -11,7 +11,7 @@ interface TechStacksProps {
 }
 const TechStacks = ({ techStacks }: TechStacksProps) => {
   const groupedByCategory = techStacksCategory(techStacks)
-
+  console.log(groupedByCategory)
   const [isLargerThan600] = useMediaQuery(["(min-width: 600px)"])
 
   return (
