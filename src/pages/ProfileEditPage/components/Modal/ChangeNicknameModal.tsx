@@ -45,7 +45,7 @@ const ChangeNicknameModal = ({
     setError,
     reset,
     formState: { errors },
-  } = useForm<NicknameFormValues>({ mode: "onSubmit" })
+  } = useForm<NicknameFormValues>()
 
   const onValid = (data: NicknameFormValues) => {
     const { newNickname } = data
