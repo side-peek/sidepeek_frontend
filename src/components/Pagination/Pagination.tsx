@@ -1,9 +1,9 @@
 import { HStack } from "@chakra-ui/react"
 
-import PaginationProvider from "./components/Contexts/Contexts"
 import NextButton from "./components/NextButton/NextButton"
 import PageButtons from "./components/PageButtons/PageButtons"
 import PrevButton from "./components/PrevButton/PrevButton"
+import PaginationProvider from "./stores/contexts"
 
 const Pagination = () => {
   const handlePageChange = (page: number) => {

@@ -5,7 +5,7 @@ import { Button } from "@chakra-ui/react"
 import { MAX_PAGES_COUNT } from "@components/Pagination/constants/constants"
 import { setPageButtonStyles } from "@components/Pagination/styles/pageButtonStyles"
 
-import { PaginationContext } from "../Contexts/Contexts"
+import { PaginationContext } from "../../stores/contexts"
 
 const PageButtons = () => {
   const { totalPages, currentPage, handleSelectPage } =
