@@ -5,6 +5,15 @@ import tsconfigPaths from "vite-tsconfig-paths"
 
 export default defineConfig(({ command }) => ({
   plugins: [react(), tsconfigPaths(), splitVendorChunkPlugin()],
+  server: {
+    proxy: {
+      "/serve": {
+        target: "http://3.39.156.144:8080",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/serve/, ""),
+      },
+    },
+  },
   publicDir: command === "serve" ? "public" : false,
   build: {
     chunkSizeWarningLimit: 1600,
