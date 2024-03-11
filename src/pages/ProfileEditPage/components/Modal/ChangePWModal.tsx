@@ -38,9 +38,7 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<PasswordFormValues>({
-    mode: "onSubmit",
-  })
+  } = useForm<PasswordFormValues>()
   const onValid = () => {
     // TODO: 비밀번호 변경 api 요청
     console.log("1")
