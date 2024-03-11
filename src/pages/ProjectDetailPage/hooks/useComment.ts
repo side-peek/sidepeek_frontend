@@ -2,9 +2,10 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { SubmitHandler } from "react-hook-form"
 
+import { editCommentPayload } from "api-models"
+
 import { useDeleteCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteCommentMutation"
 import { useEditCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/useEditCommentMutation"
-import { EditCommentFormValues } from "@pages/ProjectDetailPage/types/EditCommentFormValues"
 
 export const useComment = () => {
   const [isEditing, setIsEditing] = useState(false)
@@ -13,7 +14,7 @@ export const useComment = () => {
   const [replyTargetCommentId, setReplyTargetCommentId] = useState(-1)
 
   const { register, handleSubmit, setValue, reset } =
-    useForm<EditCommentFormValues>()
+    useForm<editCommentPayload>()
 
   const { editCommentMutation } = useEditCommentMutation()
   const { deleteCommentMutation } = useDeleteCommentMutation()
@@ -22,7 +23,7 @@ export const useComment = () => {
     commentId,
     isAnonymous,
     content,
-  }: EditCommentFormValues) => {
+  }: editCommentPayload) => {
     setIsEditing(true)
     setEditTargetCommentId(commentId)
     setValue("commentId", commentId)
@@ -51,9 +52,7 @@ export const useComment = () => {
     handleOffReply()
   }
 
-  const onSubmitEdit: SubmitHandler<EditCommentFormValues> = (
-    commentValues,
-  ) => {
+  const onSubmitEdit: SubmitHandler<editCommentPayload> = (commentValues) => {
     editCommentMutation.mutate(commentValues)
     handleOffEdit()
     handleOffReply()

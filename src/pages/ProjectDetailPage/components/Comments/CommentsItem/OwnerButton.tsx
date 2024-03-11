@@ -3,8 +3,7 @@ import { TiPencil } from "react-icons/ti"
 
 import { IconButton } from "@chakra-ui/react"
 import { Comment } from "api-models"
-
-import { EditCommentFormValues } from "@pages/ProjectDetailPage/types/EditCommentFormValues"
+import { editCommentPayload } from "api-models"
 
 import EditingButton from "./EditingButton"
 
@@ -13,7 +12,7 @@ interface OwnerButtonProps {
     commentId,
     isAnonymous,
     content,
-  }: EditCommentFormValues) => void
+  }: editCommentPayload) => void
   handleDelete: (id: number) => void
   handleOffEdit: () => void
   editTargetCommentId: number

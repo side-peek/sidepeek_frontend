@@ -1,6 +1,5 @@
 import { Comment } from "api-models"
-
-import { EditCommentFormValues } from "@pages/ProjectDetailPage/types/EditCommentFormValues"
+import { editCommentPayload } from "api-models"
 
 import OwnerButton from "./OwnerButton"
 
@@ -11,7 +10,7 @@ interface CommentsButtonProps {
     commentId,
     isAnonymous,
     content,
-  }: EditCommentFormValues) => void
+  }: editCommentPayload) => void
   handleOffEdit: () => void
   handleDelete: (id: number) => void
   editTargetCommentId: number
