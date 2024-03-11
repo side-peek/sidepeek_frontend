@@ -7,6 +7,7 @@ import Prefetcher from "@components/PreFetcher/Prefetcher"
 import ErrorPage from "@pages/ErrorPage/ErrorPage"
 import HomePage from "@pages/HomePage/HomePage"
 import LoginPage from "@pages/LoginPage/LoginPage"
+import ProfileEditPage from "@pages/ProfileEditPage/ProfileEditPage"
 import ProfilePage from "@pages/ProfilePage/ProfilePage"
 import ProjectDetailPage from "@pages/ProjectDetailPage/ProjectDetailPage"
 import ProjectEditPage from "@pages/ProjectEditPage/ProjectEditPage"
@@ -52,6 +53,7 @@ export const router = (queryClient: QueryClient) => {
               path: "/profile/:userId",
               element: <ProfilePage />,
             },
+            { path: "/profile/edit", element: <ProfileEditPage /> },
           ],
         },
         {
