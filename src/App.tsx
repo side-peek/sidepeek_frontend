@@ -13,9 +13,11 @@ const queryClient = new QueryClient({
       gcTime: 1000 * 60 * 3,
       staleTime: 1000 * 60,
       refetchOnWindowFocus: false,
+      retry: 0,
     },
     mutations: {
       gcTime: 1000 * 60 * 3,
+      retry: 0,
     },
   },
 })
