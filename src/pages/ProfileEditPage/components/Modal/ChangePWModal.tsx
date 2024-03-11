@@ -24,12 +24,8 @@ import {
   NEW_PASSWORD_VALIDATION_OPTION,
   PASSWORD_MISMATCH_ERROR,
 } from "@pages/ProfileEditPage/constants/validation"
+import { PasswordFormValues } from "@pages/ProfileEditPage/types/types"
 
-interface FormValues {
-  currentPassword: string
-  newPassword: string
-  checkPassword: string
-}
 interface ModalProps {
   isOpen: boolean
   onClose: () => void
@@ -42,7 +38,7 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormValues>({
+  } = useForm<PasswordFormValues>({
     mode: "onSubmit",
   })
   const onValid = () => {
@@ -55,7 +51,7 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
     console.log("Submit 실패")
   }
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<PasswordFormValues> = (data) => {
     // TODO: 기존 비밀번호 api 불러와서 비교 후 다르면 setError하도록 해야함
     // TODO: 3/4 스크럼 이후 - api 에러코드 보고 분류하기로 함. 프론트단에서 현재 비밀번호와 같은지 판단할 수 없기 때문에 수정 예정임
     const { newPassword, checkPassword } = data

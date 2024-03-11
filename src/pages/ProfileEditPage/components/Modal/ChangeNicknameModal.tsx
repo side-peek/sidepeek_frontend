@@ -22,11 +22,11 @@ import {
   NICKNAME_VALIDATION_OPTION,
   RegEx,
 } from "@pages/ProfileEditPage/constants/validation"
-import { ProfileInfo } from "@pages/ProfileEditPage/types/types"
+import {
+  NicknameFormValues,
+  ProfileInfo,
+} from "@pages/ProfileEditPage/types/types"
 
-interface FormValues {
-  newNickname: string
-}
 interface ModalProps {
   isOpen: boolean
   onClose: () => void
@@ -45,9 +45,9 @@ const ChangeNicknameModal = ({
     setError,
     reset,
     formState: { errors },
-  } = useForm<FormValues>({ mode: "onSubmit" })
+  } = useForm<NicknameFormValues>({ mode: "onSubmit" })
 
-  const onValid = (data: FormValues) => {
+  const onValid = (data: NicknameFormValues) => {
     const { newNickname } = data
     console.log("1")
     // TODO: 낙관적 업데이트 수행 예정. api 요청으로 닉네임 변경해줌
@@ -60,7 +60,7 @@ const ChangeNicknameModal = ({
     console.log("Submit 실패")
   }
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<NicknameFormValues> = (data) => {
     // TODO: api 요청 후 데이터 가공을 통해 새로운 닉네임이 이미 존재하는 닉네임인지 판단하고 분기
     const { newNickname } = data
     if (RegEx.CHECK_SPACE.test(newNickname)) {

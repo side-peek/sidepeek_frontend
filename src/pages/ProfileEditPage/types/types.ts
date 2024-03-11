@@ -13,3 +13,13 @@ export type CareerType =
   | "4~6년차"
   | "7~9년차"
   | "10년차 이상"
+
+export interface PasswordFormValues {
+  currentPassword: string
+  newPassword: string
+  checkPassword: string
+}
+
+export interface NicknameFormValues {
+  newNickname: string
+}
