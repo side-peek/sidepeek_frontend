@@ -23,13 +23,23 @@ const ProfileTechStack = ({ techStacks }: TechStackProps) => {
         fontFamily="SCDream_Bold">
         기술스택
       </Text>
-      {categories.map((category) => (
-        <ProfileTechStackByCategory
-          key={category}
-          category={category}
-          techStacks={techStacks}
-        />
-      ))}
+
+      {categories.length !== 0 ? (
+        categories.map((category) => (
+          <ProfileTechStackByCategory
+            key={category}
+            category={category}
+            techStacks={techStacks}
+          />
+        ))
+      ) : (
+        <Text
+          fontSize="1.3rem"
+          color="grey.500"
+          mt="1rem">
+          등록된 기술스택이 없습니다
+        </Text>
+      )}
     </Box>
   )
 }
