@@ -1,5 +1,9 @@
 import { createBrowserRouter } from "react-router-dom"
 
+import type { QueryClient } from "@tanstack/react-query"
+
+import Prefetcher from "@components/PreFetcher/Prefetcher"
+
 import ErrorPage from "@pages/ErrorPage/ErrorPage"
 import HomePage from "@pages/HomePage/HomePage"
 import LoginPage from "@pages/LoginPage/LoginPage"
@@ -13,47 +17,56 @@ import TestPage from "@pages/TestPage/TestPage"
 
 import DefaultLayout from "@styles/layouts/DefaultLayout"
 
-export const router = createBrowserRouter([
-  {
-    element: <DefaultLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/",
-        index: true,
-        element: <HomePage />,
-      },
-      {
-        path: "/project",
-        element: <ProjectListPage />,
-        children: [
-          {
-            path: ":projectId",
-            element: <ProjectDetailPage />,
-          },
-          {
-            path: ":projectId/edit",
-            element: <ProjectEditPage />,
-          },
-        ],
-      },
-      {
-        path: "/test",
-        element: <TestPage />,
-      },
-      {
-        path: "/profile/:userId",
-        element: <ProfilePage />,
-      },
-      { path: "/profile/edit", element: <ProfileEditPage /> },
-    ],
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/signup",
-    element: <SignUpPage />,
-  },
-])
+import { determineRedirectLoader } from "./loaders/determineRedirectLoader"
+
+export const router = (queryClient: QueryClient) => {
+  return createBrowserRouter([
+    {
+      Component: Prefetcher,
+      children: [
+        {
+          element: <DefaultLayout />,
+          errorElement: <ErrorPage />,
+          children: [
+            {
+              path: "/",
+              index: true,
+              element: <HomePage />,
+            },
+            {
+              path: "/project",
+              element: <ProjectListPage />,
+            },
+            {
+              path: "/project/:projectId",
+              element: <ProjectDetailPage />,
+            },
+            {
+              path: "/project/:projectId/edit",
+              element: <ProjectEditPage />,
+            },
+            {
+              path: "/test",
+              element: <TestPage />,
+            },
+            {
+              path: "/profile/:userId",
+              element: <ProfilePage />,
+            },
+            { path: "/profile/edit", element: <ProfileEditPage /> },
+          ],
+        },
+        {
+          path: "/login",
+          loader: determineRedirectLoader(queryClient, false),
+          element: <LoginPage />,
+        },
+        {
+          path: "/signup",
+          loader: determineRedirectLoader(queryClient, false),
+          element: <SignUpPage />,
+        },
+      ],
+    },
+  ])
+}

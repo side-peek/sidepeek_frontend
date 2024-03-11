@@ -18,7 +18,7 @@ declare module "api-models" {
     isDeleted: boolean
   } */
 
-  export type UserInfo = {
+  export type UserInfoProperties = {
     nickname: string
     introduction: string
     profileImageUrl: string
@@ -28,6 +28,9 @@ declare module "api-models" {
     blogUrl: string
     techStacks: TechStack[]
   }
+  export interface UserInfo {
+    userInfo: UserInfoProperties
+  }
 
   export type UserSummary = {
     id: number
@@ -36,11 +39,12 @@ declare module "api-models" {
   }
 
   export type Project = {
+    id: number
     name: string
     subName: string
     overview: string
     thumbnailUrl: string
-    overviewImageUrl: string[]
+    overviewImageUrl: ProjectOverViewUrl[]
     githubUrl: string
     deployUrl: string
     techStacks: TechStack[]
@@ -48,8 +52,23 @@ declare module "api-models" {
     endDate: string
     ownerId: number
     members: Member[]
-    description: Description
-    troubleShooting: Description
+    viewCount: number
+    likeCount
+    commentCount: number
+    comments: Comment[]
+    description: string
+    troubleShooting: string
+  }
+
+  export type AllProject = {
+    id: number
+    name: string
+    subName: string
+    thumbnailUrl: string
+    viewCount: number
+    likeCount: number
+    isLiked: boolean
+    isDeploy: boolean
   }
 
   export type Description = {
@@ -58,9 +77,10 @@ declare module "api-models" {
   }
 
   export type Member = {
-    userId?: number
-    category: string
+    id: number
     nickname: string
+    profileImageUrl: string
+    category: string
   }
 
   export type ProjectTag = {
@@ -90,14 +110,26 @@ declare module "api-models" {
     nickname: string
   }
 
+  export type ProjectOverViewUrl = {
+    id: number
+    url: string
+  }
+
+  export type Owner = {
+    id: number
+    nickname: string
+    profileImageUrl: string
+  }
+
   export type Comment = {
     id: number
-    userId: string
-    projectId: string
+    parentId?: number
+    user: CommentUser
+    isOwner: boolean
     isAnonymous: boolean
     content: string
     createdAt: string
-    updatedAt: string
+    replies: Comment[]
   }
 
   export type Like = {
@@ -125,11 +157,13 @@ declare module "api-models" {
     name: string
   }
 
-  /* 인증 관련 */
-  export type getEmailAuthPayload = {
-    accessToken: string
+  export type CommentUser = {
+    id: number
+    nickname: string
+    profileImageUrl: string
   }
 
+  /* 인증 관련 */
   export type getEmailAuthResponseType = UserSummary
 
   export type postEmailRefreshPayload = {
@@ -188,11 +222,11 @@ declare module "api-models" {
   }
 
   /* 기술 스택 */
-  export type getSearchTechStacksPayload = {
+  export type getTechStacksPayload = {
     keyword?: string
   }
 
-  export type getSearchTechStacksResponseType = {
+  export type getTechStacksResponseType = {
     skills: Skill[]
   }
 
@@ -217,11 +251,11 @@ declare module "api-models" {
   }
 
   export type getProjectDetailResponseType = {
-    projects: Project[]
+    projectDetailInfo: Project
   }
 
   export type getAllProjectsResponseType = {
-    projects: Project[]
+    projects: AllProject[]
   }
 
   export type putProjectPayload = {
@@ -236,5 +270,27 @@ declare module "api-models" {
   //FIXME: 미완성 api
   export type postLikePayload = {
     projectId: number
+  }
+
+  /* 댓글 */
+
+  export type postCommentPayload = {
+    projectId?: number
+    ownerId: number
+    isAnonymous: boolean
+    content: string
+  }
+
+  export type deleteCommentPayload = {
+    projectId: number
+    id: number
+  }
+
+  export type editCommentPayload = {
+    projectId?: number
+    id?: number
+    ownerId: number
+    isAnonymous: boolean
+    content: string
   }
 }

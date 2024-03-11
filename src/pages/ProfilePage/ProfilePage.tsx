@@ -1,5 +1,7 @@
+import ProfileController from "./components/Profile/Profile.controller"
+
 const ProfilePage = () => {
-  return <div>ProfilePage</div>
+  return <ProfileController />
 }
 
 export default ProfilePage
