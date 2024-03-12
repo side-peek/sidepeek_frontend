@@ -243,7 +243,10 @@ declare module "api-models" {
   }
 
   export type getAllProjectsResponseType = {
-    projects: AllProject[]
+    content: AllProject[]
+    totalElements: number
+    numberOfElements: number
+    hasNext: boolean
   }
 
   export type putProjectPayload = {

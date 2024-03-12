@@ -23,7 +23,6 @@ export const ENDPOINTS = {
   GET_PROJECT_DETAILS: (projectId: number) =>
     `${VARIABLE_URL}/projects/${projectId}`,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  GET_ALL_PROJECTS: (sort: string, isReleased: boolean) =>
-    `${VARIABLE_URL}/projects?sort=${sort}&isReleased=${isReleased}`,
+  GET_ALL_PROJECTS: `${VARIABLE_URL}/projects`,
   UPLOAD_LIKE: `${VARIABLE_URL}/likes`,
 }

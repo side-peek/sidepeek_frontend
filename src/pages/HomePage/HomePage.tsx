@@ -26,8 +26,10 @@ type SelectType = "createdAt" | "like" | "view"
 const HomePage = () => {
   const [isDeploy, setIsDeploy] = useState(false)
   const [selectedOption, setSelectedOption] = useState<SelectType>("createdAt")
-  const limit = 24
+  const pageSize = 1
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
+  let lastProjectId = null
+  let lastProjectNum = null
 
   // 프로젝트 전체 목록 조회
   const {
@@ -37,13 +39,29 @@ const HomePage = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useAllProjectQuery(selectedOption, isDeploy, limit, "")
+  } = useAllProjectQuery(
+    selectedOption,
+    isDeploy,
+    pageSize,
+    lastProjectId,
+    lastProjectNum,
+  )
 
-  const projectList = allProjectList
+  const projectList =
+    allProjectList != undefined ? allProjectList[0].content : []
+  const lastProject = projectList && projectList[projectList.length - 1]
+  lastProjectId = lastProject ? lastProject.id : null
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SelectType
     setSelectedOption(value)
+    if (selectedOption === "like") {
+      lastProjectNum = lastProject && lastProject.likeCount
+    } else if (selectedOption === "view") {
+      lastProjectNum = lastProject && lastProject.viewCount
+    } else {
+      lastProjectNum = null
+    }
 
     refetchAllProject()
   }
@@ -59,7 +77,7 @@ const HomePage = () => {
       {isAllProjectLoading ? (
         <Skeleton height="35rem" />
       ) : (
-        <Banner bannerList={allProjectList?.slice(0, 5)} />
+        <Banner bannerList={projectList?.slice(0, 5)} />
       )}
       <Container maxW={isLargerThan1200 ? "80%" : "95%"}>
         <Stack marginTop="15rem">
@@ -88,31 +106,34 @@ const HomePage = () => {
             mt="0.5rem"
             templateColumns="repeat(auto-fill, minmax(24rem, 1fr))"
             gap={0}>
-            {projectList?.map((project) => (
-              <Center key={project.id}>
-                <Skeleton
-                  width="95%"
-                  borderRadius="1rem"
-                  isLoaded={!isAllProjectLoading}>
-                  <Link to={`/project/${project.id}`}>
-                    <ProjectCard
-                      imgUrl={project.thumbnailUrl}
-                      viewCount={project.viewCount}
-                      heartCount={project.likeCount}
-                      isFullHeart={project.isLiked}
-                      title={project.name}
-                      content={project.subName}
-                    />
-                  </Link>
-                </Skeleton>
-              </Center>
-            ))}
+            {projectList &&
+              projectList.map((project) => (
+                <Center key={project.id}>
+                  <Skeleton
+                    width="95%"
+                    borderRadius="1rem"
+                    isLoaded={!isAllProjectLoading}>
+                    <Link to={`/project/${project.id}`}>
+                      <ProjectCard
+                        imgUrl={project.thumbnailUrl}
+                        viewCount={project.viewCount}
+                        heartCount={project.likeCount}
+                        isFullHeart={project.isLiked}
+                        title={project.name}
+                        content={project.subName}
+                      />
+                    </Link>
+                  </Skeleton>
+                </Center>
+              ))}
           </Grid>
         </Stack>
-        <MoreButton
-          loadMore={loadMoreProjects}
-          isMore={hasNextPage}
-        />
+        {hasNextPage && (
+          <MoreButton
+            loadMore={loadMoreProjects}
+            isMore={hasNextPage}
+          />
+        )}
       </Container>
       <Box height="15rem" />
     </>
