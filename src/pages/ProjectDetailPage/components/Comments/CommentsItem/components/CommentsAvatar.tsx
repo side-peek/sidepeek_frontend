@@ -1,8 +1,8 @@
 import { Avatar, AvatarProps } from "@chakra-ui/react"
-import { CommentUser } from "api-models"
+import { UserSummary } from "api-models"
 
 interface CommentsAvatarProps extends AvatarProps {
-  user: CommentUser
+  user: UserSummary
 }
 const CommentsAvatar = ({ user, ...props }: CommentsAvatarProps) => {
   return (
@@ -10,7 +10,7 @@ const CommentsAvatar = ({ user, ...props }: CommentsAvatarProps) => {
       width="5rem"
       height="5rem"
       _hover={{ opacity: "0.5" }}
-      src={user ? user.profileImageUrl : ""}
+      src={user && user.profileImageUrl ? user.profileImageUrl : ""}
       {...props}
       cursor="pointer"
     />

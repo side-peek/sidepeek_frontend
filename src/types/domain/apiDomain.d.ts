@@ -33,7 +33,8 @@ declare module "api-models" {
   }
 
   export type UserSummary = {
-    id: number
+    id: number | null
+    isSocialLogin: boolean | null
     nickname: string
     profileImageUrl: string | null
   }
@@ -122,13 +123,13 @@ declare module "api-models" {
 
   export type Comment = {
     id: number
+    user: userSummary | null
     parentId: number | null
-    user: CommentUser
     isOwner: boolean
     isAnonymous: boolean
     content: string
     createdAt: string
-    replies?: Comment[]
+    replies: Comment[]
   }
 
   export type Like = {
@@ -154,12 +155,6 @@ declare module "api-models" {
   export type Tag = {
     id: number
     name: string
-  }
-
-  export type CommentUser = {
-    id: number
-    nickname: string
-    profileImageUrl: string
   }
 
   /* 인증 관련 */
