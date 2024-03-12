@@ -3,10 +3,10 @@ import { MdCancel } from "react-icons/md"
 
 import { IconButton } from "@chakra-ui/react"
 
-interface EditingButtonProps {
-  handleOffEdit: () => void
-}
-const EditingButton = ({ handleOffEdit }: EditingButtonProps) => {
+import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
+
+const OnEditingButton = () => {
+  const { handleOffEdit } = useCommentContext()
   return (
     <>
       <IconButton
@@ -24,4 +24,4 @@ const EditingButton = ({ handleOffEdit }: EditingButtonProps) => {
     </>
   )
 }
-export default EditingButton
+export default OnEditingButton

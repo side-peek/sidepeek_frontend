@@ -1,7 +1,7 @@
 import { Stack } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
-import { useComment } from "@pages/ProjectDetailPage/hooks/useComment"
+import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
 import CommentsItem from "../CommentsItem/CommentsItem"
 
@@ -10,7 +10,10 @@ interface CommentsListProps {
 }
 
 const CommentsList = ({ comments }: CommentsListProps) => {
-  const { register } = useComment()
+  const { register } = useCommentContext()
+  if (!register) {
+    return
+  }
 
   return (
     <Stack

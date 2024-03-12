@@ -4,7 +4,7 @@ import { UseFormRegisterReturn } from "react-hook-form"
 import { Box, Button, HStack, Stack } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
-import { useComment } from "@pages/ProjectDetailPage/hooks/useComment"
+import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
 import CommentsForm from "../CommentsForm/CommentsForm"
 import CommentTitle from "./components/CommentTitle"
@@ -24,7 +24,7 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
     handleOnReply,
     handleOffReply,
     handleNavigateProfile,
-  } = useComment()
+  } = useCommentContext()
 
   return (
     <Stack

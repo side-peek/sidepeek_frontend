@@ -4,26 +4,16 @@ import { TiPencil } from "react-icons/ti"
 import { IconButton } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
-import { useComment } from "@pages/ProjectDetailPage/hooks/useComment"
+import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
-import EditingButton from "./EditingButton"
-
-interface OwnerButtonProps {
+interface BeforeEditingButtonProps {
   comment: Comment
 }
 
-const OwnerButton = ({ comment }: OwnerButtonProps) => {
-  const {
-    handleOffEdit,
-    editTargetCommentId,
-    isEditing,
-    handleOnEdit,
-    handleDelete,
-  } = useComment()
+const BeforeEditingButton = ({ comment }: BeforeEditingButtonProps) => {
+  const { handleOnEdit, handleDelete } = useCommentContext()
 
-  return editTargetCommentId === comment.id && isEditing ? (
-    <EditingButton handleOffEdit={handleOffEdit} />
-  ) : (
+  return (
     <>
       <IconButton
         aria-label="edit"
@@ -46,4 +36,4 @@ const OwnerButton = ({ comment }: OwnerButtonProps) => {
     </>
   )
 }
-export default OwnerButton
+export default BeforeEditingButton

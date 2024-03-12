@@ -4,9 +4,10 @@ import ResizeTextarea from "react-textarea-autosize"
 import { Box, HStack, Text, Textarea } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
-import { useComment } from "@pages/ProjectDetailPage/hooks/useComment"
+import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
-import OwnerButton from "./OwnerButton"
+import BeforeEditingButton from "./BeforeEditingButton"
+import OnEditingButton from "./OnEditingButton"
 
 interface CommentsEditFormTextProps {
   comment: Comment
@@ -18,7 +19,10 @@ const CommentsEditFormText = ({
   register,
 }: CommentsEditFormTextProps) => {
   const { handleSubmit, onSubmitEdit, editTargetCommentId, isEditing } =
-    useComment()
+    useCommentContext()
+  if (!handleSubmit) {
+    return
+  }
 
   return (
     <Box w="100%">
@@ -45,7 +49,13 @@ const CommentsEditFormText = ({
             </Text>
           )}
           <HStack gap="1rem">
-            {comment.isOwner && <OwnerButton comment={comment} />}
+            {comment.isOwner ? (
+              editTargetCommentId === comment.id && isEditing ? (
+                <OnEditingButton />
+              ) : (
+                <BeforeEditingButton comment={comment} />
+              )
+            ) : null}
           </HStack>
         </HStack>
       </form>
