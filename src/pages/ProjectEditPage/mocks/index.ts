@@ -3,11 +3,11 @@ import { rest } from "msw"
 import { ENDPOINTS } from "@constants/endPoints"
 
 export const projectEditHandler = [
-  rest.post(ENDPOINTS.UPLOAD_PROJECT_FILES, (req, res, ctx) => {
-    console.log(req)
-    const random = Math.random()
-    return random > 0.5
+  rest.post(ENDPOINTS.UPLOAD_PROJECT_FILES, (_, res, ctx) => {
+    const random = Math.random() * 5000
+    return random > 2500
       ? res(
+          ctx.delay(random),
           ctx.status(200),
           ctx.json({
             fileUrl:
@@ -15,6 +15,7 @@ export const projectEditHandler = [
           }),
         )
       : res(
+          ctx.delay(random),
           ctx.status(400),
           ctx.json({
             status: "BAD_REQUEST",
