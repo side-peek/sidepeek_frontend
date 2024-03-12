@@ -33,7 +33,8 @@ declare module "api-models" {
   }
 
   export type UserSummary = {
-    id: number
+    id: number | null
+    isSocialLogin: boolean | null
     nickname: string
     profileImageUrl: string | null
   }
@@ -78,9 +79,8 @@ declare module "api-models" {
 
   export type Member = {
     id: number
-    nickname: string
-    profileImageUrl: string
-    category: string
+    role: string
+    userSummary: UserSummary
   }
 
   export type ProjectTag = {
@@ -123,8 +123,8 @@ declare module "api-models" {
 
   export type Comment = {
     id: number
-    parentId?: number
-    user: CommentUser
+    user: userSummary | null
+    parentId: number | null
     isOwner: boolean
     isAnonymous: boolean
     content: string
@@ -155,12 +155,6 @@ declare module "api-models" {
   export type Tag = {
     id: number
     name: string
-  }
-
-  export type CommentUser = {
-    id: number
-    nickname: string
-    profileImageUrl: string
   }
 
   /* 인증 관련 */
@@ -277,22 +271,20 @@ declare module "api-models" {
   /* 댓글 */
 
   export type postCommentPayload = {
-    projectId?: number
     ownerId: number
+    projectId: number | null
+    parentId: number | null
     isAnonymous: boolean
     content: string
-  }
-
-  export type deleteCommentPayload = {
-    projectId: number
-    id: number
   }
 
   export type editCommentPayload = {
-    projectId?: number
-    id?: number
-    ownerId: number
     isAnonymous: boolean
     content: string
+    commentId: number
+  }
+
+  export type deleteCommentPayload = {
+    commentId: number
   }
 }

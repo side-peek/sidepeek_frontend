@@ -13,6 +13,7 @@ export const postEmailLogin = rest.post(
         id: 0,
         nickname: "admin",
         profileImageUrl: "https://picsum.photos/200/300",
+        isSocialLogin: false,
       },
     }
     return res(ctx.status(200), ctx.json(response))
