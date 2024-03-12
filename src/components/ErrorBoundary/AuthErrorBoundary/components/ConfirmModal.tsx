@@ -3,18 +3,23 @@ import { Link } from "react-router-dom"
 import {
   Button,
   Modal,
+  ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
 } from "@chakra-ui/react"
+
+import { LogoutError } from "@constants/customError"
 
 interface ConfirmModalProps {
   onClose: () => void
+  error: Error
 }
 
-const ConfirmModal = ({ onClose }: ConfirmModalProps) => {
+const ConfirmModal = ({ onClose, error }: ConfirmModalProps) => {
   return (
     <Modal
       size="xl"
@@ -23,21 +28,37 @@ const ConfirmModal = ({ onClose }: ConfirmModalProps) => {
       onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader fontSize="2rem">⚠️ 로그인이 필요합니다!</ModalHeader>
+        <ModalHeader fontSize="2rem">⚠️ Notification</ModalHeader>
         <ModalCloseButton />
+        <ModalBody>
+          <Text>{error.message}</Text>
+          <Text>
+            {error instanceof LogoutError ? "다시 로그인 하시겠습니까?" : ""}
+          </Text>
+        </ModalBody>
         <ModalFooter gap="0.5rem">
-          <Button
-            colorScheme="gray"
-            onClick={onClose}>
-            취소
-          </Button>
-          <Button
-            as={Link}
-            to="/login"
-            colorScheme="blue"
-            onClick={onClose}>
-            확인
-          </Button>
+          {error instanceof LogoutError ? (
+            <>
+              <Button
+                colorScheme="gray"
+                onClick={onClose}>
+                취소
+              </Button>
+              <Button
+                as={Link}
+                to="/login"
+                colorScheme="blue"
+                onClick={onClose}>
+                확인
+              </Button>
+            </>
+          ) : (
+            <Button
+              colorScheme="blue"
+              onClick={onClose}>
+              확인
+            </Button>
+          )}
         </ModalFooter>
       </ModalContent>
     </Modal>
