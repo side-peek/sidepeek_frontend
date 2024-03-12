@@ -5,6 +5,18 @@ import "./fonts/index.css"
 
 const themeConfig = {
   config: { initialColorMode: "light", useSystemColorMode: false },
+  components: {
+    Button: {
+      variants: {
+        smooth: {
+          p: "0.3rem",
+        },
+      },
+      defaultProps: {
+        variant: "smooth",
+      },
+    },
+  },
 
   styles: {
     global: (props: StyleFunctionProps) => ({
@@ -23,6 +35,7 @@ const themeConfig = {
   },
 
   colors: {
+    default: "#ffffff",
     blue: {
       100: "#0C356A",
       200: "#0174BE",
@@ -90,6 +103,8 @@ const themeConfig = {
   },
   sizes: {
     headerHeight: "9.5rem",
+    coverHeight: "25rem",
+    footerHeight: "19rem",
   },
   semanticTokens: {},
 }

@@ -20,6 +20,7 @@ const queryClient = new QueryClient({
     },
     mutations: {
       gcTime: 1000 * 60 * 3,
+      retry: 0,
       throwOnError: (error) =>
         isAxiosError(error) && error.response?.status === 401,
     },
@@ -31,7 +32,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={theme}>
         <ColorModeScript initialColorMode="light" />
-        <RouterProvider router={router} />
+        <RouterProvider router={router(queryClient)} />
       </ChakraProvider>
     </QueryClientProvider>
   )

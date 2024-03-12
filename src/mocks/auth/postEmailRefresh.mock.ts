@@ -3,12 +3,17 @@ import { rest } from "msw"
 
 import { ENDPOINTS } from "@constants/endPoints"
 
-//FIXME: 예시 함수입니다. 원하시는데로 변경해서 사용해주세요!
 export const postEmailRefresh = rest.post(
   ENDPOINTS.EMAIL_REFRESH,
   (_, res, ctx) => {
     const response: postEmailRefreshResponseType = {
       accessToken: "mock-accessToken",
+      refreshToken: "mock-refreshToken",
+      user: {
+        id: 0,
+        nickname: "admin",
+        profileImageUrl: null,
+      },
     }
     return res(ctx.status(401), ctx.json(response))
   },
