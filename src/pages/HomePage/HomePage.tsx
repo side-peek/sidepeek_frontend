@@ -28,8 +28,8 @@ const HomePage = () => {
   const [selectedOption, setSelectedOption] = useState<SelectType>("createdAt")
   const pageSize = 1
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
-  let lastProjectId = null
-  let lastProjectNum = null
+  const lastProjectId = null
+  const lastProjectNum = null
 
   // 프로젝트 전체 목록 조회
   const {
@@ -47,21 +47,21 @@ const HomePage = () => {
     lastProjectNum,
   )
 
-  const projectList =
-    allProjectList != undefined ? allProjectList[0].content : []
-  const lastProject = projectList && projectList[projectList.length - 1]
-  lastProjectId = lastProject ? lastProject.id : null
+  const projectList = allProjectList != undefined ? allProjectList : []
+  //const lastProject = projectList && projectList[projectList.length - 1]
+  //lastProjectId = lastProject ? lastProject.id : null
+  //console.log(allProjectList, isAllProjectLoading)
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SelectType
     setSelectedOption(value)
-    if (selectedOption === "like") {
+    /*if (selectedOption === "like") {
       lastProjectNum = lastProject && lastProject.likeCount
     } else if (selectedOption === "view") {
       lastProjectNum = lastProject && lastProject.viewCount
     } else {
       lastProjectNum = null
-    }
+    }*/
 
     refetchAllProject()
   }
@@ -107,7 +107,7 @@ const HomePage = () => {
             templateColumns="repeat(auto-fill, minmax(24rem, 1fr))"
             gap={0}>
             {projectList &&
-              projectList.map((project) => (
+              allProjectList?.map((project) => (
                 <Center key={project.id}>
                   <Skeleton
                     width="95%"
