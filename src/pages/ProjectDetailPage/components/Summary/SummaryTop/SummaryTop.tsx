@@ -27,6 +27,7 @@ const SummaryTop = ({
   */
 
   const location = useLocation()
+  const { VITE_BASE_URL } = import.meta.env
 
   const handleCopyClipBoard = async (text: string) => {
     try {
@@ -59,7 +60,7 @@ const SummaryTop = ({
       />
       <SummaryTopIconButton
         onClick={() =>
-          handleCopyClipBoard(`localhost:5173${location.pathname}`)
+          handleCopyClipBoard(`${VITE_BASE_URL}${location.pathname}`)
         }
         aria-label="clipboard"
         fontSize="2.7rem"
