@@ -10,7 +10,6 @@ const techStacksCategory = (techStacks: TechStack[]) => {
       return acc
     }, {}),
   )
-  console.log(groupedByCateegoryTechStacks)
 
   const duplicateFilteredTechStacks = groupedByCateegoryTechStacks.map(
     (item) => {

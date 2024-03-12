@@ -3,7 +3,7 @@ import { UseFormRegisterReturn } from "react-hook-form"
 import { Box, Flex } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
-import CommentsItem from "./CommentsItem"
+import CommentsItem from "../CommentsItem"
 
 interface ReplyCommentProps {
   comment: Comment[]

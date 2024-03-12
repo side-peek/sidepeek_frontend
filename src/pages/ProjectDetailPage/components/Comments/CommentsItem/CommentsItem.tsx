@@ -7,10 +7,10 @@ import { Comment } from "api-models"
 import { useComment } from "@pages/ProjectDetailPage/hooks/useComment"
 
 import CommentsForm from "../CommentsForm/CommentsForm"
-import CommentTitle from "./CommentTitle"
-import CommentsAvatar from "./CommentsAvatar"
-import CommentsEditFormText from "./CommentsEditFormText"
-import ReplyComment from "./ReplyComment"
+import CommentTitle from "./components/CommentTitle"
+import CommentsAvatar from "./components/CommentsAvatar"
+import CommentsEditFormText from "./components/CommentsEditFormText"
+import ReplyComment from "./components/ReplyComment"
 
 interface CommentsItemProps {
   comment: Comment
