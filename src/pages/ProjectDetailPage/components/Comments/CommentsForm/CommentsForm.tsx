@@ -11,9 +11,14 @@ import { ProjectIdProps, withProjectId } from "../Hoc/withProjectId"
 
 interface CommentsFormProps extends ProjectIdProps {
   parentId?: number | null
+  isReplyComment: boolean
 }
 
-const CommentsForm = ({ parentId, projectId }: CommentsFormProps) => {
+const CommentsForm = ({
+  parentId,
+  projectId,
+  isReplyComment,
+}: CommentsFormProps) => {
   const { register, reset, handleSubmit } = useForm<CommentFormValues>()
   const { sendCommentMutation } = usePostCommentMutation()
   // const user = useUserInfoData()
@@ -41,6 +46,7 @@ const CommentsForm = ({ parentId, projectId }: CommentsFormProps) => {
               minH="2rem"
               maxH="15rem"
               borderTopLeftRadius="0.9rem"
+              borderBottomRadius={isReplyComment ? "0.9rem" : 0}
               fontSize="xl"
               p="2.5rem"
               as={ResizeTextarea}

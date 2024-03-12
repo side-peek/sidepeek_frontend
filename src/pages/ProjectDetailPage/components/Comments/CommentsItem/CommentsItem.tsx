@@ -66,7 +66,10 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
                 (isReply ? (
                   comment.id === replyTargetCommentId && (
                     <>
-                      <CommentsForm parentId={replyTargetCommentId} />
+                      <CommentsForm
+                        parentId={replyTargetCommentId}
+                        isReplyComment
+                      />
                       <Button
                         p="0"
                         _hover={{ opacity: "0.5" }}
