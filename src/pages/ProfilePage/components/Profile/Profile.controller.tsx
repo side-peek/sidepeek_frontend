@@ -1,16 +1,15 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import { Box, Flex, useMediaQuery } from "@chakra-ui/react"
 
 import LargeScreenView from "@pages/ProfilePage/LargeScreenView/LargeScreen.view"
 import SmallScreenView from "@pages/ProfilePage/SmallScreenView/SmallScreen.view"
 
+import withUserId, { UserIdProps } from "../HOC/withUserId"
 import { useUserInfo } from "./Profile.model"
 
-const ProfileController = () => {
+const ProfileController = ({ userId }: UserIdProps) => {
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
-
-  const { userId } = useParams()
 
   const { data } = useUserInfo({ userId: Number(userId) })
 
@@ -83,4 +82,4 @@ const ProfileController = () => {
   )
 }
 
-export default ProfileController
+export default withUserId(ProfileController)

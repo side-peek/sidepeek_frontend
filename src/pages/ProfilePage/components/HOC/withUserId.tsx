@@ -1,11 +1,11 @@
 import { ComponentType } from "react"
 import { useParams } from "react-router-dom"
 
-interface UserIdProps {
+export interface UserIdProps {
   userId: string
 }
 const withUserId = <P extends UserIdProps>(
-  WrappeedComponent: ComponentType<P>,
+  WrappedComponent: ComponentType<P>,
 ) => {
   const ComponentWithUserId = (props: Omit<P, keyof UserIdProps>) => {
     const { userId } = useParams()
@@ -14,7 +14,7 @@ const withUserId = <P extends UserIdProps>(
       return null
     }
     return (
-      <WrappeedComponent
+      <WrappedComponent
         {...(props as P)}
         userId={userId}
       />
