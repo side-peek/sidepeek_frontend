@@ -158,7 +158,7 @@ declare module "api-models" {
   }
 
   /* 인증 관련 */
-  export type getEmailAuthResponseType = UserSummary
+  export type postEmailAuthResponseType = UserSummary
 
   export type postEmailRefreshPayload = {
     refreshToken: string
@@ -166,6 +166,8 @@ declare module "api-models" {
 
   export type postEmailRefreshResponseType = {
     accessToken: string
+    refreshToken: string
+    user: UserSummary
   }
 
   export type postEmailLoginPayload = {

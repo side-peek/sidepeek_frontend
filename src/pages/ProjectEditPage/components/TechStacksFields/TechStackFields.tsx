@@ -1,63 +1,71 @@
+import { Controller } from "react-hook-form"
+
 import { Box, Button, Flex, Input } from "@chakra-ui/react"
 
 import CloseButtonTag from "@components/Tag/components/CloseButtonTag"
 
-import { useTechStacksFieldsArray } from "@pages/ProjectEditPage/hooks/useTechStacksFieldsArray"
+import { useTechStacksMethods } from "@pages/ProjectEditPage/components/TechStacksFields/hooks/useTechStacksMethods"
+import { filterSelectedStack } from "@pages/ProjectEditPage/utils/filterSelectedStack"
 
 import StackSearchBox from "./components/StackSearchBox"
 
 const TechStacksFields = () => {
   const {
     fields,
-    register,
-    setCategory,
+    control,
     appendNewFields,
     appendStack,
     selectedStacks,
-  } = useTechStacksFieldsArray()
+    removeStack,
+  } = useTechStacksMethods()
 
   return (
-    <div>
+    <>
       {fields.map((field, index) => {
         return (
           <Flex key={field.id}>
-            <Input
-              flex="2"
-              variant="flushed"
-              placeholder="분야를 입력해주세요"
-              {...register(`techStacks.${index}.category` as const, {
-                required: "스킬입력은 필수입니다",
-              })}
-              onChange={(e) => {
-                setCategory(index, e.target.value)
+            <Box>
+              <Controller
+                name={`techStacks.${index}.category`}
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => <Input {...field} />}
+              />
+            </Box>
+            <StackSearchBox
+              render={({ techStacks }) => {
+                return (
+                  <Box>
+                    {filterSelectedStack(techStacks, selectedStacks(index)).map(
+                      (techStack) => {
+                        return (
+                          <Box
+                            cursor="pointer"
+                            onClick={() => appendStack(index, techStack)}
+                            key={techStack.name}>
+                            {techStack.name}
+                          </Box>
+                        )
+                      },
+                    )}
+                  </Box>
+                )
               }}
             />
-            <Flex
-              flex="8"
-              flexDir="column">
-              <StackSearchBox
-                onClickResultItem={(skill) => {
-                  appendStack(index, skill)
-                }}
-              />
-              <Box>
-                {selectedStacks(index).map((skill) => {
-                  return (
-                    <CloseButtonTag
-                      key={skill.name}
-                      label={skill.name}
-                      onClickCloseButton={() => {}}
-                    />
-                  )
-                })}
-              </Box>
-            </Flex>
+            <Box flexWrap="nowrap">
+              {selectedStacks(index).map((stack) => (
+                <CloseButtonTag
+                  key={stack.name}
+                  label={stack.name}
+                  onClickCloseButton={() => removeStack(index, stack)}
+                />
+              ))}
+            </Box>
           </Flex>
         )
       })}
-      <Button onClick={appendNewFields}>+ 기술스택 분류 추가하기</Button>
-    </div>
+      <Button onClick={appendNewFields}>기술스택 추가</Button>
+    </>
   )
 }
-
 export default TechStacksFields

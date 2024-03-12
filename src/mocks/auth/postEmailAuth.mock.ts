@@ -1,10 +1,10 @@
-import { getEmailAuthResponseType } from "api-models"
+import { postEmailAuthResponseType } from "api-models"
 import { rest } from "msw"
 
 import { ENDPOINTS } from "@constants/endPoints"
 
-export const getEmailAuth = rest.get(ENDPOINTS.EMAIL_AUTH, (_, res, ctx) => {
-  const response: getEmailAuthResponseType = {
+export const postEmailAuth = rest.post(ENDPOINTS.EMAIL_AUTH, (_, res, ctx) => {
+  const response: postEmailAuthResponseType = {
     id: 1,
     nickname: "admin",
     profileImageUrl: null,

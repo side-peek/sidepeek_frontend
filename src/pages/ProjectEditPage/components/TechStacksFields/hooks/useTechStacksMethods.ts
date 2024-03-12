@@ -1,12 +1,12 @@
-import { useFieldArray, useFormContext } from "react-hook-form"
+import { useFieldArray } from "react-hook-form"
 
 import { Skill } from "api-models"
 
-import { ProjectFormValues } from "../types/ProjectFormValues"
+import { useProjectFormContext } from "@pages/ProjectEditPage/hooks/useProjectFormContext"
+import { ProjectFormValues } from "@pages/ProjectEditPage/types/ProjectFormValues"
 
-export const useTechStacksFieldsArray = () => {
-  const { control, register, setValue, getValues, watch } =
-    useFormContext<ProjectFormValues>()
+export const useTechStacksMethods = () => {
+  const { control, setValue, getValues, watch } = useProjectFormContext()
 
   const { append, fields } = useFieldArray<ProjectFormValues>({
     control,
@@ -28,7 +28,7 @@ export const useTechStacksFieldsArray = () => {
 
   const removeStack = (index: number, element: Skill) => {
     const stacks = getValues(`techStacks.${index}.stacks`)
-    const filtered = stacks.filter((stack) => stack.id === element.id)
+    const filtered = stacks.filter((stack) => stack.id !== element.id)
     setValue(`techStacks.${index}.stacks`, [...filtered])
   }
 
@@ -36,7 +36,8 @@ export const useTechStacksFieldsArray = () => {
 
   return {
     fields,
-    register,
+    watch,
+    control,
     setCategory,
     appendNewFields,
     appendStack,

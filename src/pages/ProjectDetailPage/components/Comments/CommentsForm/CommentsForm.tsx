@@ -20,6 +20,7 @@ const CommentsForm = ({ parentId, projectId }: CommentsFormProps) => {
   const { sendCommentMutation } = usePostCommentMutation()
 
   const onSubmit: SubmitHandler<CommentFormValues> = (text) => {
+    console.log(user)
     if (user) {
       const commentRequestValue = {
         ownerId: user.id,
