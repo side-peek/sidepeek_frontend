@@ -1,34 +1,11 @@
 import { ReactNode, createContext, useContext, useState } from "react"
-import {
-  SubmitHandler,
-  UseFormHandleSubmit,
-  UseFormRegister,
-  useForm,
-} from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
 
 import { editCommentPayload } from "api-models"
 
 import { useDeleteCommentMutation } from "../hooks/mutations/useDeleteCommentMutation"
 import { useEditCommentMutation } from "../hooks/mutations/useEditCommentMutation"
-
-interface CommentContextProps {
-  isEditing: boolean
-  isReply: boolean
-  replyTargetCommentId: number
-  editTargetCommentId: number
-  handleOnReply: (commentId: number) => void
-  handleOffReply: () => void
-  handleOnEdit: ({
-    commentId,
-    isAnonymous,
-    content,
-  }: editCommentPayload) => void
-  handleOffEdit: () => void
-  handleDelete: (commentId: number) => void
-  onSubmitEdit: SubmitHandler<editCommentPayload>
-  register?: UseFormRegister<editCommentPayload>
-  handleSubmit?: UseFormHandleSubmit<editCommentPayload>
-}
+import { CommentContextProps } from "../types/commentContextProps"
 
 const CommentContext = createContext<CommentContextProps>({
   isEditing: false,
@@ -41,6 +18,7 @@ const CommentContext = createContext<CommentContextProps>({
   handleOffEdit: () => {},
   handleDelete: () => {},
   onSubmitEdit: () => {},
+  // 좀 문제임
   register: undefined,
   handleSubmit: undefined,
 })
@@ -121,9 +99,5 @@ export const CommentProvider = ({ children }: CommentProviderProps) => {
 }
 
 export const useCommentContext = () => {
-  const context = useContext(CommentContext)
-  if (!context) {
-    throw new Error("useCommentContext must be used within a CommentProvider")
-  }
-  return context
+  return useContext(CommentContext)
 }
