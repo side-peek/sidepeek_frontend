@@ -5,7 +5,6 @@ import {
   UseFormRegister,
   useForm,
 } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
 
 import { editCommentPayload } from "api-models"
 
@@ -29,7 +28,6 @@ interface CommentContextProps {
   onSubmitEdit: SubmitHandler<editCommentPayload>
   register?: UseFormRegister<editCommentPayload>
   handleSubmit?: UseFormHandleSubmit<editCommentPayload>
-  handleNavigateProfile: (userId: number) => void
 }
 
 const CommentContext = createContext<CommentContextProps>({
@@ -43,7 +41,6 @@ const CommentContext = createContext<CommentContextProps>({
   handleOffEdit: () => {},
   handleDelete: () => {},
   onSubmitEdit: () => {},
-  handleNavigateProfile: () => {},
   register: undefined,
   handleSubmit: undefined,
 })
@@ -53,16 +50,10 @@ interface CommentProviderProps {
 }
 
 export const CommentProvider = ({ children }: CommentProviderProps) => {
-  const navigate = useNavigate()
   const [isEditing, setIsEditing] = useState(false)
   const [isReply, setIsReply] = useState(false)
   const [editTargetCommentId, setEditTargetCommentId] = useState(-1)
   const [replyTargetCommentId, setReplyTargetCommentId] = useState(-1)
-
-  // 이거 여기다 두는게 맞는지 ㅠ
-  const handleNavigateProfile = (userId: number) => {
-    navigate(`/profile/${userId}`)
-  }
 
   const { register, setValue, reset, handleSubmit } =
     useForm<editCommentPayload>()
@@ -121,7 +112,6 @@ export const CommentProvider = ({ children }: CommentProviderProps) => {
         handleOffEdit,
         handleDelete,
         onSubmitEdit,
-        handleNavigateProfile,
         register,
         handleSubmit,
       }}>

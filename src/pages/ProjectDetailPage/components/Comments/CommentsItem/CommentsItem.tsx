@@ -1,5 +1,6 @@
 // TODO: 1. 포커스 자동 조정(register edit name 사용)
 import { UseFormRegisterReturn } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 
 import { Box, Button, HStack, Stack } from "@chakra-ui/react"
 import { Comment } from "api-models"
@@ -18,13 +19,14 @@ interface CommentsItemProps {
 }
 
 const CommentsItem = ({ comment, register }: CommentsItemProps) => {
-  const {
-    replyTargetCommentId,
-    isReply,
-    handleOnReply,
-    handleOffReply,
-    handleNavigateProfile,
-  } = useCommentContext()
+  const navigate = useNavigate()
+
+  const handleNavigateProfile = (userId: number) => {
+    navigate(`/profile/${userId}`)
+  }
+
+  const { replyTargetCommentId, isReply, handleOnReply, handleOffReply } =
+    useCommentContext()
 
   return (
     <Stack
