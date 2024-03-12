@@ -1,10 +1,10 @@
 import { HStack, Text } from "@chakra-ui/react"
-import { CommentUser } from "api-models"
+import { UserSummary } from "api-models"
 
 import dateToTimeago from "@pages/ProjectDetailPage/utils/datetoTimeago"
 
 interface CommentTitleProps {
-  user: CommentUser
+  user: UserSummary
   createdAt: string
 }
 

@@ -11,7 +11,7 @@ import { ProjectIdProps, withProjectId } from "../Hoc/withProjectId"
 
 interface CommentsFormProps extends ProjectIdProps {
   parentId?: number | null
-  isReplyComment: boolean
+  isReplyComment?: boolean
 }
 
 const CommentsForm = ({
