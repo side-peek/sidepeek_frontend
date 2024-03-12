@@ -8,10 +8,9 @@ export default defineConfig(({ command }) => ({
   publicDir: command === "serve" ? "public" : false,
   server: {
     proxy: {
-      "/serve": {
+      "/api": {
         target: "http://3.39.156.144:8080",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/serve/, ""),
       },
     },
   },

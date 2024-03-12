@@ -1,11 +1,15 @@
-import { RegisterOptions } from "react-hook-form"
+import { FieldPath, RegisterOptions } from "react-hook-form"
 
 import { ProjectFormValues } from "../types/ProjectFormValues"
 
 const TITLE_MAX_LENGTH = 50
 const OVERVIEW_MAX_LENGTH = 300
 
-export const projectInputRegisters = {
+type ProjectInputRegisterType = {
+  [key in FieldPath<ProjectFormValues>]: RegisterOptions
+}
+
+export const projectInputRegister: ProjectInputRegisterType = {
   name: {
     required: `제목은 필수입니다.${TITLE_MAX_LENGTH} 이내로 입력해주세요.`,
     maxLength: TITLE_MAX_LENGTH,
@@ -24,4 +28,6 @@ export const projectInputRegisters = {
   startDate: { required: "프로젝트 시작 날짜를 입력해주세요" },
 
   endDate: { required: "프로젝트 완성 날짜를 입력해주세요" },
-} satisfies Record<keyof ProjectFormValues, RegisterOptions>
+
+  techStacks: { required: "하나 이상은 필수입니다" },
+}

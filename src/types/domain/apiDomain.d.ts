@@ -53,8 +53,9 @@ declare module "api-models" {
     ownerId: number
     members: Member[]
     viewCount: number
-    likeCount: number
+    likeCount
     commentCount: number
+    comments: Comment[]
     description: string
     troubleShooting: string
   }
@@ -76,8 +77,9 @@ declare module "api-models" {
 
   export type Member = {
     id: number
+    nickname: string
+    profileImageUrl: string
     category: string
-    userSummary: UserSummary
   }
 
   export type ProjectTag = {
@@ -112,14 +114,21 @@ declare module "api-models" {
     url: string
   }
 
+  export type Owner = {
+    id: number
+    nickname: string
+    profileImageUrl: string
+  }
+
   export type Comment = {
     id: number
-    userId: string
-    projectId: string
+    parentId?: number
+    user: CommentUser
+    isOwner: boolean
     isAnonymous: boolean
     content: string
     createdAt: string
-    updatedAt: string
+    replies: Comment[]
   }
 
   export type Like = {
@@ -147,12 +156,14 @@ declare module "api-models" {
     name: string
   }
 
-  /* 인증 관련 */
-  export type getEmailAuthPayload = {
-    accessToken: string
+  export type CommentUser = {
+    id: number
+    nickname: string
+    profileImageUrl: string
   }
 
-  export type getEmailAuthResponseType = UserSummary
+  /* 인증 관련 */
+  export type postEmailAuthResponseType = UserSummary
 
   export type postEmailRefreshPayload = {
     refreshToken: string
@@ -160,6 +171,8 @@ declare module "api-models" {
 
   export type postEmailRefreshResponseType = {
     accessToken: string
+    refreshToken: string
+    user: UserSummary
   }
 
   export type postEmailLoginPayload = {
@@ -210,11 +223,11 @@ declare module "api-models" {
   }
 
   /* 기술 스택 */
-  export type getSearchTechStacksPayload = {
+  export type getTechStacksPayload = {
     keyword?: string
   }
 
-  export type getSearchTechStacksResponseType = {
+  export type getTechStacksResponseType = {
     skills: Skill[]
   }
 
@@ -261,5 +274,27 @@ declare module "api-models" {
   //FIXME: 미완성 api
   export type postLikePayload = {
     projectId: number
+  }
+
+  /* 댓글 */
+
+  export type postCommentPayload = {
+    projectId?: number
+    ownerId: number
+    isAnonymous: boolean
+    content: string
+  }
+
+  export type deleteCommentPayload = {
+    projectId: number
+    id: number
+  }
+
+  export type editCommentPayload = {
+    projectId?: number
+    id?: number
+    ownerId: number
+    isAnonymous: boolean
+    content: string
   }
 }

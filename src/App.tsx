@@ -13,9 +13,11 @@ const queryClient = new QueryClient({
       gcTime: 1000 * 60 * 3,
       staleTime: 1000 * 60,
       refetchOnWindowFocus: false,
+      retry: 0,
     },
     mutations: {
       gcTime: 1000 * 60 * 3,
+      retry: 0,
     },
   },
 })
@@ -25,7 +27,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={theme}>
         <ColorModeScript initialColorMode="light" />
-        <RouterProvider router={router} />
+        <RouterProvider router={router(queryClient)} />
       </ChakraProvider>
     </QueryClientProvider>
   )

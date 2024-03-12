@@ -1,15 +1,14 @@
-import { useParams } from "react-router-dom"
+import { Center } from "@chakra-ui/layout"
+import { Flex } from "@chakra-ui/react"
 
-import { Center, Flex } from "@chakra-ui/layout"
+import Comments from "./components/Comments/Comments"
+import { withProjectId } from "./components/Comments/Hoc/withProjectId"
+import { ProjectIdProps } from "./components/Comments/Hoc/withProjectId"
+import Content from "./components/Content/Content"
+import Summary from "./components/Summary/Summary"
+import { useProjectDetailQuery } from "./hooks/queries/useProjectDetailQuery"
 
-import ProjectDetailContent from "./components/ProjectDetailContent/ProjectDetailContent"
-import ProjectDetailSummary from "./components/ProjectDetailSummary/ProjectDetailSummary"
-import ProjectDetailTabList from "./components/ProjectDetailTabList/ProjectDetailTabList"
-import useProjectDetailQuery from "./hooks/queries/useProjectDetailQuery"
-
-const ProjectDetailPage = () => {
-  const { projectId } = useParams()
-
+const ProjectDetailPage = ({ projectId }: ProjectIdProps) => {
   const { projectDetailInfo } = useProjectDetailQuery(Number(projectId))
 
   if (!projectDetailInfo) {
@@ -18,18 +17,19 @@ const ProjectDetailPage = () => {
 
   return (
     <>
-      <ProjectDetailSummary projectDetailInfo={projectDetailInfo} />
+      <Summary projectDetailInfo={projectDetailInfo} />
       <Flex
-        direction="column"
-        gap="5rem"
         maxW="128rem"
+        w="100%"
         margin="0 auto"
-        px="5rem">
-        <ProjectDetailContent projectDetailInfo={projectDetailInfo} />
-        <ProjectDetailTabList projectDetailInfo={projectDetailInfo} />
+        p="5rem"
+        gap="10rem"
+        direction="column">
+        <Content projectDetailInfo={projectDetailInfo} />
+        <Comments comments={projectDetailInfo.comments}></Comments>
       </Flex>
     </>
   )
 }
 
-export default ProjectDetailPage
+export default withProjectId(ProjectDetailPage)

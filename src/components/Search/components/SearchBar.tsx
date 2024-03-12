@@ -2,17 +2,17 @@ import { ChangeEventHandler } from "react"
 
 import { Input, InputProps } from "@chakra-ui/react"
 
-interface SearchBarProps extends InputProps {
-  inputValue: string
-  onInput: ChangeEventHandler<HTMLInputElement>
+interface SearchBarProps extends Omit<InputProps, "onChange" | "onInput"> {
+  value: string
+  onChange: ChangeEventHandler<HTMLInputElement>
 }
 
-const SearchBar = ({ inputValue, onInput, ...props }: SearchBarProps) => {
+const SearchBar = ({ value, onChange, ...props }: SearchBarProps) => {
   return (
     <Input
-      type="text"
-      value={inputValue}
-      onInput={onInput}
+      value={value}
+      onChange={onChange}
+      border="none"
       {...props}
     />
   )
