@@ -39,6 +39,7 @@ const HomePage = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    isRefetching,
   } = useAllProjectQuery(
     selectedOption,
     isDeploy,
@@ -47,7 +48,7 @@ const HomePage = () => {
     lastProjectNum,
   )
 
-  const projectList = allProjectList != undefined ? allProjectList : []
+  //const projectList = allProjectList
   //const lastProject = projectList && projectList[projectList.length - 1]
   //lastProjectId = lastProject ? lastProject.id : null
   //console.log(allProjectList, isAllProjectLoading)
@@ -74,10 +75,10 @@ const HomePage = () => {
 
   return (
     <>
-      {isAllProjectLoading ? (
+      {isAllProjectLoading || isRefetching ? (
         <Skeleton height="35rem" />
       ) : (
-        <Banner bannerList={projectList?.slice(0, 5)} />
+        <Banner bannerList={[]} />
       )}
       <Container maxW={isLargerThan1200 ? "80%" : "95%"}>
         <Stack marginTop="15rem">
@@ -106,26 +107,25 @@ const HomePage = () => {
             mt="0.5rem"
             templateColumns="repeat(auto-fill, minmax(24rem, 1fr))"
             gap={0}>
-            {projectList &&
-              allProjectList?.map((project) => (
-                <Center key={project.id}>
-                  <Skeleton
-                    width="95%"
-                    borderRadius="1rem"
-                    isLoaded={!isAllProjectLoading}>
-                    <Link to={`/project/${project.id}`}>
-                      <ProjectCard
-                        imgUrl={project.thumbnailUrl}
-                        viewCount={project.viewCount}
-                        heartCount={project.likeCount}
-                        isFullHeart={project.isLiked}
-                        title={project.name}
-                        content={project.subName}
-                      />
-                    </Link>
-                  </Skeleton>
-                </Center>
-              ))}
+            {allProjectList?.map((project) => (
+              <Center key={project.id}>
+                <Skeleton
+                  width="95%"
+                  borderRadius="1rem"
+                  isLoaded={!isAllProjectLoading || !isRefetching}>
+                  <Link to={`/project/${project.id}`}>
+                    <ProjectCard
+                      imgUrl={project.thumbnailUrl}
+                      viewCount={project.viewCount}
+                      heartCount={project.likeCount}
+                      isFullHeart={project.isLiked}
+                      title={project.name}
+                      content={project.subName}
+                    />
+                  </Link>
+                </Skeleton>
+              </Center>
+            ))}
           </Grid>
         </Stack>
         {hasNextPage && (

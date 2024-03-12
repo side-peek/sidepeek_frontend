@@ -18,6 +18,7 @@ const useAllProjectQuery = (
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    isRefetching,
   } = useInfiniteQuery({
     queryKey: [
       QUERY_KEYS,
@@ -50,6 +51,7 @@ const useAllProjectQuery = (
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    isRefetching,
   }
 }
 
