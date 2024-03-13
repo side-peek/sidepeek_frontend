@@ -8,7 +8,6 @@ import { Link } from "react-scroll"
 import { Flex, useMediaQuery } from "@chakra-ui/react"
 
 import SummaryTopIcon from "./SummaryTopIcon"
-import SummaryTopIconButton from "./SummaryTopIconButton"
 
 interface SummaryTopProps {
   likeCount: number
@@ -25,7 +24,6 @@ const SummaryTop = ({
           2. 클립보드 클릭시 완료 모달/토스트 띄우기
   */
   const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
-
   const location = useLocation()
   const { VITE_BASE_URL } = import.meta.env
   const handleCopyClipBoard = async (text: string) => {
@@ -35,7 +33,6 @@ const SummaryTop = ({
       console.log(err)
     }
   }
-
   return (
     <Flex
       gap={isLargerThan1200 ? "1.5rem" : "1rem"}
@@ -43,12 +40,15 @@ const SummaryTop = ({
       justifyContent="flex-end">
       <SummaryTopIcon
         count={viewCount}
-        icon={MdRemoveRedEye}
+        aria-label="views"
+        icon={<MdRemoveRedEye />}
+        fontSize={isLargerThan1200 ? "2.7rem" : "2rem"}
       />
-      <SummaryTopIconButton
+
+      <SummaryTopIcon
         count={likeCount}
         icon={<IoMdHeartEmpty />}
-        aria-label="good"
+        aria-label="goodButton"
         fontSize={isLargerThan1200 ? "2.7rem" : "2rem"}
       />
       <Link
@@ -56,18 +56,18 @@ const SummaryTop = ({
         spy={true}
         offset={-100}
         smooth={true}>
-        <SummaryTopIconButton
+        <SummaryTopIcon
           count={commentCount}
           icon={<FaRegComment />}
-          aria-label="comment"
+          aria-label="commentButton"
           fontSize={isLargerThan1200 ? "2.3rem" : "1.8rem"}
         />
       </Link>
-      <SummaryTopIconButton
+      <SummaryTopIcon
         onClick={() =>
           handleCopyClipBoard(`${VITE_BASE_URL}${location.pathname}`)
         }
-        aria-label="clipboard"
+        aria-label="clipboardButton"
         fontSize={isLargerThan1200 ? "2.7rem" : "2rem"}
         icon={<PiClipboardText />}
       />
