@@ -20,7 +20,9 @@ const MemberInfo = ({ members }: MemberInfoProps) => {
         fontFamily="SCDream_Bold">
         팀원
       </Text>
-      <Flex gap="1rem">
+      <Flex
+        gap="1rem"
+        flexWrap="wrap">
         {groupedByCategory.map(([category, members]) => (
           <MemberList
             key={category}
