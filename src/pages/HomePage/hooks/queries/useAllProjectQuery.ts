@@ -41,7 +41,7 @@ const useAllProjectQuery = (
       lastPage.hasNext
         ? lastPage.content[lastPage.numberOfElements - 1].id
         : null,
-    select: ({ pages }) => pages.flatMap((page) => page),
+    select: ({ pages }) => pages.flatMap((page) => page.content),
   })
 
   return {
