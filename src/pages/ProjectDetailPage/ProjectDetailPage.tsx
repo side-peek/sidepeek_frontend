@@ -1,15 +1,14 @@
-import { useParams } from "react-router-dom"
-
 import { Center } from "@chakra-ui/layout"
 import { Flex } from "@chakra-ui/react"
 
+import Comments from "./components/Comments/Comments"
+import { withProjectId } from "./components/Comments/Hoc/withProjectId"
+import { ProjectIdProps } from "./components/Comments/Hoc/withProjectId"
 import Content from "./components/Content/Content"
 import Summary from "./components/Summary/Summary"
-import useProjectDetailQuery from "./hooks/queries/useProjectDetailQuery"
+import { useProjectDetailQuery } from "./hooks/queries/useProjectDetailQuery"
 
-const ProjectDetailPage = () => {
-  const { projectId } = useParams()
-
+const ProjectDetailPage = ({ projectId }: ProjectIdProps) => {
   const { projectDetailInfo } = useProjectDetailQuery(Number(projectId))
 
   if (!projectDetailInfo) {
@@ -27,9 +26,10 @@ const ProjectDetailPage = () => {
         gap="10rem"
         direction="column">
         <Content projectDetailInfo={projectDetailInfo} />
+        <Comments comments={projectDetailInfo.comments}></Comments>
       </Flex>
     </>
   )
 }
 
-export default ProjectDetailPage
+export default withProjectId(ProjectDetailPage)

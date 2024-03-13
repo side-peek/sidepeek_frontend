@@ -7,7 +7,7 @@ import ProfileActionsButtons from "./ProfileActionsButtons"
 interface ProfileCardProps extends ProfileActionsButtonsProps {
   profileImageUrl?: string
   nickname?: string
-  career?: string
+  career?: string | null
 }
 
 const ProfileCard = ({
@@ -29,11 +29,13 @@ const ProfileCard = ({
         fontFamily="SCDream_Bold">
         {nickname}
       </Text>
-      <Text
-        mt="-3"
-        fontSize="2xl">
-        {career} 개발자
-      </Text>
+      {career && (
+        <Text
+          mt="-3"
+          fontSize="2xl">
+          {career} 개발자
+        </Text>
+      )}
       <ProfileActionsButtons {...{ handleNewProject, handleEditProfile }} />
     </VStack>
   )

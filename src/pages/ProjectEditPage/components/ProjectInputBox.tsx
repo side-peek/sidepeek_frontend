@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form"
 
 import { Box, BoxProps, InputElementProps, Text } from "@chakra-ui/react"
 
-import { projectInputRegisters } from "../constants/registerOptions"
+import { projectInputRegister } from "../constants/registerOptions"
 import { ProjectFormValues } from "../types/ProjectFormValues"
 
 interface TextInputProps extends BoxProps {
@@ -33,7 +33,7 @@ const ProjectInputBox = ({ name, label, footer, children }: TextInputProps) => {
       {isValidElement(children) &&
         cloneElement(children as ReactElement<InputElementProps>, {
           id: name,
-          ...register(name, projectInputRegisters[name]),
+          ...register(name, projectInputRegister[name]),
         })}
 
       {footer && (

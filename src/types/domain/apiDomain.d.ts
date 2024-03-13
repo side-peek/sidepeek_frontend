@@ -20,12 +20,12 @@ declare module "api-models" {
 
   export type UserInfoProperties = {
     nickname: string
-    introduction: string
+    introduction: string | null
     profileImageUrl: string
-    job: string
-    career: string
-    githubUrl: string
-    blogUrl: string
+    job: string | null
+    career: string | null
+    githubUrl: string | null
+    blogUrl: string | null
     techStacks: TechStack[]
   }
   export interface UserInfo {
@@ -33,7 +33,8 @@ declare module "api-models" {
   }
 
   export type UserSummary = {
-    id: number
+    id: number | null
+    isSocialLogin: boolean | null
     nickname: string
     profileImageUrl: string | null
   }
@@ -53,8 +54,9 @@ declare module "api-models" {
     ownerId: number
     members: Member[]
     viewCount: number
-    likeCount: number
+    likeCount
     commentCount: number
+    comments: Comment[]
     description: string
     troubleShooting: string
   }
@@ -77,9 +79,8 @@ declare module "api-models" {
 
   export type Member = {
     id: number
-    nickname: string
-    profileImageUrl: string
-    category: string
+    role: string
+    userSummary: UserSummary
   }
 
   export type ProjectTag = {
@@ -114,14 +115,21 @@ declare module "api-models" {
     url: string
   }
 
+  export type Owner = {
+    id: number
+    nickname: string
+    profileImageUrl: string
+  }
+
   export type Comment = {
     id: number
-    userId: string
-    projectId: string
+    user: userSummary | null
+    parentId: number | null
+    isOwner: boolean
     isAnonymous: boolean
     content: string
     createdAt: string
-    updatedAt: string
+    replies: Comment[]
   }
 
   export type Like = {
@@ -150,7 +158,7 @@ declare module "api-models" {
   }
 
   /* 인증 관련 */
-  export type getEmailAuthResponseType = UserSummary
+  export type postEmailAuthResponseType = UserSummary
 
   export type postEmailRefreshPayload = {
     refreshToken: string
@@ -158,6 +166,8 @@ declare module "api-models" {
 
   export type postEmailRefreshResponseType = {
     accessToken: string
+    refreshToken: string
+    user: UserSummary
   }
 
   export type postEmailLoginPayload = {
@@ -188,7 +198,7 @@ declare module "api-models" {
 
   export type getUserDetailPayload = { userId: number }
 
-  export type getUserDetailResponseType = UserInfo
+  export type getUserDetailResponseType = UserInfoProperties
 
   export type putUserDetailPayload = {
     userId: number
@@ -212,11 +222,11 @@ declare module "api-models" {
   }
 
   /* 기술 스택 */
-  export type getSearchTechStacksPayload = {
+  export type getTechStacksPayload = {
     keyword?: string
   }
 
-  export type getSearchTechStacksResponseType = {
+  export type getTechStacksResponseType = {
     skills: Skill[]
   }
 
@@ -260,5 +270,25 @@ declare module "api-models" {
   //FIXME: 미완성 api
   export type postLikePayload = {
     projectId: number
+  }
+
+  /* 댓글 */
+
+  export type postCommentPayload = {
+    ownerId: number
+    projectId: number | null
+    parentId: number | null
+    isAnonymous: boolean
+    content: string
+  }
+
+  export type editCommentPayload = {
+    isAnonymous: boolean
+    content: string
+    commentId: number
+  }
+
+  export type deleteCommentPayload = {
+    commentId: number
   }
 }

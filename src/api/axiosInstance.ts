@@ -1,6 +1,11 @@
-import axios, { AxiosError, isAxiosError } from "axios"
+import axios from "axios"
 
 import authToken from "@stores/authToken"
+
+import { isAuthError } from "@utils/isAuthError"
+import { isAxios401Error } from "@utils/isAxios401Error"
+
+import { LogoutError, PermissionError } from "@constants/customError"
 
 import { postEmailRefresh } from "./auth/postEmailRefresh"
 
@@ -18,14 +23,25 @@ authInstance.interceptors.request.use(
     const accessToken = authToken.getAccessToken()
     const refreshToken = authToken.getRefreshToken()
 
+    config.headers.Authorization = `Bearer ${accessToken}`
+
     if (!refreshToken) {
-      throw new AxiosError("Login Required")
+      return Promise.reject(new PermissionError())
     }
 
     if (!accessToken) {
-      const currentAccessToken = await postEmailRefresh({ refreshToken })
-      authToken.setAccessToken(currentAccessToken)
-      config.headers.Authorization = `Bearer ${currentAccessToken}`
+      try {
+        const data = await postEmailRefresh({ refreshToken })
+        authToken.setAccessToken(data.accessToken)
+        authToken.setRefreshToken(data.refreshToken)
+        config.headers.Authorization = `Bearer ${data.accessToken}`
+      } catch (refreshError) {
+        if (isAxios401Error(refreshError)) {
+          return Promise.reject(new LogoutError())
+        }
+
+        throw refreshError
+      }
     }
 
     return config
@@ -39,27 +55,38 @@ authInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config
-    if (isAxiosError(error) && error.status === 401) {
+
+    if (isAuthError(error)) {
+      return Promise.reject(error)
+    }
+
+    if (isAxios401Error(error)) {
+      if (originalRequest && !originalRequest?._retry) {
+        originalRequest._retry = true
+      } else {
+        return Promise.reject(new LogoutError())
+      }
+
       const refreshToken = authToken.getRefreshToken()
 
       try {
-        const currentAccessToken = await postEmailRefresh({ refreshToken })
-        authToken.setAccessToken(currentAccessToken)
-        originalRequest.headers.Authorization = `Bearer ${currentAccessToken}`
+        const data = await postEmailRefresh({ refreshToken })
+        authToken.setAccessToken(data.accessToken)
+        authToken.setRefreshToken(data.refreshToken)
+        originalRequest.headers.Authorization = `Bearer ${data.accessToken}`
 
         // 재발급된 엑세스 토큰으로 재요청
-        return baseInstance(originalRequest)
+        return authInstance(originalRequest)
       } catch (refreshError) {
         /*FIXME:
         1. 🟨 로그아웃 api 요청
         2. 🟨 react-query의 유저 정보 캐싱 초기화
         3. ✅ accessToken, refreshToken 초기화 */
-        authToken.removeAccessToken()
-        authToken.removeRefreshToken()
-        if (import.meta.env.DEV) {
-          console.error()
+        if (isAxios401Error(refreshError)) {
+          return Promise.reject(new LogoutError())
         }
-        throw new Error("권한이 없습니다. 로그인 해주세요.")
+
+        return Promise.reject(refreshError)
       }
     }
     return Promise.reject(error)

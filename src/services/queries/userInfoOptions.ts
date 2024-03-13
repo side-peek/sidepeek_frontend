@@ -1,12 +1,15 @@
+import { postEmailAuth } from "@api/auth/postEmailAuth"
+
 import { UseQueryOptions } from "@tanstack/react-query"
 
-import { getEmailAuth } from "@/api/auth/getEmailAuth"
+import authToken from "@stores/authToken"
 
 import { QUERYKEY } from "@constants/queryKey"
 
 export const userInfoOptions: UseQueryOptions<
-  Awaited<ReturnType<typeof getEmailAuth>>
+  Awaited<ReturnType<typeof postEmailAuth>>
 > = {
   queryKey: [QUERYKEY.USER_INFO],
-  queryFn: getEmailAuth,
+  queryFn: () => postEmailAuth(),
+  enabled: Boolean(authToken.getRefreshToken()),
 }
