@@ -1,4 +1,4 @@
-import { HStack, Text } from "@chakra-ui/react"
+import { HStack, Text, useMediaQuery } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
@@ -13,6 +13,8 @@ interface CommentTitleProps {
 
 const CommentTitle = ({ comment }: CommentTitleProps) => {
   const { isEditing, editTargetCommentId } = useCommentContext()
+  const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
+
   return (
     <HStack
       justifyContent="space-between"
@@ -26,11 +28,13 @@ const CommentTitle = ({ comment }: CommentTitleProps) => {
           fontSize="xl">
           {comment.user ? comment.user.nickname : "익명"}
         </Text>
-        <Text
-          color="grey.500"
-          fontSize="md">
-          {dateToTimeago(comment.createdAt)}
-        </Text>
+        {isLargerThan768 && (
+          <Text
+            color="grey.500"
+            fontSize="md">
+            {dateToTimeago(comment.createdAt)}
+          </Text>
+        )}
       </HStack>
       <HStack gap="1rem">
         {comment.isOwner ? (

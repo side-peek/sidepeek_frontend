@@ -2,10 +2,18 @@
 import { UseFormRegisterReturn } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
-import { Box, Button, HStack, Stack } from "@chakra-ui/react"
+import {
+  Box,
+  Button,
+  HStack,
+  Stack,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react"
 import { Comment } from "api-models"
 
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
+import dateToTimeago from "@pages/ProjectDetailPage/utils/datetoTimeago"
 
 import CommentsForm from "../CommentsForm/CommentsForm"
 import CommentTitle from "./components/CommentTitle"
@@ -19,6 +27,7 @@ interface CommentsItemProps {
 }
 
 const CommentsItem = ({ comment, register }: CommentsItemProps) => {
+  const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
   const navigate = useNavigate()
 
   const handleNavigateProfile = (userId: number) => {
@@ -53,6 +62,13 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
               gap="1rem"
               align="flex-start">
               <CommentTitle comment={comment} />
+              {!isLargerThan768 && (
+                <Text
+                  color="grey.500"
+                  fontSize="md">
+                  {dateToTimeago(comment.createdAt)}
+                </Text>
+              )}
               <CommentsEditFormText
                 {...{
                   comment,
