@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react"
 
-import { postProjectFiles } from "@api/projectFile/postProjectFiles"
-
 import { FileUploadStateType } from "../types/FileUploadStateType"
+import { usePostFileMutation } from "./usePostFileMutation"
+
+const MAX_FILE_UPLOAD = 6
 
 export const useFileUpload = () => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -11,12 +12,32 @@ export const useFileUpload = () => {
     FileUploadStateType<{ fileUrl: string }>[]
   >([])
 
+  const updateFileState = (
+    index: number,
+    update: FileUploadStateType<{ fileUrl: string }>,
+  ) => {
+    setFiles((prev) => {
+      const updatedFiles = [...prev]
+      updatedFiles[index] = { ...update }
+      return updatedFiles
+    })
+  }
+
+  const { mutateAsync } = usePostFileMutation({
+    onMutate: () => {
+      setFiles((prev) => [
+        ...prev,
+        { isLoading: true, error: null, data: null },
+      ])
+    },
+  })
+
   const onChangeFile = async (e: Event, fileLength: number) => {
     if (!(e.target as HTMLInputElement).files) return
     const selectFiles = (e.target as HTMLInputElement).files as FileList
     const uploadFiles = Array.from(selectFiles)
 
-    if (files.length + uploadFiles.length > 6) {
+    if (files.length + uploadFiles.length > MAX_FILE_UPLOAD) {
       alert("더이상 추가할 수 없습니다")
       return
     }
@@ -27,37 +48,15 @@ export const useFileUpload = () => {
 
       const index = fileLength + idx - 1 < 0 ? 0 : fileLength + idx
 
-      setFiles((prev) => [
-        ...prev,
-        { isLoading: true, error: null, data: null },
-      ])
-
-      return postProjectFiles(imageFormData)
+      return mutateAsync(imageFormData)
         .then((data) => {
-          setFiles((prev) => {
-            console.log(index)
-
-            const updatedFiles = [...prev]
-            updatedFiles[index] = {
-              isLoading: false,
-              error: null,
-              data,
-            }
-            return updatedFiles
-          })
+          updateFileState(index, { isLoading: false, error: null, data })
         })
         .catch((error) => {
-          // 실패 시 파일 상태 업데이트
-          setFiles((prev) => {
-            console.log(index)
-
-            const updatedFiles = [...prev]
-            updatedFiles[index] = {
-              isLoading: false,
-              error,
-              data: null,
-            }
-            return updatedFiles
+          updateFileState(index, {
+            isLoading: false,
+            error,
+            data: null,
           })
         })
     })
@@ -80,7 +79,7 @@ export const useFileUpload = () => {
       current?.removeEventListener("change", handleFileChange)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputRef, files])
+  }, [files])
 
   return {
     inputRef,
