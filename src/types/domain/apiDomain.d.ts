@@ -217,6 +217,11 @@ declare module "api-models" {
     nickname: string
   }
 
+  export type getUserProjectsPayload = {
+    userId: number
+    type: string
+  }
+
   /* 기술 스택 */
   export type getTechStacksPayload = {
     keyword?: string
