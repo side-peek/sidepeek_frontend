@@ -221,6 +221,10 @@ declare module "api-models" {
     nickname: string
   }
 
+  export type postDoubleCheckNicknameResponseType = {
+    isDuplicated: boolean
+  }
+
   /* 기술 스택 */
   export type getTechStacksPayload = {
     keyword?: string

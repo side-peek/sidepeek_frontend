@@ -10,5 +10,5 @@ export const postEmailAuth = rest.post(ENDPOINTS.EMAIL_AUTH, (_, res, ctx) => {
     profileImageUrl: null,
     isSocialLogin: false,
   }
-  return res(ctx.delay(1000), ctx.status(200), ctx.json(response))
+  return res(ctx.status(200), ctx.json(response))
 })
