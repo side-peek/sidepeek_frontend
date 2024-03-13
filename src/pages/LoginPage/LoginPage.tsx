@@ -12,10 +12,9 @@ const LoginPage = () => {
     <Center height="100vh">
       <Box
         aria-label="login container"
-        position="relative"
         width="50rem">
-        <BackButton />
-        <Center>
+        <Center position="relative">
+          <BackButton />
           <LogoLink logoHeight="6rem" />
         </Center>
         <Flex

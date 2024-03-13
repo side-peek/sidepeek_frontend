@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 import { Box, Flex, Text } from "@chakra-ui/react"
 
-const LoginHref = () => {
+const LoginLink = () => {
   return (
     <Flex
       pt="1.4rem"
@@ -11,7 +11,7 @@ const LoginHref = () => {
         fontSize="1.2rem"
         color="blue">
         회원이신가요?
-        <Link to="/signup">
+        <Link to="/login">
           <Text
             px="0.4rem"
             display="inline"
@@ -24,4 +24,4 @@ const LoginHref = () => {
   )
 }
 
-export default LoginHref
+export default LoginLink
