@@ -10,7 +10,7 @@ const SummaryTitle = ({ name, subName }: SummaryTitleProps) => {
     <Box>
       <Text
         fontFamily="SCDream_Bold"
-        fontSize="3xl"
+        fontSize="2xl"
         textAlign="center">
         {name}
       </Text>
