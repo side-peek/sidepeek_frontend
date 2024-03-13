@@ -2,6 +2,8 @@ import { postEmailAuth } from "@api/auth/postEmailAuth"
 
 import { UseQueryOptions } from "@tanstack/react-query"
 
+import authToken from "@stores/authToken"
+
 import { QUERYKEY } from "@constants/queryKey"
 
 export const userInfoOptions: UseQueryOptions<
@@ -9,4 +11,5 @@ export const userInfoOptions: UseQueryOptions<
 > = {
   queryKey: [QUERYKEY.USER_INFO],
   queryFn: () => postEmailAuth(),
+  enabled: Boolean(authToken.getRefreshToken()),
 }
