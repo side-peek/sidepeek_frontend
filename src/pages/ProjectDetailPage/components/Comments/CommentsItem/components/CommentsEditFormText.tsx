@@ -6,9 +6,6 @@ import { Comment } from "api-models"
 
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
-import BeforeEditingButton from "./BeforeEditingButton"
-import OnEditingButton from "./OnEditingButton"
-
 interface CommentsEditFormTextProps {
   comment: Comment
   register: UseFormRegisterReturn
@@ -48,15 +45,6 @@ const CommentsEditFormText = ({
               {comment.content}
             </Text>
           )}
-          <HStack gap="1rem">
-            {comment.isOwner ? (
-              editTargetCommentId === comment.id && isEditing ? (
-                <OnEditingButton />
-              ) : (
-                <BeforeEditingButton comment={comment} />
-              )
-            ) : null}
-          </HStack>
         </HStack>
       </form>
     </Box>
