@@ -1,6 +1,6 @@
 import { UseToastOptions } from "@chakra-ui/toast"
 
-export const errorToastOptions: UseToastOptions = {
+export const toastOptions: UseToastOptions = {
   position: "top-right",
   containerStyle: {
     maxWidth: "100%",
