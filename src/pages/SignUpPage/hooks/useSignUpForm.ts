@@ -1,21 +1,22 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 
 import { useToast } from "@chakra-ui/toast"
+import { isAxiosError } from "axios"
 
 import {
   differentPasswordError,
   duplicatedErrors,
 } from "../constants/errorOptions"
 import { SUBMIT_MESSAGE } from "../constants/toastMessages"
-import { errorToastOptions } from "../constants/toastOptions"
+import { toastOptions } from "../constants/toastOptions"
 import { SignUpFormValues } from "../types/SignUpFormValues"
-import useDoubleCheckEmailMutation from "./mutaitions/useDoubleCheckEmailMutation"
-import useDoubleCheckNicknameMutation from "./mutaitions/useDoubleCheckNicknameMutation"
-import { useSignUpMutation } from "./mutaitions/useSignUpMutation"
+import useDoubleCheckEmailMutation from "./mutations/useDoubleCheckEmailMutation"
+import useDoubleCheckNicknameMutation from "./mutations/useDoubleCheckNicknameMutation"
+import { useSignUpMutation } from "./mutations/useSignUpMutation"
 
 export const useSignUpForm = () => {
-  const toast = useToast(errorToastOptions)
+  const toast = useToast(toastOptions)
 
   const [checkedEmail, setCheckedEmail] = useState("")
   const [checkedNickname, setCheckedNickname] = useState("")
@@ -86,5 +87,35 @@ export const useSignUpForm = () => {
     }
   }
 
-  return { method, emailCheck, nicknameCheck, onSubmit, handleDoubleCheck }
+  useEffect(() => {
+    if (isAxiosError(signUp.error)) {
+      let message = ""
+      switch (signUp.error.response?.status) {
+        case 500: {
+          message = SUBMIT_MESSAGE.ERROR.SERVER
+          break
+        }
+        case 404: {
+          message = SUBMIT_MESSAGE.ERROR.INVALID
+          break
+        }
+        default: {
+          message = SUBMIT_MESSAGE.ERROR.UNCAUGHT
+        }
+      }
+      toast({
+        status: "error",
+        title: message,
+      })
+    }
+  }, [signUp.error])
+
+  return {
+    method,
+    emailCheck,
+    nicknameCheck,
+    onSubmit,
+    handleDoubleCheck,
+    isLoading: signUp.isPending,
+  }
 }

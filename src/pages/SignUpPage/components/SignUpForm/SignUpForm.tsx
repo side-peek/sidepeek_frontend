@@ -17,8 +17,14 @@ import DoubleCheckButton from "./components/DoubleCheckButton"
 import SignUpButton from "./components/SignUpButton"
 
 const SignUpForm = () => {
-  const { method, emailCheck, nicknameCheck, onSubmit, handleDoubleCheck } =
-    useSignUpForm()
+  const {
+    method,
+    emailCheck,
+    nicknameCheck,
+    onSubmit,
+    handleDoubleCheck,
+    isLoading,
+  } = useSignUpForm()
 
   return (
     <FormProvider {...method}>
@@ -85,7 +91,7 @@ const SignUpForm = () => {
             registerOptions={confirmPasswordOptions}>
             <Input type="password" />
           </InputController>
-          <SignUpButton />
+          <SignUpButton isLoading={isLoading} />
         </Flex>
       </form>
     </FormProvider>

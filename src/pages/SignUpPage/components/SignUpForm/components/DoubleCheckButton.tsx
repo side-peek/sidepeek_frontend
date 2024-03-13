@@ -3,7 +3,7 @@ import { IoMdCheckmarkCircle } from "react-icons/io"
 
 import { Button, ButtonProps, Icon, Text, useToast } from "@chakra-ui/react"
 
-import { errorToastOptions } from "@pages/SignUpPage/constants/toastOptions"
+import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
 interface DoubleCheckButtonProps extends ButtonProps {
   isDuplicated?: boolean
@@ -17,7 +17,7 @@ const DoubleCheckButton = ({
   successMessage,
   ...props
 }: DoubleCheckButtonProps) => {
-  const toast = useToast(errorToastOptions)
+  const toast = useToast(toastOptions)
 
   useEffect(() => {
     if (isDuplicated === true) {
