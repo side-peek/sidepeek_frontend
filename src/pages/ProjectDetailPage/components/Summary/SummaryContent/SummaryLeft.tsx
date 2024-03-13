@@ -10,25 +10,21 @@ interface SummaryLeftProps {
 }
 const SummaryLeft = ({ deployUrl, githubUrl, overview }: SummaryLeftProps) => {
   const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
-  console.log(isLargerThan1200)
 
   return (
     <Flex
       flexDirection="column"
+      gap="2rem"
+      align={isLargerThan1200 ? "flex-start" : "center"}
       justifyContent={isLargerThan1200 ? "space-between" : "center"}>
-      {isLargerThan1200 && (
-        <>
-          <SummaryOverview overview={overview} />
-          <SummaryLink
-            {...{
-              deployUrl,
-              githubUrl,
-            }}
-          />
-        </>
-      )}
+      <SummaryOverview overview={overview} />
+      <SummaryLink
+        {...{
+          deployUrl,
+          githubUrl,
+        }}
+      />
     </Flex>
   )
 }
-
 export default SummaryLeft

@@ -1,13 +1,20 @@
-import { Flex, IconButton, IconButtonProps, Text } from "@chakra-ui/react"
+import {
+  Flex,
+  IconButton,
+  IconButtonProps,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react"
 
 interface SummaryTopIconButtonProps extends IconButtonProps {
   count?: number
 }
-
 const SummaryTopIconButton = ({
   count,
   ...props
 }: SummaryTopIconButtonProps) => {
+  const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
+
   return (
     <Flex
       gap="0.7rem"
@@ -15,9 +22,8 @@ const SummaryTopIconButton = ({
       cursor="pointer"
       _hover={{ opacity: "0.5" }}>
       <IconButton {...props} />
-      <Text fontSize="xl">{count}</Text>
+      <Text fontSize={isLargerThan1200 ? "xl" : "md"}>{count}</Text>
     </Flex>
   )
 }
-
 export default SummaryTopIconButton

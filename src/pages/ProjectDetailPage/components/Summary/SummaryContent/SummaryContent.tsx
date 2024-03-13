@@ -10,7 +10,6 @@ interface SummaryContentProps {
   overviewImageUrl: ProjectOverViewUrl[]
   overview: string
 }
-
 const SummaryContent = ({
   deployUrl,
   githubUrl,
@@ -18,24 +17,23 @@ const SummaryContent = ({
   overview,
 }: SummaryContentProps) => {
   const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
-
   return (
     <Flex
+      direction={isLargerThan1200 ? "row" : "column"}
       justifyContent={isLargerThan1200 ? "space-between" : "center"}
-      align="stretch"
+      align={isLargerThan1200 ? "stretch" : "center"}
+      gap="3rem"
       w="100%">
-      {isLargerThan1200 && (
-        <SummaryLeft
-          {...{
-            deployUrl,
-            githubUrl,
-            overview,
-          }}
-        />
-      )}
+      <SummaryLeft
+        {...{
+          deployUrl,
+          githubUrl,
+          overview,
+        }}
+      />
+
       <SummaryRight overviewImageUrl={overviewImageUrl} />
     </Flex>
   )
 }
-
 export default SummaryContent

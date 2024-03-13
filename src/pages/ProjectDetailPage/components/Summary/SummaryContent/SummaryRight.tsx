@@ -17,7 +17,6 @@ import SummaryRightIcon from "./SummaryRightIcon"
 interface SummaryRightProps {
   overviewImageUrl: ProjectOverViewUrl[]
 }
-
 const swiperParams = {
   loop: true,
   pagination: {
@@ -28,12 +27,13 @@ const swiperParams = {
 
 const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
   const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
+  const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
 
   const swiperRef = useRef<SwiperCore>()
 
   return (
     <Box
-      maxW={isLargerThan1200 ? "35%" : "53rem"}
+      maxW={isLargerThan1200 ? "35%" : isLargerThan768 ? "53rem" : "75%"}
       position="relative">
       <StyledSwiper
         {...swiperParams}
@@ -60,7 +60,6 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
               />
             }
           />
-
           <SummaryRightIcon
             direction="right"
             aria-label="rightIcon"
