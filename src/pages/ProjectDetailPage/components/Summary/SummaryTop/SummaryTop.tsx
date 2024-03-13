@@ -3,6 +3,7 @@ import { IoMdHeartEmpty } from "react-icons/io"
 import { MdRemoveRedEye } from "react-icons/md"
 import { PiClipboardText } from "react-icons/pi"
 import { useLocation } from "react-router-dom"
+import { Link } from "react-scroll"
 
 import { Flex } from "@chakra-ui/react"
 
@@ -52,12 +53,18 @@ const SummaryTop = ({
         aria-label="good"
         fontSize="2.7rem"
       />
-      <SummaryTopIconButton
-        count={commentCount}
-        icon={<FaRegComment />}
-        aria-label="comment"
-        fontSize="2.3rem"
-      />
+      <Link
+        to="Comment"
+        spy={true}
+        offset={-100}
+        smooth={true}>
+        <SummaryTopIconButton
+          count={commentCount}
+          icon={<FaRegComment />}
+          aria-label="comment"
+          fontSize="2.3rem"
+        />
+      </Link>
       <SummaryTopIconButton
         onClick={() =>
           handleCopyClipBoard(`${VITE_BASE_URL}${location.pathname}`)
