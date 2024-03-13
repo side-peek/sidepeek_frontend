@@ -1,5 +1,4 @@
-import { Center } from "@chakra-ui/layout"
-import { Flex } from "@chakra-ui/react"
+import { Box, Center, Flex } from "@chakra-ui/react"
 
 import Comments from "./components/Comments/Comments"
 import { withProjectId } from "./components/Comments/Hoc/withProjectId"
@@ -16,7 +15,7 @@ const ProjectDetailPage = ({ projectId }: ProjectIdProps) => {
   }
 
   return (
-    <>
+    <Box w="100%">
       <Summary projectDetailInfo={projectDetailInfo} />
       <Flex
         maxW="128rem"
@@ -28,7 +27,7 @@ const ProjectDetailPage = ({ projectId }: ProjectIdProps) => {
         <Content projectDetailInfo={projectDetailInfo} />
         <Comments comments={projectDetailInfo.comments}></Comments>
       </Flex>
-    </>
+    </Box>
   )
 }
 

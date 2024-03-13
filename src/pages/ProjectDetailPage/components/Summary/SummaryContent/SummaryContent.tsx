@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react"
+import { Flex, useMediaQuery } from "@chakra-ui/react"
 import { ProjectOverViewUrl } from "api-models"
 
 import SummaryLeft from "./SummaryLeft"
@@ -17,18 +17,22 @@ const SummaryContent = ({
   overviewImageUrl,
   overview,
 }: SummaryContentProps) => {
+  const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
+
   return (
     <Flex
-      justifyContent="space-between"
+      justifyContent={isLargerThan1200 ? "space-between" : "center"}
       align="stretch"
       w="100%">
-      <SummaryLeft
-        {...{
-          deployUrl,
-          githubUrl,
-          overview,
-        }}
-      />
+      {isLargerThan1200 && (
+        <SummaryLeft
+          {...{
+            deployUrl,
+            githubUrl,
+            overview,
+          }}
+        />
+      )}
       <SummaryRight overviewImageUrl={overviewImageUrl} />
     </Flex>
   )

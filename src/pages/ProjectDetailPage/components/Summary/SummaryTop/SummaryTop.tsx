@@ -41,6 +41,7 @@ const SummaryTop = ({
   return (
     <Flex
       gap="1.5rem"
+      mb="3rem"
       justifyContent="flex-end">
       <SummaryTopIcon
         count={viewCount}
