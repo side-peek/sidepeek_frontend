@@ -6,13 +6,14 @@ import { IconButton } from "@chakra-ui/react"
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
 const OnEditingButton = () => {
-  const { handleOffEdit } = useCommentContext()
+  const { handleOffEdit, handleSubmit, onSubmitEdit } = useCommentContext()
   return (
     <>
       <IconButton
         type="submit"
         aria-label="submit"
         icon={<FaRegCheckCircle />}
+        onClick={handleSubmit(onSubmitEdit)}
         fontSize="2xl"
       />
       <IconButton

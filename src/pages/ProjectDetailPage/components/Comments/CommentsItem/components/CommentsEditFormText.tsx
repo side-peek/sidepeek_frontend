@@ -1,3 +1,4 @@
+import { useCallback } from "react"
 import { UseFormRegisterReturn } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
@@ -17,6 +18,17 @@ const CommentsEditFormText = ({
 }: CommentsEditFormTextProps) => {
   const { handleSubmit, onSubmitEdit, editTargetCommentId, isEditing } =
     useCommentContext()
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === "Enter" && !e.shiftKey && handleSubmit) {
+        e.preventDefault()
+        handleSubmit(onSubmitEdit)()
+      }
+    },
+    [handleSubmit, onSubmitEdit],
+  )
+
   if (!handleSubmit) {
     return
   }
@@ -36,6 +48,7 @@ const CommentsEditFormText = ({
               as={ResizeTextarea}
               isRequired={false}
               resize="none"
+              onKeyDown={handleKeyDown}
               {...register}
             />
           ) : (
