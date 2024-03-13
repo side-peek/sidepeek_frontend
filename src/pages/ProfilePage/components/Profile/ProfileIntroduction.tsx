@@ -1,4 +1,7 @@
-import { Box, Text } from "@chakra-ui/react"
+import { FaSquarePen } from "react-icons/fa6"
+import { ImGithub } from "react-icons/im"
+
+import { Box, Flex, Text } from "@chakra-ui/react"
 
 import ProfileLink from "./ProfileLink"
 
@@ -29,10 +32,20 @@ const ProfileIntroduction = ({
         fontSize="md">
         {aboutMe}
       </Text>
-      <ProfileLink
-        githubUrl={githubUrl}
-        blogUrl={blogUrl}
-      />
+      <Flex
+        direction="column"
+        gap="0.7rem">
+        <ProfileLink
+          Icon={ImGithub}
+          url={githubUrl}
+          alt="Github"
+        />
+        <ProfileLink
+          Icon={FaSquarePen}
+          url={blogUrl}
+          alt="Blog"
+        />
+      </Flex>
     </Box>
   )
 }
