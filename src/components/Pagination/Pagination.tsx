@@ -5,14 +5,20 @@ import PageButtons from "./components/PageButtons/PageButtons"
 import PrevButton from "./components/PrevButton/PrevButton"
 import PaginationProvider from "./stores/contexts"
 
-const Pagination = () => {
+interface PaginationProps {
+  totalProjectsCount: number
+  setPage: React.Dispatch<React.SetStateAction<number>>
+}
+
+const Pagination = ({ totalProjectsCount, setPage }: PaginationProps) => {
   const handlePageChange = (page: number) => {
-    console.log(`${page}렌더`)
+    // console.log(`${page}렌더`)
+    setPage(page)
   }
   return (
     <PaginationProvider
-      limit={24}
-      total={400}
+      limit={12}
+      total={totalProjectsCount}
       onPageChange={handlePageChange}>
       <HStack>
         <PrevButton />
