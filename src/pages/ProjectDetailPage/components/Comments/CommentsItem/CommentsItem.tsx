@@ -52,10 +52,7 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
               w="100%"
               gap="1rem"
               align="flex-start">
-              <CommentTitle
-                user={comment.user}
-                createdAt={comment.createdAt}
-              />
+              <CommentTitle comment={comment} />
               <CommentsEditFormText
                 {...{
                   comment,
