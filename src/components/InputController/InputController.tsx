@@ -1,52 +1,50 @@
-import { ReactNode } from "react"
-import { RegisterOptions, useFormContext } from "react-hook-form"
+import { cloneElement, isValidElement } from "react"
+import { useFormContext } from "react-hook-form"
 
 import {
   Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Input,
   InputProps,
   Spacer,
 } from "@chakra-ui/react"
+import { isFunction } from "lodash"
 
-import { FormKeys } from "./types/formKeys"
-
-interface InputControllerProps extends InputProps {
-  name: FormKeys
-  children?: ReactNode
-  label?: string
-  registerOptions: RegisterOptions
-}
+import { InputControllerProps } from "./types/InputControllerProps"
 
 const InputController = ({
   children,
-  name,
+  fieldName,
   label,
   registerOptions,
-  ...props
 }: InputControllerProps) => {
   const {
     register,
+    getFieldState,
     formState: { errors },
   } = useFormContext()
+
+  const renderPorps = {
+    height: "5rem",
+    fontSize: "2rem",
+    ...register(fieldName, registerOptions),
+  } as InputProps
+
   return (
-    <FormControl isInvalid={Boolean(errors[name])}>
+    <FormControl isInvalid={getFieldState(fieldName).invalid}>
       <Flex alignItems="center">
         <FormLabel display="inline-block">{label}</FormLabel>
         <Spacer />
-        <FormErrorMessage>{errors[name]?.message as string}</FormErrorMessage>
+        <FormErrorMessage>
+          {errors[fieldName]?.message as string}
+        </FormErrorMessage>
       </Flex>
-      <Flex alignItems="center">
-        <Input
-          height="5rem"
-          fontSize="2rem"
-          {...register(name, registerOptions)}
-          {...props}
-        />
-        {children}
-      </Flex>
+      {isValidElement(children)
+        ? cloneElement(children, renderPorps)
+        : isFunction(children)
+          ? children(renderPorps)
+          : null}
     </FormControl>
   )
 }
