@@ -21,7 +21,7 @@ import useAllProjectQuery from "@pages/HomePage/hooks/queries/useAllProjectQuery
 import ResultInfo from "./components/ResultInfo"
 import SearchSection from "./components/SearchSection"
 
-type SelectType = "default" | "likeCount" | "viewCount"
+type SelectType = "createdAt" | "like" | "view"
 
 const ProjectListPage = () => {
   const params = new URLSearchParams(window.location.search)
@@ -29,14 +29,11 @@ const ProjectListPage = () => {
 
   const [isDeploy, setIsDeploy] = useState(false)
 
-  const [selectedOption, setSelectedOption] = useState<SelectType>("default")
+  const [selectedOption, setSelectedOption] = useState<SelectType>("createdAt")
 
-  // 검색 결과 가져오기 (일단 임시로 다 받아왔어용..)
+  // 검색 결과 가져오기 (일단 임시)
   const { allProjectList, isAllProjectLoading } = useAllProjectQuery()
-
-  const projectList = allProjectList?.projects.filter((project) =>
-    isDeploy ? project.isDeploy : project,
-  )
+  const projectList = allProjectList?.projects
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SelectType
@@ -65,9 +62,9 @@ const ProjectListPage = () => {
               marginRight="1rem"
               onChange={handleSelect}
               value={selectedOption}>
-              <option value="default">최신순</option>
-              <option value="likeCount">인기순</option>
-              <option value="viewCount">조회순</option>
+              <option value="createdAt">최신순</option>
+              <option value="like">인기순</option>
+              <option value="view">조회순</option>
             </Select>
           </HStack>
           <Grid

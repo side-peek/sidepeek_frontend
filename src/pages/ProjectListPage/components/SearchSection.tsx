@@ -1,10 +1,12 @@
 import { IoMdSearch } from "react-icons/io"
 
-import { Box, Center, Icon } from "@chakra-ui/react"
+import { Box, Button, Center, Icon, useMediaQuery } from "@chakra-ui/react"
 
 import CommonInput from "@components/Input/CommonInput"
 
 const SearchSection = () => {
+  const [isLargerThan768] = useMediaQuery("(min-width: 768px)")
+
   return (
     <Box
       height="12rem"
@@ -17,20 +19,23 @@ const SearchSection = () => {
         <CommonInput
           placeholder="검색어를 입력하세요"
           borderRadius="5rem"
-          inputWidth="50rem"
+          inputWidth={isLargerThan768 ? "50rem" : "30rem"}
           height="7rem"
           fontSize="2xl"
-          onChange={() => console.log("change")}
+          onSubmit={() => console.log("enter")}
           backgroundColor="white">
-          <Icon
-            cursor="pointer"
-            as={IoMdSearch}
-            w="5rem"
-            h="5rem"
-            position="absolute"
-            top="1rem"
-            right="1rem"
-          />
+          <Button>
+            <Icon
+              type="submit"
+              cursor="pointer"
+              as={IoMdSearch}
+              w="5rem"
+              h="5rem"
+              position="absolute"
+              top="1rem"
+              right="1rem"
+            />
+          </Button>
         </CommonInput>
       </Center>
     </Box>
