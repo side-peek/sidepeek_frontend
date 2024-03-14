@@ -27,7 +27,7 @@ export const useSignUpForm = () => {
       setCheckedEmail(() => "")
       method.setError("email", duplicatedErrors.email)
     },
-    trigger: () => method.trigger(),
+    trigger: () => method.trigger("email"),
   })
 
   const nicknameCheck = useDoubleCheckNicknameMutation({
@@ -35,7 +35,7 @@ export const useSignUpForm = () => {
       setCheckedNickname(() => "")
       method.setError("nickname", duplicatedErrors.nickname)
     },
-    trigger: () => method.trigger(),
+    trigger: () => method.trigger("nickname"),
   })
 
   const signUp = useSignUpMutation()
