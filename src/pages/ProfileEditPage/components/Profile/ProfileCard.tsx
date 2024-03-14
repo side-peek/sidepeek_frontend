@@ -57,7 +57,8 @@ const ProfileCard = ({
         <label>
           <Avatar
             w="12rem"
-            h="12rem">
+            h="12rem"
+            cursor="pointer">
             {profileImageUrl}
           </Avatar>
           <Input
@@ -72,6 +73,7 @@ const ProfileCard = ({
         <Text
           fontSize="3xl"
           fontFamily="SCDream_Bold"
+          cursor="pointer"
           onClick={onOpen}>
           {nickname}
         </Text>
