@@ -13,7 +13,7 @@ interface ExplanationItemProps {
 }
 
 const ExplanationItem = ({ content }: ExplanationItemProps) => {
-  const processedText = content.replace(/\\n/g, "\n")
+  const processedText = content?.replace(/\\n/g, "\n")
   return (
     <Box data-color-mode="light">
       <MDEditor.Markdown
