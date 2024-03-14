@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react"
 
 import StyledTab from "@pages/ProfilePage/styles/StyledTab"
+import { TabsType } from "@pages/ProfilePage/types/types"
 
 import withUserId, { UserIdProps } from "../HOC/withUserId"
 import ProjectsGrid from "./ProjectsGrid"
@@ -15,7 +16,7 @@ import ProjectsGrid from "./ProjectsGrid"
 const ProjectsView = ({ userId }: UserIdProps) => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
 
-  const tabs = ["JOINED", "LIKED", "COMMENTED"]
+  const tabs: TabsType[] = ["JOINED", "LIKED", "COMMENTED"]
 
   return (
     <Box
