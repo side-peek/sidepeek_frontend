@@ -1,20 +1,20 @@
-import {
-  postProjectFilesPayload,
-  postProjectFilesResponseType,
-} from "api-models"
-import { AxiosRequestConfig } from "axios"
+import { postProjectFilesResponseType } from "api-models"
+
+import { PostFormDataType } from "@pages/ProjectEditPage/types/PostFormDataType"
 
 import { ENDPOINTS } from "@constants/endPoints"
 
 import { baseInstance } from "../axiosInstance"
 
-export const postProjectFiles = async (
-  { file }: postProjectFilesPayload,
-  config: AxiosRequestConfig = {},
-) => {
-  await baseInstance.post<postProjectFilesResponseType>(
+export const postProjectFiles = async (file: PostFormDataType) => {
+  const { data } = await baseInstance.post<postProjectFilesResponseType>(
     ENDPOINTS.UPLOAD_PROJECT_FILES,
     file,
-    { ...config },
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    },
   )
+  return data
 }
