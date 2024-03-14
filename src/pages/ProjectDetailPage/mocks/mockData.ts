@@ -20,6 +20,7 @@ export const DUMMY_PROJECT_DETAIL = {
   viewCount: 168,
   likeCount: 7,
   commentCount: 13,
+  likeId: 3,
   techStacks: [
     {
       id: 21,

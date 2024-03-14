@@ -55,6 +55,7 @@ declare module "api-models" {
     members: Member[]
     viewCount: number
     likeCount: number
+    likeId: number | null
     commentCount: number
     comments: Comment[]
     description: string
