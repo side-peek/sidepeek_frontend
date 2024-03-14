@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md"
 
-import { Box, Image } from "@chakra-ui/react"
+import { Box, Image, useMediaQuery } from "@chakra-ui/react"
 import { ProjectOverViewUrl } from "api-models"
 import "swiper/css"
 import "swiper/css/pagination"
@@ -17,7 +17,6 @@ import SummaryRightIcon from "./SummaryRightIcon"
 interface SummaryRightProps {
   overviewImageUrl: ProjectOverViewUrl[]
 }
-
 const swiperParams = {
   loop: true,
   pagination: {
@@ -27,12 +26,14 @@ const swiperParams = {
 }
 
 const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
+  const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
+  const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
+
   const swiperRef = useRef<SwiperCore>()
 
   return (
     <Box
-      maxW="43rem"
-      maxH="33rem"
+      maxW={isLargerThan1200 ? "35%" : isLargerThan768 ? "53rem" : "75%"}
       position="relative">
       <StyledSwiper
         {...swiperParams}
@@ -40,35 +41,38 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
         {overviewImageUrl?.map((overviewImg) => (
           <SwiperSlide key={overviewImg.id}>
             <Image
+              objectFit="cover"
               src={overviewImg.url}
               fallbackSrc={noImage}
             />
           </SwiperSlide>
         ))}
       </StyledSwiper>
-      <SummaryRightIcon
-        direction="left"
-        aria-label="leftIcon"
-        onClick={() => swiperRef.current?.slidePrev()}
-        icon={
-          <MdArrowBackIosNew
-            style={{ width: "2rem", height: "2rem", color: "#7a7a7a" }}
+      {isLargerThan1200 && (
+        <>
+          <SummaryRightIcon
+            direction="left"
+            aria-label="leftIcon"
+            onClick={() => swiperRef.current?.slidePrev()}
+            icon={
+              <MdArrowBackIosNew
+                style={{ width: "2rem", height: "2rem", color: "#7a7a7a" }}
+              />
+            }
           />
-        }
-      />
-
-      <SummaryRightIcon
-        direction="right"
-        aria-label="rightIcon"
-        onClick={() => swiperRef.current?.slideNext()}
-        icon={
-          <MdArrowForwardIos
-            style={{ width: "2rem", height: "2rem", color: "#7a7a7a" }}
+          <SummaryRightIcon
+            direction="right"
+            aria-label="rightIcon"
+            onClick={() => swiperRef.current?.slideNext()}
+            icon={
+              <MdArrowForwardIos
+                style={{ width: "2rem", height: "2rem", color: "#7a7a7a" }}
+              />
+            }
           />
-        }
-      />
+        </>
+      )}
     </Box>
   )
 }
-
 export default SummaryRight

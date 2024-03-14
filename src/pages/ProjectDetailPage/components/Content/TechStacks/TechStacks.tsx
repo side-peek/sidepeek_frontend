@@ -1,5 +1,4 @@
-// TODO: 1. 기술스택 이미지 URL 추가
-import { Flex, HStack, Text, useMediaQuery } from "@chakra-ui/react"
+import { Flex, HStack, Image, Text, useMediaQuery } from "@chakra-ui/react"
 import { TechStack } from "api-models"
 
 import CommonTag from "@components/Tag/components/CommonTag"
@@ -11,14 +10,14 @@ interface TechStacksProps {
 }
 const TechStacks = ({ techStacks }: TechStacksProps) => {
   const groupedByCategory = techStacksCategory(techStacks)
-  const [isLargerThan600] = useMediaQuery(["(min-width: 600px)"])
+  const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
 
   return (
     <Flex
       direction="column"
       gap="3rem">
       <Text
-        fontSize="3xl"
+        fontSize="lg"
         fontFamily="SCDream_Bold">
         기술 스택
       </Text>
@@ -28,7 +27,7 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
         {groupedByCategory.map(([category, stacks]) => (
           <Flex
             key={category}
-            direction={isLargerThan600 ? "row" : "column"}
+            direction={isLargerThan768 ? "row" : "column"}
             gap="2rem">
             <Text
               fontSize="xl"
@@ -41,8 +40,16 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
               flexWrap="wrap">
               {stacks.map((stack) => (
                 <CommonTag
+                  leftElement={
+                    <Image
+                      src={stack.skill.iconImageUrl}
+                      w="2rem"
+                      h="2rem"
+                    />
+                  }
                   label={stack.skill.name}
                   key={stack.skill.id}
+                  fontSize="lg"
                 />
               ))}
             </HStack>

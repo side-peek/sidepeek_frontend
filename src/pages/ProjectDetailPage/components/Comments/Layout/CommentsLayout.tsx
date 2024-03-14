@@ -7,9 +7,11 @@ interface CommentsLayoutProps {
 }
 const CommentsLayout = ({ children }: CommentsLayoutProps) => {
   return (
-    <Stack gap="2rem">
+    <Stack
+      gap="2rem"
+      id="Comment">
       <Text
-        fontSize="3xl"
+        fontSize="2xl"
         fontFamily="SCDream_Bold">
         댓글
       </Text>
