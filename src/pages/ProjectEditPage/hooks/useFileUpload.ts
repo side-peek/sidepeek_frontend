@@ -1,21 +1,35 @@
-import { useEffect, useRef, useState } from "react"
+import { ChangeEvent, useState } from "react"
+
+import { isAxiosError } from "axios"
 
 import { FileUploadStateType } from "../types/FileUploadStateType"
+import { PostFormDataType } from "../types/PostFormDataType"
+import { getTypedFormData } from "../types/TypedFormDataValue"
 import { usePostFileMutation } from "./usePostFileMutation"
 
 const MAX_FILE_UPLOAD = 6
 
+type UseFileUploadDataType = {
+  fileUrl: string
+}
+
+type FileState = FileUploadStateType<UseFileUploadDataType> & {
+  imageFormData: PostFormDataType
+}
+
 export const useFileUpload = () => {
-  const inputRef = useRef<HTMLInputElement>(null)
+  const [files, setFiles] = useState<FileState[]>([])
 
-  const [files, setFiles] = useState<
-    FileUploadStateType<{ fileUrl: string }>[]
-  >([])
+  const { mutateAsync } = usePostFileMutation({
+    onMutate: (imageFormData) => {
+      setFiles((prev) => [
+        ...prev,
+        { isLoading: true, error: null, data: null, imageFormData },
+      ])
+    },
+  })
 
-  const updateFileState = (
-    index: number,
-    update: FileUploadStateType<{ fileUrl: string }>,
-  ) => {
+  const updateFileState = (index: number, update: FileState) => {
     setFiles((prev) => {
       const updatedFiles = [...prev]
       updatedFiles[index] = { ...update }
@@ -23,18 +37,11 @@ export const useFileUpload = () => {
     })
   }
 
-  const { mutateAsync } = usePostFileMutation({
-    onMutate: () => {
-      setFiles((prev) => [
-        ...prev,
-        { isLoading: true, error: null, data: null },
-      ])
-    },
-  })
-
-  const onChangeFile = async (e: Event, fileLength: number) => {
-    if (!(e.target as HTMLInputElement).files) return
-    const selectFiles = (e.target as HTMLInputElement).files as FileList
+  const onChangeFile = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) {
+      return
+    }
+    const selectFiles = e.target.files
     const uploadFiles = Array.from(selectFiles)
 
     if (files.length + uploadFiles.length > MAX_FILE_UPLOAD) {
@@ -42,47 +49,47 @@ export const useFileUpload = () => {
       return
     }
 
-    const promises = Object.values(uploadFiles).map((file, idx) => {
-      const imageFormData = new FormData()
+    const promises = Object.values(uploadFiles).map(async (file, idx) => {
+      const imageFormData: PostFormDataType = getTypedFormData<{
+        file: File
+      }>()
+
       imageFormData.append("file", file)
 
-      const index = fileLength + idx - 1 < 0 ? 0 : fileLength + idx
+      const index = files.length + idx - 1 < 0 ? 0 : files.length + idx
 
-      return mutateAsync(imageFormData)
-        .then((data) => {
-          updateFileState(index, { isLoading: false, error: null, data })
+      try {
+        const { fileUrl } = await mutateAsync(imageFormData)
+        updateFileState(index, {
+          isLoading: false,
+          error: null,
+          data: { fileUrl },
+          imageFormData,
         })
-        .catch((error) => {
+      } catch (error) {
+        if (isAxiosError(error)) {
           updateFileState(index, {
             isLoading: false,
             error,
             data: null,
+            imageFormData,
           })
-        })
+        }
+      }
     })
 
     await Promise.allSettled(promises)
   }
 
-  useEffect(() => {
-    if (!inputRef.current) return
-    const { current } = inputRef
-    const currentlength = files.length
-
-    const handleFileChange = (e: Event) => {
-      onChangeFile(e, currentlength)
-    }
-    inputRef.current.setAttribute("type", "file")
-
-    inputRef.current.addEventListener("change", handleFileChange)
-    return () => {
-      current?.removeEventListener("change", handleFileChange)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [files])
+  const deleteFile = async (idx: number) => {
+    const copy = [...files]
+    copy.splice(idx, 1)
+    setFiles([...copy])
+  }
 
   return {
-    inputRef,
     files,
+    onChangeFile,
+    deleteFile,
   }
 }
