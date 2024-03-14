@@ -28,14 +28,14 @@ const Explanation = ({ projects }: ExplanationProps) => {
         <TabList>
           <Tab borderTopRadius="1rem">
             <Text
-              fontSize="3rem"
+              fontSize="2rem"
               _hover={{ opacity: 0.5 }}>
               기능
             </Text>
           </Tab>
           <Tab borderTopRadius="1rem">
             <Text
-              fontSize="3rem"
+              fontSize="2rem"
               _hover={{ opacity: 0.5 }}>
               트러블 슈팅
             </Text>
