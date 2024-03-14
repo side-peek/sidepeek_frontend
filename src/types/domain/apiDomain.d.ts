@@ -134,10 +134,9 @@ declare module "api-models" {
 
   export type Like = {
     id: number
-    userId: string
     projectId: string
+    userId: string
     createdAt: string
-    updatedAt: string
   }
 
   export type TechStack = {
@@ -263,8 +262,16 @@ declare module "api-models" {
   }
 
   /* 좋아요 */
+  export type getLikePayload = {
+    likes: Like[]
+  }
+
   export type postLikePayload = {
     projectId: number
+  }
+
+  export type deleteLikePayload = {
+    likeId: number
   }
 
   /* 댓글 */

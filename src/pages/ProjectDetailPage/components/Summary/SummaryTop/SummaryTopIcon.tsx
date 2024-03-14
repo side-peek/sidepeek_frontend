@@ -6,7 +6,9 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react"
 
-import { usePostLikeMutation } from "../../../hooks/mutations/usePostLikeMutation"
+import { useDeleteLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteLikeMutation"
+import { usePostLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostLikeMutation"
+
 import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
 
 interface SummaryTopIconProps extends IconButtonProps, ProjectIdProps {
@@ -19,10 +21,11 @@ const SummaryTopIcon = ({
   ...props
 }: SummaryTopIconProps) => {
   const { postLikeMutation } = usePostLikeMutation()
+  const { deleteLikeMutation } = useDeleteLikeMutation()
+
   const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
   const isButton = props["aria-label"].toLowerCase().includes("button")
   const isLike = props["aria-label"].toLowerCase().includes("like")
-  console.log(isLike)
   return (
     <Flex
       gap="0.7rem"
@@ -33,6 +36,7 @@ const SummaryTopIcon = ({
         <IconButton
           onClick={() => {
             postLikeMutation.mutate({ projectId: Number(projectId) })
+            deleteLikeMutation.mutate({ likeId: 12 })
           }}
           {...props}
         />
