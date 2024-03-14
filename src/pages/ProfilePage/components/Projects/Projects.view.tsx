@@ -9,15 +9,14 @@ import {
 
 import { tabsType } from "@pages/ProfilePage/constants/constants"
 import StyledTab from "@pages/ProfilePage/styles/StyledTab"
-import { ProjectsType } from "@pages/ProfilePage/types/types"
 
 import withUserId, { UserIdProps } from "../HOC/withUserId"
 import ProjectsGrid from "./ProjectsGrid"
 
-const ProjectsView = ({ userId }: UserIdProps) => {
+const ProjectsView = ({ userId, isMe }: UserIdProps) => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
 
-  const projectsType: ProjectsType[] = ["JOINED", "LIKED", "COMMENTED"]
+  const projectsType = isMe ? ["JOINED", "LIKED", "COMMENTED"] : ["JOINED"]
 
   return (
     <Box
@@ -35,8 +34,12 @@ const ProjectsView = ({ userId }: UserIdProps) => {
             },
           }}>
           <StyledTab>{tabsType.JOINED}</StyledTab>
-          <StyledTab>{tabsType.LIKED}</StyledTab>
-          <StyledTab>{tabsType.COMMENTED}</StyledTab>
+          {isMe && (
+            <>
+              <StyledTab>{tabsType.LIKED}</StyledTab>
+              <StyledTab>{tabsType.COMMENTED}</StyledTab>
+            </>
+          )}
         </TabList>
         <TabPanels>
           {projectsType.map((type) => (
