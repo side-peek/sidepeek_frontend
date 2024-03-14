@@ -1,6 +1,7 @@
 import { Button, Flex, Input, Text, Textarea } from "@chakra-ui/react"
 
 import ProjectFormProvider from "../stores/ProjectFormProvider"
+import MemberFields from "./MemberFields/MemberFields"
 import ProjectInputBox from "./ProjectInputBox"
 import TechStacksFields from "./TechStacksFields/TechStackFields"
 
@@ -55,8 +56,13 @@ const ProjectForm = () => {
 
         <label htmlFor="techStacks">
           <Text>기술 스택</Text>
+          <TechStacksFields />
         </label>
-        <TechStacksFields />
+
+        <label htmlFor="members">
+          <Text>멤버</Text>
+          <MemberFields />
+        </label>
 
         <Button type="submit">제출</Button>
       </Flex>
