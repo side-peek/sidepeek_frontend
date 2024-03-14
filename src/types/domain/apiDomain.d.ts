@@ -263,7 +263,6 @@ declare module "api-models" {
   }
 
   /* 좋아요 */
-  //FIXME: 미완성 api
   export type postLikePayload = {
     projectId: number
   }
