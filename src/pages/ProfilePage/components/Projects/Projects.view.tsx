@@ -30,7 +30,7 @@ const ProjectsView = ({ userId, isMe }: UserIdProps) => {
           h="6rem"
           sx={{
             "& > *": {
-              _selected: { fontFamily: "SCDream_Bold", color: "#000000" },
+              _selected: { fontFamily: "SCDream_Bold", color: "black.100" },
             },
           }}>
           <StyledTab>{tabsType.JOINED}</StyledTab>
