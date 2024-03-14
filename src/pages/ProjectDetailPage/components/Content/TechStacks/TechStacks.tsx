@@ -1,4 +1,3 @@
-// TODO: 1. 기술스택 이미지 URL 추가
 import { Flex, HStack, Text, useMediaQuery } from "@chakra-ui/react"
 import { TechStack } from "api-models"
 
@@ -11,7 +10,7 @@ interface TechStacksProps {
 }
 const TechStacks = ({ techStacks }: TechStacksProps) => {
   const groupedByCategory = techStacksCategory(techStacks)
-  const [isLargerThan600] = useMediaQuery(["(min-width: 600px)"])
+  const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
 
   return (
     <Flex
@@ -28,7 +27,7 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
         {groupedByCategory.map(([category, stacks]) => (
           <Flex
             key={category}
-            direction={isLargerThan600 ? "row" : "column"}
+            direction={isLargerThan768 ? "row" : "column"}
             gap="2rem">
             <Text
               fontSize="xl"
