@@ -108,6 +108,7 @@ export const useSignUpForm = () => {
         title: message,
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [signUp.error])
 
   return {
