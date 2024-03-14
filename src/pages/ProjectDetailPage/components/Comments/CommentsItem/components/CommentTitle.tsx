@@ -36,7 +36,7 @@ const CommentTitle = ({ comment }: CommentTitleProps) => {
           </Text>
         )}
       </HStack>
-      <HStack gap="1rem">
+      <HStack gap={isLargerThan768 ? "0.5rem" : "0"}>
         {comment.isOwner ? (
           editTargetCommentId === comment.id && isEditing ? (
             <OnEditingButton />
