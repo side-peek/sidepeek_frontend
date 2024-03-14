@@ -188,11 +188,11 @@ declare module "api-models" {
     nickname: string
   }
 
-  export type getUserSummaryPayload = {
+  export type getUserListPayload = {
     keyword: string
   }
 
-  export type getUserSummaryResponseType = {
+  export type getUserListResponseType = {
     users: UserSummary[]
   }
 
