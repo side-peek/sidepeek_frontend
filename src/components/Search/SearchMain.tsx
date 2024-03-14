@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ReactNode, forwardRef } from "react"
 
 import { Box, BoxProps } from "@chakra-ui/react"
 
@@ -9,16 +9,21 @@ interface SearchLayoutProps extends BoxProps {
   children: ReactNode
 }
 
-const SearchMain = ({ children, ...props }: SearchLayoutProps) => {
-  return (
-    <Box
-      borderRadius="0.5rem"
-      backgroundColor="white"
-      {...props}>
-      {children}
-    </Box>
-  )
-}
+const SearchMain = forwardRef(
+  ({ children, ...props }: SearchLayoutProps, ref) => {
+    return (
+      <Box
+        ref={ref}
+        borderRadius="0.5rem"
+        backgroundColor="white"
+        {...props}>
+        {children}
+      </Box>
+    )
+  },
+)
+
+SearchMain.displayName = "SearchMain"
 
 const SearchBox = Object.assign(SearchMain, {
   Input: SearchBar,
