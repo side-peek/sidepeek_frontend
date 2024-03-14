@@ -20,12 +20,12 @@ declare module "api-models" {
 
   export type UserInfoProperties = {
     nickname: string
-    introduction: string
+    introduction: string | null
     profileImageUrl: string
-    job: string
-    career: string
-    githubUrl: string
-    blogUrl: string
+    job: string | null
+    career: string | null
+    githubUrl: string | null
+    blogUrl: string | null
     techStacks: TechStack[]
   }
   export interface UserInfo {
@@ -198,7 +198,7 @@ declare module "api-models" {
 
   export type getUserDetailPayload = { userId: number }
 
-  export type getUserDetailResponseType = UserInfo
+  export type getUserDetailResponseType = UserInfoProperties
 
   export type putUserDetailPayload = {
     userId: number
