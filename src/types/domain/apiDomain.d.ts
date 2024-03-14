@@ -193,7 +193,7 @@ declare module "api-models" {
   }
 
   export type getUserSummaryResponseType = {
-    users: [UserSummary]
+    users: UserSummary[]
   }
 
   export type getUserDetailPayload = { userId: number }
