@@ -1,4 +1,4 @@
-import { Flex, HStack, Text, useMediaQuery } from "@chakra-ui/react"
+import { Flex, HStack, Image, Text, useMediaQuery } from "@chakra-ui/react"
 import { TechStack } from "api-models"
 
 import CommonTag from "@components/Tag/components/CommonTag"
@@ -40,8 +40,16 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
               flexWrap="wrap">
               {stacks.map((stack) => (
                 <CommonTag
+                  leftElement={
+                    <Image
+                      src={stack.skill.iconImageUrl}
+                      w="2rem"
+                      h="2rem"
+                    />
+                  }
                   label={stack.skill.name}
                   key={stack.skill.id}
+                  fontSize="lg"
                 />
               ))}
             </HStack>
