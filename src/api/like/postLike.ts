@@ -1,8 +1,15 @@
+import { postLikePayload } from "api-models"
+import { AxiosRequestConfig } from "axios"
+
 import { ENDPOINTS } from "@constants/endPoints"
 
 import { authInstance } from "../axiosInstance"
 
-//FIXME: 미완성 api
-export const postLike = async () => {
-  await authInstance.post(ENDPOINTS.UPLOAD_LIKE)
+export const postLike = async (
+  { ...data }: postLikePayload,
+  config: AxiosRequestConfig = {},
+) => {
+  await authInstance.post(ENDPOINTS.POST_LIKE, data, {
+    ...config,
+  })
 }
