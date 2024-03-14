@@ -31,6 +31,7 @@ const DoubleCheckButton = ({
         title: successMessage,
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDuplicated])
 
   return (
