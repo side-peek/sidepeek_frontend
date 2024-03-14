@@ -27,7 +27,6 @@ export const useSignUpForm = () => {
       setCheckedEmail(() => "")
       method.setError("email", duplicatedErrors.email)
     },
-    trigger: () => method.trigger("email"),
   })
 
   const nicknameCheck = useDoubleCheckNicknameMutation({
@@ -35,7 +34,6 @@ export const useSignUpForm = () => {
       setCheckedNickname(() => "")
       method.setError("nickname", duplicatedErrors.nickname)
     },
-    trigger: () => method.trigger("nickname"),
   })
 
   const signUp = useSignUpMutation()
@@ -108,8 +106,7 @@ export const useSignUpForm = () => {
         title: message,
       })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [signUp.error])
+  }, [signUp.error, toast])
 
   return {
     method,

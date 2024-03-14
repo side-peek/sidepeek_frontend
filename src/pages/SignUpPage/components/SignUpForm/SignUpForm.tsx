@@ -42,10 +42,7 @@ const SignUpForm = () => {
             registerOptions={emailOptions}>
             {(renderProps) => (
               <Flex alignItems="center">
-                <Input
-                  type="email"
-                  {...renderProps}
-                />
+                <Input {...renderProps} />
                 <DoubleCheckButton
                   isDuplicated={emailCheck.data?.isDuplicated}
                   isLoading={emailCheck.isPending}
@@ -63,10 +60,7 @@ const SignUpForm = () => {
             registerOptions={nicknameOptions}>
             {(renderProps) => (
               <Flex alignItems="center">
-                <Input
-                  type="text"
-                  {...renderProps}
-                />
+                <Input {...renderProps} />
                 <DoubleCheckButton
                   isDuplicated={nicknameCheck.data?.isDuplicated}
                   isLoading={nicknameCheck.isPending}

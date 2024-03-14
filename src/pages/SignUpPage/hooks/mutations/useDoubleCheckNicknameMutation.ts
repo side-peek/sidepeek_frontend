@@ -4,17 +4,12 @@ import { postDoubleCheckNickname } from "@apis/user/postDoubleCheckNickname"
 
 import { DoubleCheckProps } from "@pages/SignUpPage/types/DoubleCheckProps"
 
-const useDoubleCheckNicknameMutation = ({
-  setError,
-  trigger,
-}: DoubleCheckProps) => {
+const useDoubleCheckNicknameMutation = ({ setError }: DoubleCheckProps) => {
   return useMutation({
     mutationFn: (nickname: string) => postDoubleCheckNickname({ nickname }),
     onSuccess: (response) => {
       if (response.isDuplicated) {
         setError()
-      } else {
-        trigger()
       }
     },
   })
