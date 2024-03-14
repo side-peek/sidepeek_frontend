@@ -7,8 +7,9 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react"
 
+import { tabsType } from "@pages/ProfilePage/constants/constants"
 import StyledTab from "@pages/ProfilePage/styles/StyledTab"
-import { TabsType } from "@pages/ProfilePage/types/types"
+import { ProjectsType } from "@pages/ProfilePage/types/types"
 
 import withUserId, { UserIdProps } from "../HOC/withUserId"
 import ProjectsGrid from "./ProjectsGrid"
@@ -16,7 +17,7 @@ import ProjectsGrid from "./ProjectsGrid"
 const ProjectsView = ({ userId }: UserIdProps) => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
 
-  const tabs: TabsType[] = ["JOINED", "LIKED", "COMMENTED"]
+  const projectsType: ProjectsType[] = ["JOINED", "LIKED", "COMMENTED"]
 
   return (
     <Box
@@ -33,16 +34,16 @@ const ProjectsView = ({ userId }: UserIdProps) => {
               _selected: { fontFamily: "SCDream_Bold", color: "#000000" },
             },
           }}>
-          <StyledTab>내 프로젝트</StyledTab>
-          <StyledTab>좋아요한 프로젝트</StyledTab>
-          <StyledTab>댓글단 프로젝트</StyledTab>
+          <StyledTab>{tabsType.JOINED}</StyledTab>
+          <StyledTab>{tabsType.LIKED}</StyledTab>
+          <StyledTab>{tabsType.COMMENTED}</StyledTab>
         </TabList>
         <TabPanels>
-          {tabs.map((tab) => (
-            <TabPanel key={tab}>
+          {projectsType.map((type) => (
+            <TabPanel key={type}>
               <ProjectsGrid
                 userId={userId}
-                tab={tab}
+                type={type}
               />
             </TabPanel>
           ))}

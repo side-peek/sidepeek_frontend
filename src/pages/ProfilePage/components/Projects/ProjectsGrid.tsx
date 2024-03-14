@@ -19,13 +19,13 @@ interface ProjectProperties {
 
 interface ProjectsGridProps {
   userId: string
-  tab: string
+  type: string
 }
-const ProjectsGrid = ({ userId, tab }: ProjectsGridProps) => {
+const ProjectsGrid = ({ userId, type }: ProjectsGridProps) => {
   const [page, setPage] = useState(0)
   const { data } = useUserProjects({
     userId: Number(userId),
-    type: tab,
+    type: type,
     page: page - 1,
     size: 12,
   })

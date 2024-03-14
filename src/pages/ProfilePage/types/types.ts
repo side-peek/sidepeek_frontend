@@ -3,4 +3,4 @@ export interface ProfileActionsButtonsProps {
   handleEditProfile: React.MouseEventHandler<HTMLButtonElement>
 }
 
-export type TabsType = "JOINED" | "LIKED" | "COMMENTED"
+export type ProjectsType = "JOINED" | "LIKED" | "COMMENTED"
