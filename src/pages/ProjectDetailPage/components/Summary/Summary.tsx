@@ -17,6 +17,7 @@ const Summary = ({ projectDetailInfo }: getProjectDetailResponseType) => {
     commentCount,
     overview,
   } = projectDetailInfo
+
   return (
     <Box bg="whiteSmoke">
       <Flex
@@ -32,7 +33,6 @@ const Summary = ({ projectDetailInfo }: getProjectDetailResponseType) => {
               commentCount,
             }}
           />
-
           <Center
             flexDirection="column"
             gap="5rem">
@@ -56,5 +56,4 @@ const Summary = ({ projectDetailInfo }: getProjectDetailResponseType) => {
     </Box>
   )
 }
-
 export default Summary
