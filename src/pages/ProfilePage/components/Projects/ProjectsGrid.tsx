@@ -22,7 +22,7 @@ interface ProjectsGridProps {
   type: string
 }
 const ProjectsGrid = ({ userId, type }: ProjectsGridProps) => {
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(1)
   const { data } = useUserProjects({
     userId: Number(userId),
     type: type,
