@@ -12,7 +12,6 @@ interface PaginationProps {
 
 const Pagination = ({ totalProjectsCount, setPage }: PaginationProps) => {
   const handlePageChange = (page: number) => {
-    // console.log(`${page}렌더`)
     setPage(page)
   }
   return (
