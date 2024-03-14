@@ -6,6 +6,7 @@ const ViewStyleParams = {
   padding: "2rem",
   lineHeight: "1.5",
   fontFamily: "SCDream_Regular",
+  fontSize: "1rem",
 }
 
 interface ExplanationItemProps {

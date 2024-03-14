@@ -7,6 +7,10 @@ import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext
 
 const OnEditingButton = () => {
   const { handleOffEdit, handleSubmit, onSubmitEdit } = useCommentContext()
+  if (!handleSubmit) {
+    return
+  }
+
   return (
     <>
       <IconButton
