@@ -95,7 +95,6 @@ const ChangeProfileImageModal = ({
   const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault()
     event.stopPropagation()
-
     setIsDragging(false)
   }
 
@@ -166,12 +165,16 @@ const ChangeProfileImageModal = ({
                   style={{
                     clipPath: "circle(16rem at center)",
                   }}>
-                  <Image
-                    src={fileBase64}
-                    objectFit="cover"
+                  <Box
                     w="100%"
-                    h="100%"
-                  />
+                    h="40rem">
+                    <Image
+                      src={fileBase64}
+                      objectFit="cover"
+                      w="100%"
+                      h="100%"
+                    />
+                  </Box>
                 </Box>
               </>
             ) : (
