@@ -27,9 +27,7 @@ const ProfileTechStack = ({ setProfileInfo }: ProfileTechStackProps) => {
   } = useExample()
 
   return (
-    <Box
-      w="100%"
-      pb="2rem">
+    <Box w="100%">
       <Text
         fontSize="xl"
         fontFamily="SCDream_Bold"
@@ -38,8 +36,12 @@ const ProfileTechStack = ({ setProfileInfo }: ProfileTechStackProps) => {
       </Text>
       {fields.map((field, index) => {
         return (
-          <Flex key={field.id}>
-            <Box>
+          <Flex
+            key={field.id}
+            mb="3rem">
+            <Box
+              flex="0 0 25rem"
+              pr="2rem">
               <Controller
                 name={`techStacks.${index}.category`}
                 control={control}
@@ -47,6 +49,7 @@ const ProfileTechStack = ({ setProfileInfo }: ProfileTechStackProps) => {
                 render={({ field }) => (
                   <Input
                     {...field}
+                    placeholder="직군을 입력해주세요"
                     onChange={(e) => {
                       const newCategory = e.target.value
                       setCategory(index, newCategory)
@@ -56,12 +59,19 @@ const ProfileTechStack = ({ setProfileInfo }: ProfileTechStackProps) => {
                 )}
               />
             </Box>
-            <StackSearchBox
-              render={({ techStacks }) => {
-                return (
-                  <Box>
-                    {filterSelectedStack(techStacks, selectedStacks(index)).map(
-                      (techStack) => {
+            <Box
+              flex="0 0 30rem"
+              borderLeft="1px solid"
+              borderColor="grey.200"
+              px="2rem">
+              <StackSearchBox
+                render={({ techStacks }) => {
+                  return (
+                    <Box>
+                      {filterSelectedStack(
+                        techStacks,
+                        selectedStacks(index),
+                      ).map((techStack) => {
                         return (
                           <Box
                             cursor="pointer"
@@ -86,13 +96,19 @@ const ProfileTechStack = ({ setProfileInfo }: ProfileTechStackProps) => {
                             {techStack.name}
                           </Box>
                         )
-                      },
-                    )}
-                  </Box>
-                )
-              }}
-            />
-            <Box flexWrap="nowrap">
+                      })}
+                    </Box>
+                  )
+                }}
+              />
+            </Box>
+
+            <Box
+              flexWrap="nowrap"
+              flex="1 1 auto"
+              borderLeft="1px solid"
+              borderColor="grey.200"
+              pl="2rem">
               {selectedStacks(index).map((stack) => (
                 <CloseButtonTag
                   key={stack.name}
@@ -104,7 +120,14 @@ const ProfileTechStack = ({ setProfileInfo }: ProfileTechStackProps) => {
           </Flex>
         )
       })}
-      <Button onClick={appendNewFields}>기술스택 추가</Button>
+      <Button
+        w="100%"
+        h="3rem"
+        border="1px solid"
+        borderColor="grey.300"
+        onClick={appendNewFields}>
+        + 기술스택 추가
+      </Button>
     </Box>
   )
 }
