@@ -1,8 +1,8 @@
 import { Box, Center, Divider, Flex } from "@chakra-ui/react"
 
+import BackButton from "@components/BackButton/BackButton"
 import LogoLink from "@components/LogoLink/LogoLink"
 
-import BackButton from "./components/BackButton"
 import CreateAccount from "./components/CreateAccount"
 import LoginForm from "./components/LoginForm/LoginForm"
 import SocialLogin from "./components/SocialLogin"
@@ -12,10 +12,9 @@ const LoginPage = () => {
     <Center height="100vh">
       <Box
         aria-label="login container"
-        position="relative"
         width="50rem">
-        <BackButton />
-        <Center>
+        <Center position="relative">
+          <BackButton />
           <LogoLink logoHeight="6rem" />
         </Center>
         <Flex

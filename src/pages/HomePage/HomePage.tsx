@@ -29,6 +29,7 @@ const HomePage = () => {
 
   // 프로젝트 전체 목록 조회
   const { allProjectList, isAllProjectLoading } = useAllProjectQuery()
+  console.log(allProjectList)
 
   const projectList = allProjectList?.projects.filter((project) =>
     isDeploy ? project.isDeploy : project,

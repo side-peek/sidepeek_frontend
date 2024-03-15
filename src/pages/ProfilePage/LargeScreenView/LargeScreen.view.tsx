@@ -8,10 +8,10 @@ import { ProfileActionsButtonsProps } from "../types/types"
 export interface ProfileBarProps extends ProfileActionsButtonsProps {
   nickname: string
   profileImageUrl: string
-  career: string
-  introduction: string
-  githubUrl: string
-  blogUrl: string
+  career: string | null
+  introduction: string | null
+  githubUrl: string | null
+  blogUrl: string | null
   techStacks: TechStack[]
 }
 

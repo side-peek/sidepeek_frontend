@@ -19,7 +19,7 @@ const PaginationProvider = ({
   onPageChange,
   children,
 }: PaginationProviderProps) => {
-  const [currentPage, setCurrentPage] = useState(12)
+  const [currentPage, setCurrentPage] = useState(1)
   const totalPages = Math.ceil(total / limit)
 
   const handleSelectPage = (page: number) => {

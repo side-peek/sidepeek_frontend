@@ -1,6 +1,9 @@
-import axios, { isAxiosError } from "axios"
+import axios from "axios"
 
 import authToken from "@stores/authToken"
+
+import { isAuthError } from "@utils/isAuthError"
+import { isAxios401Error } from "@utils/isAxios401Error"
 
 import { LogoutError, PermissionError } from "@constants/customError"
 
@@ -23,11 +26,7 @@ authInstance.interceptors.request.use(
     config.headers.Authorization = `Bearer ${accessToken}`
 
     if (!refreshToken) {
-      const permission = new PermissionError()
-
-      if (import.meta.env.DEV) console.error(permission)
-
-      throw permission
+      return Promise.reject(new PermissionError())
     }
 
     if (!accessToken) {
@@ -37,18 +36,11 @@ authInstance.interceptors.request.use(
         authToken.setRefreshToken(data.refreshToken)
         config.headers.Authorization = `Bearer ${data.accessToken}`
       } catch (refreshError) {
-        if (
-          isAxiosError(refreshError) &&
-          refreshError.response?.status === 401
-        ) {
-          const logout = new LogoutError()
-
-          if (import.meta.env.DEV) console.error(logout)
-
-          throw logout
+        if (isAxios401Error(refreshError)) {
+          return Promise.reject(new LogoutError())
         }
 
-        throw refreshError
+        return Promise.reject(refreshError)
       }
     }
 
@@ -63,7 +55,18 @@ authInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config
-    if (isAxiosError(error) && error.response?.status === 401) {
+
+    if (isAuthError(error)) {
+      return Promise.reject(error)
+    }
+
+    if (isAxios401Error(error)) {
+      if (originalRequest && !originalRequest?._retry) {
+        originalRequest._retry = true
+      } else {
+        return Promise.reject(new PermissionError())
+      }
+
       const refreshToken = authToken.getRefreshToken()
 
       try {
@@ -73,29 +76,17 @@ authInstance.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${data.accessToken}`
 
         // 재발급된 엑세스 토큰으로 재요청
-        return baseInstance(originalRequest)
+        return authInstance(originalRequest)
       } catch (refreshError) {
         /*FIXME:
         1. 🟨 로그아웃 api 요청
         2. 🟨 react-query의 유저 정보 캐싱 초기화
         3. ✅ accessToken, refreshToken 초기화 */
-        if (
-          isAxiosError(refreshError) &&
-          refreshError.response?.status === 401
-        ) {
-          authToken.removeAccessToken()
-          authToken.removeRefreshToken()
-
-          if (import.meta.env.DEV) {
-            console.error("로그아웃 처리됩니다.")
-          }
-
-          const logout = new LogoutError()
-
-          throw logout
+        if (isAxios401Error(refreshError)) {
+          return Promise.reject(new LogoutError())
         }
 
-        throw refreshError
+        return Promise.reject(refreshError)
       }
     }
     return Promise.reject(error)

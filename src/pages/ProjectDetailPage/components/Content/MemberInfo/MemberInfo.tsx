@@ -16,11 +16,13 @@ const MemberInfo = ({ members }: MemberInfoProps) => {
       direction="column"
       gap="2rem">
       <Text
-        fontSize="3xl"
+        fontSize="2xl"
         fontFamily="SCDream_Bold">
         팀원
       </Text>
-      <Flex gap="1rem">
+      <Flex
+        gap="1rem"
+        flexWrap="wrap">
         {groupedByCategory.map(([category, members]) => (
           <MemberList
             key={category}

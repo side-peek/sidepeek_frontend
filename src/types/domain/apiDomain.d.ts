@@ -20,12 +20,12 @@ declare module "api-models" {
 
   export type UserInfoProperties = {
     nickname: string
-    introduction: string
+    introduction: string | null
     profileImageUrl: string
-    job: string
-    career: string
-    githubUrl: string
-    blogUrl: string
+    job: string | null
+    career: string | null
+    githubUrl: string | null
+    blogUrl: string | null
     techStacks: TechStack[]
   }
   export interface UserInfo {
@@ -33,7 +33,8 @@ declare module "api-models" {
   }
 
   export type UserSummary = {
-    id: number
+    id: number | null
+    isSocialLogin: boolean | null
     nickname: string
     profileImageUrl: string | null
   }
@@ -78,9 +79,8 @@ declare module "api-models" {
 
   export type Member = {
     id: number
-    nickname: string
-    profileImageUrl: string
-    category: string
+    role: string
+    userSummary: UserSummary
   }
 
   export type ProjectTag = {
@@ -123,8 +123,8 @@ declare module "api-models" {
 
   export type Comment = {
     id: number
-    parentId?: number
-    user: CommentUser
+    user: userSummary | null
+    parentId: number | null
     isOwner: boolean
     isAnonymous: boolean
     content: string
@@ -134,10 +134,9 @@ declare module "api-models" {
 
   export type Like = {
     id: number
-    userId: string
     projectId: string
+    userId: string
     createdAt: string
-    updatedAt: string
   }
 
   export type TechStack = {
@@ -155,12 +154,6 @@ declare module "api-models" {
   export type Tag = {
     id: number
     name: string
-  }
-
-  export type CommentUser = {
-    id: number
-    nickname: string
-    profileImageUrl: string
   }
 
   /* 인증 관련 */
@@ -204,7 +197,7 @@ declare module "api-models" {
 
   export type getUserDetailPayload = { userId: number }
 
-  export type getUserDetailResponseType = UserInfo
+  export type getUserDetailResponseType = UserInfoProperties
 
   export type putUserDetailPayload = {
     userId: number
@@ -219,8 +212,21 @@ declare module "api-models" {
     email: string
   }
 
+  export type postDoubleCheckEmailResponseType = {
+    isDuplicated: boolean
+  }
+
   export type postDoubleCheckNicknamePayload = {
     nickname: string
+  }
+
+  export type getUserProjectsPayload = {
+    userId: number
+    type: string
+  }
+
+  export type postDoubleCheckNicknameResponseType = {
+    isDuplicated: boolean
   }
 
   /* 기술 스택 */
@@ -269,30 +275,35 @@ declare module "api-models" {
   }
 
   /* 좋아요 */
-  //FIXME: 미완성 api
+  export type getLikePayload = {
+    likes: Like[]
+  }
+
   export type postLikePayload = {
     projectId: number
+  }
+
+  export type deleteLikePayload = {
+    likeId: number
   }
 
   /* 댓글 */
 
   export type postCommentPayload = {
-    projectId?: number
     ownerId: number
+    projectId: number | null
+    parentId: number | null
     isAnonymous: boolean
     content: string
-  }
-
-  export type deleteCommentPayload = {
-    projectId: number
-    id: number
   }
 
   export type editCommentPayload = {
-    projectId?: number
-    id?: number
-    ownerId: number
     isAnonymous: boolean
     content: string
+    commentId: number
+  }
+
+  export type deleteCommentPayload = {
+    commentId: number
   }
 }
