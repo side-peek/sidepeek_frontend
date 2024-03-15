@@ -11,25 +11,29 @@ import {
 import ChangePWModal from "./components/Modal/ChangePWModal"
 import ProfileCard from "./components/Profile/ProfileCard"
 import ProfileIntroduction from "./components/Profile/ProfileIntroduction"
-// import ProfileTechStack from "./components/ProfileTechStack"
+import ProfileTechStack from "./components/Profile/ProfileTechStack"
 import StyledButton from "./styles/StyledButton"
+import { ProfileInfo } from "./types/types"
 
 const ProfileEditPage = () => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [profileInfo, setProfileInfo] = useState({
+  const [profileInfo, setProfileInfo] = useState<ProfileInfo>({
     profileImageUrl: "",
     nickname: "개발자",
     career: "0년차",
     introduction: "",
+    job: "",
     githubUrl: "",
     blogUrl: "",
+    techStacks: [],
   })
 
-  const handleSubmit = () => {
+  const handleUpdateProfile = () => {
     // TODO: 프로필 정보를 저장하는 api 요청
     console.log(profileInfo)
   }
+
   return (
     <VStack
       w="80%"
@@ -50,8 +54,7 @@ const ProfileEditPage = () => {
           blogUrl={profileInfo.blogUrl}
           setProfileInfo={setProfileInfo}
         />
-        {/* TODO: 기술스택 컴포넌트 완성되면 추가 예정임 */}
-        {/* <ProfileTechStack /> */}
+        <ProfileTechStack setProfileInfo={setProfileInfo} />
       </VStack>
 
       <Flex
@@ -59,7 +62,7 @@ const ProfileEditPage = () => {
         gap="0.5rem"
         justifyContent={isLargerThan500 ? "flex-end" : "center"}>
         <StyledButton onClick={onOpen}>비밀번호 변경</StyledButton>
-        <StyledButton onClick={handleSubmit}>변경내용 저장</StyledButton>
+        <StyledButton onClick={handleUpdateProfile}>변경내용 저장</StyledButton>
         <ChangePWModal
           isOpen={isOpen}
           onClose={onClose}
