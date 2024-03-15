@@ -1,7 +1,6 @@
 import { useRef, useState } from "react"
 import { GoPlus } from "react-icons/go"
 
-import { postFile } from "@api/file/postFile"
 import {
   Box,
   Button,
@@ -20,6 +19,8 @@ import {
 } from "@chakra-ui/react"
 
 import { useMutation } from "@tanstack/react-query"
+
+import { postFile } from "@apis/file/postFile"
 
 import useFileUpload from "@pages/ProfileEditPage/hooks/useFileUpload"
 import { ProfileInfo } from "@pages/ProfileEditPage/types/types"
