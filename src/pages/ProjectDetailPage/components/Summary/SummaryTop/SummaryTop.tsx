@@ -7,7 +7,7 @@ import { Link } from "react-scroll"
 
 import { Flex, useMediaQuery } from "@chakra-ui/react"
 
-// import { useDeleteLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteLikeMutation"
+import { useDeleteLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteLikeMutation"
 import { usePostLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostLikeMutation"
 
 import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
@@ -18,24 +18,18 @@ interface SummaryTopProps extends ProjectIdProps {
   viewCount: number
   commentCount: number
   likeId: number | null
-  ownerId: number
 }
 const SummaryTop = ({
   likeCount,
   viewCount,
   commentCount,
   likeId,
-  ownerId,
   projectId,
 }: SummaryTopProps) => {
-  /*
-    TODO: 1. 좋아요 요청
-          2. 클립보드 클릭시 완료 모달/토스트 띄우기
-  */
-
   const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
   const location = useLocation()
   const { VITE_BASE_URL } = import.meta.env
+
   const handleCopyClipBoard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text)
@@ -45,7 +39,7 @@ const SummaryTop = ({
   }
 
   const { postLikeMutation } = usePostLikeMutation()
-  // const { deleteLikeMutation } = useDeleteLikeMutation()
+  const { deleteLikeMutation } = useDeleteLikeMutation()
   return (
     <Flex
       gap={isLargerThan1200 ? "1.5rem" : "1rem"}
@@ -60,17 +54,15 @@ const SummaryTop = ({
 
       <SummaryTopIcon
         count={likeCount}
-        ownerId={ownerId}
-        icon={likeId ? <IoMdHeart /> : <IoMdHeartEmpty />}
+        likeId={likeId}
         aria-label="likeButton"
+        icon={likeId ? <IoMdHeart /> : <IoMdHeartEmpty />}
         fontSize={isLargerThan1200 ? "2.7rem" : "2rem"}
-        onClick={(isOwner: boolean) => {
-          if (isOwner) {
-            postLikeMutation.mutate({ projectId: Number(projectId) })
-            // deleteLikeMutation.mutate({ likeId })
+        onClick={(likeId: number | null) => {
+          if (likeId) {
+            deleteLikeMutation.mutate({ likeId })
           } else {
-            console.log("권한 없음")
-            // toast로 권한이 없다고 띄우기
+            postLikeMutation.mutate({ projectId: Number(projectId) })
           }
         }}
       />

@@ -5,29 +5,29 @@ import {
   Text,
   useMediaQuery,
 } from "@chakra-ui/react"
-import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 interface SummaryTopIconProps extends Omit<IconButtonProps, "onClick"> {
   count?: number
-  ownerId?: number
-  onClick?: (isOwner: boolean) => void
+  likeId?: number | null
+  onClick?: (likeId: number | null) => void
 }
 
 const SummaryTopIcon = ({
   count,
   onClick,
-  ownerId,
+  likeId,
   ...props
 }: SummaryTopIconProps) => {
   const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
   const isButton = props["aria-label"].toLowerCase().includes("button")
   const isLike = props["aria-label"].toLowerCase().includes("like")
-  const userId = useUserInfoData()
-  const isOwner = ownerId === userId
 
   const handleClick = () => {
     if (isButton && onClick) {
-      onClick(isOwner)
+      if (likeId === undefined) {
+        return
+      }
+      onClick(likeId)
     }
   }
 

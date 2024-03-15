@@ -13,6 +13,15 @@ export const usePostLikeMutation = () => {
   const postLikeMutation = useMutation({
     mutationKey: [QUERY_KEY_POST_LIKE],
     mutationFn: (data: postLikePayload) => postLike(data),
+    onMutate: async () => {
+      await queryClient.cancelQueries({
+        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
+      })
+      const previousLikeState = queryClient.getQueriesData({
+        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
+      })
+      console.log(previousLikeState)
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
