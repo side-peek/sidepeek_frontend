@@ -7,26 +7,36 @@ import {
   useDisclosure,
   useMediaQuery,
 } from "@chakra-ui/react"
+import { useUserInfoData } from "@services/caches/useUserInfoData"
+import { UserInfoProperties } from "api-models"
 
 import ChangePWModal from "./components/Modal/ChangePWModal"
 import ProfileCard from "./components/Profile/ProfileCard"
 import ProfileIntroduction from "./components/Profile/ProfileIntroduction"
 import ProfileTechStack from "./components/Profile/ProfileTechStack"
+import { useUserInfo } from "./hooks/query/useUserInfo"
 import StyledButton from "./styles/StyledButton"
 import { ProfileInfo } from "./types/types"
 
 const ProfileEditPage = () => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const data = useUserInfoData()
+  const userId = data?.id
+  const { data: userInfoDetail } = useUserInfo(Number(userId))
+
+  const userDetail = userInfoDetail as UserInfoProperties
+
   const [profileInfo, setProfileInfo] = useState<ProfileInfo>({
-    profileImageUrl: "",
-    nickname: "개발자",
-    career: "0년차",
-    introduction: "",
-    job: "",
-    githubUrl: "",
-    blogUrl: "",
-    techStacks: [],
+    profileImageUrl: userDetail.profileImageUrl,
+    nickname: userDetail.nickname,
+    career: userDetail.career,
+    introduction: userDetail.introduction,
+    job: userDetail.job,
+    githubUrl: userDetail.githubUrl,
+    blogUrl: userDetail.blogUrl,
+    techStacks: userDetail.techStacks,
   })
 
   const handleUpdateProfile = () => {
@@ -46,6 +56,7 @@ const ProfileEditPage = () => {
           profileImageUrl={profileInfo.profileImageUrl}
           nickname={profileInfo.nickname}
           career={profileInfo.career}
+          job={profileInfo.job}
           setProfileInfo={setProfileInfo}
         />
         <ProfileIntroduction
