@@ -4,6 +4,7 @@ import {
   Avatar,
   Button,
   Flex,
+  Input,
   Menu,
   MenuButton,
   MenuItem,
@@ -11,6 +12,7 @@ import {
   Stack,
   Text,
   useDisclosure,
+  useMediaQuery,
 } from "@chakra-ui/react"
 
 import { CareerType, ProfileInfo } from "../../types/types"
@@ -21,6 +23,7 @@ interface ProfileCardProps {
   profileImageUrl: string
   nickname: string
   career: string
+  job: string
   setProfileInfo: React.Dispatch<React.SetStateAction<ProfileInfo>>
 }
 
@@ -28,8 +31,10 @@ const ProfileCard = ({
   profileImageUrl,
   nickname,
   career,
+  job,
   setProfileInfo,
 }: ProfileCardProps) => {
+  const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
   const {
     isOpen: isNicknameModalOpen,
     onOpen: onNicknameModalOpen,
@@ -55,20 +60,18 @@ const ProfileCard = ({
       bg="default"
       ml="2rem"
       alignItems="center">
-      <form>
-        <Avatar
-          w="12rem"
-          h="12rem"
-          cursor="pointer"
-          onClick={onProfileImageModalOpen}
-          src={profileImageUrl}></Avatar>
+      <Avatar
+        w="12rem"
+        h="12rem"
+        cursor="pointer"
+        onClick={onProfileImageModalOpen}
+        src={profileImageUrl}></Avatar>
 
-        <ChangeProfileImageModal
-          isOpen={isProfileImageModalOpen}
-          onClose={onProfileImageModalClose}
-          setProfileInfo={setProfileInfo}
-        />
-      </form>
+      <ChangeProfileImageModal
+        isOpen={isProfileImageModalOpen}
+        onClose={onProfileImageModalClose}
+        setProfileInfo={setProfileInfo}
+      />
 
       <Stack ml="1.5rem">
         <Text
@@ -83,28 +86,45 @@ const ProfileCard = ({
           onClose={onNicknameModalClose}
           setProfileInfo={setProfileInfo}
         />
-        <Menu>
-          <MenuButton
-            as={Button}
-            rightIcon={<AiFillCaretDown />}
-            w="12rem">
-            {career} 개발자
-          </MenuButton>
-          <MenuList>
-            {careers.map((career) => (
-              <MenuItem
-                key={career}
-                onClick={() =>
-                  setProfileInfo((profileInfo) => ({
-                    ...profileInfo,
-                    career: career,
-                  }))
-                }>
-                {career} 개발자
-              </MenuItem>
-            ))}
-          </MenuList>
-        </Menu>
+        <Flex direction={isLargerThan500 ? "row" : "column"}>
+          <Menu>
+            <MenuButton
+              as={Button}
+              rightIcon={<AiFillCaretDown />}
+              w="9rem">
+              {career}
+            </MenuButton>
+            <MenuList>
+              {careers.map((career) => (
+                <MenuItem
+                  key={career}
+                  onClick={() =>
+                    setProfileInfo((profileInfo) => ({
+                      ...profileInfo,
+                      career: career,
+                    }))
+                  }>
+                  {career}
+                </MenuItem>
+              ))}
+            </MenuList>
+          </Menu>
+          <Input
+            pl="0.5rem"
+            variant="flushed"
+            height="2.5rem"
+            value={job}
+            placeholder="직업을 입력해주세요"
+            ml="0.5rem"
+            w="12rem"
+            onChange={(e) =>
+              setProfileInfo((profileInfo) => ({
+                ...profileInfo,
+                job: e.target.value,
+              }))
+            }
+          />
+        </Flex>
       </Stack>
     </Flex>
   )
