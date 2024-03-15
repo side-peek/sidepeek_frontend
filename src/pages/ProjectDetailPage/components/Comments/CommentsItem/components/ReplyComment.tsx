@@ -14,7 +14,7 @@ const ReplyComment = ({ comment, register }: ReplyCommentProps) => {
   return comment.map((reply) => {
     return (
       <Flex
-        pl="3rem"
+        pl="1.3rem"
         gap="2rem"
         w="100%"
         key={reply.id}>
