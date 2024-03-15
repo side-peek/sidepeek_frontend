@@ -11,7 +11,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@chakra-ui/react"
-import { AllProject } from "api-models"
+import { BannerProject } from "api-models"
 import "swiper/css"
 import "swiper/css"
 import "swiper/css/navigation"
@@ -24,7 +24,7 @@ import sidepeekBlue from "@assets/images/sidepeek_blue.png"
 import { CustomSwiper } from "./Banner.style"
 
 interface bannerListProps {
-  bannerList: AllProject[] | undefined
+  bannerList: BannerProject[] | undefined
 }
 
 const Banner = ({ bannerList }: bannerListProps) => {

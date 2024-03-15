@@ -5,7 +5,7 @@ import { ENDPOINTS } from "@constants/endPoints"
 import { baseInstance } from "../axiosInstance"
 
 interface getAllProjectsQueryString {
-  sort: string
+  sort: "createdAt" | "like" | "view"
   isReleased: boolean
   pageSize: number
   lastProjectId: number | null
@@ -19,8 +19,8 @@ export const getAllProjects = async ({
   sort,
   isReleased,
   pageSize,
-  lastProjectId,
-  lastProjectNum,
+  lastProjectId = null,
+  lastProjectNum = null,
 }: getAllProjectsQueryString) => {
   const { data } = await baseInstance.get<getAllProjectsResponseType>(
     ENDPOINTS.GET_ALL_PROJECTS,

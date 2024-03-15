@@ -2,13 +2,13 @@ import { Button, Center } from "@chakra-ui/react"
 
 interface MoreButton {
   loadMore: () => void
-  isMore: boolean
+  hasNext: boolean
 }
 
-const MoreButton = ({ loadMore, isMore }: MoreButton) => {
+const MoreButton = ({ loadMore, hasNext }: MoreButton) => {
   return (
     <>
-      {isMore && (
+      {hasNext && (
         <Center marginTop="2rem">
           <Button
             width="8rem"

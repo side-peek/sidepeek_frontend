@@ -3,4 +3,6 @@ export const QUERYKEY = {
   NICKNAME_DOUBLE_CHECK: "nicknameDoubleCheck",
   USER_INFO: "userInfo",
   TECH_STACKS: "techStacks",
+  ALL_PROJECTS: "allProjects",
+  BANNER_PROJECTS: "bannerProjects",
 }

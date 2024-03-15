@@ -1,6 +1,9 @@
 import { searchHandlers } from "@components/Search/mocks"
 
-import allProjectHandlers from "@pages/HomePage/mocks"
+import {
+  allProjectHandlers,
+  bannerProjectHandlers,
+} from "@pages/HomePage/mocks"
 import { projectsHandlers, userInfoHandlers } from "@pages/ProfilePage/mocks"
 import { projectDetailHandlers } from "@pages/ProjectDetailPage/mocks"
 
@@ -17,4 +20,5 @@ export const handlers = [
   postEmailAuth,
   ...userInfoHandlers,
   ...projectsHandlers,
+  ...bannerProjectHandlers,
 ]

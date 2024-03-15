@@ -2,11 +2,11 @@ import { useInfiniteQuery } from "@tanstack/react-query"
 
 import { getAllProjects } from "@/api/project/getAllProjects"
 
-const QUERY_KEYS = "projects"
+import { QUERYKEY } from "@constants/queryKey"
 
-const useAllProjectQuery = (
-  sort: string,
-  isReleased: boolean,
+export const useAllProjectQuery = (
+  sortOption: "createdAt" | "like" | "view",
+  isDeploy: boolean,
   pageSize: number,
   lastProjectId: number | null,
   lastProjectNum: number | null,
@@ -21,17 +21,17 @@ const useAllProjectQuery = (
     isRefetching,
   } = useInfiniteQuery({
     queryKey: [
-      QUERY_KEYS,
-      sort,
-      isReleased,
+      QUERYKEY.ALL_PROJECTS,
+      sortOption,
+      isDeploy,
       pageSize,
       lastProjectId,
       lastProjectNum,
     ],
     queryFn: () =>
       getAllProjects({
-        sort,
-        isReleased,
+        sort: sortOption,
+        isReleased: isDeploy,
         pageSize,
         lastProjectId,
         lastProjectNum,
@@ -54,5 +54,3 @@ const useAllProjectQuery = (
     isRefetching,
   }
 }
-
-export default useAllProjectQuery

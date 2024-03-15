@@ -23,6 +23,7 @@ export const ENDPOINTS = {
   GET_PROJECT_DETAILS: (projectId: number) =>
     `${VARIABLE_URL}/projects/${projectId}`,
   GET_ALL_PROJECTS: `${VARIABLE_URL}/projects`,
+  GET_BANNER_PROJECTS: `${VARIABLE_URL}/projects/weekly`,
   UPLOAD_LIKE: `${VARIABLE_URL}/likes`,
   POST_COMMENT: (projectId: number) =>
     `${VARIABLE_URL}/projects/${projectId}/comments`,

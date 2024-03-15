@@ -70,6 +70,13 @@ declare module "api-models" {
     isLiked: boolean
   }
 
+  export type BannerProject = {
+    id: number
+    name: string
+    subName: string
+    thumbnailUrl: string
+  }
+
   export type Description = {
     content: string
     imageUrls: string[]

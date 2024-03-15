@@ -361,3 +361,38 @@ export const mockDataSortView = {
     },
   ],
 }
+
+export const mockBanner = {
+  data: [
+    {
+      id: 1,
+      name: "사이드픽👀",
+      subName: "요즘 사이드 플젝 뭐함? 사이드픽 👀",
+      thumbnailUrl: "https://picsum.photos/200",
+    },
+    {
+      id: 2,
+      name: "냠냠디저트",
+      subName: "냠냠디저트 맛집 공유 플랫폼",
+      thumbnailUrl: "https://picsum.photos/200",
+    },
+    {
+      id: 3,
+      name: "사이드픽👀",
+      subName: "요즘 사이드 플젝 뭐함? 사이드픽 👀",
+      thumbnailUrl: "https://picsum.photos/200",
+    },
+    {
+      id: 4,
+      name: "냠냠디저트",
+      subName: "냠냠디저트 맛집 공유 플랫폼",
+      thumbnailUrl: "https://picsum.photos/200",
+    },
+    {
+      id: 5,
+      name: "사이드픽👀",
+      subName: "요즘 사이드 플젝 뭐함? 사이드픽 👀",
+      thumbnailUrl: "https://picsum.photos/200",
+    },
+  ],
+}
