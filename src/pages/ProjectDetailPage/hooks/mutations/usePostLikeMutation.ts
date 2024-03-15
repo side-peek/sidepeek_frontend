@@ -47,7 +47,6 @@ export const usePostLikeMutation = () => {
     },
     // 요청이 성공하든, 에러가 발생되든 실행하고 싶은 경우
     onSettled: (_, __, projectId) => {
-      console.log(projectId)
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
       })
