@@ -1,7 +1,8 @@
-import { deleteLike } from "@api/like/deleteLike"
 import { deleteLikePayload } from "api-models"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+
+import { deleteLike } from "@apis/like/deleteLike"
 
 import { QUERY_KEY_GET_PROJECT_DETAIL } from "../queries/useProjectDetailQuery"
 

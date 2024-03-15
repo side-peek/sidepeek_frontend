@@ -1,7 +1,8 @@
-import { postLike } from "@api/like/postLike"
 import { postLikePayload } from "api-models"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+
+import { postLike } from "@apis/like/postLike"
 
 import { QUERY_KEY_GET_PROJECT_DETAIL } from "../queries/useProjectDetailQuery"
 
