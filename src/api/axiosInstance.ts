@@ -40,7 +40,7 @@ authInstance.interceptors.request.use(
           return Promise.reject(new LogoutError())
         }
 
-        throw refreshError
+        return Promise.reject(refreshError)
       }
     }
 
@@ -64,7 +64,7 @@ authInstance.interceptors.response.use(
       if (originalRequest && !originalRequest?._retry) {
         originalRequest._retry = true
       } else {
-        return Promise.reject(new LogoutError())
+        return Promise.reject(new PermissionError())
       }
 
       const refreshToken = authToken.getRefreshToken()

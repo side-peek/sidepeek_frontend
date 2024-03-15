@@ -1,4 +1,7 @@
-import { postDoubleCheckEmailPayload } from "api-models"
+import {
+  postDoubleCheckEmailPayload,
+  postDoubleCheckEmailResponseType,
+} from "api-models"
 import { AxiosRequestConfig } from "axios"
 
 import { ENDPOINTS } from "@constants/endPoints"
@@ -9,5 +12,13 @@ export const postDoubleCheckEmail = async (
   body: postDoubleCheckEmailPayload,
   config: AxiosRequestConfig = {},
 ) => {
-  await baseInstance.post(ENDPOINTS.EMAIL_DOUBLE_CHECK, body, { ...config })
+  const { data } = await baseInstance.post<postDoubleCheckEmailResponseType>(
+    ENDPOINTS.EMAIL_DOUBLE_CHECK,
+    body,
+    {
+      ...config,
+    },
+  )
+
+  return data
 }

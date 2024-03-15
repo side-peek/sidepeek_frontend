@@ -1,3 +1,4 @@
+import { useCallback } from "react"
 import { UseFormRegisterReturn } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
@@ -5,9 +6,6 @@ import { Box, HStack, Text, Textarea } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
-
-import BeforeEditingButton from "./BeforeEditingButton"
-import OnEditingButton from "./OnEditingButton"
 
 interface CommentsEditFormTextProps {
   comment: Comment
@@ -20,6 +18,17 @@ const CommentsEditFormText = ({
 }: CommentsEditFormTextProps) => {
   const { handleSubmit, onSubmitEdit, editTargetCommentId, isEditing } =
     useCommentContext()
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === "Enter" && !e.shiftKey && handleSubmit) {
+        e.preventDefault()
+        handleSubmit(onSubmitEdit)()
+      }
+    },
+    [handleSubmit, onSubmitEdit],
+  )
+
   if (!handleSubmit) {
     return
   }
@@ -39,6 +48,7 @@ const CommentsEditFormText = ({
               as={ResizeTextarea}
               isRequired={false}
               resize="none"
+              onKeyDown={handleKeyDown}
               {...register}
             />
           ) : (
@@ -48,15 +58,6 @@ const CommentsEditFormText = ({
               {comment.content}
             </Text>
           )}
-          <HStack gap="1rem">
-            {comment.isOwner ? (
-              editTargetCommentId === comment.id && isEditing ? (
-                <OnEditingButton />
-              ) : (
-                <BeforeEditingButton comment={comment} />
-              )
-            ) : null}
-          </HStack>
         </HStack>
       </form>
     </Box>

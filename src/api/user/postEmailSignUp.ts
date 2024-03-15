@@ -5,7 +5,7 @@ import { ENDPOINTS } from "@constants/endPoints"
 
 import { baseInstance } from "../axiosInstance"
 
-export const postSignUp = async (
+export const postEmailSignUp = async (
   body: postEmailSignUpPayload,
   config: AxiosRequestConfig = {},
 ) => {

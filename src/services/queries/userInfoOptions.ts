@@ -1,6 +1,6 @@
-import { postEmailAuth } from "@api/auth/postEmailAuth"
-
 import { UseQueryOptions } from "@tanstack/react-query"
+
+import { postEmailAuth } from "@apis/auth/postEmailAuth"
 
 import authToken from "@stores/authToken"
 

@@ -1,25 +1,32 @@
 import { FaRegCheckCircle } from "react-icons/fa"
 import { MdCancel } from "react-icons/md"
 
-import { IconButton } from "@chakra-ui/react"
+import { IconButton, useMediaQuery } from "@chakra-ui/react"
 
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
 const OnEditingButton = () => {
-  const { handleOffEdit } = useCommentContext()
+  const { handleOffEdit, handleSubmit, onSubmitEdit } = useCommentContext()
+  const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
+
+  if (!handleSubmit) {
+    return
+  }
+
   return (
     <>
       <IconButton
         type="submit"
         aria-label="submit"
         icon={<FaRegCheckCircle />}
-        fontSize="2xl"
+        onClick={handleSubmit(onSubmitEdit)}
+        fontSize={isLargerThan768 ? "2xl" : "lg"}
       />
       <IconButton
         aria-label="cancel"
         icon={<MdCancel />}
         onClick={handleOffEdit}
-        fontSize="2xl"
+        fontSize={isLargerThan768 ? "2xl" : "lg"}
       />
     </>
   )
