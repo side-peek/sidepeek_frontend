@@ -1,4 +1,4 @@
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
+import { FormProvider } from "react-hook-form"
 
 import { Flex, Input } from "@chakra-ui/react"
 
@@ -8,16 +8,12 @@ import {
   emailOptions,
   passwordOptions,
 } from "@pages/LoginPage/constants/registerOptions"
-import { LoginFormType } from "@pages/LoginPage/types/LoginFormType"
+import useLoginForm from "@pages/LoginPage/hooks/useLoginForm"
 
 import LoginButton from "./components/LoginButton"
 
 const LoginForm = () => {
-  const method = useForm<LoginFormType>()
-
-  const onSubmit: SubmitHandler<LoginFormType> = (values) => {
-    console.log(values)
-  }
+  const { method, onSubmit, isPending } = useLoginForm()
 
   return (
     <FormProvider {...method}>
@@ -33,7 +29,7 @@ const LoginForm = () => {
             fieldName="email"
             label="이메일"
             registerOptions={emailOptions}>
-            <Input type="email" />
+            <Input />
           </InputController>
           {/* paasword */}
           <InputController
@@ -42,7 +38,7 @@ const LoginForm = () => {
             registerOptions={passwordOptions}>
             <Input type="password" />
           </InputController>
-          <LoginButton />
+          <LoginButton isLoading={isPending} />
         </Flex>
       </form>
     </FormProvider>
