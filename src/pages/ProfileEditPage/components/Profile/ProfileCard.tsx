@@ -92,7 +92,7 @@ const ProfileCard = ({
               as={Button}
               rightIcon={<AiFillCaretDown />}
               w="9rem">
-              {career}
+              {career === "" ? "연차" : career}
             </MenuButton>
             <MenuList>
               {careers.map((career) => (
