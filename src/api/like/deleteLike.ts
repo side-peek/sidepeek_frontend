@@ -1,6 +1,7 @@
-import { authInstance } from "@api/axiosInstance"
 import { deleteLikePayload } from "api-models"
 import { AxiosRequestConfig } from "axios"
+
+import { authInstance } from "@apis/axiosInstance"
 
 import { ENDPOINTS } from "@constants/endPoints"
 
