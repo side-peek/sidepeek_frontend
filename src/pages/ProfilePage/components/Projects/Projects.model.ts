@@ -1,15 +1,23 @@
+import { getUserProjects } from "@api/user/getUserProjects"
+
 import { useQuery } from "@tanstack/react-query"
 
-import { getAllProjects } from "@/api/project/getAllProjects"
+interface UserProjectsProps {
+  userId: number
+  type: string
+  page: number
+  size: number
+}
 
-export const useMyProjects = () => {}
-export const useLikedProjects = () => {
+export const useUserProjects = ({
+  userId,
+  type,
+  page,
+  size,
+}: UserProjectsProps) => {
   const { data } = useQuery({
-    queryKey: ["projects"],
-    queryFn: () => getAllProjects(),
-    gcTime: 0,
+    queryKey: ["projects", userId, type, page, size],
+    queryFn: () => getUserProjects({ userId, type, page, size }),
   })
-
   return { data }
 }
-export const useCommentedProjects = () => {}

@@ -7,14 +7,17 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react"
 
+import { tabsType } from "@pages/ProfilePage/constants/constants"
 import StyledTab from "@pages/ProfilePage/styles/StyledTab"
 
-import ProjectsCommented from "./ProjectsCommented"
-import ProjectsLiked from "./ProjectsLiked"
-import ProjectsOwned from "./ProjectsOwned"
+import withUserId, { UserIdProps } from "../HOC/withUserId"
+import ProjectsGrid from "./ProjectsGrid"
 
-const ProjectsView = () => {
+const ProjectsView = ({ userId, isMe }: UserIdProps) => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
+
+  const projectsType = isMe ? ["JOINED", "LIKED", "COMMENTED"] : ["JOINED"]
+
   return (
     <Box
       height="100%"
@@ -27,27 +30,30 @@ const ProjectsView = () => {
           h="6rem"
           sx={{
             "& > *": {
-              _selected: { fontFamily: "SCDream_Bold", color: "#000000" },
+              _selected: { fontFamily: "SCDream_Bold", color: "black.100" },
             },
           }}>
-          <StyledTab>내 프로젝트</StyledTab>
-          <StyledTab>좋아요한 프로젝트</StyledTab>
-          <StyledTab>댓글단 프로젝트</StyledTab>
+          <StyledTab>{tabsType.JOINED}</StyledTab>
+          {isMe && (
+            <>
+              <StyledTab>{tabsType.LIKED}</StyledTab>
+              <StyledTab>{tabsType.COMMENTED}</StyledTab>
+            </>
+          )}
         </TabList>
         <TabPanels>
-          <TabPanel>
-            <ProjectsOwned />
-          </TabPanel>
-          <TabPanel>
-            <ProjectsLiked />
-          </TabPanel>
-          <TabPanel>
-            <ProjectsCommented />
-          </TabPanel>
+          {projectsType.map((type) => (
+            <TabPanel key={type}>
+              <ProjectsGrid
+                userId={userId}
+                type={type}
+              />
+            </TabPanel>
+          ))}
         </TabPanels>
       </Tabs>
     </Box>
   )
 }
 
-export default ProjectsView
+export default withUserId(ProjectsView)

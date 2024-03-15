@@ -220,6 +220,11 @@ declare module "api-models" {
     nickname: string
   }
 
+  export type getUserProjectsPayload = {
+    userId: number
+    type: string
+  }
+  
   export type postDoubleCheckNicknameResponseType = {
     isDuplicated: boolean
   }
