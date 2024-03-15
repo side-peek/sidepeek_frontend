@@ -1,5 +1,5 @@
 import { postLike } from "@api/like/postLike"
-import { postLikePayload } from "api-models"
+import { Project, postLikePayload } from "api-models"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
@@ -13,37 +13,40 @@ export const usePostLikeMutation = () => {
   const postLikeMutation = useMutation({
     mutationKey: [QUERY_KEY_POST_LIKE],
     mutationFn: (data: postLikePayload) => postLike(data),
-    // onMutate: async ({ projectId }) => {
-    //   console.log(projectId)
-    //   await queryClient.cancelQueries({
-    //     queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
-    //   })
-    //   const previousLikeState = queryClient.getQueriesData({
-    //     queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
-    //   })
-    //   if (previousLikeState) {
-    //     const updatedLikeState = previousLikeState.map((likeState, index) => {
-    //       if (index === 0) {
-    //         return likeState
-    //       }
-    //       return likeState.map((like) => {
-    //         console.log(like)
-    //         return {
-    //           ...like,
-    //           likeId: like.likeId ? null : 3,
-    //           likeCount: like.likeCount + 1,
-    //         }
-    //       })
-    //     })
-    //     queryClient.setQueryData({
-    //       queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
-    //       updatedLikeState,
-    //     })
-    //   }
+    onMutate: async ({ projectId }) => {
+      await queryClient.cancelQueries({
+        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
+      })
 
-    //   return { previousLikeState }
-    // },
-    onSuccess: () => {
+      const previousLikeState = queryClient.getQueryData<Project>([
+        QUERY_KEY_GET_PROJECT_DETAIL,
+        projectId,
+      ])
+
+      if (previousLikeState) {
+        const updatedLikeState = {
+          ...previousLikeState,
+          likeId: 99999,
+          likeCount: previousLikeState.likeCount + 1,
+        }
+        queryClient.setQueryData(
+          [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
+          updatedLikeState,
+        )
+      }
+
+      return { previousLikeState }
+    },
+
+    onError: (err, _, context) => {
+      console.log(err)
+      queryClient.setQueryData(
+        [QUERY_KEY_GET_PROJECT_DETAIL],
+        context?.previousLikeState,
+      )
+    },
+    // 요청이 성공하든, 에러가 발생되든 실행하고 싶은 경우
+    onSettled: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
       })
