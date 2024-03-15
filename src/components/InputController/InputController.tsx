@@ -9,7 +9,6 @@ import {
   InputProps,
   Spacer,
 } from "@chakra-ui/react"
-import { isFunction } from "lodash"
 
 import { InputControllerProps } from "./types/InputControllerProps"
 
@@ -42,7 +41,7 @@ const InputController = ({
       </Flex>
       {isValidElement(children)
         ? cloneElement(children, renderPorps)
-        : isFunction(children)
+        : typeof children === "function"
           ? children(renderPorps)
           : null}
     </FormControl>
