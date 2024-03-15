@@ -30,4 +30,5 @@ export const ENDPOINTS = {
     `${VARIABLE_URL}/projects/${projectId}/comments/${id}`,
   EDIT_COMMENT: (projectId: number, id: number) =>
     `${VARIABLE_URL}/projects/${projectId}/comments/${id}`,
+  UPLOAD_FILE: `${VARIABLE_URL}/files`,
 }
