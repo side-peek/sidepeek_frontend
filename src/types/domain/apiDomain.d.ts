@@ -20,12 +20,12 @@ declare module "api-models" {
 
   export type UserInfoProperties = {
     nickname: string
-    introduction: string | null
+    introduction: string
     profileImageUrl: string
-    job: string | null
-    career: string | null
-    githubUrl: string | null
-    blogUrl: string | null
+    job: string
+    career: string
+    githubUrl: string
+    blogUrl: string
     techStacks: TechStack[]
   }
   export interface UserInfo {

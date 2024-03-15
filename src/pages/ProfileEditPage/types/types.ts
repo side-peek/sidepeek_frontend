@@ -1,6 +1,6 @@
 export interface TechStack {
-  skillId: number
-  category: string
+  skillId?: number
+  category?: string
 }
 
 export interface ProfileInfo {
