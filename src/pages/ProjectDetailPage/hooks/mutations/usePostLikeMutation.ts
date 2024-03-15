@@ -13,15 +13,36 @@ export const usePostLikeMutation = () => {
   const postLikeMutation = useMutation({
     mutationKey: [QUERY_KEY_POST_LIKE],
     mutationFn: (data: postLikePayload) => postLike(data),
-    onMutate: async () => {
-      await queryClient.cancelQueries({
-        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
-      })
-      const previousLikeState = queryClient.getQueriesData({
-        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
-      })
-      console.log(previousLikeState)
-    },
+    // onMutate: async ({ projectId }) => {
+    //   console.log(projectId)
+    //   await queryClient.cancelQueries({
+    //     queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
+    //   })
+    //   const previousLikeState = queryClient.getQueriesData({
+    //     queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
+    //   })
+    //   if (previousLikeState) {
+    //     const updatedLikeState = previousLikeState.map((likeState, index) => {
+    //       if (index === 0) {
+    //         return likeState
+    //       }
+    //       return likeState.map((like) => {
+    //         console.log(like)
+    //         return {
+    //           ...like,
+    //           likeId: like.likeId ? null : 3,
+    //           likeCount: like.likeCount + 1,
+    //         }
+    //       })
+    //     })
+    //     queryClient.setQueryData({
+    //       queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
+    //       updatedLikeState,
+    //     })
+    //   }
+
+    //   return { previousLikeState }
+    // },
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],

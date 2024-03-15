@@ -29,6 +29,7 @@ const SummaryTop = ({
   const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
   const location = useLocation()
   const { VITE_BASE_URL } = import.meta.env
+  console.log(likeId)
 
   const handleCopyClipBoard = async (text: string) => {
     try {

@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
 import { Box, Button, Flex, FormControl, Textarea } from "@chakra-ui/react"
+import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 
@@ -21,11 +22,15 @@ const CommentsForm = ({
 }: CommentsFormProps) => {
   const { register, reset, handleSubmit } = useForm<CommentFormValues>()
   const { sendCommentMutation } = usePostCommentMutation()
-  // const user = useUserInfoData()
+  const user = useUserInfoData()
+
   const onSubmit: SubmitHandler<CommentFormValues> = (text) => {
+    if (!user) {
+      return
+    }
+
     const commentRequestValue = {
-      // ownerId: user.id,
-      ownerId: 123,
+      ownerId: user.id,
       projectId: Number(projectId),
       isAnonymous: false,
       parentId: parentId ? parentId : null,
