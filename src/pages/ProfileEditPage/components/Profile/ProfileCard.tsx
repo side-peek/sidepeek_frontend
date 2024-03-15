@@ -4,7 +4,6 @@ import {
   Avatar,
   Button,
   Flex,
-  Input,
   Menu,
   MenuButton,
   MenuItem,
@@ -16,6 +15,7 @@ import {
 
 import { CareerType, ProfileInfo } from "../../types/types"
 import ChangeNicknameModal from "../Modal/ChangeNicknameModal"
+import ChangeProfileImageModal from "../Modal/ChangeProfileImageModal"
 
 interface ProfileCardProps {
   profileImageUrl: string
@@ -30,14 +30,16 @@ const ProfileCard = ({
   career,
   setProfileInfo,
 }: ProfileCardProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-
-  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // TODO: 1. 파일 -> url api 요청 / 2. setState
-    if (e.target.files) {
-      console.log(e.target.files[0])
-    }
-  }
+  const {
+    isOpen: isNicknameModalOpen,
+    onOpen: onNicknameModalOpen,
+    onClose: onNicknameModalClose,
+  } = useDisclosure()
+  const {
+    isOpen: isProfileImageModalOpen,
+    onOpen: onProfileImageModalOpen,
+    onClose: onProfileImageModalClose,
+  } = useDisclosure()
 
   const careers: CareerType[] = [
     "0년차",
@@ -54,19 +56,18 @@ const ProfileCard = ({
       ml="2rem"
       alignItems="center">
       <form>
-        <label>
-          <Avatar
-            w="12rem"
-            h="12rem"
-            cursor="pointer">
-            {profileImageUrl}
-          </Avatar>
-          <Input
-            type="file"
-            display="none"
-            onChange={handleSubmit}
-          />
-        </label>
+        <Avatar
+          w="12rem"
+          h="12rem"
+          cursor="pointer"
+          onClick={onProfileImageModalOpen}
+          src={profileImageUrl}></Avatar>
+
+        <ChangeProfileImageModal
+          isOpen={isProfileImageModalOpen}
+          onClose={onProfileImageModalClose}
+          setProfileInfo={setProfileInfo}
+        />
       </form>
 
       <Stack ml="1.5rem">
@@ -74,12 +75,12 @@ const ProfileCard = ({
           fontSize="3xl"
           fontFamily="SCDream_Bold"
           cursor="pointer"
-          onClick={onOpen}>
+          onClick={onNicknameModalOpen}>
           {nickname}
         </Text>
         <ChangeNicknameModal
-          isOpen={isOpen}
-          onClose={onClose}
+          isOpen={isNicknameModalOpen}
+          onClose={onNicknameModalClose}
           setProfileInfo={setProfileInfo}
         />
         <Menu>
