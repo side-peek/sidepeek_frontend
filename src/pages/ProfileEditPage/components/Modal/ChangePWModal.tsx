@@ -39,9 +39,14 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
     reset,
     formState: { errors },
   } = useForm<PasswordFormValues>()
-  const onValid = () => {
+  const onValid = (data: PasswordFormValues) => {
     // TODO: 비밀번호 변경 api 요청
-    console.log("1")
+    console.log(data)
+    const putPasswordPayload = {
+      originalPassword: data.currentPassword,
+      password: data.newPassword,
+    }
+    console.log(putPasswordPayload)
     reset()
     onClose()
   }
@@ -57,7 +62,7 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
       setError("checkPassword", PASSWORD_MISMATCH_ERROR)
       onInvalid()
     } else {
-      onValid()
+      onValid(data)
     }
   }
 
