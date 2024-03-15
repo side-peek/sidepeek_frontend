@@ -31,7 +31,7 @@ const ProjectListPage = () => {
 
   const [selectedOption, setSelectedOption] = useState<SelectType>("createdAt")
 
-  // 검색 결과 가져오기 (일단 임시)
+  // 검색 결과 가져오기 (일단 임시로 넣어뒀습니다)
   const { allProjectList, isAllProjectLoading } = useAllProjectQuery()
   const projectList = allProjectList?.projects
 
