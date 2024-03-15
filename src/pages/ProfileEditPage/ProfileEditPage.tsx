@@ -60,7 +60,9 @@ const ProfileEditPage = () => {
       <Flex
         w="100%"
         gap="0.5rem"
-        justifyContent={isLargerThan500 ? "flex-end" : "center"}>
+        justifyContent={isLargerThan500 ? "flex-end" : "center"}
+        mt="1.5rem"
+        mb="3rem">
         <StyledButton onClick={onOpen}>비밀번호 변경</StyledButton>
         <StyledButton onClick={handleUpdateProfile}>변경내용 저장</StyledButton>
         <ChangePWModal

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Controller } from "react-hook-form"
 
-import { Box, Button, Flex, Input, Text } from "@chakra-ui/react"
+import { Box, Button, Flex, Input, Text, useMediaQuery } from "@chakra-ui/react"
 
 import CloseButtonTag from "@components/Tag/components/CloseButtonTag"
 
@@ -14,6 +14,7 @@ interface ProfileTechStackProps {
   setProfileInfo: React.Dispatch<React.SetStateAction<ProfileInfo>>
 }
 const ProfileTechStack = ({ setProfileInfo }: ProfileTechStackProps) => {
+  const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
   const [role, setRole] = useState("")
 
   const {
@@ -38,10 +39,11 @@ const ProfileTechStack = ({ setProfileInfo }: ProfileTechStackProps) => {
         return (
           <Flex
             key={field.id}
-            mb="3rem">
+            direction={isLargerThan500 ? "row" : "column"}
+            mb={isLargerThan500 ? "3rem" : "1.5rem"}>
             <Box
-              flex="0 0 25rem"
-              pr="2rem">
+              flex={isLargerThan500 ? "0 0 25rem" : "0 0 3.5rem"}
+              pr={isLargerThan500 ? "2rem" : "0rem"}>
               <Controller
                 name={`techStacks.${index}.category`}
                 control={control}
@@ -61,9 +63,11 @@ const ProfileTechStack = ({ setProfileInfo }: ProfileTechStackProps) => {
             </Box>
             <Box
               flex="0 0 30rem"
-              borderLeft="1px solid"
+              borderLeft={isLargerThan500 ? "1px solid" : ""}
+              borderTop={isLargerThan500 ? "" : "1px solid"}
               borderColor="grey.200"
-              px="2rem">
+              px={isLargerThan500 ? "2rem" : "0rem"}
+              py={isLargerThan500 ? "0rem" : "1rem"}>
               <StackSearchBox
                 render={({ techStacks }) => {
                   return (
@@ -74,7 +78,11 @@ const ProfileTechStack = ({ setProfileInfo }: ProfileTechStackProps) => {
                       ).map((techStack) => {
                         return (
                           <Box
+                            ml="1rem"
+                            mb="0.3rem"
+                            fontSize="1.2rem"
                             cursor="pointer"
+                            _hover={{ fontWeight: "bold" }}
                             onClick={() => {
                               appendStack(index, techStack)
                               console.log(role, techStack.id)
@@ -106,9 +114,11 @@ const ProfileTechStack = ({ setProfileInfo }: ProfileTechStackProps) => {
             <Box
               flexWrap="nowrap"
               flex="1 1 auto"
-              borderLeft="1px solid"
+              borderLeft={isLargerThan500 ? "1px solid" : ""}
+              borderTop={isLargerThan500 ? "" : "1px solid"}
               borderColor="grey.200"
-              pl="2rem">
+              pl={isLargerThan500 ? "2rem" : 0}
+              pt={isLargerThan500 ? "0" : "1rem"}>
               {selectedStacks(index).map((stack) => (
                 <CloseButtonTag
                   key={stack.name}
