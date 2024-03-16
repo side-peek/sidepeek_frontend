@@ -13,14 +13,7 @@ export const usePostLikeMutation = () => {
 
   const postLikeMutation = useMutation({
     mutationKey: [QUERY_KEY_POST_LIKE],
-    mutationFn: async (data: postLikePayload) => {
-      try {
-        const response = await postLike(data)
-        console.log(response)
-      } catch (error) {
-        console.error("Error in postLike:", error)
-      }
-    },
+    mutationFn: (data: postLikePayload) => postLike(data),
     onMutate: async ({ projectId }) => {
       await queryClient.cancelQueries({
         queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
@@ -34,7 +27,7 @@ export const usePostLikeMutation = () => {
       if (previousLikeState) {
         const updatedLikeState = {
           ...previousLikeState,
-          likeId: 99999,
+          likeId: 99999999,
           likeCount: previousLikeState.likeCount + 1,
         }
         queryClient.setQueryData(
@@ -53,7 +46,7 @@ export const usePostLikeMutation = () => {
         context?.previousLikeState,
       )
     },
-    onSuccess: (_, { projectId }) => {
+    onSettled: (_, __, { projectId }) => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
       })
