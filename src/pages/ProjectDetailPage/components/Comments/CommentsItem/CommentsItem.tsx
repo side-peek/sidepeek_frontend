@@ -2,7 +2,7 @@
 import { UseFormRegisterReturn } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
-import { Box, Button, HStack, Stack } from "@chakra-ui/react"
+import { Box, Button, HStack, Stack, useMediaQuery } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
@@ -19,6 +19,7 @@ interface CommentsItemProps {
 }
 
 const CommentsItem = ({ comment, register }: CommentsItemProps) => {
+  const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
   const navigate = useNavigate()
 
   const handleNavigateProfile = (userId: number) => {
@@ -34,7 +35,7 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
       gap="3rem">
       <HStack
         w="100%"
-        gap="2rem"
+        gap={isLargerThan768 ? "2rem" : "1.3rem"}
         align="flex-start">
         <CommentsAvatar
           onClick={() => {
@@ -52,10 +53,7 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
               w="100%"
               gap="1rem"
               align="flex-start">
-              <CommentTitle
-                user={comment.user}
-                createdAt={comment.createdAt}
-              />
+              <CommentTitle comment={comment} />
               <CommentsEditFormText
                 {...{
                   comment,
@@ -73,6 +71,7 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
                       <Button
                         p="0"
                         _hover={{ opacity: "0.5" }}
+                        fontSize={isLargerThan768 ? "md" : "sm"}
                         onClick={handleOffReply}>
                         취소
                       </Button>
@@ -80,6 +79,7 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
                   )
                 ) : (
                   <Button
+                    size={isLargerThan768 ? "md" : "sm"}
                     onClick={() => handleOnReply(comment.id)}
                     p="0">
                     답글달기

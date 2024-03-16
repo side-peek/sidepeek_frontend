@@ -48,7 +48,7 @@ const SummaryTop = ({
       <SummaryTopIcon
         count={likeCount}
         icon={<IoMdHeartEmpty />}
-        aria-label="goodButton"
+        aria-label="likeButton"
         fontSize={isLargerThan1200 ? "2.7rem" : "2rem"}
       />
       <Link

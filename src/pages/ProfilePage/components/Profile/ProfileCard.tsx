@@ -2,9 +2,10 @@ import { Avatar, Text, VStack } from "@chakra-ui/react"
 
 import { ProfileActionsButtonsProps } from "@pages/ProfilePage/types/types"
 
+import withUserId, { UserIdProps } from "../HOC/withUserId"
 import ProfileActionsButtons from "./ProfileActionsButtons"
 
-interface ProfileCardProps extends ProfileActionsButtonsProps {
+interface ProfileCardProps extends ProfileActionsButtonsProps, UserIdProps {
   profileImageUrl?: string
   nickname?: string
   career?: string | null
@@ -16,6 +17,7 @@ const ProfileCard = ({
   career,
   handleNewProject,
   handleEditProfile,
+  isMe,
 }: ProfileCardProps) => {
   return (
     <VStack>
@@ -36,9 +38,11 @@ const ProfileCard = ({
           {career} 개발자
         </Text>
       )}
-      <ProfileActionsButtons {...{ handleNewProject, handleEditProfile }} />
+      {isMe && (
+        <ProfileActionsButtons {...{ handleNewProject, handleEditProfile }} />
+      )}
     </VStack>
   )
 }
 
-export default ProfileCard
+export default withUserId(ProfileCard)

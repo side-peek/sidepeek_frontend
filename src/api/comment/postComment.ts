@@ -9,7 +9,7 @@ export const postComment = async (
   { ...data }: postCommentPayload,
   config: AxiosRequestConfig = {},
 ) => {
-  await authInstance.post(ENDPOINTS.POST_COMMENT(), data, {
+  await authInstance.post(ENDPOINTS.POST_COMMENT, data, {
     ...config,
   })
 }

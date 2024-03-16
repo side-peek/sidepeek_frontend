@@ -23,8 +23,16 @@ export const ENDPOINTS = {
   GET_PROJECT_DETAILS: (projectId: number) =>
     `${VARIABLE_URL}/projects/${projectId}`,
   GET_ALL_PROJECTS: `${VARIABLE_URL}/projects`,
-  UPLOAD_LIKE: `${VARIABLE_URL}/likes`,
-  POST_COMMENT: () => `${VARIABLE_URL}/comments`,
+  GET_USER_PROJECTS: (
+    userId: number,
+    type: string,
+    page: number,
+    size: number,
+  ) =>
+    `${VARIABLE_URL}/users/${userId}/projects?type=${type}&page=${page}&size=${size}`,
+  POST_LIKE: `${VARIABLE_URL}/likes`,
+  DELETE_LIKE: (likeId: number) => `${VARIABLE_URL}/likes/${likeId}`,
+  POST_COMMENT: `${VARIABLE_URL}/comments`,
   DELETE_COMMENT: (commentId: number) =>
     `${VARIABLE_URL}/comments/${commentId}`,
   EDIT_COMMENT: (commentId: number) => `${VARIABLE_URL}/comments/${commentId}`,

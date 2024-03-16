@@ -8,8 +8,8 @@ const BackButton = () => {
   return (
     <Button
       position="absolute"
-      top="3%"
-      left="3%"
+      top="0"
+      left="0"
       w="3rem"
       h="2rem"
       p="0"

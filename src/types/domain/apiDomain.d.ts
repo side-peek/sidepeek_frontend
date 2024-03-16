@@ -134,10 +134,9 @@ declare module "api-models" {
 
   export type Like = {
     id: number
-    userId: string
     projectId: string
+    userId: string
     createdAt: string
-    updatedAt: string
   }
 
   export type TechStack = {
@@ -213,8 +212,21 @@ declare module "api-models" {
     email: string
   }
 
+  export type postDoubleCheckEmailResponseType = {
+    isDuplicated: boolean
+  }
+
   export type postDoubleCheckNicknamePayload = {
     nickname: string
+  }
+
+  export type getUserProjectsPayload = {
+    userId: number
+    type: string
+  }
+
+  export type postDoubleCheckNicknameResponseType = {
+    isDuplicated: boolean
   }
 
   /* 기술 스택 */
@@ -263,9 +275,16 @@ declare module "api-models" {
   }
 
   /* 좋아요 */
-  //FIXME: 미완성 api
+  export type getLikePayload = {
+    likes: Like[]
+  }
+
   export type postLikePayload = {
     projectId: number
+  }
+
+  export type deleteLikePayload = {
+    likeId: number
   }
 
   /* 댓글 */

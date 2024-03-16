@@ -1,6 +1,6 @@
-import { postEmailAuth } from "@api/auth/postEmailAuth"
-
 import { useQuery } from "@tanstack/react-query"
+
+import { postEmailAuth } from "@apis/auth/postEmailAuth"
 
 import { QUERYKEY } from "@constants/queryKey"
 
