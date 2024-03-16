@@ -108,7 +108,7 @@ const ChangeProfileImageModal = ({
                   }}>
                   <Box
                     w="100%"
-                    h="40rem">
+                    h="50rem">
                     <Image
                       src={fileBase64}
                       objectFit="cover"
