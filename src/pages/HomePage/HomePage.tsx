@@ -14,6 +14,7 @@ import {
   Stack,
   useMediaQuery,
 } from "@chakra-ui/react"
+import { AllProject } from "api-models"
 
 import ProjectCard from "@components/ProjectCard/ProjectCard"
 
@@ -25,12 +26,11 @@ import { SortSelectType } from "./types/type"
 
 const HomePage = () => {
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
-  const [isDeploy, setIsDeploy] = useState(false)
+  const [isReleased, setIsReleased] = useState(false)
   const [sortOption, setSortOption] = useState<SortSelectType>("createdAt")
 
-  const pageSize = 10
-  let lastOrderCount: null | number = null
   const lastProjectId = null
+  const lastProject: AllProject | undefined = undefined
 
   // 배너 프로젝트 조회
   const { bannerProjectList, isBannerLoading } = useBannerProjectQuery()
@@ -44,18 +44,9 @@ const HomePage = () => {
     hasNextPage,
     isFetchingNextPage,
     isRefetching,
-  } = useAllProjectQuery(
-    sortOption,
-    isDeploy,
-    pageSize,
-    lastProjectId,
-    lastOrderCount,
-  )
+  } = useAllProjectQuery({ sortOption, isReleased, lastProjectId, lastProject })
 
   const isLoading = isAllProjectLoading || isRefetching
-
-  // TODO: 더보기
-  const lastProject = allProjectList && allProjectList.pages[0].content.at(-1)
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SortSelectType
@@ -64,17 +55,8 @@ const HomePage = () => {
     refetchAllProject()
   }
 
-  if (sortOption === "like") {
-    lastOrderCount = lastProject ? lastProject.likeCount : null
-  } else if (sortOption === "view") {
-    lastOrderCount = lastProject ? lastProject.viewCount : null
-  } else {
-    lastOrderCount = null
-  }
-
   const loadMoreProjects = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) {
-      //console.log(lastOrderCount, sortOption)
       fetchNextPage()
     }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage])
@@ -93,7 +75,7 @@ const HomePage = () => {
             <Checkbox
               paddingRight="0.3rem"
               onChange={() => {
-                setIsDeploy(!isDeploy)
+                setIsReleased(!isReleased)
                 refetchAllProject()
               }}>
               출시 서비스만 보기
@@ -137,13 +119,13 @@ const HomePage = () => {
               })}
           </Grid>
         </Stack>
-        {hasNextPage && (
-          <MoreButton
-            loadMore={loadMoreProjects}
-            hasNext={hasNextPage}
-          />
-        )}
       </Container>
+      {hasNextPage && (
+        <MoreButton
+          loadMore={loadMoreProjects}
+          hasNext={hasNextPage}
+        />
+      )}
       <Box height="15rem" />
     </>
   )

@@ -1,16 +1,17 @@
+import { getAllProjectsType } from "api-models"
+
 import { useInfiniteQuery } from "@tanstack/react-query"
 
 import { getAllProjects } from "@/api/project/getAllProjects"
 
 import { QUERYKEY } from "@constants/queryKey"
 
-export const useAllProjectQuery = (
-  sortOption: "createdAt" | "like" | "view",
-  isDeploy: boolean,
-  pageSize: number,
-  lastProjectId: number | null = null,
-  lastProjectNum: number | null,
-) => {
+export const useAllProjectQuery = ({
+  sortOption,
+  isReleased,
+  lastProjectId,
+  lastProject,
+}: getAllProjectsType) => {
   const {
     data,
     isLoading,
@@ -23,25 +24,24 @@ export const useAllProjectQuery = (
     queryKey: [
       QUERYKEY.ALL_PROJECTS,
       sortOption,
-      isDeploy,
-      pageSize,
+      isReleased,
       lastProjectId,
-      lastProjectNum,
+      lastProject,
     ],
     queryFn: () =>
       getAllProjects({
-        sort: sortOption,
-        isReleased: isDeploy,
-        pageSize,
+        sortOption,
+        isReleased,
         lastProjectId,
-        lastProjectNum,
+        lastProject,
       }),
     initialPageParam: 0,
-    getNextPageParam: (lastPage) =>
+    getNextPageParam: (lastPage) => (
+      (lastProject = lastPage.content[lastPage.numberOfElements - 1]),
       (lastProjectId = lastPage.hasNext
         ? lastPage.content[lastPage.numberOfElements - 1].id
-        : null),
-    //select: ({ pages }) => pages.flatMap((page) => page.content),
+        : null)
+    ),
   })
 
   return {
