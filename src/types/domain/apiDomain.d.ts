@@ -18,7 +18,7 @@ declare module "api-models" {
     isDeleted: boolean
   } */
 
-  export type TechStacks = {
+  export type TechStackRequest = {
     skillId?: number
     category?: string
   }
@@ -31,7 +31,7 @@ declare module "api-models" {
     career: string
     githubUrl: string
     blogUrl: string
-    techStacks: TechStacks[]
+    techStacks: TechStack[]
   }
   export interface UserInfo {
     userInfo: UserInfoProperties
@@ -204,9 +204,21 @@ declare module "api-models" {
 
   export type getUserDetailResponseType = UserInfoProperties
 
+  export type UserInfoRequest = {
+    nickname: string
+    introduction: string
+    profileImageUrl: string
+    job: string
+    career: string
+    githubUrl: string
+    blogUrl: string
+    techStacks: TechStackRequest[]
+  }
   export type putUserDetailPayload = {
     userId: number
-  } & UserInfo
+  } & {
+    userInfo: UserInfoRequest
+  }
 
   export type putUserPasswordPayload = {
     userId: number
