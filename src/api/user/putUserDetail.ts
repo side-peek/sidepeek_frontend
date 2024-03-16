@@ -9,7 +9,7 @@ export const putUserDetail = async (
   { userId, ...body }: putUserDetailPayload,
   config: AxiosRequestConfig = {},
 ) => {
-  await authInstance.put(ENDPOINTS.PUT_USER_PROFILE(userId), body, {
+  await authInstance.put(ENDPOINTS.PUT_USER_PROFILE(userId), body.userInfo, {
     ...config,
   })
 }
