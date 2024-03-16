@@ -3,13 +3,13 @@ import { AxiosRequestConfig } from "axios"
 
 import { ENDPOINTS } from "@constants/endPoints"
 
-import { baseInstance } from "../axiosInstance"
+import { authInstance } from "../axiosInstance"
 
 export const getProjectDetail = async (
   { projectId }: getProjectDetailPayload,
   config: AxiosRequestConfig = {},
 ) => {
-  const { data } = await baseInstance.get<Project>(
+  const { data } = await authInstance.get<Project>(
     ENDPOINTS.GET_PROJECT_DETAILS(projectId),
     {
       ...config,

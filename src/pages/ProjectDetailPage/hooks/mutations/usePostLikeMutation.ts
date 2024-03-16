@@ -1,5 +1,6 @@
 import { postLike } from "@api/like/postLike"
-import { Project, postLikePayload } from "api-models"
+import { postLikePayload } from "api-models"
+import { Project } from "api-models"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
@@ -12,7 +13,14 @@ export const usePostLikeMutation = () => {
 
   const postLikeMutation = useMutation({
     mutationKey: [QUERY_KEY_POST_LIKE],
-    mutationFn: (data: postLikePayload) => postLike(data),
+    mutationFn: async (data: postLikePayload) => {
+      try {
+        const response = await postLike(data)
+        console.log(response)
+      } catch (error) {
+        console.error("Error in postLike:", error)
+      }
+    },
     onMutate: async ({ projectId }) => {
       await queryClient.cancelQueries({
         queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
@@ -45,8 +53,7 @@ export const usePostLikeMutation = () => {
         context?.previousLikeState,
       )
     },
-    // 요청이 성공하든, 에러가 발생되든 실행하고 싶은 경우
-    onSettled: (_, __, projectId) => {
+    onSuccess: (_, { projectId }) => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
       })
