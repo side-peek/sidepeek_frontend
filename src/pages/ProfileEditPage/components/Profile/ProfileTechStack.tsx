@@ -1,7 +1,16 @@
 import { useState } from "react"
 import { Controller } from "react-hook-form"
 
-import { Box, Button, Flex, Input, Text, useMediaQuery } from "@chakra-ui/react"
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Input,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react"
+import { TechStack } from "api-models"
 
 import CloseButtonTag from "@components/Tag/components/CloseButtonTag"
 
@@ -10,10 +19,16 @@ import { ProfileInfo } from "@pages/ProfileEditPage/types/types"
 import StackSearchBox from "@pages/ProjectEditPage/components/TechStacksFields/components/StackSearchBox"
 import { filterSelectedStack } from "@pages/ProjectEditPage/utils/filterSelectedStack"
 
+import ProfileCurrentTechStack from "./ProfileCurrentTechStack"
+
 interface ProfileTechStackProps {
+  techStacks: TechStack[]
   setProfileInfo: React.Dispatch<React.SetStateAction<ProfileInfo>>
 }
-const ProfileTechStack = ({ setProfileInfo }: ProfileTechStackProps) => {
+const ProfileTechStack = ({
+  techStacks,
+  setProfileInfo,
+}: ProfileTechStackProps) => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
   const [role, setRole] = useState("")
 
@@ -35,6 +50,7 @@ const ProfileTechStack = ({ setProfileInfo }: ProfileTechStackProps) => {
         margin="1.5rem 0 1.5rem 1rem">
         기술스택
       </Text>
+      <ProfileCurrentTechStack techStacks={techStacks} />
       {fields.map((field, index) => {
         return (
           <Flex
@@ -130,14 +146,18 @@ const ProfileTechStack = ({ setProfileInfo }: ProfileTechStackProps) => {
           </Flex>
         )
       })}
-      <Button
-        w="100%"
-        h="3rem"
-        border="1px solid"
-        borderColor="grey.300"
-        onClick={appendNewFields}>
-        + 기술스택 추가
-      </Button>
+      <Center>
+        <Button
+          w="99%"
+          h="3.2rem"
+          border="1px solid"
+          borderColor="grey.300"
+          borderRadius="1rem"
+          margin="auto auto"
+          onClick={appendNewFields}>
+          + 기술스택 추가
+        </Button>
+      </Center>
     </Box>
   )
 }

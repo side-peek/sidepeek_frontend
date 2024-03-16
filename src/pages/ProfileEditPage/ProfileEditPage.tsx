@@ -26,8 +26,16 @@ const ProfileEditPage = () => {
   const data = useUserInfoData()
   const userId = Number(data?.id)
   const { data: userInfoDetail } = useUserInfo(userId)
-
   const userDetail = userInfoDetail as UserInfoProperties
+
+  console.log(userInfoDetail)
+
+  const processedTechStacks = userDetail.techStacks.map(
+    ({ category, skill }) => {
+      const obj = { category: category, skillId: skill.id }
+      return obj
+    },
+  )
 
   const [profileInfo, setProfileInfo] = useState<ProfileInfo>({
     profileImageUrl: userDetail.profileImageUrl,
@@ -37,10 +45,10 @@ const ProfileEditPage = () => {
     job: userDetail.job,
     githubUrl: userDetail.githubUrl,
     blogUrl: userDetail.blogUrl,
-    techStacks: userDetail.techStacks,
+    techStacks: processedTechStacks,
   })
 
-  const { putUserDetailMutation } = usePutUserDetailMutation()
+  const { putUserDetailMutation } = usePutUserDetailMutation(userId)
 
   const handleUpdateProfile = () => {
     // TODO: 프로필 정보를 저장하는 api 요청
@@ -69,7 +77,11 @@ const ProfileEditPage = () => {
           blogUrl={profileInfo.blogUrl}
           setProfileInfo={setProfileInfo}
         />
-        <ProfileTechStack setProfileInfo={setProfileInfo} />
+
+        <ProfileTechStack
+          techStacks={userDetail.techStacks}
+          setProfileInfo={setProfileInfo}
+        />
       </VStack>
 
       <Flex
