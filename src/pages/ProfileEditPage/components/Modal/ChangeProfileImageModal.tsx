@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useRef } from "react"
 import { GoPlus } from "react-icons/go"
 
 import {
@@ -18,10 +18,6 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react"
 
-import { useMutation } from "@tanstack/react-query"
-
-import { postFile } from "@apis/file/postFile"
-
 import useFileUpload from "@pages/ProfileEditPage/hooks/useFileUpload"
 import { ProfileInfo } from "@pages/ProfileEditPage/types/types"
 
@@ -38,18 +34,22 @@ const ChangeProfileImageModal = ({
 }: ModalProps) => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
 
-  const { convertFileToBase64 } = useFileUpload()
-
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const [fileBase64, setFileBase64] = useState<string | undefined>()
-  const [isDragging, setIsDragging] = useState(false)
-  const [responsedFileUrl, setResponsedFileUrl] = useState("")
+  const {
+    handleFileChange,
+    handleDragEnter,
+    handleDragLeave,
+    handleDragOver,
+    handleFileDrop,
+    isDragging,
+    fileBase64,
+    responsedFileUrl,
+  } = useFileUpload()
 
   const handleClose = () => {
     onClose()
   }
-
   const handleSubmit = () => {
     setProfileInfo((profileInfo: ProfileInfo) => ({
       ...profileInfo,
@@ -58,86 +58,25 @@ const ChangeProfileImageModal = ({
     onClose()
   }
 
-  const uploadFileMutation = useMutation({
-    mutationFn: async (file: File) => await postFile(file),
-    onSuccess(data) {
-      setResponsedFileUrl(data?.fileUrl)
-      console.log(data)
-    },
-  })
-
-  const handleFileChange = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const selectedFile = event.target.files[0]
-      const base64 = await convertFileToBase64(selectedFile)
-      setFileBase64(base64)
-      console.log(selectedFile)
-
-      uploadFileMutation.mutate(selectedFile)
-    }
-  }
-
   const handleFileChoose = () => {
     if (!inputRef.current) return
     inputRef.current.click()
   }
 
-  const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault()
-    event.stopPropagation()
-
-    if (event?.dataTransfer?.items && event.dataTransfer.items.length > 0) {
-      setIsDragging(true)
-    }
-  }
-
-  const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault()
-    event.stopPropagation()
-    setIsDragging(false)
-  }
-
-  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault()
-    event.stopPropagation()
-  }
-
-  const handleFileDrop = async (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault()
-    event.stopPropagation()
-
-    const files = event?.dataTransfer?.files
-
-    if (files && files?.length > 0) {
-      const selectedFile = files[0]
-
-      const base64 = await convertFileToBase64(selectedFile)
-      setFileBase64(base64)
-      //   setProfileInfo((profileInfo: ProfileInfo) => ({
-      //     ...profileInfo,
-      //     profileImageUrl: base64,
-      //   }))
-      uploadFileMutation.mutate(selectedFile)
-    }
-    setIsDragging(false)
-  }
-
   return (
     <Modal
-      size="xl"
+      size="2xl"
       isOpen={isOpen}
       onClose={handleClose}>
       <ModalOverlay />
-      <ModalContent marginTop={isLargerThan500 ? "15rem" : "50%"}>
+      <ModalContent margin={isLargerThan500 ? "15rem 0 0 0" : "auto auto"}>
         <ModalHeader>프로필 이미지 변경</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Flex
             position="relative"
             w="100%"
-            h="40rem"
+            h="50rem"
             border="1px solid"
             borderColor={isDragging ? "yellow.100" : "grey.300"}
             justifyContent="center"
@@ -163,8 +102,9 @@ const ChangeProfileImageModal = ({
                 <Box
                   position="absolute"
                   borderRadius="50%"
+                  w="100%"
                   style={{
-                    clipPath: "circle(16rem at center)",
+                    clipPath: "circle(19rem at center)",
                   }}>
                   <Box
                     w="100%"
