@@ -224,7 +224,7 @@ declare module "api-models" {
     userId: number
     type: string
   }
-  
+
   export type postDoubleCheckNicknameResponseType = {
     isDuplicated: boolean
   }
