@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
-import { deleteComment } from "@/api/comment/deleteComment"
+import { deleteComment } from "@apis/comment/deleteComment"
 
 import { QUERY_KEY_GET_PROJECT_DETAIL } from "../queries/useProjectDetailQuery"
 
