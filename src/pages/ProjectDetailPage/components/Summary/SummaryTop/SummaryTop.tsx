@@ -39,7 +39,7 @@ const SummaryTop = ({
   }
 
   const { postLikeMutation } = usePostLikeMutation()
-  const { deleteLikeMutation } = useDeleteLikeMutation()
+  const { deleteLikeMutation } = useDeleteLikeMutation(Number(projectId))
   return (
     <Flex
       gap={isLargerThan1200 ? "1.5rem" : "1rem"}
