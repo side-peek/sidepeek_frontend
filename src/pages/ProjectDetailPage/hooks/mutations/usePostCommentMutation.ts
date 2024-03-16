@@ -2,7 +2,7 @@ import { postCommentPayload } from "api-models"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
-import { postComment } from "@/api/comment/postComment"
+import { postComment } from "@apis/comment/postComment"
 
 import { QUERY_KEY_GET_PROJECT_DETAIL } from "../queries/useProjectDetailQuery"
 
