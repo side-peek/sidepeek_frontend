@@ -11,8 +11,12 @@ import {
 } from "@chakra-ui/react"
 import { AllProject } from "api-models"
 
+import { useQueryClient } from "@tanstack/react-query"
+
 import { useAllProjectQuery } from "@pages/HomePage/hooks/queries/useAllProjectQuery"
 import { SortSelectType } from "@pages/HomePage/types/type"
+
+import { QUERYKEY } from "@constants/queryKey"
 
 import MoreButton from "../MoreButton/MoreButton"
 import ProjectList from "../ProjectList/ProjectList"
@@ -21,6 +25,7 @@ const ProjectListSection = () => {
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
   const [isReleased, setIsReleased] = useState(false)
   const [sortOption, setSortOption] = useState<SortSelectType>("createdAt")
+  const queryClient = useQueryClient()
 
   const lastProjectId = null
   const lastProject: AllProject | undefined = undefined
@@ -40,6 +45,12 @@ const ProjectListSection = () => {
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SortSelectType
+
+    // 다른 정렬 옵션 선택시 초기화 후 리패치
+    if (value !== sortOption) {
+      queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
+      queryClient.refetchQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
+    }
     setSortOption(value)
 
     refetchAllProject()
