@@ -1,5 +1,6 @@
-import { baseInstance } from "@api/axiosInstance"
 import { getUserProjectsPayload } from "api-models"
+
+import { baseInstance } from "@apis/axiosInstance"
 
 import { ENDPOINTS } from "@constants/endPoints"
 

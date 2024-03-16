@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query"
 
-import { postDoubleCheckEmail } from "@/api/user/postDoubleCheckEmail"
+import { postDoubleCheckEmail } from "@apis/user/postDoubleCheckEmail"
 
 import { DoubleCheckProps } from "@pages/SignUpPage/types/DoubleCheckProps"
 

@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query"
 
-import { getProjectDetail } from "@/api/project/getProjectDetail"
+import { getProjectDetail } from "@apis/project/getProjectDetail"
 
 export const QUERY_KEY_GET_PROJECT_DETAIL = "GET_PROJECT_DETAIL_1389471984712"
 export const useProjectDetailQuery = (projectId: number) => {

@@ -1,6 +1,6 @@
-import { getUserProjects } from "@api/user/getUserProjects"
-
 import { useQuery } from "@tanstack/react-query"
+
+import { getUserProjects } from "@apis/user/getUserProjects"
 
 interface UserProjectsProps {
   userId: number

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 
-import { getAllProjects } from "@/api/project/getAllProjects"
+import { getAllProjects } from "@apis/project/getAllProjects"
 
 const useAllProjectQuery = () => {
   const { data, isLoading, refetch } = useQuery({
