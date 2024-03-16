@@ -14,6 +14,7 @@ import ChangePWModal from "./components/Modal/ChangePWModal"
 import ProfileCard from "./components/Profile/ProfileCard"
 import ProfileIntroduction from "./components/Profile/ProfileIntroduction"
 import ProfileTechStack from "./components/Profile/ProfileTechStack"
+import usePutUserDetailMutation from "./hooks/mutation/usePutUserDetailMutation"
 import { useUserInfo } from "./hooks/query/useUserInfo"
 import StyledButton from "./styles/StyledButton"
 import { ProfileInfo } from "./types/types"
@@ -23,8 +24,8 @@ const ProfileEditPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const data = useUserInfoData()
-  const userId = data?.id
-  const { data: userInfoDetail } = useUserInfo(Number(userId))
+  const userId = Number(data?.id)
+  const { data: userInfoDetail } = useUserInfo(userId)
 
   const userDetail = userInfoDetail as UserInfoProperties
 
@@ -39,9 +40,12 @@ const ProfileEditPage = () => {
     techStacks: userDetail.techStacks,
   })
 
+  const { putUserDetailMutation } = usePutUserDetailMutation()
+
   const handleUpdateProfile = () => {
     // TODO: 프로필 정보를 저장하는 api 요청
     console.log(profileInfo)
+    putUserDetailMutation.mutate({ userId: userId, userInfo: profileInfo })
   }
 
   return (
