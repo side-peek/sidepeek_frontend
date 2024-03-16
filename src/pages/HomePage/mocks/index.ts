@@ -14,7 +14,7 @@ export const allProjectHandlers = [
     (req, res, ctx) => {
       const { isReleased, sort } = req.params
 
-      if (!isReleased) {
+      if (isReleased) {
         return res(ctx.status(200), ctx.json(mockDataReleased))
       }
       if (sort === "view") {

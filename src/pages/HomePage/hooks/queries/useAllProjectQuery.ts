@@ -8,7 +8,7 @@ export const useAllProjectQuery = (
   sortOption: "createdAt" | "like" | "view",
   isDeploy: boolean,
   pageSize: number,
-  lastProjectId: number | null,
+  lastProjectId: number | null = null,
   lastProjectNum: number | null,
 ) => {
   const {
@@ -38,10 +38,10 @@ export const useAllProjectQuery = (
       }),
     initialPageParam: 0,
     getNextPageParam: (lastPage) =>
-      lastPage.hasNext
+      (lastProjectId = lastPage.hasNext
         ? lastPage.content[lastPage.numberOfElements - 1].id
-        : null,
-    select: ({ pages }) => pages.flatMap((page) => page.content),
+        : null),
+    //select: ({ pages }) => pages.flatMap((page) => page.content),
   })
 
   return {

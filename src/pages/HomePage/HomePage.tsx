@@ -28,7 +28,9 @@ const HomePage = () => {
   const [isDeploy, setIsDeploy] = useState(false)
   const [sortOption, setSortOption] = useState<SortSelectType>("createdAt")
 
-  const pageSize = 24
+  const pageSize = 10
+  let lastOrderCount: null | number = null
+  const lastProjectId = null
 
   // 배너 프로젝트 조회
   const { bannerProjectList, isBannerLoading } = useBannerProjectQuery()
@@ -42,32 +44,37 @@ const HomePage = () => {
     hasNextPage,
     isFetchingNextPage,
     isRefetching,
-  } = useAllProjectQuery(sortOption, isDeploy, pageSize, null, null)
+  } = useAllProjectQuery(
+    sortOption,
+    isDeploy,
+    pageSize,
+    lastProjectId,
+    lastOrderCount,
+  )
 
   const isLoading = isAllProjectLoading || isRefetching
 
   // TODO: 더보기
-  //const projectList = allProjectList
-  //const lastProject = projectList && projectList[projectList.length - 1]
-  //lastProjectId = lastProject ? lastProject.id : null
-  //console.log(allProjectList, isAllProjectLoading)
+  const lastProject = allProjectList && allProjectList.pages[0].content.at(-1)
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SortSelectType
     setSortOption(value)
-    /*if (selectedOption === "like") {
-      lastProjectNum = lastProject && lastProject.likeCount
-    } else if (selectedOption === "view") {
-      lastProjectNum = lastProject && lastProject.viewCount
-    } else {
-      lastProjectNum = null
-    }*/
 
     refetchAllProject()
   }
 
+  if (sortOption === "like") {
+    lastOrderCount = lastProject ? lastProject.likeCount : null
+  } else if (sortOption === "view") {
+    lastOrderCount = lastProject ? lastProject.viewCount : null
+  } else {
+    lastOrderCount = null
+  }
+
   const loadMoreProjects = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) {
+      //console.log(lastOrderCount, sortOption)
       fetchNextPage()
     }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage])
@@ -106,25 +113,28 @@ const HomePage = () => {
             mt="0.5rem"
             templateColumns="repeat(auto-fill, minmax(24rem, 1fr))"
             gap={0}>
-            {allProjectList?.map((project) => (
-              <Center key={project.id}>
-                <Skeleton
-                  width="95%"
-                  borderRadius="1rem"
-                  isLoaded={!isLoading}>
-                  <Link to={`/project/${project.id}`}>
-                    <ProjectCard
-                      imgUrl={project.thumbnailUrl}
-                      viewCount={project.viewCount}
-                      heartCount={project.likeCount}
-                      isFullHeart={project.isLiked}
-                      title={project.name}
-                      content={project.subName}
-                    />
-                  </Link>
-                </Skeleton>
-              </Center>
-            ))}
+            {allProjectList !== undefined &&
+              allProjectList.pages.map((projectList) => {
+                return projectList.content.map((project) => (
+                  <Center key={project.id}>
+                    <Skeleton
+                      width="95%"
+                      borderRadius="1rem"
+                      isLoaded={!isLoading}>
+                      <Link to={`/project/${project.id}`}>
+                        <ProjectCard
+                          imgUrl={project.thumbnailUrl}
+                          viewCount={project.viewCount}
+                          heartCount={project.likeCount}
+                          isFullHeart={project.isLiked}
+                          title={project.name}
+                          content={project.subName}
+                        />
+                      </Link>
+                    </Skeleton>
+                  </Center>
+                ))
+              })}
           </Grid>
         </Stack>
         {hasNextPage && (

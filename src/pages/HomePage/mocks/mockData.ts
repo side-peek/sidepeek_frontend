@@ -1,5 +1,5 @@
 export const mockData = {
-  projects: [
+  content: [
     {
       id: 1,
       name: "사이드픽👀",
@@ -140,7 +140,7 @@ export const mockData = {
 }
 
 export const mockDataReleased = {
-  projects: [
+  content: [
     {
       id: 2,
       name: "냠냠디저트",
@@ -217,7 +217,7 @@ export const mockDataReleased = {
 }
 
 export const mockDataSortView = {
-  projects: [
+  content: [
     {
       id: 12,
       name: "사이드픽👀",
