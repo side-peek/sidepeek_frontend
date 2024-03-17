@@ -25,7 +25,7 @@ export const COMMENT_MESSAGES = {
 
 export const LIKE_MESSAGES = {
   ERROR: {
-    FAIL: "좋아요 요청에 실패했습니다.", // 400, 404
+    UNVALIDATE: "좋아요 요청에 실패했습니다.", // 400, 404
     DUPLICATE: "이미 좋아요를 눌렀습니다.", // 409
     UNCAUGHT: "일시적인 오류가 발생하였습니다.",
   },
