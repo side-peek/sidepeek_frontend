@@ -9,9 +9,11 @@ import { putUserDetail } from "@apis/user/putUserDetail"
 const usePutUserDetailMutation = (userId: number) => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+
   const putUserDetailMutation = useMutation({
     mutationFn: async (formData: putUserDetailPayload) =>
       await putUserDetail(formData),
+
     onSuccess(data) {
       console.log("putUserDetail 성공", data)
       alert("프로필 수정이 완료되었습니다")
@@ -19,6 +21,7 @@ const usePutUserDetailMutation = (userId: number) => {
       navigate(`/profile/${userId}`)
     },
   })
+
   return {
     putUserDetailMutation,
   }
