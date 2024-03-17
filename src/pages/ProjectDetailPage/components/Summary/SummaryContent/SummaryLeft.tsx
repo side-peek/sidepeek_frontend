@@ -15,6 +15,7 @@ const SummaryLeft = ({ deployUrl, githubUrl, overview }: SummaryLeftProps) => {
     <Flex
       flexDirection="column"
       gap="2rem"
+      w={isLargerThan1200 ? "50%" : "100%"}
       align={isLargerThan1200 ? "flex-start" : "center"}
       justifyContent={isLargerThan1200 ? "space-between" : "center"}>
       <SummaryOverview overview={overview} />
