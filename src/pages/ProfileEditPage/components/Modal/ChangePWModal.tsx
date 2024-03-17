@@ -24,13 +24,15 @@ import {
   NEW_PASSWORD_VALIDATION_OPTION,
   PASSWORD_MISMATCH_ERROR,
 } from "@pages/ProfileEditPage/constants/validation"
+import usePutUserPassword from "@pages/ProfileEditPage/hooks/mutation/usePutUserPassword"
 import { PasswordFormValues } from "@pages/ProfileEditPage/types/types"
 
 interface ModalProps {
   isOpen: boolean
   onClose: () => void
+  userId: number
 }
-const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
+const ChangePWModal = ({ isOpen, onClose, userId }: ModalProps) => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
   const {
     register,
@@ -39,14 +41,19 @@ const ChangePWModal = ({ isOpen, onClose }: ModalProps) => {
     reset,
     formState: { errors },
   } = useForm<PasswordFormValues>()
+  const { putUserPasswordMutation } = usePutUserPassword()
+
   const onValid = (data: PasswordFormValues) => {
     // TODO: 비밀번호 변경 api 요청
-    console.log(data)
-    const putPasswordPayload = {
+    const passwordChange = {
       originalPassword: data.currentPassword,
       password: data.newPassword,
     }
-    console.log(putPasswordPayload)
+    console.log(passwordChange)
+    putUserPasswordMutation.mutate({
+      userId: userId,
+      passwordChange: passwordChange,
+    })
     reset()
     onClose()
   }

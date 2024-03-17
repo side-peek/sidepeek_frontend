@@ -28,8 +28,6 @@ const ProfileEditPage = () => {
   const { data: userInfoDetail } = useUserInfo(userId)
   const userDetail = userInfoDetail as UserInfoProperties
 
-  console.log(userInfoDetail)
-
   const processedTechStacks = userDetail.techStacks.map(
     ({ category, skill }) => {
       const obj = { category: category, skillId: skill.id }
@@ -47,6 +45,8 @@ const ProfileEditPage = () => {
     blogUrl: userDetail.blogUrl,
     techStacks: processedTechStacks,
   })
+
+  console.log(profileInfo)
 
   const { putUserDetailMutation } = usePutUserDetailMutation(userId)
 
@@ -95,6 +95,7 @@ const ProfileEditPage = () => {
         <ChangePWModal
           isOpen={isOpen}
           onClose={onClose}
+          userId={userId}
         />
       </Flex>
     </VStack>

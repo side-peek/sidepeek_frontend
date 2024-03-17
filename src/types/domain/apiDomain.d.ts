@@ -220,9 +220,14 @@ declare module "api-models" {
     userInfo: UserInfoRequest
   }
 
+  export type PasswordChangeType = {
+    originalPassword: string
+    password: string
+  }
+
   export type putUserPasswordPayload = {
     userId: number
-    password: string
+    passwordChange: PasswordChangeType
   }
 
   export type postDoubleCheckEmailPayload = {
