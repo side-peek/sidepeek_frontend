@@ -282,75 +282,75 @@ export const DUMMY_PROJECT_DETAIL = {
       },
     },
   ],
-  startDate: "2024-01",
-  endDate: "2024-03",
+  startDate: "",
+  endDate: "",
   ownerId: 1,
   members: [
-    {
-      id: 1,
-      role: "PO",
-      userSummary: {
-        id: 1,
-        nickname: "의진",
-        profileImageUrl:
-          "https://i.namu.wiki/i/N6_MwKL2hvhgbTGJR_rGAxby09eVQJdnx33clAyVNGcbZI83kXZSNg6OoGQeqTQ0iNWO-CZFZheouxGdEkCLvw.webp",
-      },
-    },
-    {
-      id: 2,
-      role: "프론트",
-      userSummary: {
-        id: 2,
-        nickname: "동건",
-        profileImageUrl:
-          "https://user-images.githubusercontent.com/donggun.png",
-      },
-    },
-    {
-      id: 3,
-      role: "오락부짱",
-      userSummary: {
-        id: null,
-        nickname: "민호",
-        profileImageUrl: null,
-      },
-    },
-    {
-      id: 4,
-      role: "PO",
-      userSummary: {
-        id: null,
-        nickname: "육개",
-        profileImageUrl: null,
-      },
-    },
-    {
-      id: 5,
-      role: "PO",
-      userSummary: {
-        id: null,
-        nickname: "육개데",
-        profileImageUrl: null,
-      },
-    },
-    {
-      id: 6,
-      role: "프론트",
-      userSummary: {
-        id: null,
-        nickname: "훈오오",
-        profileImageUrl: null,
-      },
-    },
-    {
-      id: 7,
-      role: "오락부짱",
-      userSummary: {
-        id: null,
-        nickname: "짱짱맨",
-        profileImageUrl: null,
-      },
-    },
+    // {
+    //   id: 1,
+    //   role: "PO",
+    //   userSummary: {
+    //     id: 1,
+    //     nickname: "의진",
+    //     profileImageUrl:
+    //       "https://i.namu.wiki/i/N6_MwKL2hvhgbTGJR_rGAxby09eVQJdnx33clAyVNGcbZI83kXZSNg6OoGQeqTQ0iNWO-CZFZheouxGdEkCLvw.webp",
+    //   },
+    // },
+    // {
+    //   id: 2,
+    //   role: "프론트",
+    //   userSummary: {
+    //     id: 2,
+    //     nickname: "동건",
+    //     profileImageUrl:
+    //       "https://user-images.githubusercontent.com/donggun.png",
+    //   },
+    // },
+    // {
+    //   id: 3,
+    //   role: "오락부짱",
+    //   userSummary: {
+    //     id: null,
+    //     nickname: "민호",
+    //     profileImageUrl: null,
+    //   },
+    // },
+    // {
+    //   id: 4,
+    //   role: "PO",
+    //   userSummary: {
+    //     id: null,
+    //     nickname: "육개",
+    //     profileImageUrl: null,
+    //   },
+    // },
+    // {
+    //   id: 5,
+    //   role: "PO",
+    //   userSummary: {
+    //     id: null,
+    //     nickname: "육개데",
+    //     profileImageUrl: null,
+    //   },
+    // },
+    // {
+    //   id: 6,
+    //   role: "프론트",
+    //   userSummary: {
+    //     id: null,
+    //     nickname: "훈오오",
+    //     profileImageUrl: null,
+    //   },
+    // },
+    // {
+    //   id: 7,
+    //   role: "오락부짱",
+    //   userSummary: {
+    //     id: null,
+    //     nickname: "짱짱맨",
+    //     profileImageUrl: null,
+    //   },
+    // },
   ],
   description:
     "## 이미지가 잘오나?\\n\\n![image](https://velog.velcdn.com/images/gnsdh8616/post/c30b08c8-4221-44b5-bb68-3a66d1917de6/image.gif)\\n\\n## gg",
