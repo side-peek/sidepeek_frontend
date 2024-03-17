@@ -9,7 +9,6 @@ import {
   Stack,
   useMediaQuery,
 } from "@chakra-ui/react"
-import { AllProject } from "api-models"
 
 import { useQueryClient } from "@tanstack/react-query"
 
@@ -21,14 +20,17 @@ import { QUERYKEY } from "@constants/queryKey"
 import MoreButton from "../MoreButton/MoreButton"
 import ProjectList from "../ProjectList/ProjectList"
 
-const ProjectListSection = () => {
+interface ProjectListSectionProps {
+  isInfinityScroll?: boolean
+}
+
+const ProjectListSection = ({
+  isInfinityScroll = false,
+}: ProjectListSectionProps) => {
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
   const [isReleased, setIsReleased] = useState(false)
   const [sortOption, setSortOption] = useState<SortSelectType>("createdAt")
   const queryClient = useQueryClient()
-
-  const lastProjectId = null
-  const lastProject: AllProject | undefined = undefined
 
   // 프로젝트 전체 목록 조회
   const {
@@ -39,7 +41,7 @@ const ProjectListSection = () => {
     hasNextPage,
     isFetchingNextPage,
     isRefetching,
-  } = useAllProjectQuery({ sortOption, isReleased, lastProjectId, lastProject })
+  } = useAllProjectQuery({ sortOption, isReleased })
 
   const isLoading = isAllProjectLoading || isRefetching
 
@@ -91,10 +93,12 @@ const ProjectListSection = () => {
           isLoading={isLoading}
         />
       </Stack>
-      <MoreButton
-        loadMore={loadMoreProjects}
-        hasNext={hasNextPage}
-      />
+      {!isInfinityScroll && (
+        <MoreButton
+          loadMore={loadMoreProjects}
+          hasNext={hasNextPage}
+        />
+      )}
     </Container>
   )
 }

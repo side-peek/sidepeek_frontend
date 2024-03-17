@@ -15,7 +15,7 @@ const HomePage = () => {
       ) : (
         <Banner bannerList={bannerProjectList} />
       )}
-      <ProjectListSection />
+      <ProjectListSection isInfinityScroll={true} />
       <Box height="15rem" />
     </>
   )

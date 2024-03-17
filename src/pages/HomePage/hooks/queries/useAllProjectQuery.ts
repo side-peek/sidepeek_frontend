@@ -9,8 +9,8 @@ import { QUERYKEY } from "@constants/queryKey"
 export const useAllProjectQuery = ({
   sortOption,
   isReleased,
-  lastProjectId,
-  lastProject,
+  lastProjectId = null,
+  lastProject = undefined,
 }: getAllProjectsType) => {
   const {
     data,

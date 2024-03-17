@@ -272,8 +272,8 @@ declare module "api-models" {
   export type getAllProjectsType = {
     sortOption: "createdAt" | "like" | "view"
     isReleased: boolean
-    lastProjectId: number | null
-    lastProject: AllProject | undefined
+    lastProjectId?: number | null
+    lastProject?: AllProject | undefined
   }
 
   export type putProjectPayload = {
