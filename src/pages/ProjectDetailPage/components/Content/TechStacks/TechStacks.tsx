@@ -17,7 +17,7 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
       direction="column"
       gap="3rem">
       <Text
-        fontSize="lg"
+        fontSize="2xl"
         fontFamily="SCDream_Bold">
         기술 스택
       </Text>
