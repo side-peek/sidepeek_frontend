@@ -21,41 +21,49 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
         fontFamily="SCDream_Bold">
         기술 스택
       </Text>
-      <Flex
-        gap="3rem"
-        direction="column">
-        {groupedByCategory.map(([category, stacks]) => (
-          <Flex
-            key={category}
-            direction={isLargerThan768 ? "row" : "column"}
-            gap="2rem">
-            <Text
-              fontSize="xl"
-              minW="8rem"
-              whiteSpace="nowrap">
-              {category}
-            </Text>
-            <HStack
-              spacing="1rem"
-              flexWrap="wrap">
-              {stacks.map((stack) => (
-                <CommonTag
-                  leftElement={
-                    <Image
-                      src={stack.skill.iconImageUrl}
-                      w="2rem"
-                      h="2rem"
-                    />
-                  }
-                  label={stack.skill.name}
-                  key={stack.skill.id}
-                  fontSize="lg"
-                />
-              ))}
-            </HStack>
-          </Flex>
-        ))}
-      </Flex>
+      {techStacks.length > 0 ? (
+        <Flex
+          gap="3rem"
+          direction="column">
+          {groupedByCategory.map(([category, stacks]) => (
+            <Flex
+              key={category}
+              direction={isLargerThan768 ? "row" : "column"}
+              gap="2rem">
+              <Text
+                fontSize="xl"
+                minW="8rem"
+                whiteSpace="nowrap">
+                {category}
+              </Text>
+              <HStack
+                spacing="1rem"
+                flexWrap="wrap">
+                {stacks.map((stack) => (
+                  <CommonTag
+                    leftElement={
+                      <Image
+                        src={stack.skill.iconImageUrl}
+                        w="2rem"
+                        h="2rem"
+                      />
+                    }
+                    label={stack.skill.name}
+                    key={stack.skill.id}
+                    fontSize="lg"
+                  />
+                ))}
+              </HStack>
+            </Flex>
+          ))}
+        </Flex>
+      ) : (
+        <Text
+          fontSize="lg"
+          color="grey.500">
+          등록된 기술 스택이 존재하지 않습니다.
+        </Text>
+      )}
     </Flex>
   )
 }
