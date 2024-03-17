@@ -1,8 +1,10 @@
 // TODO: 익명 처리
+import { useCallback } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
 import { Box, Button, Flex, FormControl, Textarea } from "@chakra-ui/react"
+import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 
@@ -20,20 +22,38 @@ const CommentsForm = ({
   isReplyComment,
 }: CommentsFormProps) => {
   const { register, reset, handleSubmit } = useForm<CommentFormValues>()
+
   const { sendCommentMutation } = usePostCommentMutation()
-  // const user = useUserInfoData()
-  const onSubmit: SubmitHandler<CommentFormValues> = (text) => {
-    const commentRequestValue = {
-      // ownerId: user.id,
-      ownerId: 123,
-      projectId: Number(projectId),
-      isAnonymous: false,
-      parentId: parentId ? parentId : null,
-      content: text.content,
-    }
-    sendCommentMutation.mutate(commentRequestValue)
-    reset()
-  }
+  const user = useUserInfoData()
+
+  const onSubmit: SubmitHandler<CommentFormValues> = useCallback(
+    (text) => {
+      if (!user || !user.id) {
+        return
+      }
+
+      const commentRequestValue = {
+        ownerId: user.id,
+        projectId: Number(projectId),
+        isAnonymous: false,
+        parentId: parentId ? parentId : null,
+        content: text.content,
+      }
+      sendCommentMutation.mutate(commentRequestValue)
+      reset()
+    },
+    [parentId, projectId, reset, user, sendCommentMutation],
+  )
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === "Enter" && !e.shiftKey && handleSubmit) {
+        e.preventDefault()
+        handleSubmit(onSubmit)()
+      }
+    },
+    [handleSubmit, onSubmit],
+  )
 
   return (
     <Box w="100%">
@@ -56,6 +76,7 @@ const CommentsForm = ({
               _hover={{ boxShadow: "none", borderColor: "grey.400" }}
               _focus={{ boxShadow: "none", borderColor: "grey.400" }}
               {...register("content", { required: true })}
+              onKeyDown={handleKeyDown}
             />
 
             <Button

@@ -54,7 +54,8 @@ declare module "api-models" {
     ownerId: number
     members: Member[]
     viewCount: number
-    likeCount
+    likeCount: number
+    likeId: number | null
     commentCount: number
     comments: Comment[]
     description: string
@@ -275,8 +276,8 @@ declare module "api-models" {
   }
 
   /* 좋아요 */
-  export type getLikePayload = {
-    likes: Like[]
+  export type getLikeResponseType = {
+    likeId: number | null
   }
 
   export type postLikePayload = {
