@@ -31,7 +31,7 @@ const CommentsForm = ({
       parentId: parentId ? parentId : null,
       content: text.content,
     }
-    sendCommentMutation.mutate(commentRequestValue)
+    sendCommentMutation(commentRequestValue)
     reset()
   }
 
