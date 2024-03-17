@@ -35,8 +35,8 @@ const SummaryTopIcon = ({
       {isLike ? (
         <IconButton
           onClick={() => {
-            postLikeMutation.mutate({ projectId: Number(projectId) })
-            deleteLikeMutation.mutate({ likeId: 12 })
+            postLikeMutation({ projectId: Number(projectId) })
+            deleteLikeMutation({ likeId: 12 })
           }}
           {...props}
         />
