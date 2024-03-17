@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react"
+import { HStack, Stack, Text } from "@chakra-ui/react"
 import { Member } from "api-models"
 
 import membersCategory from "@pages/ProjectDetailPage/utils/membersCategory"
@@ -12,26 +12,34 @@ interface MemberInfoProps {
 const MemberInfo = ({ members }: MemberInfoProps) => {
   const groupedByCategory = membersCategory(members)
   return (
-    <Flex
-      direction="column"
-      gap="2rem">
+    <Stack
+      direction={groupedByCategory.length > 0 ? "column" : "row"}
+      spacing="2rem">
       <Text
         fontSize="2xl"
         fontFamily="SCDream_Bold">
         팀원
       </Text>
-      <Flex
-        gap="1rem"
+      <HStack
+        spacing="1rem"
         flexWrap="wrap">
-        {groupedByCategory.map(([category, members]) => (
-          <MemberList
-            key={category}
-            category={category}
-            members={members}
-          />
-        ))}
-      </Flex>
-    </Flex>
+        {groupedByCategory.length > 0 ? (
+          groupedByCategory.map(([category, members]) => (
+            <MemberList
+              key={category}
+              category={category}
+              members={members}
+            />
+          ))
+        ) : (
+          <Text
+            color="grey.500"
+            fontSize="lg">
+            등록된 멤버가 존재하지 않습니다.
+          </Text>
+        )}
+      </HStack>
+    </Stack>
   )
 }
 
