@@ -40,7 +40,7 @@ export const router = (queryClient: QueryClient) => {
               element: <ProjectDetailPage />,
             },
             {
-              path: "/project/:projectId/edit",
+              path: "/project/edit",
               element: <ProjectEditPage />,
             },
             {

@@ -2,6 +2,7 @@ import { useEffect } from "react"
 
 import { useToast } from "@chakra-ui/react"
 import { postLikePayload } from "api-models"
+import { Project } from "api-models"
 import { isAxiosError } from "axios"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
@@ -25,9 +26,41 @@ export const usePostLikeMutation = () => {
   const { mutate: postLikeMutation, error } = useMutation({
     mutationKey: [QUERY_KEY_POST_LIKE],
     mutationFn: (data: postLikePayload) => postLike(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
+    onMutate: async ({ projectId }) => {
+      await queryClient.cancelQueries({
         queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
+      })
+
+      const previousLikeState = queryClient.getQueryData<Project>([
+        QUERY_KEY_GET_PROJECT_DETAIL,
+        projectId,
+      ])
+
+      if (previousLikeState) {
+        const updatedLikeState = {
+          ...previousLikeState,
+          likeId: 99999999,
+          likeCount: previousLikeState.likeCount + 1,
+        }
+        queryClient.setQueryData(
+          [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
+          updatedLikeState,
+        )
+      }
+
+      return { previousLikeState }
+    },
+
+    onError: (err, _, context) => {
+      console.log(err)
+      queryClient.setQueryData(
+        [QUERY_KEY_GET_PROJECT_DETAIL],
+        context?.previousLikeState,
+      )
+    },
+    onSettled: (_, __, { projectId }) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
       })
     },
   })

@@ -25,9 +25,9 @@ export const usePostCommentMutation = () => {
   const { mutate: sendCommentMutation, error } = useMutation({
     mutationKey: [QUERY_KEY_POST_COMMENT],
     mutationFn: (data: postCommentPayload) => postComment(data),
-    onSuccess: () => {
+    onSuccess: (_, { projectId }) => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
+        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
       })
       toast({
         status: "success",
