@@ -1,13 +1,15 @@
-import { useQuery } from "@tanstack/react-query"
+import { useSuspenseQuery } from "@tanstack/react-query"
 
 import { getUserDetail } from "@apis/user/getUserDetail"
 
 export const useUserInfo = (userId: number) => {
-  const { isLoading, data } = useQuery({
+  const { data, error } = useSuspenseQuery({
     queryKey: ["userInfo", userId],
     queryFn: () => getUserDetail({ userId }),
-    // gcTime: 0,
   })
 
-  return { isLoading, data }
+  if (error) {
+    console.log(error)
+  }
+  return { data }
 }

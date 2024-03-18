@@ -8,7 +8,6 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
-import { UserInfoProperties } from "api-models"
 
 import ChangePWModal from "./components/Modal/ChangePWModal"
 import ProfileCard from "./components/Profile/ProfileCard"
@@ -25,10 +24,10 @@ const ProfileEditPage = () => {
 
   const data = useUserInfoData()
   const userId = Number(data?.id)
-  const { data: userInfoDetail } = useUserInfo(userId)
-  const userDetail = userInfoDetail as UserInfoProperties
 
-  const processedTechStacks = userDetail.techStacks.map(
+  const { data: userInfoDetail } = useUserInfo(userId)
+
+  const processedTechStacks = userInfoDetail?.techStacks?.map(
     ({ category, skill }) => {
       const obj = { category: category, skillId: skill.id }
       return obj
@@ -36,17 +35,15 @@ const ProfileEditPage = () => {
   )
 
   const [profileInfo, setProfileInfo] = useState<ProfileInfo>({
-    profileImageUrl: userDetail.profileImageUrl,
-    nickname: userDetail.nickname,
-    career: userDetail.career,
-    introduction: userDetail.introduction,
-    job: userDetail.job,
-    githubUrl: userDetail.githubUrl,
-    blogUrl: userDetail.blogUrl,
+    profileImageUrl: userInfoDetail.profileImageUrl,
+    nickname: userInfoDetail.nickname,
+    career: userInfoDetail.career,
+    introduction: userInfoDetail.introduction,
+    job: userInfoDetail.job,
+    githubUrl: userInfoDetail.githubUrl,
+    blogUrl: userInfoDetail.blogUrl,
     techStacks: processedTechStacks,
   })
-
-  console.log(profileInfo)
 
   const { putUserDetailMutation } = usePutUserDetailMutation(userId)
 
@@ -79,7 +76,7 @@ const ProfileEditPage = () => {
         />
 
         <ProfileTechStack
-          techStacks={userDetail.techStacks}
+          techStacks={userInfoDetail.techStacks}
           setProfileInfo={setProfileInfo}
         />
       </VStack>
