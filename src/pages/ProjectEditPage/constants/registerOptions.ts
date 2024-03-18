@@ -32,4 +32,7 @@ export const projectInputRegister: ProjectInputRegisterType = {
   techStacks: { required: "하나 이상은 필수입니다" },
 
   overviewImageUrl: {},
+
+  description: {},
+  troubleShooting: {},
 }

@@ -11,4 +11,6 @@ export const ProjectFormDefaultValues: ProjectFormValues = {
   startDate: "",
   endDate: "",
   techStacks: [],
+  description: "",
+  troubleShooting: "",
 }

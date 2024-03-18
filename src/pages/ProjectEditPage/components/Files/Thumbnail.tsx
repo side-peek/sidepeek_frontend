@@ -7,7 +7,7 @@ import { useProjectFormContext } from "@pages/ProjectEditPage/hooks/useProjectFo
 import FileUploadSection from "./FileUploadSection"
 
 const Thumbnail = () => {
-  const { getValues, setValue, watch } = useProjectFormContext()
+  const { getValues, setValue } = useProjectFormContext()
   const { onChangeFile } = useFileUpload()
 
   const onDropFile = async (file: File[]) => {
@@ -17,8 +17,6 @@ const Thumbnail = () => {
     }
     setValue("thumbnailUrl", fileUrls[0])
   }
-
-  console.log(watch("thumbnailUrl"))
 
   return (
     <>
