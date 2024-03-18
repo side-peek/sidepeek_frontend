@@ -6,10 +6,8 @@ import FileUploadSection from "./FileUploadSection"
 
 const Overview = () => {
   const MAX_FILE_UPLOAD = 6
-  const { getValues, setValue, watch } = useProjectFormContext()
+  const { getValues, setValue } = useProjectFormContext()
   const { onChangeFile } = useFileUpload()
-
-  console.log(watch("overviewImageUrl"))
 
   const onDropFile = async (files: File[]) => {
     const prevImageUrls = getValues("overviewImageUrl")
