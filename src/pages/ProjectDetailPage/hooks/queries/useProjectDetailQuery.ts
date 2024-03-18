@@ -7,7 +7,10 @@ import { useQuery } from "@tanstack/react-query"
 
 import { getProjectDetail } from "@apis/project/getProjectDetail"
 
-import { GET_PROJECT_MESSAGES } from "@pages/ProjectDetailPage/constants/toastMessage"
+import {
+  COMMON_MESSAGES,
+  GET_PROJECT_MESSAGES,
+} from "@pages/ProjectDetailPage/constants/toastMessage"
 import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
 export const QUERY_KEY_GET_PROJECT_DETAIL = "GET_PROJECT_DETAIL_1389471984712"
@@ -23,7 +26,7 @@ export const useProjectDetailQuery = (projectId: number) => {
       let message = ""
       switch (error.response?.status) {
         case 500: {
-          message = GET_PROJECT_MESSAGES.ERROR.SERVER
+          message = COMMON_MESSAGES.SERVER
           break
         }
         case 404: {
