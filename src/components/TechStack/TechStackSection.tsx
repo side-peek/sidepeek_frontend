@@ -17,7 +17,8 @@ const TechStackSection = ({
   onAppendStack,
   onDeleteField,
   onDeleteStack,
-  children,
+  onChangeCategory,
+  render,
 }: FieldProps<Skill>) => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
   return (
@@ -29,6 +30,11 @@ const TechStackSection = ({
             key={field.id || index}
             direction={isLargerThan500 ? "row" : "column"}
             mb={isLargerThan500 ? "3rem" : "1.5rem"}>
+            {render({
+              value: field.category,
+              onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+                onChangeCategory(e, index),
+            })}
             {onDeleteField && (
               <Box
                 pos="absolute"
@@ -41,9 +47,7 @@ const TechStackSection = ({
             )}
             <Box
               flex={isLargerThan500 ? "0 0 25rem" : "0 0 3.5rem"}
-              pr={isLargerThan500 ? "2rem" : "0rem"}>
-              {children}
-            </Box>
+              pr={isLargerThan500 ? "2rem" : "0rem"}></Box>
             <Box
               flex="0 0 30rem"
               borderLeft={isLargerThan500 ? "1px solid" : ""}

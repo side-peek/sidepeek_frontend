@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react"
+import { ChangeEventHandler, useState } from "react"
 
 import { Skill } from "api-models"
 
@@ -15,7 +15,17 @@ export interface FieldProps<T> {
   onAppendStack?: (data: T, idx: number) => void
   onDeleteField?: (number: number) => void
   onDeleteStack?: (data: T, idx: number) => void
-  children?: ReactNode
+  onChangeCategory: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    idx: number,
+  ) => void
+  render: ({
+    value,
+    onChange,
+  }: {
+    value: string
+    onChange: ChangeEventHandler<HTMLInputElement>
+  }) => JSX.Element
 }
 
 export const useTechStack = (defaultValue: FieldElement<Skill>[]) => {
@@ -54,11 +64,24 @@ export const useTechStack = (defaultValue: FieldElement<Skill>[]) => {
     )
   }
 
+  const onChangeCategory = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    idx: number,
+  ) => {
+    setFieldValue((prev) =>
+      prev.map((el, number) =>
+        number === idx ? { ...el, category: e.target.value } : el,
+      ),
+    )
+  }
+
   return {
     fieldValue,
     onAppendField,
     onAppendStack,
     onDeleteField,
     onDeleteStack,
+    setFieldValue,
+    onChangeCategory,
   }
 }
