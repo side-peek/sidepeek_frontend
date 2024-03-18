@@ -75,7 +75,13 @@ declare module "api-models" {
     viewCount: number
     likeCount: number
     isLiked: boolean
-    isDeploy: boolean
+  }
+
+  export type BannerProject = {
+    id: number
+    name: string
+    subName: string
+    thumbnailUrl: string
   }
 
   export type Description = {
@@ -286,7 +292,17 @@ declare module "api-models" {
   }
 
   export type getAllProjectsResponseType = {
-    projects: AllProject[]
+    content: AllProject[]
+    totalElements: number
+    numberOfElements: number
+    hasNext: boolean
+  }
+
+  export type getAllProjectsType = {
+    sortOption: "createdAt" | "like" | "view"
+    isReleased: boolean
+    lastProjectId?: number | null
+    lastProject?: AllProject | undefined
   }
 
   export type putProjectPayload = {
