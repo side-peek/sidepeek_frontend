@@ -1,23 +1,27 @@
 import { ReactNode } from "react"
 
-import { Flex } from "@chakra-ui/react"
+import { BoxProps, Flex } from "@chakra-ui/react"
 import { Skill } from "api-models"
 
 import SearchBox from "@components/Search/SearchMain"
 import { useInput } from "@components/Search/hooks/useInput"
 import { useTechStacks } from "@components/Search/hooks/useTechStacksSearch"
 
-interface StackSearchSectionProps {
+interface StackSearchSectionProps extends BoxProps {
   children?: ReactNode
   render: ({ techStacks }: { techStacks: Skill[] }) => JSX.Element
 }
 
-const StackSearchBox = ({ children, render }: StackSearchSectionProps) => {
+const StackSearchBox = ({
+  children,
+  render,
+  ...props
+}: StackSearchSectionProps) => {
   const [inputValue, onInput] = useInput("")
   const [techStacks] = useTechStacks(inputValue)
 
   return (
-    <SearchBox>
+    <SearchBox {...props}>
       <Flex
         gap="0.5rem"
         flexWrap="wrap">
