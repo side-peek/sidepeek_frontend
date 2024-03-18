@@ -1,6 +1,6 @@
-import { getBannerProjects } from "@api/project/getBannerProjects"
-
 import { useQuery } from "@tanstack/react-query"
+
+import { getBannerProjects } from "@apis/project/getBannerProjects"
 
 import { QUERYKEY } from "@constants/queryKey"
 
