@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react"
 
-import SearchSection from "./components/SearchBarSection/SearchSection"
+import SearchBarSection from "./components/SearchBarSection/SearchBarSection"
 import SearchListSection from "./components/SearchListSection/SearchListSection"
 
 const ProjectListPage = () => {
@@ -9,7 +9,7 @@ const ProjectListPage = () => {
 
   return (
     <>
-      <SearchSection search={search ? search : ""} />
+      <SearchBarSection search={search ? search : ""} />
       <SearchListSection search={search ? search : ""} />
       <Box height="15rem" />
     </>

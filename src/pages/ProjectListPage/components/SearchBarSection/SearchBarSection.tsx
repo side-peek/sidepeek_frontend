@@ -7,7 +7,7 @@ import CommonInput from "@components/Input/CommonInput"
 
 import { SearchListSectionProps } from "../SearchListSection/SearchListSection"
 
-const SearchSection = ({ search }: SearchListSectionProps) => {
+const SearchBarSection = ({ search }: SearchListSectionProps) => {
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)")
   const $ref = useRef<HTMLInputElement>(null)
 
@@ -62,4 +62,4 @@ const SearchSection = ({ search }: SearchListSectionProps) => {
   )
 }
 
-export default SearchSection
+export default SearchBarSection
