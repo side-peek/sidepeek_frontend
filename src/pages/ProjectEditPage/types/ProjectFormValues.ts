@@ -5,6 +5,7 @@ export type ProjectFormValues = {
   name: string
   subName: string
   overview: string
+  overviewImageUrl: string[]
   thumbnailUrl: string
   githubUrl: string
   deployUrl: string

@@ -30,4 +30,6 @@ export const projectInputRegister: ProjectInputRegisterType = {
   endDate: { required: "프로젝트 완성 날짜를 입력해주세요" },
 
   techStacks: { required: "하나 이상은 필수입니다" },
+
+  overviewImageUrl: {},
 }
