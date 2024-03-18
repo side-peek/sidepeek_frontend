@@ -1,6 +1,6 @@
-import { ENDPOINTS } from "@constants/endPoints"
+import { authInstance } from "@apis/axiosInstance"
 
-import { authInstance } from "../axiosInstance"
+import { ENDPOINTS } from "@constants/endPoints"
 
 export const postFile = async (file: File) => {
   const response = await authInstance.post(
