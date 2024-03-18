@@ -4,6 +4,6 @@ import { UseFormRegisterReturn } from "react-hook-form"
 import { InputProps } from "@chakra-ui/react"
 
 export interface CommonInputProps extends PropsWithChildren, InputProps {
-  register: UseFormRegisterReturn
+  register?: UseFormRegisterReturn | null
   inputWidth?: string
 }
