@@ -1,7 +1,9 @@
 import { Comment } from "api-models"
 
-import CommentsForm from "./CommentsForm"
-import CommentsList from "./CommentsList"
+import { CommentProvider } from "@pages/ProjectDetailPage/store/CommentContext"
+
+import CommentsForm from "./CommentsForm/CommentsForm"
+import CommentsList from "./CommentsList/CommentsList"
 import CommentsLayout from "./Layout/CommentsLayout"
 
 export interface CommentsProps {
@@ -12,7 +14,9 @@ const Comments = ({ comments }: CommentsProps) => {
   return (
     <CommentsLayout>
       <CommentsForm />
-      <CommentsList comments={comments} />
+      <CommentProvider>
+        <CommentsList comments={comments} />
+      </CommentProvider>
     </CommentsLayout>
   )
 }

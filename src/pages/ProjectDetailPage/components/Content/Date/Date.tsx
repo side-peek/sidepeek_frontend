@@ -13,7 +13,7 @@ const Date = ({ startDate, endDate }: DateProps) => {
       spacing="6rem"
       h="10rem">
       <Text
-        fontSize="3xl"
+        fontSize="2xl"
         fontFamily="SCDream_Bold">
         프로젝트 기간
       </Text>

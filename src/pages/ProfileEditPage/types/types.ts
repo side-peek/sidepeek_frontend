@@ -1,3 +1,8 @@
+export interface TechStack {
+  skillId?: number
+  category?: string
+}
+
 export interface ProfileInfo {
   profileImageUrl: string
   nickname: string
@@ -5,6 +10,8 @@ export interface ProfileInfo {
   introduction: string
   githubUrl: string
   blogUrl: string
+  job: string
+  techStacks: TechStack[]
 }
 
 export type CareerType =

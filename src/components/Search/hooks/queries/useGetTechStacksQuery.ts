@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 
-import { getTechStacks } from "@/api/skill/getSearchTechStacks"
+import { getTechStacks } from "@apis/skill/getSearchTechStacks"
 
 import { QUERYKEY } from "@constants/queryKey"
 

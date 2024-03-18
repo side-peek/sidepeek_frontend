@@ -8,6 +8,7 @@ export const postEmailAuth = rest.post(ENDPOINTS.EMAIL_AUTH, (_, res, ctx) => {
     id: 1,
     nickname: "admin",
     profileImageUrl: null,
+    isSocialLogin: false,
   }
-  return res(ctx.delay(1000), ctx.status(200), ctx.json(response))
+  return res(ctx.status(200), ctx.json(response))
 })

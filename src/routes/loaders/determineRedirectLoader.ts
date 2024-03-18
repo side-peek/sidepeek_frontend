@@ -18,7 +18,7 @@ export const determineRedirectLoader =
   ): LoaderFunction =>
   () => {
     const isLoggedInUser =
-      queryClient.getQueryData([QUERYKEY.USER_INFO]) == null
+      queryClient.getQueryData([QUERYKEY.USER_INFO]) != null
 
     const willRedirect =
       (!isAllowedForLoggedInUser && isLoggedInUser) ||

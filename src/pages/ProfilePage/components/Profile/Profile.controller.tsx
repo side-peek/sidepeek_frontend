@@ -5,19 +5,20 @@ import { Box, Flex, useMediaQuery } from "@chakra-ui/react"
 import LargeScreenView from "@pages/ProfilePage/LargeScreenView/LargeScreen.view"
 import SmallScreenView from "@pages/ProfilePage/SmallScreenView/SmallScreen.view"
 
+import withUserId, { UserIdProps } from "../HOC/withUserId"
 import { useUserInfo } from "./Profile.model"
 
-const ProfileController = () => {
+const ProfileController = ({ userId }: UserIdProps) => {
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
 
-  const { data } = useUserInfo({ userId: 1 })
+  const { data } = useUserInfo({ userId: Number(userId) })
 
   const navigate = useNavigate()
   const handleNewProject = () => {
     navigate("/test")
   }
   const handleEditProfile = () => {
-    navigate("/test")
+    navigate("/profile/edit")
   }
 
   if (!data)
@@ -39,7 +40,7 @@ const ProfileController = () => {
     githubUrl,
     blogUrl,
     techStacks,
-  } = data.userInfo
+  } = data
 
   return (
     <Box>
@@ -81,4 +82,4 @@ const ProfileController = () => {
   )
 }
 
-export default ProfileController
+export default withUserId(ProfileController)

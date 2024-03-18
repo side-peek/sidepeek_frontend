@@ -2,7 +2,7 @@ import { getAllProjectsType } from "api-models"
 
 import { useInfiniteQuery } from "@tanstack/react-query"
 
-import { getAllProjects } from "@/api/project/getAllProjects"
+import { getAllProjects } from "@apis/project/getAllProjects"
 
 import { QUERYKEY } from "@constants/queryKey"
 

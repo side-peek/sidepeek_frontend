@@ -12,15 +12,18 @@ import {
   Stack,
   Text,
   useDisclosure,
+  useMediaQuery,
 } from "@chakra-ui/react"
 
 import { CareerType, ProfileInfo } from "../../types/types"
 import ChangeNicknameModal from "../Modal/ChangeNicknameModal"
+import ChangeProfileImageModal from "../Modal/ChangeProfileImageModal"
 
 interface ProfileCardProps {
   profileImageUrl: string
   nickname: string
   career: string
+  job: string
   setProfileInfo: React.Dispatch<React.SetStateAction<ProfileInfo>>
 }
 
@@ -28,16 +31,20 @@ const ProfileCard = ({
   profileImageUrl,
   nickname,
   career,
+  job,
   setProfileInfo,
 }: ProfileCardProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-
-  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // TODO: 1. 파일 -> url api 요청 / 2. setState
-    if (e.target.files) {
-      console.log(e.target.files[0])
-    }
-  }
+  const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
+  const {
+    isOpen: isNicknameModalOpen,
+    onOpen: onNicknameModalOpen,
+    onClose: onNicknameModalClose,
+  } = useDisclosure()
+  const {
+    isOpen: isProfileImageModalOpen,
+    onOpen: onProfileImageModalOpen,
+    onClose: onProfileImageModalClose,
+  } = useDisclosure()
 
   const careers: CareerType[] = [
     "0년차",
@@ -53,55 +60,71 @@ const ProfileCard = ({
       bg="default"
       ml="2rem"
       alignItems="center">
-      <form>
-        <label>
-          <Avatar
-            w="12rem"
-            h="12rem">
-            {profileImageUrl}
-          </Avatar>
-          <Input
-            type="file"
-            display="none"
-            onChange={handleSubmit}
-          />
-        </label>
-      </form>
+      <Avatar
+        w="12rem"
+        h="12rem"
+        cursor="pointer"
+        onClick={onProfileImageModalOpen}
+        src={profileImageUrl}></Avatar>
+
+      <ChangeProfileImageModal
+        isOpen={isProfileImageModalOpen}
+        onClose={onProfileImageModalClose}
+        setProfileInfo={setProfileInfo}
+      />
 
       <Stack ml="1.5rem">
         <Text
           fontSize="3xl"
           fontFamily="SCDream_Bold"
-          onClick={onOpen}>
+          cursor="pointer"
+          onClick={onNicknameModalOpen}>
           {nickname}
         </Text>
         <ChangeNicknameModal
-          isOpen={isOpen}
-          onClose={onClose}
+          isOpen={isNicknameModalOpen}
+          onClose={onNicknameModalClose}
           setProfileInfo={setProfileInfo}
         />
-        <Menu>
-          <MenuButton
-            as={Button}
-            rightIcon={<AiFillCaretDown />}
-            w="12rem">
-            {career} 개발자
-          </MenuButton>
-          <MenuList>
-            {careers.map((career) => (
-              <MenuItem
-                key={career}
-                onClick={() =>
-                  setProfileInfo((profileInfo) => ({
-                    ...profileInfo,
-                    career: career,
-                  }))
-                }>
-                {career} 개발자
-              </MenuItem>
-            ))}
-          </MenuList>
-        </Menu>
+        <Flex direction={isLargerThan500 ? "row" : "column"}>
+          <Menu>
+            <MenuButton
+              as={Button}
+              rightIcon={<AiFillCaretDown />}
+              w="9rem">
+              {career === "" ? "연차" : career}
+            </MenuButton>
+            <MenuList>
+              {careers.map((career) => (
+                <MenuItem
+                  key={career}
+                  onClick={() =>
+                    setProfileInfo((profileInfo) => ({
+                      ...profileInfo,
+                      career: career,
+                    }))
+                  }>
+                  {career}
+                </MenuItem>
+              ))}
+            </MenuList>
+          </Menu>
+          <Input
+            pl="0.5rem"
+            variant="flushed"
+            height="2.5rem"
+            value={job}
+            placeholder="직업을 입력해주세요"
+            ml="0.5rem"
+            w="12rem"
+            onChange={(e) =>
+              setProfileInfo((profileInfo) => ({
+                ...profileInfo,
+                job: e.target.value,
+              }))
+            }
+          />
+        </Flex>
       </Stack>
     </Flex>
   )

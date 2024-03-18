@@ -13,6 +13,8 @@ import {
   Text,
 } from "@chakra-ui/react"
 
+import noImage from "@assets/images/noImage.jpg"
+
 interface ProjectCardProps {
   imgUrl: string
   viewCount: number
@@ -49,6 +51,7 @@ const ProjectCard = forwardRef(
             src={imgUrl}
             alt="projectImg"
             width="100%"
+            fallbackSrc={noImage}
           />
           <Center
             className="hover-overlay"
