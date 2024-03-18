@@ -1,9 +1,7 @@
 import { Box } from "@chakra-ui/react"
 
-import ProjectListSection from "@pages/HomePage/components/ProjectListSection/ProjectListSection"
-
-import ResultInfo from "./components/ResultInfo"
-import SearchSection from "./components/SearchSection"
+import SearchSection from "./components/SearchBarSection/SearchSection"
+import SearchListSection from "./components/SearchListSection/SearchListSection"
 
 const ProjectListPage = () => {
   const params = new URLSearchParams(window.location.search)
@@ -11,12 +9,8 @@ const ProjectListPage = () => {
 
   return (
     <>
-      <SearchSection />
-      <ResultInfo
-        searchWord={search !== null ? search : ""}
-        resultCount={0}
-      />
-      <ProjectListSection isInfinityScroll={true} />
+      <SearchSection search={search ? search : ""} />
+      <SearchListSection search={search ? search : ""} />
       <Box height="15rem" />
     </>
   )

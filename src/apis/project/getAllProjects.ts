@@ -12,6 +12,8 @@ export const getAllProjects = async ({
   isReleased,
   lastProjectId,
   lastProject,
+  search,
+  skill,
 }: getAllProjectsType) => {
   let lastOrderCount
   if (sortOption !== "createdAt") {
@@ -32,6 +34,8 @@ export const getAllProjects = async ({
         pageSize: 10,
         lastProjectId,
         lastOrderCount,
+        search,
+        skill: skill?.join(","),
       },
     },
   )

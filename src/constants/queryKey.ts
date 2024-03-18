@@ -3,4 +3,5 @@ export const QUERYKEY = {
   TECH_STACKS: "techStacks",
   ALL_PROJECTS: "allProjects",
   BANNER_PROJECTS: "bannerProjects",
+  SEARCH_PROJECTS: "searchProjects",
 }

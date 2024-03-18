@@ -5,7 +5,9 @@ import { Box, Button, Center, Icon, useMediaQuery } from "@chakra-ui/react"
 
 import CommonInput from "@components/Input/CommonInput"
 
-const SearchSection = () => {
+import { SearchListSectionProps } from "../SearchListSection/SearchListSection"
+
+const SearchSection = ({ search }: SearchListSectionProps) => {
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)")
   const $ref = useRef<HTMLInputElement>(null)
 
@@ -13,6 +15,7 @@ const SearchSection = () => {
     $ref.current?.focus()
   }, [])
 
+  console.log(search)
   return (
     <Box
       height="12rem"

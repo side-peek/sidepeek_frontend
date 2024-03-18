@@ -2,7 +2,7 @@ import { Heading, Stack, Text } from "@chakra-ui/react"
 
 interface ResultInfoProps {
   searchWord: string
-  resultCount: number
+  resultCount: number | null
 }
 
 const ResultInfo = ({ searchWord, resultCount }: ResultInfoProps) => {
