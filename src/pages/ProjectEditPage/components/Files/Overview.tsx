@@ -5,24 +5,38 @@ import { useProjectFormContext } from "@pages/ProjectEditPage/hooks/useProjectFo
 import FileUploadSection from "./FileUploadSection"
 
 const Overview = () => {
-  const { getValues, setValue } = useProjectFormContext()
+  const MAX_FILE_UPLOAD = 6
+  const { getValues, setValue, watch } = useProjectFormContext()
   const { onChangeFile } = useFileUpload()
+
+  console.log(watch("overviewImageUrl"))
+
+  const onDropFile = async (files: File[]) => {
+    const prevImageUrls = getValues("overviewImageUrl")
+    if (
+      prevImageUrls &&
+      prevImageUrls.length + files.length > Number(`${MAX_FILE_UPLOAD}`)
+    ) {
+      alert("최대 6개까지 업로드 가능합니다")
+      return
+    }
+    const fileUrls = await onChangeFile(files)
+    if (!fileUrls.length) {
+      return
+    }
+    setValue("overviewImageUrl", [...prevImageUrls, ...fileUrls])
+  }
 
   return (
     <>
       <FileUploadSection
-        onDrop={async (files) => {
-          const prev = getValues("overviewImageUrl")
-          if (prev && prev.length + files.length > 6) {
-            alert("최대 6개까지 업로드 가능합니다")
-            return
-          }
-          const file = await onChangeFile(files)
-          setValue("overviewImageUrl", [...prev, ...file])
-        }}
+        onDrop={onDropFile}
         maxFiles={6}
-        disabled={getValues("overviewImageUrl").length >= 6}
-        multiple={true}>
+        disabled={
+          getValues("overviewImageUrl").length >= Number(`${MAX_FILE_UPLOAD}`)
+        }
+        multiple={true}
+        accept={{ "image/*": [".jpeg", ".png"] }}>
         {(inputProps) => (
           <FileUploadBox
             {...inputProps}
