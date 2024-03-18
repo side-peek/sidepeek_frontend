@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 
-import { getUserDetail } from "@/api/user/getUserDetail"
+import { getUserDetail } from "@apis/user/getUserDetail"
 
 interface UserIdProps {
   userId: number

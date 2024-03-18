@@ -1,5 +1,3 @@
-import { ReactNode } from "react"
-
 import {
   Divider,
   Heading,
@@ -12,16 +10,14 @@ import {
   PopoverTrigger,
 } from "@chakra-ui/react"
 
-interface NotificationPopoverProps {
-  NotificationIconButton: ReactNode
-}
+import NotificationIconButton from "./components/NotificationIconButton"
 
-const NotificationPopover = ({
-  NotificationIconButton,
-}: NotificationPopoverProps) => {
+const NotificationPopover = () => {
   return (
     <Popover>
-      <PopoverTrigger>{NotificationIconButton}</PopoverTrigger>
+      <PopoverTrigger>
+        <NotificationIconButton />
+      </PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />
         <PopoverCloseButton />

@@ -1,4 +1,5 @@
 import { rest } from "msw"
+import { DUMMY_USERSUMMARY } from "src/pages/ProjectEditPage/mocks/mockData"
 
 import { ENDPOINTS } from "@constants/endPoints"
 
@@ -23,5 +24,15 @@ export const projectEditHandler = [
             message: "유효하지 않은 요청입니다.",
           }),
         )
+  }),
+  rest.get("/api/v1/users/nickname", (req, res, ctx) => {
+    req.url.searchParams.get("keyword")
+    return res(
+      ctx.delay(1000),
+      ctx.status(200),
+      ctx.json({
+        ...DUMMY_USERSUMMARY,
+      }),
+    )
   }),
 ]

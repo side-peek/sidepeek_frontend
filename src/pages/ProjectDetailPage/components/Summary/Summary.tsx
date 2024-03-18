@@ -16,6 +16,8 @@ const Summary = ({ projectDetailInfo }: getProjectDetailResponseType) => {
     likeCount,
     commentCount,
     overview,
+    likeId,
+    ownerId,
   } = projectDetailInfo
 
   return (
@@ -31,6 +33,8 @@ const Summary = ({ projectDetailInfo }: getProjectDetailResponseType) => {
               likeCount,
               viewCount,
               commentCount,
+              likeId,
+              ownerId,
             }}
           />
           <Center

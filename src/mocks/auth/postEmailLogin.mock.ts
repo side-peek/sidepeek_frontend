@@ -5,7 +5,8 @@ import { ENDPOINTS } from "@constants/endPoints"
 
 export const postEmailLogin = rest.post(
   ENDPOINTS.EMAIL_LOGIN,
-  (_, res, ctx) => {
+  async (req, res, ctx) => {
+    const { email, password } = await req.json()
     const response: postEmailLoginResponseType = {
       accessToken:
         "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJzaXhnYWV6emFuZyIsImlhdCI6MTcxMDI0MTgzNCwiZXhwIjoxNzEwMjQ1NDM0LCJ1c2VyX2lkIjo2fQ.2_QWBUJIGGVcqLRq2gHhjwPONc0KmhAzDc3TiOefptd_SWNy-FbDNqbPAB4JTmyIuR1AVr_wipT0w0FCQZ_Q-w",
@@ -18,6 +19,8 @@ export const postEmailLogin = rest.post(
         isSocialLogin: false,
       },
     }
-    return res(ctx.status(200), ctx.json(response))
+    return email === "admin@admin.com" && password === "admin123!"
+      ? res(ctx.status(200), ctx.json(response))
+      : res(ctx.status(403))
   },
 )
