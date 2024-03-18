@@ -26,7 +26,7 @@ const Summary = ({ projectDetailInfo }: getProjectDetailResponseType) => {
         maxW="128rem"
         flexDirection="column"
         m="0 auto"
-        p="2rem">
+        p="2rem 4rem">
         <Flex flexDirection="column">
           <SummaryTop
             {...{

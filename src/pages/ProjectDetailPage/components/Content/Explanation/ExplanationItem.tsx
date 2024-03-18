@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react"
 import MDEditor from "@uiw/react-md-editor"
 
-const ViewStyleParams = {
+const ViewOptions = {
   whiteSpace: "pre-wrap",
   padding: "2rem",
   lineHeight: "1.5",
@@ -9,18 +9,32 @@ const ViewStyleParams = {
   fontSize: "1rem",
 }
 
+const ViewNotContentOptions = {
+  fontSize: "2rem",
+  color: "#7a7a7a",
+}
+
 interface ExplanationItemProps {
   content: string
 }
+
+const notContentText = "내용이 존재하지 않습니다."
 
 const ExplanationItem = ({ content }: ExplanationItemProps) => {
   const processedText = content?.replace(/\\n/g, "\n")
   return (
     <Box data-color-mode="light">
-      <MDEditor.Markdown
-        source={processedText}
-        style={{ ...ViewStyleParams }}
-      />
+      {processedText ? (
+        <MDEditor.Markdown
+          source={processedText}
+          style={{ ...ViewOptions }}
+        />
+      ) : (
+        <MDEditor.Markdown
+          source={notContentText}
+          style={{ ...ViewNotContentOptions }}
+        />
+      )}
     </Box>
   )
 }

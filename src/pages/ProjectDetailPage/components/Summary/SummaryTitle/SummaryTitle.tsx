@@ -6,18 +6,18 @@ interface SummaryTitleProps {
 }
 
 const SummaryTitle = ({ name, subName }: SummaryTitleProps) => {
-  const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
+  const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
 
   return (
     <Box>
       <Text
         fontFamily="SCDream_Bold"
-        fontSize={isLargerThan1200 ? "2xl" : "lg"}
+        fontSize={isLargerThan768 ? "3xl" : "2.5rem"}
         textAlign="center">
         {name}
       </Text>
       <Text
-        fontSize={isLargerThan1200 ? "2xl" : "lg"}
+        fontSize={isLargerThan768 ? "3xl" : "2.5rem"}
         textAlign="center">
         {subName}
       </Text>
