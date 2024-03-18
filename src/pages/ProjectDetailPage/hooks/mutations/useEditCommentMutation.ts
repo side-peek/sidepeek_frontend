@@ -41,7 +41,7 @@ export const useEditCommentMutation = () => {
           break
         }
         case 400: {
-          message = COMMENT_MESSAGES.ERROR.UNVALIDATE
+          message = COMMENT_MESSAGES.ERROR.BAD_REQUEST
           break
         }
         case 403: {
@@ -49,7 +49,7 @@ export const useEditCommentMutation = () => {
           break
         }
         case 404: {
-          message = COMMENT_MESSAGES.ERROR.UNDEFINED
+          message = COMMENT_MESSAGES.ERROR.NOT_FOUND
           break
         }
         default: {

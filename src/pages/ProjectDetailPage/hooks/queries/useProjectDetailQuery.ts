@@ -30,7 +30,7 @@ export const useProjectDetailQuery = (projectId: number) => {
           break
         }
         case 404: {
-          message = GET_PROJECT_MESSAGES.ERROR.FAIL
+          message = GET_PROJECT_MESSAGES.ERROR.BAD_REQUEST
           break
         }
         default: {

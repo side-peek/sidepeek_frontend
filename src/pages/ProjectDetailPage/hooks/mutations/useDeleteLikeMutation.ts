@@ -74,7 +74,7 @@ export const useDeleteLikeMutation = (projectId: number) => {
         }
         case 400:
         case 404: {
-          message = LIKE_MESSAGES.ERROR.UNVALIDATE
+          message = LIKE_MESSAGES.ERROR.BAD_REQUEST
           break
         }
         default: {

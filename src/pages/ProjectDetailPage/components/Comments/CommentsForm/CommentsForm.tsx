@@ -99,6 +99,7 @@ const CommentsForm = ({
                   isChecked={isAnonymous}
                   size="lg"
                   onChange={handleAnonymous}
+                  color={isAnonymous ? "red.200" : "grey.500"}
                   colorScheme="red">
                   익명
                 </Checkbox>
