@@ -18,7 +18,7 @@ const ProfileController = ({ userId }: UserIdProps) => {
     navigate("/test")
   }
   const handleEditProfile = () => {
-    navigate("/test")
+    navigate("/profile/edit")
   }
 
   if (!data)

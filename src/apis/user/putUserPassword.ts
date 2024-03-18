@@ -6,12 +6,10 @@ import { ENDPOINTS } from "@constants/endPoints"
 import { authInstance } from "../axiosInstance"
 
 export const putUserPassword = async (
-  { userId, password }: putUserPasswordPayload,
+  { userId, passwordChange }: putUserPasswordPayload,
   config: AxiosRequestConfig = {},
 ) => {
-  await authInstance.put(
-    ENDPOINTS.PUT_USER_PASSWORD(userId),
-    { password },
-    { ...config },
-  )
+  await authInstance.put(ENDPOINTS.PUT_USER_PASSWORD(userId), passwordChange, {
+    ...config,
+  })
 }

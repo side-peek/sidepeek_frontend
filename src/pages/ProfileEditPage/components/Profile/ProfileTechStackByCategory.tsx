@@ -3,38 +3,37 @@ import { TechStack } from "api-models"
 
 import CommonTag from "@components/Tag/components/CommonTag"
 
-// TODO: props 타입이 undefined가 될수 있다는게 뭔가 이상함 이렇게 안하면 케찹 터짐. 해결해보기
 interface ProfileTechStackByCategoryProps {
   category: string
-  techStacks?: TechStack[]
+  skills: TechStack[]
 }
-
 const ProfileTechStackByCategory = ({
   category,
-  techStacks,
+  skills,
 }: ProfileTechStackByCategoryProps) => {
-  // console.log("1", techStacks)
   return (
-    <Box>
+    <Box ml="0.5rem">
       <Text
         mt="1rem"
-        fontSize="lg">
+        ml="0.3rem"
+        fontSize="md">
         {category}
       </Text>
       <Flex
         flexWrap="wrap"
-        sx={{ "& > *": { mr: "0.5rem", mb: "0.5rem" } }}
-        mt="0.5rem">
-        {techStacks &&
-          techStacks
-            .filter((techStack) => techStack.category === category)
-            .map((techStack) => (
+        sx={{ "& > *": { mr: "0.8rem" } }}
+        mt="0.5rem"
+        mb="1.5rem">
+        {skills &&
+          skills
+            .filter((skill) => skill.category === category)
+            .map(({ skill }) => (
               <CommonTag
-                key={techStack.id}
-                label={techStack.skill.name}
+                key={skill.id}
+                label={skill.name}
                 leftElement={
                   <Image
-                    src={techStack.skill.iconImageUrl}
+                    src={skill.iconImageUrl}
                     w="1.6rem"
                     h="1.6rem"
                   />

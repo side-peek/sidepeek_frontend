@@ -36,4 +36,5 @@ export const ENDPOINTS = {
   DELETE_COMMENT: (commentId: number) =>
     `${VARIABLE_URL}/comments/${commentId}`,
   EDIT_COMMENT: (commentId: number) => `${VARIABLE_URL}/comments/${commentId}`,
+  UPLOAD_FILE: `${VARIABLE_URL}/files`,
 }
