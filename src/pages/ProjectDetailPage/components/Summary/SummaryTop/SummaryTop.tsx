@@ -60,9 +60,9 @@ const SummaryTop = ({
         fontSize={isLargerThan1200 ? "2.7rem" : "2rem"}
         onClick={(likeId: number | null) => {
           if (likeId) {
-            deleteLikeMutation.mutate({ likeId })
+            deleteLikeMutation({ likeId })
           } else {
-            postLikeMutation.mutate({ projectId: Number(projectId) })
+            postLikeMutation({ projectId: Number(projectId) })
           }
         }}
       />
