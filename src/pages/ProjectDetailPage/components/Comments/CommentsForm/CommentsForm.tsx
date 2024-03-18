@@ -45,16 +45,6 @@ const CommentsForm = ({
     [parentId, projectId, reset, user, sendCommentMutation],
   )
 
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-      if (e.key === "Enter" && !e.shiftKey && handleSubmit) {
-        e.preventDefault()
-        handleSubmit(onSubmit)()
-      }
-    },
-    [handleSubmit, onSubmit],
-  )
-
   return (
     <Box w="100%">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -76,7 +66,6 @@ const CommentsForm = ({
               _hover={{ boxShadow: "none", borderColor: "grey.400" }}
               _focus={{ boxShadow: "none", borderColor: "grey.400" }}
               {...register("content", { required: true })}
-              onKeyDown={handleKeyDown}
             />
 
             <Button
