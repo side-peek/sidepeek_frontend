@@ -9,18 +9,19 @@ type FieldElement<T> = {
 }
 
 export interface FieldProps<T> {
-  fieldValue: FieldElement<T>[]
+  fieldValue?: FieldElement<T>[]
   defaultValue?: FieldElement<T>[]
-  onAppendField: () => void
-  onAppendStack: (data: T, idx: number) => void
-  onDeleteField: (number: number) => void
-  onDeleteStack: (data: T, idx: number) => void
+  onAppendField?: () => void
+  onAppendStack?: (data: T, idx: number) => void
+  onDeleteField?: (number: number) => void
+  onDeleteStack?: (data: T, idx: number) => void
   children?: ReactNode
 }
 
-export const useTechStack = (defaultValue = []) => {
-  const [fieldValue, setFieldValue] =
-    useState<FieldElement<Skill>[]>(defaultValue)
+export const useTechStack = (defaultValue: FieldElement<Skill>[]) => {
+  const [fieldValue, setFieldValue] = useState<FieldElement<Skill>[]>(
+    defaultValue || [],
+  )
 
   const onAppendField = () => {
     setFieldValue((prev) => {
