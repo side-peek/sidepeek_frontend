@@ -12,12 +12,21 @@ import {
   VStack,
 } from "@chakra-ui/react"
 
-const SummaryControl = () => {
+import { useDeleteProjectMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteProjectMutation"
+
+import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
+
+interface SummaryControl extends ProjectIdProps {}
+
+const SummaryControl = ({ projectId }: SummaryControl) => {
   const navigate = useNavigate()
+  const { deleteProjectMutation } = useDeleteProjectMutation()
   const handleEditProject = () => {
     navigate("/project/edit")
   }
-  const handleDeleteProject = () => {}
+  const handleDeleteProject = () => {
+    deleteProjectMutation(Number(projectId))
+  }
   return (
     <Popover>
       <PopoverTrigger>
@@ -41,4 +50,4 @@ const SummaryControl = () => {
   )
 }
 
-export default SummaryControl
+export default withProjectId(SummaryControl)

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { useToast } from "@chakra-ui/react"
 import { isAxiosError } from "axios"
 
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 import { deleteProject } from "@apis/project/deleteProject"
 
@@ -13,16 +13,23 @@ import {
   PROJECT__CONTROL_MESSAGES,
 } from "@pages/ProjectDetailPage/constants/toastMessage"
 
+import { QUERYKEY } from "../../../../constants/queryKey"
+
 const QUERY_KEY_POST_LIKE = "DELETE_LIKE_1328940382182"
 
 export const useDeleteProjectMutation = () => {
   const navigate = useNavigate()
   const toast = useToast()
+  const queryClient = useQueryClient()
 
   const { mutate: deleteProjectMutation, error } = useMutation({
     mutationKey: [QUERY_KEY_POST_LIKE],
     mutationFn: (projectId: number) => deleteProject({ projectId }),
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERYKEY.ALL_PROJECTS],
+      })
+
       navigate(-1)
     },
   })
