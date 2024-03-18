@@ -37,7 +37,7 @@ export const useAllProjectQuery = ({
       }),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => (
-      (lastProject = lastPage.content[lastPage.numberOfElements - 1]),
+      (lastProject = lastPage.content.at(-1)),
       (lastProjectId = lastPage.hasNext
         ? lastPage.content[lastPage.numberOfElements - 1].id
         : null)
