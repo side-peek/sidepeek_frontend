@@ -1,35 +1,31 @@
 import { MouseEventHandler } from "react"
+import { MdCancel } from "react-icons/md"
 
-import { Tag, TagCloseButton, TagLabel } from "@chakra-ui/react"
+import { CommonTagProps } from "../types/commonTagProps"
+import CommonTag from "./CommonTag"
 
-import { CustomTagProps } from "../types/customTag"
-
-interface CloseButtonTagProps extends Omit<CustomTagProps, "onClickLabel"> {
+interface CloseButtonTagProps extends Omit<CommonTagProps, "rightElement"> {
   onClickCloseButton: MouseEventHandler
 }
 
 const CloseButtonTag = ({
+  leftElement,
   label,
-  variant = "outline",
-  colorScheme,
   onClickCloseButton,
+  ...props
 }: CloseButtonTagProps) => {
   return (
-    <>
-      <Tag
-        size="lg"
-        variant={variant}
-        colorScheme={colorScheme}
-        padding="0.75rem">
-        <TagLabel>{label}</TagLabel>
-        <TagCloseButton
-          onClick={(e) => {
-            e.stopPropagation()
-            onClickCloseButton(e)
-          }}
+    <CommonTag
+      leftElement={leftElement}
+      label={label}
+      rightElement={
+        <MdCancel
+          size="15"
+          onClick={onClickCloseButton}
         />
-      </Tag>
-    </>
+      }
+      {...props}
+    />
   )
 }
 

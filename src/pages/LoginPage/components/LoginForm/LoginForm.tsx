@@ -1,57 +1,47 @@
-import { SubmitHandler, useForm } from "react-hook-form"
+import { FormProvider } from "react-hook-form"
 
-import { Flex, FormControl, Input } from "@chakra-ui/react"
+import { Flex, Input } from "@chakra-ui/react"
+
+import InputController from "@components/InputController/InputController"
+
+import {
+  emailOptions,
+  passwordOptions,
+} from "@pages/LoginPage/constants/registerOptions"
+import useLoginForm from "@pages/LoginPage/hooks/useLoginForm"
 
 import LoginButton from "./components/LoginButton"
-import LoginFormLabel from "./components/LoginFormLabel"
-
-type FormType = {
-  email: string
-  password: string
-}
 
 const LoginForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormType>()
-
-  const onSubmit: SubmitHandler<FormType> = (values) => {
-    console.log(values)
-  }
+  const { method, onSubmit, isPending } = useLoginForm()
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Flex
-        direction="column"
-        gap="1.6rem"
-        justifyContent="center"
-        alignItems="stretch">
-        {/* 로그인 입력 양식 */}
-        {/* email */}
-        <FormControl isInvalid={Boolean(errors.email)}>
-          <LoginFormLabel error={errors.email}>이메일</LoginFormLabel>
-          <Input
-            type="email"
-            height="5rem"
-            fontSize="2rem"
-            {...register("email", { required: "이메일을 입력해주세요" })}
-          />
-        </FormControl>
-        {/* paasword */}
-        <FormControl isInvalid={Boolean(errors.password)}>
-          <LoginFormLabel error={errors.password}>비밀번호</LoginFormLabel>
-          <Input
-            type="password"
-            height="5rem"
-            fontSize="2rem"
-            {...register("password", { required: "비밀번호를 입력해주세요" })}
-          />
-        </FormControl>
-        <LoginButton />
-      </Flex>
-    </form>
+    <FormProvider {...method}>
+      <form onSubmit={method.handleSubmit(onSubmit)}>
+        <Flex
+          direction="column"
+          gap="1.6rem"
+          justifyContent="center"
+          alignItems="stretch">
+          {/* 로그인 입력 양식 */}
+          {/* email */}
+          <InputController
+            fieldName="email"
+            label="이메일"
+            registerOptions={emailOptions}>
+            <Input />
+          </InputController>
+          {/* paasword */}
+          <InputController
+            fieldName="password"
+            label="비밀번호"
+            registerOptions={passwordOptions}>
+            <Input type="password" />
+          </InputController>
+          <LoginButton isLoading={isPending} />
+        </Flex>
+      </form>
+    </FormProvider>
   )
 }
 

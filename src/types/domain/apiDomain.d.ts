@@ -18,6 +18,11 @@ declare module "api-models" {
     isDeleted: boolean
   } */
 
+  export type TechStackRequest = {
+    skillId?: number
+    category?: string
+  }
+
   export type UserInfoProperties = {
     nickname: string
     introduction: string
@@ -33,7 +38,8 @@ declare module "api-models" {
   }
 
   export type UserSummary = {
-    id: number
+    id: number | null
+    isSocialLogin: boolean | null
     nickname: string
     profileImageUrl: string | null
   }
@@ -54,7 +60,9 @@ declare module "api-models" {
     members: Member[]
     viewCount: number
     likeCount: number
+    likeId: number | null
     commentCount: number
+    comments: Comment[]
     description: string
     troubleShooting: string
   }
@@ -67,7 +75,13 @@ declare module "api-models" {
     viewCount: number
     likeCount: number
     isLiked: boolean
-    isDeploy: boolean
+  }
+
+  export type BannerProject = {
+    id: number
+    name: string
+    subName: string
+    thumbnailUrl: string
   }
 
   export type Description = {
@@ -77,7 +91,7 @@ declare module "api-models" {
 
   export type Member = {
     id: number
-    category: string
+    role: string
     userSummary: UserSummary
   }
 
@@ -113,22 +127,28 @@ declare module "api-models" {
     url: string
   }
 
+  export type Owner = {
+    id: number
+    nickname: string
+    profileImageUrl: string
+  }
+
   export type Comment = {
     id: number
-    userId: string
-    projectId: string
+    user: userSummary | null
+    parentId: number | null
+    isOwner: boolean
     isAnonymous: boolean
     content: string
     createdAt: string
-    updatedAt: string
+    replies: Comment[]
   }
 
   export type Like = {
     id: number
-    userId: string
     projectId: string
+    userId: string
     createdAt: string
-    updatedAt: string
   }
 
   export type TechStack = {
@@ -149,11 +169,7 @@ declare module "api-models" {
   }
 
   /* 인증 관련 */
-  export type getEmailAuthPayload = {
-    accessToken: string
-  }
-
-  export type getEmailAuthResponseType = UserSummary
+  export type postEmailAuthResponseType = UserSummary
 
   export type postEmailRefreshPayload = {
     refreshToken: string
@@ -161,6 +177,8 @@ declare module "api-models" {
 
   export type postEmailRefreshResponseType = {
     accessToken: string
+    refreshToken: string
+    user: UserSummary
   }
 
   export type postEmailLoginPayload = {
@@ -181,41 +199,71 @@ declare module "api-models" {
     nickname: string
   }
 
-  export type getUserSummaryPayload = {
+  export type getUserListPayload = {
     keyword: string
   }
 
-  export type getUserSummaryResponseType = {
-    users: [UserSummary]
+  export type getUserListResponseType = {
+    users: UserSummary[]
   }
 
   export type getUserDetailPayload = { userId: number }
 
-  export type getUserDetailResponseType = UserInfo
+  export type getUserDetailResponseType = UserInfoProperties
 
+  export type UserInfoRequest = {
+    nickname: string
+    introduction: string
+    profileImageUrl: string
+    job: string
+    career: string
+    githubUrl: string
+    blogUrl: string
+    techStacks: TechStackRequest[]
+  }
   export type putUserDetailPayload = {
     userId: number
-  } & UserInfo
+  } & {
+    userInfo: UserInfoRequest
+  }
+
+  export type PasswordChangeType = {
+    originalPassword: string
+    password: string
+  }
 
   export type putUserPasswordPayload = {
     userId: number
-    password: string
+    passwordChange: PasswordChangeType
   }
 
   export type postDoubleCheckEmailPayload = {
     email: string
   }
 
+  export type postDoubleCheckEmailResponseType = {
+    isDuplicated: boolean
+  }
+
   export type postDoubleCheckNicknamePayload = {
     nickname: string
   }
 
+  export type getUserProjectsPayload = {
+    userId: number
+    type: string
+  }
+
+  export type postDoubleCheckNicknameResponseType = {
+    isDuplicated: boolean
+  }
+
   /* 기술 스택 */
-  export type getSearchTechStacksPayload = {
+  export type getTechStacksPayload = {
     keyword?: string
   }
 
-  export type getSearchTechStacksResponseType = {
+  export type getTechStacksResponseType = {
     skills: Skill[]
   }
 
@@ -244,7 +292,17 @@ declare module "api-models" {
   }
 
   export type getAllProjectsResponseType = {
-    projects: AllProject[]
+    content: AllProject[]
+    totalElements: number
+    numberOfElements: number
+    hasNext: boolean
+  }
+
+  export type getAllProjectsType = {
+    sortOption: "createdAt" | "like" | "view"
+    isReleased: boolean
+    lastProjectId?: number | null
+    lastProject?: AllProject | undefined
   }
 
   export type putProjectPayload = {
@@ -256,8 +314,35 @@ declare module "api-models" {
   }
 
   /* 좋아요 */
-  //FIXME: 미완성 api
+  export type getLikeResponseType = {
+    likeId: number | null
+  }
+
   export type postLikePayload = {
     projectId: number
+  }
+
+  export type deleteLikePayload = {
+    likeId: number
+  }
+
+  /* 댓글 */
+
+  export type postCommentPayload = {
+    ownerId: number
+    projectId: number | null
+    parentId: number | null
+    isAnonymous: boolean
+    content: string
+  }
+
+  export type editCommentPayload = {
+    isAnonymous: boolean
+    content: string
+    commentId: number
+  }
+
+  export type deleteCommentPayload = {
+    commentId: number
   }
 }

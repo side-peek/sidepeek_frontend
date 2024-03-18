@@ -5,6 +5,18 @@ import "./fonts/index.css"
 
 const themeConfig = {
   config: { initialColorMode: "light", useSystemColorMode: false },
+  components: {
+    Button: {
+      variants: {
+        smooth: {
+          p: "0.3rem",
+        },
+      },
+      defaultProps: {
+        variant: "smooth",
+      },
+    },
+  },
 
   styles: {
     global: (props: StyleFunctionProps) => ({

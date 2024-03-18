@@ -1,18 +1,19 @@
-import { Box, Flex, Text } from "@chakra-ui/react"
+import { Box, Flex, Image, Text } from "@chakra-ui/react"
 import { TechStack } from "api-models"
 
-import CustomTag from "@components/Tag/components/CustomTag"
+import CommonTag from "@components/Tag/components/CommonTag"
 
 // TODO: props 타입이 undefined가 될수 있다는게 뭔가 이상함 이렇게 안하면 케찹 터짐. 해결해보기
 interface ProfileTechStackByCategoryProps {
   category: string
-  techStacks: TechStack[] | undefined
+  techStacks?: TechStack[]
 }
 
 const ProfileTechStackByCategory = ({
   category,
   techStacks,
 }: ProfileTechStackByCategoryProps) => {
+  // console.log("1", techStacks)
   return (
     <Box>
       <Text
@@ -22,15 +23,22 @@ const ProfileTechStackByCategory = ({
       </Text>
       <Flex
         flexWrap="wrap"
-        sx={{ "& > *": { mr: "0.8rem", mb: "0.8rem" } }}
+        sx={{ "& > *": { mr: "0.5rem", mb: "0.5rem" } }}
         mt="0.5rem">
         {techStacks &&
           techStacks
             .filter((techStack) => techStack.category === category)
             .map((techStack) => (
-              <CustomTag
+              <CommonTag
                 key={techStack.id}
                 label={techStack.skill.name}
+                leftElement={
+                  <Image
+                    src={techStack.skill.iconImageUrl}
+                    w="1.6rem"
+                    h="1.6rem"
+                  />
+                }
               />
             ))}
       </Flex>

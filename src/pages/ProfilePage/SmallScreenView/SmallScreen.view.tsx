@@ -7,7 +7,7 @@ import { ProfileActionsButtonsProps } from "../types/types"
 interface ProfileCardProps extends ProfileActionsButtonsProps {
   profileImageUrl?: string
   nickname?: string
-  career?: string
+  career?: string | null
 }
 const SmallScreenView = ({
   nickname,

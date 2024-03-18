@@ -8,8 +8,10 @@ class AuthToken {
   private REFRESH_KEY: string
 
   constructor() {
-    this.accessToken = ""
-    this.refreshToken = ""
+    this.accessToken =
+      localStorage.getItem(VITE_AUTH_JWT_TOKEN_STORAGE_KEY) ?? ""
+    this.refreshToken =
+      localStorage.getItem(VITE_REFRESH_JWT_TOKEN_STORAGE_KEY) ?? ""
     this.ACCESS_KEY = VITE_AUTH_JWT_TOKEN_STORAGE_KEY
     this.REFRESH_KEY = VITE_REFRESH_JWT_TOKEN_STORAGE_KEY
   }

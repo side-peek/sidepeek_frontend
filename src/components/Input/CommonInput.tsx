@@ -7,7 +7,7 @@ import { CommonInputProps } from "./types/types"
  * @param {string} inputWidth - Input 너비; 20rem(default)
  * @param {object} register - 필수; Input 필드를 관리함; 다양한 validation 처리 가능
  * @param {string} type - text(default)
- * @param {boolean} required - true(default) | false
+ * @param {boolean} isRequired - true(default) | false
  * @param {string} placeholder - 플레이스홀더
  * @param {string} variant - Input 스타일; outline(default)
  * @param {string} size - Input 크기; md(default)
@@ -29,7 +29,7 @@ const CommonInput = ({
       <Input
         {...register}
         type="text"
-        required={true}
+        isRequired={true}
         placeholder="입력해주세요"
         variant="outline"
         size="md"
