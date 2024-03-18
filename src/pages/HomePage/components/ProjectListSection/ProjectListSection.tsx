@@ -13,13 +13,14 @@ import {
 
 import { useQueryClient } from "@tanstack/react-query"
 
+import ProjectList from "@components/ProjectList/ProjectList"
+
 import { useAllProjectQuery } from "@pages/HomePage/hooks/queries/useAllProjectQuery"
 import { SortSelectType } from "@pages/HomePage/types/type"
 
 import { QUERYKEY } from "@constants/queryKey"
 
 import MoreButton from "../MoreButton/MoreButton"
-import ProjectList from "../ProjectList/ProjectList"
 
 interface ProjectListSectionProps {
   isInfinityScroll?: boolean
