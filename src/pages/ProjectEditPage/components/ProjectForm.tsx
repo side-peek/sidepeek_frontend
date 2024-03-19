@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Input, Text, Textarea } from "@chakra-ui/react"
+import { Box, Button, Flex, FormLabel, Input, Textarea } from "@chakra-ui/react"
 
 import ProjectFormProvider from "../stores/ProjectFormProvider"
 import Description from "./Editors/Description"
@@ -34,10 +34,13 @@ const ProjectForm = () => {
 
           <ProjectInputBox
             name="overview"
-            label="요약">
+            label="요약"
+            footer="최대 150자까지 작성 가능합니다">
             <Textarea
               resize="none"
-              height="10rem"
+              overflow="hidden"
+              fontSize="lg"
+              h="10rem"
             />
           </ProjectInputBox>
 
@@ -53,19 +56,25 @@ const ProjectForm = () => {
             <Input />
           </ProjectInputBox>
 
-          <label htmlFor="techStacks">
-            <Text>기술 스택</Text>
+          <Box>
+            <FormLabel htmlFor="teckStacks">기술스택</FormLabel>
             <TechStacksFields />
-          </label>
+          </Box>
 
-          <label htmlFor="members">
-            <Text>멤버</Text>
+          <Box>
+            <FormLabel htmlFor="members">멤버</FormLabel>
             <MemberFields />
-          </label>
+          </Box>
 
-          <Description name="description" />
+          <Box>
+            <FormLabel htmlFor="members">요약</FormLabel>
+            <Description name="description" />
+          </Box>
 
-          <Description name="troubleShooting" />
+          <Box>
+            <FormLabel htmlFor="members">트러블 슈팅</FormLabel>
+            <Description name="troubleShooting" />
+          </Box>
 
           <Button type="submit">제출</Button>
         </Flex>
