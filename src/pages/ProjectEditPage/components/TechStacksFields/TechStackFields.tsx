@@ -5,8 +5,9 @@ import { Box, Button, Flex, Input } from "@chakra-ui/react"
 import CloseButtonTag from "@components/Tag/components/CloseButtonTag"
 
 import { useTechStacksMethods } from "@pages/ProjectEditPage/components/TechStacksFields/hooks/useTechStacksMethods"
-import { filterSelectedStack } from "@pages/ProjectEditPage/utils/filterSelectedStack"
+import { filterSelectedId } from "@pages/ProjectEditPage/utils/filterSelectedId"
 
+import FieldContainer from "../FieldContainer"
 import StackSearchBox from "./components/StackSearchBox"
 
 const TechStacksFields = () => {
@@ -20,10 +21,12 @@ const TechStacksFields = () => {
   } = useTechStacksMethods()
 
   return (
-    <>
+    <Flex
+      flexDir="column"
+      gap="8px">
       {fields.map((field, index) => {
         return (
-          <Flex key={field.id}>
+          <FieldContainer key={field.id}>
             <Box>
               <Controller
                 name={`techStacks.${index}.category`}
@@ -36,7 +39,7 @@ const TechStacksFields = () => {
               render={({ techStacks }) => {
                 return (
                   <Box>
-                    {filterSelectedStack(techStacks, selectedStacks(index)).map(
+                    {filterSelectedId(techStacks, selectedStacks(index)).map(
                       (techStack) => {
                         return (
                           <Box
@@ -61,11 +64,11 @@ const TechStacksFields = () => {
                 />
               ))}
             </Box>
-          </Flex>
+          </FieldContainer>
         )
       })}
       <Button onClick={appendNewFields}>기술스택 추가</Button>
-    </>
+    </Flex>
   )
 }
 export default TechStacksFields
