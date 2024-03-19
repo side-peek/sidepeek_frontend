@@ -19,6 +19,7 @@ import "swiper/css/pagination"
 import { Autoplay, Navigation, Pagination } from "swiper/modules"
 import { SwiperSlide } from "swiper/react"
 
+import noImage from "@assets/images/noImage.jpg"
 import sidepeekBlue from "@assets/images/sidepeek_blue.png"
 
 import { CustomSwiper } from "./Banner.style"
@@ -72,6 +73,7 @@ const Banner = ({ bannerList }: bannerListProps) => {
             <HStack height="90%">
               <Image
                 src={project.thumbnailUrl}
+                fallbackSrc={noImage}
                 alt="projectImg"
                 height={isLargerThan768 ? "90%" : "50%"}
                 marginTop="4rem"

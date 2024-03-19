@@ -1,4 +1,4 @@
-import { Box, Skeleton } from "@chakra-ui/react"
+import { Skeleton } from "@chakra-ui/react"
 
 import Banner from "./components/Banner/Banner"
 import ProjectListSection from "./components/ProjectListSection/ProjectListSection"
@@ -15,7 +15,6 @@ const HomePage = () => {
         <Banner bannerList={bannerProjectList} />
       )}
       <ProjectListSection />
-      <Box height="15rem" />
     </>
   )
 }
