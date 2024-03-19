@@ -6,12 +6,22 @@ import { useProjectFormContext } from "@pages/ProjectEditPage/hooks/useProjectFo
 import { ProjectFormValues } from "@pages/ProjectEditPage/types/ProjectFormValues"
 
 export const useTechStacksMethods = () => {
-  const { control, setValue, getValues, watch, register } =
-    useProjectFormContext()
+  const {
+    control,
+    setValue,
+    getValues,
+    watch,
+    register,
+    formState: { errors },
+    trigger,
+  } = useProjectFormContext()
 
   const { append, fields, remove } = useFieldArray<ProjectFormValues>({
     control,
     name: "techStacks",
+    rules: {
+      required: "하나 이상은 필수입니다",
+    },
   })
 
   const appendNewFields = () => {
@@ -48,5 +58,7 @@ export const useTechStacksMethods = () => {
     selectedStacks,
     removeField,
     register,
+    errors,
+    trigger,
   }
 }

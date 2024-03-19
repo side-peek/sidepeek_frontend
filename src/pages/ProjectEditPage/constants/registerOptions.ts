@@ -1,6 +1,10 @@
 import { FieldPath, RegisterOptions } from "react-hook-form"
 
-import { ProjectFormValues } from "../types/ProjectFormValues"
+import {
+  ProjectFormValues,
+  RequestedMemberType,
+} from "../types/ProjectFormValues"
+import { checkEmptyField } from "../utils/checkEmptyField"
 
 const TITLE_MAX_LENGTH = 50
 const OVERVIEW_MAX_LENGTH = 300
@@ -29,11 +33,18 @@ export const projectInputRegister: ProjectInputRegisterType = {
 
   endDate: { required: "프로젝트 완성 날짜를 입력해주세요" },
 
-  techStacks: { required: "하나 이상은 필수입니다" },
+  techStacks: {},
 
   overviewImageUrl: {},
 
-  members: { required: "하나 이상은 필수입니다" },
+  members: {
+    required: "하나 이상은 필수입니다",
+    validate: {
+      isEmpty: (data: { category: string; data: RequestedMemberType[] }[]) =>
+        !checkEmptyField<RequestedMemberType>(data) ||
+        "멤버를 한명은 넣어주세요",
+    },
+  },
 
   description: {},
 
