@@ -7,6 +7,7 @@ import { HStack, Stack, useDisclosure, useMediaQuery } from "@chakra-ui/react"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { useDeleteLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteLikeMutation"
+import { useDeleteProjectMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteProjectMutation"
 import { usePostLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostLikeMutation"
 
 import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
@@ -35,7 +36,14 @@ const SummaryTop = ({
   const { postLikeMutation } = usePostLikeMutation()
   const { deleteLikeMutation } = useDeleteLikeMutation(Number(projectId))
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const { deleteProjectMutation } = useDeleteProjectMutation()
   const user = useUserInfoData()
+
+  const handleDeleteProject = () => {
+    onClose()
+    deleteProjectMutation(Number(projectId))
+  }
 
   return (
     <HStack
@@ -87,6 +95,7 @@ const SummaryTop = ({
       {ownerId === user?.id && <SummaryControl onOpen={onOpen} />}
       {isOpen && (
         <ProjectDeleteCheckModal
+          onClick={handleDeleteProject}
           isOpen={isOpen}
           onClose={onClose}
           projectId={projectId}

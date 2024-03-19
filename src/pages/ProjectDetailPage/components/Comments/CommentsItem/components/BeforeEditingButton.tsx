@@ -1,9 +1,10 @@
 import { MdDelete } from "react-icons/md"
 import { TiPencil } from "react-icons/ti"
 
-import { IconButton, useMediaQuery } from "@chakra-ui/react"
+import { IconButton, useDisclosure, useMediaQuery } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
+import ProjectDeleteCheckModal from "@pages/ProjectDetailPage/components/Summary/SummaryTop/ProjectDeleteCheckModal"
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
 interface BeforeEditingButtonProps {
@@ -13,6 +14,7 @@ interface BeforeEditingButtonProps {
 const BeforeEditingButton = ({ comment }: BeforeEditingButtonProps) => {
   const { handleOnEdit, handleDelete } = useCommentContext()
   const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -31,9 +33,16 @@ const BeforeEditingButton = ({ comment }: BeforeEditingButtonProps) => {
       <IconButton
         aria-label="delete"
         icon={<MdDelete />}
-        onClick={() => handleDelete(comment.id)}
+        onClick={onOpen}
         fontSize={isLargerThan768 ? "2xl" : "lg"}
       />
+      {isOpen && (
+        <ProjectDeleteCheckModal
+          isOpen={isOpen}
+          onClose={onClose}
+          onClick={() => handleDelete(comment.id)}
+        />
+      )}
     </>
   )
 }

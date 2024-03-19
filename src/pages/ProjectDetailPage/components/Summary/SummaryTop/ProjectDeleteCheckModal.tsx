@@ -9,26 +9,18 @@ import {
   Text,
 } from "@chakra-ui/react"
 
-import { useDeleteProjectMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteProjectMutation"
-
 interface ProjectDeleteCheckModalProps {
   isOpen: boolean
   onClose: () => void
-  projectId: string
+  projectId?: string
+  onClick: () => void
 }
 
 const ProjectDeleteCheckModal = ({
   isOpen,
   onClose,
-  projectId,
+  onClick,
 }: ProjectDeleteCheckModalProps) => {
-  const { deleteProjectMutation } = useDeleteProjectMutation()
-
-  const handleDeleteProject = () => {
-    onClose()
-    deleteProjectMutation(Number(projectId))
-  }
-
   return (
     <Modal
       isOpen={isOpen}
@@ -51,7 +43,7 @@ const ProjectDeleteCheckModal = ({
             bg="blue.100"
             p="1rem"
             _hover={{ opacity: 0.5 }}
-            onClick={handleDeleteProject}>
+            onClick={onClick}>
             삭제하기
           </Button>
           <Button
