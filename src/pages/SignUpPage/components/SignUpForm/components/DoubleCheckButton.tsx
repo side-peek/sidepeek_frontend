@@ -3,35 +3,36 @@ import { IoMdCheckmarkCircle } from "react-icons/io"
 
 import { Button, ButtonProps, Icon, Text, useToast } from "@chakra-ui/react"
 
+import { DOUBLE_CHECK_MESSAGE } from "@pages/SignUpPage/constants/toastMessages"
 import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
+import { useDoubleCheck } from "@pages/SignUpPage/hooks/useDoubleCheck"
+import { DoubleCheckFiledNames } from "@pages/SignUpPage/types/DoubleCheckFieldNames"
 
 interface DoubleCheckButtonProps extends ButtonProps {
-  isDuplicated?: boolean
-  errorMessage: string
-  successMessage: string
+  fieldName: DoubleCheckFiledNames
 }
 
-const DoubleCheckButton = ({
-  isDuplicated,
-  errorMessage,
-  successMessage,
-  ...props
-}: DoubleCheckButtonProps) => {
+const DoubleCheckButton = ({ fieldName, ...props }: DoubleCheckButtonProps) => {
   const toast = useToast(toastOptions)
 
+  const {
+    checkMutation: { data: response, isPending },
+    handleDoubleCheck,
+  } = useDoubleCheck(fieldName)
+
   useEffect(() => {
-    if (isDuplicated === true) {
+    if (response?.isDuplicated === true) {
       toast({
         status: "error",
-        title: errorMessage,
+        title: DOUBLE_CHECK_MESSAGE[fieldName].ERROR,
       })
-    } else if (isDuplicated === false) {
+    } else if (response?.isDuplicated === false) {
       toast({
         status: "success",
-        title: successMessage,
+        title: DOUBLE_CHECK_MESSAGE[fieldName].SUCCESS,
       })
     }
-  }, [errorMessage, isDuplicated, successMessage, toast])
+  }, [fieldName, response, toast])
 
   return (
     <Button
@@ -39,8 +40,10 @@ const DoubleCheckButton = ({
       height="5rem"
       variant="outline"
       borderRadius="0.8rem"
+      isLoading={isPending}
+      onClick={handleDoubleCheck}
       {...props}>
-      {isDuplicated === false ? (
+      {response?.isDuplicated === false ? (
         <Icon
           as={IoMdCheckmarkCircle}
           color="green"
