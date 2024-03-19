@@ -1,6 +1,6 @@
 import { expect, test } from "vitest"
 
-import { filterSelectedStack } from "./filterSelectedStack"
+import { filterSelectedId } from "./filterSelectedId"
 
 test("서버에서 내려온 기술스택 데이터 중 이미 선택된 기술스택을 제외한다", () => {
   const original = [
@@ -27,7 +27,7 @@ test("서버에서 내려온 기술스택 데이터 중 이미 선택된 기술�
       iconImageUrl: "https://www.iconimageurl.com",
     },
   ]
-  expect(filterSelectedStack(original, selected)).toEqual([
+  expect(filterSelectedId(original, selected)).toEqual([
     {
       id: 1,
       name: "react",
