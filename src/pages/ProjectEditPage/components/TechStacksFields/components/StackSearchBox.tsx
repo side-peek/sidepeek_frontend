@@ -26,13 +26,13 @@ const StackSearchBox = ({
         gap="0.5rem"
         flexWrap="wrap">
         <SearchBox.Input
-          value={inputValue}
           onChange={onInput}
           placeholder="기술 스택을 검색해보세요"
         />
         {children}
         <SearchBox.Result
           flexDir="row"
+          w="100%"
           gap="0.5rem">
           {render({ techStacks })}
         </SearchBox.Result>
