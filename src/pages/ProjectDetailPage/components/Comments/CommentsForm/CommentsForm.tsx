@@ -14,6 +14,7 @@ import { Stack } from "@chakra-ui/react"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
+import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
 import { CommentFormValues } from "../../../types/commentFormValues"
 import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
@@ -31,6 +32,7 @@ const CommentsForm = ({
   const { register, reset, handleSubmit } = useForm<CommentFormValues>()
 
   const { sendCommentMutation } = usePostCommentMutation()
+  const { handleOffReply } = useCommentContext()
   const [isAnonymous, setIsAnonymous] = useState(false)
 
   const user = useUserInfoData()
@@ -49,9 +51,18 @@ const CommentsForm = ({
         content: text.content,
       }
       sendCommentMutation(commentRequestValue)
+      handleOffReply()
       reset()
     },
-    [parentId, projectId, reset, user, sendCommentMutation, isAnonymous],
+    [
+      parentId,
+      projectId,
+      reset,
+      user,
+      sendCommentMutation,
+      isAnonymous,
+      handleOffReply,
+    ],
   )
 
   const handleAnonymous = () => {

@@ -13,8 +13,8 @@ export interface CommentsProps {
 const Comments = ({ comments }: CommentsProps) => {
   return (
     <CommentsLayout>
-      <CommentsForm />
       <CommentProvider>
+        <CommentsForm />
         <CommentsList comments={comments} />
       </CommentProvider>
     </CommentsLayout>
