@@ -1,7 +1,7 @@
 import { ReactElement, cloneElement, isValidElement } from "react"
 import { useFormContext } from "react-hook-form"
 
-import { Box, BoxProps, InputElementProps, Text } from "@chakra-ui/react"
+import { BoxProps, Flex, InputElementProps, Text } from "@chakra-ui/react"
 
 import { projectInputRegister } from "../constants/registerOptions"
 import { ProjectFormValues } from "../types/ProjectFormValues"
@@ -20,7 +20,9 @@ const ProjectInputBox = ({ name, label, footer, children }: TextInputProps) => {
   } = useFormContext<ProjectFormValues>()
 
   return (
-    <Box>
+    <Flex
+      flexDir="column"
+      gap="5px">
       <label htmlFor={name}>
         <Text
           fontSize="md"
@@ -43,7 +45,7 @@ const ProjectInputBox = ({ name, label, footer, children }: TextInputProps) => {
           {footer}
         </Text>
       )}
-    </Box>
+    </Flex>
   )
 }
 
