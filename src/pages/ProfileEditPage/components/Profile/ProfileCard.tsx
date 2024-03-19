@@ -1,9 +1,12 @@
 import { AiFillCaretDown } from "react-icons/ai"
+import { FaPlus } from "react-icons/fa6"
 
 import {
   Avatar,
+  Box,
   Button,
   Flex,
+  Icon,
   Input,
   Menu,
   MenuButton,
@@ -60,12 +63,34 @@ const ProfileCard = ({
       bg="default"
       ml="2rem"
       alignItems="center">
-      <Avatar
-        w="12rem"
-        h="12rem"
+      <Box
+        position="relative"
         cursor="pointer"
-        onClick={onProfileImageModalOpen}
-        src={profileImageUrl}></Avatar>
+        onClick={onProfileImageModalOpen}>
+        <Avatar
+          w="12rem"
+          h="12rem"
+          src={profileImageUrl}></Avatar>
+        <Flex
+          position="absolute"
+          alignItems="center"
+          justifyContent="center"
+          bottom="-0.5rem"
+          right="-1rem"
+          w="5rem"
+          h="5rem"
+          bg="blue.100"
+          borderRadius="50%"
+          border="0.4rem solid"
+          borderColor="default">
+          <Icon
+            as={FaPlus}
+            w="2.5rem"
+            h="2.5rem"
+            fontWeight="bold"
+            color="default"></Icon>
+        </Flex>
+      </Box>
 
       <ChangeProfileImageModal
         isOpen={isProfileImageModalOpen}
