@@ -28,7 +28,8 @@ const MemberFields = () => {
         register(`members.${idx}.data`, {
           validate: {
             isEmpty: (data) => {
-              return data?.length === 0 && "한명 이상의 멤버를 추가해주세요"
+              console.log(data.length)
+              return data.length !== 0
             },
           },
         })

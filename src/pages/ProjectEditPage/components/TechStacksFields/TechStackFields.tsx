@@ -41,9 +41,7 @@ const TechStacksFields = () => {
         register(`techStacks.${index}.data`, {
           validate: {
             isEmpty: (data) => {
-              return (
-                data?.length === 0 && "하나 이상의 기술 스택을 추가해주세요"
-              )
+              return data.length !== 0
             },
           },
         })
@@ -73,21 +71,20 @@ const TechStacksFields = () => {
             </Box>
 
             <Box>
-              {errors?.techStacks && errors.techStacks[index]?.data && (
-                <ErrorMessage
-                  name={`techStacks.${index}.data`}
-                  errors={errors}
-                  render={({ message }) => {
-                    return (
-                      <Text
-                        as="b"
-                        color="red.200">
-                        {message}
-                      </Text>
-                    )
-                  }}
-                />
-              )}
+              <ErrorMessage
+                name={`techStacks.${index}.data`}
+                errors={errors}
+                render={({ message }) => {
+                  return (
+                    <Text
+                      as="b"
+                      color="red.200">
+                      {message}
+                    </Text>
+                  )
+                }}
+              />
+
               <StackSearchBox
                 render={({ techStacks }) => {
                   return (
