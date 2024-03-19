@@ -1,5 +1,3 @@
-import { MdClose } from "react-icons/md"
-
 import {
   AbsoluteCenter,
   Box,
@@ -17,6 +15,7 @@ import CommonTag from "@components/Tag/components/CommonTag"
 import { useTechStacksMethods } from "@pages/ProjectEditPage/components/TechStacksFields/hooks/useTechStacksMethods"
 import { filterSelectedId } from "@pages/ProjectEditPage/utils/filterSelectedId"
 
+import CloseButton from "../styles/CloseButton"
 import FieldContainer from "../styles/FieldContainer"
 import SearchResultContainer from "../styles/SearchResultContainer"
 import StackSearchBox from "./components/StackSearchBox"
@@ -34,19 +33,21 @@ const TechStacksFields = () => {
     trigger,
   } = useTechStacksMethods()
 
-  register(`techStacks.${0}.data`, {
-    validate: {
-      isEmpty: (data) => {
-        return data.length === 0 && "하나 이상의 기술 스택을 추가해주세요"
-      },
-    },
-  })
-
   return (
     <Flex
       flexDir="column"
       gap="8px">
       {fields.map((field, index) => {
+        register(`techStacks.${index}.data`, {
+          validate: {
+            isEmpty: (data) => {
+              return (
+                data?.length === 0 && "하나 이상의 기술 스택을 추가해주세요"
+              )
+            },
+          },
+        })
+
         return (
           <FieldContainer key={field.id}>
             <Box>
@@ -60,7 +61,13 @@ const TechStacksFields = () => {
                 name={`techStacks[${index}].category`}
                 errors={errors}
                 render={({ message }) => {
-                  return <div>{message}</div>
+                  return (
+                    <Text
+                      as="b"
+                      color="red.200">
+                      {message}
+                    </Text>
+                  )
                 }}
               />
             </Box>
@@ -71,7 +78,13 @@ const TechStacksFields = () => {
                   name={`techStacks.${index}.data`}
                   errors={errors}
                   render={({ message }) => {
-                    return <Text>{message}</Text>
+                    return (
+                      <Text
+                        as="b"
+                        color="red.200">
+                        {message}
+                      </Text>
+                    )
                   }}
                 />
               )}
@@ -126,14 +139,7 @@ const TechStacksFields = () => {
                 />
               ))}
             </Box>
-            <Box
-              cursor="pointer"
-              pos="absolute"
-              top="5px"
-              left="5px"
-              onClick={() => removeField(index)}>
-              <MdClose size="20" />
-            </Box>
+            {index >= 1 && <CloseButton onClick={() => removeField(index)} />}
           </FieldContainer>
         )
       })}
