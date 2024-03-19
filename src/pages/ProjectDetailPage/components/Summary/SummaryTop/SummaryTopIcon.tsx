@@ -33,7 +33,7 @@ const SummaryTopIcon = ({
 
   return (
     <Flex
-      gap="0.7rem"
+      gap="0.5rem"
       alignItems="center"
       cursor={isButton ? "pointer" : "default"}
       _hover={isButton ? { opacity: "0.5" } : {}}

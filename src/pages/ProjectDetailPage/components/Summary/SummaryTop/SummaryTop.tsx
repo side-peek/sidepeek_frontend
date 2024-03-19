@@ -30,6 +30,7 @@ const SummaryTop = ({
   projectId,
 }: SummaryTopProps) => {
   const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
+  const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
 
   const { postLikeMutation } = usePostLikeMutation()
   const { deleteLikeMutation } = useDeleteLikeMutation(Number(projectId))
@@ -44,12 +45,14 @@ const SummaryTop = ({
       <Stack
         direction="row"
         spacing={isLargerThan1200 ? "1rem" : "0.5rem"}>
-        <SummaryTopIcon
-          count={viewCount}
-          aria-label="views"
-          icon={<MdRemoveRedEye />}
-          fontSize={isLargerThan1200 ? "2.7rem" : "2rem"}
-        />
+        {isLargerThan768 && (
+          <SummaryTopIcon
+            count={viewCount}
+            aria-label="views"
+            icon={<MdRemoveRedEye />}
+            fontSize={isLargerThan1200 ? "2.7rem" : "2rem"}
+          />
+        )}
 
         <SummaryTopIcon
           count={likeCount}
@@ -65,18 +68,20 @@ const SummaryTop = ({
             }
           }}
         />
-        <Link
-          to="Comment"
-          spy={true}
-          offset={-100}
-          smooth={true}>
-          <SummaryTopIcon
-            count={commentCount}
-            icon={<FaRegComment />}
-            aria-label="commentButton"
-            fontSize={isLargerThan1200 ? "2.3rem" : "1.8rem"}
-          />
-        </Link>
+        {isLargerThan768 && (
+          <Link
+            to="Comment"
+            spy={true}
+            offset={-100}
+            smooth={true}>
+            <SummaryTopIcon
+              count={commentCount}
+              icon={<FaRegComment />}
+              aria-label="commentButton"
+              fontSize={isLargerThan1200 ? "2.3rem" : "1.8rem"}
+            />
+          </Link>
+        )}
       </Stack>
       {ownerId === user?.id && <SummaryControl onOpen={onOpen} />}
       {isOpen && (
