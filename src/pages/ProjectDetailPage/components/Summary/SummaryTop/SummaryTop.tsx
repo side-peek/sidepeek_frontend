@@ -34,7 +34,6 @@ const SummaryTop = ({
   const { postLikeMutation } = usePostLikeMutation()
   const { deleteLikeMutation } = useDeleteLikeMutation(Number(projectId))
   const { isOpen, onOpen, onClose } = useDisclosure()
-  console.log(isOpen)
   const user = useUserInfoData()
 
   return (

@@ -35,10 +35,17 @@ const SummaryTopIcon = ({
     <Flex
       gap="0.7rem"
       alignItems="center"
-      cursor={isButton ? "pointer" : ""}
+      cursor={isButton ? "pointer" : "default"}
       _hover={isButton ? { opacity: "0.5" } : {}}
       onClick={handleClick}>
-      {isLike ? <IconButton {...props} /> : <IconButton {...props} />}
+      {isLike ? (
+        <IconButton {...props} />
+      ) : (
+        <IconButton
+          cursor={isButton ? "pointer" : "default"}
+          {...props}
+        />
+      )}
       <Text fontSize={isLargerThan1200 ? "xl" : "md"}>{count}</Text>
     </Flex>
   )
