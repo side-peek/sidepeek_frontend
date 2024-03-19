@@ -11,6 +11,8 @@ export const useAllProjectQuery = ({
   isReleased,
   lastProjectId = null,
   lastProject = undefined,
+  search,
+  skill,
 }: getAllProjectsType) => {
   const {
     data,
@@ -27,6 +29,8 @@ export const useAllProjectQuery = ({
       isReleased,
       lastProjectId,
       lastProject,
+      search,
+      skill,
     ],
     queryFn: () =>
       getAllProjects({
@@ -34,6 +38,8 @@ export const useAllProjectQuery = ({
         isReleased,
         lastProjectId,
         lastProject,
+        search,
+        skill,
       }),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => (

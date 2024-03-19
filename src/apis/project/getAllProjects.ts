@@ -11,7 +11,14 @@ import { baseInstance } from "../axiosInstance"
  * @brief 전체 프로젝트 목록을 가져옵니다
  */
 export const getAllProjects = async (
-  { sortOption, isReleased, lastProjectId, lastProject }: getAllProjectsType,
+  {
+    sortOption,
+    isReleased,
+    lastProjectId,
+    lastProject,
+    search,
+    skill,
+  }: getAllProjectsType,
   config: AxiosRequestConfig = {
     headers: {
       Authorization: `Bearer ${authToken.getAccessToken()}`,
@@ -38,6 +45,8 @@ export const getAllProjects = async (
         pageSize: 10,
         lastProjectId,
         lastOrderCount,
+        search,
+        skill: skill?.join(","),
       },
     },
   )

@@ -5,7 +5,6 @@ import ProjectListSection from "./components/ProjectListSection/ProjectListSecti
 import { useBannerProjectQuery } from "./hooks/queries/useBannerProjectQuery"
 
 const HomePage = () => {
-  // 배너 프로젝트 조회
   const { bannerProjectList, isBannerLoading } = useBannerProjectQuery()
 
   return (
@@ -15,7 +14,7 @@ const HomePage = () => {
       ) : (
         <Banner bannerList={bannerProjectList} />
       )}
-      <ProjectListSection isInfinityScroll={false} />
+      <ProjectListSection />
       <Box height="15rem" />
     </>
   )

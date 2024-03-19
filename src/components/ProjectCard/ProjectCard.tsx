@@ -1,6 +1,7 @@
 import { ForwardedRef, forwardRef } from "react"
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io"
 import { MdRemoveRedEye } from "react-icons/md"
+import { useNavigate } from "react-router-dom"
 
 import {
   Box,
@@ -22,6 +23,7 @@ interface ProjectCardProps {
   isFullHeart: boolean
   title: string
   content: string
+  url: string
 }
 
 const ProjectCard = forwardRef(
@@ -33,13 +35,17 @@ const ProjectCard = forwardRef(
       isFullHeart,
       title,
       content,
+      url,
     }: ProjectCardProps,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
+    const navigate = useNavigate()
+
     return (
       <Box
         ref={ref}
         width="100%"
+        onClick={() => navigate(url)}
         padding="1rem"
         cursor="pointer">
         <Box
@@ -51,6 +57,8 @@ const ProjectCard = forwardRef(
             src={imgUrl}
             alt="projectImg"
             width="100%"
+            height="27rem"
+            objectFit="cover"
             fallbackSrc={noImage}
           />
           <Center
