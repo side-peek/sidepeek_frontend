@@ -48,8 +48,6 @@ const ProfileEditPage = () => {
   const { putUserDetailMutation } = usePutUserDetailMutation(userId)
 
   const handleUpdateProfile = () => {
-    // TODO: 프로필 정보를 저장하는 api 요청
-    console.log(profileInfo)
     putUserDetailMutation.mutate({ userId: userId, userInfo: profileInfo })
   }
 

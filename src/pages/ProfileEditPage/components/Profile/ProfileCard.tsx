@@ -87,7 +87,6 @@ const ProfileCard = ({
             as={FaPlus}
             w="2.2rem"
             h="2.2rem"
-            fontWeight="bold"
             color="default"></Icon>
         </Flex>
       </Box>

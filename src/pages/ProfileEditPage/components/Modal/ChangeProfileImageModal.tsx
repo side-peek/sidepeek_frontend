@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Flex,
+  Icon,
   Image,
   Input,
   Modal,
@@ -142,9 +143,11 @@ const ChangeProfileImageModal = ({
               justifyContent="center"
               cursor="pointer"
               onClick={handleFileChoose}>
-              <GoPlus
-                color="white"
-                size="2.5rem"
+              <Icon
+                as={GoPlus}
+                w="2.5rem"
+                h="2.5rem"
+                color="default"
               />
             </Flex>
           </Flex>

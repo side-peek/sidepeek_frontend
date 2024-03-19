@@ -31,7 +31,6 @@ const useFileUpload = () => {
     onSuccess(data) {
       setResponsedFileUrl(data?.fileUrl)
       setIsSubmitting(false)
-      console.log(data)
     },
   })
 
@@ -42,7 +41,6 @@ const useFileUpload = () => {
       const selectedFile = event.target.files[0]
       const base64 = await convertFileToBase64(selectedFile)
       setFileBase64(base64)
-      console.log(selectedFile)
 
       uploadFileMutation.mutate(selectedFile)
     }
