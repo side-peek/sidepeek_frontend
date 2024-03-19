@@ -99,7 +99,6 @@ const ProfileTechStack = ({
                               _hover={{ fontWeight: "bold" }}
                               onClick={() => {
                                 appendStack(index, techStack)
-                                console.log(role, techStack.id)
                                 setProfileInfo((profileInfo) => {
                                   const newTeckStack = {
                                     skillId: techStack.id,
