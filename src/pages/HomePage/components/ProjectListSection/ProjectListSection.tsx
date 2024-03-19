@@ -20,7 +20,6 @@ const ProjectListSection = () => {
   const [sortOption, setSortOption] = useState<SortSelectType>("createdAt")
   const queryClient = useQueryClient()
 
-  // 프로젝트 전체 목록 조회
   const {
     allProjectList,
     isAllProjectLoading,
@@ -36,7 +35,6 @@ const ProjectListSection = () => {
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SortSelectType
 
-    // 다른 정렬 옵션 선택시 초기화 후 리패치
     if (value !== sortOption) {
       queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
       queryClient.refetchQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
