@@ -57,6 +57,8 @@ const ProjectCard = forwardRef(
             src={imgUrl}
             alt="projectImg"
             width="100%"
+            height="27rem"
+            objectFit="cover"
             fallbackSrc={noImage}
           />
           <Center
