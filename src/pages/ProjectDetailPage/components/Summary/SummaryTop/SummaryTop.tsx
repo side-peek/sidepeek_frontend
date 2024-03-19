@@ -3,7 +3,7 @@ import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io"
 import { MdRemoveRedEye } from "react-icons/md"
 import { Link } from "react-scroll"
 
-import { Stack, VStack, useDisclosure, useMediaQuery } from "@chakra-ui/react"
+import { HStack, Stack, useDisclosure, useMediaQuery } from "@chakra-ui/react"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { useDeleteLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteLikeMutation"
@@ -38,10 +38,11 @@ const SummaryTop = ({
   const user = useUserInfoData()
 
   return (
-    <VStack
+    <HStack
       mb="3rem"
       spacing="1.5rem"
-      align="flex-end">
+      justifyContent="flex-end"
+      align="center">
       <Stack
         direction="row"
         spacing={isLargerThan1200 ? "1rem" : "0.5rem"}>
@@ -91,7 +92,7 @@ const SummaryTop = ({
           projectId={projectId}
         />
       )}
-    </VStack>
+    </HStack>
   )
 }
 export default withProjectId(SummaryTop)
