@@ -4,7 +4,7 @@ import { TiPencil } from "react-icons/ti"
 import { IconButton, useDisclosure, useMediaQuery } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
-import ProjectDeleteCheckModal from "@pages/ProjectDetailPage/components/Summary/SummaryTop/ProjectDeleteCheckModal"
+import DeleteCheckModal from "@pages/ProjectDetailPage/components/DeleteCheckModal"
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
 interface BeforeEditingButtonProps {
@@ -37,7 +37,7 @@ const BeforeEditingButton = ({ comment }: BeforeEditingButtonProps) => {
         fontSize={isLargerThan768 ? "2xl" : "lg"}
       />
       {isOpen && (
-        <ProjectDeleteCheckModal
+        <DeleteCheckModal
           isOpen={isOpen}
           onClose={onClose}
           onClick={() => handleDelete(comment.id)}

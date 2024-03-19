@@ -9,18 +9,18 @@ import {
   Text,
 } from "@chakra-ui/react"
 
-interface ProjectDeleteCheckModalProps {
+interface DeleteCheckModalProps {
   isOpen: boolean
   onClose: () => void
   projectId?: string
   onClick: () => void
 }
 
-const ProjectDeleteCheckModal = ({
+const DeleteCheckModal = ({
   isOpen,
   onClose,
   onClick,
-}: ProjectDeleteCheckModalProps) => {
+}: DeleteCheckModalProps) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -63,4 +63,4 @@ const ProjectDeleteCheckModal = ({
   )
 }
 
-export default ProjectDeleteCheckModal
+export default DeleteCheckModal

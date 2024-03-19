@@ -10,8 +10,8 @@ import { useDeleteLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/
 import { useDeleteProjectMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteProjectMutation"
 import { usePostLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostLikeMutation"
 
+import DeleteCheckModal from "../../DeleteCheckModal"
 import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
-import ProjectDeleteCheckModal from "./ProjectDeleteCheckModal"
 import SummaryControl from "./SummaryControl"
 import SummaryTopIcon from "./SummaryTopIcon"
 
@@ -94,7 +94,7 @@ const SummaryTop = ({
       </Stack>
       {ownerId === user?.id && <SummaryControl onOpen={onOpen} />}
       {isOpen && (
-        <ProjectDeleteCheckModal
+        <DeleteCheckModal
           onClick={handleDeleteProject}
           isOpen={isOpen}
           onClose={onClose}
