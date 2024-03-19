@@ -8,7 +8,7 @@ import { ProjectFormValues } from "@pages/ProjectEditPage/types/ProjectFormValue
 export const useTechStacksMethods = () => {
   const { control, setValue, getValues, watch } = useProjectFormContext()
 
-  const { append, fields } = useFieldArray<ProjectFormValues>({
+  const { append, fields, remove } = useFieldArray<ProjectFormValues>({
     control,
     name: "techStacks",
   })
@@ -32,6 +32,8 @@ export const useTechStacksMethods = () => {
     setValue(`techStacks.${index}.stacks`, [...filtered])
   }
 
+  const removeField = (idx: number) => remove(idx)
+
   const selectedStacks = (index: number) => watch(`techStacks.${index}.stacks`)
 
   return {
@@ -43,5 +45,6 @@ export const useTechStacksMethods = () => {
     appendStack,
     removeStack,
     selectedStacks,
+    removeField,
   }
 }
