@@ -4,8 +4,15 @@ import { useProjectFormContext } from "@pages/ProjectEditPage/hooks/useProjectFo
 import { RequestedMemberType } from "@pages/ProjectEditPage/types/ProjectFormValues"
 
 export const useMemberFieldsMethods = () => {
-  const { control, getValues, setValue, watch, register } =
-    useProjectFormContext()
+  const {
+    control,
+    getValues,
+    setValue,
+    watch,
+    register,
+    trigger,
+    formState: { errors },
+  } = useProjectFormContext()
 
   const { fields, append, remove } = useFieldArray({
     name: "members",
@@ -48,5 +55,7 @@ export const useMemberFieldsMethods = () => {
     appendMembers,
     removeMembers,
     getSelectedMembers,
+    errors,
+    trigger,
   }
 }
