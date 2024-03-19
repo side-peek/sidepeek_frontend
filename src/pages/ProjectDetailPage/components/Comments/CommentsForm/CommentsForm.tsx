@@ -8,6 +8,7 @@ import {
   Checkbox,
   Flex,
   FormControl,
+  HStack,
   Textarea,
 } from "@chakra-ui/react"
 import { Stack } from "@chakra-ui/react"
@@ -77,19 +78,29 @@ const CommentsForm = ({
             <Flex
               w="100%"
               position="relative">
-              <Box
+              <HStack
                 w="100%"
+                gap="2rem"
                 border="1px solid #ECECEC"
                 borderTopLeftRadius="0.9rem"
                 borderBottomRadius={isReplyComment ? "0.9rem" : 0}>
                 <Textarea
-                  w="93%"
+                  w="95%"
+                  sx={{
+                    "&::-webkit-scrollbar": {
+                      display: "none",
+                    },
+                    "-ms-overflow-style": "none",
+                    "scrollbar-width": "none",
+                  }}
+                  mr="2rem"
                   size="xs"
                   rows={1}
                   minH="1rem"
                   maxH="10rem"
                   fontSize="lg"
-                  p={isReplyComment ? "1rem" : "2rem"}
+                  p={isReplyComment ? "1rem " : "2rem"}
+                  pr="4rem"
                   as={ResizeTextarea}
                   placeholder={isReplyComment ? "" : "댓글을 입력하세요"}
                   isRequired={false}
@@ -99,21 +110,22 @@ const CommentsForm = ({
                   _focus={{ boxShadow: "none", borderColor: "grey.400" }}
                   {...register("content", { required: true })}
                 />
-              </Box>
-              <Stack
-                position="absolute"
-                right="1.5rem"
-                top="30%"
-                direction="row">
-                <Checkbox
-                  isChecked={isAnonymous}
-                  size="lg"
-                  onChange={handleAnonymous}
-                  color={isAnonymous ? "red.200" : "grey.500"}
-                  colorScheme="red">
-                  익명
-                </Checkbox>
-              </Stack>
+                <Stack
+                  position="absolute"
+                  right="1rem"
+                  top="30%"
+                  direction="row">
+                  <Checkbox
+                    isChecked={isAnonymous}
+                    size="lg"
+                    onChange={handleAnonymous}
+                    color={isAnonymous ? "red.200" : "grey.500"}
+                    minWidth="5rem"
+                    colorScheme="red">
+                    익명
+                  </Checkbox>
+                </Stack>
+              </HStack>
             </Flex>
 
             <Button
