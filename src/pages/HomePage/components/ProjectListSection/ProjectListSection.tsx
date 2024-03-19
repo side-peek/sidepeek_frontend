@@ -69,6 +69,7 @@ const ProjectListSection = () => {
         />
       </Stack>
       <MoreButton
+        isLoading={isFetchingNextPage}
         loadMore={loadMoreProjects}
         hasNext={hasNextPage}
       />

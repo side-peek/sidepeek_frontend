@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react"
 import { useInView } from "react-intersection-observer"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
 
 import { Box } from "@chakra-ui/react"
 import { Container, Stack, useMediaQuery } from "@chakra-ui/react"
@@ -19,7 +19,7 @@ import ResultInfo from "./components/ResultInfo/ResultInfo"
 import SearchBarSection from "./components/SearchBarSection/SearchBarSection"
 
 const ProjectListPage = () => {
-  const params = new URLSearchParams(window.location.search)
+  const params = useSearchParams()[0]
   const keyword = params.get("search")
 
   const [search, setSearch] = useState(keyword)
@@ -38,6 +38,7 @@ const ProjectListPage = () => {
     refetchAllProject,
     fetchNextPage,
     isRefetching,
+    isFetchingNextPage,
   } = useAllProjectQuery({ sortOption, isReleased, search })
 
   const isLoading = isAllProjectLoading || isRefetching
@@ -82,6 +83,7 @@ const ProjectListPage = () => {
         onSubmit={handleSearch}
       />
       <ResultInfo
+        isLoading={isLoading}
         searchWord={search !== null ? search : ""}
         resultCount={allProjectList?.pages[0].totalElements || 0}
       />
@@ -95,6 +97,7 @@ const ProjectListPage = () => {
           <ProjectList
             projects={allProjectList}
             isLoading={isLoading}
+            isFetchingNextPage={isFetchingNextPage}
             ref={ref}
           />
         </Stack>

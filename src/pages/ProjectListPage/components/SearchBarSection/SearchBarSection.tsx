@@ -18,7 +18,7 @@ const SearchBarSection = ({ search, onSubmit }: SearchBarSectionProps) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!inputValue) {
-      console.log("검색어를 입력하세요")
+      alert("검색어를 입력하세요")
     }
 
     onSubmit(inputValue)
