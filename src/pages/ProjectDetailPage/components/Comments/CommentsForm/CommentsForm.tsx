@@ -1,15 +1,22 @@
-// TODO: 익명 처리
-import { useCallback } from "react"
+import { useCallback, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
-import { Box, Button, Flex, FormControl, Textarea } from "@chakra-ui/react"
+import {
+  Box,
+  Button,
+  Checkbox,
+  Flex,
+  FormControl,
+  Textarea,
+} from "@chakra-ui/react"
+import { Stack } from "@chakra-ui/react"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 
 import { CommentFormValues } from "../../../types/commentFormValues"
-import { ProjectIdProps, withProjectId } from "../Hoc/withProjectId"
+import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
 
 interface CommentsFormProps extends ProjectIdProps {
   parentId?: number | null
@@ -24,6 +31,8 @@ const CommentsForm = ({
   const { register, reset, handleSubmit } = useForm<CommentFormValues>()
 
   const { sendCommentMutation } = usePostCommentMutation()
+  const [isAnonymous, setIsAnonymous] = useState(false)
+
   const user = useUserInfoData()
 
   const onSubmit: SubmitHandler<CommentFormValues> = useCallback(
@@ -35,49 +44,66 @@ const CommentsForm = ({
       const commentRequestValue = {
         ownerId: user.id,
         projectId: Number(projectId),
-        isAnonymous: false,
+        isAnonymous: isAnonymous,
         parentId: parentId ? parentId : null,
         content: text.content,
       }
-      sendCommentMutation.mutate(commentRequestValue)
+      sendCommentMutation(commentRequestValue)
       reset()
     },
-    [parentId, projectId, reset, user, sendCommentMutation],
+    [parentId, projectId, reset, user, sendCommentMutation, isAnonymous],
   )
 
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-      if (e.key === "Enter" && !e.shiftKey && handleSubmit) {
-        e.preventDefault()
-        handleSubmit(onSubmit)()
-      }
-    },
-    [handleSubmit, onSubmit],
-  )
+  const handleAnonymous = () => {
+    setIsAnonymous(!isAnonymous)
+  }
 
   return (
     <Box w="100%">
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
           <Flex w="100%">
-            <Textarea
-              size="xs"
-              rows={1}
-              minH="1rem"
-              maxH="10rem"
-              borderTopLeftRadius="0.9rem"
-              borderBottomRadius={isReplyComment ? "0.9rem" : 0}
-              fontSize="lg"
-              p={isReplyComment ? "1rem" : "2rem"}
-              as={ResizeTextarea}
-              placeholder={isReplyComment ? "" : "댓글을 입력하세요"}
-              isRequired={false}
-              resize="none"
-              _hover={{ boxShadow: "none", borderColor: "grey.400" }}
-              _focus={{ boxShadow: "none", borderColor: "grey.400" }}
-              {...register("content", { required: true })}
-              onKeyDown={handleKeyDown}
-            />
+            <Flex
+              w="100%"
+              position="relative">
+              <Box
+                w="100%"
+                border="1px solid #ECECEC"
+                borderTopLeftRadius="0.9rem"
+                borderBottomRadius={isReplyComment ? "0.9rem" : 0}>
+                <Textarea
+                  w="93%"
+                  size="xs"
+                  rows={1}
+                  minH="1rem"
+                  maxH="10rem"
+                  fontSize="lg"
+                  p={isReplyComment ? "1rem" : "2rem"}
+                  as={ResizeTextarea}
+                  placeholder={isReplyComment ? "" : "댓글을 입력하세요"}
+                  isRequired={false}
+                  resize="none"
+                  border="none"
+                  _hover={{ boxShadow: "none", borderColor: "grey.400" }}
+                  _focus={{ boxShadow: "none", borderColor: "grey.400" }}
+                  {...register("content", { required: true })}
+                />
+              </Box>
+              <Stack
+                position="absolute"
+                right="1.5rem"
+                top="30%"
+                direction="row">
+                <Checkbox
+                  isChecked={isAnonymous}
+                  size="lg"
+                  onChange={handleAnonymous}
+                  color={isAnonymous ? "red.200" : "grey.500"}
+                  colorScheme="red">
+                  익명
+                </Checkbox>
+              </Stack>
+            </Flex>
 
             <Button
               p="0"

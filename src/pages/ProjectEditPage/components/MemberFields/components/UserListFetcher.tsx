@@ -7,7 +7,6 @@ interface UserListFetcherProps {
   render: (data: UserSummary[]) => JSX.Element
 }
 
-//TODO : value값이 없을 경우 고려
 const UserListFetcher = ({ value, render }: UserListFetcherProps) => {
   const { data } = useGetUserListByNickname(value)
 

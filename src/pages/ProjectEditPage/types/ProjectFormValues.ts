@@ -1,6 +1,11 @@
 import { Skill } from "api-models"
 
-//TODO : 내용 추가해서 최종적으로는 Project 타입을 상속받는 방향으로 수정
+export type FieldMember = {
+  id: number | null
+  nickname: string
+  role: string
+}
+
 export type ProjectFormValues = {
   name: string
   subName: string
@@ -9,7 +14,10 @@ export type ProjectFormValues = {
   thumbnailUrl: string
   githubUrl: string
   deployUrl: string
-  startDate: string //2002-02
-  endDate: string //동일
+  startDate: string
+  endDate: string
   techStacks: { category: string; stacks: Skill[] }[]
+  description: string
+  troubleShooting: string
+  members: { category: string; members: FieldMember[] }[]
 }

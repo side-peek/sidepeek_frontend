@@ -280,7 +280,20 @@ declare module "api-models" {
   /* 프로젝트 게시글 */
   //FIXME: 미완성 api
   export type postProjectPayload = {
-    projects: Project[]
+    name: string
+    overview: string
+    ownerId: number
+    githubUrl: string
+    techStacks: { skillId: number; category: string }[]
+    subName: string
+    thumbnailUrl: string
+    deployUrl: string
+    startDate: string
+    endDate: string
+    overviewImageUrl: string[]
+    members: { id: number | null; nickname: string; role: string }[]
+    description: string
+    troubleShooting: string
   }
 
   export type getProjectDetailPayload = {

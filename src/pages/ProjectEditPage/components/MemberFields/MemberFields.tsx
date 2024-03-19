@@ -4,6 +4,7 @@ import { Button, Flex, Input } from "@chakra-ui/react"
 
 import AvatarCard from "@components/AvatarCard/AvatarCard"
 
+import FieldContainer from "../FieldContainer"
 import UserSearchBox from "./components/UserSearchBox"
 import { useMemberFieldsMethods } from "./hooks/useMemberFieldsMethods"
 
@@ -19,17 +20,13 @@ const MemberFields = () => {
   } = useMemberFieldsMethods()
 
   return (
-    <>
+    <Flex
+      flexDir="column"
+      gap="10px">
       {fields.map((field, idx) => {
+        const selectedMembers = getSelectedMembers(idx)
         return (
-          <Flex
-            key={field.id}
-            gap="5px"
-            border="1px solid"
-            borderColor="grey.400"
-            borderRadius="1rem"
-            padding="5rem"
-            overflow="scroll">
+          <FieldContainer key={field.id}>
             <IoCloseCircle
               size="20"
               onClick={() => deleteFields(idx)}
@@ -41,15 +38,13 @@ const MemberFields = () => {
             />
             <UserSearchBox
               onClick={({ id, nickname, profileImageUrl }) => {
-                appendMembers(
-                  { userId: id as number, nickname, profileImageUrl },
-                  idx,
-                )
+                appendMembers({ id, nickname, profileImageUrl }, idx)
               }}
+              selectedMembers={getSelectedMembers(idx)}
             />
-            {getSelectedMembers(idx)?.map((member) => {
+            {selectedMembers?.map((member, idx) => {
               return (
-                <AvatarCard key={member.userId}>
+                <AvatarCard key={idx}>
                   <IoCloseCircle
                     size="20"
                     onClick={() => removeMembers(member, idx)}
@@ -59,11 +54,11 @@ const MemberFields = () => {
                 </AvatarCard>
               )
             })}
-          </Flex>
+          </FieldContainer>
         )
       })}
       <Button onClick={appendNewFields}>팀원 추가하기</Button>
-    </>
+    </Flex>
   )
 }
 

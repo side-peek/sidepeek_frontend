@@ -18,7 +18,6 @@ const CommentContext = createContext<CommentContextProps>({
   handleOffEdit: () => {},
   handleDelete: () => {},
   onSubmitEdit: () => {},
-  // 좀 문제임
   register: undefined,
   handleSubmit: undefined,
 })
@@ -66,13 +65,13 @@ export const CommentProvider = ({ children }: CommentProviderProps) => {
   }
 
   const handleDelete = (commentId: number) => {
-    deleteCommentMutation.mutate(commentId)
+    deleteCommentMutation(commentId)
     handleOffEdit()
     handleOffReply()
   }
 
   const onSubmitEdit: SubmitHandler<editCommentPayload> = (commentValues) => {
-    editCommentMutation.mutate(commentValues)
+    editCommentMutation(commentValues)
     handleOffEdit()
     handleOffReply()
   }

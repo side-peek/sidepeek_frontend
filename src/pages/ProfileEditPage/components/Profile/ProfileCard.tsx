@@ -1,9 +1,12 @@
 import { AiFillCaretDown } from "react-icons/ai"
+import { FaPlus } from "react-icons/fa6"
 
 import {
   Avatar,
+  Box,
   Button,
   Flex,
+  Icon,
   Input,
   Menu,
   MenuButton,
@@ -48,9 +51,9 @@ const ProfileCard = ({
 
   const careers: CareerType[] = [
     "0년차",
-    "1~3년차",
-    "4~6년차",
-    "7~9년차",
+    "1-3년차",
+    "4-6년차",
+    "7-9년차",
     "10년차 이상",
   ]
   return (
@@ -60,12 +63,33 @@ const ProfileCard = ({
       bg="default"
       ml="2rem"
       alignItems="center">
-      <Avatar
-        w="12rem"
-        h="12rem"
+      <Box
+        position="relative"
         cursor="pointer"
-        onClick={onProfileImageModalOpen}
-        src={profileImageUrl}></Avatar>
+        onClick={onProfileImageModalOpen}>
+        <Avatar
+          w="12rem"
+          h="12rem"
+          src={profileImageUrl}></Avatar>
+        <Flex
+          position="absolute"
+          alignItems="center"
+          justifyContent="center"
+          bottom="-0.3rem"
+          right="-0.5rem"
+          w="4.5rem"
+          h="4.5rem"
+          bg="blue.100"
+          borderRadius="50%"
+          border="0.3rem solid"
+          borderColor="default">
+          <Icon
+            as={FaPlus}
+            w="2.2rem"
+            h="2.2rem"
+            color="default"></Icon>
+        </Flex>
+      </Box>
 
       <ChangeProfileImageModal
         isOpen={isProfileImageModalOpen}

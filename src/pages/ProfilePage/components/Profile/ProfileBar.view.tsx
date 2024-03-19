@@ -10,7 +10,6 @@ import ProfileCard from "./ProfileCard"
 import ProfileIntroduction from "./ProfileIntroduction"
 import ProfileTechStack from "./ProfileTechStack"
 
-// TODO: props 타입이 undefined가 될수 있다는게 뭔가 이상함 이렇게 안하면 케찹 터짐. 해결해보기
 export interface ProfileBarProps extends ProfileActionsButtonsProps {
   nickname: string
   profileImageUrl: string

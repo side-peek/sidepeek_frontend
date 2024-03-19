@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Input, Text, Textarea } from "@chakra-ui/react"
 
 import ProjectFormProvider from "../stores/ProjectFormProvider"
+import Description from "./Editors/Description"
 import Overview from "./Files/Overview"
 import Thumbnail from "./Files/Thumbnail"
 import MemberFields from "./MemberFields/MemberFields"
@@ -61,6 +62,10 @@ const ProjectForm = () => {
             <Text>멤버</Text>
             <MemberFields />
           </label>
+
+          <Description name="description" />
+
+          <Description name="troubleShooting" />
 
           <Button type="submit">제출</Button>
         </Flex>

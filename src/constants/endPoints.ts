@@ -5,7 +5,7 @@ export const ENDPOINTS = {
   EMAIL_LOGIN: `${VARIABLE_URL}/auth/login`,
   EMAIL_REFRESH: `${VARIABLE_URL}/auth/reissue`,
   EMAIL_AUTH: `${VARIABLE_URL}/auth/me`,
-  EMAIL_SIGNUP: `${VARIABLE_URL}/users/signup`,
+  EMAIL_SIGNUP: `${VARIABLE_URL}/users`,
   GET_USER_NICKNAME: `${VARIABLE_URL}/users?keyword=`,
   GET_USER_PROFILE: (userId: number) => `${VARIABLE_URL}/users/${userId}`,
   PUT_USER_PROFILE: (userId: number) => `${VARIABLE_URL}/users/${userId}`,

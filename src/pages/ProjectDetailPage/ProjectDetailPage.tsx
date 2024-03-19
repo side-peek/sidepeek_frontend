@@ -1,9 +1,10 @@
-import { Box, Center, Flex, useMediaQuery } from "@chakra-ui/react"
+import { Box, Flex, useMediaQuery } from "@chakra-ui/react"
+
+import FullScreenSpinner from "@components/LoadingComponents/FullScreenSpinner"
 
 import Comments from "./components/Comments/Comments"
-import { withProjectId } from "./components/Comments/Hoc/withProjectId"
-import { ProjectIdProps } from "./components/Comments/Hoc/withProjectId"
 import Content from "./components/Content/Content"
+import { ProjectIdProps, withProjectId } from "./components/Hoc/withProjectId"
 import Summary from "./components/Summary/Summary"
 import { useProjectDetailQuery } from "./hooks/queries/useProjectDetailQuery"
 
@@ -12,7 +13,7 @@ const ProjectDetailPage = ({ projectId }: ProjectIdProps) => {
   const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
 
   if (!projectDetailInfo) {
-    return <Center>Loading...</Center>
+    return <FullScreenSpinner />
   }
 
   return (

@@ -23,7 +23,6 @@ const ProfileController = ({ userId }: UserIdProps) => {
 
   if (!data)
     return (
-      // TODO: 공용 로딩 컴포넌트 개발해야함
       <Box
         w="100vw"
         h="100vh"

@@ -13,7 +13,7 @@ const Content = ({ projectDetailInfo }: getProjectDetailResponseType) => {
     <VStack
       alignItems="flex-start"
       divider={<StackDivider borderColor="grey.300" />}
-      spacing={10}
+      spacing={30}
       w="100%"
       margin="0 auto">
       <TechStacks techStacks={techStacks} />

@@ -1,26 +1,35 @@
+import { useEffect } from "react"
+
+import { useToast } from "@chakra-ui/react"
 import { deleteLikePayload } from "api-models"
 import { Project } from "api-models"
+import { isAxiosError } from "axios"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 import { deleteLike } from "@apis/like/deleteLike"
 
-import { QUERY_KEY_GET_PROJECT_DETAIL } from "../queries/useProjectDetailQuery"
+import {
+  COMMON_MESSAGES,
+  LIKE_MESSAGES,
+} from "@pages/ProjectDetailPage/constants/toastMessage"
+import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
-const QUERY_KEY_POST_LIKE = "DELETE_LIKE_1328940382182"
+import { QUERYKEY } from "@constants/queryKey"
 
 export const useDeleteLikeMutation = (projectId: number) => {
   const queryClient = useQueryClient()
+  const toast = useToast(toastOptions)
 
-  const deleteLikeMutation = useMutation({
-    mutationKey: [QUERY_KEY_POST_LIKE],
+  const { mutate: deleteLikeMutation, error } = useMutation({
+    mutationKey: [QUERYKEY.DELETE_LIKE],
     mutationFn: (data: deleteLikePayload) => deleteLike(data),
     onMutate: async () => {
       await queryClient.cancelQueries({
-        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
+        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
       const previousLikeState = queryClient.getQueryData<Project>([
-        QUERY_KEY_GET_PROJECT_DETAIL,
+        QUERYKEY.PROJECT_DETAIL,
         projectId,
       ])
 
@@ -31,7 +40,7 @@ export const useDeleteLikeMutation = (projectId: number) => {
           likeCount: previousLikeState.likeCount - 1,
         }
         queryClient.setQueryData(
-          [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
+          [QUERYKEY.PROJECT_DETAIL, projectId],
           updatedLikeState,
         )
       }
@@ -39,18 +48,41 @@ export const useDeleteLikeMutation = (projectId: number) => {
       return { previousLikeState }
     },
 
-    onError: (err, _, context) => {
-      console.log(err)
+    onError: (_, __, context) => {
       queryClient.setQueryData(
-        [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
+        [QUERYKEY.PROJECT_DETAIL, projectId],
         context?.previousLikeState,
       )
     },
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
+        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
     },
   })
+
+  useEffect(() => {
+    if (isAxiosError(error)) {
+      let message = ""
+      switch (error.response?.status) {
+        case 500: {
+          message = COMMON_MESSAGES.SERVER
+          break
+        }
+        case 400:
+        case 404: {
+          message = LIKE_MESSAGES.ERROR.BAD_REQUEST
+          break
+        }
+        default: {
+          message = LIKE_MESSAGES.ERROR.UNCAUGHT
+        }
+      }
+      toast({
+        status: "error",
+        title: message,
+      })
+    }
+  }, [error, toast])
   return { deleteLikeMutation }
 }
