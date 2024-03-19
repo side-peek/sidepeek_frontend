@@ -4,7 +4,7 @@ import { Button, Flex, Input } from "@chakra-ui/react"
 
 import AvatarCard from "@components/AvatarCard/AvatarCard"
 
-import FieldContainer from "../FieldContainer"
+import FieldContainer from "../styles/FieldContainer"
 import UserSearchBox from "./components/UserSearchBox"
 import { useMemberFieldsMethods } from "./hooks/useMemberFieldsMethods"
 
