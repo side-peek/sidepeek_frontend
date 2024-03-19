@@ -1,4 +1,6 @@
+import { useRef } from "react"
 import { IoSearch } from "react-icons/io5"
+import { useNavigate } from "react-router-dom"
 
 import {
   Box,
@@ -17,12 +19,21 @@ import LoginButton from "./components/LoginButton"
 import Menu from "./components/Menu/Menu"
 
 const Header = () => {
+  const navigate = useNavigate()
   const isLoggedIn = useUserInfoData()
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (inputRef.current) {
+      navigate(`/project?search=${inputRef.current.value}`)
+      inputRef.current.value = ""
+    }
+  }
+
   return (
     <HeaderContainer>
-      {/* 로고 */}
       <LogoLink logoHeight="7rem" />
-      {/* 검색창 */}
       <Box
         pl="1.5rem"
         alignSelf="end"
@@ -35,15 +46,17 @@ const Header = () => {
               h="2rem"
             />
           </InputRightElement>
-          <Input
-            size="lg"
-            variant="flushed"
-            placeholder="검색어를 입력하세요"
-          />
+          <form onSubmit={handleSubmit}>
+            <Input
+              ref={inputRef}
+              size="lg"
+              variant="flushed"
+              placeholder="검색어를 입력하세요"
+            />
+          </form>
         </InputGroup>
       </Box>
       <Spacer />
-      {/* 메뉴 */}
       {isLoggedIn ? <Menu /> : <LoginButton />}
     </HeaderContainer>
   )
