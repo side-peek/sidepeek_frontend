@@ -7,7 +7,6 @@ const ProfileActionsButtons = ({
   handleNewProject,
   handleEditProfile,
 }: ProfileActionsButtonsProps) => {
-  // TODO: mediaQuery 값 계산 최상위 컴포넌트에서 하고 Props로 내려줄지 고민해보기
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
 
   return (
