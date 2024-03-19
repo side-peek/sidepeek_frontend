@@ -3,13 +3,14 @@ import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io"
 import { MdRemoveRedEye } from "react-icons/md"
 import { Link } from "react-scroll"
 
-import { Stack, VStack, useMediaQuery } from "@chakra-ui/react"
+import { Stack, VStack, useDisclosure, useMediaQuery } from "@chakra-ui/react"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { useDeleteLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteLikeMutation"
 import { usePostLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostLikeMutation"
 
 import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
+import ProjectDeleteCheckModal from "./ProjectDeleteCheckModal"
 import SummaryControl from "./SummaryControl"
 import SummaryTopIcon from "./SummaryTopIcon"
 
@@ -32,6 +33,8 @@ const SummaryTop = ({
 
   const { postLikeMutation } = usePostLikeMutation()
   const { deleteLikeMutation } = useDeleteLikeMutation(Number(projectId))
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  console.log(isOpen)
   const user = useUserInfoData()
 
   return (
@@ -76,7 +79,14 @@ const SummaryTop = ({
           />
         </Link>
       </Stack>
-      {ownerId === user?.id && <SummaryControl />}
+      {ownerId === user?.id && <SummaryControl onOpen={onOpen} />}
+      {isOpen && (
+        <ProjectDeleteCheckModal
+          isOpen={isOpen}
+          onClose={onClose}
+          projectId={projectId}
+        />
+      )}
     </VStack>
   )
 }
