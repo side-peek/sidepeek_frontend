@@ -17,7 +17,7 @@ import CloseButtonTag from "@components/Tag/components/CloseButtonTag"
 import { useExample } from "@pages/ProfileEditPage/hooks/useExample"
 import { ProfileInfo } from "@pages/ProfileEditPage/types/types"
 import StackSearchBox from "@pages/ProjectEditPage/components/TechStacksFields/components/StackSearchBox"
-import { filterSelectedStack } from "@pages/ProjectEditPage/utils/filterSelectedStack"
+import { filterSelectedId } from "@pages/ProjectEditPage/utils/filterSelectedId"
 
 import ProfileCurrentTechStack from "./ProfileCurrentTechStack"
 
@@ -88,38 +88,37 @@ const ProfileTechStack = ({
                 render={({ techStacks }) => {
                   return (
                     <Box>
-                      {filterSelectedStack(
-                        techStacks,
-                        selectedStacks(index),
-                      ).map((techStack) => {
-                        return (
-                          <Box
-                            ml="1rem"
-                            mb="0.3rem"
-                            fontSize="1.2rem"
-                            cursor="pointer"
-                            _hover={{ fontWeight: "bold" }}
-                            onClick={() => {
-                              appendStack(index, techStack)
-                              setProfileInfo((profileInfo) => {
-                                const newTeckStack = {
-                                  skillId: techStack.id,
-                                  category: role,
-                                }
-                                return {
-                                  ...profileInfo,
-                                  techStacks: [
-                                    ...profileInfo.techStacks,
-                                    newTeckStack,
-                                  ],
-                                }
-                              })
-                            }}
-                            key={techStack.name}>
-                            {techStack.name}
-                          </Box>
-                        )
-                      })}
+                      {filterSelectedId(techStacks, selectedStacks(index)).map(
+                        (techStack) => {
+                          return (
+                            <Box
+                              ml="1rem"
+                              mb="0.3rem"
+                              fontSize="1.2rem"
+                              cursor="pointer"
+                              _hover={{ fontWeight: "bold" }}
+                              onClick={() => {
+                                appendStack(index, techStack)
+                                setProfileInfo((profileInfo) => {
+                                  const newTeckStack = {
+                                    skillId: techStack.id,
+                                    category: role,
+                                  }
+                                  return {
+                                    ...profileInfo,
+                                    techStacks: [
+                                      ...profileInfo.techStacks,
+                                      newTeckStack,
+                                    ],
+                                  }
+                                })
+                              }}
+                              key={techStack.name}>
+                              {techStack.name}
+                            </Box>
+                          )
+                        },
+                      )}
                     </Box>
                   )
                 }}

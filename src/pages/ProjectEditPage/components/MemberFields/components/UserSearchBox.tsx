@@ -7,15 +7,33 @@ import { useOutsideClick } from "src/components/Search/hooks/useOutsideClick"
 import SearchBox from "@components/Search/SearchMain"
 import { useInput } from "@components/Search/hooks/useInput"
 
+import { filterSelectedId } from "@pages/ProjectEditPage/utils/filterSelectedId"
+
 import UserListFetcher from "./UserListFetcher"
 
 interface UserSearchBoxProps extends Omit<BoxProps, "onClick" | "ref"> {
-  onClick: (data: UserSummary) => void
+  onClick: (data: Omit<UserSummary, "isSocialLogin">) => void
+  selectedMembers: Omit<UserSummary, "isSocialLogin">[]
 }
 
-const UserSearchBox = ({ onClick, ...props }: UserSearchBoxProps) => {
+const UserSearchBox = ({
+  onClick,
+  selectedMembers = [],
+  ...props
+}: UserSearchBoxProps) => {
   const [inputValue, onInput] = useInput("")
   const [ref, isFocused] = useOutsideClick()
+
+  const handleClickNonUser = (value: string) => {
+    if (!value.trim().length) {
+      return
+    }
+    onClick({
+      id: null,
+      nickname: value,
+      profileImageUrl: "",
+    })
+  }
 
   return (
     <SearchBox
@@ -38,19 +56,26 @@ const UserSearchBox = ({ onClick, ...props }: UserSearchBoxProps) => {
         }>
         <UserListFetcher
           value={inputValue}
-          render={(data) => {
-            return (
-              <SearchBox.Result isFocused={isFocused}>
-                {data?.map((userSummary) => (
+          render={(data) => (
+            <SearchBox.Result isFocused={isFocused}>
+              {filterSelectedId(data, selectedMembers)?.map(
+                ({ id, nickname, profileImageUrl }) => (
                   <Box
-                    key={userSummary.id}
-                    onClick={() => onClick(userSummary)}>
-                    #{userSummary.nickname}
+                    key={id}
+                    fontWeight={700}
+                    onClick={() => onClick({ id, nickname, profileImageUrl })}>
+                    #{nickname}
                   </Box>
-                ))}
-              </SearchBox.Result>
-            )
-          }}></UserListFetcher>
+                ),
+              )}
+              {inputValue && (
+                <Box onClick={() => handleClickNonUser(inputValue)}>
+                  {inputValue} 추가하기
+                </Box>
+              )}
+            </SearchBox.Result>
+          )}
+        />
       </Suspense>
     </SearchBox>
   )

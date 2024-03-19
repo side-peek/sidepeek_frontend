@@ -1,7 +1,7 @@
 import { useFieldArray, useFormContext } from "react-hook-form"
 
 type RequestedMemberType = {
-  userId: number
+  id: number | null
   nickname: string
   profileImageUrl: string | null
 }
@@ -43,7 +43,7 @@ export const useMemberFieldsMethods = () => {
     const members = [...getValues(`members.${idx}.members`)]
     setValue(
       `members.${idx}.members`,
-      members.filter((member) => member.userId !== data.userId),
+      members.filter((member) => member.id !== data.id),
     )
   }
 

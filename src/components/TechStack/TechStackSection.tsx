@@ -6,7 +6,7 @@ import { Skill } from "api-models"
 import CloseButtonTag from "@components/Tag/components/CloseButtonTag"
 import { FieldProps } from "@components/TechStack/hooks/useTechStack"
 
-import { filterSelectedStack } from "@pages/ProjectEditPage/utils/filterSelectedStack"
+import { filterSelectedId } from "@pages/ProjectEditPage/utils/filterSelectedId"
 
 import StackSearchBox from "../../pages/ProjectEditPage/components/TechStacksFields/components/StackSearchBox"
 
@@ -59,7 +59,7 @@ const TechStackSection = ({
                 render={({ techStacks }) => {
                   return (
                     <Box>
-                      {filterSelectedStack(techStacks, selectedData).map(
+                      {filterSelectedId(techStacks, selectedData).map(
                         (techStack) => {
                           return (
                             <Box

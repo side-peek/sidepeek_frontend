@@ -33,6 +33,9 @@ export const projectInputRegister: ProjectInputRegisterType = {
 
   overviewImageUrl: {},
 
+  members: { required: "하나 이상은 필수입니다" },
+
   description: {},
+
   troubleShooting: {},
 }
