@@ -12,9 +12,6 @@ const ProjectFormProvider = ({ children }: PropsWithChildren) => {
   const { mutate } = usePostProjectMutation()
   //TODO : 인증 관련 로직 수정 필요
   const userInfo = useUserInfoData()
-  if (!userInfo) {
-    throw new Error()
-  }
 
   const handleSubmitEvent = (data: ProjectFormValues) => {
     const members = data.members
@@ -36,7 +33,7 @@ const ProjectFormProvider = ({ children }: PropsWithChildren) => {
         return stacks.map(({ id }) => ({ skillId: id, category }))
       })
       .flat()
-    mutate({ ...data, members, techStacks, ownerId: userInfo.id as number })
+    mutate({ ...data, members, techStacks, ownerId: userInfo?.id as number })
   }
 
   return (
