@@ -3,18 +3,11 @@ import { useInView } from "react-intersection-observer"
 import { useLocation } from "react-router-dom"
 
 import { Box } from "@chakra-ui/react"
-import {
-  Checkbox,
-  Container,
-  HStack,
-  Select,
-  Spacer,
-  Stack,
-  useMediaQuery,
-} from "@chakra-ui/react"
+import { Container, Stack, useMediaQuery } from "@chakra-ui/react"
 
 import { useQueryClient } from "@tanstack/react-query"
 
+import ProjectFilter from "@components/ProjectFilter/ProjectFilter"
 import ProjectList from "@components/ProjectList/ProjectList"
 
 import { useAllProjectQuery } from "@pages/HomePage/hooks/queries/useAllProjectQuery"
@@ -55,7 +48,10 @@ const ProjectListPage = () => {
       queryClient.refetchQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
     }
     setSortOption(value)
+  }
 
+  const handleChange = () => {
+    setIsReleased(!isReleased)
     refetchAllProject()
   }
 
@@ -89,27 +85,11 @@ const ProjectListPage = () => {
       />
       <Container maxW={isLargerThan1200 ? "80%" : "95%"}>
         <Stack marginTop="15rem">
-          <HStack spacing={5}>
-            <Spacer />
-            <Checkbox
-              paddingRight="0.3rem"
-              onChange={() => {
-                setIsReleased(!isReleased)
-                refetchAllProject()
-              }}>
-              출시 서비스만 보기
-            </Checkbox>
-            <Select
-              width="10rem"
-              variant="outline"
-              marginRight="1rem"
-              onChange={handleSelect}
-              value={sortOption}>
-              <option value="createdAt">최신순</option>
-              <option value="like">인기순</option>
-              <option value="view">조회순</option>
-            </Select>
-          </HStack>
+          <ProjectFilter
+            sortOption={sortOption}
+            handleChange={handleChange}
+            handleSelect={handleSelect}
+          />
           <ProjectList
             projects={allProjectList}
             isLoading={isLoading}
