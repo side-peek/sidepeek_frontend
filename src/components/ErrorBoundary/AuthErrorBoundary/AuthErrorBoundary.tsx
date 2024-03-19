@@ -47,13 +47,14 @@ class AuthErrorBoundary extends Component<AuthErrorBoundaryProps, State> {
   render() {
     return (
       <>
-        {this.state.error && (
+        {this.state.error ? (
           <ConfirmModal
             onClose={this.handleClose}
             error={this.state.error}
           />
+        ) : (
+          this.props.children
         )}
-        {this.props.children}
       </>
     )
   }
