@@ -75,18 +75,18 @@ const ProfileCard = ({
           position="absolute"
           alignItems="center"
           justifyContent="center"
-          bottom="-0.5rem"
-          right="-1rem"
-          w="5rem"
-          h="5rem"
+          bottom="-0.3rem"
+          right="-0.5rem"
+          w="4.5rem"
+          h="4.5rem"
           bg="blue.100"
           borderRadius="50%"
-          border="0.4rem solid"
+          border="0.3rem solid"
           borderColor="default">
           <Icon
             as={FaPlus}
-            w="2.5rem"
-            h="2.5rem"
+            w="2.2rem"
+            h="2.2rem"
             fontWeight="bold"
             color="default"></Icon>
         </Flex>
