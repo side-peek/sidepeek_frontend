@@ -62,6 +62,7 @@ const SearchBarSection = ({ search, onSubmit }: SearchBarSectionProps) => {
               onChange={handleChange}
             />
             <Button
+              type="submit"
               position="absolute"
               top="2.3rem"
               right="1rem"

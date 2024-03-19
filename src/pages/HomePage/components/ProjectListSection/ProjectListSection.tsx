@@ -23,7 +23,6 @@ const ProjectListSection = () => {
   const {
     allProjectList,
     isAllProjectLoading,
-    refetchAllProject,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
@@ -36,17 +35,16 @@ const ProjectListSection = () => {
     const value = e.target.value as SortSelectType
 
     if (value !== sortOption) {
+      setSortOption(value)
       queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
       queryClient.refetchQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
     }
-    setSortOption(value)
-
-    refetchAllProject()
   }
 
   const handleChange = () => {
     setIsReleased(!isReleased)
-    refetchAllProject()
+    queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
+    queryClient.refetchQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
   }
 
   const loadMoreProjects = useCallback(() => {
