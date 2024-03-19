@@ -33,6 +33,18 @@ const ProjectForm = () => {
           </ProjectInputBox>
 
           <ProjectInputBox
+            name="startDate"
+            label="시작일">
+            <Input type="date" />
+          </ProjectInputBox>
+
+          <ProjectInputBox
+            name="endDate"
+            label="종료일">
+            <Input type="date" />
+          </ProjectInputBox>
+
+          <ProjectInputBox
             name="overview"
             label="요약"
             footer="최대 150자까지 작성 가능합니다">
