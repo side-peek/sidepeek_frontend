@@ -8,6 +8,7 @@ const useFileUpload = () => {
   const [isDragging, setIsDragging] = useState(false)
   const [fileBase64, setFileBase64] = useState<string | undefined>()
   const [responsedFileUrl, setResponsedFileUrl] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const convertFileToBase64 = (file: File) => {
     return new Promise<string>((resolve) => {
@@ -24,8 +25,12 @@ const useFileUpload = () => {
 
   const uploadFileMutation = useMutation({
     mutationFn: async (file: File) => await postFile(file),
+    onMutate() {
+      setIsSubmitting(true)
+    },
     onSuccess(data) {
       setResponsedFileUrl(data?.fileUrl)
+      setIsSubmitting(false)
       console.log(data)
     },
   })
@@ -89,6 +94,7 @@ const useFileUpload = () => {
     handleDragOver,
     handleFileDrop,
     isDragging,
+    isSubmitting,
     fileBase64,
     responsedFileUrl,
   }

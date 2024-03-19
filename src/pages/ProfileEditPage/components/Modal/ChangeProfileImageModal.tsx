@@ -43,6 +43,7 @@ const ChangeProfileImageModal = ({
     handleDragOver,
     handleFileDrop,
     isDragging,
+    isSubmitting,
     fileBase64,
     responsedFileUrl,
   } = useFileUpload()
@@ -150,13 +151,15 @@ const ChangeProfileImageModal = ({
         </ModalBody>
         <ModalFooter>
           <Button
+            isLoading={isSubmitting}
             type="submit"
             w="6rem"
             h="3.5rem"
             fontSize="1.3rem"
-            color="white"
+            color="default"
             bg="blue.100"
             borderRadius="10px"
+            _hover={{ bg: "blue.100" }}
             onClick={handleSubmit}>
             변경
           </Button>
