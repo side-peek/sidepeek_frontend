@@ -18,7 +18,6 @@ const CommentContext = createContext<CommentContextProps>({
   handleOffEdit: () => {},
   handleDelete: () => {},
   onSubmitEdit: () => {},
-  // 좀 문제임
   register: undefined,
   handleSubmit: undefined,
 })

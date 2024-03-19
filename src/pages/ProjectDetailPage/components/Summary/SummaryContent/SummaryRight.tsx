@@ -31,8 +31,6 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
 
   const swiperRef = useRef<SwiperCore>()
 
-  console.log(overviewImageUrl)
-
   return (
     <Box
       maxW={isLargerThan1200 ? "50%" : isLargerThan768 ? "75rem" : "100%"}

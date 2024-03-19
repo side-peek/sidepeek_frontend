@@ -51,8 +51,7 @@ export const usePostLikeMutation = () => {
       return { previousLikeState }
     },
 
-    onError: (err, _, context) => {
-      console.log(err)
+    onError: (_, __, context) => {
       queryClient.setQueryData(
         [QUERY_KEY_GET_PROJECT_DETAIL],
         context?.previousLikeState,

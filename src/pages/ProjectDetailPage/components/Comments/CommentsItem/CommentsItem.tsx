@@ -1,4 +1,3 @@
-// TODO: 1. 포커스 자동 조정(register edit name 사용)
 import { UseFormRegisterReturn } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 

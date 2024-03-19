@@ -50,8 +50,7 @@ export const useDeleteLikeMutation = (projectId: number) => {
       return { previousLikeState }
     },
 
-    onError: (err, _, context) => {
-      console.log(err)
+    onError: (_, __, context) => {
       queryClient.setQueryData(
         [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
         context?.previousLikeState,
