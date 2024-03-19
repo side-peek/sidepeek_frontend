@@ -1,5 +1,4 @@
 import { ForwardedRef, forwardRef } from "react"
-import { Link } from "react-router-dom"
 
 import { Center, Grid, Skeleton, Text } from "@chakra-ui/react"
 import { getAllProjectsResponseType } from "api-models"
@@ -18,7 +17,8 @@ const ProjectList = forwardRef(
     { projects, isLoading }: ProjectListProps,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
-    const projectCount = projects?.pages[0].totalElements
+    const projectCount =
+      projects != undefined && projects.pages[0].totalElements
 
     return (
       <Grid
@@ -39,17 +39,16 @@ const ProjectList = forwardRef(
                   width="95%"
                   borderRadius="1rem"
                   isLoaded={!isLoading}>
-                  <Link to={`/project/${project.id}`}>
-                    <ProjectCard
-                      imgUrl={project.thumbnailUrl}
-                      viewCount={project.viewCount}
-                      heartCount={project.likeCount}
-                      isFullHeart={project.isLiked}
-                      title={project.name}
-                      content={project.subName}
-                      ref={ref}
-                    />
-                  </Link>
+                  <ProjectCard
+                    imgUrl={project.thumbnailUrl}
+                    viewCount={project.viewCount}
+                    heartCount={project.likeCount}
+                    isFullHeart={project.isLiked}
+                    title={project.name}
+                    content={project.subName}
+                    url={`/project/${project.id}`}
+                    ref={ref}
+                  />
                 </Skeleton>
               </Center>
             ))

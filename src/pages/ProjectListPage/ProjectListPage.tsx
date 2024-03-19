@@ -65,7 +65,7 @@ const ProjectListPage = () => {
 
   const handleSearch = (keyword: string) => {
     setSearch(keyword)
-    navigate(`/project?search?${keyword}`)
+    navigate(`/project?search=${keyword}`)
   }
 
   const location = useLocation()
