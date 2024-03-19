@@ -14,20 +14,18 @@ import {
 } from "@pages/ProjectDetailPage/constants/toastMessage"
 import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
-import { QUERY_KEY_GET_PROJECT_DETAIL } from "../queries/useProjectDetailQuery"
-
-const QUERY_KEY_EDIT_COMMENT = "EDIT_COMMENT_234893204832"
+import { QUERYKEY } from "@constants/queryKey"
 
 export const useEditCommentMutation = () => {
   const queryClient = useQueryClient()
   const toast = useToast(toastOptions)
 
   const { mutate: editCommentMutation, error } = useMutation({
-    mutationKey: [QUERY_KEY_EDIT_COMMENT],
+    mutationKey: [QUERYKEY.EDIT_COMMENT],
     mutationFn: (data: editCommentPayload) => editComment(data),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
+        queryKey: [QUERYKEY.PROJECT_DETAIL],
       })
     },
   })

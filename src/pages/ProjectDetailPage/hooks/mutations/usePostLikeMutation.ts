@@ -15,24 +15,22 @@ import {
 } from "@pages/ProjectDetailPage/constants/toastMessage"
 import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
-import { QUERY_KEY_GET_PROJECT_DETAIL } from "../queries/useProjectDetailQuery"
-
-const QUERY_KEY_POST_LIKE = "POST_LIKE_234893204832"
+import { QUERYKEY } from "@constants/queryKey"
 
 export const usePostLikeMutation = () => {
   const queryClient = useQueryClient()
   const toast = useToast(toastOptions)
 
   const { mutate: postLikeMutation, error } = useMutation({
-    mutationKey: [QUERY_KEY_POST_LIKE],
+    mutationKey: [QUERYKEY.POST_LIKE],
     mutationFn: (data: postLikePayload) => postLike(data),
     onMutate: async ({ projectId }) => {
       await queryClient.cancelQueries({
-        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL],
+        queryKey: [QUERYKEY.PROJECT_DETAIL],
       })
 
       const previousLikeState = queryClient.getQueryData<Project>([
-        QUERY_KEY_GET_PROJECT_DETAIL,
+        QUERYKEY.PROJECT_DETAIL,
         projectId,
       ])
 
@@ -43,7 +41,7 @@ export const usePostLikeMutation = () => {
           likeCount: previousLikeState.likeCount + 1,
         }
         queryClient.setQueryData(
-          [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
+          [QUERYKEY.PROJECT_DETAIL, projectId],
           updatedLikeState,
         )
       }
@@ -53,13 +51,13 @@ export const usePostLikeMutation = () => {
 
     onError: (_, __, context) => {
       queryClient.setQueryData(
-        [QUERY_KEY_GET_PROJECT_DETAIL],
+        [QUERYKEY.PROJECT_DETAIL],
         context?.previousLikeState,
       )
     },
     onSettled: (_, __, { projectId }) => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
+        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
     },
   })

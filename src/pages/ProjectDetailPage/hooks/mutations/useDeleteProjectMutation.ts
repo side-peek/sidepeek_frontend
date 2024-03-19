@@ -15,15 +15,13 @@ import {
 
 import { QUERYKEY } from "../../../../constants/queryKey"
 
-const QUERY_KEY_POST_LIKE = "DELETE_LIKE_1328940382182"
-
 export const useDeleteProjectMutation = () => {
   const navigate = useNavigate()
   const toast = useToast()
   const queryClient = useQueryClient()
 
   const { mutate: deleteProjectMutation, error } = useMutation({
-    mutationKey: [QUERY_KEY_POST_LIKE],
+    mutationKey: [QUERYKEY.DELETE_PROJECT],
     mutationFn: (projectId: number) => deleteProject({ projectId }),
     onSuccess: () => {
       queryClient.invalidateQueries({

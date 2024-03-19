@@ -16,7 +16,7 @@ import { useUserInfoData } from "@services/caches/useUserInfoData"
 import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 
 import { CommentFormValues } from "../../../types/commentFormValues"
-import { ProjectIdProps, withProjectId } from "../Hoc/withProjectId"
+import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
 
 interface CommentsFormProps extends ProjectIdProps {
   parentId?: number | null
