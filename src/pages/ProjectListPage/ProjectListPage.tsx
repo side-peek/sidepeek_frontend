@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react"
 import { useInView } from "react-intersection-observer"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 import { Box } from "@chakra-ui/react"
 import { Container, Stack, useMediaQuery } from "@chakra-ui/react"
@@ -21,7 +21,9 @@ import SearchBarSection from "./components/SearchBarSection/SearchBarSection"
 const ProjectListPage = () => {
   const params = new URLSearchParams(window.location.search)
   const keyword = params.get("search")
+
   const [search, setSearch] = useState(keyword)
+  const navigate = useNavigate()
 
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
 
@@ -62,8 +64,8 @@ const ProjectListPage = () => {
   })
 
   const handleSearch = (keyword: string) => {
-    params.append("search", keyword)
     setSearch(keyword)
+    navigate(`/project?search?${keyword}`)
   }
 
   const location = useLocation()
