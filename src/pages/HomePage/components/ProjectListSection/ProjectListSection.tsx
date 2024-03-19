@@ -1,5 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react"
-import { useInView } from "react-intersection-observer"
+import { ChangeEvent, useCallback, useState } from "react"
 
 import {
   Checkbox,
@@ -22,13 +21,7 @@ import { QUERYKEY } from "@constants/queryKey"
 
 import MoreButton from "../MoreButton/MoreButton"
 
-interface ProjectListSectionProps {
-  isInfinityScroll?: boolean
-}
-
-const ProjectListSection = ({
-  isInfinityScroll = false,
-}: ProjectListSectionProps) => {
+const ProjectListSection = () => {
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
   const [isReleased, setIsReleased] = useState(false)
   const [sortOption, setSortOption] = useState<SortSelectType>("createdAt")
@@ -66,14 +59,6 @@ const ProjectListSection = ({
     }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage])
 
-  const { ref, inView } = useInView({ threshold: 0 })
-
-  useEffect(() => {
-    if (isInfinityScroll && inView) {
-      fetchNextPage()
-    }
-  })
-
   return (
     <Container maxW={isLargerThan1200 ? "80%" : "95%"}>
       <Stack marginTop="15rem">
@@ -101,15 +86,12 @@ const ProjectListSection = ({
         <ProjectList
           projects={allProjectList}
           isLoading={isLoading}
-          ref={isInfinityScroll ? ref : null}
         />
       </Stack>
-      {!isInfinityScroll && (
-        <MoreButton
-          loadMore={loadMoreProjects}
-          hasNext={hasNextPage}
-        />
-      )}
+      <MoreButton
+        loadMore={loadMoreProjects}
+        hasNext={hasNextPage}
+      />
     </Container>
   )
 }

@@ -303,7 +303,7 @@ declare module "api-models" {
     isReleased: boolean
     lastProjectId?: number | null
     lastProject?: AllProject | undefined
-    search?: string
+    search?: string | null
     skill?: string[]
   }
 
