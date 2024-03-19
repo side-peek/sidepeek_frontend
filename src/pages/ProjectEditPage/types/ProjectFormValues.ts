@@ -1,9 +1,9 @@
 import { Skill } from "api-models"
 
-export type FieldMember = {
+export type RequestedMemberType = {
   id: number | null
   nickname: string
-  role: string
+  profileImageUrl: string | null
 }
 
 export type ProjectFormValues = {
@@ -16,8 +16,8 @@ export type ProjectFormValues = {
   deployUrl: string
   startDate: string
   endDate: string
-  techStacks: { category: string; stacks: Skill[] }[]
+  techStacks: { category: string; data: Skill[] }[]
   description: string
   troubleShooting: string
-  members: { category: string; members: FieldMember[] }[]
+  members: { category: string; data: RequestedMemberType[] }[]
 }

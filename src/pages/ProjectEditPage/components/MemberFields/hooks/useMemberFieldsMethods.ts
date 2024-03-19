@@ -1,21 +1,11 @@
-import { useFieldArray, useFormContext } from "react-hook-form"
+import { useFieldArray } from "react-hook-form"
 
-type RequestedMemberType = {
-  id: number | null
-  nickname: string
-  profileImageUrl: string | null
-}
+import { useProjectFormContext } from "@pages/ProjectEditPage/hooks/useProjectFormContext"
+import { RequestedMemberType } from "@pages/ProjectEditPage/types/ProjectFormValues"
 
-type MemberFieldValues = {
-  members: {
-    category: string
-    members: RequestedMemberType[]
-  }[]
-}
-//react-hook-form의 formProvider와 같이 사용해야함
 export const useMemberFieldsMethods = () => {
   const { control, getValues, setValue, watch, register } =
-    useFormContext<MemberFieldValues>()
+    useProjectFormContext()
 
   const { fields, append, remove } = useFieldArray({
     name: "members",
@@ -23,7 +13,7 @@ export const useMemberFieldsMethods = () => {
   })
 
   const appendNewFields = () => {
-    append({ category: "", members: [] })
+    append({ category: "", data: [] })
   }
 
   const deleteFields = (idx: number) => {
@@ -35,19 +25,19 @@ export const useMemberFieldsMethods = () => {
   }
 
   const appendMembers = (data: RequestedMemberType, idx: number) => {
-    const members = [...getValues(`members.${idx}.members`), data]
-    setValue(`members.${idx}.members`, members)
+    const members = [...getValues(`members.${idx}.data`), data]
+    setValue(`members.${idx}.data`, members)
   }
 
   const removeMembers = (data: RequestedMemberType, idx: number) => {
-    const members = [...getValues(`members.${idx}.members`)]
+    const members = [...getValues(`members.${idx}.data`)]
     setValue(
-      `members.${idx}.members`,
+      `members.${idx}.data`,
       members.filter((member) => member.id !== data.id),
     )
   }
 
-  const getSelectedMembers = (idx: number) => watch(`members.${idx}.members`)
+  const getSelectedMembers = (idx: number) => watch(`members.${idx}.data`)
 
   return {
     fields,

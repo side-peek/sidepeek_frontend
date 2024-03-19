@@ -6,7 +6,8 @@ import { useProjectFormContext } from "@pages/ProjectEditPage/hooks/useProjectFo
 import { ProjectFormValues } from "@pages/ProjectEditPage/types/ProjectFormValues"
 
 export const useTechStacksMethods = () => {
-  const { control, setValue, getValues, watch } = useProjectFormContext()
+  const { control, setValue, getValues, watch, register } =
+    useProjectFormContext()
 
   const { append, fields, remove } = useFieldArray<ProjectFormValues>({
     control,
@@ -14,7 +15,7 @@ export const useTechStacksMethods = () => {
   })
 
   const appendNewFields = () => {
-    append({ category: "", stacks: [] })
+    append({ category: "", data: [] })
   }
 
   const setCategory = (index: number, value: string) => {
@@ -22,19 +23,19 @@ export const useTechStacksMethods = () => {
   }
 
   const appendStack = (index: number, element: Skill) => {
-    const stacks = getValues(`techStacks.${index}.stacks`)
-    setValue(`techStacks.${index}.stacks`, [...stacks, element])
+    const stacks = getValues(`techStacks.${index}.data`)
+    setValue(`techStacks.${index}.data`, [...stacks, element])
   }
 
   const removeStack = (index: number, element: Skill) => {
-    const stacks = getValues(`techStacks.${index}.stacks`)
+    const stacks = getValues(`techStacks.${index}.data`)
     const filtered = stacks.filter((stack) => stack.id !== element.id)
-    setValue(`techStacks.${index}.stacks`, [...filtered])
+    setValue(`techStacks.${index}.data`, [...filtered])
   }
 
   const removeField = (idx: number) => remove(idx)
 
-  const selectedStacks = (index: number) => watch(`techStacks.${index}.stacks`)
+  const selectedStacks = (index: number) => watch(`techStacks.${index}.data`)
 
   return {
     fields,
@@ -46,5 +47,6 @@ export const useTechStacksMethods = () => {
     removeStack,
     selectedStacks,
     removeField,
+    register,
   }
 }
