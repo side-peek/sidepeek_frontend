@@ -1,5 +1,11 @@
 import { Skill } from "api-models"
 
+export type FieldMember = {
+  id: number | null
+  nickname: string
+  role: string
+}
+
 export type ProjectFormValues = {
   name: string
   subName: string
@@ -8,9 +14,10 @@ export type ProjectFormValues = {
   thumbnailUrl: string
   githubUrl: string
   deployUrl: string
-  startDate: string //2002-02
-  endDate: string //동일
+  startDate: string
+  endDate: string
   techStacks: { category: string; stacks: Skill[] }[]
-  description: ""
-  troubleShooting: ""
+  description: string
+  troubleShooting: string
+  members: { category: string; members: FieldMember[] }[]
 }
