@@ -33,12 +33,33 @@ const SummaryControl = ({ onOpen }: SummaryControlProps) => {
           fontSize="3rem"
         />
       </PopoverTrigger>
-      <PopoverContent w="100%">
+      <PopoverContent
+        w="100%"
+        height="10rem">
         <PopoverArrow />
-        <PopoverBody>
-          <VStack>
-            <Button onClick={handleEditProject}>수정하기</Button>
-            <Button onClick={onOpen}>삭제하기</Button>
+        <PopoverBody
+          h="100%"
+          p="0">
+          <VStack
+            justifyContent="space-between"
+            h="100%"
+            w="100%">
+            <Button
+              p="1rem"
+              flex="50%"
+              onClick={handleEditProject}
+              _hover={{ opacity: 0.5, bg: "grey.200" }}
+              fontSize="lg">
+              수정하기
+            </Button>
+            <Button
+              p="1rem"
+              flex="50%"
+              onClick={onOpen}
+              _hover={{ opacity: 0.5, bg: "grey.200" }}
+              fontSize="lg">
+              삭제하기
+            </Button>
           </VStack>
         </PopoverBody>
       </PopoverContent>
