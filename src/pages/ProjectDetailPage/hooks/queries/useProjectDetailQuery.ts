@@ -13,11 +13,12 @@ import {
 } from "@pages/ProjectDetailPage/constants/toastMessage"
 import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
-export const QUERY_KEY_GET_PROJECT_DETAIL = "GET_PROJECT_DETAIL_1389471984712"
+import { QUERYKEY } from "@constants/queryKey"
+
 export const useProjectDetailQuery = (projectId: number) => {
   const toast = useToast(toastOptions)
   const { data: projectDetailInfo, error } = useQuery({
-    queryKey: [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
+    queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
     queryFn: () => getProjectDetail({ projectId }),
   })
 
@@ -30,7 +31,7 @@ export const useProjectDetailQuery = (projectId: number) => {
           break
         }
         case 404: {
-          message = GET_PROJECT_MESSAGES.ERROR.FAIL
+          message = GET_PROJECT_MESSAGES.ERROR.BAD_REQUEST
           break
         }
         default: {

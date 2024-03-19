@@ -3,9 +3,8 @@ import { Box, Flex, useMediaQuery } from "@chakra-ui/react"
 import FullScreenSpinner from "@components/LoadingComponents/FullScreenSpinner"
 
 import Comments from "./components/Comments/Comments"
-import { withProjectId } from "./components/Comments/Hoc/withProjectId"
-import { ProjectIdProps } from "./components/Comments/Hoc/withProjectId"
 import Content from "./components/Content/Content"
+import { ProjectIdProps, withProjectId } from "./components/Hoc/withProjectId"
 import Summary from "./components/Summary/Summary"
 import { useProjectDetailQuery } from "./hooks/queries/useProjectDetailQuery"
 

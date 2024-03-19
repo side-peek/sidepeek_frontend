@@ -1,4 +1,3 @@
-// TODO: 익명 처리
 import { useCallback, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
@@ -17,7 +16,7 @@ import { useUserInfoData } from "@services/caches/useUserInfoData"
 import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 
 import { CommentFormValues } from "../../../types/commentFormValues"
-import { ProjectIdProps, withProjectId } from "../Hoc/withProjectId"
+import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
 
 interface CommentsFormProps extends ProjectIdProps {
   parentId?: number | null
@@ -99,6 +98,7 @@ const CommentsForm = ({
                   isChecked={isAnonymous}
                   size="lg"
                   onChange={handleAnonymous}
+                  color={isAnonymous ? "red.200" : "grey.500"}
                   colorScheme="red">
                   익명
                 </Checkbox>

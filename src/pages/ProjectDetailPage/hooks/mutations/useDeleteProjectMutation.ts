@@ -1,31 +1,34 @@
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 import { useToast } from "@chakra-ui/react"
 import { isAxiosError } from "axios"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
-import { deleteComment } from "@apis/comment/deleteComment"
+import { deleteProject } from "@apis/project/deleteProject"
 
 import {
-  COMMENT_MESSAGES,
   COMMON_MESSAGES,
+  PROJECT__CONTROL_MESSAGES,
 } from "@pages/ProjectDetailPage/constants/toastMessage"
-import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
-import { QUERYKEY } from "@constants/queryKey"
+import { QUERYKEY } from "../../../../constants/queryKey"
 
-export const useDeleteCommentMutation = () => {
+export const useDeleteProjectMutation = () => {
+  const navigate = useNavigate()
+  const toast = useToast()
   const queryClient = useQueryClient()
-  const toast = useToast(toastOptions)
 
-  const { mutate: deleteCommentMutation, error } = useMutation({
-    mutationKey: [QUERYKEY.DELETE_COMMENT],
-    mutationFn: (commentId: number) => deleteComment({ commentId }),
+  const { mutate: deleteProjectMutation, error } = useMutation({
+    mutationKey: [QUERYKEY.DELETE_PROJECT],
+    mutationFn: (projectId: number) => deleteProject({ projectId }),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERYKEY.PROJECT_DETAIL],
+        queryKey: [QUERYKEY.ALL_PROJECTS],
       })
+
+      navigate(-1)
     },
   })
 
@@ -37,20 +40,16 @@ export const useDeleteCommentMutation = () => {
           message = COMMON_MESSAGES.SERVER
           break
         }
-        case 400: {
-          message = COMMENT_MESSAGES.ERROR.BAD_REQUEST
-          break
-        }
         case 403: {
-          message = COMMENT_MESSAGES.ERROR.UNAUTHORIZED
+          message = PROJECT__CONTROL_MESSAGES.ERROR.FORBIDDEN
           break
         }
         case 404: {
-          message = COMMENT_MESSAGES.ERROR.NOT_FOUND
+          message = PROJECT__CONTROL_MESSAGES.ERROR.NOT_FOUND
           break
         }
         default: {
-          message = COMMENT_MESSAGES.ERROR.UNCAUGHT
+          message = PROJECT__CONTROL_MESSAGES.ERROR.UNCAUGHT
         }
       }
       toast({
@@ -60,5 +59,5 @@ export const useDeleteCommentMutation = () => {
     }
   }, [error, toast])
 
-  return { deleteCommentMutation }
+  return { deleteProjectMutation }
 }
