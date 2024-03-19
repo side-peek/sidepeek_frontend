@@ -16,9 +16,9 @@ export interface ProfileInfo {
 
 export type CareerType =
   | "0년차"
-  | "1~3년차"
-  | "4~6년차"
-  | "7~9년차"
+  | "1-3년차"
+  | "4-6년차"
+  | "7-9년차"
   | "10년차 이상"
 
 export interface PasswordFormValues {

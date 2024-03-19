@@ -33,9 +33,9 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
 
   return (
     <Box
-      maxW={isLargerThan1200 ? "50%" : isLargerThan768 ? "75rem" : "100%"}
+      maxW={isLargerThan1200 ? "40%" : isLargerThan768 ? "50%" : "100%"}
       position="relative">
-      {overviewImageUrl.length > 0 ? (
+      {overviewImageUrl.length > 1 ? (
         <StyledSwiper
           {...swiperParams}
           onBeforeInit={(swiper) => (swiperRef.current = swiper)}>
@@ -56,8 +56,7 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
           fallbackSrc={noImage}
         />
       )}
-
-      {isLargerThan1200 && overviewImageUrl.length > 0 && (
+      {isLargerThan1200 && overviewImageUrl.length > 1 && (
         <>
           <SummaryRightIcon
             direction="left"

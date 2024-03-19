@@ -15,23 +15,21 @@ import {
 } from "@pages/ProjectDetailPage/constants/toastMessage"
 import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
-import { QUERY_KEY_GET_PROJECT_DETAIL } from "../queries/useProjectDetailQuery"
-
-const QUERY_KEY_POST_LIKE = "DELETE_LIKE_1328940382182"
+import { QUERYKEY } from "@constants/queryKey"
 
 export const useDeleteLikeMutation = (projectId: number) => {
   const queryClient = useQueryClient()
   const toast = useToast(toastOptions)
 
   const { mutate: deleteLikeMutation, error } = useMutation({
-    mutationKey: [QUERY_KEY_POST_LIKE],
+    mutationKey: [QUERYKEY.DELETE_LIKE],
     mutationFn: (data: deleteLikePayload) => deleteLike(data),
     onMutate: async () => {
       await queryClient.cancelQueries({
-        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
+        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
       const previousLikeState = queryClient.getQueryData<Project>([
-        QUERY_KEY_GET_PROJECT_DETAIL,
+        QUERYKEY.PROJECT_DETAIL,
         projectId,
       ])
 
@@ -42,7 +40,7 @@ export const useDeleteLikeMutation = (projectId: number) => {
           likeCount: previousLikeState.likeCount - 1,
         }
         queryClient.setQueryData(
-          [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
+          [QUERYKEY.PROJECT_DETAIL, projectId],
           updatedLikeState,
         )
       }
@@ -50,16 +48,15 @@ export const useDeleteLikeMutation = (projectId: number) => {
       return { previousLikeState }
     },
 
-    onError: (err, _, context) => {
-      console.log(err)
+    onError: (_, __, context) => {
       queryClient.setQueryData(
-        [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
+        [QUERYKEY.PROJECT_DETAIL, projectId],
         context?.previousLikeState,
       )
     },
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
+        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
     },
   })
@@ -74,7 +71,7 @@ export const useDeleteLikeMutation = (projectId: number) => {
         }
         case 400:
         case 404: {
-          message = LIKE_MESSAGES.ERROR.UNVALIDATE
+          message = LIKE_MESSAGES.ERROR.BAD_REQUEST
           break
         }
         default: {

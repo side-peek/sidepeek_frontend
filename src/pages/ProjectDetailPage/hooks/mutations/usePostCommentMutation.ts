@@ -14,20 +14,18 @@ import {
 } from "@pages/ProjectDetailPage/constants/toastMessage"
 import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
-import { QUERY_KEY_GET_PROJECT_DETAIL } from "../queries/useProjectDetailQuery"
-
-const QUERY_KEY_POST_COMMENT = "POST_COMMENT_2384902384"
+import { QUERYKEY } from "@constants/queryKey"
 
 export const usePostCommentMutation = () => {
   const queryClient = useQueryClient()
   const toast = useToast(toastOptions)
 
   const { mutate: sendCommentMutation, error } = useMutation({
-    mutationKey: [QUERY_KEY_POST_COMMENT],
+    mutationKey: [QUERYKEY.POST_COMMENT],
     mutationFn: (data: postCommentPayload) => postComment(data),
     onSuccess: (_, { projectId }) => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY_GET_PROJECT_DETAIL, projectId],
+        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
       toast({
         status: "success",
@@ -45,7 +43,7 @@ export const usePostCommentMutation = () => {
           break
         }
         case 400: {
-          message = COMMENT_MESSAGES.ERROR.UNVALIDATE
+          message = COMMENT_MESSAGES.ERROR.BAD_REQUEST
           break
         }
         case 403: {
@@ -53,7 +51,7 @@ export const usePostCommentMutation = () => {
           break
         }
         case 404: {
-          message = COMMENT_MESSAGES.ERROR.UNDEFINED
+          message = COMMENT_MESSAGES.ERROR.NOT_FOUND
           break
         }
         default: {
