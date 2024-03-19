@@ -14,8 +14,7 @@ const usePutUserDetailMutation = (userId: number) => {
     mutationFn: async (formData: putUserDetailPayload) =>
       await putUserDetail(formData),
 
-    onSuccess(data) {
-      console.log("putUserDetail 성공", data)
+    onSuccess() {
       alert("프로필 수정이 완료되었습니다")
       queryClient.invalidateQueries({ queryKey: ["userInfo", userId] })
       navigate(`/profile/${userId}`)

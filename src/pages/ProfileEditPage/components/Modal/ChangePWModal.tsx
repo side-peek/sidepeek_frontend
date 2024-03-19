@@ -44,12 +44,10 @@ const ChangePWModal = ({ isOpen, onClose, userId }: ModalProps) => {
   const { putUserPasswordMutation } = usePutUserPassword()
 
   const onValid = (data: PasswordFormValues) => {
-    // TODO: 비밀번호 변경 api 요청
     const passwordChange = {
       originalPassword: data.currentPassword,
       password: data.newPassword,
     }
-    console.log(passwordChange)
     putUserPasswordMutation.mutate({
       userId: userId,
       passwordChange: passwordChange,
@@ -58,12 +56,10 @@ const ChangePWModal = ({ isOpen, onClose, userId }: ModalProps) => {
     onClose()
   }
   const onInvalid = () => {
-    console.log("Submit 실패")
+    alert("Submit 실패")
   }
 
   const onSubmit: SubmitHandler<PasswordFormValues> = (data) => {
-    // TODO: 기존 비밀번호 api 불러와서 비교 후 다르면 setError하도록 해야함
-    // TODO: 3/4 스크럼 이후 - api 에러코드 보고 분류하기로 함. 프론트단에서 현재 비밀번호와 같은지 판단할 수 없기 때문에 수정 예정임
     const { newPassword, checkPassword } = data
     if (newPassword !== checkPassword) {
       setError("checkPassword", PASSWORD_MISMATCH_ERROR)
@@ -89,7 +85,6 @@ const ChangePWModal = ({ isOpen, onClose, userId }: ModalProps) => {
         <ModalCloseButton />
         <form onSubmit={handleSubmit(onSubmit)}>
           <ModalBody>
-            {/* TODO: 기존 비밀번호 api 불러와서 비교 validation */}
             <Flex
               direction="column"
               gap="1.5rem">
@@ -171,7 +166,7 @@ const ChangePWModal = ({ isOpen, onClose, userId }: ModalProps) => {
               w="6rem"
               h="3.5rem"
               fontSize="1.3rem"
-              color="white"
+              color="default"
               bg="blue.100"
               borderRadius="10px">
               변경
