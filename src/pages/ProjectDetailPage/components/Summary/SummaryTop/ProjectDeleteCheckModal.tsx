@@ -42,7 +42,7 @@ const ProjectDeleteCheckModal = ({
       <ModalContent>
         <ModalHeader fontSize="md">정말로 삭제하시겠습니까?</ModalHeader>
         <ModalCloseButton />
-        <Text>삭제된 게시물은 복구할 수 없습니다!</Text>
+        <Text p="2rem">삭제된 게시물은 복구할 수 없습니다!</Text>
         <ModalFooter>
           <Button
             h="2.5rem"
