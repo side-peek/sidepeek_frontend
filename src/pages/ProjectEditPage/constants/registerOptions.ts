@@ -29,9 +29,25 @@ export const projectInputRegister: ProjectInputRegisterType = {
 
   thumbnailUrl: {},
 
-  startDate: { required: "프로젝트 시작 날짜를 입력해주세요" },
+  startDate: {
+    required: "프로젝트 시작 날짜를 입력해주세요",
+    validate: {
+      checkOrder: (_, formValue) => {
+        const [start, end] = [formValue.startDate, formValue.endDate]
+        return new Date(start) < new Date(end)
+      },
+    },
+  },
 
-  endDate: { required: "프로젝트 완성 날짜를 입력해주세요" },
+  endDate: {
+    required: "프로젝트 완성 날짜를 입력해주세요",
+    validate: {
+      checkOrder: (_, formValue) => {
+        const [start, end] = [formValue.startDate, formValue.endDate]
+        return new Date(start) < new Date(end)
+      },
+    },
+  },
 
   techStacks: {},
 
