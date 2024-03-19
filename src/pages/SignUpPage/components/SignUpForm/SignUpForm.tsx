@@ -34,8 +34,6 @@ const SignUpForm = () => {
           gap="1.6rem"
           justifyContent="center"
           alignItems="stretch">
-          {/* 회원가입 입력 양식 */}
-          {/* email */}
           <InputController
             fieldName="email"
             label="이메일"
@@ -53,7 +51,6 @@ const SignUpForm = () => {
               </Flex>
             )}
           </InputController>
-          {/* nickname */}
           <InputController
             fieldName="nickname"
             label="닉네임"
@@ -71,14 +68,12 @@ const SignUpForm = () => {
               </Flex>
             )}
           </InputController>
-          {/* paasword */}
           <InputController
             fieldName="password"
             label="비밀번호"
             registerOptions={passwordOptions}>
             <Input type="password" />
           </InputController>
-          {/* double check password */}
           <InputController
             fieldName="confirmPassword"
             label="비밀번호 확인"

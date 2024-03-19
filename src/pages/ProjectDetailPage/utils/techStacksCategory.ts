@@ -24,7 +24,6 @@ const techStacksCategory = (techStacks: TechStack[]) => {
     },
   )
 
-  // 타입오류 왜 나는지 모름..
   return duplicateFilteredTechStacks as [string, TechStack[]][]
 }
 

@@ -19,7 +19,6 @@ const LogoutButton = ({ onClose }: LogoutButtonProps) => {
   const logout = useLogout()
 
   const handleLogout = () => {
-    // TODO: 모달로 변경
     const isConfirmed = confirm(LOGOUT_MESSAGE.CONFIRM)
 
     if (isConfirmed) {

@@ -12,7 +12,7 @@ type MemberFieldValues = {
     members: RequestedMemberType[]
   }[]
 }
-//react-hook-form의 formProvider와 같이 사용해야함
+
 export const useMemberFieldsMethods = () => {
   const { control, getValues, setValue, watch, register } =
     useFormContext<MemberFieldValues>()
