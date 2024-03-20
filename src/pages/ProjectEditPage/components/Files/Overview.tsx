@@ -31,7 +31,7 @@ const Overview = () => {
         onDrop={onDropFile}
         maxFiles={6}
         disabled={
-          getValues("overviewImageUrl").length >= Number(`${MAX_FILE_UPLOAD}`)
+          getValues("overviewImageUrl")?.length >= Number(`${MAX_FILE_UPLOAD}`)
         }
         multiple={true}
         accept={{ "image/*": [".jpeg", ".png"] }}>
