@@ -14,6 +14,13 @@ import {
 
 import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
 
+const ControlButtonStyles = {
+  p: "1rem",
+  flex: "50%",
+  _hover: { opacity: "0.5", backgroundColor: "grey.200" },
+  fontSize: "lg",
+}
+
 interface SummaryControlProps extends ProjectIdProps {
   onOpen: () => void
 }
@@ -47,19 +54,13 @@ const SummaryControl = ({ onOpen, projectId }: SummaryControlProps) => {
             h="100%"
             w="100%">
             <Button
-              p="1rem"
-              flex="50%"
               onClick={handleEditProject}
-              _hover={{ opacity: 0.5, bg: "grey.200" }}
-              fontSize="lg">
+              {...ControlButtonStyles}>
               수정하기
             </Button>
             <Button
-              p="1rem"
-              flex="50%"
               onClick={onOpen}
-              _hover={{ opacity: 0.5, bg: "grey.200" }}
-              fontSize="lg">
+              {...ControlButtonStyles}>
               삭제하기
             </Button>
           </VStack>
