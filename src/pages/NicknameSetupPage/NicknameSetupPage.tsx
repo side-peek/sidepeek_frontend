@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react"
 import { FormProvider } from "react-hook-form"
 
 import { Center, Flex } from "@chakra-ui/react"
@@ -10,15 +11,19 @@ import SubmitButton from "./components/SubmitButton"
 import { useNicknameSetup } from "./hooks/useNicknameSetup"
 
 const NicknameSetupPage = () => {
+  const isFirstMount = useRef(true)
   const { method, onSubmit, isError, isNicknameSet, onLoginSuccess } =
     useNicknameSetup()
 
+  useEffect(() => {
+    if (isNicknameSet && isFirstMount.current) {
+      isFirstMount.current = false
+      onLoginSuccess()
+    }
+  }, [isNicknameSet, onLoginSuccess])
+
   if (isError) {
     return <AlertModal />
-  }
-
-  if (isNicknameSet) {
-    onLoginSuccess()
   }
 
   return (

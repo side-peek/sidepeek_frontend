@@ -2,7 +2,6 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { useNavigate, useSearchParams } from "react-router-dom"
 
 import { useToast } from "@chakra-ui/react"
-import { userInfoOptions } from "@services/queries/userInfoOptions"
 import { getUserDetailResponseType } from "api-models"
 
 import { useQueryClient } from "@tanstack/react-query"
@@ -16,6 +15,7 @@ import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 import { useDoubleCheckStore } from "@stores/useDoubleCheckStore"
 
 import { ENDPOINTS } from "@constants/endPoints"
+import { QUERYKEY } from "@constants/queryKey"
 
 import { NICKNAME_SETUP_MESSAGE } from "../constants/toastMessages"
 import { useGithubLoginQuery } from "./query/useGithubLoginQuery"
@@ -31,7 +31,10 @@ export const useNicknameSetup = () => {
 
   const queryClient = useQueryClient()
 
-  const { data: userInfo, isError } = useGithubLoginQuery({
+  const {
+    data: { user: userInfo },
+    isError,
+  } = useGithubLoginQuery({
     code: searchParams.get("code") ?? "",
     state: searchParams.get("state") ?? "",
   })
@@ -40,8 +43,8 @@ export const useNicknameSetup = () => {
 
   const checkedNickname = useDoubleCheckStore((state) => state.nickname)
 
-  const onLoginSuccess = async () => {
-    await queryClient.fetchQuery(userInfoOptions)
+  const onLoginSuccess = () => {
+    queryClient.setQueryData([QUERYKEY.USER_INFO], userInfo)
     toast({
       status: "success",
       title: LOGIN_MESSAGES.SUCCESS,
@@ -55,16 +58,16 @@ export const useNicknameSetup = () => {
       return
     }
 
-    if (userInfo.user.id === null) {
+    if (userInfo.id === null) {
       return
     }
 
     try {
       const profile = await authInstance.get<getUserDetailResponseType>(
-        ENDPOINTS.GET_USER_PROFILE(userInfo.user.id),
+        ENDPOINTS.GET_USER_PROFILE(userInfo.id),
       )
-      await authInstance.put(ENDPOINTS.PUT_USER_PROFILE(userInfo.user.id), {
-        ...profile,
+      await authInstance.put(ENDPOINTS.PUT_USER_PROFILE(userInfo.id), {
+        ...profile.data,
         nickname,
       })
       onLoginSuccess()
@@ -83,7 +86,7 @@ export const useNicknameSetup = () => {
     onSubmit,
     method,
     isError,
-    isNicknameSet: userInfo.user.nickname !== null,
     onLoginSuccess,
+    isNicknameSet: userInfo.nickname !== null,
   }
 }
