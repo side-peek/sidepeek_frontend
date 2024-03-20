@@ -41,7 +41,7 @@ export const CommentProvider = ({
     useForm<editCommentPayload>()
 
   const { editCommentMutation } = useEditCommentMutation(Number(projectId))
-  const { deleteCommentMutation } = useDeleteCommentMutation()
+  const { deleteCommentMutation } = useDeleteCommentMutation(Number(projectId))
 
   const handleOnEdit = ({
     commentId,
