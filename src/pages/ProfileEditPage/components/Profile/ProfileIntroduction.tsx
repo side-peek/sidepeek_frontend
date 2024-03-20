@@ -1,19 +1,33 @@
+import { FieldErrors, UseFormRegister } from "react-hook-form"
 import { FaSquarePen } from "react-icons/fa6"
 import { ImGithub } from "react-icons/im"
 
-import { Box, HStack, Input, Text, Textarea } from "@chakra-ui/react"
+import { Box, HStack, Text, Textarea } from "@chakra-ui/react"
+
+import CommonInput from "@components/Input/CommonInput"
+
+import {
+  BLOG_URL_VALIDATION_OPTION,
+  GITHUB_URL_VALIDATION_OPTION,
+} from "@pages/ProfileEditPage/constants/validation"
 
 import { ProfileInfo } from "../../types/types"
 
+interface Urls {
+  githubUrl: string
+  blogUrl: string
+}
 interface ProfileIntroductionProps
   extends Pick<ProfileInfo, "introduction" | "githubUrl" | "blogUrl"> {
   setProfileInfo: React.Dispatch<React.SetStateAction<ProfileInfo>>
+  register: UseFormRegister<Urls>
+  errors: FieldErrors
 }
 
 const ProfileIntroduction = ({
+  register,
+  errors,
   introduction = "",
-  githubUrl = "",
-  blogUrl = "",
   setProfileInfo,
 }: ProfileIntroductionProps) => {
   return (
@@ -42,37 +56,38 @@ const ProfileIntroduction = ({
       <Box mt="2rem">
         <HStack mb="1rem">
           <ImGithub size="2.6rem" />
-          <Input
-            variant="flushed"
-            height="3rem"
-            value={githubUrl}
-            placeholder="GitHub 링크를 입력해주세요"
+
+          <CommonInput
+            size="lg"
             ml="0.5rem"
-            w="30rem"
-            onChange={(e) =>
-              setProfileInfo((profileInfo) => ({
-                ...profileInfo,
-                githubUrl: e.target.value,
-              }))
-            }
+            fontSize="1.2rem"
+            variant="flushed"
+            inputWidth="30rem"
+            placeholder="Github 링크를 입력해주세요"
+            register={register("githubUrl", GITHUB_URL_VALIDATION_OPTION)}
           />
+
+          {errors.githubUrl?.message && (
+            <Text>
+              {errors.githubUrl && errors.githubUrl.message.toString()}
+            </Text>
+          )}
         </HStack>
         <HStack>
           <FaSquarePen size="2.65rem" />
-          <Input
-            variant="flushed"
-            height="3rem"
-            value={blogUrl}
-            placeholder="Blog 링크를 입력해주세요"
+
+          <CommonInput
+            size="lg"
             ml="0.5rem"
-            w="30rem"
-            onChange={(e) =>
-              setProfileInfo((profileInfo) => ({
-                ...profileInfo,
-                blogUrl: e.target.value,
-              }))
-            }
+            fontSize="1.2rem"
+            variant="flushed"
+            inputWidth="30rem"
+            placeholder="Blog 링크를 입력해주세요"
+            register={register("blogUrl", BLOG_URL_VALIDATION_OPTION)}
           />
+          {errors.blogUrl?.message && (
+            <Text>{errors.blogUrl && errors.blogUrl.message.toString()}</Text>
+          )}
         </HStack>
       </Box>
     </Box>

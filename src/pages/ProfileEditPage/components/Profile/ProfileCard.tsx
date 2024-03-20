@@ -14,7 +14,6 @@ import {
   Stack,
   Text,
   useDisclosure,
-  useMediaQuery,
 } from "@chakra-ui/react"
 
 import { CareerType, JobType, ProfileInfo } from "../../types/types"
@@ -36,7 +35,6 @@ const ProfileCard = ({
   job = "",
   setProfileInfo,
 }: ProfileCardProps) => {
-  const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
   const {
     isOpen: isNicknameModalOpen,
     onOpen: onNicknameModalOpen,
@@ -130,7 +128,7 @@ const ProfileCard = ({
           setProfileInfo={setProfileInfo}
         />
         <Flex
-          direction={isLargerThan500 ? "row" : "column"}
+          direction="column"
           gap="0.5rem">
           <Menu>
             <MenuButton

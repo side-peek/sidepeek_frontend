@@ -1,5 +1,9 @@
 export const RegEx = {
   CHECK_SPACE: /\s/,
+  CHECK_URL:
+    /^(https?):\/\/([^:/\s]+)(:([^/]*))?((\/[^\s/]+)*)?\/?([^#\s?]*)(\?([^#\s]*))?(#(\w*))?$/,
+  CHECK_GITHUB_URL:
+    /^https:\/\/github\.com\/([^:/\s]+)(:([^/]*))?((\/[^\s/]+)*)?\/?([^#\s?]*)(\?([^#\s]*))?(#(\w*))?$/,
 }
 
 export const NICKNAME_VALIDATION_OPTION = {
@@ -42,4 +46,18 @@ export const CHECK_PASSWORD_VALIDATION_OPTION = {
 export const PASSWORD_MISMATCH_ERROR = {
   type: "password-mismatch",
   message: "비밀번호가 일치하지 않습니다",
+}
+
+export const BLOG_URL_VALIDATION_OPTION = {
+  pattern: {
+    value: RegEx.CHECK_URL,
+    message: "Blog 링크를 다시 확인해주세요",
+  },
+}
+
+export const GITHUB_URL_VALIDATION_OPTION = {
+  pattern: {
+    value: RegEx.CHECK_GITHUB_URL,
+    message: "Github 링크를 다시 확인해주세요",
+  },
 }

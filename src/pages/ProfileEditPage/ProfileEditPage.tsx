@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { SubmitHandler, useForm } from "react-hook-form"
 
 import {
   Flex,
@@ -22,7 +23,7 @@ import ProfileIntroduction from "./components/Profile/ProfileIntroduction"
 import usePutUserDetailMutation from "./hooks/mutation/usePutUserDetailMutation"
 import { useUserInfo } from "./hooks/query/useUserInfo"
 import StyledButton from "./styles/StyledButton"
-import { ProfileInfo } from "./types/types"
+import { ProfileInfo, UrlsFormValues } from "./types/types"
 
 const ProfileEditPage = () => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
@@ -48,68 +49,93 @@ const ProfileEditPage = () => {
 
   const { putUserDetailMutation } = usePutUserDetailMutation(userId)
 
-  const handleUpdateProfile = () => {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      githubUrl: profileInfo.githubUrl,
+      blogUrl: profileInfo.blogUrl,
+    },
+  })
+
+  const handleProfileUpdate: SubmitHandler<UrlsFormValues> = (
+    urlsFormValues,
+  ) => {
+    const updatedProfileInfo = {
+      ...profileInfo,
+      githubUrl: urlsFormValues.githubUrl,
+      blogUrl: urlsFormValues.blogUrl,
+      techStacks: revertTechStacks(method.fieldValue),
+    }
+
+    setProfileInfo(updatedProfileInfo)
+
     putUserDetailMutation.mutate({
       userId: userId,
-      userInfo: {
-        ...profileInfo,
-        techStacks: revertTechStacks(method.fieldValue),
-      },
+      userInfo: updatedProfileInfo,
     })
   }
 
   return (
-    <VStack
-      w="80%"
-      align="start"
-      m="auto">
+    <form>
       <VStack
-        w="100%"
-        divider={<StackDivider borderColor="grey.100" />}>
-        <ProfileCard
-          profileImageUrl={profileInfo.profileImageUrl}
-          nickname={profileInfo.nickname}
-          career={profileInfo.career}
-          job={profileInfo.job}
-          setProfileInfo={setProfileInfo}
-        />
-        <ProfileIntroduction
-          introduction={profileInfo.introduction}
-          githubUrl={profileInfo.githubUrl}
-          blogUrl={profileInfo.blogUrl}
-          setProfileInfo={setProfileInfo}
-        />
+        w="80%"
+        align="start"
+        m="auto">
+        <VStack
+          w="100%"
+          divider={<StackDivider borderColor="grey.100" />}>
+          <ProfileCard
+            profileImageUrl={profileInfo.profileImageUrl}
+            nickname={profileInfo.nickname}
+            career={profileInfo.career}
+            job={profileInfo.job}
+            setProfileInfo={setProfileInfo}
+          />
+          <ProfileIntroduction
+            register={register}
+            errors={errors}
+            introduction={profileInfo.introduction}
+            githubUrl={profileInfo.githubUrl}
+            blogUrl={profileInfo.blogUrl}
+            setProfileInfo={setProfileInfo}
+          />
 
-        <TechStackSection
-          {...method}
-          render={(renderProps) => (
-            <Input
-              w="30rem"
-              pl="1rem"
-              variant="none"
-              placeholder="직군 카테고리를 입력해주세요"
-              flex={isLargerThan500 ? "0 0 25rem" : "0 0 3.5rem"}
-              {...renderProps}
-            />
-          )}
-        />
+          <TechStackSection
+            {...method}
+            render={(renderProps) => (
+              <Input
+                w="30rem"
+                pl="1rem"
+                variant="none"
+                placeholder="직군 카테고리를 입력해주세요"
+                flex={isLargerThan500 ? "0 0 25rem" : "0 0 3.5rem"}
+                {...renderProps}
+              />
+            )}
+          />
+        </VStack>
+
+        <Flex
+          w="100%"
+          gap="0.5rem"
+          justifyContent={isLargerThan500 ? "flex-end" : "center"}
+          mt="1.5rem"
+          mb="3rem">
+          <StyledButton onClick={onOpen}>비밀번호 변경</StyledButton>
+          <StyledButton onClick={handleSubmit(handleProfileUpdate)}>
+            변경내용 저장
+          </StyledButton>
+          <ChangePWModal
+            isOpen={isOpen}
+            onClose={onClose}
+            userId={userId}
+          />
+        </Flex>
       </VStack>
-
-      <Flex
-        w="100%"
-        gap="0.5rem"
-        justifyContent={isLargerThan500 ? "flex-end" : "center"}
-        mt="1.5rem"
-        mb="3rem">
-        <StyledButton onClick={onOpen}>비밀번호 변경</StyledButton>
-        <StyledButton onClick={handleUpdateProfile}>변경내용 저장</StyledButton>
-        <ChangePWModal
-          isOpen={isOpen}
-          onClose={onClose}
-          userId={userId}
-        />
-      </Flex>
-    </VStack>
+    </form>
   )
 }
 

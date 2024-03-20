@@ -39,3 +39,8 @@ export interface PasswordFormValues {
 export interface NicknameFormValues {
   newNickname: string
 }
+
+export interface UrlsFormValues {
+  githubUrl: string
+  blogUrl: string
+}
