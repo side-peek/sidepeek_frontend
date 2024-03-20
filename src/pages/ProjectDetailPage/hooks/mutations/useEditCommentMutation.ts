@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 
 import { useToast } from "@chakra-ui/react"
-import { editCommentPayload } from "api-models"
+import { Project, editCommentPayload } from "api-models"
 import { isAxiosError } from "axios"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
@@ -16,16 +16,35 @@ import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
 import { QUERYKEY } from "@constants/queryKey"
 
-export const useEditCommentMutation = () => {
+export const useEditCommentMutation = (projectId: number) => {
   const queryClient = useQueryClient()
   const toast = useToast(toastOptions)
 
   const { mutate: editCommentMutation, error } = useMutation({
     mutationKey: [QUERYKEY.EDIT_COMMENT],
     mutationFn: (data: editCommentPayload) => editComment(data),
-    onSuccess: () => {
+    onMutate: async () => {
+      await queryClient.cancelQueries({
+        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
+      })
+
+      const previousComment = queryClient.getQueryData<Project>([
+        QUERYKEY.PROJECT_DETAIL,
+        projectId,
+      ])
+
+      console.log(previousComment)
+      return { previousComment }
+    },
+    onError: (_, __, context) => {
+      queryClient.setQueryData(
+        [QUERYKEY.PROJECT_DETAIL, projectId],
+        context?.previousComment,
+      )
+    },
+    onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERYKEY.PROJECT_DETAIL],
+        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
     },
   })

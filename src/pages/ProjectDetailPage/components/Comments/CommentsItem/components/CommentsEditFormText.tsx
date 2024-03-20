@@ -31,6 +31,7 @@ const CommentsEditFormText = ({
   if (!handleSubmit) {
     return
   }
+  console.log(comment)
 
   return (
     <Box w="100%">
