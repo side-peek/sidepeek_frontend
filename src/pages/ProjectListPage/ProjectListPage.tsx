@@ -57,8 +57,13 @@ const ProjectListPage = () => {
 
   const handleChange = () => {
     setIsReleased(!isReleased)
-    queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
-    queryClient.refetchQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
+    console.log(isReleased)
+    if (isReleased) {
+      refetchAllProject()
+    } else {
+      queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
+      queryClient.refetchQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
+    }
   }
 
   useEffect(() => {
@@ -94,6 +99,7 @@ const ProjectListPage = () => {
         <Stack marginTop="15rem">
           {projectCount ? (
             <ProjectFilter
+              isReleased={isReleased}
               sortOption={sortOption}
               handleChange={handleChange}
               handleSelect={handleSelect}

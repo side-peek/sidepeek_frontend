@@ -5,12 +5,14 @@ import { Checkbox, HStack, Select, Spacer } from "@chakra-ui/react"
 import { SortSelectType } from "@pages/HomePage/types/type"
 
 interface ProjectFilterProps {
+  isReleased: boolean
   handleChange: () => void
   sortOption: SortSelectType
   handleSelect: (e: ChangeEvent<HTMLSelectElement>) => void
 }
 
 const ProjectFilter = ({
+  isReleased,
   handleChange,
   sortOption,
   handleSelect,
@@ -19,6 +21,7 @@ const ProjectFilter = ({
     <HStack spacing={5}>
       <Spacer />
       <Checkbox
+        isChecked={isReleased}
         paddingRight="0.3rem"
         onChange={handleChange}>
         출시 서비스만 보기
