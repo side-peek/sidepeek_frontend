@@ -52,21 +52,34 @@ const ProfileEditPage = () => {
   const {
     handleSubmit,
     register,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      githubUrl: profileInfo.githubUrl,
-      blogUrl: profileInfo.blogUrl,
+      githubUrl:
+        profileInfo.githubUrl.length !== 0
+          ? profileInfo.githubUrl.slice(8)
+          : "",
+      blogUrl:
+        profileInfo.blogUrl.length !== 0 ? profileInfo.blogUrl.slice(8) : "",
     },
   })
 
   const handleProfileUpdate: SubmitHandler<UrlsFormValues> = (
     urlsFormValues,
   ) => {
+    const fullGithubUrl =
+      urlsFormValues.githubUrl.length !== 0
+        ? `https://${urlsFormValues.githubUrl}`
+        : ""
+    const fullBlogUrl =
+      urlsFormValues.blogUrl.length !== 0
+        ? `https://${urlsFormValues.blogUrl}`
+        : ""
     const updatedProfileInfo = {
       ...profileInfo,
-      githubUrl: urlsFormValues.githubUrl,
-      blogUrl: urlsFormValues.blogUrl,
+      githubUrl: fullGithubUrl,
+      blogUrl: fullBlogUrl,
       techStacks: revertTechStacks(method.fieldValue),
     }
 
@@ -97,6 +110,7 @@ const ProfileEditPage = () => {
           <ProfileIntroduction
             register={register}
             errors={errors}
+            setValue={setValue}
             introduction={profileInfo.introduction}
             githubUrl={profileInfo.githubUrl}
             blogUrl={profileInfo.blogUrl}

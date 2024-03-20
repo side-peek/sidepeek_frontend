@@ -93,7 +93,7 @@ const TechStackSection = ({
                           return (
                             <Box
                               ml="1rem"
-                              mb="0.5rem"
+                              mt="0.5rem"
                               fontSize="1.2rem"
                               cursor="pointer"
                               _hover={{ fontWeight: "bold" }}
