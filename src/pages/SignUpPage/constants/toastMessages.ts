@@ -1,9 +1,9 @@
 export const DOUBLE_CHECK_MESSAGE = {
-  EMAIL: {
+  email: {
     ERROR: "이미 존재하는 이메일입니다.",
     SUCCESS: "사용 가능한 이메일입니다.",
   },
-  NICKNAME: {
+  nickname: {
     ERROR: "이미 존재하는 닉네임입니다.",
     SUCCESS: "사용 가능한 닉네임입니다.",
   },

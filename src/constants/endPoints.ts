@@ -1,7 +1,7 @@
-const VARIABLE_URL = "/api/v1"
+export const VARIABLE_URL = "/api/v1"
 
 export const ENDPOINTS = {
-  GITHUB_LOGIN: `${VARIABLE_URL}/auth/login/github`,
+  GITHUB_LOGIN: `${VARIABLE_URL}/login/oauth2/code/github`,
   EMAIL_LOGIN: `${VARIABLE_URL}/auth/login`,
   EMAIL_REFRESH: `${VARIABLE_URL}/auth/reissue`,
   EMAIL_AUTH: `${VARIABLE_URL}/auth/me`,

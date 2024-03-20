@@ -52,6 +52,7 @@ const ProjectsGrid = ({ userId, type }: ProjectsGridProps) => {
             }: ProjectProperties) => (
               <GridItem key={id}>
                 <ProjectCard
+                  url={`/project/${id}`}
                   imgUrl={thumbnailUrl}
                   viewCount={viewCount}
                   heartCount={likeCount}
