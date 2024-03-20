@@ -4,7 +4,7 @@ export const ProjectFormDefaultValues: ProjectFormValues = {
   name: "",
   subName: "",
   overview: "",
-  overviewImageUrl: [],
+  overviewImageUrl: Array(6).fill(""),
   thumbnailUrl: "",
   githubUrl: "",
   deployUrl: "",
