@@ -122,7 +122,7 @@ const TechStacksFields = () => {
             <Box
               flexWrap="nowrap"
               marginLeft="5px">
-              {selectedStacks(index).map((stack) => (
+              {selectedStacks(index)?.map((stack) => (
                 <CloseButtonTag
                   key={stack.name}
                   label={stack.name}
