@@ -1,10 +1,7 @@
 import { FieldPath, RegisterOptions } from "react-hook-form"
 
-import {
-  ProjectFormValues,
-  RequestedMemberType,
-} from "../types/ProjectFormValues"
-import { checkEmptyField } from "../utils/checkEmptyField"
+import { ProjectFormValues } from "../types/ProjectFormValues"
+import { regex } from "./validate"
 
 const TITLE_MAX_LENGTH = 50
 const OVERVIEW_MAX_LENGTH = 300
@@ -23,7 +20,13 @@ export const projectInputRegister: ProjectInputRegisterType = {
 
   overview: { maxLength: OVERVIEW_MAX_LENGTH },
 
-  githubUrl: { required: "Github URL은 필수입니다" },
+  githubUrl: {
+    required: "Github URL은 필수입니다",
+    pattern: {
+      value: regex,
+      message: "유효한 url이 아닙니다.",
+    },
+  },
 
   deployUrl: {},
 
@@ -34,7 +37,7 @@ export const projectInputRegister: ProjectInputRegisterType = {
     validate: {
       checkOrder: (_, formValue) => {
         const [start, end] = [formValue.startDate, formValue.endDate]
-        return new Date(start) < new Date(end)
+        return new Date(start) < new Date(end) || "날짜를 다시 확인해주세요"
       },
     },
   },
@@ -53,14 +56,7 @@ export const projectInputRegister: ProjectInputRegisterType = {
 
   overviewImageUrl: {},
 
-  members: {
-    required: "하나 이상은 필수입니다",
-    validate: {
-      isEmpty: (data: { category: string; data: RequestedMemberType[] }[]) =>
-        !checkEmptyField<RequestedMemberType>(data) ||
-        "멤버를 한명은 넣어주세요",
-    },
-  },
+  members: {},
 
   description: {},
 
