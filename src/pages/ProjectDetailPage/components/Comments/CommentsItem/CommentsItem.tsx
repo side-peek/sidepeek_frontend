@@ -1,4 +1,3 @@
-import { UseFormRegisterReturn } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
 import { Box, Button, HStack, Stack, useMediaQuery } from "@chakra-ui/react"
@@ -15,10 +14,9 @@ import ReplyComment from "./components/ReplyComment"
 
 interface CommentsItemProps {
   comment: Comment
-  register: UseFormRegisterReturn
 }
 
-const CommentsItem = ({ comment, register }: CommentsItemProps) => {
+const CommentsItem = ({ comment }: CommentsItemProps) => {
   const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
   const navigate = useNavigate()
 
@@ -61,7 +59,7 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
               align="flex-start">
               <CommentTitle comment={comment} />
               {editTargetCommentId === comment.id && isEditing ? (
-                <CommentsEditForm register={register} />
+                <CommentsEditForm />
               ) : (
                 <CommentsText text={comment.content} />
               )}
@@ -95,14 +93,7 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
           </HStack>
         </Box>
       </HStack>
-      {comment.replies && (
-        <ReplyComment
-          comment={comment.replies}
-          {...{
-            register,
-          }}
-        />
-      )}
+      {comment.replies && <ReplyComment comment={comment.replies} />}
     </Stack>
   )
 }

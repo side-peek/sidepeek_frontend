@@ -1,5 +1,3 @@
-import { UseFormRegisterReturn } from "react-hook-form"
-
 import { Box, Flex } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
@@ -7,10 +5,9 @@ import CommentsItem from "../CommentsItem"
 
 interface ReplyCommentProps {
   comment: Comment[]
-  register: UseFormRegisterReturn
 }
 
-const ReplyComment = ({ comment, register }: ReplyCommentProps) => {
+const ReplyComment = ({ comment }: ReplyCommentProps) => {
   return comment.map((reply) => {
     return (
       <Flex
@@ -19,12 +16,7 @@ const ReplyComment = ({ comment, register }: ReplyCommentProps) => {
         w="100%"
         key={reply.id}>
         <Box w="100%">
-          <CommentsItem
-            comment={reply}
-            {...{
-              register,
-            }}
-          />
+          <CommentsItem comment={reply} />
         </Box>
       </Flex>
     )

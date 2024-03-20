@@ -1,23 +1,19 @@
 import { useEffect } from "react"
-import { UseFormRegisterReturn } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
 import { Box, HStack, Textarea } from "@chakra-ui/react"
 
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
-interface CommentsEditFormProps {
-  register: UseFormRegisterReturn
-}
-
-const CommentsEditForm = ({ register }: CommentsEditFormProps) => {
-  const { handleSubmit, onSubmitEdit, focusOnFiled } = useCommentContext()
+const CommentsEditForm = () => {
+  const { handleSubmit, onSubmitEdit, focusOnFiled, register } =
+    useCommentContext()
 
   useEffect(() => {
     focusOnFiled()
   }, [focusOnFiled])
 
-  if (!handleSubmit) {
+  if (!handleSubmit || !register) {
     return
   }
 
@@ -36,7 +32,7 @@ const CommentsEditForm = ({ register }: CommentsEditFormProps) => {
             isRequired={false}
             resize="none"
             maxH="10rem"
-            {...register}
+            {...register("content", { required: true })}
           />
         </HStack>
       </form>
