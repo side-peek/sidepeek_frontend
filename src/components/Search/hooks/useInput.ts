@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeEventHandler, useState } from "react"
 
 import { useDebounce } from "@hooks/useDebounce"
