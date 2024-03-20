@@ -1,5 +1,22 @@
+import { Skeleton } from "@chakra-ui/react"
+
+import Banner from "./components/Banner/Banner"
+import ProjectListSection from "./components/ProjectListSection/ProjectListSection"
+import { useBannerProjectQuery } from "./hooks/queries/useBannerProjectQuery"
+
 const HomePage = () => {
-  return <div>HomePage</div>
+  const { bannerProjectList, isBannerLoading } = useBannerProjectQuery()
+
+  return (
+    <>
+      {isBannerLoading ? (
+        <Skeleton height="35rem" />
+      ) : (
+        <Banner bannerList={bannerProjectList} />
+      )}
+      <ProjectListSection />
+    </>
+  )
 }
 
 export default HomePage

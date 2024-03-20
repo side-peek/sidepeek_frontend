@@ -1,0 +1,52 @@
+import { FaSquarePen } from "react-icons/fa6"
+import { ImGithub } from "react-icons/im"
+
+import { Box, Flex, Text } from "@chakra-ui/react"
+
+import ProfileLink from "./ProfileLink"
+
+interface IntroductionProps {
+  aboutMe?: string | null
+  githubUrl?: string | null
+  blogUrl?: string | null
+}
+
+const ProfileIntroduction = ({
+  aboutMe,
+  githubUrl,
+  blogUrl,
+}: IntroductionProps) => {
+  return (
+    <Box
+      w="32rem"
+      px="1rem"
+      py="3rem">
+      <Text
+        fontSize="xl"
+        fontFamily="SCDream_Bold">
+        소개
+      </Text>
+      <Text
+        mt="1rem"
+        fontSize="md">
+        {aboutMe}
+      </Text>
+      <Flex
+        direction="column"
+        gap="0.7rem">
+        <ProfileLink
+          Icon={ImGithub}
+          url={githubUrl}
+          alt="Github"
+        />
+        <ProfileLink
+          Icon={FaSquarePen}
+          url={blogUrl}
+          alt="Blog"
+        />
+      </Flex>
+    </Box>
+  )
+}
+
+export default ProfileIntroduction

@@ -7,8 +7,7 @@ module.exports = {
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:import/recommended",
-    "plugin:import/typescript",
+    "plugin:react/jsx-runtime",
     "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended",
     "plugin:@tanstack/eslint-plugin-query/recommended",
@@ -19,16 +18,17 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   plugins: [
     "react-refresh",
+    "react",
     "@tanstack/query",
     "@typescript-eslint",
     "prettier",
   ],
-
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
   rules: {
-    "react-refresh/only-export-components": [
-      "warn",
-      { allowConstantExport: true },
-    ],
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": [
       2,
@@ -37,29 +37,13 @@ module.exports = {
     "@tanstack/query/exhaustive-deps": "error",
     "@tanstack/query/no-rest-destructuring": "warn",
     "@tanstack/query/stable-query-client": "error",
+    quotes: ["error", "double"],
     "prettier/prettier": [
       "error",
       {
         endOfLine: "auto",
       },
     ],
-    "import/order": [
-      "error",
-      {
-        groups: ["builtin", "external", ["parent", "sibling"], "index"],
-        pathGroups: [
-          {
-            pattern: "angular",
-            group: "external",
-            position: "before",
-          },
-        ],
-        alphabetize: {
-          order: "asc",
-          caseInsensitive: true,
-        },
-        "newlines-between": "always",
-      },
-    ],
+    "react/no-unescaped-entities": 0,
   },
 }

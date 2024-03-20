@@ -1,10 +1,17 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
-import { RouterProvider } from "react-router-dom"
-import { router } from "./routes"
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+import App from "./App"
+import { initMsw } from "./mocks"
+
+const root = ReactDOM.createRoot(document.getElementById("root")!)
+
+if (import.meta.env.MODE === "development") {
+  await initMsw()
+}
+
+root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <App />
   </React.StrictMode>,
 )
