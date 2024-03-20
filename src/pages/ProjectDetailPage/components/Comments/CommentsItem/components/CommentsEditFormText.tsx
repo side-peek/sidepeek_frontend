@@ -53,6 +53,7 @@ const CommentsEditFormText = ({
           ) : (
             <Text
               whiteSpace="pre-line"
+              wordBreak="break-all"
               fontSize="lg"
               p="0.5rem">
               {comment.content}
