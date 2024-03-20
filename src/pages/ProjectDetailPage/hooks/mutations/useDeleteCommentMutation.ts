@@ -15,7 +15,7 @@ import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
 import { QUERYKEY } from "@constants/queryKey"
 
-export const useDeleteCommentMutation = () => {
+export const useDeleteCommentMutation = (projectId: number) => {
   const queryClient = useQueryClient()
   const toast = useToast(toastOptions)
 
@@ -24,7 +24,7 @@ export const useDeleteCommentMutation = () => {
     mutationFn: (commentId: number) => deleteComment({ commentId }),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERYKEY.PROJECT_DETAIL],
+        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
     },
   })

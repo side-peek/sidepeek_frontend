@@ -1,8 +1,6 @@
 import { Center, Stack, Text } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
-import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
-
 import CommentsItem from "../CommentsItem/CommentsItem"
 
 interface CommentsListProps {
@@ -10,11 +8,6 @@ interface CommentsListProps {
 }
 
 const CommentsList = ({ comments }: CommentsListProps) => {
-  const { register } = useCommentContext()
-  if (!register) {
-    return
-  }
-
   return (
     <Stack
       w="100%"
@@ -24,7 +17,6 @@ const CommentsList = ({ comments }: CommentsListProps) => {
         comments.map((comment) => {
           return (
             <CommentsItem
-              register={register("content", { required: true })}
               key={comment.id}
               {...{
                 comment,

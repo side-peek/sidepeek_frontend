@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 
 import { useToast } from "@chakra-ui/react"
-import { editCommentPayload } from "api-models"
+import { Project, editCommentPayload } from "api-models"
 import { isAxiosError } from "axios"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
@@ -16,16 +16,52 @@ import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
 import { QUERYKEY } from "@constants/queryKey"
 
-export const useEditCommentMutation = () => {
+export const useEditCommentMutation = (projectId: number) => {
   const queryClient = useQueryClient()
   const toast = useToast(toastOptions)
 
   const { mutate: editCommentMutation, error } = useMutation({
     mutationKey: [QUERYKEY.EDIT_COMMENT],
     mutationFn: (data: editCommentPayload) => editComment(data),
-    onSuccess: () => {
+
+    onMutate: async (data: editCommentPayload) => {
+      const { commentId, content: newContent } = data
+      await queryClient.cancelQueries({
+        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
+      })
+
+      const previousState = queryClient.getQueryData<Project>([
+        QUERYKEY.PROJECT_DETAIL,
+        projectId,
+      ])
+
+      if (previousState) {
+        const updatedComment = previousState.comments.map((comment) =>
+          comment.id === commentId
+            ? { ...comment, content: newContent }
+            : comment,
+        )
+        const updatedState = {
+          ...previousState,
+          comments: updatedComment,
+        }
+        queryClient.setQueryData(
+          [QUERYKEY.PROJECT_DETAIL, projectId],
+          updatedState,
+        )
+      }
+
+      return { previousState }
+    },
+    onError: (_, __, context) => {
+      queryClient.setQueryData(
+        [QUERYKEY.PROJECT_DETAIL, projectId],
+        context?.previousState,
+      )
+    },
+    onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERYKEY.PROJECT_DETAIL],
+        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
     },
   })

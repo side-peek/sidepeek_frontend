@@ -3,14 +3,15 @@ import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io"
 import { MdRemoveRedEye } from "react-icons/md"
 import { Link } from "react-scroll"
 
-import { Stack, VStack, useDisclosure, useMediaQuery } from "@chakra-ui/react"
+import { HStack, Stack, useDisclosure, useMediaQuery } from "@chakra-ui/react"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { useDeleteLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteLikeMutation"
+import { useDeleteProjectMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteProjectMutation"
 import { usePostLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostLikeMutation"
 
+import DeleteCheckModal from "../../DeleteCheckModal"
 import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
-import ProjectDeleteCheckModal from "./ProjectDeleteCheckModal"
 import SummaryControl from "./SummaryControl"
 import SummaryTopIcon from "./SummaryTopIcon"
 
@@ -35,13 +36,21 @@ const SummaryTop = ({
   const { postLikeMutation } = usePostLikeMutation()
   const { deleteLikeMutation } = useDeleteLikeMutation(Number(projectId))
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const { deleteProjectMutation } = useDeleteProjectMutation()
   const user = useUserInfoData()
 
+  const handleDeleteProject = () => {
+    onClose()
+    deleteProjectMutation(Number(projectId))
+  }
+
   return (
-    <VStack
+    <HStack
       mb="3rem"
       spacing="1.5rem"
-      align="flex-end">
+      justifyContent="flex-end"
+      align="center">
       <Stack
         direction="row"
         spacing={isLargerThan1200 ? "1rem" : "0.5rem"}>
@@ -73,6 +82,7 @@ const SummaryTop = ({
             to="Comment"
             spy={true}
             offset={-100}
+            duration={500}
             smooth={true}>
             <SummaryTopIcon
               count={commentCount}
@@ -85,13 +95,14 @@ const SummaryTop = ({
       </Stack>
       {ownerId === user?.id && <SummaryControl onOpen={onOpen} />}
       {isOpen && (
-        <ProjectDeleteCheckModal
+        <DeleteCheckModal
+          onClick={handleDeleteProject}
           isOpen={isOpen}
           onClose={onClose}
           projectId={projectId}
         />
       )}
-    </VStack>
+    </HStack>
   )
 }
 export default withProjectId(SummaryTop)
