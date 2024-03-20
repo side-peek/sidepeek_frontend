@@ -4,7 +4,6 @@ import { Skill } from "api-models"
 
 import { ProjectFormValues } from "@pages/ProjectEditPage/types/ProjectFormValues"
 
-// TODO: 공통 훅 사용 예정임
 export const useExample = () => {
   const { control, setValue, getValues, watch } =
     useForm<Pick<ProjectFormValues, "techStacks">>()

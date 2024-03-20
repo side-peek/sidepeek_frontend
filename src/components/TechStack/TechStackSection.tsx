@@ -10,7 +10,6 @@ import { filterSelectedId } from "@pages/ProjectEditPage/utils/filterSelectedId"
 
 import StackSearchBox from "../../pages/ProjectEditPage/components/TechStacksFields/components/StackSearchBox"
 
-//useTechStack hook을 사용하여 제어 컴포넌트처럼 사용
 const TechStackSection = ({
   fieldValue,
   onAppendField,
