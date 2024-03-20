@@ -2,7 +2,7 @@ import { ChangeEventHandler, useState } from "react"
 
 import { Skill } from "api-models"
 
-type FieldElement<T> = {
+export type FieldElement<T> = {
   id?: string | number
   category: string
   data: T[]
