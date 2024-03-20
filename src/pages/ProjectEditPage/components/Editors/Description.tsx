@@ -3,7 +3,8 @@ import { Controller, FieldPath } from "react-hook-form"
 import { Box } from "@chakra-ui/react"
 import MDEditor, { commands } from "@uiw/react-md-editor"
 
-import { useFileUpload } from "@pages/ProjectEditPage/hooks/useFileUpload"
+import { usePostFileMutation } from "@pages/ProjectEditPage/hooks/usePostFileMutation"
+// import { useFileUpload } from "@pages/ProjectEditPage/hooks/useFileUpload"
 import { useProjectFormContext } from "@pages/ProjectEditPage/hooks/useProjectFormContext"
 import { ProjectFormValues } from "@pages/ProjectEditPage/types/ProjectFormValues"
 
@@ -13,7 +14,12 @@ import UploadIcon from "./components/UpdateIcon"
 
 const Description = ({ name }: { name: FieldPath<ProjectFormValues> }) => {
   const { control } = useProjectFormContext()
-  const { onChangeFile } = useFileUpload()
+
+  const { mutateAsync } = usePostFileMutation({
+    onError: () => {
+      alert("파일 업로드에 실패했습니다")
+    },
+  })
 
   return (
     <Controller
@@ -53,12 +59,10 @@ const Description = ({ name }: { name: FieldPath<ProjectFormValues> }) => {
                 return (
                   <Box>
                     <FileUploadSection
-                      onDrop={async (e) => {
-                        const fileUrl = await onChangeFile(e)
-                        if (!fileUrl.length) {
-                          return
-                        }
-                        textApi?.replaceSelection(`![](${[fileUrl[0]]})`)
+                      onDrop={async (files) => {
+                        const { fileUrl } = await mutateAsync(files[0])
+                        textApi?.replaceSelection(`![](${[fileUrl]})`)
+                        close()
                       }}
                       maxFiles={1}
                       multiple={false}
