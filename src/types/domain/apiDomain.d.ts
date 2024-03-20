@@ -327,9 +327,7 @@ declare module "api-models" {
     skill?: string[]
   }
 
-  export type putProjectPayload = {
-    projectId: number
-  } & Project
+  export type putProjectPayload = Omit<postProjectPayload, "ownerId">
 
   export type deleteProjectPayload = {
     projectId: number
