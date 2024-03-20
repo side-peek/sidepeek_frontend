@@ -1,24 +1,38 @@
-import { PropsWithChildren } from "react"
-import { FormProvider } from "react-hook-form"
+import { ReactNode } from "react"
+import { FormProvider, useForm } from "react-hook-form"
 
 import { Button } from "@chakra-ui/react"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
 
+import { ProjectFormDefaultValues } from "../constants/defaultValues"
 import { usePostProjectMutation } from "../hooks/usePostProjectMutation"
-import { useProjectForm } from "../hooks/useProjectForm"
+import { usePutProjectMutation } from "../hooks/usePutProjectMutation"
 import { ProjectFormValues } from "../types/ProjectFormValues"
 
-const ProjectFormProvider = ({ children }: PropsWithChildren) => {
-  const methods = useProjectForm()
-  const { mutate } = usePostProjectMutation()
+interface ProjectFormProviderProps {
+  children: ReactNode
+  defaultValues?: ProjectFormValues
+  projectId?: number
+}
+
+const ProjectFormProvider = ({
+  children,
+  defaultValues,
+  projectId,
+}: ProjectFormProviderProps) => {
   const userInfo = useUserInfoData()
+
+  const methods = useForm<ProjectFormValues>({
+    defaultValues: defaultValues || ProjectFormDefaultValues,
+  })
+
+  const { mutate: postProject } = usePostProjectMutation()
+  const { mutate: putProject } = usePutProjectMutation()
+
   const handleSubmitEvent = (data: ProjectFormValues) => {
     const convertedMembers = data.members
       .map(({ category, data }) => {
         return data.map(({ id, nickname }) => {
-          if (!data.length) {
-            methods.setError("members", { message: " 하나 이상 넣으세요" })
-          }
           return {
             id,
             nickname,
@@ -26,25 +40,47 @@ const ProjectFormProvider = ({ children }: PropsWithChildren) => {
           }
         })
       })
-      .flat()
+      ?.flat()
 
     const convertedTechStacks = data.techStacks
       .map(({ category, data }) => {
         return data.map(({ id }) => ({ skillId: id, category }))
       })
-      .flat()
+      ?.flat()
 
-    mutate({
-      ...data,
-      members: convertedMembers,
-      techStacks: convertedTechStacks,
-      ownerId: userInfo?.id as number,
-    })
+    const convertedDate = (date: string) => {
+      const idx = date.lastIndexOf("-")
+      return date.slice(0, idx)
+    }
+
+    if (!projectId) {
+      postProject({
+        ...data,
+        members: convertedMembers,
+        techStacks: convertedTechStacks,
+        ownerId: userInfo?.id as number,
+        startDate: convertedDate(data.startDate),
+        endDate: convertedDate(data.endDate),
+      })
+    } else {
+      putProject({
+        projectId,
+        body: {
+          ...data,
+          members: convertedMembers,
+          techStacks: convertedTechStacks,
+        },
+      })
+    }
   }
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit((data) => handleSubmitEvent(data))}>
+      <form
+        onSubmit={methods.handleSubmit(
+          (data) => handleSubmitEvent(data),
+          (err) => console.log(err),
+        )}>
         {children}
         <Button />
       </form>
