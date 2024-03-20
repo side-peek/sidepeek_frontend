@@ -30,6 +30,8 @@ const ProjectListSection = () => {
   } = useAllProjectQuery({ sortOption, isReleased })
 
   const isLoading = isAllProjectLoading || isRefetching
+  const projectCount =
+    allProjectList != undefined && allProjectList.pages[0].totalElements
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SortSelectType
@@ -56,11 +58,13 @@ const ProjectListSection = () => {
   return (
     <Container maxW={isLargerThan1200 ? "80%" : "95%"}>
       <Stack marginTop="15rem">
-        <ProjectFilter
-          sortOption={sortOption}
-          handleChange={handleChange}
-          handleSelect={handleSelect}
-        />
+        {projectCount ? (
+          <ProjectFilter
+            sortOption={sortOption}
+            handleChange={handleChange}
+            handleSelect={handleSelect}
+          />
+        ) : null}
         <ProjectList
           projects={allProjectList}
           isLoading={isLoading}
