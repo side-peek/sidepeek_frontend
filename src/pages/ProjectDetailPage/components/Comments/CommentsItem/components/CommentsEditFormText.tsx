@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { UseFormRegisterReturn } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
@@ -15,8 +16,17 @@ const CommentsEditFormText = ({
   comment,
   register,
 }: CommentsEditFormTextProps) => {
-  const { handleSubmit, onSubmitEdit, editTargetCommentId, isEditing } =
-    useCommentContext()
+  const {
+    handleSubmit,
+    onSubmitEdit,
+    editTargetCommentId,
+    isEditing,
+    focusOnFiled,
+  } = useCommentContext()
+
+  useEffect(() => {
+    focusOnFiled()
+  }, [focusOnFiled])
 
   if (!handleSubmit) {
     return

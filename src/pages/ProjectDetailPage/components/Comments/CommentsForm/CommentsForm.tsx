@@ -33,7 +33,7 @@ const CommentsForm = ({
   const { register, reset, handleSubmit } = useForm<CommentFormValues>()
 
   const { sendCommentMutation } = usePostCommentMutation()
-  const { handleOffReply } = useCommentContext()
+  const { handleOffReply, handleOffEdit } = useCommentContext()
   const [isAnonymous, setIsAnonymous] = useState(false)
 
   const user = useUserInfoData()
@@ -53,6 +53,7 @@ const CommentsForm = ({
       }
       sendCommentMutation(commentRequestValue)
       handleOffReply()
+      handleOffEdit()
       reset()
     },
     [
@@ -63,6 +64,7 @@ const CommentsForm = ({
       sendCommentMutation,
       isAnonymous,
       handleOffReply,
+      handleOffEdit,
     ],
   )
 

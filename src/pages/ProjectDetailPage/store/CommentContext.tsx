@@ -18,6 +18,7 @@ const CommentContext = createContext<CommentContextProps>({
   handleOffEdit: () => {},
   handleDelete: () => {},
   onSubmitEdit: () => {},
+  focusOnFiled: () => {},
   register: undefined,
   handleSubmit: undefined,
 })
@@ -32,7 +33,7 @@ export const CommentProvider = ({ children }: CommentProviderProps) => {
   const [editTargetCommentId, setEditTargetCommentId] = useState(-1)
   const [replyTargetCommentId, setReplyTargetCommentId] = useState(-1)
 
-  const { register, setValue, reset, handleSubmit } =
+  const { register, setValue, reset, handleSubmit, setFocus } =
     useForm<editCommentPayload>()
 
   const { editCommentMutation } = useEditCommentMutation()
@@ -76,6 +77,10 @@ export const CommentProvider = ({ children }: CommentProviderProps) => {
     handleOffReply()
   }
 
+  const focusOnFiled = () => {
+    setFocus("content")
+  }
+
   return (
     <CommentContext.Provider
       value={{
@@ -90,6 +95,7 @@ export const CommentProvider = ({ children }: CommentProviderProps) => {
         handleDelete,
         onSubmitEdit,
         register,
+        focusOnFiled,
         handleSubmit,
       }}>
       {children}
