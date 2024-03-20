@@ -9,6 +9,8 @@ import ProjectFilter from "@components/ProjectFilter/ProjectFilter"
 import ProjectList from "@components/ProjectList/ProjectList"
 import TechStackFilter from "@components/TechStackFilter/TechStackFilter"
 
+import { useDebounce } from "@hooks/useDebounce"
+
 import { useAllProjectQuery } from "@pages/HomePage/hooks/queries/useAllProjectQuery"
 import { SortSelectType } from "@pages/HomePage/types/type"
 
@@ -67,9 +69,15 @@ const ProjectListSection = () => {
 
   const [selectedStacks, setSelectedStacks] = useState<Skill[]>([])
 
-  useEffect(() => {
+  const useDebounceTechFilter = useDebounce(() => {
     selectedStacks.forEach((skill) => skills.push(skill.name))
+    console.log(skills)
     refetchAllProject()
+  }, 500)
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useDebounceTechFilter()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStacks])
 
