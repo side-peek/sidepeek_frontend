@@ -3,7 +3,7 @@ import { ChangeEventHandler } from "react"
 import { Input, InputProps } from "@chakra-ui/react"
 
 interface SearchBarProps extends Omit<InputProps, "onChange" | "onInput"> {
-  value: string
+  value?: string
   onChange: ChangeEventHandler<HTMLInputElement>
 }
 

@@ -10,21 +10,13 @@ import {
   nicknameOptions,
   passwordOptions,
 } from "@pages/SignUpPage/constants/registerOptions"
-import { DOUBLE_CHECK_MESSAGE } from "@pages/SignUpPage/constants/toastMessages"
 import { useSignUpForm } from "@pages/SignUpPage/hooks/useSignUpForm"
 
-import DoubleCheckButton from "./components/DoubleCheckButton"
+import InputWithDoubleCheck from "./components/InputWithDoubleCheck"
 import SignUpButton from "./components/SignUpButton"
 
 const SignUpForm = () => {
-  const {
-    method,
-    emailCheck,
-    nicknameCheck,
-    onSubmit,
-    handleDoubleCheck,
-    isLoading,
-  } = useSignUpForm()
+  const { method, onSubmit, isLoading } = useSignUpForm()
 
   return (
     <FormProvider {...method}>
@@ -41,16 +33,10 @@ const SignUpForm = () => {
             label="이메일"
             registerOptions={emailOptions}>
             {(renderProps) => (
-              <Flex alignItems="center">
-                <Input {...renderProps} />
-                <DoubleCheckButton
-                  isDuplicated={emailCheck.data?.isDuplicated}
-                  isLoading={emailCheck.isPending}
-                  onClick={() => handleDoubleCheck("email")}
-                  errorMessage={DOUBLE_CHECK_MESSAGE.EMAIL.ERROR}
-                  successMessage={DOUBLE_CHECK_MESSAGE.EMAIL.SUCCESS}
-                />
-              </Flex>
+              <InputWithDoubleCheck
+                renderProps={renderProps}
+                fieldName="email"
+              />
             )}
           </InputController>
           {/* nickname */}
@@ -59,16 +45,10 @@ const SignUpForm = () => {
             label="닉네임"
             registerOptions={nicknameOptions}>
             {(renderProps) => (
-              <Flex alignItems="center">
-                <Input {...renderProps} />
-                <DoubleCheckButton
-                  isDuplicated={nicknameCheck.data?.isDuplicated}
-                  isLoading={nicknameCheck.isPending}
-                  onClick={() => handleDoubleCheck("nickname")}
-                  errorMessage={DOUBLE_CHECK_MESSAGE.NICKNAME.ERROR}
-                  successMessage={DOUBLE_CHECK_MESSAGE.NICKNAME.SUCCESS}
-                />
-              </Flex>
+              <InputWithDoubleCheck
+                renderProps={renderProps}
+                fieldName="nickname"
+              />
             )}
           </InputController>
           {/* paasword */}

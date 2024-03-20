@@ -47,6 +47,7 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
                         h="2rem"
                       />
                     }
+                    cursor="default"
                     label={stack.skill.name}
                     key={stack.skill.id}
                     fontSize="lg"

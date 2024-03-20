@@ -17,6 +17,7 @@ export const COMMENT_MESSAGES = {
   },
   ERROR: {
     BAD_REQUEST: "요청 정보가 유효하지 않습니다.",
+    MAX_LENGTH: "댓글은 100자 이하여야 합니다.",
     UNAUTHORIZED: "해당 요청에 대한 권한이 없습니다.",
     NOT_FOUND: "존재하지 않는 댓글입니다.",
     UNCAUGHT: "일시적인 오류가 발생하였습니다.",
