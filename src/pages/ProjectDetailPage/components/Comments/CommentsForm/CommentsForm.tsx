@@ -2,18 +2,11 @@ import { useCallback, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
-import {
-  Box,
-  Button,
-  Checkbox,
-  Flex,
-  FormControl,
-  HStack,
-  Textarea,
-} from "@chakra-ui/react"
+import { Box, Button, Checkbox, Flex, HStack, Textarea } from "@chakra-ui/react"
 import { Stack } from "@chakra-ui/react"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
 
+import { scrollBarNone } from "@pages/ProjectDetailPage/constants/scrollBarNone"
 import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
@@ -75,76 +68,67 @@ const CommentsForm = ({
   return (
     <Box w="100%">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControl>
-          <Flex w="100%">
-            <Flex
+        <Flex w="100%">
+          <Flex
+            w="100%"
+            position="relative">
+            <HStack
               w="100%"
-              position="relative">
-              <HStack
-                w="100%"
-                gap="2rem"
-                border="1px solid #ECECEC"
-                borderTopLeftRadius="0.9rem"
-                borderBottomRadius={isReplyComment ? "0.9rem" : 0}>
-                <Textarea
-                  w="95%"
-                  sx={{
-                    "&::-webkit-scrollbar": {
-                      display: "none",
-                    },
-                    "-ms-overflow-style": "none",
-                    "scrollbar-width": "none",
-                  }}
-                  mr="2rem"
-                  size="xs"
-                  rows={1}
-                  minH="1rem"
-                  maxH="10rem"
-                  fontSize="lg"
-                  p={isReplyComment ? "1rem " : "2rem"}
-                  pr="4rem"
-                  as={ResizeTextarea}
-                  placeholder={isReplyComment ? "" : "댓글을 입력하세요"}
-                  isRequired={false}
-                  resize="none"
-                  border="none"
-                  _hover={{ boxShadow: "none", borderColor: "grey.400" }}
-                  _focus={{ boxShadow: "none", borderColor: "grey.400" }}
-                  {...register("content", { required: true })}
-                />
-                <Stack
-                  position="absolute"
-                  right="1rem"
-                  top="30%"
-                  direction="row">
-                  <Checkbox
-                    isChecked={isAnonymous}
-                    size="lg"
-                    onChange={handleAnonymous}
-                    color={isAnonymous ? "red.200" : "grey.500"}
-                    minWidth="5rem"
-                    colorScheme="red">
-                    익명
-                  </Checkbox>
-                </Stack>
-              </HStack>
-            </Flex>
-
-            <Button
-              p="0"
-              h="revert"
-              w="5rem"
-              bgColor="blue.100"
-              borderRadius="0"
-              borderTopRightRadius="1rem"
-              color="white"
-              fontSize="xl"
-              _hover={{ opacity: "0.5" }}
-              type="submit">
-              입력
-            </Button>
+              border="1px solid #ECECEC"
+              borderTopLeftRadius="0.9rem"
+              borderBottomRadius={isReplyComment ? "0.9rem" : 0}>
+              <Textarea
+                w="95%"
+                sx={scrollBarNone()}
+                mr="2rem"
+                size="xs"
+                rows={1}
+                minH="1rem"
+                maxH="10rem"
+                fontSize="lg"
+                p={isReplyComment ? "1rem " : "2rem"}
+                pr="4rem"
+                as={ResizeTextarea}
+                placeholder={isReplyComment ? "" : "댓글을 입력하세요"}
+                isRequired={false}
+                resize="none"
+                border="none"
+                _hover={{ boxShadow: "none", borderColor: "grey.400" }}
+                _focus={{ boxShadow: "none", borderColor: "grey.400" }}
+                {...register("content", { required: true })}
+              />
+              <Stack
+                position="absolute"
+                right="1rem"
+                top="30%"
+                direction="row">
+                <Checkbox
+                  isChecked={isAnonymous}
+                  size="lg"
+                  onChange={handleAnonymous}
+                  color={isAnonymous ? "red.200" : "grey.500"}
+                  minWidth="5rem"
+                  colorScheme="red">
+                  익명
+                </Checkbox>
+              </Stack>
+            </HStack>
           </Flex>
-        </FormControl>
+
+          <Button
+            p="0"
+            h="revert"
+            w="5rem"
+            bgColor="blue.100"
+            borderRadius="0"
+            borderTopRightRadius="1rem"
+            color="white"
+            fontSize="xl"
+            _hover={{ opacity: "0.5" }}
+            type="submit">
+            입력
+          </Button>
+        </Flex>
       </form>
     </Box>
   )

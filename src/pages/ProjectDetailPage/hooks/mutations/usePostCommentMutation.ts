@@ -43,7 +43,11 @@ export const usePostCommentMutation = () => {
           break
         }
         case 400: {
-          message = COMMENT_MESSAGES.ERROR.BAD_REQUEST
+          if (error.response.data[0].message.includes("100자")) {
+            message = COMMENT_MESSAGES.ERROR.MAX_LENGTH
+          } else {
+            message = COMMENT_MESSAGES.ERROR.BAD_REQUEST
+          }
           break
         }
         case 403: {
