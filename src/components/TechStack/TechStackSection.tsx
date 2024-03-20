@@ -1,6 +1,14 @@
 import { IoMdClose } from "react-icons/io"
 
-import { Box, Button, Center, Flex, useMediaQuery } from "@chakra-ui/react"
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Image,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react"
 import { Skill } from "api-models"
 
 import CloseButtonTag from "@components/Tag/components/CloseButtonTag"
@@ -21,8 +29,17 @@ const TechStackSection = ({
   render,
 }: FieldProps<Skill>) => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
+
   return (
-    <>
+    <Box
+      w="100%"
+      position="relative">
+      <Text
+        fontSize="xl"
+        fontFamily="SCDream_Bold"
+        margin="1.5rem 0 1.5rem 1rem">
+        기술스택
+      </Text>
       {fieldValue?.map((field, index) => {
         const selectedData = field.data
         return (
@@ -32,22 +49,24 @@ const TechStackSection = ({
             mb={isLargerThan500 ? "3rem" : "1.5rem"}>
             {render({
               value: field.category,
-              onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                onChangeCategory(e, index),
+              onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                onChangeCategory(e, index)
+              },
             })}
-            {onDeleteField && (
-              <Box
-                pos="absolute"
-                right="5px">
-                <IoMdClose
-                  size="20px"
-                  onClick={() => onDeleteField?.(index)}
-                />
-              </Box>
-            )}
-            <Box
-              flex={isLargerThan500 ? "0 0 25rem" : "0 0 3.5rem"}
-              pr={isLargerThan500 ? "2rem" : "0rem"}></Box>
+            <Box pr={isLargerThan500 ? "2rem" : "0rem"}>
+              {onDeleteField && (
+                <Box
+                  pos="absolute"
+                  right="0.5rem"
+                  cursor="pointer">
+                  <IoMdClose
+                    size="2rem"
+                    onClick={() => onDeleteField?.(index)}
+                  />
+                </Box>
+              )}
+            </Box>
+
             <Box
               flex="0 0 30rem"
               borderLeft={isLargerThan500 ? "1px solid" : ""}
@@ -80,6 +99,7 @@ const TechStackSection = ({
                 }}
               />
             </Box>
+
             <Box
               flexWrap="nowrap"
               flex="1 1 auto"
@@ -92,6 +112,13 @@ const TechStackSection = ({
                 <CloseButtonTag
                   key={stack.name}
                   label={stack.name}
+                  leftElement={
+                    <Image
+                      src={stack.iconImageUrl}
+                      w="1.4rem"
+                      h="1.4rem"
+                    />
+                  }
                   onClickCloseButton={() => onDeleteStack?.(stack, index)}
                 />
               ))}
@@ -113,7 +140,7 @@ const TechStackSection = ({
           </Button>
         </Center>
       )}
-    </>
+    </Box>
   )
 }
 export default TechStackSection
