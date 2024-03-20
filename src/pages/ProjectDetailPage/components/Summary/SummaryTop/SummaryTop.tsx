@@ -82,6 +82,7 @@ const SummaryTop = ({
             to="Comment"
             spy={true}
             offset={-100}
+            duration={500}
             smooth={true}>
             <SummaryTopIcon
               count={commentCount}
