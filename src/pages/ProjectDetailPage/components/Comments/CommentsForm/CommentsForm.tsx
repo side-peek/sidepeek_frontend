@@ -79,7 +79,7 @@ const CommentsForm = ({
               borderBottomRadius={isReplyComment ? "0.9rem" : 0}>
               <Textarea
                 w="95%"
-                sx={scrollBarNone()}
+                sx={scrollBarNone}
                 mr="2rem"
                 size="xs"
                 rows={1}
