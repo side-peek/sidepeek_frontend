@@ -12,6 +12,7 @@ import {
   COMMENT_MESSAGES,
   COMMON_MESSAGES,
 } from "@pages/ProjectDetailPage/constants/toastMessage"
+import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
 import { QUERYKEY } from "@constants/queryKey"
@@ -19,30 +20,50 @@ import { QUERYKEY } from "@constants/queryKey"
 export const useEditCommentMutation = (projectId: number) => {
   const queryClient = useQueryClient()
   const toast = useToast(toastOptions)
+  const { handleOptimistic } = useCommentContext()
 
   const { mutate: editCommentMutation, error } = useMutation({
     mutationKey: [QUERYKEY.EDIT_COMMENT],
     mutationFn: (data: editCommentPayload) => editComment(data),
-    onMutate: async () => {
+
+    onMutate: async (data: editCommentPayload) => {
+      const { commentId, content: newContent } = data
       await queryClient.cancelQueries({
         queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
 
-      const previousComment = queryClient.getQueryData<Project>([
+      const previousState = queryClient.getQueryData<Project>([
         QUERYKEY.PROJECT_DETAIL,
         projectId,
       ])
 
-      console.log(previousComment)
-      return { previousComment }
+      if (previousState) {
+        const updatedComment = previousState.comments.map((comment) =>
+          comment.id === commentId
+            ? { ...comment, content: newContent }
+            : comment,
+        )
+        const updatedState = {
+          ...previousState,
+          comments: updatedComment,
+        }
+        queryClient.setQueryData(
+          [QUERYKEY.PROJECT_DETAIL, projectId],
+          updatedState,
+        )
+        handleOptimistic(false)
+      }
+
+      return { previousState }
     },
     onError: (_, __, context) => {
       queryClient.setQueryData(
         [QUERYKEY.PROJECT_DETAIL, projectId],
-        context?.previousComment,
+        context?.previousState,
       )
     },
     onSettled: () => {
+      handleOptimistic(false)
       queryClient.invalidateQueries({
         queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
