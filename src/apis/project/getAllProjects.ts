@@ -17,7 +17,7 @@ export const getAllProjects = async (
     lastProjectId,
     lastProject,
     search,
-    skill,
+    skills,
   }: getAllProjectsType,
   config: AxiosRequestConfig = {
     headers: {
@@ -34,6 +34,10 @@ export const getAllProjects = async (
           ? lastProject?.viewCount
           : null
   }
+  let skill
+  if (skills?.length) {
+    skill = skills?.join(",")
+  }
 
   const { data } = await baseInstance.get<getAllProjectsResponseType>(
     ENDPOINTS.GET_ALL_PROJECTS,
@@ -46,7 +50,7 @@ export const getAllProjects = async (
         lastProjectId,
         lastOrderCount,
         search,
-        skill: skill?.join(","),
+        skill,
       },
     },
   )

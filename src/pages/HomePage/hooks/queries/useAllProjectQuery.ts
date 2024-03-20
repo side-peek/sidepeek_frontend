@@ -12,7 +12,7 @@ export const useAllProjectQuery = ({
   lastProjectId = null,
   lastProject = undefined,
   search,
-  skill,
+  skills,
 }: getAllProjectsType) => {
   const {
     data,
@@ -30,7 +30,7 @@ export const useAllProjectQuery = ({
       lastProjectId,
       lastProject,
       search,
-      skill,
+      skills,
     ],
     queryFn: () =>
       getAllProjects({
@@ -39,7 +39,7 @@ export const useAllProjectQuery = ({
         lastProjectId,
         lastProject,
         search,
-        skill,
+        skills,
       }),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => (

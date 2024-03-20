@@ -1,11 +1,13 @@
-import { ChangeEvent, useCallback, useState } from "react"
+import { ChangeEvent, useCallback, useEffect, useState } from "react"
 
 import { Container, Stack, useMediaQuery } from "@chakra-ui/react"
+import { Skill } from "api-models"
 
 import { useQueryClient } from "@tanstack/react-query"
 
 import ProjectFilter from "@components/ProjectFilter/ProjectFilter"
 import ProjectList from "@components/ProjectList/ProjectList"
+import TechStackFilter from "@components/TechStackFilter/TechStackFilter"
 
 import { useAllProjectQuery } from "@pages/HomePage/hooks/queries/useAllProjectQuery"
 import { SortSelectType } from "@pages/HomePage/types/type"
@@ -19,6 +21,7 @@ const ProjectListSection = () => {
   const [isReleased, setIsReleased] = useState(false)
   const [sortOption, setSortOption] = useState<SortSelectType>("createdAt")
   const queryClient = useQueryClient()
+  const skills: string[] = []
 
   const {
     allProjectList,
@@ -28,11 +31,12 @@ const ProjectListSection = () => {
     hasNextPage,
     isFetchingNextPage,
     isRefetching,
-  } = useAllProjectQuery({ sortOption, isReleased })
+  } = useAllProjectQuery({ sortOption, isReleased, skills })
 
   const isLoading = isAllProjectLoading || isRefetching
-  const projectCount =
-    allProjectList != undefined && allProjectList.pages[0].totalElements
+  const projectCount = allProjectList
+    ? allProjectList.pages[0].totalElements
+    : 0
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SortSelectType
@@ -46,7 +50,7 @@ const ProjectListSection = () => {
 
   const handleChange = () => {
     setIsReleased(!isReleased)
-    console.log(isReleased)
+
     if (isReleased) {
       refetchAllProject()
     } else {
@@ -61,9 +65,32 @@ const ProjectListSection = () => {
     }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage])
 
+  const [selectedStacks, setSelectedStacks] = useState<Skill[]>([])
+
+  useEffect(() => {
+    selectedStacks.forEach((skill) => skills.push(skill.name))
+    refetchAllProject()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedStacks])
+
+  const onAppendStack = (selectedSkill: Skill) => {
+    setSelectedStacks((prev) => [...prev, selectedSkill])
+  }
+
+  const onDeleteStack = (selectedSkill: Skill) => {
+    setSelectedStacks((prev) =>
+      prev.filter((skill) => skill.id !== selectedSkill.id),
+    )
+  }
+
   return (
     <Container maxW={isLargerThan1200 ? "80%" : "95%"}>
-      <Stack marginTop="15rem">
+      <TechStackFilter
+        selectedStacks={selectedStacks}
+        onAppendStack={onAppendStack}
+        onDeleteStack={onDeleteStack}
+      />
+      <Stack marginTop="5rem">
         {projectCount ? (
           <ProjectFilter
             isReleased={isReleased}
@@ -73,6 +100,7 @@ const ProjectListSection = () => {
           />
         ) : null}
         <ProjectList
+          projectCount={projectCount}
           projects={allProjectList}
           isLoading={isLoading}
         />

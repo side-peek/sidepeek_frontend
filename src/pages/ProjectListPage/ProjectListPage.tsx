@@ -3,11 +3,13 @@ import { useInView } from "react-intersection-observer"
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
 
 import { Container, Stack, useMediaQuery } from "@chakra-ui/react"
+import { Skill } from "api-models"
 
 import { useQueryClient } from "@tanstack/react-query"
 
 import ProjectFilter from "@components/ProjectFilter/ProjectFilter"
 import ProjectList from "@components/ProjectList/ProjectList"
+import TechStackFilter from "@components/TechStackFilter/TechStackFilter"
 
 import { useAllProjectQuery } from "@pages/HomePage/hooks/queries/useAllProjectQuery"
 import { SortSelectType } from "@pages/HomePage/types/type"
@@ -30,6 +32,7 @@ const ProjectListPage = () => {
   const [sortOption, setSortOption] = useState<SortSelectType>("createdAt")
   const queryClient = useQueryClient()
   const { ref, inView } = useInView({ threshold: 0 })
+  const skills: string[] = []
 
   const {
     allProjectList,
@@ -38,12 +41,13 @@ const ProjectListPage = () => {
     fetchNextPage,
     isRefetching,
     isFetchingNextPage,
-  } = useAllProjectQuery({ sortOption, isReleased, search })
+  } = useAllProjectQuery({ sortOption, isReleased, search, skills })
 
   const isLoading = isAllProjectLoading || isRefetching
 
-  const projectCount =
-    allProjectList != undefined && allProjectList.pages[0].totalElements
+  const projectCount = allProjectList
+    ? allProjectList.pages[0].totalElements
+    : 0
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SortSelectType
@@ -57,7 +61,7 @@ const ProjectListPage = () => {
 
   const handleChange = () => {
     setIsReleased(!isReleased)
-    console.log(isReleased)
+
     if (isReleased) {
       refetchAllProject()
     } else {
@@ -84,6 +88,25 @@ const ProjectListPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
 
+  const [selectedStacks, setSelectedStacks] = useState<Skill[]>([])
+
+  useEffect(() => {
+    selectedStacks.forEach((skill) => skills.push(skill.name))
+    refetchAllProject()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedStacks])
+
+  const onAppendStack = (selectedSkill: Skill) => {
+    setSelectedStacks((prev) => [...prev, selectedSkill])
+    selectedStacks.forEach((skill) => skills.push(skill.name))
+  }
+
+  const onDeleteStack = (selectedSkill: Skill) => {
+    setSelectedStacks((prev) =>
+      prev.filter((skill) => skill.id !== selectedSkill.id),
+    )
+  }
+
   return (
     <>
       <SearchBarSection
@@ -96,7 +119,12 @@ const ProjectListPage = () => {
         resultCount={allProjectList?.pages[0].totalElements || 0}
       />
       <Container maxW={isLargerThan1200 ? "80%" : "95%"}>
-        <Stack marginTop="15rem">
+        <TechStackFilter
+          selectedStacks={selectedStacks}
+          onAppendStack={onAppendStack}
+          onDeleteStack={onDeleteStack}
+        />
+        <Stack marginTop="5rem">
           {projectCount ? (
             <ProjectFilter
               isReleased={isReleased}
@@ -109,6 +137,7 @@ const ProjectListPage = () => {
             projects={allProjectList}
             isLoading={isLoading}
             isFetchingNextPage={isFetchingNextPage}
+            projectCount={projectCount}
             ref={ref}
           />
         </Stack>

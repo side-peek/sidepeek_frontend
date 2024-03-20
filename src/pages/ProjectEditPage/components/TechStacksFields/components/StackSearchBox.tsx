@@ -9,16 +9,18 @@ import { useTechStacks } from "@components/Search/hooks/useTechStacksSearch"
 
 interface StackSearchSectionProps extends BoxProps {
   children?: ReactNode
+  showAll?: boolean
   render: ({ techStacks }: { techStacks: Skill[] }) => JSX.Element
 }
 
 const StackSearchBox = ({
   children,
   render,
+  showAll = true,
   ...props
 }: StackSearchSectionProps) => {
   const [inputValue, onInput] = useInput("")
-  const [techStacks] = useTechStacks(inputValue)
+  const [techStacks] = useTechStacks(inputValue, showAll)
 
   return (
     <SearchBox {...props}>
