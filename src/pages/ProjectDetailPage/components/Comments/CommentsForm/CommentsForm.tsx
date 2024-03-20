@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
@@ -23,7 +23,8 @@ const CommentsForm = ({
   projectId,
   isReplyComment,
 }: CommentsFormProps) => {
-  const { register, reset, handleSubmit } = useForm<CommentFormValues>()
+  const { register, reset, handleSubmit, setFocus } =
+    useForm<CommentFormValues>()
 
   const { sendCommentMutation } = usePostCommentMutation()
   const { handleOffReply, handleOffEdit } = useCommentContext()
@@ -64,6 +65,12 @@ const CommentsForm = ({
   const handleAnonymous = () => {
     setIsAnonymous(!isAnonymous)
   }
+
+  useEffect(() => {
+    if (isReplyComment) {
+      setFocus("content")
+    }
+  }, [isReplyComment, setFocus])
 
   return (
     <Box w="100%">
