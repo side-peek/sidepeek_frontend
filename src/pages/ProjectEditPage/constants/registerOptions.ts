@@ -1,41 +1,59 @@
-import { FieldPath, RegisterOptions } from "react-hook-form"
+import { RegisterOptions } from "react-hook-form"
 
-import { ProjectFormValues } from "../types/ProjectFormValues"
+import { URL_REGEX } from "@constants/regExp"
 
 const TITLE_MAX_LENGTH = 50
 const OVERVIEW_MAX_LENGTH = 300
 
 type ProjectInputRegisterType = {
-  [key in FieldPath<ProjectFormValues>]: RegisterOptions
+  [key in string]: RegisterOptions
 }
 
 export const projectInputRegister: ProjectInputRegisterType = {
   name: {
     required: `제목은 필수입니다.${TITLE_MAX_LENGTH} 이내로 입력해주세요.`,
-    maxLength: TITLE_MAX_LENGTH,
+    maxLength: {
+      value: TITLE_MAX_LENGTH,
+      message: `최대 ${TITLE_MAX_LENGTH}자 이내로 작성해주세요`,
+    },
   },
 
-  subName: {},
+  overview: {
+    maxLength: {
+      value: OVERVIEW_MAX_LENGTH,
+      message: `최대 ${OVERVIEW_MAX_LENGTH}자 이내로 작성해주세요`,
+    },
+  },
 
-  overview: { maxLength: OVERVIEW_MAX_LENGTH },
+  githubUrl: {
+    required: "입력 필수",
+    pattern: {
+      value: URL_REGEX,
+      message: "유효한 URL 형식이 아닙니다",
+    },
+    validate: {
+      isValidGithubUrl: (_, formValue) =>
+        formValue.github && formValue.includes("https://github.com/"),
+    },
+  },
 
-  githubUrl: { required: "Github URL은 필수입니다" },
+  startDate: {
+    required: "프로젝트 시작 날짜를 입력해주세요",
+    validate: {
+      checkOrder: (_, formValue) => {
+        const [start, end] = [formValue.startDate, formValue.endDate]
+        return new Date(start) < new Date(end) || "날짜를 다시 확인해주세요"
+      },
+    },
+  },
 
-  deployUrl: {},
-
-  thumbnailUrl: {},
-
-  startDate: { required: "프로젝트 시작 날짜를 입력해주세요" },
-
-  endDate: { required: "프로젝트 완성 날짜를 입력해주세요" },
-
-  techStacks: { required: "하나 이상은 필수입니다" },
-
-  overviewImageUrl: {},
-
-  members: { required: "하나 이상은 필수입니다" },
-
-  description: {},
-
-  troubleShooting: {},
+  endDate: {
+    required: "프로젝트 완성 날짜를 입력해주세요",
+    validate: {
+      checkOrder: (_, formValue) => {
+        const [start, end] = [formValue.startDate, formValue.endDate]
+        return new Date(start) < new Date(end)
+      },
+    },
+  },
 }

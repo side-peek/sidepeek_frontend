@@ -10,8 +10,8 @@ export const ProjectFormDefaultValues: ProjectFormValues = {
   deployUrl: "",
   startDate: "",
   endDate: "",
-  techStacks: [],
+  techStacks: [{ category: "", data: [] }],
   description: "",
   troubleShooting: "",
-  members: [],
+  members: [{ category: "", data: [] }],
 }
