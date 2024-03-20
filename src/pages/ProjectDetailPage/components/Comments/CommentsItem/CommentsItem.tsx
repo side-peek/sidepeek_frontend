@@ -9,7 +9,8 @@ import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext
 import CommentsForm from "../CommentsForm/CommentsForm"
 import CommentTitle from "./components/CommentTitle"
 import CommentsAvatar from "./components/CommentsAvatar"
-import CommentsEditFormText from "./components/CommentsEditFormText"
+import CommentsEditForm from "./components/CommentsEditForm"
+import CommentsText from "./components/CommentsText"
 import ReplyComment from "./components/ReplyComment"
 
 interface CommentsItemProps {
@@ -25,8 +26,14 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
     navigate(`/profile/${userId}`)
   }
 
-  const { replyTargetCommentId, isReply, handleOnReply, handleOffReply } =
-    useCommentContext()
+  const {
+    replyTargetCommentId,
+    isReply,
+    handleOnReply,
+    handleOffReply,
+    editTargetCommentId,
+    isEditing,
+  } = useCommentContext()
 
   return (
     <Stack
@@ -53,12 +60,12 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
               gap="1rem"
               align="flex-start">
               <CommentTitle comment={comment} />
-              <CommentsEditFormText
-                {...{
-                  comment,
-                  register,
-                }}
-              />
+              {editTargetCommentId === comment.id && isEditing ? (
+                <CommentsEditForm register={register} />
+              ) : (
+                <CommentsText text={comment.content} />
+              )}
+
               {!comment.parentId &&
                 (isReply ? (
                   comment.id === replyTargetCommentId && (
