@@ -6,7 +6,7 @@ import { Button, ButtonProps, Icon, Text, useToast } from "@chakra-ui/react"
 import { DOUBLE_CHECK_MESSAGE } from "@pages/SignUpPage/constants/toastMessages"
 import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 import { useDoubleCheck } from "@pages/SignUpPage/hooks/useDoubleCheck"
-import { DoubleCheckFiledNames } from "@pages/SignUpPage/types/DoubleCheckFieldNames"
+import { DoubleCheckFiledNames } from "@pages/SignUpPage/types/doubleCheckFieldNames"
 
 interface DoubleCheckButtonProps extends ButtonProps {
   fieldName: DoubleCheckFiledNames

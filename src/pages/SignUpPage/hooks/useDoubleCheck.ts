@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form"
 import { useDoubleCheckStore } from "@stores/useDoubleCheckStore"
 
 import { duplicatedErrors } from "../constants/errorOptions"
-import { DoubleCheckFiledNames } from "../types/DoubleCheckFieldNames"
+import { DoubleCheckFiledNames } from "../types/doubleCheckFieldNames"
 import { useDoubleCheckMutaion } from "./mutations/useDoubleCheckMutation"
 
 export const useDoubleCheck = (fieldName: DoubleCheckFiledNames) => {

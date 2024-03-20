@@ -1,6 +1,6 @@
 import { create } from "zustand"
 
-import { DoubleCheckFiledNames } from "@pages/SignUpPage/types/DoubleCheckFieldNames"
+import { DoubleCheckFiledNames } from "@pages/SignUpPage/types/doubleCheckFieldNames"
 
 interface State extends Record<DoubleCheckFiledNames, string> {}
 

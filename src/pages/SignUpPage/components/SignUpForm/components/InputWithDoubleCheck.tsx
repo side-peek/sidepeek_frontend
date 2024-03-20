@@ -1,6 +1,6 @@
 import { Flex, Input, InputProps } from "@chakra-ui/react"
 
-import { DoubleCheckFiledNames } from "@pages/SignUpPage/types/DoubleCheckFieldNames"
+import { DoubleCheckFiledNames } from "@pages/SignUpPage/types/doubleCheckFieldNames"
 
 import DoubleCheckButton from "./DoubleCheckButton"
 
