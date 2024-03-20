@@ -22,6 +22,7 @@ const SearchResult = ({
       overflow="hidden"
       zIndex="dropdown"
       flexDir="column"
+      cursor="pointer"
       {...props}>
       {children}
     </Flex>

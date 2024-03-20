@@ -4,7 +4,8 @@ import { MdCancel } from "react-icons/md"
 import { CommonTagProps } from "../types/commonTagProps"
 import CommonTag from "./CommonTag"
 
-interface CloseButtonTagProps extends Omit<CommonTagProps, "rightElement"> {
+interface CloseButtonTagProps
+  extends Omit<CommonTagProps, "rightElement" | "onClick"> {
   onClickCloseButton: MouseEventHandler
 }
 
@@ -17,6 +18,9 @@ const CloseButtonTag = ({
   return (
     <CommonTag
       leftElement={leftElement}
+      onClick={(e) => {
+        e.preventDefault()
+      }}
       label={label}
       rightElement={
         <MdCancel

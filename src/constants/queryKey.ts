@@ -11,4 +11,5 @@ export const QUERYKEY = {
   POST_COMMENT: "postComment",
   EDIT_COMMENT: "editComment",
   DELETE_COMMENT: "deleteComment",
+  GITHUB_LOGIN: "githubLogin",
 }

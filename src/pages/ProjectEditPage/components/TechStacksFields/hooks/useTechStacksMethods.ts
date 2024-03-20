@@ -6,15 +6,26 @@ import { useProjectFormContext } from "@pages/ProjectEditPage/hooks/useProjectFo
 import { ProjectFormValues } from "@pages/ProjectEditPage/types/ProjectFormValues"
 
 export const useTechStacksMethods = () => {
-  const { control, setValue, getValues, watch } = useProjectFormContext()
+  const {
+    control,
+    setValue,
+    getValues,
+    watch,
+    register,
+    formState: { errors },
+    trigger,
+  } = useProjectFormContext()
 
-  const { append, fields } = useFieldArray<ProjectFormValues>({
+  const { append, fields, remove } = useFieldArray<ProjectFormValues>({
     control,
     name: "techStacks",
+    rules: {
+      required: "하나 이상은 필수입니다",
+    },
   })
 
   const appendNewFields = () => {
-    append({ category: "", stacks: [] })
+    append({ category: "", data: [] })
   }
 
   const setCategory = (index: number, value: string) => {
@@ -22,17 +33,19 @@ export const useTechStacksMethods = () => {
   }
 
   const appendStack = (index: number, element: Skill) => {
-    const stacks = getValues(`techStacks.${index}.stacks`)
-    setValue(`techStacks.${index}.stacks`, [...stacks, element])
+    const stacks = getValues(`techStacks.${index}.data`)
+    setValue(`techStacks.${index}.data`, [...stacks, element])
   }
 
   const removeStack = (index: number, element: Skill) => {
-    const stacks = getValues(`techStacks.${index}.stacks`)
+    const stacks = getValues(`techStacks.${index}.data`)
     const filtered = stacks.filter((stack) => stack.id !== element.id)
-    setValue(`techStacks.${index}.stacks`, [...filtered])
+    setValue(`techStacks.${index}.data`, [...filtered])
   }
 
-  const selectedStacks = (index: number) => watch(`techStacks.${index}.stacks`)
+  const removeField = (idx: number) => remove(idx)
+
+  const selectedStacks = (index: number) => watch(`techStacks.${index}.data`)
 
   return {
     fields,
@@ -43,5 +56,9 @@ export const useTechStacksMethods = () => {
     appendStack,
     removeStack,
     selectedStacks,
+    removeField,
+    register,
+    errors,
+    trigger,
   }
 }

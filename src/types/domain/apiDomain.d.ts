@@ -25,6 +25,12 @@ declare module "api-models" {
     profileImageUrl: string | null
   }
 
+  export type AuthResponseType = {
+    accessToken: string
+    refreshToken: string
+    user: UserSummary
+  }
+
   export type Project = {
     id: number
     name: string
@@ -155,22 +161,23 @@ declare module "api-models" {
     refreshToken: string
   }
 
-  export type postEmailRefreshResponseType = {
-    accessToken: string
-    refreshToken: string
-    user: UserSummary
-  }
+  export type postEmailRefreshResponseType = AuthResponseType
 
   export type postEmailLoginPayload = {
     email: string
     password: string
   }
 
-  export type postEmailLoginResponseType = {
-    accessToken: string
-    refreshToken: string
-    user: UserSummary
+  export type postEmailLoginResponseType = AuthResponseType
+
+  export type getGithubLoginPayload = {
+    code: string
+    state: string
   }
+
+  export type getGithubLoginResponseType = {
+    providerType: string
+  } & AuthResponseType
 
   export type postEmailSignUpPayload = {
     email: string

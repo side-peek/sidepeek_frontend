@@ -1,21 +1,18 @@
-import { useFieldArray, useFormContext } from "react-hook-form"
+import { useFieldArray } from "react-hook-form"
 
-type RequestedMemberType = {
-  id: number | null
-  nickname: string
-  profileImageUrl: string | null
-}
-
-type MemberFieldValues = {
-  members: {
-    category: string
-    members: RequestedMemberType[]
-  }[]
-}
+import { useProjectFormContext } from "@pages/ProjectEditPage/hooks/useProjectFormContext"
+import { RequestedMemberType } from "@pages/ProjectEditPage/types/ProjectFormValues"
 
 export const useMemberFieldsMethods = () => {
-  const { control, getValues, setValue, watch, register } =
-    useFormContext<MemberFieldValues>()
+  const {
+    control,
+    getValues,
+    setValue,
+    watch,
+    register,
+    trigger,
+    formState: { errors },
+  } = useProjectFormContext()
 
   const { fields, append, remove } = useFieldArray({
     name: "members",
@@ -23,7 +20,7 @@ export const useMemberFieldsMethods = () => {
   })
 
   const appendNewFields = () => {
-    append({ category: "", members: [] })
+    append({ category: "", data: [] })
   }
 
   const deleteFields = (idx: number) => {
@@ -35,19 +32,19 @@ export const useMemberFieldsMethods = () => {
   }
 
   const appendMembers = (data: RequestedMemberType, idx: number) => {
-    const members = [...getValues(`members.${idx}.members`), data]
-    setValue(`members.${idx}.members`, members)
+    const members = [...getValues(`members.${idx}.data`), data]
+    setValue(`members.${idx}.data`, members)
   }
 
   const removeMembers = (data: RequestedMemberType, idx: number) => {
-    const members = [...getValues(`members.${idx}.members`)]
+    const members = [...getValues(`members.${idx}.data`)]
     setValue(
-      `members.${idx}.members`,
+      `members.${idx}.data`,
       members.filter((member) => member.id !== data.id),
     )
   }
 
-  const getSelectedMembers = (idx: number) => watch(`members.${idx}.members`)
+  const getSelectedMembers = (idx: number) => watch(`members.${idx}.data`)
 
   return {
     fields,
@@ -58,5 +55,7 @@ export const useMemberFieldsMethods = () => {
     appendMembers,
     removeMembers,
     getSelectedMembers,
+    errors,
+    trigger,
   }
 }
