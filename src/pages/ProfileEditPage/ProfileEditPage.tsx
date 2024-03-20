@@ -85,6 +85,9 @@ const ProfileEditPage = () => {
           render={(renderProps) => (
             <Input
               w="30rem"
+              pl="1rem"
+              variant="none"
+              placeholder="직군 카테고리를 입력해주세요"
               flex={isLargerThan500 ? "0 0 25rem" : "0 0 3.5rem"}
               {...renderProps}
             />
