@@ -12,9 +12,7 @@ const ProjectFormProvider = ({ children }: PropsWithChildren) => {
   const methods = useProjectForm()
   const { mutate } = usePostProjectMutation()
   const userInfo = useUserInfoData()
-  console.log(methods.formState.errors)
   const handleSubmitEvent = (data: ProjectFormValues) => {
-    console.log(data)
     const convertedMembers = data.members
       .map(({ category, data }) => {
         return data.map(({ id, nickname }) => {
