@@ -34,7 +34,7 @@ const ProfileCard = ({
   profileImageUrl,
   nickname,
   career,
-  job,
+  job = "",
   setProfileInfo,
 }: ProfileCardProps) => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")

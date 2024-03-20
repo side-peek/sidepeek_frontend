@@ -11,9 +11,9 @@ interface ProfileIntroductionProps
 }
 
 const ProfileIntroduction = ({
-  introduction,
-  githubUrl,
-  blogUrl,
+  introduction = "",
+  githubUrl = "",
+  blogUrl = "",
   setProfileInfo,
 }: ProfileIntroductionProps) => {
   return (
