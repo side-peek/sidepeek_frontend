@@ -12,7 +12,6 @@ import {
   COMMENT_MESSAGES,
   COMMON_MESSAGES,
 } from "@pages/ProjectDetailPage/constants/toastMessage"
-import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
 import { QUERYKEY } from "@constants/queryKey"
@@ -20,7 +19,6 @@ import { QUERYKEY } from "@constants/queryKey"
 export const useEditCommentMutation = (projectId: number) => {
   const queryClient = useQueryClient()
   const toast = useToast(toastOptions)
-  const { handleOptimistic } = useCommentContext()
 
   const { mutate: editCommentMutation, error } = useMutation({
     mutationKey: [QUERYKEY.EDIT_COMMENT],
@@ -51,7 +49,6 @@ export const useEditCommentMutation = (projectId: number) => {
           [QUERYKEY.PROJECT_DETAIL, projectId],
           updatedState,
         )
-        handleOptimistic(false)
       }
 
       return { previousState }
@@ -63,7 +60,6 @@ export const useEditCommentMutation = (projectId: number) => {
       )
     },
     onSettled: () => {
-      handleOptimistic(false)
       queryClient.invalidateQueries({
         queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
