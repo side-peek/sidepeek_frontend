@@ -53,7 +53,6 @@ export const router = (queryClient: QueryClient) => {
             },
             {
               path: "/profile/edit",
-              loader: determineRedirectLoader(queryClient, true, "/login"),
               element: <ProfileEditPage />,
             },
           ],
