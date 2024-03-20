@@ -1,8 +1,9 @@
-import { Box, Button, Input, Text } from "@chakra-ui/react"
+import { Box, Button, Flex, Input } from "@chakra-ui/react"
 
 import { ErrorMessage } from "@components/ErrorMessage/ErrorMessage"
 
 import CloseButton from "../styles/CloseButton"
+import ErrorText from "../styles/ErrorText"
 import FieldContainer from "../styles/FieldContainer"
 import MemberAvatarCard from "./components/MemberAvatarCard"
 import UserSearchBox from "./components/UserSearchBox"
@@ -22,16 +23,14 @@ const MemberFields = () => {
   } = useMemberFieldsMethods()
 
   return (
-    <>
+    <Flex
+      flexDir="column"
+      gap="8px">
       {fields.map((field, idx) => {
         const selectedMembers = getSelectedMembers(idx)
-        register(`members.${idx}.data`, {
-          validate: {
-            isEmpty: (data) => {
-              console.log(data.length)
-              return data.length !== 0
-            },
-          },
+        register(`members.${idx}.data` as const, {
+          validate: (data) =>
+            data.length !== 0 || "팀원을 한명 이상 선택해주세요",
         })
 
         return (
@@ -40,22 +39,14 @@ const MemberFields = () => {
               <Input
                 placeholder="카테고리를 입력해주세요"
                 width="20rem"
-                {...register(`members.${idx}.category`, {
+                {...register(`members.${idx}.category` as const, {
                   required: "분야 입력은 필수입니다",
                 })}
               />
               <ErrorMessage
-                name={`members.${idx}.category`}
+                name={`members.${idx}.category` as const}
                 errors={errors}
-                render={({ message }) => {
-                  return (
-                    <Text
-                      as="b"
-                      color="red.200">
-                      {message}
-                    </Text>
-                  )
-                }}
+                render={({ message }) => <ErrorText message={message} />}
               />
             </Box>
 
@@ -63,20 +54,12 @@ const MemberFields = () => {
               <ErrorMessage
                 name={`members.${idx}.data`}
                 errors={errors}
-                render={({ message }) => {
-                  return (
-                    <Text
-                      as="b"
-                      color="red.200">
-                      {message}
-                    </Text>
-                  )
-                }}
+                render={({ message }) => <ErrorText message={message} />}
               />
               <UserSearchBox
                 onClick={({ id, nickname, profileImageUrl }) => {
                   appendMembers({ id, nickname, profileImageUrl }, idx)
-                  trigger(`members.${idx}.data`)
+                  trigger(`members.${idx}.data` as const)
                 }}
                 selectedMembers={getSelectedMembers(idx)}
               />
@@ -99,8 +82,13 @@ const MemberFields = () => {
           </FieldContainer>
         )
       })}
-      <Button onClick={appendNewFields}>팀원 추가하기</Button>
-    </>
+      <Button
+        border="2px solid"
+        borderColor="blue.200"
+        onClick={appendNewFields}>
+        팀원 추가
+      </Button>
+    </Flex>
   )
 }
 

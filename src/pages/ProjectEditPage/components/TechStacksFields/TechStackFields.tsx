@@ -39,24 +39,19 @@ const TechStacksFields = () => {
       gap="8px">
       {fields.map((field, index) => {
         register(`techStacks.${index}.data`, {
-          validate: {
-            isEmpty: (data) => {
-              return data.length !== 0
-            },
-          },
+          validate: (data) => data.length !== 0 || "하나 이상 선택해주세요",
         })
-
         return (
           <FieldContainer key={field.id}>
             <Box>
               <Input
                 placeholder="기술스택 분야를 입력해주세요"
                 {...register(`techStacks.${index}.category`, {
-                  required: "분야를 입력해주세요",
+                  required: "분야 입력은 필수입니다",
                 })}
               />
               <ErrorMessage
-                name={`techStacks[${index}].category`}
+                name={`techStacks[${index}].category` as const}
                 errors={errors}
                 render={({ message }) => {
                   return (
@@ -72,7 +67,7 @@ const TechStacksFields = () => {
 
             <Box>
               <ErrorMessage
-                name={`techStacks.${index}.data`}
+                name={`techStacks.${index}.data` as const}
                 errors={errors}
                 render={({ message }) => {
                   return (
@@ -84,7 +79,6 @@ const TechStacksFields = () => {
                   )
                 }}
               />
-
               <StackSearchBox
                 render={({ techStacks }) => {
                   return (
@@ -140,7 +134,12 @@ const TechStacksFields = () => {
           </FieldContainer>
         )
       })}
-      <Button onClick={appendNewFields}>기술스택 추가</Button>
+      <Button
+        border="2px solid"
+        borderColor="blue.200"
+        onClick={appendNewFields}>
+        기술스택 추가
+      </Button>
     </Flex>
   )
 }
