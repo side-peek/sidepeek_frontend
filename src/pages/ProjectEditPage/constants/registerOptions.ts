@@ -1,36 +1,41 @@
-import { FieldPath, RegisterOptions } from "react-hook-form"
+import { RegisterOptions } from "react-hook-form"
 
-import { ProjectFormValues } from "../types/ProjectFormValues"
-import { regex } from "./validate"
+import { URL_REGEX } from "@constants/regExp"
 
 const TITLE_MAX_LENGTH = 50
 const OVERVIEW_MAX_LENGTH = 300
 
 type ProjectInputRegisterType = {
-  [key in FieldPath<ProjectFormValues>]: RegisterOptions
+  [key in string]: RegisterOptions
 }
 
 export const projectInputRegister: ProjectInputRegisterType = {
   name: {
     required: `제목은 필수입니다.${TITLE_MAX_LENGTH} 이내로 입력해주세요.`,
-    maxLength: TITLE_MAX_LENGTH,
-  },
-
-  subName: {},
-
-  overview: { maxLength: OVERVIEW_MAX_LENGTH },
-
-  githubUrl: {
-    required: "Github URL은 필수입니다",
-    pattern: {
-      value: regex,
-      message: "유효한 url이 아닙니다.",
+    maxLength: {
+      value: TITLE_MAX_LENGTH,
+      message: `최대 ${TITLE_MAX_LENGTH}자 이내로 작성해주세요`,
     },
   },
 
-  deployUrl: {},
+  overview: {
+    maxLength: {
+      value: OVERVIEW_MAX_LENGTH,
+      message: `최대 ${OVERVIEW_MAX_LENGTH}자 이내로 작성해주세요`,
+    },
+  },
 
-  thumbnailUrl: {},
+  githubUrl: {
+    required: "입력 필수",
+    pattern: {
+      value: URL_REGEX,
+      message: "유효한 URL 형식이 아닙니다",
+    },
+    validate: {
+      isValidGithubUrl: (_, formValue) =>
+        formValue.github && formValue.includes("https://github.com/"),
+    },
+  },
 
   startDate: {
     required: "프로젝트 시작 날짜를 입력해주세요",
@@ -51,14 +56,4 @@ export const projectInputRegister: ProjectInputRegisterType = {
       },
     },
   },
-
-  techStacks: {},
-
-  overviewImageUrl: {},
-
-  members: {},
-
-  description: {},
-
-  troubleShooting: {},
 }
