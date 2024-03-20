@@ -12,15 +12,17 @@ import {
   VStack,
 } from "@chakra-ui/react"
 
-interface SummaryControlProps {
+import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
+
+interface SummaryControlProps extends ProjectIdProps {
   onOpen: () => void
 }
 
-const SummaryControl = ({ onOpen }: SummaryControlProps) => {
+const SummaryControl = ({ onOpen, projectId }: SummaryControlProps) => {
   const navigate = useNavigate()
 
   const handleEditProject = () => {
-    navigate("/project/edit")
+    navigate(`/edit?projectid=${Number(projectId)}`)
   }
 
   return (
@@ -67,4 +69,4 @@ const SummaryControl = ({ onOpen }: SummaryControlProps) => {
   )
 }
 
-export default SummaryControl
+export default withProjectId(SummaryControl)
