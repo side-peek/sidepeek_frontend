@@ -1,6 +1,14 @@
 import { Suspense } from "react"
 
-import { Box, BoxProps, Center, Spinner } from "@chakra-ui/react"
+import {
+  Avatar,
+  Box,
+  BoxProps,
+  Center,
+  Flex,
+  Spinner,
+  Text,
+} from "@chakra-ui/react"
 import { UserSummary } from "api-models"
 import { useOutsideClick } from "src/components/Search/hooks/useOutsideClick"
 
@@ -9,6 +17,7 @@ import { useInput } from "@components/Search/hooks/useInput"
 
 import { filterSelectedId } from "@pages/ProjectEditPage/utils/filterSelectedId"
 
+import SearchResultContainer from "../../styles/SearchResultContainer"
 import UserListFetcher from "./UserListFetcher"
 
 interface UserSearchBoxProps extends Omit<BoxProps, "onClick" | "ref"> {
@@ -43,10 +52,9 @@ const UserSearchBox = ({
       width="20rem"
       {...props}>
       <SearchBox.Input
-        value={inputValue}
         onChange={onInput}
         placeholder="닉네임을 검색해보세요"
-        variant="flushed"
+        variant="outline"
       />
       <Suspense
         fallback={
@@ -58,21 +66,33 @@ const UserSearchBox = ({
           value={inputValue}
           render={(data) => (
             <SearchBox.Result isFocused={isFocused}>
-              {filterSelectedId(data, selectedMembers)?.map(
-                ({ id, nickname, profileImageUrl }) => (
-                  <Box
-                    key={id}
-                    fontWeight={700}
-                    onClick={() => onClick({ id, nickname, profileImageUrl })}>
-                    #{nickname}
+              <SearchResultContainer>
+                {inputValue && (
+                  <Box onClick={() => handleClickNonUser(inputValue)}>
+                    {inputValue} 추가하기
                   </Box>
-                ),
-              )}
-              {inputValue && (
-                <Box onClick={() => handleClickNonUser(inputValue)}>
-                  {inputValue} 추가하기
-                </Box>
-              )}
+                )}
+                {filterSelectedId(data, selectedMembers)?.map(
+                  ({ id, nickname, profileImageUrl }, idx) => (
+                    <Flex
+                      key={idx}
+                      border="none"
+                      padding="5px"
+                      gap="10px"
+                      onClick={() =>
+                        onClick({ id, nickname, profileImageUrl })
+                      }>
+                      <Avatar
+                        src={profileImageUrl || ""}
+                        boxSize="10"
+                        borderRadius="full"
+                        objectFit="cover"
+                      />
+                      <Text>{nickname}</Text>
+                    </Flex>
+                  ),
+                )}
+              </SearchResultContainer>
             </SearchBox.Result>
           )}
         />

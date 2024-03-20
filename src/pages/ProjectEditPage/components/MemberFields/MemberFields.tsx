@@ -1,10 +1,11 @@
-import { IoCloseCircle } from "react-icons/io5"
+import { Box, Button, Flex, Input } from "@chakra-ui/react"
 
-import { Button, Flex, Input } from "@chakra-ui/react"
+import { ErrorMessage } from "@components/ErrorMessage/ErrorMessage"
 
-import AvatarCard from "@components/AvatarCard/AvatarCard"
-
-import FieldContainer from "../FieldContainer"
+import CloseButton from "../styles/CloseButton"
+import ErrorText from "../styles/ErrorText"
+import FieldContainer from "../styles/FieldContainer"
+import MemberAvatarCard from "./components/MemberAvatarCard"
 import UserSearchBox from "./components/UserSearchBox"
 import { useMemberFieldsMethods } from "./hooks/useMemberFieldsMethods"
 
@@ -17,47 +18,76 @@ const MemberFields = () => {
     appendMembers,
     removeMembers,
     getSelectedMembers,
+    errors,
+    trigger,
   } = useMemberFieldsMethods()
 
   return (
     <Flex
       flexDir="column"
-      gap="10px">
+      gap="8px">
       {fields.map((field, idx) => {
         const selectedMembers = getSelectedMembers(idx)
+        register(`members.${idx}.data` as const, {
+          validate: (data) =>
+            data.length !== 0 || "팀원을 한명 이상 선택해주세요",
+        })
+
         return (
           <FieldContainer key={field.id}>
-            <IoCloseCircle
-              size="20"
-              onClick={() => deleteFields(idx)}
-            />
-            <Input
-              placeholder="카테고리를 입력해주세요"
-              width="20rem"
-              {...register(`members.${idx}.category`, { required: "true" })}
-            />
-            <UserSearchBox
-              onClick={({ id, nickname, profileImageUrl }) => {
-                appendMembers({ id, nickname, profileImageUrl }, idx)
-              }}
-              selectedMembers={getSelectedMembers(idx)}
-            />
-            {selectedMembers?.map((member, idx) => {
-              return (
-                <AvatarCard key={idx}>
-                  <IoCloseCircle
-                    size="20"
-                    onClick={() => removeMembers(member, idx)}
+            <Box>
+              <Input
+                placeholder="카테고리를 입력해주세요"
+                width="20rem"
+                {...register(`members.${idx}.category` as const, {
+                  required: "분야 입력은 필수입니다",
+                })}
+              />
+              <ErrorMessage
+                name={`members.${idx}.category` as const}
+                errors={errors}
+                render={({ message }) => <ErrorText message={message} />}
+              />
+            </Box>
+
+            <Box>
+              <ErrorMessage
+                name={`members.${idx}.data`}
+                errors={errors}
+                render={({ message }) => <ErrorText message={message} />}
+              />
+              <UserSearchBox
+                onClick={({ id, nickname, profileImageUrl }) => {
+                  appendMembers({ id, nickname, profileImageUrl }, idx)
+                  trigger(`members.${idx}.data` as const)
+                }}
+                selectedMembers={getSelectedMembers(idx)}
+              />
+            </Box>
+            <Box>
+              {selectedMembers?.map((member, idx) => {
+                return (
+                  <MemberAvatarCard
+                    key={idx}
+                    image={member.profileImageUrl || ""}
+                    text={member.nickname}
+                    onClick={() => {
+                      removeMembers(member, idx)
+                    }}
                   />
-                  <AvatarCard.Image src={member.profileImageUrl || ""} />
-                  <AvatarCard.Header text={member.nickname} />
-                </AvatarCard>
-              )
-            })}
+                )
+              })}
+            </Box>
+            {idx >= 1 && <CloseButton onClick={() => deleteFields(idx)} />}
           </FieldContainer>
         )
       })}
-      <Button onClick={appendNewFields}>팀원 추가하기</Button>
+      <Button
+        border="2px solid"
+        borderColor="blue.200"
+        onClick={appendNewFields}>
+        팀원 추가
+      </Button>
     </Flex>
   )
 }

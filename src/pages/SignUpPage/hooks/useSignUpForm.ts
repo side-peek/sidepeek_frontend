@@ -1,40 +1,23 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 
 import { useToast } from "@chakra-ui/toast"
 import { isAxiosError } from "axios"
 
-import {
-  differentPasswordError,
-  duplicatedErrors,
-} from "../constants/errorOptions"
+import { useDoubleCheckStore } from "@stores/useDoubleCheckStore"
+
+import { differentPasswordError } from "../constants/errorOptions"
 import { SUBMIT_MESSAGE } from "../constants/toastMessages"
 import { toastOptions } from "../constants/toastOptions"
 import { SignUpFormValues } from "../types/SignUpFormValues"
-import useDoubleCheckEmailMutation from "./mutations/useDoubleCheckEmailMutation"
-import useDoubleCheckNicknameMutation from "./mutations/useDoubleCheckNicknameMutation"
 import { useSignUpMutation } from "./mutations/useSignUpMutation"
 
 export const useSignUpForm = () => {
   const toast = useToast(toastOptions)
-
-  const [checkedEmail, setCheckedEmail] = useState("")
-  const [checkedNickname, setCheckedNickname] = useState("")
   const method = useForm<SignUpFormValues>()
 
-  const emailCheck = useDoubleCheckEmailMutation({
-    setError: () => {
-      setCheckedEmail(() => "")
-      method.setError("email", duplicatedErrors.email)
-    },
-  })
-
-  const nicknameCheck = useDoubleCheckNicknameMutation({
-    setError: () => {
-      setCheckedNickname(() => "")
-      method.setError("nickname", duplicatedErrors.nickname)
-    },
-  })
+  const { email: checkedEmail, nickname: checkedNickname } =
+    useDoubleCheckStore((state) => state)
 
   const signUp = useSignUpMutation()
 
@@ -67,24 +50,6 @@ export const useSignUpForm = () => {
     signUp.mutate({ email, password, nickname })
   }
 
-  const handleDoubleCheck = async (fieldName: keyof SignUpFormValues) => {
-    await method.trigger(fieldName)
-
-    if (method.getFieldState(fieldName, method.formState).invalid) {
-      return
-    }
-
-    const value = method.getValues()[fieldName]
-
-    if (fieldName === "email") {
-      setCheckedEmail(value)
-      emailCheck.mutate(value)
-    } else {
-      setCheckedNickname(value)
-      nicknameCheck.mutate(value)
-    }
-  }
-
   useEffect(() => {
     if (isAxiosError(signUp.error)) {
       let message = ""
@@ -110,10 +75,7 @@ export const useSignUpForm = () => {
 
   return {
     method,
-    emailCheck,
-    nicknameCheck,
     onSubmit,
-    handleDoubleCheck,
     isLoading: signUp.isPending,
   }
 }

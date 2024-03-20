@@ -1,10 +1,13 @@
 import { ReactElement, cloneElement, isValidElement } from "react"
 import { useFormContext } from "react-hook-form"
 
-import { Box, BoxProps, InputElementProps, Text } from "@chakra-ui/react"
+import { BoxProps, Flex, InputElementProps, Text } from "@chakra-ui/react"
+
+import { ErrorMessage } from "@components/ErrorMessage/ErrorMessage"
 
 import { projectInputRegister } from "../constants/registerOptions"
 import { ProjectFormValues } from "../types/ProjectFormValues"
+import ErrorText from "./styles/ErrorText"
 
 interface TextInputProps extends BoxProps {
   name: keyof ProjectFormValues
@@ -20,7 +23,9 @@ const ProjectInputBox = ({ name, label, footer, children }: TextInputProps) => {
   } = useFormContext<ProjectFormValues>()
 
   return (
-    <Box>
+    <Flex
+      flexDir="column"
+      gap="5px">
       <label htmlFor={name}>
         <Text
           fontSize="md"
@@ -28,8 +33,11 @@ const ProjectInputBox = ({ name, label, footer, children }: TextInputProps) => {
           {label}
         </Text>
       </label>
-      {errors[name] && <Text>{errors[name]?.message}</Text>}
-
+      <ErrorMessage
+        name={name}
+        errors={errors}
+        render={({ message }) => <ErrorText message={message} />}
+      />
       {isValidElement(children) &&
         cloneElement(children as ReactElement<InputElementProps>, {
           id: name,
@@ -43,7 +51,7 @@ const ProjectInputBox = ({ name, label, footer, children }: TextInputProps) => {
           {footer}
         </Text>
       )}
-    </Box>
+    </Flex>
   )
 }
 

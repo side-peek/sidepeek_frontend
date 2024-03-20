@@ -7,6 +7,7 @@ import DefaultLayout from "@/routes/layouts/DefaultLayout"
 import ErrorPage from "@pages/ErrorPage/ErrorPage"
 import HomePage from "@pages/HomePage/HomePage"
 import LoginPage from "@pages/LoginPage/LoginPage"
+import NicknameSetupPage from "@pages/NicknameSetupPage/NicknameSetupPage"
 import ProfileEditPage from "@pages/ProfileEditPage/ProfileEditPage"
 import ProfilePage from "@pages/ProfilePage/ProfilePage"
 import ProjectDetailPage from "@pages/ProjectDetailPage/ProjectDetailPage"
@@ -60,7 +61,16 @@ export const router = (queryClient: QueryClient) => {
         {
           path: "/login",
           loader: determineRedirectLoader(queryClient, false),
-          element: <LoginPage />,
+          children: [
+            {
+              index: true,
+              element: <LoginPage />,
+            },
+            {
+              path: "/login/validation",
+              element: <NicknameSetupPage />,
+            },
+          ],
         },
         {
           path: "/signup",
