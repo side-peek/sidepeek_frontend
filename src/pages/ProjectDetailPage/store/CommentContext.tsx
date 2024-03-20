@@ -1,4 +1,10 @@
-import { ReactNode, createContext, useContext, useState } from "react"
+import {
+  ReactNode,
+  createContext,
+  useCallback,
+  useContext,
+  useState,
+} from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 
 import { editCommentPayload } from "api-models"
@@ -83,9 +89,9 @@ export const CommentProvider = ({
     handleOffReply()
   }
 
-  const focusOnFiled = () => {
+  const focusOnFiled = useCallback(() => {
     setFocus("content")
-  }
+  }, [setFocus])
 
   return (
     <CommentContext.Provider

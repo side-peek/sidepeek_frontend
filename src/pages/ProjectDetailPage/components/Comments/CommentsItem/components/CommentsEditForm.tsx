@@ -10,6 +10,7 @@ const CommentsEditForm = () => {
     useCommentContext()
 
   useEffect(() => {
+    console.log("gg")
     focusOnFiled()
   }, [focusOnFiled])
 
