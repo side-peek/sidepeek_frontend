@@ -43,17 +43,18 @@ const CommentsEditFormText = ({
               rows={1}
               w="100%"
               fontSize="lg"
-              p="0.2rem"
+              p="0.5rem"
               as={ResizeTextarea}
               isRequired={false}
               resize="none"
+              maxH="10rem"
               {...register}
             />
           ) : (
             <Text
               whiteSpace="pre-line"
               fontSize="lg"
-              p="0.2rem">
+              p="0.5rem">
               {comment.content}
             </Text>
           )}

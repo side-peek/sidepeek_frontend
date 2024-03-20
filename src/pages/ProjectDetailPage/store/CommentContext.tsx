@@ -45,6 +45,7 @@ export const CommentProvider = ({ children }: CommentProviderProps) => {
     content,
   }: editCommentPayload) => {
     setIsEditing(true)
+    handleOffReply()
     setEditTargetCommentId(commentId)
     setValue("commentId", commentId)
     setValue("isAnonymous", isAnonymous)
@@ -58,6 +59,7 @@ export const CommentProvider = ({ children }: CommentProviderProps) => {
 
   const handleOnReply = (commentId: number) => {
     setIsReply(true)
+    handleOffEdit()
     setReplyTargetCommentId(commentId)
   }
 
