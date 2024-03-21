@@ -23,7 +23,7 @@ const ProjectListSection = () => {
   const [isReleased, setIsReleased] = useState(false)
   const [sortOption, setSortOption] = useState<SortSelectType>("createdAt")
   const queryClient = useQueryClient()
-  const skills: string[] = []
+  const [skills, setSkills] = useState<string[]>([])
 
   const {
     allProjectList,
@@ -33,7 +33,7 @@ const ProjectListSection = () => {
     hasNextPage,
     isFetchingNextPage,
     isRefetching,
-  } = useAllProjectQuery({ sortOption, isReleased, skills })
+  } = useAllProjectQuery({ sortOption, isReleased, skills: skills.join(",") })
 
   const isLoading = isAllProjectLoading || isRefetching
   const projectCount = allProjectList
@@ -66,7 +66,7 @@ const ProjectListSection = () => {
   const [selectedStacks, setSelectedStacks] = useState<Skill[]>([])
 
   const debounceTechFilter = useDebounce(() => {
-    selectedStacks.forEach((skill) => skills.push(skill.name))
+    setSkills(selectedStacks.map((skill) => skill.name))
 
     refetchAllProject()
   }, 500)

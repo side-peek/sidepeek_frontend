@@ -43,7 +43,12 @@ const ProjectListPage = () => {
     fetchNextPage,
     isRefetching,
     isFetchingNextPage,
-  } = useAllProjectQuery({ sortOption, isReleased, search, skills })
+  } = useAllProjectQuery({
+    sortOption,
+    isReleased,
+    search,
+    skills: skills.join(","),
+  })
 
   const isLoading = isAllProjectLoading || isRefetching
 

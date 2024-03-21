@@ -324,7 +324,7 @@ declare module "api-models" {
     lastProjectId?: number | null
     lastProject?: AllProject | undefined
     search?: string | null
-    skills?: string[]
+    skills?: string
   }
 
   export type putProjectPayload = {
