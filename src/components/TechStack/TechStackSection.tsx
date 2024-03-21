@@ -1,4 +1,4 @@
-import { IoMdClose } from "react-icons/io"
+import { AiFillCloseSquare } from "react-icons/ai"
 
 import {
   Box,
@@ -57,24 +57,15 @@ const TechStackSection = ({
             })}
             <Box>
               {onDeleteField && (
-                <Flex
-                  border="1.3px solid"
-                  borderColor="grey.300"
-                  alignItems="center"
-                  justifyContent="center"
-                  w="1.5rem"
-                  h="1.5em"
-                  borderRadius="5px"
-                  bg="default"
+                <Icon
+                  as={AiFillCloseSquare}
                   pos="absolute"
-                  top={isLargerThan500 ? "0.4rem" : "0.8rem"}
-                  right={isLargerThan500 ? "2rem" : "1rem"}
-                  cursor="pointer">
-                  <Icon
-                    as={IoMdClose}
-                    color="grey.500"
-                    onClick={() => onDeleteField?.(index)}></Icon>
-                </Flex>
+                  top={isLargerThan500 ? "0.2rem" : "0.6rem"}
+                  right={isLargerThan500 ? "2rem" : "0.5rem"}
+                  cursor="pointer"
+                  w="1.6rem"
+                  h="1.6rem"
+                  onClick={() => onDeleteField?.(index)}></Icon>
               )}
             </Box>
 
