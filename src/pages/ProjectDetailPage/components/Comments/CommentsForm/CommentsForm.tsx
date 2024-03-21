@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
 import { Box, Button, Checkbox, Flex, HStack, Textarea } from "@chakra-ui/react"
-import { Stack } from "@chakra-ui/react"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { scrollBarNone } from "@pages/ProjectDetailPage/constants/scrollBarNone"
+import { TEXTAREA_STYLE } from "@pages/ProjectDetailPage/constants/textAreaStyle"
 import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
@@ -23,8 +23,13 @@ const CommentsForm = ({
   projectId,
   isReplyComment,
 }: CommentsFormProps) => {
-  const { register, reset, handleSubmit, setFocus } =
-    useForm<CommentFormValues>()
+  const {
+    register,
+    reset,
+    handleSubmit,
+    setFocus,
+    formState: { isValid, isSubmitting },
+  } = useForm<CommentFormValues>()
 
   const { sendCommentMutation } = usePostCommentMutation()
   const { handleOffReply, handleOffEdit } = useCommentContext()
@@ -32,35 +37,21 @@ const CommentsForm = ({
 
   const user = useUserInfoData()
 
-  const onSubmit: SubmitHandler<CommentFormValues> = useCallback(
-    (text) => {
-      if (!user || !user.id) {
-        return
-      }
-
+  const onSubmit: SubmitHandler<CommentFormValues> = (comment) => {
+    if (user && user.id) {
       const commentRequestValue = {
         ownerId: user.id,
         projectId: Number(projectId),
         isAnonymous: isAnonymous,
         parentId: parentId ? parentId : null,
-        content: text.content,
+        content: comment.content,
       }
       sendCommentMutation(commentRequestValue)
       handleOffReply()
       handleOffEdit()
       reset()
-    },
-    [
-      parentId,
-      projectId,
-      reset,
-      user,
-      sendCommentMutation,
-      isAnonymous,
-      handleOffReply,
-      handleOffEdit,
-    ],
-  )
+    }
+  }
 
   const handleAnonymous = () => {
     setIsAnonymous(!isAnonymous)
@@ -85,40 +76,36 @@ const CommentsForm = ({
               borderTopLeftRadius="0.9rem"
               borderBottomRadius={isReplyComment ? "0.9rem" : 0}>
               <Textarea
-                w="95%"
                 sx={scrollBarNone}
-                mr="2rem"
-                size="xs"
-                rows={1}
-                minH="1rem"
-                maxH="10rem"
-                fontSize="lg"
                 p={isReplyComment ? "1rem " : "2rem"}
-                pr="4rem"
-                as={ResizeTextarea}
                 placeholder={isReplyComment ? "" : "댓글을 입력하세요"}
-                isRequired={false}
-                resize="none"
+                mr="5.5rem"
+                as={ResizeTextarea}
                 border="none"
-                _hover={{ boxShadow: "none", borderColor: "grey.400" }}
-                _focus={{ boxShadow: "none", borderColor: "grey.400" }}
-                {...register("content", { required: true })}
+                _focus={{ boxShadow: "none" }}
+                {...register("content", {
+                  required: true,
+                  validate: (value) =>
+                    value.trim().length > 0 && value.trim().length < 100,
+                })}
+                {...TEXTAREA_STYLE}
               />
-              <Stack
+              <Box
+                zIndex="checkbox"
                 position="absolute"
+                cursor="pointer"
                 right="1rem"
-                top="30%"
-                direction="row">
+                top="28%">
                 <Checkbox
                   isChecked={isAnonymous}
                   size="lg"
+                  _hover={{ opacity: 0.5 }}
                   onChange={handleAnonymous}
                   color={isAnonymous ? "red.200" : "grey.500"}
-                  minWidth="5rem"
                   colorScheme="red">
                   익명
                 </Checkbox>
-              </Stack>
+              </Box>
             </HStack>
           </Flex>
 
@@ -129,9 +116,11 @@ const CommentsForm = ({
             bgColor="blue.100"
             borderRadius="0"
             borderTopRightRadius="1rem"
+            opacity={!isSubmitting && isValid ? "1" : "0.3"}
             color="white"
             fontSize="xl"
-            _hover={{ opacity: "0.5" }}
+            disabled={isSubmitting}
+            cursor={!isSubmitting && isValid ? "pointer" : "default"}
             type="submit">
             입력
           </Button>

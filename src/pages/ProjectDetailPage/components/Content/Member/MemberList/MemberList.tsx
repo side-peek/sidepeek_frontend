@@ -1,7 +1,7 @@
 import { Flex, Text } from "@chakra-ui/react"
 import { Member } from "api-models"
 
-import MemberCard from "../MemberCard/MemberCard"
+import AvatarCard from "@components/AvatarCard/AvatarCard"
 
 interface MemberListProps {
   members: Member[]
@@ -23,11 +23,20 @@ const MemberList = ({ category, members }: MemberListProps) => {
         p="1rem"
         alignItems="center">
         {members.map((member) => (
-          <MemberCard
-            profileImageUrl={member.userSummary.profileImageUrl}
-            nickname={member.userSummary.nickname}
+          <AvatarCard
             key={member.id}
-          />
+            flexDir="column"
+            border="none"
+            gap="2rem">
+            <AvatarCard.Image
+              src={member.userSummary.profileImageUrl ?? undefined}
+            />
+            <AvatarCard.Content
+              text={member.userSummary.nickname}
+              fontSize="2rem"
+              display="block"
+            />
+          </AvatarCard>
         ))}
       </Flex>
       <Text

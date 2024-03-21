@@ -19,5 +19,5 @@ export type ProjectFormValues = {
   techStacks: { category: string; data: Skill[] }[]
   description: string
   troubleShooting: string
-  members: { category: string; data: RequestedMemberType[] }[]
+  members: { role: string; members: RequestedMemberType[] }[]
 }

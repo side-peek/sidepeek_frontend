@@ -15,6 +15,7 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react"
 
+import { ErrorMessage } from "@components/ErrorMessage/ErrorMessage"
 import CommonInput from "@components/Input/CommonInput"
 
 import {
@@ -81,11 +82,11 @@ const ChangeNicknameModal = ({
             <Flex alignItems="center">
               <Text fontSize="1.3rem">새로운 닉네임</Text>
               <Spacer />
-              {errors.newNickname?.message && (
-                <Text color="red.100">
-                  {errors.newNickname.message.toString()}
-                </Text>
-              )}
+              <ErrorMessage
+                errors={errors}
+                name="newNickname"
+                render={({ message }) => <Text color="red.100">{message}</Text>}
+              />
             </Flex>
             <CommonInput
               size="lg"

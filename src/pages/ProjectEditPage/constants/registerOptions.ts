@@ -26,7 +26,7 @@ export const projectInputRegister: ProjectInputRegisterType = {
   },
 
   githubUrl: {
-    required: "입력 필수",
+    required: "github 링크는 필수입니다",
     pattern: {
       value: URL_REGEX,
       message: "유효한 URL 형식이 아닙니다",
@@ -54,6 +54,14 @@ export const projectInputRegister: ProjectInputRegisterType = {
         const [start, end] = [formValue.startDate, formValue.endDate]
         return new Date(start) < new Date(end)
       },
+    },
+  },
+
+  deployUrl: {
+    required: "배포한 링크를 입력해주세요",
+    pattern: {
+      value: URL_REGEX,
+      message: "유효한 URL 형식이 아닙니다",
     },
   },
 }

@@ -7,7 +7,7 @@ interface InsideElementProps {
 }
 
 const InsideElement = ({ children }: InsideElementProps) => {
-  return <InputRightElement pointerEvents="none">{children}</InputRightElement>
+  return <InputRightElement>{children}</InputRightElement>
 }
 
 export default InsideElement

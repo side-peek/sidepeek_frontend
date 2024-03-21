@@ -12,15 +12,24 @@ import {
   VStack,
 } from "@chakra-ui/react"
 
-interface SummaryControlProps {
+import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
+
+const ControlButtonStyles = {
+  p: "1rem",
+  flex: "50%",
+  _hover: { opacity: "0.5", backgroundColor: "grey.200" },
+  fontSize: "lg",
+}
+
+interface SummaryControlProps extends ProjectIdProps {
   onOpen: () => void
 }
 
-const SummaryControl = ({ onOpen }: SummaryControlProps) => {
+const SummaryControl = ({ onOpen, projectId }: SummaryControlProps) => {
   const navigate = useNavigate()
 
   const handleEditProject = () => {
-    navigate("/project/edit")
+    navigate(`/project/edit?=${Number(projectId)}`)
   }
 
   return (
@@ -45,19 +54,13 @@ const SummaryControl = ({ onOpen }: SummaryControlProps) => {
             h="100%"
             w="100%">
             <Button
-              p="1rem"
-              flex="50%"
               onClick={handleEditProject}
-              _hover={{ opacity: 0.5, bg: "grey.200" }}
-              fontSize="lg">
+              {...ControlButtonStyles}>
               수정하기
             </Button>
             <Button
-              p="1rem"
-              flex="50%"
               onClick={onOpen}
-              _hover={{ opacity: 0.5, bg: "grey.200" }}
-              fontSize="lg">
+              {...ControlButtonStyles}>
               삭제하기
             </Button>
           </VStack>
@@ -67,4 +70,4 @@ const SummaryControl = ({ onOpen }: SummaryControlProps) => {
   )
 }
 
-export default SummaryControl
+export default withProjectId(SummaryControl)

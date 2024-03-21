@@ -1,8 +1,6 @@
 import { LoaderFunction, redirect } from "react-router-dom"
 
-import { QueryClient } from "@tanstack/query-core"
-
-import { QUERYKEY } from "@constants/queryKey"
+const { VITE_AUTH_JWT_TOKEN_STORAGE_KEY } = import.meta.env
 
 /**
  * @brief 회원, 비회원에 대한 페이지 접근을 결정하는 loader 함수입니다.
@@ -12,22 +10,20 @@ import { QUERYKEY } from "@constants/queryKey"
  */
 export const determineRedirectLoader =
   (
-    queryClient: QueryClient,
     isAllowedForLoggedInUser: boolean,
     redirectUrl: string = "/",
   ): LoaderFunction =>
   () => {
-    const isLoggedInUser =
-      queryClient.getQueryData([QUERYKEY.USER_INFO]) != null
+    const isLoggedInUser = !!localStorage.getItem(
+      VITE_AUTH_JWT_TOKEN_STORAGE_KEY,
+    )
 
     const willRedirect =
       (!isAllowedForLoggedInUser && isLoggedInUser) ||
       (isAllowedForLoggedInUser && !isLoggedInUser)
 
-    if (import.meta.env.DEV && willRedirect) {
-      alert(
-        "페이지 접속 권한이 없습니다.\n원하는 동작이 아닐시 router에서 loader함수를 확인해주세요~ -동건",
-      )
+    if (willRedirect) {
+      alert("권한이 없습니다. 다시 시도해주세요.")
     }
 
     return willRedirect ? redirect(redirectUrl) : null
