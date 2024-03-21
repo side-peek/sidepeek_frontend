@@ -20,9 +20,10 @@ const FileUploadBox = forwardRef<HTMLInputElement, FileUploadBoxProps>(
         <FormLabel htmlFor={id}>
           <Center
             flexDir="column"
-            cursor="pointer">
+            justifyContent="center"
+            alignItems="center">
             <IoCameraOutline size="3rem" />
-            <Text>{placeholder}</Text>
+            <Text textAlign="center">{placeholder}</Text>
           </Center>
         </FormLabel>
         <input
