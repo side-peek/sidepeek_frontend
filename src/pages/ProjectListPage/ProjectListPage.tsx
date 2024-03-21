@@ -34,7 +34,7 @@ const ProjectListPage = () => {
   const [sortOption, setSortOption] = useState<SortSelectType>("createdAt")
   const queryClient = useQueryClient()
   const { ref, inView } = useInView({ threshold: 0 })
-  const skills: string[] = []
+  const [skills, setSkills] = useState<string[]>([])
 
   const {
     allProjectList,
@@ -98,7 +98,8 @@ const ProjectListPage = () => {
   const [selectedStacks, setSelectedStacks] = useState<Skill[]>([])
 
   const debounceTechFilter = useDebounce(() => {
-    selectedStacks.forEach((skill) => skills.push(skill.name))
+    setSkills(selectedStacks.map((skill) => skill.name))
+
     refetchAllProject()
   }, 500)
 
@@ -109,7 +110,6 @@ const ProjectListPage = () => {
 
   const onAppendStack = (selectedSkill: Skill) => {
     setSelectedStacks((prev) => [...prev, selectedSkill])
-    selectedStacks.forEach((skill) => skills.push(skill.name))
   }
 
   const onDeleteStack = (selectedSkill: Skill) => {
