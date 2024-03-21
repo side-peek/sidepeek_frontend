@@ -9,6 +9,7 @@ export interface ProfileBarProps extends ProfileActionsButtonsProps {
   nickname: string
   profileImageUrl: string
   career: string | null
+  job: string | null
   introduction: string | null
   githubUrl: string | null
   blogUrl: string | null
@@ -19,6 +20,7 @@ const LargeScreenView = ({
   nickname,
   profileImageUrl,
   career,
+  job,
   introduction,
   githubUrl,
   blogUrl,
@@ -36,6 +38,7 @@ const LargeScreenView = ({
             nickname,
             profileImageUrl,
             career,
+            job,
             introduction,
             githubUrl,
             blogUrl,

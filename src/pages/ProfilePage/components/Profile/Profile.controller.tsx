@@ -35,6 +35,7 @@ const ProfileController = ({ userId }: UserIdProps) => {
     nickname,
     profileImageUrl,
     career,
+    job,
     introduction,
     githubUrl,
     blogUrl,
@@ -57,6 +58,7 @@ const ProfileController = ({ userId }: UserIdProps) => {
               nickname,
               profileImageUrl,
               career,
+              job,
               introduction,
               githubUrl,
               blogUrl,
@@ -71,6 +73,7 @@ const ProfileController = ({ userId }: UserIdProps) => {
               nickname,
               profileImageUrl,
               career,
+              job,
               handleNewProject,
               handleEditProfile,
             }}

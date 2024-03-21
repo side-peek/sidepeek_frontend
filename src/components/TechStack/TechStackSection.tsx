@@ -48,7 +48,7 @@ const TechStackSection = ({
             pos="relative"
             key={field.id || index}
             direction={isLargerThan500 ? "row" : "column"}
-            mb={isLargerThan500 ? "3rem" : "1.5rem"}>
+            mb={isLargerThan500 ? "3rem" : "2rem"}>
             {render({
               value: field.category,
               onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,42 +70,40 @@ const TechStackSection = ({
             </Box>
 
             <Box
-              flex="0 0 30rem"
+              flex={isLargerThan500 ? "0 0 30rem" : "0 0 21rem"}
               borderLeft={isLargerThan500 ? "1px solid" : ""}
               borderColor="grey.200"
               px={isLargerThan500 ? "2rem" : "0rem"}
-              py={isLargerThan500 ? "0rem" : "1rem"}>
+              py={isLargerThan500 ? "0rem" : "0.5rem"}>
               <StackSearchBox
                 showAll={true}
                 inputProps={{ pl: "0.5rem" }}
                 render={({ techStacks }) => {
                   return (
-                    <Box>
+                    <Box
+                      w="100%"
+                      mt="1rem"
+                      h={isLargerThan500 ? "21rem" : "17rem"}
+                      overflow="auto">
                       {filterSelectedId(techStacks, selectedData).map(
                         (techStack) => {
                           return (
-                            <Box
-                              ml="1rem"
-                              mt="0.5rem"
-                              fontSize="1.2rem"
-                              cursor="pointer"
-                              _hover={{ fontWeight: "bold" }}
+                            <CommonTag
+                              ml="0.5rem"
+                              mb="0.7rem"
+                              fontSize="1rem"
+                              fontWeight="bold"
+                              key={techStack.name}
+                              label={techStack.name}
                               onClick={() => onAppendStack?.(techStack, index)}
-                              key={techStack.name}>
-                              <CommonTag
-                                fontSize="1rem"
-                                fontWeight="bold"
-                                key={techStack.name}
-                                label={techStack.name}
-                                leftElement={
-                                  <Image
-                                    src={techStack.iconImageUrl}
-                                    w="1.4rem"
-                                    h="1.4rem"
-                                  />
-                                }
-                              />
-                            </Box>
+                              leftElement={
+                                <Image
+                                  src={techStack.iconImageUrl}
+                                  w="1.4rem"
+                                  h="1.4rem"
+                                />
+                              }
+                            />
                           )
                         },
                       )}
@@ -127,7 +125,8 @@ const TechStackSection = ({
               {selectedData.length !== 0 && (
                 <Box
                   h="2.5rem"
-                  mt={isLargerThan500 ? "0.2rem" : "0"}>
+                  mt={isLargerThan500 ? "0.4rem" : "0"}
+                  mb="0.6rem">
                   <Text
                     fontSize="1.3rem"
                     fontFamily="SCDream_Bold">
@@ -138,7 +137,7 @@ const TechStackSection = ({
               {selectedData?.map((stack) => (
                 <CloseButtonTag
                   mr="0.5rem"
-                  mb="0.5rem"
+                  mb="0.7rem"
                   key={stack.name}
                   label={stack.name}
                   fontWeight="bold"
