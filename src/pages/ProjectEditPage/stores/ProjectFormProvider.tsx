@@ -7,8 +7,11 @@ import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { useQueryClient } from "@tanstack/react-query"
 
+import { useTechStackStore } from "@stores/useTechStackStore"
+
 import { QUERYKEY } from "@constants/queryKey"
 
+import { useMemberStore } from "../components/MemberFields/stores/useMemberStore"
 import { ProjectFormDefaultValues } from "../constants/defaultValues"
 import { usePostProjectMutation } from "../hooks/usePostProjectMutation"
 import { usePutProjectMutation } from "../hooks/usePutProjectMutation"
@@ -62,8 +65,9 @@ const ProjectFormProvider = ({
   })
 
   const handleSubmitEvent = (data: ProjectFormValues) => {
-    const convertedMembers = data.members
-      .map(({ role, members }) => {
+    const convertedMembers = useMemberStore
+      .getState()
+      .fields.map(({ role, members }) => {
         return members?.map(({ id, nickname }) => {
           return {
             id,
@@ -74,8 +78,9 @@ const ProjectFormProvider = ({
       })
       ?.flat()
 
-    const convertedTechStacks = data.techStacks
-      .map(({ category, data }) => {
+    const convertedTechStacks = useTechStackStore
+      .getState()
+      .fields.map(({ category, data }) => {
         return data?.map(({ id }) => ({ skillId: id, category }))
       })
       ?.flat()
@@ -114,10 +119,14 @@ const ProjectFormProvider = ({
         {children}
         <Center>
           <Button
-            border="1px solid"
-            borderColor="blue.100"
+            width="100%"
+            variant="solid"
+            padding="2rem"
             marginTop="1rem"
-            type="submit">
+            type="submit"
+            disabled={
+              methods.formState.isSubmitting || methods.formState.isValidating
+            }>
             제출하기
           </Button>
         </Center>
