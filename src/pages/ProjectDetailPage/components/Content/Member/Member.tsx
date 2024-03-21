@@ -1,7 +1,7 @@
 import { HStack, Stack, Text } from "@chakra-ui/react"
 import { Member } from "api-models"
 
-import { categorizeMembers } from "@pages/ProjectDetailPage/utils/categorizeMembers"
+import { categorizeMembers } from "@utils/categorizeMembers"
 
 import MemberList from "./MemberList/MemberList"
 

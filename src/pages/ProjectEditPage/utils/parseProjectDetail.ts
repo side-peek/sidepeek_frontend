@@ -1,7 +1,7 @@
 import { Project } from "api-models"
 
-import { categorizeMembers } from "@utils/categorizeMembers"
-import { categorizeTechStacks } from "@utils/categorizeTechStacks"
+import { processMembers } from "@utils/process/processMembers"
+import { processTechStacks } from "@utils/process/processTechStacks"
 
 //받아온 프로젝트 정보를 작성 타입에 맞춰 변환
 export const parseProjectDetail = (data: Project) => {
@@ -13,10 +13,10 @@ export const parseProjectDetail = (data: Project) => {
     overviewImageUrl: data.overviewImageUrl.map(({ url }) => url), //string[]
     githubUrl: data.githubUrl,
     deployUrl: data.deployUrl,
-    techStacks: categorizeTechStacks(data.techStacks),
+    techStacks: processTechStacks(data.techStacks),
     startDate: data.startDate,
     endDate: data.endDate,
-    members: categorizeMembers(data.members),
+    members: processMembers(data.members),
     description: data.description,
     troubleShooting: data.troubleShooting,
   }

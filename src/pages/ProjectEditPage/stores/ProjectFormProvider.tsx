@@ -63,12 +63,12 @@ const ProjectFormProvider = ({
 
   const handleSubmitEvent = (data: ProjectFormValues) => {
     const convertedMembers = data.members
-      .map(({ category, data }) => {
-        return data?.map(({ id, nickname }) => {
+      .map(({ role, members }) => {
+        return members?.map(({ id, nickname }) => {
           return {
             id,
             nickname,
-            role: category,
+            role,
           }
         })
       })

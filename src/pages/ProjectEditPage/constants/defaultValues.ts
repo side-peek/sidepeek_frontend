@@ -13,5 +13,5 @@ export const ProjectFormDefaultValues: ProjectFormValues = {
   techStacks: [{ category: "", data: [] }],
   description: "",
   troubleShooting: "",
-  members: [{ category: "", data: [] }],
+  members: [{ role: "", members: [] }],
 }
