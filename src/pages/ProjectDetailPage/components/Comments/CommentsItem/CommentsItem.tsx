@@ -42,12 +42,12 @@ const CommentsItem = ({ comment }: CommentsItemProps) => {
         gap={isLargerThan768 ? "2rem" : "1.3rem"}
         align="flex-start">
         <CommentsAvatar
+          src={comment.user.profileImageUrl ?? undefined}
           onClick={() => {
-            if (comment.user && comment.user.id) {
+            if (comment.user.id) {
               handleNavigateProfile(comment.user.id)
             }
           }}
-          user={comment.user}
         />
         <Box w="100%">
           <HStack
