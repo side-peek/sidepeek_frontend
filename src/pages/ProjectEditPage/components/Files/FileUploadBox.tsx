@@ -16,7 +16,8 @@ const FileUploadBox = forwardRef<HTMLInputElement, FileUploadBoxProps>(
     return (
       <Center
         bgColor={backgroundColor || "grey.300"}
-        boxSize={boxSize}>
+        boxSize={boxSize}
+        borderRadius="1rem">
         <FormLabel htmlFor={id}>
           <Center
             flexDir="column"

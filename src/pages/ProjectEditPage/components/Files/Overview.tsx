@@ -38,9 +38,7 @@ const Overview = () => {
     <>
       {watch("overviewImageUrl")?.map((image, idx) => {
         return (
-          <Box
-            boxSize="100"
-            key={idx}>
+          <Box key={idx}>
             {image ? (
               <Image
                 src={image}
@@ -58,7 +56,8 @@ const Overview = () => {
                   <FileUploadBox
                     {...inputProps}
                     id="overviewImageUrl"
-                    placeholder="최대 6개까지 업로드 가능합니다"
+                    placeholder="클릭해서 사진을 업로드해주세요"
+                    width="50%"
                   />
                 )}
               </FileUploadSection>

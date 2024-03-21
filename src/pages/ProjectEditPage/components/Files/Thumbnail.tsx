@@ -20,7 +20,7 @@ const Thumbnail = () => {
   }
 
   return (
-    <Box boxSize="40">
+    <Box>
       {watch("thumbnailUrl") ? (
         <Image
           src={watch("thumbnailUrl")}
@@ -36,8 +36,7 @@ const Thumbnail = () => {
             <FileUploadBox
               {...inputProps}
               id="thumbnail"
-              placeholder="사진을 업로드해주세요"
-              boxSize="100"
+              placeholder="대표 사진을 업로드해주세요"
             />
           )}
         </FileUploadSection>
