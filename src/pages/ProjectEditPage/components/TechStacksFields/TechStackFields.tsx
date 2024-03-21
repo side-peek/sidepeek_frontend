@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useWatch } from "react-hook-form"
 
 import {
   AbsoluteCenter,
@@ -33,19 +34,29 @@ const TechStacksFields = () => {
     register,
     errors,
     trigger,
+    control,
   } = useTechStacksMethods()
 
   const [max, setMax] = useState(0)
   const MAX_FIELDS_NUMBER = 4
   const MIN_FIELDS_NUMBER = 1
 
+  const watchFields = useWatch({ name: "techStacks", control })
+
+  const controlledStacks = fields.map((field, index) => {
+    return {
+      ...field,
+      ...watchFields[index],
+    }
+  })
+
   return (
     <Flex
       flexDir="column"
       gap="8px">
-      {fields.map((field, index) => {
+      {controlledStacks?.map((field, index) => {
         register(`techStacks.${index}.data`, {
-          validate: (data) => data.length !== 0 || "하나 이상 선택해주세요",
+          validate: (data) => data?.length !== 0 || "하나 이상 선택해주세요",
         })
         return (
           <FieldContainer

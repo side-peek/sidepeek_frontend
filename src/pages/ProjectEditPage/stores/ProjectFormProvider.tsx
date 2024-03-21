@@ -2,8 +2,12 @@ import { ReactNode } from "react"
 import { FormProvider, useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
-import { Button } from "@chakra-ui/react"
+import { Button, Center, useToast } from "@chakra-ui/react"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
+
+import { useQueryClient } from "@tanstack/react-query"
+
+import { QUERYKEY } from "@constants/queryKey"
 
 import { ProjectFormDefaultValues } from "../constants/defaultValues"
 import { usePostProjectMutation } from "../hooks/usePostProjectMutation"
@@ -22,27 +26,45 @@ const ProjectFormProvider = ({
   projectId,
 }: ProjectFormProviderProps) => {
   const userInfo = useUserInfoData()
-
+  const toast = useToast()
+  const queryClient = useQueryClient()
   const methods = useForm<ProjectFormValues>({
     defaultValues: defaultValues || ProjectFormDefaultValues,
   })
   const navigate = useNavigate()
+
   const { mutate: postProject } = usePostProjectMutation({
     onError: (error) => {
-      alert(error.response && error.response?.data.message)
+      toast({
+        status: "error",
+        title: error.response && error.response?.data.message,
+      })
     },
     onSuccess: (data) => {
-      navigate(`../ ${data.id}`)
+      queryClient.invalidateQueries({
+        queryKey: [QUERYKEY.PROJECT_DETAIL],
+      })
+      navigate(`../project/${data.id}`)
     },
   })
   const { mutate: putProject } = usePutProjectMutation({
-    onError: (error) => alert(error.response && error.response?.data.message),
+    onError: (error) =>
+      toast({
+        status: "error",
+        title: error.response && error.response?.data.message,
+      }),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERYKEY.PROJECT_DETAIL],
+      })
+      navigate(`../project/${data.id}`)
+    },
   })
 
   const handleSubmitEvent = (data: ProjectFormValues) => {
     const convertedMembers = data.members
       .map(({ category, data }) => {
-        return data.map(({ id, nickname }) => {
+        return data?.map(({ id, nickname }) => {
           return {
             id,
             nickname,
@@ -54,7 +76,7 @@ const ProjectFormProvider = ({
 
     const convertedTechStacks = data.techStacks
       .map(({ category, data }) => {
-        return data.map(({ id }) => ({ skillId: id, category }))
+        return data?.map(({ id }) => ({ skillId: id, category }))
       })
       ?.flat()
 
@@ -79,6 +101,8 @@ const ProjectFormProvider = ({
           ...data,
           members: convertedMembers,
           techStacks: convertedTechStacks,
+          startDate: convertedDate(data.startDate),
+          endDate: convertedDate(data.endDate),
         },
       })
     }
@@ -88,7 +112,15 @@ const ProjectFormProvider = ({
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit((data) => handleSubmitEvent(data))}>
         {children}
-        <Button disabled={!!methods.formState.errors} />
+        <Center>
+          <Button
+            border="1px solid"
+            borderColor="blue.100"
+            marginTop="1rem"
+            type="submit">
+            제출하기
+          </Button>
+        </Center>
       </form>
     </FormProvider>
   )

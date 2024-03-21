@@ -13,7 +13,7 @@ export const useMemberFieldsMethods = () => {
     formState: { errors },
   } = useProjectFormContext()
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append } = useFieldArray({
     name: "members",
     control,
   })
@@ -23,7 +23,9 @@ export const useMemberFieldsMethods = () => {
   }
 
   const deleteFields = (idx: number) => {
-    remove(idx)
+    const copy = [...watch("members")]
+    copy.splice(idx, 1)
+    setValue("members", [...copy.filter((v) => v)])
   }
 
   const setCategory = (value: string, idx: number) => {

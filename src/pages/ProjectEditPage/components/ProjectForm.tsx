@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FormLabel, Input, Textarea } from "@chakra-ui/react"
+import { Box, Flex, FormLabel, Grid, Input, Textarea } from "@chakra-ui/react"
 
 import Description from "./Editors/Description"
 import Overview from "./Files/Overview"
@@ -14,10 +14,13 @@ const ProjectForm = () => {
         flexDir="column"
         gap="30px">
         <Thumbnail />
-
-        <Flex gap="10px">
+        <Grid
+          mt="0.5rem"
+          templateColumns="repeat(auto-fill, minmax(20rem, 1fr))"
+          gap={0}>
           <Overview />
-        </Flex>
+        </Grid>
+
         <ProjectInputBox
           name="name"
           label="제목"
@@ -31,17 +34,21 @@ const ProjectForm = () => {
           <Input />
         </ProjectInputBox>
 
-        <ProjectInputBox
-          name="startDate"
-          label="시작일">
-          <Input type="date" />
-        </ProjectInputBox>
+        <Flex justifyContent="space-between">
+          <ProjectInputBox
+            name="startDate"
+            label="시작일"
+            width="30rem">
+            <Input type="date" />
+          </ProjectInputBox>
 
-        <ProjectInputBox
-          name="endDate"
-          label="종료일">
-          <Input type="date" />
-        </ProjectInputBox>
+          <ProjectInputBox
+            name="endDate"
+            label="종료일"
+            width="30rem">
+            <Input type="date" />
+          </ProjectInputBox>
+        </Flex>
 
         <ProjectInputBox
           name="overview"
@@ -86,8 +93,6 @@ const ProjectForm = () => {
           <FormLabel htmlFor="members">트러블 슈팅</FormLabel>
           <Description name="troubleShooting" />
         </Box>
-
-        <Button type="submit">제출</Button>
       </Flex>
     </Box>
   )

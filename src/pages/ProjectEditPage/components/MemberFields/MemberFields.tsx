@@ -45,7 +45,7 @@ const MemberFields = () => {
       {controlledMember.map((field, idx) => {
         register(`members.${idx}.data` as const, {
           validate: (data) =>
-            data.length !== 0 || "팀원을 한명 이상 선택해주세요",
+            data?.length !== 0 || "팀원을 한명 이상 선택해주세요",
         })
 
         return (
@@ -89,7 +89,7 @@ const MemberFields = () => {
                 {field.data?.map((member, idx) => {
                   return (
                     <MemberAvatarCard
-                      key={member.nickname}
+                      key={member.id}
                       image={member.profileImageUrl || ""}
                       text={member.nickname}
                       onClick={() => {
