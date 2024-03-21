@@ -29,12 +29,14 @@ const TechStackFilter = ({
           render={({ techStacks }) => {
             return (
               <Box
+                paddingTop="1rem"
                 height="10rem"
                 overflow="auto">
                 {filterSelectedId(techStacks, selectedStacks).map(
                   (techStack) => {
                     return (
                       <CommonTag
+                        m="0.25rem"
                         leftElement={
                           <Image
                             src={techStack.iconImageUrl}
@@ -56,9 +58,11 @@ const TechStackFilter = ({
       <Box
         flexWrap="nowrap"
         flex="1 1 auto"
+        border="1px solid"
         borderColor="grey.200">
         {selectedStacks.map((stack) => (
           <CloseButtonTag
+            m="0.3rem"
             key={stack.name}
             label={stack.name}
             leftElement={
