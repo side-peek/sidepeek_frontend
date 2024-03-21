@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import { FormProvider, useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 
 import { Button } from "@chakra-ui/react"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
@@ -25,9 +26,18 @@ const ProjectFormProvider = ({
   const methods = useForm<ProjectFormValues>({
     defaultValues: defaultValues || ProjectFormDefaultValues,
   })
-
-  const { mutate: postProject } = usePostProjectMutation()
-  const { mutate: putProject } = usePutProjectMutation()
+  const navigate = useNavigate()
+  const { mutate: postProject } = usePostProjectMutation({
+    onError: (error) => {
+      alert(error.response && error.response?.data.message)
+    },
+    onSuccess: (data) => {
+      navigate(`../ ${data.id}`)
+    },
+  })
+  const { mutate: putProject } = usePutProjectMutation({
+    onError: (error) => alert(error.response && error.response?.data.message),
+  })
 
   const handleSubmitEvent = (data: ProjectFormValues) => {
     const convertedMembers = data.members
@@ -78,7 +88,7 @@ const ProjectFormProvider = ({
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit((data) => handleSubmitEvent(data))}>
         {children}
-        <Button />
+        <Button disabled={!!methods.formState.errors} />
       </form>
     </FormProvider>
   )
