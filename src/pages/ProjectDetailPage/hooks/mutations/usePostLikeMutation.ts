@@ -26,7 +26,7 @@ export const usePostLikeMutation = () => {
     mutationFn: (data: postLikePayload) => postLike(data),
     onMutate: async ({ projectId }) => {
       await queryClient.cancelQueries({
-        queryKey: [QUERYKEY.PROJECT_DETAIL],
+        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
 
       const previousLikeState = queryClient.getQueryData<Project>([

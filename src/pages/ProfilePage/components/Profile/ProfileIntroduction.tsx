@@ -26,11 +26,18 @@ const ProfileIntroduction = ({
         fontFamily="SCDream_Bold">
         소개
       </Text>
-      <Text
+      <Box
         mt="1rem"
-        fontSize="md">
-        {aboutMe}
-      </Text>
+        mb="1.5rem">
+        {aboutMe?.split("\n").map((line, index) => (
+          <Text
+            key={index}
+            fontSize="md">
+            {line}
+          </Text>
+        ))}
+      </Box>
+
       <Flex
         direction="column"
         gap="0.7rem">

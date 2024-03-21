@@ -17,7 +17,6 @@ const PageButtons = () => {
       : Math.floor(currentPage / MAX_PAGES_COUNT) * MAX_PAGES_COUNT + 1
 
   const pages = useMemo(() => {
-    console.log("재연산 test")
     return Array.from(
       { length: Math.min(MAX_PAGES_COUNT, totalPages - startPage + 1) },
       (_, idx) => startPage + idx,
