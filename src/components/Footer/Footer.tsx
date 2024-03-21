@@ -3,6 +3,7 @@ import { Center, HStack, Text, VStack } from "@chakra-ui/react"
 const Footer = () => {
   return (
     <Center
+      mt="15rem"
       bgColor="grey.200"
       height="footerHeight">
       <VStack gap="1rem">

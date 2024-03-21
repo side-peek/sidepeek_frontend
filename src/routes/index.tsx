@@ -1,7 +1,5 @@
 import { createBrowserRouter } from "react-router-dom"
 
-import type { QueryClient } from "@tanstack/react-query"
-
 import DefaultLayout from "@/routes/layouts/DefaultLayout"
 
 import ErrorPage from "@pages/ErrorPage/ErrorPage"
@@ -18,65 +16,63 @@ import SignUpPage from "@pages/SignUpPage/SignUpPage"
 import RootLayout from "./layouts/RootLayout"
 import { determineRedirectLoader } from "./loaders/determineRedirectLoader"
 
-export const router = (queryClient: QueryClient) => {
-  return createBrowserRouter([
-    {
-      element: <RootLayout />,
-      children: [
-        {
-          path: "/",
-          element: <DefaultLayout />,
-          children: [
-            {
-              index: true,
-              element: <HomePage />,
-            },
-            {
-              path: "/project",
-              element: <ProjectListPage />,
-            },
-            {
-              path: "/project/:projectId",
-              element: <ProjectDetailPage />,
-            },
-            {
-              path: "/project/edit",
-              element: <ProjectEditPage />,
-            },
-            {
-              path: "/profile/:userId",
-              element: <ProfilePage />,
-            },
-            {
-              path: "/profile/edit",
-              element: <ProfileEditPage />,
-            },
-          ],
-        },
-        {
-          path: "/login",
-          loader: determineRedirectLoader(queryClient, false),
-          children: [
-            {
-              index: true,
-              element: <LoginPage />,
-            },
-            {
-              path: "/login/validation",
-              element: <NicknameSetupPage />,
-            },
-          ],
-        },
-        {
-          path: "/signup",
-          loader: determineRedirectLoader(queryClient, false),
-          element: <SignUpPage />,
-        },
-        {
-          path: "*",
-          element: <ErrorPage />,
-        },
-      ],
-    },
-  ])
-}
+export const router = createBrowserRouter([
+  {
+    element: <RootLayout />,
+    children: [
+      {
+        path: "/",
+        element: <DefaultLayout />,
+        children: [
+          {
+            index: true,
+            element: <HomePage />,
+          },
+          {
+            path: "/project",
+            element: <ProjectListPage />,
+          },
+          {
+            path: "/project/:projectId",
+            element: <ProjectDetailPage />,
+          },
+          {
+            path: "/project/edit",
+            element: <ProjectEditPage />,
+          },
+          {
+            path: "/profile/:userId",
+            element: <ProfilePage />,
+          },
+          {
+            path: "/profile/edit",
+            element: <ProfileEditPage />,
+          },
+        ],
+      },
+      {
+        path: "/login",
+        loader: determineRedirectLoader(false),
+        children: [
+          {
+            index: true,
+            element: <LoginPage />,
+          },
+          {
+            path: "/login/validation",
+            element: <NicknameSetupPage />,
+          },
+        ],
+      },
+      {
+        path: "/signup",
+        loader: determineRedirectLoader(false),
+        element: <SignUpPage />,
+      },
+      {
+        path: "*",
+        element: <ErrorPage />,
+      },
+    ],
+  },
+])
