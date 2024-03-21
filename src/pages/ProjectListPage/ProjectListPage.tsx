@@ -92,14 +92,13 @@ const ProjectListPage = () => {
 
   const [selectedStacks, setSelectedStacks] = useState<Skill[]>([])
 
-  const useDebounceTechFilter = useDebounce(() => {
+  const debounceTechFilter = useDebounce(() => {
     selectedStacks.forEach((skill) => skills.push(skill.name))
     refetchAllProject()
   }, 500)
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useDebounceTechFilter()
+    debounceTechFilter()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStacks])
 
@@ -126,20 +125,19 @@ const ProjectListPage = () => {
         resultCount={allProjectList?.pages[0].totalElements || 0}
       />
       <Container maxW={isLargerThan1200 ? "80%" : "95%"}>
-        <TechStackFilter
-          selectedStacks={selectedStacks}
-          onAppendStack={onAppendStack}
-          onDeleteStack={onDeleteStack}
-        />
-        <Stack marginTop="5rem">
-          {projectCount ? (
-            <ProjectFilter
-              isReleased={isReleased}
-              sortOption={sortOption}
-              handleChange={handleChange}
-              handleSelect={handleSelect}
-            />
-          ) : null}
+        <Stack>
+          <TechStackFilter
+            selectedStacks={selectedStacks}
+            onAppendStack={onAppendStack}
+            onDeleteStack={onDeleteStack}
+          />
+          <ProjectFilter
+            projectCount={projectCount}
+            isReleased={isReleased}
+            sortOption={sortOption}
+            handleChange={handleChange}
+            handleSelect={handleSelect}
+          />
           <ProjectList
             projects={allProjectList}
             isLoading={isLoading}

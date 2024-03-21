@@ -19,14 +19,12 @@ const ProjectFilter = ({
   handleSelect,
   projectCount,
 }: ProjectFilterProps) => {
-  console.log(projectCount)
   return (
     <HStack
       marginTop="3rem"
       spacing={5}>
       <Spacer />
       <Checkbox
-        disabled={projectCount < 1 ? true : false}
         isChecked={isReleased}
         paddingRight="0.3rem"
         onChange={handleChange}>

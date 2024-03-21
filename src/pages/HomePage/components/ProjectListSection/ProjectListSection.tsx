@@ -53,12 +53,8 @@ const ProjectListSection = () => {
   const handleChange = () => {
     setIsReleased(!isReleased)
 
-    if (isReleased) {
-      refetchAllProject()
-    } else {
-      queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
-      queryClient.refetchQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
-    }
+    queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
+    queryClient.refetchQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
   }
 
   const loadMoreProjects = useCallback(() => {
@@ -69,15 +65,14 @@ const ProjectListSection = () => {
 
   const [selectedStacks, setSelectedStacks] = useState<Skill[]>([])
 
-  const useDebounceTechFilter = useDebounce(() => {
+  const debounceTechFilter = useDebounce(() => {
     selectedStacks.forEach((skill) => skills.push(skill.name))
 
     refetchAllProject()
   }, 500)
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useDebounceTechFilter()
+    debounceTechFilter()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStacks])
 
