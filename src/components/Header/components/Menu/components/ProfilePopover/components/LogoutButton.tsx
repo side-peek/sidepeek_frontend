@@ -1,13 +1,15 @@
 import { IoLogOutOutline } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
 
-import { Button, Icon, Text, useToast } from "@chakra-ui/react"
+import { Button, Icon, Text, useDisclosure, useToast } from "@chakra-ui/react"
 
 import { LOGOUT_MESSAGE } from "@components/Header/constants/messages"
 
 import useLogout from "@hooks/useLogout"
 
 import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
+
+import LogoutModal from "./LogoutModal"
 
 interface LogoutButtonProps {
   onClose: () => void
@@ -18,39 +20,47 @@ const LogoutButton = ({ onClose }: LogoutButtonProps) => {
   const navigate = useNavigate()
   const logout = useLogout()
 
+  const { isOpen, onOpen, onClose: onLogoutModalClose } = useDisclosure()
+
   const handleLogout = () => {
-    const isConfirmed = confirm(LOGOUT_MESSAGE.CONFIRM)
+    onLogoutModalClose()
 
-    if (isConfirmed) {
-      onClose()
+    onClose()
 
-      logout()
+    logout()
 
-      navigate("/login")
+    navigate("/login")
 
-      toast({
-        status: "success",
-        title: LOGOUT_MESSAGE.SUCCESS,
-      })
-    }
+    toast({
+      status: "success",
+      title: LOGOUT_MESSAGE.SUCCESS,
+    })
   }
 
   return (
-    <Button
-      rightIcon={
-        <Icon
-          as={IoLogOutOutline}
-          w={8}
-          h={8}
+    <>
+      <Button
+        rightIcon={
+          <Icon
+            as={IoLogOutOutline}
+            w={8}
+            h={8}
+          />
+        }
+        onClick={onOpen}>
+        <Text
+          flexGrow="1"
+          textAlign="left">
+          로그아웃
+        </Text>
+      </Button>
+      {isOpen && (
+        <LogoutModal
+          onLogout={handleLogout}
+          onClose={onClose}
         />
-      }
-      onClick={handleLogout}>
-      <Text
-        flexGrow="1"
-        textAlign="left">
-        로그아웃
-      </Text>
-    </Button>
+      )}
+    </>
   )
 }
 

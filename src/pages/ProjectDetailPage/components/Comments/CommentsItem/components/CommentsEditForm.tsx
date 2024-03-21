@@ -3,6 +3,7 @@ import ResizeTextarea from "react-textarea-autosize"
 
 import { Box, HStack, Textarea } from "@chakra-ui/react"
 
+import { TEXTAREA_STYLE } from "@pages/ProjectDetailPage/constants/textAreaStyle"
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
 const CommentsEditForm = () => {
@@ -10,7 +11,6 @@ const CommentsEditForm = () => {
     useCommentContext()
 
   useEffect(() => {
-    console.log("gg")
     focusOnFiled()
   }, [focusOnFiled])
 
@@ -25,14 +25,9 @@ const CommentsEditForm = () => {
           justify="space-between"
           w="100%">
           <Textarea
-            rows={1}
-            w="100%"
-            fontSize="lg"
             p="0.5rem"
             as={ResizeTextarea}
-            isRequired={false}
-            resize="none"
-            maxH="10rem"
+            {...TEXTAREA_STYLE}
             {...register("content", { required: true })}
           />
         </HStack>

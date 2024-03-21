@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 
 import {
@@ -16,6 +17,7 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react"
 
+import { ErrorMessage } from "@components/ErrorMessage/ErrorMessage"
 import CommonInput from "@components/Input/CommonInput"
 
 import {
@@ -41,7 +43,17 @@ const ChangePWModal = ({ isOpen, onClose, userId }: ModalProps) => {
     reset,
     formState: { errors },
   } = useForm<PasswordFormValues>()
-  const { putUserPasswordMutation } = usePutUserPassword()
+
+  const [serverErrorMessage, setServerErrorMessage] = useState("")
+  const handleClose = () => {
+    reset()
+    onClose()
+  }
+
+  const { putUserPasswordMutation } = usePutUserPassword(
+    handleClose,
+    setServerErrorMessage,
+  )
 
   const onValid = (data: PasswordFormValues) => {
     const passwordChange = {
@@ -52,26 +64,15 @@ const ChangePWModal = ({ isOpen, onClose, userId }: ModalProps) => {
       userId: userId,
       passwordChange: passwordChange,
     })
-    reset()
-    onClose()
-  }
-  const onInvalid = () => {
-    alert("Submit 실패")
   }
 
   const onSubmit: SubmitHandler<PasswordFormValues> = (data) => {
     const { newPassword, checkPassword } = data
     if (newPassword !== checkPassword) {
       setError("checkPassword", PASSWORD_MISMATCH_ERROR)
-      onInvalid()
     } else {
       onValid(data)
     }
-  }
-
-  const handleClose = () => {
-    reset()
-    onClose()
   }
 
   return (
@@ -92,10 +93,15 @@ const ChangePWModal = ({ isOpen, onClose, userId }: ModalProps) => {
                 <Flex alignItems="center">
                   <Text fontSize="1.3rem">현재 비밀번호</Text>
                   <Spacer />
-                  {errors.currentPassword?.message && (
-                    <Text color="red.100">
-                      {errors.currentPassword && errors.currentPassword.message}
-                    </Text>
+                  <ErrorMessage
+                    errors={errors}
+                    name="currentPassword"
+                    render={({ message }) => (
+                      <Text color="red.100">{message}</Text>
+                    )}
+                  />
+                  {!errors.currentPassword && serverErrorMessage && (
+                    <Text color="red.100">{serverErrorMessage}</Text>
                   )}
                 </Flex>
 
@@ -115,11 +121,13 @@ const ChangePWModal = ({ isOpen, onClose, userId }: ModalProps) => {
                 <Flex alignItems="center">
                   <Text fontSize="1.3rem">새로운 비밀번호</Text>
                   <Spacer />
-                  {errors.newPassword?.message && (
-                    <Text color="red.100">
-                      {errors.newPassword && errors.newPassword?.message}
-                    </Text>
-                  )}
+                  <ErrorMessage
+                    errors={errors}
+                    name="newPassword"
+                    render={({ message }) => (
+                      <Text color="red.100">{message}</Text>
+                    )}
+                  />
                 </Flex>
 
                 <CommonInput
@@ -138,13 +146,13 @@ const ChangePWModal = ({ isOpen, onClose, userId }: ModalProps) => {
                 <Flex alignItems="center">
                   <Text fontSize="1.3rem">비밀번호 확인</Text>
                   <Spacer />
-                  {errors.checkPassword?.message ? (
-                    <Text color="red.100">
-                      {errors.checkPassword?.message.toString()}
-                    </Text>
-                  ) : (
-                    <Text></Text>
-                  )}
+                  <ErrorMessage
+                    errors={errors}
+                    name="checkPassword"
+                    render={({ message }) => (
+                      <Text color="red.100">{message}</Text>
+                    )}
+                  />
                 </Flex>
 
                 <CommonInput

@@ -16,7 +16,7 @@ const ProfileTechStackByCategory = ({
     <Box>
       <Text
         mt="1rem"
-        fontSize="lg">
+        fontSize="md">
         {category}
       </Text>
       <Flex
@@ -33,8 +33,8 @@ const ProfileTechStackByCategory = ({
                 leftElement={
                   <Image
                     src={techStack.skill.iconImageUrl}
-                    w="1.6rem"
-                    h="1.6rem"
+                    w="1.4rem"
+                    h="1.4rem"
                   />
                 }
               />

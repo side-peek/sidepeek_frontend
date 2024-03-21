@@ -1,9 +1,19 @@
-import { IoMdClose } from "react-icons/io"
+import { AiFillCloseSquare } from "react-icons/ai"
 
-import { Box, Button, Center, Flex, useMediaQuery } from "@chakra-ui/react"
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Icon,
+  Image,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react"
 import { Skill } from "api-models"
 
 import CloseButtonTag from "@components/Tag/components/CloseButtonTag"
+import CommonTag from "@components/Tag/components/CommonTag"
 import { FieldProps } from "@components/TechStack/hooks/useTechStack"
 
 import { filterSelectedId } from "@pages/ProjectEditPage/utils/filterSelectedId"
@@ -20,41 +30,54 @@ const TechStackSection = ({
   render,
 }: FieldProps<Skill>) => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
+
   return (
-    <>
+    <Box
+      w="100%"
+      position="relative">
+      <Text
+        fontSize="xl"
+        fontFamily="SCDream_Bold"
+        margin="1.5rem 0 1.5rem 1rem">
+        기술스택
+      </Text>
       {fieldValue?.map((field, index) => {
         const selectedData = field.data
         return (
           <Flex
+            pos="relative"
             key={field.id || index}
             direction={isLargerThan500 ? "row" : "column"}
             mb={isLargerThan500 ? "3rem" : "1.5rem"}>
             {render({
               value: field.category,
-              onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                onChangeCategory(e, index),
+              onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                onChangeCategory(e, index)
+              },
             })}
-            {onDeleteField && (
-              <Box
-                pos="absolute"
-                right="5px">
-                <IoMdClose
-                  size="20px"
-                  onClick={() => onDeleteField?.(index)}
-                />
-              </Box>
-            )}
-            <Box
-              flex={isLargerThan500 ? "0 0 25rem" : "0 0 3.5rem"}
-              pr={isLargerThan500 ? "2rem" : "0rem"}></Box>
+            <Box>
+              {onDeleteField && (
+                <Icon
+                  as={AiFillCloseSquare}
+                  pos="absolute"
+                  top={isLargerThan500 ? "0.2rem" : "0.6rem"}
+                  right={isLargerThan500 ? "2rem" : "0.5rem"}
+                  cursor="pointer"
+                  w="1.6rem"
+                  h="1.6rem"
+                  onClick={() => onDeleteField?.(index)}></Icon>
+              )}
+            </Box>
+
             <Box
               flex="0 0 30rem"
               borderLeft={isLargerThan500 ? "1px solid" : ""}
-              borderTop={isLargerThan500 ? "" : "1px solid"}
               borderColor="grey.200"
               px={isLargerThan500 ? "2rem" : "0rem"}
               py={isLargerThan500 ? "0rem" : "1rem"}>
               <StackSearchBox
+                showAll={true}
+                inputProps={{ pl: "0.5rem" }}
                 render={({ techStacks }) => {
                   return (
                     <Box>
@@ -63,13 +86,25 @@ const TechStackSection = ({
                           return (
                             <Box
                               ml="1rem"
-                              mb="0.3rem"
+                              mt="0.5rem"
                               fontSize="1.2rem"
                               cursor="pointer"
                               _hover={{ fontWeight: "bold" }}
                               onClick={() => onAppendStack?.(techStack, index)}
                               key={techStack.name}>
-                              {techStack.name}
+                              <CommonTag
+                                fontSize="1rem"
+                                fontWeight="bold"
+                                key={techStack.name}
+                                label={techStack.name}
+                                leftElement={
+                                  <Image
+                                    src={techStack.iconImageUrl}
+                                    w="1.4rem"
+                                    h="1.4rem"
+                                  />
+                                }
+                              />
                             </Box>
                           )
                         },
@@ -79,18 +114,42 @@ const TechStackSection = ({
                 }}
               />
             </Box>
+
             <Box
               flexWrap="nowrap"
               flex="1 1 auto"
               borderLeft={isLargerThan500 ? "1px solid" : ""}
-              borderTop={isLargerThan500 ? "" : "1px solid"}
+              borderBottom={isLargerThan500 ? "" : "1px solid"}
               borderColor="grey.200"
-              pl={isLargerThan500 ? "2rem" : 0}
-              pt={isLargerThan500 ? "0" : "1rem"}>
+              pl={isLargerThan500 ? "2rem" : "1rem"}
+              pt={isLargerThan500 ? "0" : "1rem"}
+              pb={isLargerThan500 ? "0" : "1.5rem"}>
+              {selectedData.length !== 0 && (
+                <Box
+                  h="2.5rem"
+                  mt={isLargerThan500 ? "0.2rem" : "0"}>
+                  <Text
+                    fontSize="1.3rem"
+                    fontFamily="SCDream_Bold">
+                    추가한 기술 스택
+                  </Text>
+                </Box>
+              )}
               {selectedData?.map((stack) => (
                 <CloseButtonTag
+                  mr="0.5rem"
+                  mb="0.5rem"
                   key={stack.name}
                   label={stack.name}
+                  fontWeight="bold"
+                  fontSize="1rem"
+                  leftElement={
+                    <Image
+                      src={stack.iconImageUrl}
+                      w="1.4rem"
+                      h="1.4rem"
+                    />
+                  }
                   onClickCloseButton={() => onDeleteStack?.(stack, index)}
                 />
               ))}
@@ -112,7 +171,7 @@ const TechStackSection = ({
           </Button>
         </Center>
       )}
-    </>
+    </Box>
   )
 }
 export default TechStackSection

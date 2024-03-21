@@ -1,11 +1,11 @@
 import { Box } from "@chakra-ui/react"
 
-import ProjectForm from "./components/ProjectForm"
+import DefaultValueFetcher from "./components/DefaultValueFetcher"
 
 const ProjectEditPage = () => {
   return (
     <Box padding="3rem">
-      <ProjectForm />
+      <DefaultValueFetcher />
     </Box>
   )
 }

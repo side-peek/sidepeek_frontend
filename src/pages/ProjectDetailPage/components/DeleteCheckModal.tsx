@@ -1,5 +1,6 @@
 import {
   Button,
+  HStack,
   Modal,
   ModalCloseButton,
   ModalContent,
@@ -14,6 +15,15 @@ interface DeleteCheckModalProps {
   onClose: () => void
   projectId?: string
   onClick: () => void
+}
+
+const DeleteCheckModalStyles = {
+  h: "2.5rem",
+  fontSize: "md",
+  color: "white",
+  bg: "blue.100",
+  p: "1rem",
+  _hover: { opacity: "0.5" },
 }
 
 const DeleteCheckModal = ({
@@ -36,27 +46,18 @@ const DeleteCheckModal = ({
         <ModalCloseButton />
         <Text p="2rem">삭제된 게시물은 복구할 수 없습니다!</Text>
         <ModalFooter>
-          <Button
-            h="2.5rem"
-            fontSize="md"
-            color="white"
-            bg="blue.100"
-            p="1rem"
-            _hover={{ opacity: 0.5 }}
-            onClick={onClick}>
-            삭제하기
-          </Button>
-          <Button
-            h="2.5rem"
-            fontSize="md"
-            color="white"
-            bg="blue.100"
-            p="1rem"
-            ml="1rem"
-            _hover={{ opacity: 0.5 }}
-            onClick={onClose}>
-            취소
-          </Button>
+          <HStack>
+            <Button
+              onClick={onClick}
+              {...DeleteCheckModalStyles}>
+              삭제하기
+            </Button>
+            <Button
+              onClick={onClose}
+              {...DeleteCheckModalStyles}>
+              취소
+            </Button>
+          </HStack>
         </ModalFooter>
       </ModalContent>
     </Modal>

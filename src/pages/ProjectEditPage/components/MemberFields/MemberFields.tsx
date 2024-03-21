@@ -1,3 +1,6 @@
+import { useState } from "react"
+import { useWatch } from "react-hook-form"
+
 import { Box, Button, Flex, Input } from "@chakra-ui/react"
 
 import { ErrorMessage } from "@components/ErrorMessage/ErrorMessage"
@@ -12,34 +15,49 @@ import { useMemberFieldsMethods } from "./hooks/useMemberFieldsMethods"
 const MemberFields = () => {
   const {
     fields,
+    control,
     register,
     appendNewFields,
     deleteFields,
     appendMembers,
     removeMembers,
-    getSelectedMembers,
     errors,
     trigger,
   } = useMemberFieldsMethods()
+
+  const watchFields = useWatch({ name: "members", control })
+
+  const controlledMember = fields.map((field, index) => {
+    return {
+      ...field,
+      ...watchFields[index],
+    }
+  })
+
+  const [max, setMax] = useState(0)
+  const MAX_FIELDS_NUMBER = 4
+  const MIN_FIELDS_NUMBER = 1
 
   return (
     <Flex
       flexDir="column"
       gap="8px">
-      {fields.map((field, idx) => {
-        const selectedMembers = getSelectedMembers(idx)
-        register(`members.${idx}.data` as const, {
+      {controlledMember.map((field, idx) => {
+        register(`members.${idx}.role` as const, {
           validate: (data) =>
-            data.length !== 0 || "팀원을 한명 이상 선택해주세요",
+            data?.length !== 0 || "팀원을 한명 이상 선택해주세요",
         })
 
         return (
-          <FieldContainer key={field.id}>
-            <Box>
+          <FieldContainer
+            key={field.id}
+            gap="20px"
+            overflow="scroll">
+            <Box flex="1">
               <Input
                 placeholder="카테고리를 입력해주세요"
                 width="20rem"
-                {...register(`members.${idx}.category` as const, {
+                {...register(`members.${idx}.members` as const, {
                   required: "분야 입력은 필수입니다",
                 })}
               />
@@ -50,7 +68,7 @@ const MemberFields = () => {
               />
             </Box>
 
-            <Box>
+            <Box flex="1">
               <ErrorMessage
                 name={`members.${idx}.data`}
                 errors={errors}
@@ -59,35 +77,51 @@ const MemberFields = () => {
               <UserSearchBox
                 onClick={({ id, nickname, profileImageUrl }) => {
                   appendMembers({ id, nickname, profileImageUrl }, idx)
-                  trigger(`members.${idx}.data` as const)
+                  trigger(`members.${idx}.members` as const)
                 }}
-                selectedMembers={getSelectedMembers(idx)}
+                selectedMembers={field.members || []}
               />
             </Box>
-            <Box>
-              {selectedMembers?.map((member, idx) => {
-                return (
-                  <MemberAvatarCard
-                    key={idx}
-                    image={member.profileImageUrl || ""}
-                    text={member.nickname}
-                    onClick={() => {
-                      removeMembers(member, idx)
-                    }}
-                  />
-                )
-              })}
+            <Box flex="6">
+              <Flex
+                gap="5px"
+                overflow="scroll">
+                {field.members?.map((member, idx) => {
+                  return (
+                    <MemberAvatarCard
+                      key={member.id}
+                      image={member.profileImageUrl || ""}
+                      text={member.nickname}
+                      onClick={() => {
+                        removeMembers(member, idx)
+                      }}
+                    />
+                  )
+                })}
+              </Flex>
             </Box>
-            {idx >= 1 && <CloseButton onClick={() => deleteFields(idx)} />}
+            {idx >= MIN_FIELDS_NUMBER && (
+              <CloseButton
+                onClick={() => {
+                  deleteFields(idx)
+                  setMax(max - 1)
+                }}
+              />
+            )}
           </FieldContainer>
         )
       })}
-      <Button
-        border="2px solid"
-        borderColor="blue.200"
-        onClick={appendNewFields}>
-        팀원 추가
-      </Button>
+      {max < MAX_FIELDS_NUMBER && (
+        <Button
+          border="2px solid"
+          borderColor="blue.200"
+          onClick={() => {
+            appendNewFields()
+            setMax(max + 1)
+          }}>
+          팀원 추가
+        </Button>
+      )}
     </Flex>
   )
 }

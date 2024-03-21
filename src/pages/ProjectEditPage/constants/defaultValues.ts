@@ -4,7 +4,7 @@ export const ProjectFormDefaultValues: ProjectFormValues = {
   name: "",
   subName: "",
   overview: "",
-  overviewImageUrl: [],
+  overviewImageUrl: Array(6).fill(""),
   thumbnailUrl: "",
   githubUrl: "",
   deployUrl: "",
@@ -13,5 +13,5 @@ export const ProjectFormDefaultValues: ProjectFormValues = {
   techStacks: [{ category: "", data: [] }],
   description: "",
   troubleShooting: "",
-  members: [{ category: "", data: [] }],
+  members: [{ role: "", members: [] }],
 }

@@ -18,7 +18,9 @@ const dateToTimeago = (date: string) => {
     numeric: "always",
   })
 
-  const passed = +new Date() - +new Date(date)
+  // UTC 시간을 KST로 변환하기 위해 9시간 (32400000 밀리초)을 더함
+  const kstDate = +new Date(date) + 32400000
+  const passed = +new Date() - kstDate
 
   if (passed <= 0) {
     return
@@ -42,7 +44,7 @@ const dateToTimeago = (date: string) => {
       year: "numeric",
       month: "short",
       day: "numeric",
-    }).format(new Date(date))
+    }).format(new Date(kstDate))
   }
 }
 
