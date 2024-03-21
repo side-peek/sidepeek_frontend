@@ -17,19 +17,22 @@ const handleOpenNewTab = (url: string) => {
 const SummaryLink = ({ deployUrl, githubUrl }: SummaryLinkProps) => {
   return (
     <Flex gap="2rem">
-      <SummaryLinkButton
-        linkName="WEB"
-        leftIcon={<TbWorld />}
-        bgColor="blue.100"
-        onClick={() => handleOpenNewTab(deployUrl)}
-      />
-
-      <SummaryLinkButton
-        leftIcon={<FaGithub />}
-        bgColor="blue.300"
-        linkName="Github"
-        onClick={() => handleOpenNewTab(githubUrl)}
-      />
+      {deployUrl && (
+        <SummaryLinkButton
+          linkName="WEB"
+          leftIcon={<TbWorld />}
+          bgColor="blue.100"
+          onClick={() => handleOpenNewTab(deployUrl)}
+        />
+      )}
+      {githubUrl && (
+        <SummaryLinkButton
+          leftIcon={<FaGithub />}
+          bgColor="blue.300"
+          linkName="Github"
+          onClick={() => handleOpenNewTab(githubUrl)}
+        />
+      )}
     </Flex>
   )
 }

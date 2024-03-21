@@ -11,7 +11,7 @@ const SummaryRightIcon = ({
   ...props
 }: SummaryRightIconProps) => {
   const directionStyle =
-    direction === "left" ? { left: "-6%" } : { right: "-6%" }
+    direction === "left" ? { left: "-5%" } : { right: "-5%" }
 
   return (
     <IconButton

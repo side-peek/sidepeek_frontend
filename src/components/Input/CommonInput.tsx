@@ -19,7 +19,7 @@ import { CommonInputProps } from "./types/types"
  */
 
 const CommonInput = ({
-  inputWidth = "20rem",
+  inputWidth,
   register = null,
   children,
   ...props

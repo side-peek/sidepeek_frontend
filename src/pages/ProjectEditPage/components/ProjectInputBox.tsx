@@ -9,14 +9,21 @@ import { projectInputRegister } from "../constants/registerOptions"
 import { ProjectFormValues } from "../types/ProjectFormValues"
 import ErrorText from "./styles/ErrorText"
 
-interface TextInputProps extends BoxProps {
+interface ProjectInputBoxProps extends BoxProps {
   name: keyof ProjectFormValues
   label: string
   footer?: string
   children?: ReactElement
+  width?: string
 }
 
-const ProjectInputBox = ({ name, label, footer, children }: TextInputProps) => {
+const ProjectInputBox = ({
+  name,
+  label,
+  footer,
+  children,
+  width,
+}: ProjectInputBoxProps) => {
   const {
     register,
     formState: { errors },
@@ -25,7 +32,8 @@ const ProjectInputBox = ({ name, label, footer, children }: TextInputProps) => {
   return (
     <Flex
       flexDir="column"
-      gap="5px">
+      gap="5px"
+      width={width}>
       <label htmlFor={name}>
         <Text
           fontSize="md"

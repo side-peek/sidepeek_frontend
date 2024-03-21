@@ -23,15 +23,12 @@ const LoginForm = () => {
           gap="1.6rem"
           justifyContent="center"
           alignItems="stretch">
-          {/* 로그인 입력 양식 */}
-          {/* email */}
           <InputController
             fieldName="email"
             label="이메일"
             registerOptions={emailOptions}>
             <Input />
           </InputController>
-          {/* paasword */}
           <InputController
             fieldName="password"
             label="비밀번호"

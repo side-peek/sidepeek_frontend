@@ -12,17 +12,16 @@ interface FileUploadBoxProps extends DropzoneInputProps {
 }
 
 const FileUploadBox = forwardRef<HTMLInputElement, FileUploadBoxProps>(
-  ({ id, placeholder, boxSize, backgroundColor, ...props }, ref) => {
+  ({ id, placeholder, ...props }, ref) => {
     return (
-      <Center
-        bgColor={backgroundColor || "grey.300"}
-        boxSize={boxSize}>
+      <>
         <FormLabel htmlFor={id}>
           <Center
             flexDir="column"
-            cursor="pointer">
+            justifyContent="center"
+            alignItems="center">
             <IoCameraOutline size="3rem" />
-            <Text>{placeholder}</Text>
+            <Text textAlign="center">{placeholder}</Text>
           </Center>
         </FormLabel>
         <input
@@ -31,7 +30,7 @@ const FileUploadBox = forwardRef<HTMLInputElement, FileUploadBoxProps>(
           ref={ref}
           {...props}
         />
-      </Center>
+      </>
     )
   },
 )
