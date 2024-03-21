@@ -21,6 +21,15 @@ export type CareerType =
   | "7-9년차"
   | "10년차 이상"
 
+export type JobType =
+  | "백엔드 개발자"
+  | "프론트엔드 개발자"
+  | "IOS 개발자"
+  | "안드로이드 개발자"
+  | "디자이너"
+  | "데이터 분석가"
+  | "기타"
+
 export interface PasswordFormValues {
   currentPassword: string
   newPassword: string
@@ -29,4 +38,9 @@ export interface PasswordFormValues {
 
 export interface NicknameFormValues {
   newNickname: string
+}
+
+export interface UrlsFormValues {
+  githubUrl: string
+  blogUrl: string
 }

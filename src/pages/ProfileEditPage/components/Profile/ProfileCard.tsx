@@ -1,4 +1,4 @@
-import { AiFillCaretDown } from "react-icons/ai"
+import { AiFillCaretDown, AiFillEdit } from "react-icons/ai"
 import { FaPlus } from "react-icons/fa6"
 
 import {
@@ -7,7 +7,6 @@ import {
   Button,
   Flex,
   Icon,
-  Input,
   Menu,
   MenuButton,
   MenuItem,
@@ -15,10 +14,9 @@ import {
   Stack,
   Text,
   useDisclosure,
-  useMediaQuery,
 } from "@chakra-ui/react"
 
-import { CareerType, ProfileInfo } from "../../types/types"
+import { CareerType, JobType, ProfileInfo } from "../../types/types"
 import ChangeNicknameModal from "../Modal/ChangeNicknameModal"
 import ChangeProfileImageModal from "../Modal/ChangeProfileImageModal"
 
@@ -34,10 +32,9 @@ const ProfileCard = ({
   profileImageUrl,
   nickname,
   career,
-  job,
+  job = "",
   setProfileInfo,
 }: ProfileCardProps) => {
-  const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
   const {
     isOpen: isNicknameModalOpen,
     onOpen: onNicknameModalOpen,
@@ -55,6 +52,16 @@ const ProfileCard = ({
     "4-6년차",
     "7-9년차",
     "10년차 이상",
+  ]
+
+  const jobs: JobType[] = [
+    "백엔드 개발자",
+    "프론트엔드 개발자",
+    "IOS 개발자",
+    "안드로이드 개발자",
+    "디자이너",
+    "데이터 분석가",
+    "기타",
   ]
   return (
     <Flex
@@ -98,24 +105,38 @@ const ProfileCard = ({
       />
 
       <Stack ml="1.5rem">
-        <Text
-          fontSize="3xl"
-          fontFamily="SCDream_Bold"
+        <Flex
+          direction="row"
+          alignItems="center"
+          gap="0.5rem"
           cursor="pointer"
           onClick={onNicknameModalOpen}>
-          {nickname}
-        </Text>
+          <Text
+            fontSize="3xl"
+            fontFamily="SCDream_Bold">
+            {nickname}
+          </Text>
+          <Icon
+            mb="0.4rem"
+            as={AiFillEdit}
+            fontSize="3.3rem"></Icon>
+        </Flex>
+
         <ChangeNicknameModal
           isOpen={isNicknameModalOpen}
           onClose={onNicknameModalClose}
           setProfileInfo={setProfileInfo}
         />
-        <Flex direction={isLargerThan500 ? "row" : "column"}>
+        <Flex
+          direction="column"
+          gap="0.5rem">
           <Menu>
             <MenuButton
               as={Button}
+              border="1px solid"
+              borderColor="grey.300"
               rightIcon={<AiFillCaretDown />}
-              w="9rem">
+              w="13rem">
               {career === "" ? "연차" : career}
             </MenuButton>
             <MenuList>
@@ -133,21 +154,31 @@ const ProfileCard = ({
               ))}
             </MenuList>
           </Menu>
-          <Input
-            pl="0.5rem"
-            variant="flushed"
-            height="2.5rem"
-            value={job}
-            placeholder="직업을 입력해주세요"
-            ml="0.5rem"
-            w="12rem"
-            onChange={(e) =>
-              setProfileInfo((profileInfo) => ({
-                ...profileInfo,
-                job: e.target.value,
-              }))
-            }
-          />
+
+          <Menu>
+            <MenuButton
+              as={Button}
+              border="1px solid"
+              borderColor="grey.300"
+              rightIcon={<AiFillCaretDown />}
+              w="13rem">
+              {job === "" ? "직업" : job}
+            </MenuButton>
+            <MenuList>
+              {jobs.map((job) => (
+                <MenuItem
+                  key={job}
+                  onClick={() =>
+                    setProfileInfo((profileInfo) => ({
+                      ...profileInfo,
+                      job: job,
+                    }))
+                  }>
+                  {job}
+                </MenuItem>
+              ))}
+            </MenuList>
+          </Menu>
         </Flex>
       </Stack>
     </Flex>

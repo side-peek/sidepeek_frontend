@@ -47,7 +47,10 @@ export const router = (queryClient: QueryClient) => {
               path: "/profile/:userId",
               element: <ProfilePage />,
             },
-            { path: "/profile/edit", element: <ProfileEditPage /> },
+            {
+              path: "/profile/edit",
+              element: <ProfileEditPage />,
+            },
           ],
         },
         {
