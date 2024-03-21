@@ -35,11 +35,14 @@ const ProfileController = ({ userId }: UserIdProps) => {
     nickname,
     profileImageUrl,
     career,
+    job,
     introduction,
     githubUrl,
     blogUrl,
     techStacks,
   } = data
+
+  console.log(job)
 
   return (
     <Box>
@@ -57,6 +60,7 @@ const ProfileController = ({ userId }: UserIdProps) => {
               nickname,
               profileImageUrl,
               career,
+              job,
               introduction,
               githubUrl,
               blogUrl,
@@ -71,6 +75,7 @@ const ProfileController = ({ userId }: UserIdProps) => {
               nickname,
               profileImageUrl,
               career,
+              job,
               handleNewProject,
               handleEditProfile,
             }}
