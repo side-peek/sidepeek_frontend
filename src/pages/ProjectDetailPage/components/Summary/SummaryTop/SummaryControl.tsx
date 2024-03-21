@@ -29,7 +29,7 @@ const SummaryControl = ({ onOpen, projectId }: SummaryControlProps) => {
   const navigate = useNavigate()
 
   const handleEditProject = () => {
-    navigate(`/edit?projectid=${Number(projectId)}`)
+    navigate(`/project/edit?=${Number(projectId)}`)
   }
 
   return (
