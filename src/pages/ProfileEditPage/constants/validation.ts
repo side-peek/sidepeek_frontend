@@ -39,6 +39,10 @@ export const CURRENT_PASSWORD_VALIDATION_OPTION = {
 
 export const NEW_PASSWORD_VALIDATION_OPTION = {
   required: "새로운 비밀번호를 입력해주세요",
+  pattern: {
+    value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/,
+    message: "문자, 숫자, 특수문자를 포함해야 합니다",
+  },
   minLength: {
     value: 8,
     message: "새로운 비밀번호는 8자 이상이어야 합니다",
