@@ -1,8 +1,15 @@
-import { ReactNode, createContext, useContext, useState } from "react"
+import {
+  ReactNode,
+  createContext,
+  useCallback,
+  useContext,
+  useState,
+} from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 
 import { editCommentPayload } from "api-models"
 
+import { ProjectIdProps } from "../components/Hoc/withProjectId"
 import { useDeleteCommentMutation } from "../hooks/mutations/useDeleteCommentMutation"
 import { useEditCommentMutation } from "../hooks/mutations/useEditCommentMutation"
 import { CommentContextProps } from "../types/commentContextProps"
@@ -18,25 +25,29 @@ const CommentContext = createContext<CommentContextProps>({
   handleOffEdit: () => {},
   handleDelete: () => {},
   onSubmitEdit: () => {},
+  focusOnFiled: () => {},
   register: undefined,
   handleSubmit: undefined,
 })
 
-interface CommentProviderProps {
+interface CommentProviderProps extends ProjectIdProps {
   children: ReactNode
 }
 
-export const CommentProvider = ({ children }: CommentProviderProps) => {
+export const CommentProvider = ({
+  children,
+  projectId,
+}: CommentProviderProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const [isReply, setIsReply] = useState(false)
   const [editTargetCommentId, setEditTargetCommentId] = useState(-1)
   const [replyTargetCommentId, setReplyTargetCommentId] = useState(-1)
 
-  const { register, setValue, reset, handleSubmit } =
+  const { register, setValue, reset, handleSubmit, setFocus } =
     useForm<editCommentPayload>()
 
-  const { editCommentMutation } = useEditCommentMutation()
-  const { deleteCommentMutation } = useDeleteCommentMutation()
+  const { editCommentMutation } = useEditCommentMutation(Number(projectId))
+  const { deleteCommentMutation } = useDeleteCommentMutation(Number(projectId))
 
   const handleOnEdit = ({
     commentId,
@@ -44,6 +55,7 @@ export const CommentProvider = ({ children }: CommentProviderProps) => {
     content,
   }: editCommentPayload) => {
     setIsEditing(true)
+    handleOffReply()
     setEditTargetCommentId(commentId)
     setValue("commentId", commentId)
     setValue("isAnonymous", isAnonymous)
@@ -57,6 +69,7 @@ export const CommentProvider = ({ children }: CommentProviderProps) => {
 
   const handleOnReply = (commentId: number) => {
     setIsReply(true)
+    handleOffEdit()
     setReplyTargetCommentId(commentId)
   }
 
@@ -76,6 +89,10 @@ export const CommentProvider = ({ children }: CommentProviderProps) => {
     handleOffReply()
   }
 
+  const focusOnFiled = useCallback(() => {
+    setFocus("content")
+  }, [setFocus])
+
   return (
     <CommentContext.Provider
       value={{
@@ -90,6 +107,7 @@ export const CommentProvider = ({ children }: CommentProviderProps) => {
         handleDelete,
         onSubmitEdit,
         register,
+        focusOnFiled,
         handleSubmit,
       }}>
       {children}

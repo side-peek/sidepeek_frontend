@@ -1,24 +1,20 @@
-import { Comment } from "api-models"
-
 import { CommentProvider } from "@pages/ProjectDetailPage/store/CommentContext"
 
+import { CommentsProps } from "../../types/commentsProps"
+import { withProjectId } from "../Hoc/withProjectId"
 import CommentsForm from "./CommentsForm/CommentsForm"
 import CommentsList from "./CommentsList/CommentsList"
 import CommentsLayout from "./Layout/CommentsLayout"
 
-export interface CommentsProps {
-  comments: Comment[]
-}
-
-const Comments = ({ comments }: CommentsProps) => {
+const Comments = ({ comments, projectId }: CommentsProps) => {
   return (
     <CommentsLayout>
-      <CommentsForm />
-      <CommentProvider>
+      <CommentProvider projectId={projectId}>
+        <CommentsForm />
         <CommentsList comments={comments} />
       </CommentProvider>
     </CommentsLayout>
   )
 }
 
-export default Comments
+export default withProjectId(Comments)

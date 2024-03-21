@@ -1,4 +1,3 @@
-import { UseFormRegisterReturn } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
 import { Box, Button, HStack, Stack, useMediaQuery } from "@chakra-ui/react"
@@ -9,15 +8,15 @@ import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext
 import CommentsForm from "../CommentsForm/CommentsForm"
 import CommentTitle from "./components/CommentTitle"
 import CommentsAvatar from "./components/CommentsAvatar"
-import CommentsEditFormText from "./components/CommentsEditFormText"
+import CommentsEditForm from "./components/CommentsEditForm"
+import CommentsText from "./components/CommentsText"
 import ReplyComment from "./components/ReplyComment"
 
 interface CommentsItemProps {
   comment: Comment
-  register: UseFormRegisterReturn
 }
 
-const CommentsItem = ({ comment, register }: CommentsItemProps) => {
+const CommentsItem = ({ comment }: CommentsItemProps) => {
   const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
   const navigate = useNavigate()
 
@@ -25,8 +24,14 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
     navigate(`/profile/${userId}`)
   }
 
-  const { replyTargetCommentId, isReply, handleOnReply, handleOffReply } =
-    useCommentContext()
+  const {
+    replyTargetCommentId,
+    isReply,
+    handleOnReply,
+    handleOffReply,
+    editTargetCommentId,
+    isEditing,
+  } = useCommentContext()
 
   return (
     <Stack
@@ -37,12 +42,13 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
         gap={isLargerThan768 ? "2rem" : "1.3rem"}
         align="flex-start">
         <CommentsAvatar
+          user={comment.user}
+          src={comment.user?.profileImageUrl ?? undefined}
           onClick={() => {
-            if (comment.user && comment.user.id) {
+            if (comment.user.id) {
               handleNavigateProfile(comment.user.id)
             }
           }}
-          user={comment.user}
         />
         <Box w="100%">
           <HStack
@@ -53,12 +59,12 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
               gap="1rem"
               align="flex-start">
               <CommentTitle comment={comment} />
-              <CommentsEditFormText
-                {...{
-                  comment,
-                  register,
-                }}
-              />
+              {editTargetCommentId === comment.id && isEditing ? (
+                <CommentsEditForm />
+              ) : (
+                <CommentsText text={comment.content} />
+              )}
+
               {!comment.parentId &&
                 (isReply ? (
                   comment.id === replyTargetCommentId && (
@@ -80,6 +86,7 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
                   <Button
                     size={isLargerThan768 ? "md" : "sm"}
                     onClick={() => handleOnReply(comment.id)}
+                    _hover={{ opacity: 0.5 }}
                     p="0">
                     답글달기
                   </Button>
@@ -88,14 +95,7 @@ const CommentsItem = ({ comment, register }: CommentsItemProps) => {
           </HStack>
         </Box>
       </HStack>
-      {comment.replies && (
-        <ReplyComment
-          comment={comment.replies}
-          {...{
-            register,
-          }}
-        />
-      )}
+      {comment.replies && <ReplyComment comment={comment.replies} />}
     </Stack>
   )
 }

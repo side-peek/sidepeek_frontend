@@ -3,13 +3,16 @@ import { TechStack } from "api-models"
 
 import CommonTag from "@components/Tag/components/CommonTag"
 
-import techStacksCategory from "@pages/ProjectDetailPage/utils/techStacksCategory"
+import {
+  CategoryTechStacks,
+  categorizeTechStacks,
+} from "@utils/categorizeTechStacks"
 
 interface TechStacksProps {
   techStacks: TechStack[]
 }
 const TechStacks = ({ techStacks }: TechStacksProps) => {
-  const groupedByCategory = techStacksCategory(techStacks)
+  const categorizedTechStacks = categorizeTechStacks(techStacks)
   const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
 
   return (
@@ -24,37 +27,40 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
       </Text>
       {techStacks.length > 0 ? (
         <Stack spacing="3rem">
-          {groupedByCategory.map(([category, stacks]) => (
-            <Stack
-              key={category}
-              direction={isLargerThan768 ? "row" : "column"}
-              spacing="2rem">
-              <Text
-                fontSize="xl"
-                minW="8rem"
-                whiteSpace="nowrap">
-                {category}
-              </Text>
-              <HStack
-                spacing="1rem"
-                flexWrap="wrap">
-                {stacks.map((stack) => (
-                  <CommonTag
-                    leftElement={
-                      <Image
-                        src={stack.skill.iconImageUrl}
-                        w="2rem"
-                        h="2rem"
-                      />
-                    }
-                    label={stack.skill.name}
-                    key={stack.skill.id}
-                    fontSize="lg"
-                  />
-                ))}
-              </HStack>
-            </Stack>
-          ))}
+          {categorizedTechStacks.map(
+            ({ category, techStacks }: CategoryTechStacks) => (
+              <Stack
+                key={category}
+                direction={isLargerThan768 ? "row" : "column"}
+                spacing="2rem">
+                <Text
+                  fontSize="xl"
+                  minW="8rem"
+                  whiteSpace="nowrap">
+                  {category}
+                </Text>
+                <HStack
+                  spacing="1rem"
+                  flexWrap="wrap">
+                  {techStacks.map((stack) => (
+                    <CommonTag
+                      leftElement={
+                        <Image
+                          src={stack.skill.iconImageUrl}
+                          w="2rem"
+                          h="2rem"
+                        />
+                      }
+                      cursor="default"
+                      label={stack.skill.name}
+                      key={stack.skill.id}
+                      fontSize="lg"
+                    />
+                  ))}
+                </HStack>
+              </Stack>
+            ),
+          )}
         </Stack>
       ) : (
         <Text

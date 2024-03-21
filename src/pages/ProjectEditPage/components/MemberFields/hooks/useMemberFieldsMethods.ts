@@ -6,7 +6,6 @@ import { RequestedMemberType } from "@pages/ProjectEditPage/types/ProjectFormVal
 export const useMemberFieldsMethods = () => {
   const {
     control,
-    getValues,
     setValue,
     watch,
     register,
@@ -14,7 +13,7 @@ export const useMemberFieldsMethods = () => {
     formState: { errors },
   } = useProjectFormContext()
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append } = useFieldArray({
     name: "members",
     control,
   })
@@ -24,7 +23,9 @@ export const useMemberFieldsMethods = () => {
   }
 
   const deleteFields = (idx: number) => {
-    remove(idx)
+    const copy = [...watch("members")]
+    copy.splice(idx, 1)
+    setValue("members", [...copy.filter((v) => v)])
   }
 
   const setCategory = (value: string, idx: number) => {
@@ -32,29 +33,28 @@ export const useMemberFieldsMethods = () => {
   }
 
   const appendMembers = (data: RequestedMemberType, idx: number) => {
-    const members = [...getValues(`members.${idx}.data`), data]
+    const members = [...watch(`members.${idx}.data`), data]
     setValue(`members.${idx}.data`, members)
   }
 
   const removeMembers = (data: RequestedMemberType, idx: number) => {
-    const members = [...getValues(`members.${idx}.data`)]
+    const members = watch(`members.${idx}.data`)
+
     setValue(
       `members.${idx}.data`,
-      members.filter((member) => member.id !== data.id),
+      members?.filter((member) => member.id !== data.id),
     )
   }
 
-  const getSelectedMembers = (idx: number) => watch(`members.${idx}.data`)
-
   return {
     fields,
+    control,
     register,
     appendNewFields,
     deleteFields,
     setCategory,
     appendMembers,
     removeMembers,
-    getSelectedMembers,
     errors,
     trigger,
   }

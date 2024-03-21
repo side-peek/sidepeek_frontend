@@ -16,7 +16,7 @@ const Pagination = ({ totalProjectsCount, setPage }: PaginationProps) => {
   }
   return (
     <PaginationProvider
-      limit={12}
+      limit={24}
       total={totalProjectsCount}
       onPageChange={handlePageChange}>
       <HStack>

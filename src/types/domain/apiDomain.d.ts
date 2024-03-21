@@ -1,23 +1,4 @@
 declare module "api-models" {
-  /* FIXME: 초기 ERD 모델 (아직 정해지지 않아서 일단 남겨놓습니다)
-  export type User = {
-    id: number
-    nickname: string
-    provider: string
-    email: string
-    password?: string
-    profileImageUrl?: string
-    introduction?: string
-    job?: string
-    career?: string
-    githubUrl?: string
-    blogUrl?: string
-    createdAt: string
-    updatedAt: string
-    deletedAt?: string
-    isDeleted: boolean
-  } */
-
   export type TechStackRequest = {
     skillId?: number
     category?: string
@@ -174,7 +155,6 @@ declare module "api-models" {
     name: string
   }
 
-  /* 인증 관련 */
   export type postEmailAuthResponseType = UserSummary
 
   export type postEmailRefreshPayload = {
@@ -199,7 +179,6 @@ declare module "api-models" {
     providerType: string
   } & AuthResponseType
 
-  /* 회원 관련 */
   export type postEmailSignUpPayload = {
     email: string
     password: string
@@ -265,7 +244,6 @@ declare module "api-models" {
     isDuplicated: boolean
   }
 
-  /* 기술 스택 */
   export type getTechStacksPayload = {
     keyword?: string
   }
@@ -274,9 +252,7 @@ declare module "api-models" {
     skills: Skill[]
   }
 
-  /* 프로젝트 파일 */
   export type postProjectFilesPayload = {
-    //FIXME: file에 저장될 키 값을 아직 안정함
     file: FormData
   }
 
@@ -284,8 +260,6 @@ declare module "api-models" {
     fileUrl: string
   }
 
-  /* 프로젝트 게시글 */
-  //FIXME: 미완성 api
   export type postProjectPayload = {
     name: string
     overview: string
@@ -327,15 +301,12 @@ declare module "api-models" {
     skill?: string[]
   }
 
-  export type putProjectPayload = {
-    projectId: number
-  } & Project
+  export type putProjectPayload = Omit<postProjectPayload, "ownerId">
 
   export type deleteProjectPayload = {
     projectId: number
   }
 
-  /* 좋아요 */
   export type getLikeResponseType = {
     likeId: number | null
   }
@@ -347,8 +318,6 @@ declare module "api-models" {
   export type deleteLikePayload = {
     likeId: number
   }
-
-  /* 댓글 */
 
   export type postCommentPayload = {
     ownerId: number

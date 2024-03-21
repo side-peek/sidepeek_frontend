@@ -1,4 +1,4 @@
-import { Box, Flex, useMediaQuery } from "@chakra-ui/react"
+import { Box, Flex } from "@chakra-ui/react"
 
 import FullScreenSpinner from "@components/LoadingComponents/FullScreenSpinner"
 
@@ -10,7 +10,6 @@ import { useProjectDetailQuery } from "./hooks/queries/useProjectDetailQuery"
 
 const ProjectDetailPage = ({ projectId }: ProjectIdProps) => {
   const { projectDetailInfo } = useProjectDetailQuery(Number(projectId))
-  const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
 
   if (!projectDetailInfo) {
     return <FullScreenSpinner />
@@ -23,7 +22,7 @@ const ProjectDetailPage = ({ projectId }: ProjectIdProps) => {
         maxW="128rem"
         w="100%"
         margin="0 auto"
-        p={isLargerThan768 ? "5rem" : "1.5rem"}
+        p="5rem"
         gap="10rem"
         direction="column">
         <Content projectDetailInfo={projectDetailInfo} />

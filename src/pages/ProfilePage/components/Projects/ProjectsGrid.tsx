@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import { Center, Grid, GridItem } from "@chakra-ui/react"
+import { Center, Grid, GridItem, Text } from "@chakra-ui/react"
 
 import Pagination from "@components/Pagination/Pagination"
 import ProjectCard from "@components/ProjectCard/ProjectCard"
@@ -27,7 +27,7 @@ const ProjectsGrid = ({ userId, type }: ProjectsGridProps) => {
     userId: Number(userId),
     type: type,
     page: page - 1,
-    size: 12,
+    size: 24,
   })
 
   const totalProjectsCount = data?.totalElements
@@ -35,41 +35,53 @@ const ProjectsGrid = ({ userId, type }: ProjectsGridProps) => {
 
   return (
     <>
-      <Grid
-        mt="0.5rem"
-        templateColumns="repeat(auto-fill, minmax(24rem, 1fr))"
-        gap={0}>
-        {projects &&
-          projects.map(
-            ({
-              id,
-              name,
-              subName,
-              isLiked,
-              thumbnailUrl,
-              viewCount,
-              likeCount,
-            }: ProjectProperties) => (
-              <GridItem key={id}>
-                <ProjectCard
-                  url={`/project/${id}`}
-                  imgUrl={thumbnailUrl}
-                  viewCount={viewCount}
-                  heartCount={likeCount}
-                  isFullHeart={isLiked}
-                  title={name}
-                  content={subName}
-                />
-              </GridItem>
-            ),
-          )}
-      </Grid>
-      <Center my="2rem">
-        <Pagination
-          totalProjectsCount={totalProjectsCount}
-          setPage={setPage}
-        />
-      </Center>
+      {projects && projects.length !== 0 ? (
+        <>
+          <Grid
+            mt="0.5rem"
+            templateColumns="repeat(auto-fill, minmax(24rem, 1fr))"
+            gap={0}>
+            {projects &&
+              projects.map(
+                ({
+                  id,
+                  name,
+                  subName,
+                  isLiked,
+                  thumbnailUrl,
+                  viewCount,
+                  likeCount,
+                }: ProjectProperties) => (
+                  <GridItem key={id}>
+                    <ProjectCard
+                      url={`/project/${id}`}
+                      imgUrl={thumbnailUrl}
+                      viewCount={viewCount}
+                      heartCount={likeCount}
+                      isFullHeart={isLiked}
+                      title={name}
+                      content={subName}
+                    />
+                  </GridItem>
+                ),
+              )}
+          </Grid>
+          <Center my="2rem">
+            <Pagination
+              totalProjectsCount={totalProjectsCount}
+              setPage={setPage}
+            />
+          </Center>
+        </>
+      ) : (
+        <Center my="4rem">
+          <Text
+            fontSize="1.2rem"
+            color="grey.500">
+            프로젝트가 없습니다
+          </Text>
+        </Center>
+      )}
     </>
   )
 }

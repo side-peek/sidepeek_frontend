@@ -1,18 +1,25 @@
 import { MdDelete } from "react-icons/md"
 import { TiPencil } from "react-icons/ti"
 
-import { IconButton, useMediaQuery } from "@chakra-ui/react"
-import { Comment } from "api-models"
+import { IconButton, useDisclosure, useMediaQuery } from "@chakra-ui/react"
 
+import DeleteCheckModal from "@pages/ProjectDetailPage/components/DeleteCheckModal"
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
 interface BeforeEditingButtonProps {
-  comment: Comment
+  isAnonymous: boolean
+  commentId: number
+  content: string
 }
 
-const BeforeEditingButton = ({ comment }: BeforeEditingButtonProps) => {
+const BeforeEditingButton = ({
+  isAnonymous,
+  commentId,
+  content,
+}: BeforeEditingButtonProps) => {
   const { handleOnEdit, handleDelete } = useCommentContext()
   const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -21,19 +28,28 @@ const BeforeEditingButton = ({ comment }: BeforeEditingButtonProps) => {
         icon={<TiPencil />}
         onClick={() => {
           handleOnEdit({
-            commentId: comment.id,
-            isAnonymous: comment.isAnonymous,
-            content: comment.content,
+            commentId: commentId,
+            isAnonymous: isAnonymous,
+            content: content,
           })
         }}
+        _hover={{ opacity: 0.5 }}
         fontSize={isLargerThan768 ? "2xl" : "lg"}
       />
       <IconButton
         aria-label="delete"
         icon={<MdDelete />}
-        onClick={() => handleDelete(comment.id)}
+        onClick={onOpen}
+        _hover={{ opacity: 0.5 }}
         fontSize={isLargerThan768 ? "2xl" : "lg"}
       />
+      {isOpen && (
+        <DeleteCheckModal
+          isOpen={isOpen}
+          onClose={onClose}
+          onClick={() => handleDelete(commentId)}
+        />
+      )}
     </>
   )
 }

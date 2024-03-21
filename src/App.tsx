@@ -12,14 +12,11 @@ import { theme } from "./styles/theme"
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      gcTime: 1000 * 60 * 3,
-      staleTime: 1000 * 60,
       refetchOnWindowFocus: false,
       retry: 0,
       throwOnError: (error) => isAuthError(error),
     },
     mutations: {
-      gcTime: 1000 * 60 * 3,
       retry: 0,
       throwOnError: (error) => isAuthError(error),
     },

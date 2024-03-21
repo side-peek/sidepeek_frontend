@@ -16,7 +16,7 @@ export const useTechStacksMethods = () => {
     trigger,
   } = useProjectFormContext()
 
-  const { append, fields, remove } = useFieldArray<ProjectFormValues>({
+  const { append, fields } = useFieldArray<ProjectFormValues>({
     control,
     name: "techStacks",
     rules: {
@@ -43,7 +43,11 @@ export const useTechStacksMethods = () => {
     setValue(`techStacks.${index}.data`, [...filtered])
   }
 
-  const removeField = (idx: number) => remove(idx)
+  const removeField = (index: number) => {
+    const copy = [...watch("techStacks")]
+    copy.splice(index, 1)
+    setValue("techStacks", copy)
+  }
 
   const selectedStacks = (index: number) => watch(`techStacks.${index}.data`)
 
