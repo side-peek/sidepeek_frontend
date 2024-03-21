@@ -76,6 +76,8 @@ const TechStackSection = ({
               px={isLargerThan500 ? "2rem" : "0rem"}
               py={isLargerThan500 ? "0rem" : "1rem"}>
               <StackSearchBox
+                showAll={true}
+                inputProps={{ pl: "0.5rem" }}
                 render={({ techStacks }) => {
                   return (
                     <Box>
