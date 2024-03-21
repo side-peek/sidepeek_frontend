@@ -23,9 +23,13 @@ const CommentsForm = ({
   projectId,
   isReplyComment,
 }: CommentsFormProps) => {
-  const { register, reset, handleSubmit, setFocus, watch } =
-    useForm<CommentFormValues>()
-  const currentInput = watch("content")
+  const {
+    register,
+    reset,
+    handleSubmit,
+    setFocus,
+    formState: { isValid, isSubmitting },
+  } = useForm<CommentFormValues>()
 
   const { sendCommentMutation } = usePostCommentMutation()
   const { handleOffReply, handleOffEdit } = useCommentContext()
@@ -79,7 +83,11 @@ const CommentsForm = ({
                 as={ResizeTextarea}
                 border="none"
                 _focus={{ boxShadow: "none" }}
-                {...register("content", { required: true })}
+                {...register("content", {
+                  required: true,
+                  validate: (value) =>
+                    value.trim().length > 0 && value.trim().length < 10,
+                })}
                 {...TEXTAREA_STYLE}
               />
               <Box
@@ -107,10 +115,11 @@ const CommentsForm = ({
             bgColor="blue.100"
             borderRadius="0"
             borderTopRightRadius="1rem"
-            opacity={currentInput ? "1" : "0.3"}
+            opacity={!isSubmitting && isValid ? "1" : "0.3"}
             color="white"
             fontSize="xl"
-            cursor={currentInput ? "pointer" : "default"}
+            disabled={isSubmitting}
+            cursor={!isSubmitting && isValid ? "pointer" : "default"}
             type="submit">
             입력
           </Button>
