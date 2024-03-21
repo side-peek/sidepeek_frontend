@@ -38,13 +38,18 @@ const Overview = () => {
     <>
       {watch("overviewImageUrl")?.map((image, idx) => {
         return (
-          <Box key={idx}>
+          <Box
+            key={idx}
+            boxSize="10rem"
+            cursor="pointer">
             {image ? (
               <Image
                 src={image}
                 key={idx}
                 loading="lazy"
-                objectFit="fill"
+                width="100%"
+                height="100%"
+                objectFit="cover"
                 onClick={() => deleteFile(idx)}
               />
             ) : (
@@ -57,7 +62,6 @@ const Overview = () => {
                     {...inputProps}
                     id="overviewImageUrl"
                     placeholder="클릭해서 사진을 업로드해주세요"
-                    width="50%"
                   />
                 )}
               </FileUploadSection>

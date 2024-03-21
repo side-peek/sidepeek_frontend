@@ -1,4 +1,4 @@
-import { Box, Image } from "@chakra-ui/react"
+import { Center, Image } from "@chakra-ui/react"
 
 import FileUploadBox from "@pages/ProjectEditPage/components/Files/FileUploadBox"
 import { usePostFileMutation } from "@pages/ProjectEditPage/hooks/usePostFileMutation"
@@ -20,11 +20,19 @@ const Thumbnail = () => {
   }
 
   return (
-    <Box>
+    <Center
+      width="100%"
+      height="30rem"
+      border="1px solid black"
+      borderRadius="1rem"
+      cursor="pointer">
       {watch("thumbnailUrl") ? (
         <Image
           src={watch("thumbnailUrl")}
           onClick={deleteFile}
+          width="100%"
+          height="100%"
+          objectFit="cover"
         />
       ) : (
         <FileUploadSection
@@ -41,7 +49,7 @@ const Thumbnail = () => {
           )}
         </FileUploadSection>
       )}
-    </Box>
+    </Center>
   )
 }
 
