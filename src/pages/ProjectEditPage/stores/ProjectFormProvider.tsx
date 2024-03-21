@@ -76,11 +76,7 @@ const ProjectFormProvider = ({
 
   return (
     <FormProvider {...methods}>
-      <form
-        onSubmit={methods.handleSubmit(
-          (data) => handleSubmitEvent(data),
-          (err) => console.log(err),
-        )}>
+      <form onSubmit={methods.handleSubmit((data) => handleSubmitEvent(data))}>
         {children}
         <Button />
       </form>
