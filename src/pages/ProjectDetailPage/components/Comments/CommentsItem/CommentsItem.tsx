@@ -42,6 +42,7 @@ const CommentsItem = ({ comment }: CommentsItemProps) => {
         gap={isLargerThan768 ? "2rem" : "1.3rem"}
         align="flex-start">
         <CommentsAvatar
+          user={comment.user}
           src={comment.user?.profileImageUrl ?? undefined}
           onClick={() => {
             if (comment.user.id) {
