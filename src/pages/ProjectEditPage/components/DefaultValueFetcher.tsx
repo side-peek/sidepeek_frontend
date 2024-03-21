@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 
 import { Spinner } from "@chakra-ui/react"
 
@@ -7,7 +7,8 @@ import ProjectFormProvider from "../stores/ProjectFormProvider"
 import ProjectForm from "./ProjectForm"
 
 const DefaultValueFetcher = () => {
-  const { projectId } = useParams()
+  const [searchParams] = useSearchParams()
+  const projectId = searchParams.get("projectId")
 
   const { data: projectDetailInfo, isLoading } = useGetProjectEdit(
     Number(projectId),
