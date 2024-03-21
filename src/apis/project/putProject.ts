@@ -1,13 +1,16 @@
-import { putProjectPayload } from "api-models"
-import { AxiosRequestConfig } from "axios"
+import { Project, putProjectPayload } from "api-models"
 
 import { ENDPOINTS } from "@constants/endPoints"
 
 import { authInstance } from "../axiosInstance"
 
 export const putProject = async (
-  { projectId, ...body }: putProjectPayload,
-  config: AxiosRequestConfig = {},
-) => {
-  await authInstance.put(ENDPOINTS.PUT_PROJECT(projectId), body, { ...config })
+  projectId: number,
+  body: putProjectPayload,
+): Promise<Project> => {
+  const { data } = await authInstance.put(
+    ENDPOINTS.PUT_PROJECT(projectId),
+    body,
+  )
+  return data
 }

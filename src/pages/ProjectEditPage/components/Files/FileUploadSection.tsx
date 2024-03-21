@@ -9,6 +9,7 @@ import { Box } from "@chakra-ui/react"
 
 interface FileUploadAreaProps extends DropzoneOptions {
   children: (props: DropzoneInputProps) => ReactNode
+  size?: string | number
 }
 
 const FileUploadSection = ({
@@ -24,6 +25,7 @@ const FileUploadSection = ({
   })
   return (
     <Box
+      width="100%"
       {...getRootProps()}
       aria-label="File-Upload">
       {children(getInputProps())}
