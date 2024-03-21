@@ -86,7 +86,7 @@ const CommentsForm = ({
                 {...register("content", {
                   required: true,
                   validate: (value) =>
-                    value.trim().length > 0 && value.trim().length < 10,
+                    value.trim().length > 0 && value.trim().length < 100,
                 })}
                 {...TEXTAREA_STYLE}
               />
