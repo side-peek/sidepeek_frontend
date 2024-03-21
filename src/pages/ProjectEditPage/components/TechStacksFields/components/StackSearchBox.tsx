@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 
-import { BoxProps, Flex } from "@chakra-ui/react"
+import { BoxProps, Flex, InputProps } from "@chakra-ui/react"
 import { Skill } from "api-models"
 
 import SearchBox from "@components/Search/SearchMain"
@@ -10,15 +10,19 @@ import { useTechStacks } from "@components/Search/hooks/useTechStacksSearch"
 interface StackSearchSectionProps extends BoxProps {
   children?: ReactNode
   render: ({ techStacks }: { techStacks: Skill[] }) => JSX.Element
+  showAll?: boolean
+  inputProps?: InputProps
 }
 
 const StackSearchBox = ({
   children,
   render,
+  showAll = true,
+  inputProps,
   ...props
 }: StackSearchSectionProps) => {
   const [inputValue, onInput] = useInput("")
-  const [techStacks] = useTechStacks(inputValue)
+  const [techStacks] = useTechStacks(inputValue, showAll)
 
   return (
     <SearchBox {...props}>
@@ -26,6 +30,7 @@ const StackSearchBox = ({
         <SearchBox.Input
           onChange={onInput}
           placeholder="기술 스택을 검색해보세요"
+          inputProps={inputProps}
         />
         {children}
         <SearchBox.Result

@@ -23,7 +23,7 @@ import ProfileIntroduction from "./components/Profile/ProfileIntroduction"
 import usePutUserDetailMutation from "./hooks/mutation/usePutUserDetailMutation"
 import { useUserInfo } from "./hooks/query/useUserInfo"
 import StyledButton from "./styles/StyledButton"
-import { ProfileInfo, UrlsFormValues } from "./types/types"
+import { IntroductionFormValues, ProfileInfo } from "./types/types"
 
 const ProfileEditPage = () => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
@@ -56,6 +56,7 @@ const ProfileEditPage = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
+      aboutMe: profileInfo.introduction,
       githubUrl:
         profileInfo.githubUrl.length !== 0
           ? profileInfo.githubUrl.slice(8)
@@ -65,19 +66,20 @@ const ProfileEditPage = () => {
     },
   })
 
-  const handleProfileUpdate: SubmitHandler<UrlsFormValues> = (
-    urlsFormValues,
+  const handleProfileUpdate: SubmitHandler<IntroductionFormValues> = (
+    introductionFormValues,
   ) => {
     const fullGithubUrl =
-      urlsFormValues.githubUrl.length !== 0
-        ? `https://${urlsFormValues.githubUrl}`
+      introductionFormValues.githubUrl.length !== 0
+        ? `https://${introductionFormValues.githubUrl}`
         : ""
     const fullBlogUrl =
-      urlsFormValues.blogUrl.length !== 0
-        ? `https://${urlsFormValues.blogUrl}`
+      introductionFormValues.blogUrl.length !== 0
+        ? `https://${introductionFormValues.blogUrl}`
         : ""
     const updatedProfileInfo = {
       ...profileInfo,
+      introduction: introductionFormValues.aboutMe,
       githubUrl: fullGithubUrl,
       blogUrl: fullBlogUrl,
       techStacks: revertTechStacks(method.fieldValue),
@@ -114,7 +116,6 @@ const ProfileEditPage = () => {
             introduction={profileInfo.introduction}
             githubUrl={profileInfo.githubUrl}
             blogUrl={profileInfo.blogUrl}
-            setProfileInfo={setProfileInfo}
           />
 
           <TechStackSection
@@ -122,7 +123,7 @@ const ProfileEditPage = () => {
             render={(renderProps) => (
               <Input
                 w="30rem"
-                pl="1rem"
+                pl="0.5rem"
                 variant="none"
                 placeholder="직군 카테고리를 입력해주세요"
                 flex={isLargerThan500 ? "0 0 25rem" : "0 0 3.5rem"}
