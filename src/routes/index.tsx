@@ -12,7 +12,6 @@ import ProjectDetailPage from "@pages/ProjectDetailPage/ProjectDetailPage"
 import ProjectEditPage from "@pages/ProjectEditPage/ProjectEditPage"
 import ProjectListPage from "@pages/ProjectListPage/ProjectListPage"
 import SignUpPage from "@pages/SignUpPage/SignUpPage"
-import TestPage from "@pages/TestPage/TestPage"
 
 import RootLayout from "./layouts/RootLayout"
 import { determineRedirectLoader } from "./loaders/determineRedirectLoader"
@@ -40,10 +39,6 @@ export const router = createBrowserRouter([
           {
             path: "/project/edit",
             element: <ProjectEditPage />,
-          },
-          {
-            path: "/test",
-            element: <TestPage />,
           },
           {
             path: "/profile/:userId",
