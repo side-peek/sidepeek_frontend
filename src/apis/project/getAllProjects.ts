@@ -17,7 +17,7 @@ export const getAllProjects = async (
     lastProjectId,
     lastProject,
     search,
-    skill,
+    skills,
   }: getAllProjectsType,
   config: AxiosRequestConfig = {
     headers: {
@@ -46,7 +46,7 @@ export const getAllProjects = async (
         lastProjectId,
         lastOrderCount,
         search,
-        skill: skill?.join(","),
+        skill: skills,
       },
     },
   )

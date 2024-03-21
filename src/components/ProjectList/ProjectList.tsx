@@ -11,16 +11,14 @@ interface ProjectListProps {
   projects: InfiniteData<getAllProjectsResponseType, unknown> | undefined
   isLoading: boolean
   isFetchingNextPage?: boolean
+  projectCount: number
 }
 
 const ProjectList = forwardRef(
   (
-    { projects, isLoading, isFetchingNextPage }: ProjectListProps,
+    { projects, isLoading, isFetchingNextPage, projectCount }: ProjectListProps,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
-    const projectCount =
-      projects != undefined && projects.pages[0].totalElements
-
     return (
       <>
         {isLoading ? (

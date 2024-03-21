@@ -298,7 +298,7 @@ declare module "api-models" {
     lastProjectId?: number | null
     lastProject?: AllProject | undefined
     search?: string | null
-    skill?: string[]
+    skills?: string
   }
 
   export type putProjectPayload = Omit<postProjectPayload, "ownerId">
