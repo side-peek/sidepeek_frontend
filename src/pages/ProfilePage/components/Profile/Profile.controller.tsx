@@ -42,8 +42,6 @@ const ProfileController = ({ userId }: UserIdProps) => {
     techStacks,
   } = data
 
-  console.log(job)
-
   return (
     <Box>
       <Box

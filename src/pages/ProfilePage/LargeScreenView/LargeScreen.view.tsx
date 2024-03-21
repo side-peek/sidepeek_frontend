@@ -28,7 +28,6 @@ const LargeScreenView = ({
   handleNewProject,
   handleEditProfile,
 }: ProfileBarProps) => {
-  console.log(job)
   return (
     <>
       <Box
