@@ -1,8 +1,11 @@
 import { PropsWithChildren } from "react"
 
-import { Flex } from "@chakra-ui/react"
+import { Flex, FlexProps } from "@chakra-ui/react"
 
-const FieldContainer = ({ children }: PropsWithChildren) => (
+const FieldContainer = ({
+  children,
+  ...props
+}: PropsWithChildren<FlexProps>) => (
   <Flex
     gap="5px"
     pos="relative"
@@ -10,7 +13,7 @@ const FieldContainer = ({ children }: PropsWithChildren) => (
     borderColor="grey.300"
     borderRadius="1rem"
     padding="5rem"
-    overflow="scroll">
+    {...props}>
     {children}
   </Flex>
 )

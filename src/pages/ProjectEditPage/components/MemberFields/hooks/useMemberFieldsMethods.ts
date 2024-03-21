@@ -6,7 +6,6 @@ import { RequestedMemberType } from "@pages/ProjectEditPage/types/ProjectFormVal
 export const useMemberFieldsMethods = () => {
   const {
     control,
-    getValues,
     setValue,
     watch,
     register,
@@ -32,29 +31,28 @@ export const useMemberFieldsMethods = () => {
   }
 
   const appendMembers = (data: RequestedMemberType, idx: number) => {
-    const members = [...getValues(`members.${idx}.data`), data]
+    const members = [...watch(`members.${idx}.data`), data]
     setValue(`members.${idx}.data`, members)
   }
 
   const removeMembers = (data: RequestedMemberType, idx: number) => {
-    const members = [...getValues(`members.${idx}.data`)]
+    const members = watch(`members.${idx}.data`)
+
     setValue(
       `members.${idx}.data`,
-      members.filter((member) => member.id !== data.id),
+      members?.filter((member) => member.id !== data.id),
     )
   }
 
-  const getSelectedMembers = (idx: number) => watch(`members.${idx}.data`)
-
   return {
     fields,
+    control,
     register,
     appendNewFields,
     deleteFields,
     setCategory,
     appendMembers,
     removeMembers,
-    getSelectedMembers,
     errors,
     trigger,
   }
