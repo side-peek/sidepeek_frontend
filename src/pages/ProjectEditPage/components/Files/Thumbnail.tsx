@@ -12,7 +12,6 @@ const Thumbnail = () => {
 
   const onDropFile = async (file: File[]) => {
     const { fileUrl } = await mutateAsync(file[0])
-
     setValue("thumbnailUrl", fileUrl)
   }
 
@@ -22,7 +21,7 @@ const Thumbnail = () => {
 
   return (
     <Box boxSize="40">
-      {watch("thumbnailUrl") !== "" ? (
+      {watch("thumbnailUrl") ? (
         <Image
           src={watch("thumbnailUrl")}
           onClick={deleteFile}
