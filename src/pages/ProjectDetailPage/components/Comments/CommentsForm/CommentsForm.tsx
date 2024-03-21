@@ -23,8 +23,9 @@ const CommentsForm = ({
   projectId,
   isReplyComment,
 }: CommentsFormProps) => {
-  const { register, reset, handleSubmit, setFocus } =
+  const { register, reset, handleSubmit, setFocus, watch } =
     useForm<CommentFormValues>()
+  const currentInput = watch("content")
 
   const { sendCommentMutation } = usePostCommentMutation()
   const { handleOffReply, handleOffEdit } = useCommentContext()
@@ -106,9 +107,10 @@ const CommentsForm = ({
             bgColor="blue.100"
             borderRadius="0"
             borderTopRightRadius="1rem"
+            opacity={currentInput ? "1" : "0.3"}
             color="white"
             fontSize="xl"
-            _hover={{ opacity: "0.5" }}
+            cursor={currentInput ? "pointer" : "default"}
             type="submit">
             입력
           </Button>
