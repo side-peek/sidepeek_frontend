@@ -86,6 +86,7 @@ const CommentsItem = ({ comment }: CommentsItemProps) => {
                   <Button
                     size={isLargerThan768 ? "md" : "sm"}
                     onClick={() => handleOnReply(comment.id)}
+                    _hover={{ opacity: 0.5 }}
                     p="0">
                     답글달기
                   </Button>

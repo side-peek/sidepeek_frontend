@@ -33,12 +33,14 @@ const BeforeEditingButton = ({
             content: content,
           })
         }}
+        _hover={{ opacity: 0.5 }}
         fontSize={isLargerThan768 ? "2xl" : "lg"}
       />
       <IconButton
         aria-label="delete"
         icon={<MdDelete />}
         onClick={onOpen}
+        _hover={{ opacity: 0.5 }}
         fontSize={isLargerThan768 ? "2xl" : "lg"}
       />
       {isOpen && (

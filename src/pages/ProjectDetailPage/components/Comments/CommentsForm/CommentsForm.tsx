@@ -99,6 +99,7 @@ const CommentsForm = ({
                 <Checkbox
                   isChecked={isAnonymous}
                   size="lg"
+                  _hover={{ opacity: 0.5 }}
                   onChange={handleAnonymous}
                   color={isAnonymous ? "red.200" : "grey.500"}
                   colorScheme="red">
