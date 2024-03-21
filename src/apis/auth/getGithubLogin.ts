@@ -11,7 +11,13 @@ export const getGithubLogin = async ({
   state,
 }: getGithubLoginPayload) => {
   const { data } = await baseInstance.get<getGithubLoginResponseType>(
-    `${ENDPOINTS.GITHUB_LOGIN}?code=${code}&state=${state}`,
+    `${ENDPOINTS.GITHUB_LOGIN}`,
+    {
+      params: {
+        code,
+        state,
+      },
+    },
   )
 
   authToken.setAccessToken(data.accessToken)
