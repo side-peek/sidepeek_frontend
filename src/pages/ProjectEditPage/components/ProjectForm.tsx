@@ -13,8 +13,9 @@ const ProjectForm = () => {
       <Flex
         flexDir="column"
         gap="30px">
-        <Flex justifyContent="space-between">
-          <Thumbnail />
+        <Thumbnail />
+
+        <Flex gap="10px">
           <Overview />
         </Flex>
         <ProjectInputBox

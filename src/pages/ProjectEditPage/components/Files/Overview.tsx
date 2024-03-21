@@ -25,6 +25,15 @@ const Overview = () => {
     )
   }
 
+  const deleteFile = (fileIdx: number) => {
+    setValue(
+      "overviewImageUrl",
+      getValues("overviewImageUrl")?.map((image, idx) =>
+        fileIdx === idx ? "" : image,
+      ),
+    )
+  }
+
   return (
     <>
       {watch("overviewImageUrl")?.map((image, idx) => {
@@ -38,6 +47,7 @@ const Overview = () => {
                 key={idx}
                 loading="lazy"
                 objectFit="fill"
+                onClick={() => deleteFile(idx)}
               />
             ) : (
               <FileUploadSection
