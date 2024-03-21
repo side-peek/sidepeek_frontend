@@ -13,7 +13,7 @@ interface MemberInfoProps {
 
 const MemberInfo = ({ members }: MemberInfoProps) => {
   const categorizedMembers = categorizeMembers(members)
-  console.log(categorizedMembers)
+
   return (
     <Stack
       direction={categorizedMembers.length > 0 ? "column" : "row"}

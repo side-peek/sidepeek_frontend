@@ -12,7 +12,7 @@ interface TechStacksProps {
   techStacks: TechStack[]
 }
 const TechStacks = ({ techStacks }: TechStacksProps) => {
-  const groupedByCategory = categorizeTechStacks(techStacks)
+  const categorizedTechStacks = categorizeTechStacks(techStacks)
   const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
 
   return (
@@ -27,7 +27,7 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
       </Text>
       {techStacks.length > 0 ? (
         <Stack spacing="3rem">
-          {groupedByCategory.map(
+          {categorizedTechStacks.map(
             ({ category, techStacks }: CategoryTechStacks) => (
               <Stack
                 key={category}
