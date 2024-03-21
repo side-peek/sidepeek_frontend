@@ -43,7 +43,7 @@ const MemberFields = () => {
       flexDir="column"
       gap="8px">
       {controlledMember.map((field, idx) => {
-        register(`members.${idx}.data` as const, {
+        register(`members.${idx}.role` as const, {
           validate: (data) =>
             data?.length !== 0 || "팀원을 한명 이상 선택해주세요",
         })
@@ -57,7 +57,7 @@ const MemberFields = () => {
               <Input
                 placeholder="카테고리를 입력해주세요"
                 width="20rem"
-                {...register(`members.${idx}.category` as const, {
+                {...register(`members.${idx}.members` as const, {
                   required: "분야 입력은 필수입니다",
                 })}
               />
@@ -77,16 +77,16 @@ const MemberFields = () => {
               <UserSearchBox
                 onClick={({ id, nickname, profileImageUrl }) => {
                   appendMembers({ id, nickname, profileImageUrl }, idx)
-                  trigger(`members.${idx}.data` as const)
+                  trigger(`members.${idx}.members` as const)
                 }}
-                selectedMembers={field.data || []}
+                selectedMembers={field.members || []}
               />
             </Box>
             <Box flex="6">
               <Flex
                 gap="5px"
                 overflow="scroll">
-                {field.data?.map((member, idx) => {
+                {field.members?.map((member, idx) => {
                   return (
                     <MemberAvatarCard
                       key={member.id}
