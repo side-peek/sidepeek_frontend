@@ -62,6 +62,13 @@ export const PASSWORD_MISMATCH_ERROR = {
   message: "비밀번호가 일치하지 않습니다",
 }
 
+export const INTRODUCTION_VALIDATION_OPTION = {
+  maxLength: {
+    value: 100,
+    message: "100자 이하로 작성해주세요",
+  },
+}
+
 export const BLOG_URL_VALIDATION_OPTION = {
   pattern: {
     value: RegEx.CHECK_URL,

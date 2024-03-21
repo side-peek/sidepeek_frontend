@@ -20,51 +20,59 @@ import CommonInput from "@components/Input/CommonInput"
 import {
   BLOG_URL_VALIDATION_OPTION,
   GITHUB_URL_VALIDATION_OPTION,
+  INTRODUCTION_VALIDATION_OPTION,
 } from "@pages/ProfileEditPage/constants/validation"
 
 import { ProfileInfo } from "../../types/types"
 
-interface Urls {
+interface Introductions {
+  aboutMe: string
   githubUrl: string
   blogUrl: string
 }
 interface ProfileIntroductionProps
   extends Pick<ProfileInfo, "introduction" | "githubUrl" | "blogUrl"> {
-  setProfileInfo: React.Dispatch<React.SetStateAction<ProfileInfo>>
-  register: UseFormRegister<Urls>
+  register: UseFormRegister<Introductions>
   errors: FieldErrors
-  setValue: UseFormSetValue<Urls>
+  setValue: UseFormSetValue<Introductions>
 }
 
 const ProfileIntroduction = ({
   register,
   errors,
   setValue,
-  introduction = "",
-  setProfileInfo,
 }: ProfileIntroductionProps) => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
   return (
     <Box
       w="100%"
       pb="2rem">
-      <Text
-        fontSize="xl"
-        fontFamily="SCDream_Bold"
-        margin="1.5rem 0 1.5rem 1rem">
-        소개
-      </Text>
+      <Flex alignItems="center">
+        <Text
+          fontSize="xl"
+          fontFamily="SCDream_Bold"
+          margin="1.5rem 0 1.5rem 1rem">
+          소개
+        </Text>
+        <ErrorMessage
+          errors={errors}
+          name="aboutMe"
+          render={({ message }) => (
+            <Text
+              fontSize="1.1rem"
+              color="red.100"
+              ml="1rem">
+              {message}
+            </Text>
+          )}
+        />
+      </Flex>
+
       <Textarea
         height="10rem"
         resize="none"
-        value={introduction}
         placeholder="소개글을 입력해주세요"
-        onChange={(e) =>
-          setProfileInfo((profileInfo) => ({
-            ...profileInfo,
-            introduction: e.target.value,
-          }))
-        }
+        {...register("aboutMe", INTRODUCTION_VALIDATION_OPTION)}
       />
 
       <Flex

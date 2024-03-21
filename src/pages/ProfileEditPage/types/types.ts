@@ -40,7 +40,8 @@ export interface NicknameFormValues {
   newNickname: string
 }
 
-export interface UrlsFormValues {
+export interface IntroductionFormValues {
+  aboutMe: string
   githubUrl: string
   blogUrl: string
 }
