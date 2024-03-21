@@ -9,6 +9,7 @@ interface ProjectFilterProps {
   handleChange: () => void
   sortOption: SortSelectType
   handleSelect: (e: ChangeEvent<HTMLSelectElement>) => void
+  projectCount: number
 }
 
 const ProjectFilter = ({
@@ -16,17 +17,23 @@ const ProjectFilter = ({
   handleChange,
   sortOption,
   handleSelect,
+  projectCount,
 }: ProjectFilterProps) => {
+  console.log(projectCount)
   return (
-    <HStack spacing={5}>
+    <HStack
+      marginTop="3rem"
+      spacing={5}>
       <Spacer />
       <Checkbox
+        disabled={projectCount < 1 ? true : false}
         isChecked={isReleased}
         paddingRight="0.3rem"
         onChange={handleChange}>
         출시 서비스만 보기
       </Checkbox>
       <Select
+        disabled={projectCount <= 1 ? true : false}
         width="10rem"
         variant="outline"
         marginRight="1rem"

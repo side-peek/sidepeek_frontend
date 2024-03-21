@@ -71,7 +71,7 @@ const ProjectListSection = () => {
 
   const useDebounceTechFilter = useDebounce(() => {
     selectedStacks.forEach((skill) => skills.push(skill.name))
-    console.log(skills)
+
     refetchAllProject()
   }, 500)
 
@@ -93,20 +93,19 @@ const ProjectListSection = () => {
 
   return (
     <Container maxW={isLargerThan1200 ? "80%" : "95%"}>
-      <TechStackFilter
-        selectedStacks={selectedStacks}
-        onAppendStack={onAppendStack}
-        onDeleteStack={onDeleteStack}
-      />
-      <Stack marginTop="5rem">
-        {projectCount ? (
-          <ProjectFilter
-            isReleased={isReleased}
-            sortOption={sortOption}
-            handleChange={handleChange}
-            handleSelect={handleSelect}
-          />
-        ) : null}
+      <Stack>
+        <TechStackFilter
+          selectedStacks={selectedStacks}
+          onAppendStack={onAppendStack}
+          onDeleteStack={onDeleteStack}
+        />
+        <ProjectFilter
+          projectCount={projectCount}
+          isReleased={isReleased}
+          sortOption={sortOption}
+          handleChange={handleChange}
+          handleSelect={handleSelect}
+        />
         <ProjectList
           projectCount={projectCount}
           projects={allProjectList}
