@@ -92,7 +92,7 @@ const CommentsForm = ({
                 {...register("content", { required: true })}
               />
               <Box
-                zIndex="zIndices.anonymous"
+                zIndex="checkbox"
                 position="absolute"
                 cursor="pointer"
                 right="1rem"

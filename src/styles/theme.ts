@@ -100,6 +100,7 @@ const themeConfig = {
     skipLink: 80,
     toast: 90,
     tooltip: 100,
+    checkbox: 110,
   },
   sizes: {
     headerHeight: "9.5rem",
