@@ -6,6 +6,7 @@ import { Box, Button, Checkbox, Flex, HStack, Textarea } from "@chakra-ui/react"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { scrollBarNone } from "@pages/ProjectDetailPage/constants/scrollBarNone"
+import { TEXTAREA_STYLE } from "@pages/ProjectDetailPage/constants/textAreaStyle"
 import { usePostCommentMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostCommentMutation"
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
@@ -72,37 +73,27 @@ const CommentsForm = ({
               borderTopLeftRadius="0.9rem"
               borderBottomRadius={isReplyComment ? "0.9rem" : 0}>
               <Textarea
-                w="95%"
                 sx={scrollBarNone}
-                mr="2rem"
-                size="xs"
-                rows={1}
-                minH="1rem"
-                maxH="10rem"
-                fontSize="lg"
                 p={isReplyComment ? "1rem " : "2rem"}
-                pr="4rem"
-                as={ResizeTextarea}
                 placeholder={isReplyComment ? "" : "댓글을 입력하세요"}
-                isRequired={false}
-                resize="none"
+                mr="5.5rem"
+                as={ResizeTextarea}
                 border="none"
-                _hover={{ boxShadow: "none", borderColor: "grey.400" }}
-                _focus={{ boxShadow: "none", borderColor: "grey.400" }}
+                _focus={{ boxShadow: "none" }}
                 {...register("content", { required: true })}
+                {...TEXTAREA_STYLE}
               />
               <Box
                 zIndex="checkbox"
                 position="absolute"
                 cursor="pointer"
                 right="1rem"
-                top="30%">
+                top="28%">
                 <Checkbox
                   isChecked={isAnonymous}
                   size="lg"
                   onChange={handleAnonymous}
                   color={isAnonymous ? "red.200" : "grey.500"}
-                  minWidth="5rem"
                   colorScheme="red">
                   익명
                 </Checkbox>
