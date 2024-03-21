@@ -3,21 +3,14 @@ import { AxiosError } from "axios"
 
 import { UseMutationOptions, useMutation } from "@tanstack/react-query"
 
-import { postProjectFiles } from "@apis/projectFile/postProjectFiles"
-
-import { PostFormDataType } from "../types/PostFormDataType"
-import { TypedFormData } from "../types/TypedFormDataValue"
+import { postFile } from "@apis/file/postFile"
 
 export const usePostFileMutation = ({
   ...options
-}: UseMutationOptions<
-  postProjectFilesResponseType,
-  AxiosError,
-  PostFormDataType
->) => {
+}: UseMutationOptions<postProjectFilesResponseType, AxiosError, File>) => {
   return useMutation({
     mutationKey: ["file"],
-    mutationFn: (file: TypedFormData<{ file: File }>) => postProjectFiles(file),
+    mutationFn: (file: File) => postFile(file),
     ...options,
   })
 }

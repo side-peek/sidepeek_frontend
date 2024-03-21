@@ -18,9 +18,7 @@ const CommentsList = ({ comments }: CommentsListProps) => {
           return (
             <CommentsItem
               key={comment.id}
-              {...{
-                comment,
-              }}
+              comment={comment}
             />
           )
         })

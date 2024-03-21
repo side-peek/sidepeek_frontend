@@ -33,11 +33,47 @@ const ProjectsView = ({ userId, isMe }: UserIdProps) => {
               _selected: { fontFamily: "SCDream_Bold", color: "black.100" },
             },
           }}>
-          <StyledTab>{tabsType.JOINED}</StyledTab>
+          <StyledTab>
+            {isLargerThan500 ? (
+              tabsType.JOINED
+            ) : (
+              <Box>
+                {[0, 1].map((line) => (
+                  <p key={`tabsType.JOINED - ${line}`}>
+                    {tabsType.JOINED.split(" ")[line]}
+                  </p>
+                ))}
+              </Box>
+            )}
+          </StyledTab>
           {isMe && (
             <>
-              <StyledTab>{tabsType.LIKED}</StyledTab>
-              <StyledTab>{tabsType.COMMENTED}</StyledTab>
+              <StyledTab>
+                {isLargerThan500 ? (
+                  tabsType.LIKED
+                ) : (
+                  <Box>
+                    {[0, 1].map((line) => (
+                      <p key={`tabsType.LIKED - ${line}`}>
+                        {tabsType.LIKED.split(" ")[line]}
+                      </p>
+                    ))}
+                  </Box>
+                )}
+              </StyledTab>
+              <StyledTab>
+                {isLargerThan500 ? (
+                  tabsType.COMMENTED
+                ) : (
+                  <Box>
+                    {[0, 1].map((line) => (
+                      <p key={`tabsType.COMMENTED - ${line}`}>
+                        {tabsType.COMMENTED.split(" ")[line]}
+                      </p>
+                    ))}
+                  </Box>
+                )}
+              </StyledTab>
             </>
           )}
         </TabList>

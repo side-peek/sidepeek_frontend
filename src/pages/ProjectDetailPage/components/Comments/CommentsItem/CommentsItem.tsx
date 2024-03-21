@@ -42,12 +42,13 @@ const CommentsItem = ({ comment }: CommentsItemProps) => {
         gap={isLargerThan768 ? "2rem" : "1.3rem"}
         align="flex-start">
         <CommentsAvatar
+          user={comment.user}
+          src={comment.user?.profileImageUrl ?? undefined}
           onClick={() => {
-            if (comment.user && comment.user.id) {
+            if (comment.user.id) {
               handleNavigateProfile(comment.user.id)
             }
           }}
-          user={comment.user}
         />
         <Box w="100%">
           <HStack
@@ -85,6 +86,7 @@ const CommentsItem = ({ comment }: CommentsItemProps) => {
                   <Button
                     size={isLargerThan768 ? "md" : "sm"}
                     onClick={() => handleOnReply(comment.id)}
+                    _hover={{ opacity: 0.5 }}
                     p="0">
                     답글달기
                   </Button>

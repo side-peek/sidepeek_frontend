@@ -2,13 +2,13 @@ import { RegisterOptions } from "react-hook-form"
 
 export const emailOptions: RegisterOptions = {
   required: "이메일을 입력해주세요",
-  pattern: {
-    value: /[a-z0-9]+@[a-z]+.[a-z]{2,3}/,
-    message: "이메일 형식에 맞지 않습니다.",
-  },
   max: {
     value: 15,
-    message: "이메일은 최대 25자까지 입력 가능합니다.",
+    message: "이메일은 최대 15자까지 입력 가능합니다.",
+  },
+  pattern: {
+    value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+    message: "이메일 형식에 맞지 않습니다.",
   },
   shouldUnregister: true,
 }

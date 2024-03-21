@@ -34,27 +34,24 @@ const Header = () => {
   return (
     <HeaderContainer>
       <LogoLink logoHeight="7rem" />
-      <Box
-        pl="1.5rem"
-        alignSelf="end"
-        pb="2rem">
-        <InputGroup>
-          <InputRightElement>
-            <Icon
-              as={IoSearch}
-              w="2rem"
-              h="2rem"
-            />
-          </InputRightElement>
-          <form onSubmit={handleSubmit}>
+      <Box>
+        <form onSubmit={handleSubmit}>
+          <InputGroup>
+            <InputRightElement pointerEvents="none">
+              <Icon
+                as={IoSearch}
+                w="2rem"
+                h="2rem"
+              />
+            </InputRightElement>
             <Input
               ref={inputRef}
               size="lg"
               variant="flushed"
               placeholder="검색어를 입력하세요"
             />
-          </form>
-        </InputGroup>
+          </InputGroup>
+        </form>
       </Box>
       <Spacer />
       {isLoggedIn ? <Menu /> : <LoginButton />}

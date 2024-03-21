@@ -37,6 +37,7 @@ export const usePostCommentMutation = () => {
   useEffect(() => {
     if (isAxiosError(error)) {
       let message = ""
+
       switch (error.response?.status) {
         case 500: {
           message = COMMON_MESSAGES.SERVER

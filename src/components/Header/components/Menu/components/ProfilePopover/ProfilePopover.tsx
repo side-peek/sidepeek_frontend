@@ -7,6 +7,7 @@ import {
   PopoverTrigger,
   StackDivider,
   VStack,
+  forwardRef,
   useDisclosure,
 } from "@chakra-ui/react"
 
@@ -50,4 +51,4 @@ const ProfilePopover = () => {
   )
 }
 
-export default ProfilePopover
+export default forwardRef(ProfilePopover)

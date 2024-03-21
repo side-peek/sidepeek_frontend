@@ -17,7 +17,6 @@ export const authInstance = axios.create({
   baseURL: VITE_BASE_URL,
 })
 
-//TODO: 소셜 로그인 로직 추가 예정
 authInstance.interceptors.request.use(
   async (config) => {
     const accessToken = authToken.getAccessToken()
@@ -75,13 +74,8 @@ authInstance.interceptors.response.use(
         authToken.setRefreshToken(data.refreshToken)
         originalRequest.headers.Authorization = `Bearer ${data.accessToken}`
 
-        // 재발급된 엑세스 토큰으로 재요청
         return authInstance(originalRequest)
       } catch (refreshError) {
-        /*FIXME:
-        1. 🟨 로그아웃 api 요청
-        2. 🟨 react-query의 유저 정보 캐싱 초기화
-        3. ✅ accessToken, refreshToken 초기화 */
         if (isAxios401Error(refreshError)) {
           return Promise.reject(new LogoutError())
         }

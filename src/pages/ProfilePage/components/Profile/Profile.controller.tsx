@@ -15,7 +15,7 @@ const ProfileController = ({ userId }: UserIdProps) => {
 
   const navigate = useNavigate()
   const handleNewProject = () => {
-    navigate("/test")
+    navigate("/project/edit")
   }
   const handleEditProfile = () => {
     navigate("/profile/edit")

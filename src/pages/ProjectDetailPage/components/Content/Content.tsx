@@ -3,7 +3,7 @@ import { getProjectDetailResponseType } from "api-models"
 
 import Date from "./Date/Date"
 import Explanation from "./Explanation/Explanation"
-import MemberInfo from "./MemberInfo/MemberInfo"
+import Member from "./Member/Member"
 import TechStacks from "./TechStacks/TechStacks"
 
 const Content = ({ projectDetailInfo }: getProjectDetailResponseType) => {
@@ -18,7 +18,7 @@ const Content = ({ projectDetailInfo }: getProjectDetailResponseType) => {
       margin="0 auto">
       <TechStacks techStacks={techStacks} />
       <Date {...{ startDate, endDate }} />
-      <MemberInfo members={projectDetailInfo.members} />
+      <Member members={projectDetailInfo.members} />
       <Explanation projects={projectDetailInfo} />
     </VStack>
   )
