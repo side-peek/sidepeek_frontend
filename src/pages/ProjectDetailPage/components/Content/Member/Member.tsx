@@ -1,19 +1,22 @@
 import { HStack, Stack, Text } from "@chakra-ui/react"
 import { Member } from "api-models"
 
-import membersCategory from "@pages/ProjectDetailPage/utils/membersCategory"
+import { categorizeMembers } from "@pages/ProjectDetailPage/utils/categorizeMembers"
 
 import MemberList from "./MemberList/MemberList"
+
+categorizeMembers
 
 interface MemberInfoProps {
   members: Member[]
 }
 
 const MemberInfo = ({ members }: MemberInfoProps) => {
-  const groupedByCategory = membersCategory(members)
+  const categorizedMembers = categorizeMembers(members)
+  console.log(categorizedMembers)
   return (
     <Stack
-      direction={groupedByCategory.length > 0 ? "column" : "row"}
+      direction={categorizedMembers.length > 0 ? "column" : "row"}
       spacing="2rem">
       <Text
         fontSize="2xl"
@@ -23,11 +26,11 @@ const MemberInfo = ({ members }: MemberInfoProps) => {
       <HStack
         spacing="1rem"
         flexWrap="wrap">
-        {groupedByCategory.length > 0 ? (
-          groupedByCategory.map(([category, members]) => (
+        {categorizedMembers.length > 0 ? (
+          categorizedMembers.map(({ role, members }) => (
             <MemberList
-              key={category}
-              category={category}
+              key={role}
+              category={role}
               members={members}
             />
           ))
