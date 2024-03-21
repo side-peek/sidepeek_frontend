@@ -20,12 +20,14 @@ const OnEditingButton = () => {
         aria-label="submit"
         icon={<FaRegCheckCircle />}
         onClick={handleSubmit(onSubmitEdit)}
+        _hover={{ opacity: 0.5 }}
         fontSize={isLargerThan768 ? "2xl" : "lg"}
       />
       <IconButton
         aria-label="cancel"
         icon={<MdCancel />}
         onClick={handleOffEdit}
+        _hover={{ opacity: 0.5 }}
         fontSize={isLargerThan768 ? "2xl" : "lg"}
       />
     </>
