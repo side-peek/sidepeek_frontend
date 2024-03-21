@@ -42,7 +42,7 @@ const CommentsItem = ({ comment }: CommentsItemProps) => {
         gap={isLargerThan768 ? "2rem" : "1.3rem"}
         align="flex-start">
         <CommentsAvatar
-          src={comment.user.profileImageUrl ?? undefined}
+          src={comment.user?.profileImageUrl ?? undefined}
           onClick={() => {
             if (comment.user.id) {
               handleNavigateProfile(comment.user.id)
