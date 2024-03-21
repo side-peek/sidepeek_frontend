@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import ResizeTextarea from "react-textarea-autosize"
 
 import { Box, Button, Checkbox, Flex, HStack, Textarea } from "@chakra-ui/react"
-import { Stack } from "@chakra-ui/react"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { scrollBarNone } from "@pages/ProjectDetailPage/constants/scrollBarNone"
@@ -32,35 +31,23 @@ const CommentsForm = ({
 
   const user = useUserInfoData()
 
-  const onSubmit: SubmitHandler<CommentFormValues> = useCallback(
-    (text) => {
-      if (!user || !user.id) {
-        return
-      }
+  const onSubmit: SubmitHandler<CommentFormValues> = (comment) => {
+    if (!user || !user.id) {
+      return
+    }
 
-      const commentRequestValue = {
-        ownerId: user.id,
-        projectId: Number(projectId),
-        isAnonymous: isAnonymous,
-        parentId: parentId ? parentId : null,
-        content: text.content,
-      }
-      sendCommentMutation(commentRequestValue)
-      handleOffReply()
-      handleOffEdit()
-      reset()
-    },
-    [
-      parentId,
-      projectId,
-      reset,
-      user,
-      sendCommentMutation,
-      isAnonymous,
-      handleOffReply,
-      handleOffEdit,
-    ],
-  )
+    const commentRequestValue = {
+      ownerId: user.id,
+      projectId: Number(projectId),
+      isAnonymous: isAnonymous,
+      parentId: parentId ? parentId : null,
+      content: comment.content,
+    }
+    sendCommentMutation(commentRequestValue)
+    handleOffReply()
+    handleOffEdit()
+    reset()
+  }
 
   const handleAnonymous = () => {
     setIsAnonymous(!isAnonymous)
@@ -104,11 +91,12 @@ const CommentsForm = ({
                 _focus={{ boxShadow: "none", borderColor: "grey.400" }}
                 {...register("content", { required: true })}
               />
-              <Stack
+              <Box
+                zIndex="zIndices.anonymous"
                 position="absolute"
+                cursor="pointer"
                 right="1rem"
-                top="30%"
-                direction="row">
+                top="30%">
                 <Checkbox
                   isChecked={isAnonymous}
                   size="lg"
@@ -118,7 +106,7 @@ const CommentsForm = ({
                   colorScheme="red">
                   익명
                 </Checkbox>
-              </Stack>
+              </Box>
             </HStack>
           </Flex>
 
