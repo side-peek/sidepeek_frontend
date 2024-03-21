@@ -33,21 +33,19 @@ const CommentsForm = ({
   const user = useUserInfoData()
 
   const onSubmit: SubmitHandler<CommentFormValues> = (comment) => {
-    if (!user || !user.id) {
-      return
+    if (user && user.id) {
+      const commentRequestValue = {
+        ownerId: user.id,
+        projectId: Number(projectId),
+        isAnonymous: isAnonymous,
+        parentId: parentId ? parentId : null,
+        content: comment.content,
+      }
+      sendCommentMutation(commentRequestValue)
+      handleOffReply()
+      handleOffEdit()
+      reset()
     }
-
-    const commentRequestValue = {
-      ownerId: user.id,
-      projectId: Number(projectId),
-      isAnonymous: isAnonymous,
-      parentId: parentId ? parentId : null,
-      content: comment.content,
-    }
-    sendCommentMutation(commentRequestValue)
-    handleOffReply()
-    handleOffEdit()
-    reset()
   }
 
   const handleAnonymous = () => {
