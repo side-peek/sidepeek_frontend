@@ -89,7 +89,7 @@ const TechStackSection = ({
                         (techStack) => {
                           return (
                             <CommonTag
-                              mr="0.5rem"
+                              ml="0.5rem"
                               mb="0.7rem"
                               fontSize="1rem"
                               fontWeight="bold"
