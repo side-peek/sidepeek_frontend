@@ -19,7 +19,7 @@ export const useMemberFieldsMethods = () => {
   })
 
   const appendNewFields = () => {
-    append({ category: "", data: [] })
+    append({ role: "", members: [] })
   }
 
   const deleteFields = (idx: number) => {
@@ -29,19 +29,19 @@ export const useMemberFieldsMethods = () => {
   }
 
   const setCategory = (value: string, idx: number) => {
-    setValue(`members.${idx}.category`, value)
+    setValue(`members.${idx}.role`, value)
   }
 
   const appendMembers = (data: RequestedMemberType, idx: number) => {
-    const members = [...watch(`members.${idx}.data`), data]
-    setValue(`members.${idx}.data`, members)
+    const members = [...watch(`members.${idx}.members`), data]
+    setValue(`members.${idx}.members`, members)
   }
 
   const removeMembers = (data: RequestedMemberType, idx: number) => {
-    const members = watch(`members.${idx}.data`)
+    const members = watch(`members.${idx}.members`)
 
     setValue(
-      `members.${idx}.data`,
+      `members.${idx}.members`,
       members?.filter((member) => member.id !== data.id),
     )
   }
