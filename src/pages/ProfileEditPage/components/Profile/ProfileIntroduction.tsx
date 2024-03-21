@@ -44,7 +44,6 @@ const ProfileIntroduction = ({
   setProfileInfo,
 }: ProfileIntroductionProps) => {
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)")
-  console.log(errors)
   return (
     <Box
       w="100%"
