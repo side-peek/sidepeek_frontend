@@ -31,7 +31,7 @@ const UserSearchBox = ({
   ...props
 }: UserSearchBoxProps) => {
   const [inputValue, onInput] = useInput("")
-  const [ref, isFocused] = useOutsideClick()
+  const [ref, isFocused] = useOutsideClick(false)
 
   const handleClickNonUser = (value: string) => {
     if (!value.trim().length) {
