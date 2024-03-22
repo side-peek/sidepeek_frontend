@@ -35,7 +35,7 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
               <HStack
                 spacing="1rem"
                 flexWrap="wrap">
-                {skills.map((skill) => (
+                {skills.map((skill, index) => (
                   <CommonTag
                     leftElement={
                       <Image
@@ -46,7 +46,7 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
                     }
                     cursor="default"
                     label={skill.name}
-                    key={skill.id}
+                    key={`${skill.id}-${index}`}
                     fontSize="lg"
                   />
                 ))}

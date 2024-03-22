@@ -21,9 +21,9 @@ const MemberInfo = ({ members }: MemberInfoProps) => {
         spacing="1rem"
         flexWrap="wrap">
         {members.length > 0 ? (
-          members.map(({ role, userSummary }) => (
+          members.map(({ role, userSummary }, index) => (
             <MemberList
-              key={role}
+              key={`${role}}-${index}`}
               category={role}
               memberList={userSummary}
             />

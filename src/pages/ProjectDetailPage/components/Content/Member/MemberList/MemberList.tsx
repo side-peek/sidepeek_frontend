@@ -24,7 +24,7 @@ const MemberList = ({ category, memberList }: MemberListProps) => {
         alignItems="center">
         {memberList.map(({ id, profileImageUrl, nickname }) => (
           <AvatarCard
-            key={id}
+            key={`${id}-${nickname}`}
             flexDir="column"
             border="none"
             gap="2rem">
