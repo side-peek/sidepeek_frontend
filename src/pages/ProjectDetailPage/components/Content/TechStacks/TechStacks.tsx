@@ -1,5 +1,5 @@
 import { HStack, Image, Stack, Text, useMediaQuery } from "@chakra-ui/react"
-import { TechStack } from "api-models"
+import { Skill, TechStack } from "api-models"
 
 import CommonTag from "@components/Tag/components/CommonTag"
 
@@ -21,38 +21,41 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
       </Text>
       {techStacks.length > 0 ? (
         <Stack spacing="3rem">
-          {techStacks.map(({ category, skill: skills }) => (
-            <Stack
-              key={category}
-              direction={isLargerThan768 ? "row" : "column"}
-              spacing="2rem">
-              <Text
-                fontSize="xl"
-                minW="8rem"
-                whiteSpace="nowrap">
-                {category}
-              </Text>
-              <HStack
-                spacing="1rem"
-                flexWrap="wrap">
-                {skills.map((skill, index) => (
-                  <CommonTag
-                    leftElement={
-                      <Image
-                        src={skill.iconImageUrl}
-                        w="2rem"
-                        h="2rem"
-                      />
-                    }
-                    cursor="default"
-                    label={skill.name}
-                    key={`${skill.id}-${index}`}
-                    fontSize="lg"
-                  />
-                ))}
-              </HStack>
-            </Stack>
-          ))}
+          {techStacks.map(({ category, skill: skills }) => {
+            const skillList = skills as unknown as Skill[]
+            return (
+              <Stack
+                key={category}
+                direction={isLargerThan768 ? "row" : "column"}
+                spacing="2rem">
+                <Text
+                  fontSize="xl"
+                  minW="8rem"
+                  whiteSpace="nowrap">
+                  {category}
+                </Text>
+                <HStack
+                  spacing="1rem"
+                  flexWrap="wrap">
+                  {skillList.map((skill, index) => (
+                    <CommonTag
+                      leftElement={
+                        <Image
+                          src={skill.iconImageUrl}
+                          w="2rem"
+                          h="2rem"
+                        />
+                      }
+                      cursor="default"
+                      label={skill.name}
+                      key={`${skill.id}-${index}`}
+                      fontSize="lg"
+                    />
+                  ))}
+                </HStack>
+              </Stack>
+            )
+          })}
         </Stack>
       ) : (
         <Text

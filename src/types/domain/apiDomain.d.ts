@@ -79,7 +79,7 @@ declare module "api-models" {
   export type Member = {
     id: number
     role: string
-    userSummary: UserSummary[]
+    userSummary: UserSummary
   }
 
   export type ProjectTag = {
@@ -140,7 +140,7 @@ declare module "api-models" {
 
   export type TechStack = {
     id: number
-    skill: Skill[]
+    skill: Skill
     category: string
   }
 

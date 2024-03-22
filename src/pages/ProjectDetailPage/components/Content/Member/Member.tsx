@@ -1,5 +1,5 @@
 import { HStack, Stack, Text } from "@chakra-ui/react"
-import { Member } from "api-models"
+import { Member, UserSummary } from "api-models"
 
 import MemberList from "./MemberList/MemberList"
 
@@ -21,13 +21,16 @@ const MemberInfo = ({ members }: MemberInfoProps) => {
         spacing="1rem"
         flexWrap="wrap">
         {members.length > 0 ? (
-          members.map(({ role, userSummary }, index) => (
-            <MemberList
-              key={`${role}}-${index}`}
-              category={role}
-              memberList={userSummary}
-            />
-          ))
+          members.map(({ role, userSummary }) => {
+            const memberList = userSummary as unknown as UserSummary[]
+            return (
+              <MemberList
+                key={userSummary.nickname}
+                category={role}
+                memberList={memberList}
+              />
+            )
+          })
         ) : (
           <Text
             color="grey.500"
