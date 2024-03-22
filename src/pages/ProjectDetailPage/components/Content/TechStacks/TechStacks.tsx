@@ -1,18 +1,12 @@
 import { HStack, Image, Stack, Text, useMediaQuery } from "@chakra-ui/react"
-import { TechStack } from "api-models"
+import { Skill, TechStack } from "api-models"
 
 import CommonTag from "@components/Tag/components/CommonTag"
-
-import {
-  CategoryTechStacks,
-  categorizeTechStacks,
-} from "@utils/categorizeTechStacks"
 
 interface TechStacksProps {
   techStacks: TechStack[]
 }
 const TechStacks = ({ techStacks }: TechStacksProps) => {
-  const categorizedTechStacks = categorizeTechStacks(techStacks)
   const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
 
   return (
@@ -27,8 +21,9 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
       </Text>
       {techStacks.length > 0 ? (
         <Stack spacing="3rem">
-          {categorizedTechStacks.map(
-            ({ category, techStacks }: CategoryTechStacks) => (
+          {techStacks.map(({ category, skill: skills }) => {
+            const skillList = skills as unknown as Skill[]
+            return (
               <Stack
                 key={category}
                 direction={isLargerThan768 ? "row" : "column"}
@@ -42,25 +37,25 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
                 <HStack
                   spacing="1rem"
                   flexWrap="wrap">
-                  {techStacks.map((stack) => (
+                  {skillList.map((skill, index) => (
                     <CommonTag
                       leftElement={
                         <Image
-                          src={stack.skill.iconImageUrl}
+                          src={skill.iconImageUrl}
                           w="2rem"
                           h="2rem"
                         />
                       }
                       cursor="default"
-                      label={stack.skill.name}
-                      key={stack.skill.id}
+                      label={skill.name}
+                      key={`${skill.id}-${index}`}
                       fontSize="lg"
                     />
                   ))}
                 </HStack>
               </Stack>
-            ),
-          )}
+            )
+          })}
         </Stack>
       ) : (
         <Text

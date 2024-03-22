@@ -123,7 +123,7 @@ declare module "api-models" {
   export type Comment = {
     id: number
     user: userSummary | null
-    parentId: number | null
+    parentId?: number
     isOwner: boolean
     isAnonymous: boolean
     content: string
