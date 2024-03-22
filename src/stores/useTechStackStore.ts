@@ -1,10 +1,8 @@
 import { Skill } from "api-models"
 import { create } from "zustand"
 
-import { ProcessedTechStack } from "@utils/process/processTechStacks"
-
 interface TechStackStore {
-  fields: ProcessedTechStack[]
+  fields: { category: string; skill: Skill[] }[]
   appendField: () => void
   appendStack: (data: Skill, fieldIdx: number) => void
   deleteField: (fieldIdx: number) => void
@@ -13,16 +11,16 @@ interface TechStackStore {
 }
 
 export const useTechStackStore = create<TechStackStore>((set) => ({
-  fields: [{ category: "", data: [] }],
+  fields: [{ category: "", skill: [] }],
   appendField: () =>
     set((state) => ({
-      fields: [...state.fields, { category: "", data: [] }],
+      fields: [...state.fields, { category: "", skill: [] }],
     })),
   appendStack: (data: Skill, fieldIdx: number) =>
     set((state) => ({
       fields: state.fields?.map((techStack, idx) =>
         idx === fieldIdx
-          ? { ...techStack, data: [...techStack.data, data] }
+          ? { ...techStack, skill: [...techStack.skill, data] }
           : techStack,
       ),
     })),
@@ -37,7 +35,7 @@ export const useTechStackStore = create<TechStackStore>((set) => ({
         fieldIdx === idx
           ? {
               ...techStack,
-              data: techStack.data.filter((skill) => skill.id !== data.id),
+              skill: techStack.skill.filter((el) => el.id !== data.id),
             }
           : techStack,
       ),

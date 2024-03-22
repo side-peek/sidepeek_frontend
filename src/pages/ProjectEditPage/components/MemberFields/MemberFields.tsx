@@ -38,6 +38,7 @@ const MemberFields = () => {
                 width="20rem"
                 onChange={(e) => changeRole(e.target.value.trim(), fieldIdx)}
                 required={true}
+                value={field.role}
               />
             </Box>
             <Box flex="1">
@@ -48,22 +49,21 @@ const MemberFields = () => {
                     fieldIdx,
                   )
                 }}
-                selectedMembers={field.members || []}
+                selectedMembers={field.userSummary || []}
               />
             </Box>
             <Box flex="6">
               <Flex
                 gap="5px"
                 overflow="scroll">
-                {field.members?.map((member) => {
-                  console.log(member.id)
+                {field.userSummary?.map((member) => {
                   return (
                     <MemberAvatarCard
                       key={member.id}
                       image={member.profileImageUrl || ""}
                       text={member.nickname}
                       onClick={() => {
-                        deleteMember(member, fieldIdx)
+                        deleteMember(member, fieldIdx) //fieldIdx에 해당하는 값을 찾아서
                       }}
                     />
                   )

@@ -1,9 +1,11 @@
-import { ProcessedMember } from "@utils/process/processMembers"
+import { UserSummary } from "api-models"
 
-export const convertMembersData = (members: ProcessedMember[]) =>
+export const convertMembersData = (
+  members: { role: string; userSummary: UserSummary[] }[],
+) =>
   members
-    .map(({ role, members }) => {
-      return members?.map(({ id, nickname }) => {
+    .map(({ role, userSummary }) => {
+      return userSummary?.map(({ id, nickname }) => {
         return {
           id,
           nickname,

@@ -12,5 +12,6 @@ export const useGetTechStacksQuery = (value: string, showAll: boolean) => {
       return data.skills
     },
     enabled: showAll || value.length > 0,
+    staleTime: Infinity,
   })
 }

@@ -10,8 +10,8 @@ export type ProjectFormValues = {
   deployUrl: string
   startDate: string
   endDate: string
-  techStacks: { category: string; data: Skill[] }[]
+  techStacks: { category: string; skill: Skill[] }[]
   description: string
   troubleShooting: string
-  members: { role: string; members: UserSummary[] }[]
+  members: { role: string; userSummary: UserSummary[] }[]
 }

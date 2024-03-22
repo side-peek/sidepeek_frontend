@@ -10,6 +10,9 @@ export const useGetProjectEdit = (projectId: number) =>
   useQuery({
     queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
     enabled: !!projectId,
-    queryFn: () => getProjectDetail({ projectId: projectId as number }),
+    queryFn: () => {
+      const data = getProjectDetail({ projectId: projectId as number })
+      return data
+    },
     select: (data) => parseProjectDetail(data),
   })

@@ -1,10 +1,8 @@
 import { UserSummary } from "api-models"
 import { create } from "zustand"
 
-import { ProcessedMember } from "@utils/process/processMembers"
-
 interface MemberStore {
-  fields: ProcessedMember[]
+  fields: { role: string; userSummary: UserSummary[] }[]
   appendField: () => void
   appendMember: (data: UserSummary, fieldIdx: number) => void
   deleteField: (fieldIdx: number) => void
@@ -13,16 +11,16 @@ interface MemberStore {
 }
 
 export const useMemberStore = create<MemberStore>((set) => ({
-  fields: [{ role: "", members: [] }],
+  fields: [{ role: "", userSummary: [] }],
   appendField: () =>
     set((state) => ({
-      fields: [...state.fields, { role: "", members: [] }],
+      fields: [...state.fields, { role: "", userSummary: [] }],
     })),
   appendMember: (data: UserSummary, fieldIdx: number) =>
     set((state) => ({
       fields: state.fields?.map((field, idx) =>
         idx === fieldIdx
-          ? { ...field, members: [...field.members, data] }
+          ? { ...field, userSummary: [...field.userSummary, data] }
           : field,
       ),
     })),
@@ -37,7 +35,9 @@ export const useMemberStore = create<MemberStore>((set) => ({
         fieldIdx === idx
           ? {
               ...field,
-              members: field.members.filter((member) => member.id !== data.id),
+              userSummary: field.userSummary.filter(
+                (member) => member.id !== data.id,
+              ),
             }
           : field,
       ),

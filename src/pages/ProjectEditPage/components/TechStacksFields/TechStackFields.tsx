@@ -36,6 +36,7 @@ const TechStacksFields = () => {
                 placeholder="기술스택 분야를 입력해주세요"
                 width="20rem"
                 required={true}
+                value={field.category || ""}
                 onChange={(e) => changeCategory(e.target.value, index)}
               />
             </Box>
@@ -51,7 +52,7 @@ const TechStacksFields = () => {
               gap="3px"
               flex="6"
               flexWrap="nowrap">
-              {field.data?.map((stack) => (
+              {field.skill?.map((stack) => (
                 <CloseButtonTag
                   key={stack.name}
                   label={stack.name}

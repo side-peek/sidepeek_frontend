@@ -21,7 +21,6 @@ const ProfileCard = ({
   handleEditProfile,
   isMe,
 }: ProfileCardProps) => {
-  console.log(job)
   return (
     <VStack>
       <Avatar

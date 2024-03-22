@@ -5,8 +5,6 @@ import CommonTag from "@components/Tag/components/CommonTag"
 
 import { filterSelectedId } from "@pages/ProjectEditPage/utils/filterSelectedId"
 
-import { ProcessedTechStack } from "@utils/process/processTechStacks"
-
 import SearchResultContainer from "../../styles/SearchResultContainer"
 import StackSearchBox from "./StackSearchBox"
 
@@ -15,7 +13,7 @@ const Field = ({
   index,
   appendStack,
 }: {
-  field: ProcessedTechStack
+  field: { category: string; skill: Skill[] }
   index: number
   appendStack: (techStack: Skill, index: number) => void
 }) => {
@@ -28,7 +26,7 @@ const Field = ({
             {!techStacks.length && (
               <AbsoluteCenter>검색 결과가 존재하지 않습니다</AbsoluteCenter>
             )}
-            {filterSelectedId(techStacks, field.data).map((techStack) => {
+            {filterSelectedId(techStacks, field.skill).map((techStack) => {
               return (
                 <Box
                   cursor="pointer"
