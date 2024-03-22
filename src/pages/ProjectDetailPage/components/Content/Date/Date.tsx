@@ -1,5 +1,6 @@
 import { HStack, Text } from "@chakra-ui/react"
 
+import { EMPTY_MESSAGE } from "@pages/ProjectDetailPage/constants/emptyMessage"
 import changeDateForm from "@pages/ProjectDetailPage/utils/changeDateForm"
 
 interface DateProps {
@@ -21,7 +22,7 @@ const Date = ({ startDate, endDate }: DateProps) => {
         <Text
           color="grey.500"
           fontSize="lg">
-          등록된 프로젝트 기간이 존재하지 않습니다.
+          {EMPTY_MESSAGE.DATE}
         </Text>
       )}
     </HStack>

@@ -3,6 +3,8 @@ import { Skill, TechStack } from "api-models"
 
 import CommonTag from "@components/Tag/components/CommonTag"
 
+import { EMPTY_MESSAGE } from "@pages/ProjectDetailPage/constants/emptyMessage"
+
 interface TechStacksProps {
   techStacks: TechStack[]
 }
@@ -61,7 +63,7 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
         <Text
           fontSize="lg"
           color="grey.500">
-          등록된 기술 스택이 존재하지 않습니다.
+          {EMPTY_MESSAGE.TECHSTACKS}
         </Text>
       )}
     </Stack>

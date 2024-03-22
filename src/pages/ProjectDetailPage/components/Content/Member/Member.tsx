@@ -1,6 +1,8 @@
 import { HStack, Stack, Text } from "@chakra-ui/react"
 import { Member, UserSummary } from "api-models"
 
+import { EMPTY_MESSAGE } from "@pages/ProjectDetailPage/constants/emptyMessage"
+
 import MemberList from "./MemberList/MemberList"
 
 interface MemberInfoProps {
@@ -35,7 +37,7 @@ const MemberInfo = ({ members }: MemberInfoProps) => {
           <Text
             color="grey.500"
             fontSize="lg">
-            등록된 멤버가 존재하지 않습니다.
+            {EMPTY_MESSAGE.MEMBER}
           </Text>
         )}
       </HStack>
