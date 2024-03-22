@@ -1,129 +1,49 @@
 import { useState } from "react"
-import { useWatch } from "react-hook-form"
 
-import {
-  AbsoluteCenter,
-  Box,
-  Button,
-  Flex,
-  Image,
-  Input,
-} from "@chakra-ui/react"
+import { Box, Button, Flex, Input } from "@chakra-ui/react"
 
-import { ErrorMessage } from "@components/ErrorMessage/ErrorMessage"
 import CloseButtonTag from "@components/Tag/components/CloseButtonTag"
-import CommonTag from "@components/Tag/components/CommonTag"
 
-import { useTechStacksMethods } from "@pages/ProjectEditPage/components/TechStacksFields/hooks/useTechStacksMethods"
-import { filterSelectedId } from "@pages/ProjectEditPage/utils/filterSelectedId"
+import { useTechStackStore } from "@stores/useTechStackStore"
 
 import CloseButton from "../styles/CloseButton"
-import ErrorText from "../styles/ErrorText"
 import FieldContainer from "../styles/FieldContainer"
-import SearchResultContainer from "../styles/SearchResultContainer"
-import StackSearchBox from "./components/StackSearchBox"
+import Field from "./components/Field"
 
 const TechStacksFields = () => {
   const {
     fields,
-    appendNewFields,
-    removeField,
+    appendField,
     appendStack,
-    selectedStacks,
-    removeStack,
-    register,
-    errors,
-    trigger,
-    control,
-  } = useTechStacksMethods()
-
+    deleteField,
+    deleteStack,
+    changeCategory,
+  } = useTechStackStore()
   const [max, setMax] = useState(0)
-  const MAX_FIELDS_NUMBER = 4
-  const MIN_FIELDS_NUMBER = 1
-
-  const watchFields = useWatch({ name: "techStacks", control })
-
-  const controlledStacks = fields.map((field, index) => {
-    return {
-      ...field,
-      ...watchFields[index],
-    }
-  })
+  const [MAX_FIELDS_NUMBER, MIN_FIELDS_NUMBER] = [4, 1]
 
   return (
     <Flex
       flexDir="column"
       gap="8px">
-      {controlledStacks?.map((field, index) => {
-        register(`techStacks.${index}.data`, {
-          validate: (data) => data?.length !== 0 || "하나 이상 선택해주세요",
-        })
+      {fields?.map((field, index) => {
         return (
           <FieldContainer
-            key={field.id}
+            key={index}
             gap="5px">
             <Box flex="1">
               <Input
                 placeholder="기술스택 분야를 입력해주세요"
-                {...register(`techStacks.${index}.category`, {
-                  required: "분야 입력은 필수입니다",
-                })}
-              />
-              <ErrorMessage
-                name={`techStacks[${index}].category` as const}
-                errors={errors}
-                render={({ message }) => {
-                  return <ErrorText message={message} />
-                }}
+                width="20rem"
+                required={true}
+                onChange={(e) => changeCategory(e.target.value, index)}
               />
             </Box>
-
             <Box flex="1">
-              <ErrorMessage
-                name={`techStacks.${index}.data` as const}
-                errors={errors}
-                render={({ message }) => {
-                  return <ErrorText message={message} />
-                }}
-              />
-              <StackSearchBox
-                render={({ techStacks }) => {
-                  return (
-                    <SearchResultContainer>
-                      {!techStacks.length && (
-                        <AbsoluteCenter>
-                          검색 결과가 존재하지 않습니다
-                        </AbsoluteCenter>
-                      )}
-                      {filterSelectedId(techStacks, selectedStacks(index)).map(
-                        (techStack) => {
-                          return (
-                            <Box
-                              cursor="pointer"
-                              onClick={() => {
-                                appendStack(index, techStack)
-                                trigger(`techStacks.${index}.data`, {
-                                  shouldFocus: true,
-                                })
-                              }}
-                              key={techStack.name}>
-                              <CommonTag
-                                leftElement={
-                                  <Image
-                                    src={techStack.iconImageUrl}
-                                    boxSize="10"
-                                  />
-                                }
-                                label={techStack.name}
-                                border="none"
-                              />
-                            </Box>
-                          )
-                        },
-                      )}
-                    </SearchResultContainer>
-                  )
-                }}
+              <Field
+                field={field}
+                index={index}
+                appendStack={appendStack}
               />
             </Box>
 
@@ -131,20 +51,19 @@ const TechStacksFields = () => {
               gap="3px"
               flex="6"
               flexWrap="nowrap">
-              {selectedStacks(index)?.map((stack) => (
+              {field.data?.map((stack) => (
                 <CloseButtonTag
                   key={stack.name}
                   label={stack.name}
-                  onClickCloseButton={() => removeStack(index, stack)}
+                  onClickCloseButton={() => deleteStack(stack, index)}
                 />
               ))}
             </Box>
             {index >= MIN_FIELDS_NUMBER && (
               <CloseButton
-                h="auto"
                 onClick={() => {
                   setMax(max - 1)
-                  removeField(index)
+                  deleteField(index)
                 }}
               />
             )}
@@ -157,7 +76,7 @@ const TechStacksFields = () => {
           borderColor="blue.200"
           onClick={() => {
             setMax(max + 1)
-            appendNewFields()
+            appendField()
           }}>
           기술스택 추가
         </Button>

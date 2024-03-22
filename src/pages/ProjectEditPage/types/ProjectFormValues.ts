@@ -1,10 +1,4 @@
-import { Skill } from "api-models"
-
-export type RequestedMemberType = {
-  id: number | null
-  nickname: string
-  profileImageUrl: string | null
-}
+import { Skill, UserSummary } from "api-models"
 
 export type ProjectFormValues = {
   name: string
@@ -19,5 +13,5 @@ export type ProjectFormValues = {
   techStacks: { category: string; data: Skill[] }[]
   description: string
   troubleShooting: string
-  members: { role: string; members: RequestedMemberType[] }[]
+  members: { role: string; members: UserSummary[] }[]
 }

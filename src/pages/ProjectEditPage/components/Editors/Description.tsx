@@ -42,7 +42,7 @@ const Description = ({ name }: { name: FieldPath<ProjectFormValues> }) => {
       <Controller
         control={control}
         name={name}
-        // rules={{ required: "필수로 입력해주세요" }}
+        rules={{ required: "필수로 입력해주세요" }}
         render={({ field: { onChange, onBlur, value } }) => (
           <MDEditor
             onChange={onChange}
