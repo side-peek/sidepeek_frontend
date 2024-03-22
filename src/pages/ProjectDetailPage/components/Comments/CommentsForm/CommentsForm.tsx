@@ -82,6 +82,7 @@ const CommentsForm = ({
                 mr="5.5rem"
                 as={ResizeTextarea}
                 border="none"
+                disabled={isSubmitting || !user}
                 _focus={{ boxShadow: "none" }}
                 {...register("content", {
                   required: true,
@@ -97,9 +98,10 @@ const CommentsForm = ({
                 right="1rem"
                 top="28%">
                 <Checkbox
+                  disabled={isSubmitting || !user}
                   isChecked={isAnonymous}
                   size="lg"
-                  _hover={{ opacity: 0.5 }}
+                  _hover={user ? { opacity: 0.5 } : {}}
                   onChange={handleAnonymous}
                   color={isAnonymous ? "red.200" : "grey.500"}
                   colorScheme="red">
@@ -119,7 +121,7 @@ const CommentsForm = ({
             opacity={!isSubmitting && isValid ? "1" : "0.3"}
             color="white"
             fontSize="xl"
-            disabled={isSubmitting}
+            disabled={isSubmitting || !user}
             cursor={!isSubmitting && isValid ? "pointer" : "default"}
             type="submit">
             입력
