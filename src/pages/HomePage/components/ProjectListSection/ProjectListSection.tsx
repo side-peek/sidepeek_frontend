@@ -1,7 +1,7 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react"
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react"
 
 import { Container, Stack, useMediaQuery } from "@chakra-ui/react"
-import { Skill } from "api-models"
+import { AllProject, Skill } from "api-models"
 
 import { useQueryClient } from "@tanstack/react-query"
 
@@ -24,26 +24,41 @@ const ProjectListSection = () => {
   const [sortOption, setSortOption] = useState<SortSelectType>("createdAt")
   const queryClient = useQueryClient()
   const [skills, setSkills] = useState<string[]>([])
+  const [lastProjectId, setLastProjectId] = useState<number | null>(null)
+  const [lastOrderCount, setLastOrderCount] = useState<number | null>(null)
+
+  const [allProjects, setAllProjects] = useState<AllProject[]>([])
 
   const {
-    allProjectList,
+    pageData,
+
     isAllProjectLoading,
     refetchAllProject,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
     isRefetching,
-  } = useAllProjectQuery({ sortOption, isReleased, skills: skills.join(",") })
+  } = useAllProjectQuery({
+    sortOption,
+    isReleased,
+    lastProjectId,
+    lastOrderCount,
+    skill: skills.join(","),
+  })
 
   const isLoading = isAllProjectLoading || isRefetching
-  const projectCount = allProjectList
-    ? allProjectList.pages[0].totalElements
-    : 0
+  const projectCount = pageData ? pageData.pages[0].totalElements : 0
+  const lastProject = pageData && pageData.pages[0].content.at(-1)
+  const isHasNext = pageData ? pageData.pages[0].hasNext : false
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SortSelectType
 
     if (value !== sortOption) {
+      setLastOrderCount(null)
+      setLastProjectId(null)
+      setAllProjects([])
+
       setSortOption(value)
       queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
       queryClient.refetchQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
@@ -52,21 +67,44 @@ const ProjectListSection = () => {
 
   const handleChange = () => {
     setIsReleased(!isReleased)
+    setLastOrderCount(null)
+    setLastProjectId(null)
+    setAllProjects([])
 
-    queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
-    queryClient.refetchQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
+    refetchAllProject()
   }
 
+  useMemo(() => {
+    if (pageData) {
+      setAllProjects((prevProjects) => [
+        ...prevProjects,
+        ...pageData.pages.flatMap((page) => page.content),
+      ])
+    }
+  }, [pageData])
+
   const loadMoreProjects = useCallback(() => {
-    if (hasNextPage && !isFetchingNextPage) {
+    if (lastProject && hasNextPage && !isFetchingNextPage) {
+      if (sortOption !== "createdAt") {
+        sortOption === "like"
+          ? setLastOrderCount(lastProject.likeCount)
+          : setLastOrderCount(lastProject.viewCount)
+      } else {
+        setLastOrderCount(null)
+      }
+
+      setLastProjectId(lastProject.id)
       fetchNextPage()
     }
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage])
+  }, [lastProject, hasNextPage, isFetchingNextPage, sortOption, fetchNextPage])
 
   const [selectedStacks, setSelectedStacks] = useState<Skill[]>([])
 
   const debounceTechFilter = useDebounce(() => {
     setSkills(selectedStacks.map((skill) => skill.name))
+    setLastOrderCount(null)
+    setLastProjectId(null)
+    setAllProjects([])
 
     refetchAllProject()
   }, 500)
@@ -103,14 +141,14 @@ const ProjectListSection = () => {
         />
         <ProjectList
           projectCount={projectCount}
-          projects={allProjectList}
+          projects={allProjects}
           isLoading={isLoading}
         />
       </Stack>
       <MoreButton
         isLoading={isFetchingNextPage}
         loadMore={loadMoreProjects}
-        hasNext={hasNextPage}
+        hasNext={isHasNext}
       />
     </Container>
   )

@@ -7,6 +7,16 @@ import { ENDPOINTS } from "@constants/endPoints"
 
 import { baseInstance } from "../axiosInstance"
 
+interface paramsType {
+  sort: "createdAt" | "like" | "view"
+  isReleased: boolean
+  pageSize: number
+  lastProjectId?: number
+  lastOrderCount?: number
+  search?: string
+  skill?: string
+}
+
 /**
  * @brief 전체 프로젝트 목록을 가져옵니다
  */
@@ -15,9 +25,9 @@ export const getAllProjects = async (
     sortOption,
     isReleased,
     lastProjectId,
-    lastProject,
+    lastOrderCount,
     search,
-    skills,
+    skill,
   }: getAllProjectsType,
   config: AxiosRequestConfig = {
     headers: {
@@ -25,29 +35,37 @@ export const getAllProjects = async (
     },
   },
 ) => {
-  let lastOrderCount
-  if (sortOption !== "createdAt") {
-    lastOrderCount =
-      sortOption === "like"
-        ? lastProject?.likeCount
-        : sortOption === "view"
-          ? lastProject?.viewCount
-          : null
+  const params: paramsType = {
+    sort: sortOption,
+    isReleased,
+    pageSize: 24,
+  }
+
+  if (skill) {
+    params.skill = skill
+  }
+
+  if (search) {
+    params.search = search
+  }
+
+  if (lastProjectId) {
+    params.lastProjectId = lastProjectId
+  }
+
+  if (lastOrderCount && sortOption !== "createdAt") {
+    params.lastOrderCount = lastOrderCount
+  }
+
+  if (!isReleased) {
+    params.isReleased = isReleased
   }
 
   const { data } = await baseInstance.get<getAllProjectsResponseType>(
     ENDPOINTS.GET_ALL_PROJECTS,
     {
       ...config,
-      params: {
-        sort: sortOption,
-        isReleased,
-        pageSize: 10,
-        lastProjectId,
-        lastOrderCount,
-        search,
-        skill: skills,
-      },
+      params,
     },
   )
   return data

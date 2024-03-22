@@ -296,9 +296,9 @@ declare module "api-models" {
     sortOption: "createdAt" | "like" | "view"
     isReleased: boolean
     lastProjectId?: number | null
-    lastProject?: AllProject | undefined
-    search?: string | null
-    skills?: string
+    lastOrderCount?: number | null
+    search?: string
+    skill?: string
   }
 
   export type putProjectPayload = Omit<postProjectPayload, "ownerId">

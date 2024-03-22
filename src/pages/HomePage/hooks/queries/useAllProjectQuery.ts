@@ -9,10 +9,10 @@ import { QUERYKEY } from "@constants/queryKey"
 export const useAllProjectQuery = ({
   sortOption,
   isReleased,
-  lastProjectId = null,
-  lastProject = undefined,
+  lastProjectId,
+  lastOrderCount,
   search,
-  skills,
+  skill,
 }: getAllProjectsType) => {
   const {
     data,
@@ -28,30 +28,26 @@ export const useAllProjectQuery = ({
       sortOption,
       isReleased,
       lastProjectId,
-      lastProject,
+      lastOrderCount,
       search,
-      skills,
+      skill,
     ],
     queryFn: () =>
       getAllProjects({
         sortOption,
         isReleased,
         lastProjectId,
-        lastProject,
+        lastOrderCount,
         search,
-        skills,
+        skill,
       }),
     initialPageParam: 0,
-    getNextPageParam: (lastPage) => (
-      (lastProject = lastPage.content[lastPage.numberOfElements - 1]),
-      (lastProjectId = lastPage.hasNext
-        ? lastPage.content[lastPage.numberOfElements - 1].id
-        : null)
-    ),
+    getNextPageParam: (lastPage) =>
+      lastPage.hasNext && lastPage.content[lastPage.numberOfElements - 1].id,
   })
 
   return {
-    allProjectList: data,
+    pageData: data,
     isAllProjectLoading: isLoading,
     refetchAllProject: refetch,
     fetchNextPage,

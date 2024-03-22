@@ -26,6 +26,7 @@ const TechStackFilter = ({
         borderColor="grey.200">
         <StackSearchBox
           showAll={false}
+          inputProps={{ borderBottom: "1px solid", borderColor: "gray.200" }}
           render={({ techStacks }) => {
             return (
               <Box
