@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ReactNode, useEffect } from "react"
 import { FormProvider, useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
@@ -38,7 +38,7 @@ const ProjectFormProvider = ({
     defaultValues: defaultValues || ProjectFormDefaultValues,
   })
   const navigate = useNavigate()
-
+  console.log(defaultValues)
   const { mutate: postProject } = usePostProjectMutation({
     onError: (error) => {
       toast({
@@ -62,7 +62,7 @@ const ProjectFormProvider = ({
       }),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: [QUERYKEY.PROJECT_DETAIL],
+        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
       navigate(`../project/${data.id}`)
     },
@@ -76,21 +76,29 @@ const ProjectFormProvider = ({
       startDate: convertDate(data.startDate),
       endDate: convertDate(data.endDate),
     }
-
     if (!projectId) {
       postProject({
         ...convertedData,
         ownerId: userInfo?.id as number,
+        overviewImageUrl: data.overviewImageUrl.filter((url) => url),
       })
     } else {
       putProject({
         projectId,
         body: {
           ...convertedData,
+          overviewImageUrl: data.overviewImageUrl.filter((url) => url),
         },
       })
     }
   }
+
+  useEffect(() => {
+    useMemberStore.setState(() => ({ fields: defaultValues?.members || [] }))
+    useTechStackStore.setState(() => ({
+      fields: defaultValues?.techStacks || [],
+    }))
+  }, [])
 
   return (
     <FormProvider {...methods}>

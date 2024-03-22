@@ -4,6 +4,7 @@ import { Spinner } from "@chakra-ui/react"
 
 import { useGetProjectEdit } from "../hooks/useGetProject"
 import ProjectFormProvider from "../stores/ProjectFormProvider"
+import { ProjectFormValues } from "../types/ProjectFormValues"
 import ProjectForm from "./ProjectForm"
 
 const DefaultValueFetcher = () => {
@@ -20,7 +21,7 @@ const DefaultValueFetcher = () => {
 
   return (
     <ProjectFormProvider
-      defaultValues={projectDetailInfo}
+      defaultValues={projectDetailInfo as unknown as ProjectFormValues}
       projectId={Number(projectId)}>
       <ProjectForm />
     </ProjectFormProvider>

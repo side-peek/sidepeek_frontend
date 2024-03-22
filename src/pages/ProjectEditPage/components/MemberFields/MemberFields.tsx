@@ -1,7 +1,6 @@
 import { useState } from "react"
 
 import { Box, Button, Flex, Input } from "@chakra-ui/react"
-import { UserSummary } from "api-models"
 
 import CloseButton from "../styles/CloseButton"
 import FieldContainer from "../styles/FieldContainer"
@@ -28,6 +27,7 @@ const MemberFields = () => {
       flexDir="column"
       gap="8px">
       {fields?.map((field, fieldIdx) => {
+        console.log(fields)
         return (
           <FieldContainer
             key={fieldIdx}
@@ -50,25 +50,24 @@ const MemberFields = () => {
                     fieldIdx,
                   )
                 }}
-                selectedMembers={field.members || []}
+                selectedMembers={field.userSummary || []}
               />
             </Box>
             <Box flex="6">
               <Flex
                 gap="5px"
                 overflow="scroll">
-                {field.members?.map((member) => {
-                  const memberList = member as unknown as UserSummary[]
-                  return memberList.map((member) => (
+                {field.userSummary?.map((member) => {
+                  return (
                     <MemberAvatarCard
                       key={member.id}
                       image={member.profileImageUrl || ""}
                       text={member.nickname}
                       onClick={() => {
-                        deleteMember(member, fieldIdx)
+                        deleteMember(member, fieldIdx) //fieldIdx에 해당하는 값을 찾아서
                       }}
                     />
-                  ))
+                  )
                 })}
               </Flex>
             </Box>
