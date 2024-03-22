@@ -9,6 +9,7 @@ import { QUERYKEY } from "@constants/queryKey"
 export const useAllProjectQuery = ({
   sortOption,
   isReleased,
+  lastProjectId,
   lastOrderCount,
   search,
   skill,
@@ -26,6 +27,7 @@ export const useAllProjectQuery = ({
       QUERYKEY.ALL_PROJECTS,
       sortOption,
       isReleased,
+      lastProjectId,
       lastOrderCount,
       search,
       skill,

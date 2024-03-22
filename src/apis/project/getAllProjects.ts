@@ -35,6 +35,7 @@ export const getAllProjects = async (
     },
   },
 ) => {
+  //console.log(lastOrderCount, lastProjectId)
   const params: paramsType = {
     sort: sortOption,
     isReleased,
@@ -49,18 +50,20 @@ export const getAllProjects = async (
     params.search = search
   }
 
-  if (lastProjectId) {
+  if (lastProjectId && !lastOrderCount && sortOption === "createdAt") {
     params.lastProjectId = lastProjectId
   }
 
-  if (lastOrderCount && sortOption !== "createdAt") {
+  if (sortOption !== "createdAt" && lastOrderCount && lastProjectId) {
     params.lastOrderCount = lastOrderCount
+    params.lastProjectId = lastProjectId
   }
 
   if (!isReleased) {
     params.isReleased = isReleased
   }
 
+  //console.log(lastProjectId, lastOrderCount)
   const { data } = await baseInstance.get<getAllProjectsResponseType>(
     ENDPOINTS.GET_ALL_PROJECTS,
     {
