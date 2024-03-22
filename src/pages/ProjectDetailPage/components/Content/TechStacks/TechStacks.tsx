@@ -3,16 +3,10 @@ import { TechStack } from "api-models"
 
 import CommonTag from "@components/Tag/components/CommonTag"
 
-import {
-  CategoryTechStacks,
-  categorizeTechStacks,
-} from "@utils/categorizeTechStacks"
-
 interface TechStacksProps {
   techStacks: TechStack[]
 }
 const TechStacks = ({ techStacks }: TechStacksProps) => {
-  const categorizedTechStacks = categorizeTechStacks(techStacks)
   const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
 
   return (
@@ -27,40 +21,38 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
       </Text>
       {techStacks.length > 0 ? (
         <Stack spacing="3rem">
-          {categorizedTechStacks.map(
-            ({ category, techStacks }: CategoryTechStacks) => (
-              <Stack
-                key={category}
-                direction={isLargerThan768 ? "row" : "column"}
-                spacing="2rem">
-                <Text
-                  fontSize="xl"
-                  minW="8rem"
-                  whiteSpace="nowrap">
-                  {category}
-                </Text>
-                <HStack
-                  spacing="1rem"
-                  flexWrap="wrap">
-                  {techStacks.map((stack) => (
-                    <CommonTag
-                      leftElement={
-                        <Image
-                          src={stack.skill.iconImageUrl}
-                          w="2rem"
-                          h="2rem"
-                        />
-                      }
-                      cursor="default"
-                      label={stack.skill.name}
-                      key={stack.skill.id}
-                      fontSize="lg"
-                    />
-                  ))}
-                </HStack>
-              </Stack>
-            ),
-          )}
+          {techStacks.map(({ category, skill: skills }) => (
+            <Stack
+              key={category}
+              direction={isLargerThan768 ? "row" : "column"}
+              spacing="2rem">
+              <Text
+                fontSize="xl"
+                minW="8rem"
+                whiteSpace="nowrap">
+                {category}
+              </Text>
+              <HStack
+                spacing="1rem"
+                flexWrap="wrap">
+                {skills.map((skill) => (
+                  <CommonTag
+                    leftElement={
+                      <Image
+                        src={skill.iconImageUrl}
+                        w="2rem"
+                        h="2rem"
+                      />
+                    }
+                    cursor="default"
+                    label={skill.name}
+                    key={skill.id}
+                    fontSize="lg"
+                  />
+                ))}
+              </HStack>
+            </Stack>
+          ))}
         </Stack>
       ) : (
         <Text
