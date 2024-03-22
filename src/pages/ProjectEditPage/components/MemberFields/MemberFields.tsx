@@ -27,7 +27,6 @@ const MemberFields = () => {
       flexDir="column"
       gap="8px">
       {fields?.map((field, fieldIdx) => {
-        console.log(fields)
         return (
           <FieldContainer
             key={fieldIdx}
