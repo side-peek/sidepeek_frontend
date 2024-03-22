@@ -1,12 +1,14 @@
 import { ForwardedRef, forwardRef } from "react"
 
 import { Center, Grid, Spinner, Text } from "@chakra-ui/react"
-import { AllProject } from "api-models"
+import { getAllProjectsResponseType } from "api-models"
+
+import { InfiniteData } from "@tanstack/react-query"
 
 import ProjectCard from "@components/ProjectCard/ProjectCard"
 
 interface ProjectListProps {
-  projects: AllProject[]
+  projects: InfiniteData<getAllProjectsResponseType, unknown> | undefined
   isLoading: boolean
   isFetchingNextPage?: boolean
   projectCount: number
@@ -41,22 +43,24 @@ const ProjectList = forwardRef(
                 <Text fontSize="2xl">프로젝트가 없습니다</Text>
               </Center>
             ) : (
-              projects.map((project) => (
-                <Center key={project.id}>
-                  <ProjectCard
-                    imgUrl={project.thumbnailUrl}
-                    viewCount={project.viewCount}
-                    heartCount={project.likeCount}
-                    isFullHeart={project.isLiked}
-                    title={project.name}
-                    content={project.subName}
-                    url={`/project/${project.id}`}
-                    ref={ref}
-                  />
-                </Center>
-              ))
+              projects?.pages.map((projectList) => {
+                return projectList.content.map((project) => (
+                  <Center key={project.id}>
+                    <ProjectCard
+                      imgUrl={project.thumbnailUrl}
+                      viewCount={project.viewCount}
+                      heartCount={project.likeCount}
+                      isFullHeart={project.isLiked}
+                      title={project.name}
+                      content={project.subName}
+                      url={`/project/${project.id}`}
+                      ref={ref}
+                    />
+                  </Center>
+                ))
+              })
             )}
-            ){isFetchingNextPage ? <Spinner /> : null}
+            {isFetchingNextPage ? <Spinner /> : null}
           </Grid>
         )}
       </>

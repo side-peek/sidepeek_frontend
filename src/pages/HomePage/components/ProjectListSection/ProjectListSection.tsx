@@ -1,7 +1,7 @@
-import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react"
+import { ChangeEvent, useCallback, useEffect, useState } from "react"
 
 import { Container, Stack, useMediaQuery } from "@chakra-ui/react"
-import { AllProject, Skill } from "api-models"
+import { Skill } from "api-models"
 
 import { useQueryClient } from "@tanstack/react-query"
 
@@ -27,11 +27,8 @@ const ProjectListSection = () => {
   const [lastProjectId, setLastProjectId] = useState<number | null>(null)
   const [lastOrderCount, setLastOrderCount] = useState<number | null>(null)
 
-  const [allProjects, setAllProjects] = useState<AllProject[]>([])
-
   const {
     pageData,
-
     isAllProjectLoading,
     refetchAllProject,
     fetchNextPage,
@@ -49,7 +46,6 @@ const ProjectListSection = () => {
   const isLoading = isAllProjectLoading || isRefetching
   const projectCount = pageData ? pageData.pages[0].totalElements : 0
   const lastProject = pageData && pageData.pages[0].content.at(-1)
-  const isHasNext = pageData ? pageData.pages[0].hasNext : false
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SortSelectType
@@ -57,7 +53,6 @@ const ProjectListSection = () => {
     if (value !== sortOption) {
       setLastOrderCount(null)
       setLastProjectId(null)
-      setAllProjects([])
 
       setSortOption(value)
       queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
@@ -69,19 +64,9 @@ const ProjectListSection = () => {
     setIsReleased(!isReleased)
     setLastOrderCount(null)
     setLastProjectId(null)
-    setAllProjects([])
 
     refetchAllProject()
   }
-
-  useMemo(() => {
-    if (pageData) {
-      setAllProjects((prevProjects) => [
-        ...prevProjects,
-        ...pageData.pages.flatMap((page) => page.content),
-      ])
-    }
-  }, [pageData])
 
   const loadMoreProjects = useCallback(() => {
     if (lastProject && hasNextPage && !isFetchingNextPage) {
@@ -104,7 +89,6 @@ const ProjectListSection = () => {
     setSkills(selectedStacks.map((skill) => skill.name))
     setLastOrderCount(null)
     setLastProjectId(null)
-    setAllProjects([])
 
     refetchAllProject()
   }, 500)
@@ -141,14 +125,14 @@ const ProjectListSection = () => {
         />
         <ProjectList
           projectCount={projectCount}
-          projects={allProjects}
+          projects={pageData}
           isLoading={isLoading}
         />
       </Stack>
       <MoreButton
         isLoading={isFetchingNextPage}
         loadMore={loadMoreProjects}
-        hasNext={isHasNext}
+        hasNext={hasNextPage}
       />
     </Container>
   )
