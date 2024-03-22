@@ -5,6 +5,7 @@ import { Comment } from "api-models"
 
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
+import CommentsForm from "../CommentsForm/CommentsForm"
 import CommentTitle from "./components/CommentTitle"
 import CommentsAvatar from "./components/CommentsAvatar"
 import CommentsEditForm from "./components/CommentsEditForm"
@@ -24,7 +25,11 @@ const CommentsItem = ({ comment }: CommentsItemProps) => {
     navigate(`/profile/${userId}`)
   }
 
-  const { editTargetCommentId, isEditing } = useCommentContext()
+  const { editTargetCommentId, isEditing, isReply, replyTargetCommentId } =
+    useCommentContext()
+
+  const hasReply = !comment.parentId
+  const onReply = isReply && comment.id === replyTargetCommentId
 
   return (
     <Stack
@@ -57,11 +62,18 @@ const CommentsItem = ({ comment }: CommentsItemProps) => {
               ) : (
                 <CommentsText text={comment.content} />
               )}
-
-              <ReplyButton
-                parentId={comment.parentId}
-                commentId={comment.id}
-              />
+              {hasReply && onReply && (
+                <CommentsForm
+                  parentId={replyTargetCommentId}
+                  isReplyComment
+                />
+              )}
+              {hasReply && (
+                <ReplyButton
+                  onReply={onReply}
+                  commentId={comment.id}
+                />
+              )}
             </Stack>
           </HStack>
         </Box>
