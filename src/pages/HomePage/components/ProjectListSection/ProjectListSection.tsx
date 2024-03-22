@@ -24,7 +24,6 @@ const ProjectListSection = () => {
   const [sortOption, setSortOption] = useState<SortSelectType>("createdAt")
   const queryClient = useQueryClient()
   const [skills, setSkills] = useState<string[]>([])
-  const [lastProjectId, setLastProjectId] = useState<number | null>(null)
   const [lastOrderCount, setLastOrderCount] = useState<number | null>(null)
 
   const {
@@ -38,7 +37,6 @@ const ProjectListSection = () => {
   } = useAllProjectQuery({
     sortOption,
     isReleased,
-    lastProjectId,
     lastOrderCount,
     skill: skills.join(","),
   })
@@ -52,7 +50,6 @@ const ProjectListSection = () => {
 
     if (value !== sortOption) {
       setLastOrderCount(null)
-      setLastProjectId(null)
 
       setSortOption(value)
       queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
@@ -63,7 +60,6 @@ const ProjectListSection = () => {
   const handleChange = () => {
     setIsReleased(!isReleased)
     setLastOrderCount(null)
-    setLastProjectId(null)
 
     refetchAllProject()
   }
@@ -78,7 +74,6 @@ const ProjectListSection = () => {
         setLastOrderCount(null)
       }
 
-      setLastProjectId(lastProject.id)
       fetchNextPage()
     }
   }, [lastProject, hasNextPage, isFetchingNextPage, sortOption, fetchNextPage])
@@ -88,7 +83,6 @@ const ProjectListSection = () => {
   const debounceTechFilter = useDebounce(() => {
     setSkills(selectedStacks.map((skill) => skill.name))
     setLastOrderCount(null)
-    setLastProjectId(null)
 
     refetchAllProject()
   }, 500)
