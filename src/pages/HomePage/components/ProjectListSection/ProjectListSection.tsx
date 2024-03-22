@@ -3,8 +3,6 @@ import { ChangeEvent, useCallback, useEffect, useState } from "react"
 import { Container, Stack, useMediaQuery } from "@chakra-ui/react"
 import { Skill } from "api-models"
 
-import { useQueryClient } from "@tanstack/react-query"
-
 import ProjectFilter from "@components/ProjectFilter/ProjectFilter"
 import ProjectList from "@components/ProjectList/ProjectList"
 import TechStackFilter from "@components/TechStackFilter/TechStackFilter"
@@ -14,59 +12,86 @@ import { useDebounce } from "@hooks/useDebounce"
 import { useAllProjectQuery } from "@pages/HomePage/hooks/queries/useAllProjectQuery"
 import { SortSelectType } from "@pages/HomePage/types/type"
 
-import { QUERYKEY } from "@constants/queryKey"
-
 import MoreButton from "../MoreButton/MoreButton"
 
 const ProjectListSection = () => {
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
   const [isReleased, setIsReleased] = useState(false)
   const [sortOption, setSortOption] = useState<SortSelectType>("createdAt")
-  const queryClient = useQueryClient()
   const [skills, setSkills] = useState<string[]>([])
+  const [pageInfo, setPageInfo] = useState<{
+    lastProjectId: number | null
+    lastOrderCount: number | null
+  }>({ lastProjectId: null, lastOrderCount: null })
 
   const {
-    allProjectList,
+    pageData,
     isAllProjectLoading,
     refetchAllProject,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
     isRefetching,
-  } = useAllProjectQuery({ sortOption, isReleased, skills: skills.join(",") })
+  } = useAllProjectQuery({
+    sortOption,
+    isReleased,
+    lastProjectId: pageInfo.lastProjectId,
+    lastOrderCount: pageInfo.lastOrderCount,
+    skill: skills.join(","),
+  })
 
   const isLoading = isAllProjectLoading || isRefetching
-  const projectCount = allProjectList
-    ? allProjectList.pages[0].totalElements
-    : 0
+  const projectCount = pageData ? pageData.pages[0].totalElements : 0
+  const lastProject = pageData && pageData.pages[0].content.at(-1)
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SortSelectType
-
     if (value !== sortOption) {
+      setPageInfo({ lastOrderCount: null, lastProjectId: null })
+
       setSortOption(value)
-      queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
-      queryClient.refetchQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
+
+      refetchAllProject()
     }
   }
 
   const handleChange = () => {
     setIsReleased(!isReleased)
+    setPageInfo({ lastOrderCount: null, lastProjectId: null })
 
-    queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
-    queryClient.refetchQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
+    refetchAllProject()
   }
 
   const loadMoreProjects = useCallback(() => {
-    if (hasNextPage && !isFetchingNextPage) {
+    if (isFetchingNextPage) {
+      return
+    }
+
+    if (lastProject && hasNextPage) {
+      setPageInfo(() => {
+        if (sortOption === "createdAt") {
+          return { lastProjectId: lastProject.id, lastOrderCount: null }
+        } else {
+          console.log(sortOption, lastProject.id)
+          return {
+            lastProjectId: lastProject.id,
+            lastOrderCount:
+              sortOption === "like"
+                ? lastProject.likeCount
+                : lastProject.viewCount,
+          }
+        }
+      })
+
       fetchNextPage()
     }
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage])
+  }, [lastProject, hasNextPage, isFetchingNextPage, fetchNextPage, sortOption])
 
   const [selectedStacks, setSelectedStacks] = useState<Skill[]>([])
 
   const debounceTechFilter = useDebounce(() => {
     setSkills(selectedStacks.map((skill) => skill.name))
+    setPageInfo({ lastOrderCount: null, lastProjectId: null })
 
     refetchAllProject()
   }, 500)
@@ -103,7 +128,7 @@ const ProjectListSection = () => {
         />
         <ProjectList
           projectCount={projectCount}
-          projects={allProjectList}
+          projects={pageData}
           isLoading={isLoading}
         />
       </Stack>
