@@ -7,12 +7,18 @@ import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { useQueryClient } from "@tanstack/react-query"
 
+import { useTechStackStore } from "@stores/useTechStackStore"
+
 import { QUERYKEY } from "@constants/queryKey"
 
+import { useMemberStore } from "../components/MemberFields/stores/useMemberStore"
 import { ProjectFormDefaultValues } from "../constants/defaultValues"
 import { usePostProjectMutation } from "../hooks/usePostProjectMutation"
 import { usePutProjectMutation } from "../hooks/usePutProjectMutation"
 import { ProjectFormValues } from "../types/ProjectFormValues"
+import { convertDate } from "../utils/convert/convertDate"
+import { convertMembersData } from "../utils/convert/convertMembersData"
+import { convertTechStacksData } from "../utils/convert/convertTechStacksData"
 
 interface ProjectFormProviderProps {
   children: ReactNode
@@ -47,6 +53,7 @@ const ProjectFormProvider = ({
       navigate(`../project/${data.id}`)
     },
   })
+
   const { mutate: putProject } = usePutProjectMutation({
     onError: (error) =>
       toast({
@@ -62,47 +69,24 @@ const ProjectFormProvider = ({
   })
 
   const handleSubmitEvent = (data: ProjectFormValues) => {
-    const convertedMembers = data.members
-      .map(({ role, members }) => {
-        return members?.map(({ id, nickname }) => {
-          return {
-            id,
-            nickname,
-            role,
-          }
-        })
-      })
-      ?.flat()
-
-    const convertedTechStacks = data.techStacks
-      .map(({ category, data }) => {
-        return data?.map(({ id }) => ({ skillId: id, category }))
-      })
-      ?.flat()
-
-    const convertedDate = (date: string) => {
-      const idx = date.lastIndexOf("-")
-      return date.slice(0, idx)
+    const convertedData = {
+      ...data,
+      techStacks: convertTechStacksData(useTechStackStore.getState().fields),
+      members: convertMembersData(useMemberStore.getState().fields),
+      startDate: convertDate(data.startDate),
+      endDate: convertDate(data.endDate),
     }
 
     if (!projectId) {
       postProject({
-        ...data,
-        members: convertedMembers,
-        techStacks: convertedTechStacks,
+        ...convertedData,
         ownerId: userInfo?.id as number,
-        startDate: convertedDate(data.startDate),
-        endDate: convertedDate(data.endDate),
       })
     } else {
       putProject({
         projectId,
         body: {
-          ...data,
-          members: convertedMembers,
-          techStacks: convertedTechStacks,
-          startDate: convertedDate(data.startDate),
-          endDate: convertedDate(data.endDate),
+          ...convertedData,
         },
       })
     }
@@ -114,10 +98,14 @@ const ProjectFormProvider = ({
         {children}
         <Center>
           <Button
-            border="1px solid"
-            borderColor="blue.100"
+            width="100%"
+            variant="solid"
+            padding="2rem"
             marginTop="1rem"
-            type="submit">
+            type="submit"
+            disabled={
+              methods.formState.isSubmitting || methods.formState.isValidating
+            }>
             제출하기
           </Button>
         </Center>
