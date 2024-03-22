@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom"
 
-import { Box, Button, HStack, Stack, useMediaQuery } from "@chakra-ui/react"
+import { Box, HStack, Stack, useMediaQuery } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
-import CommentsForm from "../CommentsForm/CommentsForm"
 import CommentTitle from "./components/CommentTitle"
 import CommentsAvatar from "./components/CommentsAvatar"
 import CommentsEditForm from "./components/CommentsEditForm"
 import CommentsText from "./components/CommentsText"
+import ReplyButton from "./components/ReplyButton"
 import ReplyComment from "./components/ReplyComment"
 
 interface CommentsItemProps {
@@ -24,14 +24,7 @@ const CommentsItem = ({ comment }: CommentsItemProps) => {
     navigate(`/profile/${userId}`)
   }
 
-  const {
-    replyTargetCommentId,
-    isReply,
-    handleOnReply,
-    handleOffReply,
-    editTargetCommentId,
-    isEditing,
-  } = useCommentContext()
+  const { editTargetCommentId, isEditing } = useCommentContext()
 
   return (
     <Stack
@@ -65,32 +58,10 @@ const CommentsItem = ({ comment }: CommentsItemProps) => {
                 <CommentsText text={comment.content} />
               )}
 
-              {!comment.parentId &&
-                (isReply ? (
-                  comment.id === replyTargetCommentId && (
-                    <>
-                      <CommentsForm
-                        parentId={replyTargetCommentId}
-                        isReplyComment
-                      />
-                      <Button
-                        p="0"
-                        _hover={{ opacity: "0.5" }}
-                        fontSize={isLargerThan768 ? "md" : "sm"}
-                        onClick={handleOffReply}>
-                        취소
-                      </Button>
-                    </>
-                  )
-                ) : (
-                  <Button
-                    size={isLargerThan768 ? "md" : "sm"}
-                    onClick={() => handleOnReply(comment.id)}
-                    _hover={{ opacity: 0.5 }}
-                    p="0">
-                    답글달기
-                  </Button>
-                ))}
+              <ReplyButton
+                parentId={comment.parentId}
+                commentId={comment.id}
+              />
             </Stack>
           </HStack>
         </Box>
