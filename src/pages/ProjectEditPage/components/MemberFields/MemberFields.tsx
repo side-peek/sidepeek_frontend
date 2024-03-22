@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 import { Box, Button, Flex, Input } from "@chakra-ui/react"
+import { UserSummary } from "api-models"
 
 import CloseButton from "../styles/CloseButton"
 import FieldContainer from "../styles/FieldContainer"
@@ -38,6 +39,7 @@ const MemberFields = () => {
                 width="20rem"
                 onChange={(e) => changeRole(e.target.value.trim(), fieldIdx)}
                 required={true}
+                value={field.role}
               />
             </Box>
             <Box flex="1">
@@ -56,8 +58,8 @@ const MemberFields = () => {
                 gap="5px"
                 overflow="scroll">
                 {field.members?.map((member) => {
-                  console.log(member.id)
-                  return (
+                  const memberList = member as unknown as UserSummary[]
+                  return memberList.map((member) => (
                     <MemberAvatarCard
                       key={member.id}
                       image={member.profileImageUrl || ""}
@@ -66,7 +68,7 @@ const MemberFields = () => {
                         deleteMember(member, fieldIdx)
                       }}
                     />
-                  )
+                  ))
                 })}
               </Flex>
             </Box>
