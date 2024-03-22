@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode, useEffect } from "react"
 import { FormProvider, useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
@@ -38,7 +39,6 @@ const ProjectFormProvider = ({
     defaultValues: defaultValues || ProjectFormDefaultValues,
   })
   const navigate = useNavigate()
-  console.log(defaultValues)
   const { mutate: postProject } = usePostProjectMutation({
     onError: (error) => {
       toast({
