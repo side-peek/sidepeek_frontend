@@ -22,6 +22,7 @@ const swiperParams = {
   pagination: {
     clickable: true,
   },
+  autoHeight: true,
   modules: [Navigation, Pagination, Mousewheel, Keyboard],
 }
 
