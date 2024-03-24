@@ -4,18 +4,18 @@ import { ProjectOverViewUrl } from "api-models"
 import SummaryLeft from "./SummaryLeft"
 import SummaryRight from "./SummaryRight"
 
-interface SummaryContentProps {
+interface SummaryDetailProps {
   deployUrl: string
   githubUrl: string
   overviewImageUrl: ProjectOverViewUrl[]
   overview: string
 }
-const SummaryContent = ({
+const SummaryDetail = ({
   deployUrl,
   githubUrl,
   overviewImageUrl,
   overview,
-}: SummaryContentProps) => {
+}: SummaryDetailProps) => {
   const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
   return (
     <Stack
@@ -36,4 +36,4 @@ const SummaryContent = ({
     </Stack>
   )
 }
-export default SummaryContent
+export default SummaryDetail

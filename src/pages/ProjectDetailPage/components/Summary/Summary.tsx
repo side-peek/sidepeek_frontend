@@ -1,7 +1,7 @@
 import { Box, Center, Stack } from "@chakra-ui/react"
 import { getProjectDetailResponseType } from "api-models"
 
-import SummaryContent from "./SummaryContent/SummaryContent"
+import SummaryDetail from "./SummaryContent/SummaryDetail"
 import SummaryTitle from "./SummaryTitle/SummaryTitle"
 import SummaryTop from "./SummaryTop/SummaryTop"
 
@@ -45,7 +45,7 @@ const Summary = ({
                 subName,
               }}
             />
-            <SummaryContent
+            <SummaryDetail
               {...{
                 overviewImageUrl,
                 overview,

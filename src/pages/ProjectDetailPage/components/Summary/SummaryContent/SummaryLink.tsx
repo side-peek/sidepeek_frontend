@@ -1,7 +1,7 @@
 import { FaGithub } from "react-icons/fa"
 import { TbWorld } from "react-icons/tb"
 
-import { Button, Flex } from "@chakra-ui/react"
+import { Button, HStack } from "@chakra-ui/react"
 
 interface SummaryLinkProps {
   deployUrl: string
@@ -22,7 +22,7 @@ const SummaryLinkButtonStyle = {
 
 const SummaryLink = ({ deployUrl, githubUrl }: SummaryLinkProps) => {
   return (
-    <Flex gap="2rem">
+    <HStack spacing="2rem">
       {deployUrl && (
         <Button
           leftIcon={<TbWorld />}
@@ -41,7 +41,7 @@ const SummaryLink = ({ deployUrl, githubUrl }: SummaryLinkProps) => {
           {"Github"}
         </Button>
       )}
-    </Flex>
+    </HStack>
   )
 }
 

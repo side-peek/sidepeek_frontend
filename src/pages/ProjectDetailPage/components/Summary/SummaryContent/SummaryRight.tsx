@@ -12,7 +12,7 @@ import { Swiper as SwiperCore } from "swiper/types"
 import noImage from "@assets/images/noImage.jpg"
 
 import { StyledSwiper } from "../../../styles/SwiperSlide.styles"
-import SummaryRightIcon from "./SummaryRightIcon"
+import SwiperButton from "./SwiperButton"
 
 interface SummaryRightProps {
   overviewImageUrl: ProjectOverViewUrl[]
@@ -57,7 +57,7 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
       )}
       {isLargerThan768 && overviewImageUrl.length > 1 && (
         <>
-          <SummaryRightIcon
+          <SwiperButton
             direction="left"
             aria-label="leftIcon"
             onClick={() => swiperRef.current?.slidePrev()}
@@ -67,7 +67,7 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
               />
             }
           />
-          <SummaryRightIcon
+          <SwiperButton
             direction="right"
             aria-label="rightIcon"
             onClick={() => swiperRef.current?.slideNext()}
