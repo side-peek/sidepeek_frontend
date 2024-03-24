@@ -4,7 +4,6 @@ import {
   FormControl,
   FormHelperText,
   FormLabel,
-  Grid,
   Input,
   Text,
   Textarea,
@@ -24,12 +23,12 @@ const ProjectForm = () => {
         flexDir="column"
         gap="30px">
         <Thumbnail />
-        <Grid
-          mt="0.5rem"
-          templateColumns="repeat(auto-fill, minmax(20rem, 1fr))"
-          gap={0}>
+
+        <Flex
+          justifyContent="space-between"
+          flexWrap="wrap">
           <Overview />
-        </Grid>
+        </Flex>
 
         <ProjectInputBox
           name="name"

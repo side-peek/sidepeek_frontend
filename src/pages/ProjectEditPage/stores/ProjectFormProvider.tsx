@@ -47,9 +47,6 @@ const ProjectFormProvider = ({
       })
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries({
-        queryKey: [QUERYKEY.PROJECT_DETAIL],
-      })
       navigate(`../project/${data.id}`)
     },
   })
@@ -71,11 +68,13 @@ const ProjectFormProvider = ({
   const handleSubmitEvent = (data: ProjectFormValues) => {
     const convertedData = {
       ...data,
+      overviewImageUrl: data.overviewImageUrl.filter((url) => url),
       techStacks: convertTechStacksData(useTechStackStore.getState().fields),
       members: convertMembersData(useMemberStore.getState().fields),
       startDate: convertDate(data.startDate),
       endDate: convertDate(data.endDate),
     }
+
     if (!projectId) {
       postProject({
         ...convertedData,

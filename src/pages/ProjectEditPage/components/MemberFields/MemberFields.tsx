@@ -1,8 +1,14 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { Box, Button, Flex, Input } from "@chakra-ui/react"
 
+import { ErrorMessage } from "@components/ErrorMessage/ErrorMessage"
+
+import { projectInputRegister } from "@pages/ProjectEditPage/constants/registerOptions"
+import { useProjectFormContext } from "@pages/ProjectEditPage/hooks/useProjectFormContext"
+
 import CloseButton from "../styles/CloseButton"
+import ErrorText from "../styles/ErrorText"
 import FieldContainer from "../styles/FieldContainer"
 import MemberAvatarCard from "./components/MemberAvatarCard"
 import UserSearchBox from "./components/UserSearchBox"
@@ -18,26 +24,49 @@ const MemberFields = () => {
     changeRole,
   } = useMemberStore()
 
+  const {
+    formState: { errors },
+    register,
+  } = useProjectFormContext()
+
   const [max, setMax] = useState(0)
   const MAX_FIELDS_NUMBER = 4
   const MIN_FIELDS_NUMBER = 1
+
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    register("members", projectInputRegister["members"])
+  }, [register])
+
+  useEffect(() => {
+    if (errors.members) {
+      ref.current?.focus()
+    }
+  }, [errors.members])
 
   return (
     <Flex
       flexDir="column"
       gap="8px">
+      <ErrorMessage
+        name="members"
+        errors={errors}
+        render={({ message }) => <ErrorText message={message}></ErrorText>}
+      />
       {fields?.map((field, fieldIdx) => {
         return (
           <FieldContainer
             key={fieldIdx}
             gap="20px"
-            overflow="scroll">
+            overflow="scroll"
+            ref={ref}
+            tabIndex={-1}>
             <Box flex="1">
               <Input
                 placeholder="카테고리를 입력해주세요"
                 width="20rem"
                 onChange={(e) => changeRole(e.target.value.trim(), fieldIdx)}
-                required={true}
                 value={field.role}
               />
             </Box>

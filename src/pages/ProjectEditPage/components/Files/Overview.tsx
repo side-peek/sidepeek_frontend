@@ -54,7 +54,9 @@ const Overview = () => {
               />
             ) : (
               <FileUploadSection
-                onDrop={(e) => onDropFile(e, idx)}
+                onDrop={(e) => {
+                  onDropFile(e, idx)
+                }}
                 multiple={false}
                 accept={{ "image/*": [".jpeg", ".png"] }}>
                 {(inputProps) => (

@@ -1,6 +1,10 @@
 import { RegisterOptions } from "react-hook-form"
 
+import { useTechStackStore } from "@stores/useTechStackStore"
+
 import { URL_REGEX } from "@constants/regExp"
+
+import { useMemberStore } from "../components/MemberFields/stores/useMemberStore"
 
 const TITLE_MAX_LENGTH = 50
 const OVERVIEW_MAX_LENGTH = 300
@@ -62,6 +66,35 @@ export const projectInputRegister: ProjectInputRegisterType = {
     pattern: {
       value: URL_REGEX,
       message: "유효한 URL 형식이 아닙니다",
+    },
+  },
+
+  members: {
+    validate: () => {
+      const { fields } = useMemberStore.getState()
+      const isMemberFieldsValid = fields.every((field) => {
+        const isRoleValid = field.role && field.role.trim().length > 0
+        const isCategoryValid =
+          Array.isArray(field.userSummary) && field.userSummary.length > 0
+        return isRoleValid && isCategoryValid
+      })
+      return isMemberFieldsValid || "분야와 함께 작업한 팀원을 추가해주세요"
+    },
+  },
+
+  techStacks: {
+    validate: () => {
+      const { fields } = useTechStackStore.getState()
+      const isMemberFieldsValid = fields.every((field) => {
+        const isRoleValid = field.category && field.category.trim().length > 0
+        const isCategoryValid =
+          Array.isArray(field.skill) && field.skill.length > 0
+        return isRoleValid && isCategoryValid
+      })
+      return (
+        isMemberFieldsValid ||
+        "기술 스택 분야와 함께 한개 이상의 기술스택을 선택해주세요"
+      )
     },
   },
 }
