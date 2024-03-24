@@ -1,38 +1,22 @@
 import { useState } from "react"
-import { useWatch } from "react-hook-form"
 
 import { Box, Button, Flex, Input } from "@chakra-ui/react"
 
-import { ErrorMessage } from "@components/ErrorMessage/ErrorMessage"
-
 import CloseButton from "../styles/CloseButton"
-import ErrorText from "../styles/ErrorText"
 import FieldContainer from "../styles/FieldContainer"
 import MemberAvatarCard from "./components/MemberAvatarCard"
 import UserSearchBox from "./components/UserSearchBox"
-import { useMemberFieldsMethods } from "./hooks/useMemberFieldsMethods"
+import { useMemberStore } from "./stores/useMemberStore"
 
 const MemberFields = () => {
   const {
     fields,
-    control,
-    register,
-    appendNewFields,
-    deleteFields,
-    appendMembers,
-    removeMembers,
-    errors,
-    trigger,
-  } = useMemberFieldsMethods()
-
-  const watchFields = useWatch({ name: "members", control })
-
-  const controlledMember = fields.map((field, index) => {
-    return {
-      ...field,
-      ...watchFields[index],
-    }
-  })
+    appendField,
+    appendMember,
+    deleteField,
+    deleteMember,
+    changeRole,
+  } = useMemberStore()
 
   const [max, setMax] = useState(0)
   const MAX_FIELDS_NUMBER = 4
@@ -42,68 +26,54 @@ const MemberFields = () => {
     <Flex
       flexDir="column"
       gap="8px">
-      {controlledMember.map((field, idx) => {
-        register(`members.${idx}.role` as const, {
-          validate: (data) =>
-            data?.length !== 0 || "팀원을 한명 이상 선택해주세요",
-        })
-
+      {fields?.map((field, fieldIdx) => {
         return (
           <FieldContainer
-            key={field.id}
+            key={fieldIdx}
             gap="20px"
             overflow="scroll">
             <Box flex="1">
               <Input
                 placeholder="카테고리를 입력해주세요"
                 width="20rem"
-                {...register(`members.${idx}.members` as const, {
-                  required: "분야 입력은 필수입니다",
-                })}
-              />
-              <ErrorMessage
-                name={`members.${idx}.category` as const}
-                errors={errors}
-                render={({ message }) => <ErrorText message={message} />}
+                onChange={(e) => changeRole(e.target.value.trim(), fieldIdx)}
+                required={true}
+                value={field.role}
               />
             </Box>
-
             <Box flex="1">
-              <ErrorMessage
-                name={`members.${idx}.data`}
-                errors={errors}
-                render={({ message }) => <ErrorText message={message} />}
-              />
               <UserSearchBox
-                onClick={({ id, nickname, profileImageUrl }) => {
-                  appendMembers({ id, nickname, profileImageUrl }, idx)
-                  trigger(`members.${idx}.members` as const)
+                onClick={({ id, nickname, profileImageUrl, isSocialLogin }) => {
+                  appendMember(
+                    { id, nickname, profileImageUrl, isSocialLogin },
+                    fieldIdx,
+                  )
                 }}
-                selectedMembers={field.members || []}
+                selectedMembers={field.userSummary || []}
               />
             </Box>
             <Box flex="6">
               <Flex
                 gap="5px"
                 overflow="scroll">
-                {field.members?.map((member, idx) => {
+                {field.userSummary?.map((member) => {
                   return (
                     <MemberAvatarCard
                       key={member.id}
                       image={member.profileImageUrl || ""}
                       text={member.nickname}
                       onClick={() => {
-                        removeMembers(member, idx)
+                        deleteMember(member, fieldIdx) //fieldIdx에 해당하는 값을 찾아서
                       }}
                     />
                   )
                 })}
               </Flex>
             </Box>
-            {idx >= MIN_FIELDS_NUMBER && (
+            {fieldIdx >= MIN_FIELDS_NUMBER && (
               <CloseButton
                 onClick={() => {
-                  deleteFields(idx)
+                  deleteField(fieldIdx)
                   setMax(max - 1)
                 }}
               />
@@ -116,7 +86,7 @@ const MemberFields = () => {
           border="2px solid"
           borderColor="blue.200"
           onClick={() => {
-            appendNewFields()
+            appendField()
             setMax(max + 1)
           }}>
           팀원 추가

@@ -123,7 +123,7 @@ declare module "api-models" {
   export type Comment = {
     id: number
     user: userSummary | null
-    parentId: number | null
+    parentId?: number
     isOwner: boolean
     isAnonymous: boolean
     content: string
@@ -296,9 +296,9 @@ declare module "api-models" {
     sortOption: "createdAt" | "like" | "view"
     isReleased: boolean
     lastProjectId?: number | null
-    lastProject?: AllProject | undefined
+    lastOrderCount?: number | null
     search?: string | null
-    skill?: string[]
+    skill?: string
   }
 
   export type putProjectPayload = Omit<postProjectPayload, "ownerId">

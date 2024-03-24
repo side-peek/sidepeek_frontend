@@ -21,8 +21,8 @@ import SearchResultContainer from "../../styles/SearchResultContainer"
 import UserListFetcher from "./UserListFetcher"
 
 interface UserSearchBoxProps extends Omit<BoxProps, "onClick" | "ref"> {
-  onClick: (data: Omit<UserSummary, "isSocialLogin">) => void
-  selectedMembers: Omit<UserSummary, "isSocialLogin">[]
+  onClick: (data: UserSummary) => void
+  selectedMembers: UserSummary[]
 }
 
 const UserSearchBox = ({
@@ -31,7 +31,7 @@ const UserSearchBox = ({
   ...props
 }: UserSearchBoxProps) => {
   const [inputValue, onInput] = useInput("")
-  const [ref, isFocused] = useOutsideClick()
+  const [ref, isFocused] = useOutsideClick(false)
 
   const handleClickNonUser = (value: string) => {
     if (!value.trim().length) {
@@ -41,6 +41,7 @@ const UserSearchBox = ({
       id: null,
       nickname: value,
       profileImageUrl: "",
+      isSocialLogin: null,
     })
   }
 
@@ -73,14 +74,19 @@ const UserSearchBox = ({
                   </Box>
                 )}
                 {filterSelectedId(data, selectedMembers)?.map(
-                  ({ id, nickname, profileImageUrl }, idx) => (
+                  ({ id, nickname, profileImageUrl, isSocialLogin }, idx) => (
                     <Flex
                       key={idx}
                       border="none"
                       padding="5px"
                       gap="10px"
                       onClick={() =>
-                        onClick({ id, nickname, profileImageUrl })
+                        onClick({
+                          id,
+                          nickname,
+                          profileImageUrl,
+                          isSocialLogin,
+                        })
                       }>
                       <Avatar
                         src={profileImageUrl || ""}

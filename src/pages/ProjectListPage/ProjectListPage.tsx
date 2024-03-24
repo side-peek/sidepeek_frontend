@@ -3,16 +3,16 @@ import { useInView } from "react-intersection-observer"
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
 
 import { Container, Stack, useMediaQuery } from "@chakra-ui/react"
-
-import { useQueryClient } from "@tanstack/react-query"
+import { Skill } from "api-models"
 
 import ProjectFilter from "@components/ProjectFilter/ProjectFilter"
 import ProjectList from "@components/ProjectList/ProjectList"
+import TechStackFilter from "@components/TechStackFilter/TechStackFilter"
+
+import { useDebounce } from "@hooks/useDebounce"
 
 import { useAllProjectQuery } from "@pages/HomePage/hooks/queries/useAllProjectQuery"
 import { SortSelectType } from "@pages/HomePage/types/type"
-
-import { QUERYKEY } from "@constants/queryKey"
 
 import ResultInfo from "./components/ResultInfo/ResultInfo"
 import SearchBarSection from "./components/SearchBarSection/SearchBarSection"
@@ -26,46 +26,58 @@ const ProjectListPage = () => {
 
   const [isLargerThan1200] = useMediaQuery("(min-width: 1200px)")
 
+  const { ref, inView } = useInView({ threshold: 0 })
+  const [skills, setSkills] = useState<string[]>([])
+
   const [isReleased, setIsReleased] = useState(false)
   const [sortOption, setSortOption] = useState<SortSelectType>("createdAt")
-  const queryClient = useQueryClient()
-  const { ref, inView } = useInView({ threshold: 0 })
+  const [pageInfo, setPageInfo] = useState<{
+    lastProjectId: number | null
+    lastOrderCount: number | null
+  }>({ lastProjectId: null, lastOrderCount: null })
 
   const {
-    allProjectList,
+    pageData,
     isAllProjectLoading,
     refetchAllProject,
     fetchNextPage,
-    isRefetching,
     isFetchingNextPage,
-  } = useAllProjectQuery({ sortOption, isReleased, search })
+    isRefetching,
+  } = useAllProjectQuery({
+    sortOption,
+    isReleased,
+    lastProjectId: pageInfo.lastProjectId,
+    lastOrderCount: pageInfo.lastOrderCount,
+    skill: skills.join(","),
+    search,
+  })
 
   const isLoading = isAllProjectLoading || isRefetching
-
-  const projectCount =
-    allProjectList != undefined && allProjectList.pages[0].totalElements
+  const projectCount = pageData ? pageData.pages[0].totalElements : 0
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as SortSelectType
-
     if (value !== sortOption) {
+      setPageInfo({ lastOrderCount: null, lastProjectId: null })
+
       setSortOption(value)
-      queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
-      queryClient.refetchQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
+
+      refetchAllProject()
     }
   }
 
   const handleChange = () => {
     setIsReleased(!isReleased)
-    queryClient.removeQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
-    queryClient.refetchQueries({ queryKey: [QUERYKEY.ALL_PROJECTS] })
+    setPageInfo({ lastOrderCount: null, lastProjectId: null })
+
+    refetchAllProject()
   }
 
   useEffect(() => {
     if (inView) {
       fetchNextPage()
     }
-  })
+  }, [fetchNextPage, inView])
 
   const handleSearch = (keyword: string) => {
     setSearch(keyword)
@@ -79,6 +91,29 @@ const ProjectListPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
 
+  const [selectedStacks, setSelectedStacks] = useState<Skill[]>([])
+
+  const debounceTechFilter = useDebounce(() => {
+    setSkills(selectedStacks.map((skill) => skill.name))
+
+    refetchAllProject()
+  }, 500)
+
+  useEffect(() => {
+    debounceTechFilter()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedStacks])
+
+  const onAppendStack = (selectedSkill: Skill) => {
+    setSelectedStacks((prev) => [...prev, selectedSkill])
+  }
+
+  const onDeleteStack = (selectedSkill: Skill) => {
+    setSelectedStacks((prev) =>
+      prev.filter((skill) => skill.id !== selectedSkill.id),
+    )
+  }
+
   return (
     <>
       <SearchBarSection
@@ -88,21 +123,27 @@ const ProjectListPage = () => {
       <ResultInfo
         isLoading={isLoading}
         searchWord={search !== null ? search : ""}
-        resultCount={allProjectList?.pages[0].totalElements || 0}
+        resultCount={pageData?.pages[0].totalElements || 0}
       />
       <Container maxW={isLargerThan1200 ? "80%" : "95%"}>
-        <Stack marginTop="15rem">
-          {projectCount ? (
-            <ProjectFilter
-              sortOption={sortOption}
-              handleChange={handleChange}
-              handleSelect={handleSelect}
-            />
-          ) : null}
+        <Stack>
+          <TechStackFilter
+            selectedStacks={selectedStacks}
+            onAppendStack={onAppendStack}
+            onDeleteStack={onDeleteStack}
+          />
+          <ProjectFilter
+            projectCount={projectCount}
+            isReleased={isReleased}
+            sortOption={sortOption}
+            handleChange={handleChange}
+            handleSelect={handleSelect}
+          />
           <ProjectList
-            projects={allProjectList}
+            projects={pageData}
             isLoading={isLoading}
             isFetchingNextPage={isFetchingNextPage}
+            projectCount={projectCount}
             ref={ref}
           />
         </Stack>

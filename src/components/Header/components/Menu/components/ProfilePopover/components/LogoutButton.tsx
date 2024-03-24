@@ -57,7 +57,7 @@ const LogoutButton = ({ onClose }: LogoutButtonProps) => {
       {isOpen && (
         <LogoutModal
           onLogout={handleLogout}
-          onClose={onClose}
+          onClose={onLogoutModalClose}
         />
       )}
     </>

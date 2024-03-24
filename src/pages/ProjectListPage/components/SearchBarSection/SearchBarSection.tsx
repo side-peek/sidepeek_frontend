@@ -35,6 +35,7 @@ const SearchBarSection = ({ search, onSubmit }: SearchBarSectionProps) => {
   return (
     <Box
       height="12rem"
+      mb="5rem"
       backgroundColor="blue.100">
       <Center
         position="absolute"

@@ -1,4 +1,5 @@
-import { ReactNode } from "react"
+/* eslint-disable react-hooks/exhaustive-deps */
+import { ReactNode, useEffect } from "react"
 import { FormProvider, useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
@@ -7,12 +8,18 @@ import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { useQueryClient } from "@tanstack/react-query"
 
+import { useTechStackStore } from "@stores/useTechStackStore"
+
 import { QUERYKEY } from "@constants/queryKey"
 
+import { useMemberStore } from "../components/MemberFields/stores/useMemberStore"
 import { ProjectFormDefaultValues } from "../constants/defaultValues"
 import { usePostProjectMutation } from "../hooks/usePostProjectMutation"
 import { usePutProjectMutation } from "../hooks/usePutProjectMutation"
 import { ProjectFormValues } from "../types/ProjectFormValues"
+import { convertDate } from "../utils/convert/convertDate"
+import { convertMembersData } from "../utils/convert/convertMembersData"
+import { convertTechStacksData } from "../utils/convert/convertTechStacksData"
 
 interface ProjectFormProviderProps {
   children: ReactNode
@@ -32,7 +39,6 @@ const ProjectFormProvider = ({
     defaultValues: defaultValues || ProjectFormDefaultValues,
   })
   const navigate = useNavigate()
-
   const { mutate: postProject } = usePostProjectMutation({
     onError: (error) => {
       toast({
@@ -47,6 +53,7 @@ const ProjectFormProvider = ({
       navigate(`../project/${data.id}`)
     },
   })
+
   const { mutate: putProject } = usePutProjectMutation({
     onError: (error) =>
       toast({
@@ -55,58 +62,43 @@ const ProjectFormProvider = ({
       }),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: [QUERYKEY.PROJECT_DETAIL],
+        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
       navigate(`../project/${data.id}`)
     },
   })
 
   const handleSubmitEvent = (data: ProjectFormValues) => {
-    const convertedMembers = data.members
-      .map(({ role, members }) => {
-        return members?.map(({ id, nickname }) => {
-          return {
-            id,
-            nickname,
-            role,
-          }
-        })
-      })
-      ?.flat()
-
-    const convertedTechStacks = data.techStacks
-      .map(({ category, data }) => {
-        return data?.map(({ id }) => ({ skillId: id, category }))
-      })
-      ?.flat()
-
-    const convertedDate = (date: string) => {
-      const idx = date.lastIndexOf("-")
-      return date.slice(0, idx)
+    const convertedData = {
+      ...data,
+      techStacks: convertTechStacksData(useTechStackStore.getState().fields),
+      members: convertMembersData(useMemberStore.getState().fields),
+      startDate: convertDate(data.startDate),
+      endDate: convertDate(data.endDate),
     }
-
     if (!projectId) {
       postProject({
-        ...data,
-        members: convertedMembers,
-        techStacks: convertedTechStacks,
+        ...convertedData,
         ownerId: userInfo?.id as number,
-        startDate: convertedDate(data.startDate),
-        endDate: convertedDate(data.endDate),
+        overviewImageUrl: data.overviewImageUrl.filter((url) => url),
       })
     } else {
       putProject({
         projectId,
         body: {
-          ...data,
-          members: convertedMembers,
-          techStacks: convertedTechStacks,
-          startDate: convertedDate(data.startDate),
-          endDate: convertedDate(data.endDate),
+          ...convertedData,
+          overviewImageUrl: data.overviewImageUrl.filter((url) => url),
         },
       })
     }
   }
+
+  useEffect(() => {
+    useMemberStore.setState(() => ({ fields: defaultValues?.members || [] }))
+    useTechStackStore.setState(() => ({
+      fields: defaultValues?.techStacks || [],
+    }))
+  }, [])
 
   return (
     <FormProvider {...methods}>
@@ -114,10 +106,15 @@ const ProjectFormProvider = ({
         {children}
         <Center>
           <Button
-            border="1px solid"
-            borderColor="blue.100"
-            marginTop="1rem"
-            type="submit">
+            width="100%"
+            variant="solid"
+            padding="2rem"
+            colorScheme="blue"
+            marginTop="5rem"
+            type="submit"
+            disabled={
+              methods.formState.isSubmitting || methods.formState.isValidating
+            }>
             제출하기
           </Button>
         </Center>

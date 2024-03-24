@@ -9,12 +9,14 @@ interface ProfileCardProps extends ProfileActionsButtonsProps, UserIdProps {
   profileImageUrl?: string
   nickname?: string
   career?: string | null
+  job?: string | null
 }
 
 const ProfileCard = ({
   profileImageUrl = "https://bit.ly/broken-link",
   nickname,
   career,
+  job,
   handleNewProject,
   handleEditProfile,
   isMe,
@@ -27,6 +29,7 @@ const ProfileCard = ({
         src={profileImageUrl}></Avatar>
       <Text
         mt="4"
+        mb="0.5rem"
         fontSize="3xl"
         fontFamily="SCDream_Bold">
         {nickname}
@@ -34,8 +37,15 @@ const ProfileCard = ({
       {career && (
         <Text
           mt="-3"
-          fontSize="2xl">
-          {career} 개발자
+          fontSize="xl">
+          {career}
+        </Text>
+      )}
+      {job && (
+        <Text
+          mt="-3"
+          fontSize="xl">
+          {job}
         </Text>
       )}
       {isMe && (

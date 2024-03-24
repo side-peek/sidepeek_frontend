@@ -7,6 +7,6 @@ export const filterSelectedId = <T extends WithIdType>(
   selected: T[],
 ) => {
   return data.filter((stack) => {
-    return !selected.some((selectedStack) => selectedStack.id === stack.id)
+    return !selected?.some((selectedStack) => selectedStack.id === stack.id)
   })
 }

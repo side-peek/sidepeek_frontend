@@ -8,11 +8,13 @@ interface ProfileCardProps extends ProfileActionsButtonsProps {
   profileImageUrl?: string
   nickname?: string
   career?: string | null
+  job?: string | null
 }
 const SmallScreenView = ({
   nickname,
   profileImageUrl,
   career,
+  job,
   handleNewProject,
   handleEditProfile,
 }: ProfileCardProps) => {
@@ -25,6 +27,7 @@ const SmallScreenView = ({
           nickname,
           profileImageUrl,
           career,
+          job,
           handleNewProject,
           handleEditProfile,
         }}

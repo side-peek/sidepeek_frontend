@@ -1,14 +1,14 @@
 import { Flex, Text } from "@chakra-ui/react"
-import { Member } from "api-models"
+import { UserSummary } from "api-models"
 
 import AvatarCard from "@components/AvatarCard/AvatarCard"
 
 interface MemberListProps {
-  members: Member[]
+  memberList: UserSummary[]
   category: string
 }
 
-const MemberList = ({ category, members }: MemberListProps) => {
+const MemberList = ({ category, memberList }: MemberListProps) => {
   return (
     <Flex
       direction="column"
@@ -22,17 +22,15 @@ const MemberList = ({ category, members }: MemberListProps) => {
         gap="2rem"
         p="1rem"
         alignItems="center">
-        {members.map((member) => (
+        {memberList.map(({ id, profileImageUrl, nickname }) => (
           <AvatarCard
-            key={member.id}
+            key={`${id}-${nickname}`}
             flexDir="column"
             border="none"
             gap="2rem">
-            <AvatarCard.Image
-              src={member.userSummary.profileImageUrl ?? undefined}
-            />
+            <AvatarCard.Image src={profileImageUrl ?? undefined} />
             <AvatarCard.Content
-              text={member.userSummary.nickname}
+              text={nickname}
               fontSize="2rem"
               display="block"
             />

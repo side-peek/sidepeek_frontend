@@ -1,4 +1,14 @@
-import { Box, Flex, FormLabel, Grid, Input, Textarea } from "@chakra-ui/react"
+import {
+  Box,
+  Flex,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Grid,
+  Input,
+  Text,
+  Textarea,
+} from "@chakra-ui/react"
 
 import Description from "./Editors/Description"
 import Overview from "./Files/Overview"
@@ -17,6 +27,7 @@ const ProjectForm = () => {
         <Grid
           mt="0.5rem"
           templateColumns="repeat(auto-fill, minmax(20rem, 1fr))"
+          placeItems="center"
           gap={0}>
           <Overview />
         </Grid>
@@ -74,18 +85,33 @@ const ProjectForm = () => {
           <Input />
         </ProjectInputBox>
 
-        <Box>
-          <FormLabel htmlFor="teckStacks">기술스택</FormLabel>
+        <FormControl>
+          <FormLabel
+            htmlFor="teckStacks"
+            as="b">
+            <Text as="b">기술스택</Text>
+          </FormLabel>
+          <FormHelperText>
+            기술 스택 분야와, 한개 이상의 기술을 작성해주세요.
+          </FormHelperText>
           <TechStacksFields />
-        </Box>
+        </FormControl>
 
-        <Box>
-          <FormLabel htmlFor="members">멤버</FormLabel>
+        <FormControl>
+          <FormLabel htmlFor="members">
+            <Text as="b">멤버</Text>
+          </FormLabel>
+          <FormHelperText>
+            분야와 함께 작업한 팀원을 넣어주세요. 본인은 필수로 입력되어야
+            합니다
+          </FormHelperText>
           <MemberFields />
-        </Box>
+        </FormControl>
 
         <Box>
-          <FormLabel htmlFor="members">요약</FormLabel>
+          <FormLabel htmlFor="members">
+            <Text as="b">요약</Text>
+          </FormLabel>
           <Description name="description" />
         </Box>
 

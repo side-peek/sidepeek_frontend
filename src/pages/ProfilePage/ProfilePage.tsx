@@ -1,7 +1,13 @@
+import { Fade } from "@chakra-ui/react"
+
 import ProfileController from "./components/Profile/Profile.controller"
 
 const ProfilePage = () => {
-  return <ProfileController />
+  return (
+    <Fade in={true}>
+      <ProfileController />
+    </Fade>
+  )
 }
 
 export default ProfilePage
