@@ -27,6 +27,7 @@ const FileUploadSection = ({
     <Box
       width="100%"
       {...getRootProps()}
+      h="100%"
       aria-label="File-Upload">
       {children(getInputProps())}
     </Box>

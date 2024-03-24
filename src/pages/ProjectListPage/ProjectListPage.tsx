@@ -49,6 +49,7 @@ const ProjectListPage = () => {
     lastProjectId: pageInfo.lastProjectId,
     lastOrderCount: pageInfo.lastOrderCount,
     skill: skills.join(","),
+    search,
   })
 
   const isLoading = isAllProjectLoading || isRefetching
@@ -76,7 +77,7 @@ const ProjectListPage = () => {
     if (inView) {
       fetchNextPage()
     }
-  })
+  }, [fetchNextPage, inView])
 
   const handleSearch = (keyword: string) => {
     setSearch(keyword)

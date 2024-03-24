@@ -1,1 +1,6 @@
-export type FieldNames = "email" | "password" | "nickname" | "confirmPassword"
+export type FieldNames =
+  | "email"
+  | "password"
+  | "nickname"
+  | "confirmPassword"
+  | "newNickname"

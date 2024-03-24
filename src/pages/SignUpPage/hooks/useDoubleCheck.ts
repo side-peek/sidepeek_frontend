@@ -7,8 +7,7 @@ import { DoubleCheckFiledNames } from "../types/doubleCheckFieldNames"
 import { useDoubleCheckMutaion } from "./mutations/useDoubleCheckMutation"
 
 export const useDoubleCheck = (fieldName: DoubleCheckFiledNames) => {
-  const { trigger, getValues, getFieldState, setError, formState } =
-    useFormContext()
+  const { trigger, getValues, setError } = useFormContext()
   const { setCheckedValue, reset: checkedValueReset } = useDoubleCheckStore(
     (state) => state,
   )
@@ -21,9 +20,9 @@ export const useDoubleCheck = (fieldName: DoubleCheckFiledNames) => {
   })[fieldName]
 
   const handleDoubleCheck = async () => {
-    await trigger(fieldName)
+    const isValid = await trigger(fieldName)
 
-    if (getFieldState(fieldName, formState).invalid) {
+    if (!isValid) {
       return
     }
 
