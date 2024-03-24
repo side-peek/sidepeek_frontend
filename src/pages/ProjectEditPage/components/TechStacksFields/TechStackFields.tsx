@@ -1,12 +1,17 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { Box, Button, Flex, Input } from "@chakra-ui/react"
 
+import { ErrorMessage } from "@components/ErrorMessage/ErrorMessage"
 import CloseButtonTag from "@components/Tag/components/CloseButtonTag"
+
+import { projectInputRegister } from "@pages/ProjectEditPage/constants/registerOptions"
+import { useProjectFormContext } from "@pages/ProjectEditPage/hooks/useProjectFormContext"
 
 import { useTechStackStore } from "@stores/useTechStackStore"
 
 import CloseButton from "../styles/CloseButton"
+import ErrorText from "../styles/ErrorText"
 import FieldContainer from "../styles/FieldContainer"
 import Field from "./components/Field"
 
@@ -19,23 +24,47 @@ const TechStacksFields = () => {
     deleteStack,
     changeCategory,
   } = useTechStackStore()
+
+  const {
+    formState: { errors },
+    register,
+  } = useProjectFormContext()
+
+  const ref = useRef<HTMLDivElement>(null)
+
   const [max, setMax] = useState(0)
   const [MAX_FIELDS_NUMBER, MIN_FIELDS_NUMBER] = [4, 1]
+
+  useEffect(() => {
+    register("techStacks", projectInputRegister["techStacks"])
+  }, [register])
+
+  useEffect(() => {
+    if (errors.techStacks) {
+      ref.current?.focus()
+    }
+  }, [errors.techStacks])
 
   return (
     <Flex
       flexDir="column"
       gap="8px">
+      <ErrorMessage
+        name="techStacks"
+        errors={errors}
+        render={({ message }) => <ErrorText message={message}></ErrorText>}
+      />
       {fields?.map((field, index) => {
         return (
           <FieldContainer
             key={index}
-            gap="5px">
+            gap="5px"
+            ref={ref}
+            tabIndex={-1}>
             <Box flex="1">
               <Input
                 placeholder="기술스택 분야를 입력해주세요"
                 width="20rem"
-                required={true}
                 value={field.category || ""}
                 onChange={(e) => changeCategory(e.target.value, index)}
               />
