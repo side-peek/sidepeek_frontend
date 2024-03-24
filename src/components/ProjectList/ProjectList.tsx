@@ -19,8 +19,6 @@ const ProjectList = forwardRef(
     { projects, isLoading, isFetchingNextPage, projectCount }: ProjectListProps,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
-    console.log(projects, isFetchingNextPage)
-
     return (
       <Grid
         mt="0.5rem"
