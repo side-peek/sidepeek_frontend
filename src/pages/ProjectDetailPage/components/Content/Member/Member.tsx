@@ -27,7 +27,7 @@ const MemberInfo = ({ members }: MemberInfoProps) => {
             const memberList = userSummary as unknown as UserSummary[]
             return (
               <MemberList
-                key={userSummary.nickname}
+                key={role}
                 category={role}
                 memberList={memberList}
               />
