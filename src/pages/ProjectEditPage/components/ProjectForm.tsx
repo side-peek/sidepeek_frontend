@@ -27,6 +27,7 @@ const ProjectForm = () => {
         <Grid
           mt="0.5rem"
           templateColumns="repeat(auto-fill, minmax(20rem, 1fr))"
+          placeItems="center"
           gap={0}>
           <Overview />
         </Grid>

@@ -1,12 +1,16 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Center, Fade } from "@chakra-ui/react"
 
 import DefaultValueFetcher from "./components/DefaultValueFetcher"
 
 const ProjectEditPage = () => {
   return (
-    <Box padding="3rem">
-      <DefaultValueFetcher />
-    </Box>
+    <Fade in={true}>
+      <Center>
+        <Box padding="3rem">
+          <DefaultValueFetcher />
+        </Box>
+      </Center>
+    </Fade>
   )
 }
 

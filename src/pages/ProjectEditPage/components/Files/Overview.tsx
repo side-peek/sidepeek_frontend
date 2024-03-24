@@ -41,6 +41,8 @@ const Overview = () => {
           <Box
             key={idx}
             boxSize="10rem"
+            borderRadius="8px"
+            overflow="hidden"
             cursor="pointer">
             {image ? (
               <Image
@@ -49,7 +51,7 @@ const Overview = () => {
                 loading="lazy"
                 width="100%"
                 height="100%"
-                objectFit="cover"
+                objectFit="contain"
                 onClick={() => deleteFile(idx)}
               />
             ) : (
@@ -61,7 +63,7 @@ const Overview = () => {
                   <FileUploadBox
                     {...inputProps}
                     id="overviewImageUrl"
-                    placeholder="클릭해서 사진을 업로드해주세요"
+                    placeholder="Upload Image"
                   />
                 )}
               </FileUploadSection>

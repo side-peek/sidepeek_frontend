@@ -9,7 +9,7 @@ const useLogout = () => {
   return () => {
     authToken.removeAccessToken()
     authToken.removeRefreshToken()
-    queryClient.setQueryData([QUERYKEY.USER_INFO], null)
+    queryClient.removeQueries({ queryKey: [QUERYKEY.USER_INFO] })
   }
 }
 

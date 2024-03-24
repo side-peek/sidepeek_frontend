@@ -1,4 +1,4 @@
-import { Skeleton } from "@chakra-ui/react"
+import { Fade, Skeleton } from "@chakra-ui/react"
 
 import Banner from "./components/Banner/Banner"
 import ProjectListSection from "./components/ProjectListSection/ProjectListSection"
@@ -8,14 +8,14 @@ const HomePage = () => {
   const { bannerProjectList, isBannerLoading } = useBannerProjectQuery()
 
   return (
-    <>
+    <Fade in={true}>
       {isBannerLoading ? (
         <Skeleton height="35rem" />
       ) : (
         <Banner bannerList={bannerProjectList} />
       )}
       <ProjectListSection />
-    </>
+    </Fade>
   )
 }
 

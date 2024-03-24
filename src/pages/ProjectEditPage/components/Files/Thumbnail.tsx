@@ -23,16 +23,18 @@ const Thumbnail = () => {
     <Center
       width="100%"
       height="30rem"
-      border="1px solid black"
+      bg="whitesmoke"
       borderRadius="1rem"
-      cursor="pointer">
+      cursor="pointer"
+      overflow="hidden"
+      shadow="xl">
       {watch("thumbnailUrl") ? (
         <Image
           src={watch("thumbnailUrl")}
           onClick={deleteFile}
           width="100%"
           height="100%"
-          objectFit="cover"
+          objectFit="contain"
         />
       ) : (
         <FileUploadSection

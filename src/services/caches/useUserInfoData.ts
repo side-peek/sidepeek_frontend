@@ -1,11 +1,12 @@
-import { useQuery } from "@tanstack/react-query"
+import { useQueryClient } from "@tanstack/react-query"
 
 import { postEmailAuth } from "@apis/auth/postEmailAuth"
 
 import { QUERYKEY } from "@constants/queryKey"
 
 export const useUserInfoData = () => {
-  return useQuery<Awaited<ReturnType<typeof postEmailAuth>>>({
-    queryKey: [QUERYKEY.USER_INFO],
-  }).data
+  const queryClient = useQueryClient()
+  return queryClient.getQueryData<Awaited<ReturnType<typeof postEmailAuth>>>([
+    QUERYKEY.USER_INFO,
+  ])
 }

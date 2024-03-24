@@ -297,7 +297,7 @@ declare module "api-models" {
     isReleased: boolean
     lastProjectId?: number | null
     lastOrderCount?: number | null
-    search?: string
+    search?: string | null
     skill?: string
   }
 

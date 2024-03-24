@@ -16,7 +16,9 @@ const ResultInfo = ({
       marginTop="3rem"
       alignItems="center">
       <Heading>'{searchWord}' 검색결과</Heading>
-      <Text fontSize="2xl">
+      <Text
+        fontSize="2xl"
+        color="gray.500">
         {isLoading ? <Spinner color="blue.100" /> : resultCount}개의 프로젝트를
         발견하였습니다
       </Text>
