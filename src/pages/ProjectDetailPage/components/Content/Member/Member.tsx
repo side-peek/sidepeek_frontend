@@ -1,8 +1,7 @@
 import { HStack, Stack, Text } from "@chakra-ui/react"
 import { Member, UserSummary } from "api-models"
 
-import { EMPTY_MESSAGE } from "@pages/ProjectDetailPage/constants/emptyMessage"
-
+import EmptyMessage from "../../EmptyMessage/EmptyMessage"
 import MemberList from "./MemberList/MemberList"
 
 interface MemberInfoProps {
@@ -34,11 +33,7 @@ const MemberInfo = ({ members }: MemberInfoProps) => {
             )
           })
         ) : (
-          <Text
-            color="grey.500"
-            fontSize="lg">
-            {EMPTY_MESSAGE.MEMBER}
-          </Text>
+          <EmptyMessage type="MEMBER" />
         )}
       </HStack>
     </Stack>

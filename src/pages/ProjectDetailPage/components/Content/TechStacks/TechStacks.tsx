@@ -3,7 +3,7 @@ import { Skill, TechStack } from "api-models"
 
 import CommonTag from "@components/Tag/components/CommonTag"
 
-import { EMPTY_MESSAGE } from "@pages/ProjectDetailPage/constants/emptyMessage"
+import EmptyMessage from "../../EmptyMessage/EmptyMessage"
 
 interface TechStacksProps {
   techStacks: TechStack[]
@@ -60,11 +60,7 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
           })}
         </Stack>
       ) : (
-        <Text
-          fontSize="lg"
-          color="grey.500">
-          {EMPTY_MESSAGE.TECHSTACKS}
-        </Text>
+        <EmptyMessage type="TECHSTACKS" />
       )}
     </Stack>
   )

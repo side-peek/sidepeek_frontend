@@ -1,7 +1,8 @@
 import { HStack, Text } from "@chakra-ui/react"
 
-import { EMPTY_MESSAGE } from "@pages/ProjectDetailPage/constants/emptyMessage"
 import changeDateForm from "@pages/ProjectDetailPage/utils/changeDateForm"
+
+import EmptyMessage from "../../EmptyMessage/EmptyMessage"
 
 interface DateProps {
   startDate: string
@@ -19,11 +20,7 @@ const Date = ({ startDate, endDate }: DateProps) => {
       {startDate && endDate ? (
         <Text fontSize="xl">{changeDateForm(startDate, endDate)}</Text>
       ) : (
-        <Text
-          color="grey.500"
-          fontSize="lg">
-          {EMPTY_MESSAGE.DATE}
-        </Text>
+        <EmptyMessage type="DATE" />
       )}
     </HStack>
   )

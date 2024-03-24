@@ -20,8 +20,6 @@ interface ExplanationItemProps {
   content: string
 }
 
-const notContentText = EMPTY_MESSAGE.EXPLANATION
-
 const ExplanationItem = ({ content }: ExplanationItemProps) => {
   const processedText = content?.replace(/\\n/g, "\n")
   return (
@@ -33,7 +31,7 @@ const ExplanationItem = ({ content }: ExplanationItemProps) => {
         />
       ) : (
         <MDEditor.Markdown
-          source={notContentText}
+          source={EMPTY_MESSAGE.EXPLANATION}
           style={{ ...ViewNotContentOptions }}
         />
       )}
