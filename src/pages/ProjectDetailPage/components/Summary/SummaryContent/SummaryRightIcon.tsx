@@ -21,7 +21,7 @@ const SummaryRightIcon = ({
       height="5rem"
       width="5rem"
       borderRadius="50%"
-      zIndex="5"
+      zIndex="docked"
       onClick={onClick}
       {...directionStyle}
       {...props}
