@@ -23,8 +23,8 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
       </Text>
       {techStacks.length > 0 ? (
         <Stack spacing="3rem">
-          {techStacks.map(({ category, skill: skills }) => {
-            const skillList = skills as unknown as Skill[]
+          {techStacks.map(({ category, skill }) => {
+            const skillList = skill as unknown as Skill[]
             return (
               <Stack
                 key={category}

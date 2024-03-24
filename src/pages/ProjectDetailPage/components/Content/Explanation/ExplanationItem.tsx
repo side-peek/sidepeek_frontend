@@ -8,7 +8,7 @@ const ViewOptions = {
   padding: "2rem",
   lineHeight: "1.5",
   fontFamily: "SCDream_Regular",
-  fontSize: "2rem",
+  fontSize: "1.8rem",
 }
 
 const ViewNotContentOptions = {
@@ -21,12 +21,12 @@ interface ExplanationItemProps {
 }
 
 const ExplanationItem = ({ content }: ExplanationItemProps) => {
-  const processedText = content?.replace(/\\n/g, "\n")
+  const lineBreakedText = content?.replace(/\\n/g, "\n")
   return (
     <Box data-color-mode="light">
-      {processedText ? (
+      {lineBreakedText ? (
         <MDEditor.Markdown
-          source={processedText}
+          source={lineBreakedText}
           style={{ ...ViewOptions }}
         />
       ) : (
