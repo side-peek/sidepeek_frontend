@@ -9,7 +9,7 @@ import {
   PopoverBody,
   PopoverContent,
   PopoverTrigger,
-  VStack,
+  Stack,
 } from "@chakra-ui/react"
 
 import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
@@ -21,11 +21,14 @@ const ControlButtonStyles = {
   fontSize: "lg",
 }
 
-interface SummaryControlProps extends ProjectIdProps {
-  onOpen: () => void
+interface SummaryPopOverProps extends ProjectIdProps {
+  handleOpenDeleteModal: () => void
 }
 
-const SummaryControl = ({ onOpen, projectId }: SummaryControlProps) => {
+const SummaryPopOver = ({
+  handleOpenDeleteModal,
+  projectId,
+}: SummaryPopOverProps) => {
   const navigate = useNavigate()
 
   const handleEditProject = () => {
@@ -39,35 +42,32 @@ const SummaryControl = ({ onOpen, projectId }: SummaryControlProps) => {
           mr="-1rem"
           icon={<CiMenuKebab />}
           aria-label="control"
-          fontSize="3rem"
+          fontSize="3xl"
         />
       </PopoverTrigger>
       <PopoverContent
         w="100%"
-        height="10rem">
+        h="10rem">
         <PopoverArrow />
         <PopoverBody
           h="100%"
           p="0">
-          <VStack
-            justifyContent="space-between"
-            h="100%"
-            w="100%">
+          <Stack h="100%">
             <Button
               onClick={handleEditProject}
               {...ControlButtonStyles}>
               수정하기
             </Button>
             <Button
-              onClick={onOpen}
+              onClick={handleOpenDeleteModal}
               {...ControlButtonStyles}>
               삭제하기
             </Button>
-          </VStack>
+          </Stack>
         </PopoverBody>
       </PopoverContent>
     </Popover>
   )
 }
 
-export default withProjectId(SummaryControl)
+export default withProjectId(SummaryPopOver)

@@ -1,5 +1,5 @@
 import {
-  Flex,
+  HStack,
   IconButton,
   IconButtonProps,
   Text,
@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react"
 
 interface SummaryTopIconProps extends Omit<IconButtonProps, "onClick"> {
-  count?: number
+  count: number
   likeId?: number | null
   onClick?: (likeId: number | null) => void
 }
@@ -32,8 +32,7 @@ const SummaryTopIcon = ({
   }
 
   return (
-    <Flex
-      gap="0.5rem"
+    <HStack
       alignItems="center"
       cursor={isButton ? "pointer" : "default"}
       _hover={isButton ? { opacity: "0.5" } : {}}
@@ -47,7 +46,7 @@ const SummaryTopIcon = ({
         />
       )}
       <Text fontSize={isLargerThan1200 ? "xl" : "md"}>{count}</Text>
-    </Flex>
+    </HStack>
   )
 }
 export default SummaryTopIcon
