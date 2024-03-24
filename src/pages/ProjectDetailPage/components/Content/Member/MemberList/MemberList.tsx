@@ -19,7 +19,8 @@ const MemberList = ({ category, memberList }: MemberListProps) => {
       p="2rem"
       borderColor="grey.400">
       <Flex
-        gap="2rem"
+        flexWrap="wrap"
+        gap="1rem"
         p="1rem"
         alignItems="center">
         {memberList.map(({ id, profileImageUrl, nickname }) => (
