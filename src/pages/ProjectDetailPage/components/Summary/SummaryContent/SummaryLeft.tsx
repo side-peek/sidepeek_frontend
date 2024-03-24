@@ -1,4 +1,4 @@
-import { Flex, useMediaQuery } from "@chakra-ui/react"
+import { Stack, useMediaQuery } from "@chakra-ui/react"
 
 import SummaryLink from "./SummaryLink"
 import SummaryOverview from "./SummaryOverview"
@@ -12,8 +12,7 @@ const SummaryLeft = ({ deployUrl, githubUrl, overview }: SummaryLeftProps) => {
   const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
 
   return (
-    <Flex
-      flexDirection="column"
+    <Stack
       gap="2rem"
       w={isLargerThan1200 ? "50%" : "100%"}
       align={isLargerThan1200 ? "flex-start" : "center"}
@@ -25,7 +24,7 @@ const SummaryLeft = ({ deployUrl, githubUrl, overview }: SummaryLeftProps) => {
           githubUrl,
         }}
       />
-    </Flex>
+    </Stack>
   )
 }
 export default SummaryLeft
