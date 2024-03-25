@@ -2,6 +2,7 @@ import { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 
 import {
+  Fade,
   Flex,
   Input,
   StackDivider,
@@ -94,63 +95,65 @@ const ProfileEditPage = () => {
   }
 
   return (
-    <form>
-      <VStack
-        w="80%"
-        align="start"
-        m="auto">
+    <Fade in={true}>
+      <form>
         <VStack
-          w="100%"
-          divider={<StackDivider borderColor="grey.100" />}>
-          <ProfileCard
-            profileImageUrl={profileInfo.profileImageUrl}
-            nickname={profileInfo.nickname}
-            career={profileInfo.career}
-            job={profileInfo.job}
-            setProfileInfo={setProfileInfo}
-          />
-          <ProfileIntroduction
-            register={register}
-            errors={errors}
-            setValue={setValue}
-            introduction={profileInfo.introduction}
-            githubUrl={profileInfo.githubUrl}
-            blogUrl={profileInfo.blogUrl}
-          />
+          w="80%"
+          align="start"
+          m="auto">
+          <VStack
+            w="100%"
+            divider={<StackDivider borderColor="grey.100" />}>
+            <ProfileCard
+              profileImageUrl={profileInfo.profileImageUrl}
+              nickname={profileInfo.nickname}
+              career={profileInfo.career}
+              job={profileInfo.job}
+              setProfileInfo={setProfileInfo}
+            />
+            <ProfileIntroduction
+              register={register}
+              errors={errors}
+              setValue={setValue}
+              introduction={profileInfo.introduction}
+              githubUrl={profileInfo.githubUrl}
+              blogUrl={profileInfo.blogUrl}
+            />
 
-          <TechStackSection
-            {...method}
-            render={(renderProps) => (
-              <Input
-                w="30rem"
-                pl="0.5rem"
-                variant="none"
-                placeholder="직군 카테고리를 입력해주세요"
-                flex={isLargerThan500 ? "0 0 25rem" : "0 0 3.5rem"}
-                {...renderProps}
-              />
-            )}
-          />
+            <TechStackSection
+              {...method}
+              render={(renderProps) => (
+                <Input
+                  w="30rem"
+                  pl="0.5rem"
+                  variant="none"
+                  placeholder="직군 카테고리를 입력해주세요"
+                  flex={isLargerThan500 ? "0 0 25rem" : "0 0 3.5rem"}
+                  {...renderProps}
+                />
+              )}
+            />
+          </VStack>
+
+          <Flex
+            w="100%"
+            gap="0.5rem"
+            justifyContent={isLargerThan500 ? "flex-end" : "center"}
+            mt="1.5rem"
+            mb="3rem">
+            <StyledButton onClick={onOpen}>비밀번호 변경</StyledButton>
+            <StyledButton onClick={handleSubmit(handleProfileUpdate)}>
+              변경내용 저장
+            </StyledButton>
+            <ChangePWModal
+              isOpen={isOpen}
+              onClose={onClose}
+              userId={userId}
+            />
+          </Flex>
         </VStack>
-
-        <Flex
-          w="100%"
-          gap="0.5rem"
-          justifyContent={isLargerThan500 ? "flex-end" : "center"}
-          mt="1.5rem"
-          mb="3rem">
-          <StyledButton onClick={onOpen}>비밀번호 변경</StyledButton>
-          <StyledButton onClick={handleSubmit(handleProfileUpdate)}>
-            변경내용 저장
-          </StyledButton>
-          <ChangePWModal
-            isOpen={isOpen}
-            onClose={onClose}
-            userId={userId}
-          />
-        </Flex>
-      </VStack>
-    </form>
+      </form>
+    </Fade>
   )
 }
 

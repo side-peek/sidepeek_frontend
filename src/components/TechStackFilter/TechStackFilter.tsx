@@ -1,4 +1,4 @@
-import { Box, Center, Flex, Image } from "@chakra-ui/react"
+import { Box, Center, Fade, Flex, Image, Text } from "@chakra-ui/react"
 import { Skill } from "api-models"
 
 import CloseButtonTag from "@components/Tag/components/CloseButtonTag"
@@ -22,11 +22,13 @@ const TechStackFilter = ({
     <Center>
       <Flex
         width="80%"
+        p="2rem"
         borderRadius="0.5rem"
         border="1px solid"
         borderColor="grey.200"
-        height="12.8rem"
-        marginTop="3rem">
+        height="16rem"
+        marginTop="3rem"
+        shadow="xl">
         <Box flex="0 0 30rem">
           <StackSearchBox
             inputProps={{ borderBottom: "1px solid", borderColor: "gray.200" }}
@@ -35,7 +37,19 @@ const TechStackFilter = ({
                 <Box
                   height="10rem"
                   paddingTop="1rem"
-                  overflow="auto">
+                  overflow="auto"
+                  __css={{
+                    "&::-webkit-scrollbar": {
+                      width: "8px",
+                    },
+                    "&::-webkit-scrollbar-track": {
+                      background: "gray.100",
+                    },
+                    "&::-webkit-scrollbar-thumb": {
+                      background: "blue.500",
+                      borderRadius: "8px",
+                    },
+                  }}>
                   {filterSelectedId(techStacks, selectedStacks).map(
                     (techStack) => {
                       return (
@@ -65,20 +79,35 @@ const TechStackFilter = ({
           overflow="auto"
           borderLeft="1px solid"
           borderColor="gray.200">
-          {selectedStacks.map((stack) => (
-            <CloseButtonTag
-              m="0.3rem"
-              key={stack.name}
-              label={stack.name}
-              leftElement={
-                <Image
-                  src={stack.iconImageUrl}
-                  boxSize={8}
-                />
-              }
-              onClickCloseButton={() => onDeleteStack(stack)}
-            />
-          ))}
+          {selectedStacks.length ? (
+            selectedStacks.map((stack) => (
+              <CloseButtonTag
+                m="0.3rem"
+                key={stack.name}
+                label={stack.name}
+                leftElement={
+                  <Image
+                    src={stack.iconImageUrl}
+                    boxSize={8}
+                  />
+                }
+                onClickCloseButton={() => onDeleteStack(stack)}
+              />
+            ))
+          ) : (
+            <Center
+              w="100%"
+              h="100%">
+              <Fade in={true}>
+                <Text
+                  fontFamily="SCDream_Regular"
+                  fontSize="2rem"
+                  color="gray.500">
+                  기술스택으로 검색해보세요!
+                </Text>
+              </Fade>
+            </Center>
+          )}
         </Box>
       </Flex>
     </Center>

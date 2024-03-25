@@ -1,4 +1,4 @@
-import { Box, Stack } from "@chakra-ui/react"
+import { Box, Fade, Flex } from "@chakra-ui/react"
 
 import FullScreenSpinner from "@components/LoadingComponents/FullScreenSpinner"
 
@@ -16,18 +16,21 @@ const ProjectDetailPage = ({ projectId }: ProjectIdProps) => {
   }
 
   return (
-    <Box w="100%">
-      <Summary projectDetailInfo={projectDetailInfo} />
-      <Stack
-        maxW="128rem"
-        w="100%"
-        margin="0 auto"
-        p="5rem"
-        spacing="10rem">
-        <Content projectDetailInfo={projectDetailInfo} />
-        <Comments comments={projectDetailInfo.comments}></Comments>
-      </Stack>
-    </Box>
+    <Fade in={true}>
+      <Box w="100%">
+        <Summary projectDetailInfo={projectDetailInfo} />
+        <Flex
+          maxW="128rem"
+          w="100%"
+          margin="0 auto"
+          p="5rem"
+          gap="10rem"
+          direction="column">
+          <Content projectDetailInfo={projectDetailInfo} />
+          <Comments comments={projectDetailInfo.comments}></Comments>
+        </Flex>
+      </Box>
+    </Fade>
   )
 }
 

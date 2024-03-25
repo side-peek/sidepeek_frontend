@@ -109,7 +109,8 @@ const ProjectFormProvider = ({
             width="100%"
             variant="solid"
             padding="2rem"
-            marginTop="1rem"
+            colorScheme="blue"
+            marginTop="5rem"
             type="submit"
             disabled={
               methods.formState.isSubmitting || methods.formState.isValidating

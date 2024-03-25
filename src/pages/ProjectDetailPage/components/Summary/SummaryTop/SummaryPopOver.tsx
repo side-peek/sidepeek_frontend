@@ -32,7 +32,7 @@ const SummaryPopOver = ({
   const navigate = useNavigate()
 
   const handleEditProject = () => {
-    navigate(`/project/edit?=${Number(projectId)}`)
+    navigate(`/project/edit?projectId=${Number(projectId)}`)
   }
 
   return (

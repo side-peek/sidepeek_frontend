@@ -10,6 +10,11 @@ interface UncaughtFallbackProps {
 
 const UncaughtFallback = ({ error, onReset }: UncaughtFallbackProps) => {
   const navigate = useNavigate()
+
+  if (import.meta.env.DEV) {
+    alert(error)
+  }
+
   return (
     <Center
       width="100vw"
@@ -18,7 +23,7 @@ const UncaughtFallback = ({ error, onReset }: UncaughtFallbackProps) => {
         <Text
           fontFamily="SCDream_Bold"
           fontSize="8rem">
-          😓 {error.name}
+          😓 Uncaught Error
         </Text>
         <IconButton
           aria-label="reset"
