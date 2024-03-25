@@ -1,12 +1,14 @@
 import { Box } from "@chakra-ui/react"
 import MDEditor from "@uiw/react-md-editor"
 
+import { EMPTY_MESSAGE } from "@pages/ProjectDetailPage/constants/emptyMessage"
+
 const ViewOptions = {
   whiteSpace: "pre-wrap",
   padding: "2rem",
   lineHeight: "1.5",
   fontFamily: "SCDream_Regular",
-  fontSize: "2rem",
+  fontSize: "1.8rem",
 }
 
 const ViewNotContentOptions = {
@@ -18,20 +20,18 @@ interface ExplanationItemProps {
   content: string
 }
 
-const notContentText = "내용이 존재하지 않습니다."
-
 const ExplanationItem = ({ content }: ExplanationItemProps) => {
-  const processedText = content?.replace(/\\n/g, "\n")
+  const lineBreakedText = content?.replace(/\\n/g, "\n")
   return (
     <Box data-color-mode="light">
-      {processedText ? (
+      {lineBreakedText ? (
         <MDEditor.Markdown
-          source={processedText}
+          source={lineBreakedText}
           style={{ ...ViewOptions }}
         />
       ) : (
         <MDEditor.Markdown
-          source={notContentText}
+          source={EMPTY_MESSAGE.EXPLANATION}
           style={{ ...ViewNotContentOptions }}
         />
       )}

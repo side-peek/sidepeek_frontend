@@ -3,6 +3,8 @@ import { Skill, TechStack } from "api-models"
 
 import CommonTag from "@components/Tag/components/CommonTag"
 
+import EmptyMessage from "../../EmptyMessage/EmptyMessage"
+
 interface TechStacksProps {
   techStacks: TechStack[]
 }
@@ -21,8 +23,8 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
       </Text>
       {techStacks.length > 0 ? (
         <Stack spacing="3rem">
-          {techStacks.map(({ category, skill: skills }) => {
-            const skillList = skills as unknown as Skill[]
+          {techStacks.map(({ category, skill }) => {
+            const skillList = skill as unknown as Skill[]
             return (
               <Stack
                 key={category}
@@ -58,11 +60,7 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
           })}
         </Stack>
       ) : (
-        <Text
-          fontSize="lg"
-          color="grey.500">
-          등록된 기술 스택이 존재하지 않습니다.
-        </Text>
+        <EmptyMessage type="TECHSTACKS" />
       )}
     </Stack>
   )

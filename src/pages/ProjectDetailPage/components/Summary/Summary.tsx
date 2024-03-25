@@ -1,12 +1,12 @@
-import { Box, Center, Flex } from "@chakra-ui/react"
+import { Box, Center, Stack } from "@chakra-ui/react"
 import { getProjectDetailResponseType } from "api-models"
 
-import SummaryContent from "./SummaryContent/SummaryContent"
+import SummaryDetail from "./SummaryContent/SummaryDetail"
 import SummaryTitle from "./SummaryTitle/SummaryTitle"
 import SummaryTop from "./SummaryTop/SummaryTop"
 
-const Summary = ({ projectDetailInfo }: getProjectDetailResponseType) => {
-  const {
+const Summary = ({
+  projectDetailInfo: {
     deployUrl,
     githubUrl,
     name,
@@ -18,16 +18,15 @@ const Summary = ({ projectDetailInfo }: getProjectDetailResponseType) => {
     overview,
     likeId,
     ownerId,
-  } = projectDetailInfo
-
+  },
+}: getProjectDetailResponseType) => {
   return (
     <Box bg="whiteSmoke">
-      <Flex
+      <Stack
         maxW="128rem"
-        flexDirection="column"
         m="0 auto"
         p="2rem 4rem">
-        <Flex flexDirection="column">
+        <Stack>
           <SummaryTop
             {...{
               likeCount,
@@ -46,7 +45,7 @@ const Summary = ({ projectDetailInfo }: getProjectDetailResponseType) => {
                 subName,
               }}
             />
-            <SummaryContent
+            <SummaryDetail
               {...{
                 overviewImageUrl,
                 overview,
@@ -55,8 +54,8 @@ const Summary = ({ projectDetailInfo }: getProjectDetailResponseType) => {
               }}
             />
           </Center>
-        </Flex>
-      </Flex>
+        </Stack>
+      </Stack>
     </Box>
   )
 }

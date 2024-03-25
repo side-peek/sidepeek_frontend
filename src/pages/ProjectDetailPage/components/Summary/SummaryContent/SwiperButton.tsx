@@ -1,15 +1,11 @@
 import { IconButton, IconButtonProps } from "@chakra-ui/react"
 
-interface SummaryRightIconProps extends IconButtonProps {
+interface SwiperButtonProps extends IconButtonProps {
   direction: string
   onClick: () => void
 }
 
-const SummaryRightIcon = ({
-  direction,
-  onClick,
-  ...props
-}: SummaryRightIconProps) => {
+const SwiperButton = ({ direction, onClick, ...props }: SwiperButtonProps) => {
   const directionStyle =
     direction === "left" ? { left: "-5%" } : { right: "-5%" }
 
@@ -21,7 +17,7 @@ const SummaryRightIcon = ({
       height="5rem"
       width="5rem"
       borderRadius="50%"
-      zIndex="5"
+      zIndex="docked"
       onClick={onClick}
       {...directionStyle}
       {...props}
@@ -29,4 +25,4 @@ const SummaryRightIcon = ({
   )
 }
 
-export default SummaryRightIcon
+export default SwiperButton

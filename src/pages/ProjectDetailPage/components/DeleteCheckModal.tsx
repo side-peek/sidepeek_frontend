@@ -19,10 +19,10 @@ interface DeleteCheckModalProps {
 
 const DeleteCheckModalStyles = {
   h: "2.5rem",
-  fontSize: "md",
+  fontSize: "lg",
   color: "white",
   bg: "blue.100",
-  p: "1rem",
+  p: "1.5rem",
   _hover: { opacity: "0.5" },
 }
 
@@ -35,16 +35,20 @@ const DeleteCheckModal = ({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      size="md"
+      size="lg"
       isCentered>
       <ModalOverlay
         bg="blackAlpha.300"
         backdropFilter="blur(10px) hue-rotate(90deg)"
       />
       <ModalContent>
-        <ModalHeader fontSize="md">정말로 삭제하시겠습니까?</ModalHeader>
+        <ModalHeader fontSize="xl">정말로 삭제하시겠습니까?</ModalHeader>
         <ModalCloseButton />
-        <Text p="2rem">삭제된 게시물은 복구할 수 없습니다!</Text>
+        <Text
+          p="4rem 2rem"
+          fontSize="lg">
+          삭제된 게시물은 복구할 수 없습니다!
+        </Text>
         <ModalFooter>
           <HStack>
             <Button

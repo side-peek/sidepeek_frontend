@@ -1,28 +1,28 @@
-import { Flex, useMediaQuery } from "@chakra-ui/react"
+import { Stack, useMediaQuery } from "@chakra-ui/react"
 import { ProjectOverViewUrl } from "api-models"
 
 import SummaryLeft from "./SummaryLeft"
 import SummaryRight from "./SummaryRight"
 
-interface SummaryContentProps {
+interface SummaryDetailProps {
   deployUrl: string
   githubUrl: string
   overviewImageUrl: ProjectOverViewUrl[]
   overview: string
 }
-const SummaryContent = ({
+const SummaryDetail = ({
   deployUrl,
   githubUrl,
   overviewImageUrl,
   overview,
-}: SummaryContentProps) => {
+}: SummaryDetailProps) => {
   const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
   return (
-    <Flex
+    <Stack
       direction={isLargerThan1200 ? "row" : "column"}
       justifyContent={isLargerThan1200 ? "space-between" : "center"}
       align={isLargerThan1200 ? "stretch" : "center"}
-      gap="3rem"
+      spacing="3rem"
       w="100%">
       <SummaryLeft
         {...{
@@ -33,7 +33,7 @@ const SummaryContent = ({
       />
 
       <SummaryRight overviewImageUrl={overviewImageUrl} />
-    </Flex>
+    </Stack>
   )
 }
-export default SummaryContent
+export default SummaryDetail
