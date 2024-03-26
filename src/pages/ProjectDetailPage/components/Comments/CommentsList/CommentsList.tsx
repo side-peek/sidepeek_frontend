@@ -1,6 +1,7 @@
-import { Center, Stack, Text } from "@chakra-ui/react"
+import { Center, Stack } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
+import EmptyMessage from "../../EmptyMessage/EmptyMessage"
 import CommentsItem from "../CommentsItem/CommentsItem"
 
 interface CommentsListProps {
@@ -24,11 +25,7 @@ const CommentsList = ({ comments }: CommentsListProps) => {
         })
       ) : (
         <Center>
-          <Text
-            fontSize="2xl"
-            color="grey.500">
-            댓글을 남겨보세요
-          </Text>
+          <EmptyMessage type="COMMENTS" />
         </Center>
       )}
     </Stack>
