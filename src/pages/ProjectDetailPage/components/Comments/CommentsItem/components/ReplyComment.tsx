@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react"
 import { Comment } from "api-models"
 
 import CommentsItem from "../CommentsItem"
@@ -8,19 +8,13 @@ interface ReplyCommentProps {
 }
 
 const ReplyComment = ({ comment }: ReplyCommentProps) => {
-  return comment.map((reply) => {
-    return (
-      <Flex
-        pl="3rem"
-        gap="2rem"
-        w="100%"
-        key={reply.id}>
-        <Box w="100%">
-          <CommentsItem comment={reply} />
-        </Box>
-      </Flex>
-    )
-  })
+  return comment.map((reply) => (
+    <Box
+      pl="3rem"
+      key={reply.id}>
+      <CommentsItem comment={reply} />
+    </Box>
+  ))
 }
 
 export default ReplyComment
