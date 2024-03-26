@@ -1,4 +1,4 @@
 export const initMsw = async () => {
-  // const { worker } = await import("./browser")
-  // worker.start()
+  const { worker } = await import("./browser")
+  worker.start()
 }
