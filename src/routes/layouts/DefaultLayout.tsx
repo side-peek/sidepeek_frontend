@@ -4,6 +4,7 @@ import { Box, Flex, Spacer } from "@chakra-ui/react"
 
 import Footer from "@components/Footer/Footer"
 import Header from "@components/Header/Header"
+import NotificationModal from "@components/NotificationModal/NotificationModal"
 
 const DefaultLayout = () => {
   return (
@@ -16,6 +17,7 @@ const DefaultLayout = () => {
       </Box>
       <Spacer />
       <Footer />
+      <NotificationModal />
     </Flex>
   )
 }
