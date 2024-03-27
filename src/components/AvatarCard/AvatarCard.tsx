@@ -33,5 +33,5 @@ const AvatarCard = Object.assign(AvatarCardMain, {
   Header: AvatarCardHeader,
   Content: AvatarCardContent,
 })
-
+console.log(AvatarCard)
 export default AvatarCard
