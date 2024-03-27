@@ -7,12 +7,12 @@ import { TEXTAREA_STYLE } from "@pages/ProjectDetailPage/constants/textAreaStyle
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
 const CommentsEditForm = () => {
-  const { handleSubmit, onSubmitEdit, focusOnFiled, register } =
+  const { handleSubmit, onSubmitEdit, focusOnField, register } =
     useCommentContext()
 
   useEffect(() => {
-    focusOnFiled()
-  }, [focusOnFiled])
+    focusOnField()
+  }, [focusOnField])
 
   if (!handleSubmit || !register) {
     return
