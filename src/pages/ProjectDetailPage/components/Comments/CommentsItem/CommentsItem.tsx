@@ -8,7 +8,7 @@ import AvatarCard from "@components/AvatarCard/AvatarCard"
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
 import CommentsForm from "../CommentsForm/CommentsForm"
-import CommentTitle from "./components/CommentTitle"
+import CommentTop from "./components/CommentTop"
 import CommentsEditForm from "./components/CommentsEditForm"
 import CommentsText from "./components/CommentsText"
 import ReplyButton from "./components/ReplyButton"
@@ -61,7 +61,7 @@ const CommentsItem = ({ comment }: CommentsItemProps) => {
             w="100%"
             gap="1rem"
             align="flex-start">
-            <CommentTitle comment={comment} />
+            <CommentTop comment={comment} />
             {onEdit ? (
               <CommentsEditForm />
             ) : (
