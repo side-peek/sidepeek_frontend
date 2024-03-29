@@ -4,8 +4,8 @@ import { Comment } from "api-models"
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 import dateToTimeago from "@pages/ProjectDetailPage/utils/datetoTimeago"
 
-import BeforeEditingButton from "./BeforeEditingButton"
-import OnEditingButton from "./OnEditingButton"
+import BeforeEditingButton from "./Button/BeforeEditingButton"
+import OnEditingButton from "./Button/OnEditingButton"
 
 interface CommentTopProps {
   comment: Comment

@@ -8,9 +8,9 @@ import AvatarCard from "@components/AvatarCard/AvatarCard"
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 
 import CommentsForm from "../CommentsForm/CommentsForm"
-import CommentTop from "./components/CommentTop"
 import CommentsEditForm from "./components/CommentsEditForm"
 import CommentsText from "./components/CommentsText"
+import CommentTop from "./components/CommentsTop/CommentsTop"
 import ReplyButton from "./components/ReplyButton"
 import ReplyComment from "./components/ReplyComment"
 
