@@ -1,17 +1,26 @@
 @font-face {
   font-family: "SCDream_Regular";
-  src: url("/src/assets/fonts/SCDream4.woff2") format("woff2");
+  src:
+    local("SCDream_Regular"),
+    url("/src/assets/fonts/SCDream4.woff2") format("woff2"),
+    url("/src/assets/fonts/SCDream4.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SCDream_Medium";
+  src:
+    local("SCDream_Medium"),
+    url("/src/assets/fonts/SCDream5.woff2") format("woff2"),
+    url("/src/assets/fonts/SCDream5.woff") format("woff");
   font-display: swap;
 }
 
 @font-face {
   font-family: "SCDream_Bold";
-  src: url("/src/assets/fonts/SCDream6.woff2") format("woff2");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "SCDream_Heavy";
-  src: url("/src/assets/fonts/SCDream8.woff2") format("woff2");
+  src:
+    local("SCDream_Bold"),
+    url("/src/assets/fonts/SCDream6.woff2") format("woff2"),
+    url("/src/assets/fonts/SCDream6.woff") format("woff");
   font-display: swap;
 }
