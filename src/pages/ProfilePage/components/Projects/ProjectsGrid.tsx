@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import { Center, Grid, GridItem, Text } from "@chakra-ui/react"
 
-import Pagination from "@components/Pagination/Pagination"
+import PaginationRQ from "@components/PaginationRQ/PaginationRQ"
 import ProjectCard from "@components/ProjectCard/ProjectCard"
 
 import { useUserProjects } from "./Projects.model"
@@ -67,7 +67,9 @@ const ProjectsGrid = ({ userId, type }: ProjectsGridProps) => {
               )}
           </Grid>
           <Center my="2rem">
-            <Pagination
+            <PaginationRQ
+              type={type}
+              limit={24}
               totalProjectsCount={totalProjectsCount}
               setPage={setPage}
             />
