@@ -1,0 +1,20 @@
+name: assign
+
+on:
+  pull_request:
+    types: [ready_for_review]
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign assignee
+        uses: hkusu/review-assign-action@v1
+        with:
+          assignees: ${{ github.actor }}
+
+      - name: Assign reviewers randomly
+        uses: ./.github/actions/reviewers
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          reviewers: ${{vars.reviewers}}
