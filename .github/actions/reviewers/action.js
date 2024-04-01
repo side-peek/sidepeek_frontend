@@ -3,7 +3,7 @@ import { context, getOctokit } from "@actions/github"
 
 try {
   const candidates = getInput("reviewers").split(", ")
-  const reviewers = selectRandomReviewer(candidates)
+  const reviewers = selectRandomReviewer(candidates, 2)
   const token = getInput("github_token")
   const octokit = getOctokit(token)
 
@@ -28,20 +28,12 @@ try {
   setFailed(error.message)
 }
 
-function selectRandomReviewer(reviewers) {
-  const requiredReviewer = 2
+function selectRandomReviewer(reviewers, num) {
   const creator = context.payload.pull_request.user.login
-  const candidates = reviewers.filter((reviewer) => reviewer !== creator)
 
-  const result = []
-  for (let i = 0; i < requiredReviewer; i++) {
-    const { length } = candidates
-    if (length === 0) {
-      break
-    }
+  const shuffled = reviewers
+    .filter((reviewer) => reviewer !== creator)
+    .sort(() => 0.5 - Math.random())
 
-    const randomIndex = Math.floor(Math.random() * length)
-    result.push(...candidates.splice(randomIndex, 1))
-  }
-  return result
+  return shuffled.slice(0, num)
 }
