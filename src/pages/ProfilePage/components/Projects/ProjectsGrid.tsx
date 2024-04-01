@@ -68,7 +68,7 @@ const ProjectsGrid = ({ userId, type }: ProjectsGridProps) => {
           </Grid>
           <Center my="2rem">
             <PaginationRQ
-              type={type}
+              tab={type}
               limit={24}
               totalProjectsCount={totalProjectsCount}
               setPage={setPage}

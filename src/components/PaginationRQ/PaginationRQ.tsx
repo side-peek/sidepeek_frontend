@@ -7,24 +7,24 @@ import { moveButtonStyles } from "./styles/moveButtonStyles"
 import { setPageButtonStyles } from "./styles/pageButtonStyles"
 
 interface PaginationRQProps {
-  type: string
+  tab: string
   limit: number
   totalProjectsCount: number
   setPage: React.Dispatch<React.SetStateAction<number>>
 }
 const PaginationRQ = ({
-  type,
+  tab,
   limit,
   totalProjectsCount,
   setPage,
 }: PaginationRQProps) => {
   const [currentPage, setCurrentPage] = useState(() => {
-    const storedPage = localStorage.getItem(`${type}-page`)
+    const storedPage = localStorage.getItem(`${tab}-page`)
     return storedPage !== null ? Number(storedPage) : 1
   })
 
   const handleSelectPage = (page: number) => {
-    localStorage.setItem(`${type}-page`, page.toString())
+    localStorage.setItem(`${tab}-page`, page.toString())
     setPage(page)
     setCurrentPage(page)
   }
