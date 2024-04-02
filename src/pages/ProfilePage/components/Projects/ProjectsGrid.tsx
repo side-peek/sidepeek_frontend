@@ -20,9 +20,10 @@ interface ProjectProperties {
 interface ProjectsGridProps {
   userId: string
   type: string
+  defaultPage: number
 }
-const ProjectsGrid = ({ userId, type }: ProjectsGridProps) => {
-  const [page, setPage] = useState(1)
+const ProjectsGrid = ({ userId, type, defaultPage }: ProjectsGridProps) => {
+  const [page, setPage] = useState(defaultPage)
   const { data } = useUserProjects({
     userId: Number(userId),
     type: type,

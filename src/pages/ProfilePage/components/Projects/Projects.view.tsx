@@ -7,6 +7,8 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react"
 
+import useQueryString from "@hooks/useQueryString"
+
 import { tabsType } from "@pages/ProfilePage/constants/constants"
 import StyledTab from "@pages/ProfilePage/styles/StyledTab"
 
@@ -18,14 +20,31 @@ const ProjectsView = ({ userId, isMe }: UserIdProps) => {
 
   const projectsType = isMe ? ["JOINED", "LIKED", "COMMENTED"] : ["JOINED"]
 
+  const { navigate, paramsValue: tabInfo } = useQueryString("tab")
+  const { paramsValue: tempPageInfo } = useQueryString("page")
+  const pageInfo = Number(tempPageInfo)
+
+  const tabIndex = projectsType.findIndex(
+    (projectType) => projectType === tabInfo,
+  )
+
+  const handleChangeTab = (index: number) => {
+    const storedPage = localStorage.getItem(`${projectsType[index]}-page`)
+    navigate(
+      `?tab=${projectsType[index]}&page=${storedPage !== null ? storedPage : 1}`,
+    )
+  }
+
   return (
     <Box
       height="100%"
       mt="2rem">
       <Tabs
-        size="lg"
+        defaultIndex={tabIndex}
+        variant="enclosed"
         isFitted={!isLargerThan500}
-        variant="enclosed">
+        size="lg"
+        onChange={(index) => handleChangeTab(index)}>
         <TabList
           h="6rem"
           sx={{
@@ -83,6 +102,7 @@ const ProjectsView = ({ userId, isMe }: UserIdProps) => {
               <ProjectsGrid
                 userId={userId}
                 type={type}
+                defaultPage={pageInfo}
               />
             </TabPanel>
           ))}
