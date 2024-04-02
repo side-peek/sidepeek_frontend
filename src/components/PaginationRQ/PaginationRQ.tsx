@@ -28,6 +28,8 @@ const PaginationRQ = ({
     paramsValue: tempPageInfo,
   } = useQueryString("page")
 
+  const [currentPage, setCurrentPage] = useState(1)
+
   useEffect(() => {
     const pageInfo =
       tempPageInfo !== null && !isNaN(Number(tempPageInfo))
@@ -37,8 +39,6 @@ const PaginationRQ = ({
   }, [location, tempPageInfo])
 
   const { selectPage } = usePageInfoStore((state) => state)
-
-  const [currentPage, setCurrentPage] = useState(1)
 
   const handleSelectPage = (page: number) => {
     selectPage(tab, page)
