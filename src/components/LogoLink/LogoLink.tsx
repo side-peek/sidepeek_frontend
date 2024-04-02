@@ -1,5 +1,3 @@
-import { Link as ReactRouterLink } from "react-router-dom"
-
 import { Image, Link } from "@chakra-ui/react"
 
 import SidePeekLogoSVG from "@assets/svgs/sidepeek_logo.svg"
@@ -10,9 +8,7 @@ interface LogoLinkProps {
 
 const LogoLink = ({ logoHeight }: LogoLinkProps) => {
   return (
-    <Link
-      as={ReactRouterLink}
-      to="/">
+    <Link href="/">
       <Image
         height={logoHeight}
         aspectRatio={5 / 1.3}
