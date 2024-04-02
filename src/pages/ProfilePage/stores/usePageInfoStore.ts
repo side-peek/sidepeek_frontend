@@ -1,6 +1,6 @@
 import { create } from "zustand"
 
-interface ITabPageInfo {
+interface TabPageInfoProps {
   [key: string]: number
   JOINED: number
   LIKED: number
@@ -8,7 +8,7 @@ interface ITabPageInfo {
 }
 
 interface PageInfoState {
-  tabPageInfo: ITabPageInfo
+  tabPageInfo: TabPageInfoProps
   selectPage: (tab: string, page: number) => void
 }
 
