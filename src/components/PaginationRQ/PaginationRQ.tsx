@@ -1,8 +1,10 @@
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 import { Button } from "@chakra-ui/react"
 
 import useQueryString from "@hooks/useQueryString"
+
+import usePageInfoStore from "@pages/ProfilePage/stores/usePageInfoStore"
 
 import { MAX_PAGES_COUNT } from "./constants/constants"
 import { moveButtonStyles } from "./styles/moveButtonStyles"
@@ -20,16 +22,26 @@ const PaginationRQ = ({
   totalProjectsCount,
   setPage,
 }: PaginationRQProps) => {
-  const { navigate, paramsValue: tempPageInfo } = useQueryString("page")
-  const pageInfo =
-    tempPageInfo !== null && isNaN(Number(tempPageInfo))
-      ? 1
-      : Number(tempPageInfo)
+  const {
+    location,
+    navigate,
+    paramsValue: tempPageInfo,
+  } = useQueryString("page")
 
-  const [currentPage, setCurrentPage] = useState(pageInfo)
+  useEffect(() => {
+    const pageInfo =
+      tempPageInfo !== null && !isNaN(Number(tempPageInfo))
+        ? Number(tempPageInfo)
+        : 1
+    setCurrentPage(pageInfo)
+  }, [location, tempPageInfo])
+
+  const { selectPage } = usePageInfoStore((state) => state)
+
+  const [currentPage, setCurrentPage] = useState(1)
 
   const handleSelectPage = (page: number) => {
-    localStorage.setItem(`${tab}-page`, page.toString())
+    selectPage(tab, page)
     setPage(page)
     setCurrentPage(page)
     navigate(`?tab=${tab}&page=${page}`)
