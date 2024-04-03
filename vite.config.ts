@@ -1,10 +1,19 @@
 import react from "@vitejs/plugin-react"
 import { visualizer } from "rollup-plugin-visualizer"
 import { defineConfig, splitVendorChunkPlugin } from "vite"
+import viteCompression from "vite-plugin-compression"
 import tsconfigPaths from "vite-tsconfig-paths"
 
 export default defineConfig(({ command }) => ({
-  plugins: [react(), tsconfigPaths(), splitVendorChunkPlugin()],
+  plugins: [
+    react(),
+    tsconfigPaths(),
+    splitVendorChunkPlugin(),
+    viteCompression({
+      algorithm: "gzip",
+      ext: ".gz",
+    }),
+  ],
   publicDir: command === "serve" ? "public" : false,
   server: {
     proxy: {
