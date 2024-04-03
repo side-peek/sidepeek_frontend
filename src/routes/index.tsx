@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
         children: [
           { index: true, element: <ProjectListPage /> },
           { path: ":projectId", element: <ProjectDetailPage /> },
-          { path: ":edit", element: <ProjectEditPage /> },
+          { path: "edit", element: <ProjectEditPage /> },
         ],
       },
       {
@@ -44,14 +44,8 @@ export const router = createBrowserRouter([
         path: "/login",
         loader: determineRedirectLoader(false),
         children: [
-          {
-            index: true,
-            element: <LoginPage />,
-          },
-          {
-            path: ":validation",
-            element: <NicknameSetupPage />,
-          },
+          { index: true, element: <LoginPage /> },
+          { path: ":validation", element: <NicknameSetupPage /> },
         ],
       },
       {
