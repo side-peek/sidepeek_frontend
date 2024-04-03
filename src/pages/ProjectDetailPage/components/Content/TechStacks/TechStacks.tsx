@@ -45,7 +45,6 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
                         <Image
                           src={skill.iconImageUrl}
                           w="2rem"
-                          h="2rem"
                         />
                       }
                       cursor="default"
