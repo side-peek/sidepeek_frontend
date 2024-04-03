@@ -24,7 +24,7 @@
     "@chakra-ui/react": "^2.8.2",
     "@chakra-ui/theme-tools": "^2.1.2",
     "@emotion/react": "^11.11.3",
-    "@react-icons/all-files": "^4.1.0",
+    "@react-icons/all-files": "https://github.com/react-icons/react-icons/releases/download/v5.0.1/react-icons-all-files-5.0.1.tgz",
     "@tanstack/react-query": "^5.18.1",
     "@types/react-scroll": "^1.8.10",
     "@uiw/react-md-editor": "^4.0.3",
