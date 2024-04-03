@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { Outlet, RouterProvider } from "react-router-dom"
+import { RouterProvider } from "react-router-dom"
 
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react"
 
@@ -7,7 +7,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 import ErrorBoundaries from "@components/ErrorBoundary/ErrorBoundaries"
 import FullScreenSpinner from "@components/LoadingComponents/FullScreenSpinner"
-import Prefetcher from "@components/PreFetcher/Prefetcher"
 
 import { isAuthError } from "@utils/isAuthError"
 
@@ -36,9 +35,6 @@ const App = () => {
         <ErrorBoundaries>
           <Suspense fallback={<FullScreenSpinner />}>
             <RouterProvider router={router} />
-            <Prefetcher>
-              <Outlet />
-            </Prefetcher>
           </Suspense>
         </ErrorBoundaries>
       </ChakraProvider>
