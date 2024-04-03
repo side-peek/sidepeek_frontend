@@ -1,8 +1,8 @@
 import { forwardRef } from "react"
 import { DropzoneInputProps } from "react-dropzone"
-import { IoCameraOutline } from "react-icons/io5"
 
 import { Center, FormLabel, Text } from "@chakra-ui/react"
+import { IoCameraOutline } from "@react-icons/all-files/io5/IoCameraOutline"
 
 interface FileUploadBoxProps extends DropzoneInputProps {
   id: string

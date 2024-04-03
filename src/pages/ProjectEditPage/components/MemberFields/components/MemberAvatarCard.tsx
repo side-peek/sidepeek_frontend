@@ -1,4 +1,4 @@
-import { IoCloseCircle } from "react-icons/io5"
+import { IoCloseCircle } from "@react-icons/all-files/io5/IoCloseCircle"
 
 import AvatarCard from "@components/AvatarCard/AvatarCard"
 

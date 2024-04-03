@@ -1,7 +1,7 @@
 import { forwardRef } from "react"
-import { FaRegBell } from "react-icons/fa"
 
 import { Icon, IconButton } from "@chakra-ui/react"
+import { FaRegBell } from "@react-icons/all-files/fa/FaRegBell"
 
 const NotificationIconButton = forwardRef<HTMLButtonElement>((props, ref) => {
   return (

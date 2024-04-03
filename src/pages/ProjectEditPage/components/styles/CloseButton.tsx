@@ -1,6 +1,5 @@
-import { MdClose } from "react-icons/md"
-
 import { Box, ButtonProps } from "@chakra-ui/react"
+import { MdClose } from "@react-icons/all-files/md/MdClose"
 
 const CloseButton = ({ ...props }: ButtonProps) => {
   return (

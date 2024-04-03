@@ -1,7 +1,6 @@
-import { FaRegCheckCircle } from "react-icons/fa"
-import { MdCancel } from "react-icons/md"
-
 import { IconButton, useMediaQuery } from "@chakra-ui/react"
+import { FaRegCheckCircle } from "@react-icons/all-files/fa/FaRegCheckCircle"
+import { MdCancel } from "@react-icons/all-files/md/MdCancel"
 
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"
 

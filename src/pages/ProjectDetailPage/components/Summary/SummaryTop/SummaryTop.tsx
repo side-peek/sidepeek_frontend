@@ -1,9 +1,10 @@
-import { FaRegComment } from "react-icons/fa"
-import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io"
-import { MdRemoveRedEye } from "react-icons/md"
 import { Link } from "react-scroll"
 
 import { HStack, useDisclosure, useMediaQuery } from "@chakra-ui/react"
+import { FaRegComment } from "@react-icons/all-files/fa/FaRegComment"
+import { IoMdHeart } from "@react-icons/all-files/io/IoMdHeart"
+import { IoMdHeartEmpty } from "@react-icons/all-files/io/IoMdHeartEmpty"
+import { MdRemoveRedEye } from "@react-icons/all-files/md/MdRemoveRedEye"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import { useDeleteLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteLikeMutation"

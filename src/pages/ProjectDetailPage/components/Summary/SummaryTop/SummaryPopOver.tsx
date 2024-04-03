@@ -1,4 +1,3 @@
-import { CiMenuKebab } from "react-icons/ci"
 import { useNavigate } from "react-router-dom"
 
 import {
@@ -11,6 +10,7 @@ import {
   PopoverTrigger,
   Stack,
 } from "@chakra-ui/react"
+import { CiMenuKebab } from "@react-icons/all-files/ci/CiMenuKebab"
 
 import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
 

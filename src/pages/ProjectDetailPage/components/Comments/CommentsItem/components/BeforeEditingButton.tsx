@@ -1,7 +1,6 @@
-import { MdDelete } from "react-icons/md"
-import { TiPencil } from "react-icons/ti"
-
 import { IconButton, useDisclosure, useMediaQuery } from "@chakra-ui/react"
+import { MdDelete } from "@react-icons/all-files/md/MdDelete"
+import { TiPencil } from "@react-icons/all-files/ti/TiPencil"
 
 import DeleteCheckModal from "@pages/ProjectDetailPage/components/DeleteCheckModal"
 import { useCommentContext } from "@pages/ProjectDetailPage/store/CommentContext"

@@ -1,6 +1,5 @@
-import { FaGithub } from "react-icons/fa"
-
 import { Box, Button, Heading, Icon, Link } from "@chakra-ui/react"
+import { FaGithub } from "@react-icons/all-files/fa/FaGithub"
 
 import { EXTERNAL_LINKS } from "@constants/externalLinks"
 

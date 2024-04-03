@@ -1,7 +1,8 @@
 import { useRef } from "react"
-import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md"
 
 import { Box, Image, useMediaQuery } from "@chakra-ui/react"
+import { MdArrowBackIosNew } from "@react-icons/all-files/md/MdArrowBackIosNew"
+import { MdArrowForwardIos } from "@react-icons/all-files/md/MdArrowForwardIos"
 import { ProjectOverViewUrl } from "api-models"
 import "swiper/css"
 import "swiper/css/pagination"

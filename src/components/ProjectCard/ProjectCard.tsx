@@ -1,6 +1,4 @@
 import { ForwardedRef, forwardRef } from "react"
-import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io"
-import { MdRemoveRedEye } from "react-icons/md"
 import { useNavigate } from "react-router-dom"
 
 import {
@@ -13,6 +11,9 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react"
+import { IoMdHeart } from "@react-icons/all-files/io/IoMdHeart"
+import { IoMdHeartEmpty } from "@react-icons/all-files/io/IoMdHeartEmpty"
+import { MdRemoveRedEye } from "@react-icons/all-files/md/MdRemoveRedEye"
 
 import noImage from "@assets/images/noImage.jpg"
 

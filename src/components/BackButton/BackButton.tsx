@@ -1,7 +1,7 @@
-import { IoIosArrowRoundBack } from "react-icons/io"
 import { useNavigate } from "react-router-dom"
 
 import { Button, Icon } from "@chakra-ui/react"
+import { IoIosArrowRoundBack } from "@react-icons/all-files/io/IoIosArrowRoundBack"
 
 const BackButton = () => {
   const navigate = useNavigate()
