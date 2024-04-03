@@ -1,19 +1,30 @@
+import React from "react"
 import { createBrowserRouter } from "react-router-dom"
 
 import DefaultLayout from "@/routes/layouts/DefaultLayout"
 
-import ErrorPage from "@pages/ErrorPage/ErrorPage"
-import HomePage from "@pages/HomePage/HomePage"
-import LoginPage from "@pages/LoginPage/LoginPage"
-import NicknameSetupPage from "@pages/NicknameSetupPage/NicknameSetupPage"
-import ProfileEditPage from "@pages/ProfileEditPage/ProfileEditPage"
-import ProfilePage from "@pages/ProfilePage/ProfilePage"
-import ProjectDetailPage from "@pages/ProjectDetailPage/ProjectDetailPage"
-import ProjectEditPage from "@pages/ProjectEditPage/ProjectEditPage"
-import ProjectListPage from "@pages/ProjectListPage/ProjectListPage"
-import SignUpPage from "@pages/SignUpPage/SignUpPage"
-
 import { determineRedirectLoader } from "./loaders/determineRedirectLoader"
+
+const HomePage = React.lazy(() => import("@/pages/HomePage/HomePage"))
+const ErrorPage = React.lazy(() => import("@/pages/ErrorPage/ErrorPage"))
+const LoginPage = React.lazy(() => import("@/pages/LoginPage/LoginPage"))
+const NicknameSetupPage = React.lazy(
+  () => import("@/pages/NicknameSetupPage/NicknameSetupPage"),
+)
+const ProfileEditPage = React.lazy(
+  () => import("@/pages/ProfileEditPage/ProfileEditPage"),
+)
+const ProfilePage = React.lazy(() => import("@/pages/ProfilePage/ProfilePage"))
+const ProjectDetailPage = React.lazy(
+  () => import("@/pages/ProjectDetailPage/ProjectDetailPage"),
+)
+const ProjectEditPage = React.lazy(
+  () => import("@/pages/ProjectEditPage/ProjectEditPage"),
+)
+const ProjectListPage = React.lazy(
+  () => import("@/pages/ProjectListPage/ProjectListPage"),
+)
+const SignUpPage = React.lazy(() => import("@/pages/SignUpPage/SignUpPage"))
 
 export const router = createBrowserRouter([
   {
