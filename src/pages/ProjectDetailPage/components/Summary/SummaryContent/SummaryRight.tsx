@@ -19,7 +19,6 @@ interface SummaryRightProps {
   overviewImageUrl: ProjectOverViewUrl[]
 }
 const swiperParams = {
-  loop: true,
   pagination: {
     clickable: true,
   },
