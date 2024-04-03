@@ -13,41 +13,31 @@ import ProjectEditPage from "@pages/ProjectEditPage/ProjectEditPage"
 import ProjectListPage from "@pages/ProjectListPage/ProjectListPage"
 import SignUpPage from "@pages/SignUpPage/SignUpPage"
 
-import RootLayout from "./layouts/RootLayout"
 import { determineRedirectLoader } from "./loaders/determineRedirectLoader"
 
 export const router = createBrowserRouter([
   {
-    element: <RootLayout />,
+    path: "/",
+    element: <DefaultLayout />,
     children: [
       {
-        path: "/",
-        element: <DefaultLayout />,
+        index: true,
+        element: <HomePage />,
+      },
+
+      {
+        path: "/project",
         children: [
-          {
-            index: true,
-            element: <HomePage />,
-          },
-          {
-            path: "/project",
-            element: <ProjectListPage />,
-          },
-          {
-            path: "/project/:projectId",
-            element: <ProjectDetailPage />,
-          },
-          {
-            path: "/project/edit",
-            element: <ProjectEditPage />,
-          },
-          {
-            path: "/profile/:userId",
-            element: <ProfilePage />,
-          },
-          {
-            path: "/profile/edit",
-            element: <ProfileEditPage />,
-          },
+          { index: true, element: <ProjectListPage /> },
+          { path: ":projectId", element: <ProjectDetailPage /> },
+          { path: ":edit", element: <ProjectEditPage /> },
+        ],
+      },
+      {
+        path: "/profile",
+        children: [
+          { path: ":userId", element: <ProfilePage /> },
+          { path: "edit", element: <ProfileEditPage /> },
         ],
       },
       {
@@ -59,7 +49,7 @@ export const router = createBrowserRouter([
             element: <LoginPage />,
           },
           {
-            path: "/login/validation",
+            path: ":validation",
             element: <NicknameSetupPage />,
           },
         ],
