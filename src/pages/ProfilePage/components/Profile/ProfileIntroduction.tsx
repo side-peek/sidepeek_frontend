@@ -1,5 +1,5 @@
 import { Box, Flex, Text } from "@chakra-ui/react"
-import { FaSquarePen } from "@react-icons/all-files/fa/FaSquarePen"
+import { FaSquarePen } from "@react-icons/all-files/fa6/FaSquarePen"
 import { ImGithub } from "@react-icons/all-files/im/ImGithub"
 
 import ProfileLink from "./ProfileLink"

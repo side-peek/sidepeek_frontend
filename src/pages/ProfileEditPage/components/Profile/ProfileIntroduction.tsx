@@ -10,7 +10,7 @@ import {
   Textarea,
   useMediaQuery,
 } from "@chakra-ui/react"
-import { FaSquarePen } from "@react-icons/all-files/fa/FaSquarePen"
+import { FaSquarePen } from "@react-icons/all-files/fa6/FaSquarePen"
 import { ImGithub } from "@react-icons/all-files/im/ImGithub"
 import { MdCancel } from "@react-icons/all-files/md/MdCancel"
 
@@ -24,6 +24,10 @@ import {
 } from "@pages/ProfileEditPage/constants/validation"
 
 import { ProfileInfo } from "../../types/types"
+
+FaSquarePen
+
+FaSquarePen
 
 interface Introductions {
   aboutMe: string
