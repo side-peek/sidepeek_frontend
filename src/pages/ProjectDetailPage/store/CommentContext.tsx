@@ -25,7 +25,7 @@ const CommentContext = createContext<CommentContextProps>({
   handleOffEdit: () => {},
   handleDelete: () => {},
   onSubmitEdit: () => {},
-  focusOnFiled: () => {},
+  focusOnField: () => {},
   register: undefined,
   handleSubmit: undefined,
 })
@@ -89,7 +89,7 @@ export const CommentProvider = ({
     handleOffReply()
   }
 
-  const focusOnFiled = useCallback(() => {
+  const focusOnField = useCallback(() => {
     setFocus("content")
   }, [setFocus])
 
@@ -107,7 +107,7 @@ export const CommentProvider = ({
         handleDelete,
         onSubmitEdit,
         register,
-        focusOnFiled,
+        focusOnField,
         handleSubmit,
       }}>
       {children}

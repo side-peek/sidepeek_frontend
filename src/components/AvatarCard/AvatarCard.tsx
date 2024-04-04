@@ -33,5 +33,4 @@ const AvatarCard = Object.assign(AvatarCardMain, {
   Header: AvatarCardHeader,
   Content: AvatarCardContent,
 })
-
 export default AvatarCard
