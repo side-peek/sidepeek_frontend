@@ -8,14 +8,13 @@ const ProfileButton = forwardRef((props, ref) => {
       ref={ref}
       as={Button}
       src={userInfo?.profileImageUrl ?? undefined}
-      alt="profileImg"
       size="lg"
+      name={userInfo?.nickname}
       aria-label="profile popover"
       transition="all 0.2s"
       _hover={{ filter: "brightness(90%)" }}
-      {...props}>
-      {userInfo?.profileImageUrl}
-    </Avatar>
+      {...props}
+    />
   )
 })
 
