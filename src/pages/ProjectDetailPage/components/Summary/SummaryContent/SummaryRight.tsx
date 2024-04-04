@@ -45,6 +45,7 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
               <Image
                 src={overviewImg.url}
                 fallbackSrc={noImage}
+                alt="overviewImg"
               />
             </SwiperSlide>
           ))}
@@ -53,6 +54,7 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
         <Image
           src={noImage}
           fallbackSrc={noImage}
+          alt="defaultOverviewImg"
         />
       )}
       {isLargerThan768 && overviewImageUrl.length > 1 && (

@@ -39,20 +39,28 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
                 <HStack
                   spacing="1rem"
                   flexWrap="wrap">
-                  {skillList.map((skill, index) => (
-                    <CommonTag
-                      leftElement={
-                        <Image
-                          src={skill.iconImageUrl}
-                          w="2rem"
-                        />
-                      }
-                      cursor="default"
-                      label={skill.name}
-                      key={`${skill.id}-${index}`}
-                      fontSize="lg"
-                    />
-                  ))}
+                  {skillList.map((skill, index) => {
+                    return (
+                      <CommonTag
+                        leftElement={
+                          <Image
+                            src={skill.iconImageUrl}
+                            alt={
+                              skill.iconImageUrl
+                                ?.split(/\//)
+                                .at(-1)
+                                ?.split(/\./)[0]
+                            }
+                            w="2rem"
+                          />
+                        }
+                        cursor="default"
+                        label={skill.name}
+                        key={`${skill.id}-${index}`}
+                        fontSize="lg"
+                      />
+                    )
+                  })}
                 </HStack>
               </Stack>
             )
