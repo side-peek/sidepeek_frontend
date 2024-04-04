@@ -103,7 +103,7 @@ const CommentsForm = ({
                   size="lg"
                   _hover={user ? { opacity: 0.5 } : {}}
                   onChange={handleAnonymous}
-                  color={isAnonymous ? "red.700" : "grey.500"}
+                  color="red.700"
                   colorScheme="red">
                   익명
                 </Checkbox>
