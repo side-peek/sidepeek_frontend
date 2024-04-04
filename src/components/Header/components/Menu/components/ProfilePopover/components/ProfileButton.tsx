@@ -8,8 +8,7 @@ const ProfileButton = forwardRef((props, ref) => {
       ref={ref}
       as={Button}
       src={userInfo?.profileImageUrl ?? undefined}
-      iconLabel="profileImg"
-      alt="profileAvatar"
+      alt="profileImg"
       size="lg"
       aria-label="profile popover"
       transition="all 0.2s"
