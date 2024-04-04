@@ -13,7 +13,7 @@ const CommentsAvatar = ({ user, ...props }: CommentsAvatarProps) => {
       _hover={user && { opacity: "0.5" }}
       {...props}
       cursor={user && "pointer"}
-      iconLabel="profileAvatar"
+      iconLabel="profileImg"
     />
   )
 }
