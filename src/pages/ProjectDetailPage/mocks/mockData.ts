@@ -1,10 +1,9 @@
 export const DUMMY_PROJECT_DETAIL = {
-  id: 1,
-  name: "사이드픽",
-  subName: "사이드픽이에요",
-  overview: "사이드픽이에요",
-  thumbnailUrl:
-    "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/image/prod/ab9023ef-2606-47c9-bd62-0a51b3b06891.jpeg",
+  id: 32,
+  name: "사이드픽👀",
+  subName: "좋은 아이디어? 사이드픽에서 찾아봐!",
+  overview: "사이드 프로젝트를 공유하는 사이드픽입니다.",
+  thumbnailUrl: "https://sidepeek.image/imageeUrl",
   overviewImageUrl: [
     {
       id: 3,
@@ -13,6 +12,8 @@ export const DUMMY_PROJECT_DETAIL = {
     {
       id: 4,
       url: "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/image/prod/b8d87d50-08f6-42bd-9486-4c6ce3773217.jpg",
+      id: 4,
+      url: "https://sidepeek.image/img1.jpg",
     },
   ],
   githubUrl: "https://github.com/side-peek/sidepeek_frontend",
@@ -20,89 +21,64 @@ export const DUMMY_PROJECT_DETAIL = {
   viewCount: 18,
   likeCount: 2,
   commentCount: 2,
+  githubUrl: "https://github.com/side-peek",
+  deployUrl: "https://www.sidepeek.com",
+  viewCount: 1,
+  likeCount: 0,
+  commentCount: 0,
   techStacks: [
-    {
-      category: "프론트엔드",
-      skill: [
-        {
-          id: 2,
-          name: "Javascript",
-          iconImageUrl:
-            "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/skill/javascript.svg",
-        },
-        {
-          id: 63,
-          name: "Git",
-          iconImageUrl:
-            "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/skill/git-icon.svg",
-        },
-        {
-          id: 64,
-          name: "Vercel",
-          iconImageUrl:
-            "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/skill/vercel-icon.svg",
-        },
-        {
-          id: 65,
-          name: "Netflify",
-          iconImageUrl:
-            "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/skill/netlify-icon.svg",
-        },
-        {
-          id: 66,
-          name: "Express",
-          iconImageUrl:
-            "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/skill/express.svg",
-        },
-        {
-          id: 1,
-          name: "Spring",
-          iconImageUrl:
-            "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/skill/spring-icon.svg",
-        },
-      ],
-    },
     {
       category: "백엔드",
       skill: [
         {
+          id: 16,
+          name: "Spring",
+          iconImageUrl:
+            "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/skill/spring-icon.png",
+        },
+      ],
+    },
+    {
+      category: "프론트엔드",
+      skill: [
+        {
+          id: 14,
+          name: "React",
+          iconImageUrl:
+            "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/skill/react.png",
+        },
+      ],
+    },
+    {
+      category: "인프라",
+      skill: [
+        {
+          id: 1,
+          name: "AWS EC2",
+          iconImageUrl:
+            "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/skill/aws-ec2.png",
+        },
+        {
           id: 2,
-          name: "Javascript",
+          name: "AWS RDS",
           iconImageUrl:
-            "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/skill/javascript.svg",
-        },
-        {
-          id: 3,
-          name: "Java",
-          iconImageUrl:
-            "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/skill/java.svg",
-        },
-        {
-          id: 4,
-          name: "Notion",
-          iconImageUrl:
-            "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/skill/notion-icon.svg",
-        },
-        {
-          id: 5,
-          name: "Figma",
-          iconImageUrl:
-            "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/skill/figma.svg",
+            "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/skill/aws-rds.png",
         },
       ],
     },
   ],
-  startDate: "2024-03",
+  startDate: "2024-02",
   endDate: "2024-03",
-  ownerId: 11,
+  ownerId: 8,
   members: [
     {
       role: "프론트엔드",
       userSummary: [
         {
-          id: 11,
-          nickname: "훈훈훈오",
-          profileImageUrl: "",
+          id: 7,
+          nickname: "종혁",
+          profileImageUrl:
+            "https://user-images.githubusercontent.com/jonghk.png",
         },
       ],
     },
@@ -110,48 +86,57 @@ export const DUMMY_PROJECT_DETAIL = {
       role: "백엔드",
       userSummary: [
         {
-          id: null,
-          nickname: "종혁",
-          profileImageUrl: "",
+          id: 8,
+          nickname: "예림",
+          profileImageUrl: "https://user-images.githubusercontent.com/yen.png",
         },
         {
-          id: 2,
-          nickname: "훈오훈오훈오",
-          profileImageUrl: "",
+          id: 1,
+          nickname: "의진",
+          profileImageUrl:
+            "https://user-images.githubusercontent.com/uijin.png",
         },
       ],
     },
   ],
-  description: "# 사이드픽이에요 ㅎㅎㅎ",
-  troubleShooting: "# 사이드픽이에요ㅎㅎㅎㅎ",
+  description: "## 사이드픽 기능 설명 Markdown",
+  troubleShooting: "## 사이드픽 트러블 슈팅 Markdown",
   comments: [
     {
-      id: 2,
+      id: 1,
       user: {
-        id: 12,
-        nickname: "바보",
-        profileImageUrl: "",
+        id: 3,
+        nickname: "세희",
+        profileImageUrl: "https://user-images.githubusercontent.com/hailey.png",
       },
       isOwner: false,
       isAnonymous: false,
-      content: "재밌어요!",
-      createdAt: "2024-03-25 02:51:22",
+      content: "우와 이 프로젝트 대박인데요?",
+      createdAt: "2024-03-02 20:17:00",
       replies: [
         {
           id: 3,
-          parentId: 2,
+          parentId: 1,
           user: {
-            id: 5,
-            nickname: "Hailey",
+            id: 1,
+            nickname: "의진",
             profileImageUrl:
-              "https://sidepeek-bucket.s3.ap-northeast-2.amazonaws.com/image/prod/b19c7dbf-7f19-4fb2-93f6-2da818388ede.jpg",
+              "https://user-images.githubusercontent.com/uijin.png",
           },
-          isOwner: false,
+          isOwner: true,
           isAnonymous: false,
-          content: "wow 대박스",
-          createdAt: "2024-03-25 07:52:02",
+          content: "좋게 봐주셔서 감사합니다!",
+          createdAt: "2024-12-12 10:12:00",
         },
       ],
+    },
+    {
+      id: 2,
+      user: null,
+      isOwner: false,
+      isAnonymous: true,
+      content: "LGTM ✨💖",
+      createdAt: "2024-12-12 10:12:00",
     },
   ],
   likeId: null,

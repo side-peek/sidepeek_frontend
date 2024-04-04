@@ -23,5 +23,5 @@ export interface CommentContextProps {
   onSubmitEdit: SubmitHandler<editCommentPayload>
   register?: UseFormRegister<editCommentPayload>
   handleSubmit?: UseFormHandleSubmit<editCommentPayload>
-  focusOnFiled: () => void
+  focusOnField: () => void
 }

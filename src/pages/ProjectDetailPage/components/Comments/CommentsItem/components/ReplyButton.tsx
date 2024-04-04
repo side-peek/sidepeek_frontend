@@ -15,7 +15,7 @@ const ReplyButton = ({ onReply, commentId }: ReplyButtonProps) => {
     <Button
       p="0"
       _hover={{ opacity: "0.5" }}
-      fontSize={isLargerThan768 ? "md" : "sm"}
+      size={isLargerThan768 ? "md" : "sm"}
       onClick={handleOffReply}>
       취소
     </Button>
