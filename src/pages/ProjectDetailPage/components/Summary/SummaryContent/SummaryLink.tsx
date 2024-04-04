@@ -34,7 +34,7 @@ const SummaryLink = ({ deployUrl, githubUrl }: SummaryLinkProps) => {
       {githubUrl && (
         <Button
           leftIcon={<FaGithub />}
-          bgColor="blue.300"
+          bgColor="blue.100"
           onClick={() => handleOpenNewTab(githubUrl)}
           {...SummaryLinkButtonStyle}>
           {"Github"}
