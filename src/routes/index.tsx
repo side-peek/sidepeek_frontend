@@ -28,7 +28,6 @@ const SignUpPage = React.lazy(() => import("@/pages/SignUpPage/SignUpPage"))
 
 export const router = createBrowserRouter([
   {
-    path: "/",
     element: <DefaultLayout />,
     children: [
       {
@@ -51,23 +50,23 @@ export const router = createBrowserRouter([
           { path: "edit", element: <ProfileEditPage /> },
         ],
       },
-      {
-        path: "/login",
-        loader: determineRedirectLoader(false),
-        children: [
-          { index: true, element: <LoginPage /> },
-          { path: ":validation", element: <NicknameSetupPage /> },
-        ],
-      },
-      {
-        path: "/signup",
-        loader: determineRedirectLoader(false),
-        element: <SignUpPage />,
-      },
-      {
-        path: "*",
-        element: <ErrorPage />,
-      },
     ],
+  },
+  {
+    path: "/login",
+    loader: determineRedirectLoader(false),
+    children: [
+      { index: true, element: <LoginPage /> },
+      { path: ":validation", element: <NicknameSetupPage /> },
+    ],
+  },
+  {
+    path: "/signup",
+    loader: determineRedirectLoader(false),
+    element: <SignUpPage />,
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
   },
 ])

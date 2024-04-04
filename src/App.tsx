@@ -1,8 +1,12 @@
+import { Suspense } from "react"
 import { RouterProvider } from "react-router-dom"
 
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react"
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+
+import ErrorBoundaries from "@components/ErrorBoundary/ErrorBoundaries"
+import FullScreenSpinner from "@components/LoadingComponents/FullScreenSpinner"
 
 import { isAuthError } from "@utils/isAuthError"
 
@@ -28,7 +32,11 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={theme}>
         <ColorModeScript initialColorMode="light" />
-        <RouterProvider router={router} />
+        <ErrorBoundaries>
+          <Suspense fallback={<FullScreenSpinner />}>
+            <RouterProvider router={router} />
+          </Suspense>
+        </ErrorBoundaries>
       </ChakraProvider>
     </QueryClientProvider>
   )
