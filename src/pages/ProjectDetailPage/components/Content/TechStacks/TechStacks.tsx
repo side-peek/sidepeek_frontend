@@ -40,17 +40,15 @@ const TechStacks = ({ techStacks }: TechStacksProps) => {
                   spacing="1rem"
                   flexWrap="wrap">
                   {skillList.map((skill, index) => {
+                    console.log(
+                      skill.iconImageUrl?.split(/\//).at(-1)?.split(/\./)[0],
+                    )
                     return (
                       <CommonTag
                         leftElement={
                           <Image
                             src={skill.iconImageUrl}
-                            alt={
-                              skill.iconImageUrl
-                                ?.split(/\//)
-                                .at(-1)
-                                ?.split(/\./)[0]
-                            }
+                            alt=""
                             w="2rem"
                           />
                         }

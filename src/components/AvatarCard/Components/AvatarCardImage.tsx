@@ -10,7 +10,7 @@ const AvatarCardImage = ({ children, ...props }: AvatarCardImageProps) => {
   return (
     <Avatar
       size="xl"
-      name=""
+      aria-label="프로필 이미지"
       {...props}>
       {children}
     </Avatar>
