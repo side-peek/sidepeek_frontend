@@ -4,7 +4,7 @@ import FullScreenSpinner from "@components/LoadingComponents/FullScreenSpinner"
 
 import { ProjectDetailPageMetaData } from "../../components/ MetaData/MetaData"
 import Comments from "./components/Comments/Comments"
-// import Content from "./components/Content/Content"
+import Content from "./components/Content/Content"
 import { ProjectIdProps, withProjectId } from "./components/Hoc/withProjectId"
 import Summary from "./components/Summary/Summary"
 import { useProjectDetailQuery } from "./hooks/queries/useProjectDetailQuery"
@@ -28,7 +28,7 @@ const ProjectDetailPage = ({ projectId }: ProjectIdProps) => {
           p="5rem"
           gap="10rem"
           direction="column">
-          {/* <Content projectDetailInfo={projectDetailInfo} /> */}
+          <Content projectDetailInfo={projectDetailInfo} />
           <Comments comments={projectDetailInfo.comments}></Comments>
         </Flex>
       </Box>
