@@ -24,7 +24,7 @@ export const DefaultMetaData = () => {
       />
       <meta
         property="og:url"
-        content={`${window.location.origin}/${location.pathname}`}
+        content={`${window.location.origin}${location.pathname}`}
       />
       <meta
         name="description"
@@ -46,12 +46,17 @@ export const HomePageMetaData = () => {
 }
 
 export const ProjectDetailPageMetaData = () => {
+  const location = useLocation()
   return (
     <Helmet>
-      <title>프로젝트 성세</title>
+      <title>프로젝트 상세</title>
       <meta
         property="og:title"
         content="사이드 프로젝트 상세"
+      />
+      <meta
+        property="og:url"
+        content={`${window.location.origin}${location.pathname}`}
       />
       <meta
         name="description"
