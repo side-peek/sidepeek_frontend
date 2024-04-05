@@ -43,7 +43,6 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
           {overviewImageUrl?.map((overviewImg) => (
             <SwiperSlide key={overviewImg.id}>
               <Image
-                loading="lazy"
                 src={overviewImg.url}
                 fallbackSrc={noImage}
                 alt="overviewImg"
@@ -54,7 +53,6 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
       ) : (
         <Image
           src={noImage}
-          loading="lazy"
           fallbackSrc={noImage}
           alt="defaultOverviewImg"
         />
