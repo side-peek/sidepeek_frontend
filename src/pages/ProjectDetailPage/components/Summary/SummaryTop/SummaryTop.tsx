@@ -78,6 +78,7 @@ const SummaryTop = ({
         />
         {isLargerThan768 && (
           <Link
+            href="#Comment"
             to="Comment"
             spy={true}
             offset={-100}
