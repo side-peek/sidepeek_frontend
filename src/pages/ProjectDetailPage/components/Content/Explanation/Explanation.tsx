@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-} from "@chakra-ui/react"
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
 import { Project } from "api-models"
 
 import ExplanationItem from "./ExplanationItem"
@@ -24,19 +16,17 @@ const Explanation = ({ projects }: ExplanationProps) => {
         variant="enclosed"
         fontFamily="SCDream_Bold">
         <TabList>
-          <Tab borderTopRadius="1rem">
-            <Button
-              fontSize="2xl"
-              _hover={{ opacity: 0.5 }}>
-              기능
-            </Button>
+          <Tab
+            borderTopRadius="1rem"
+            fontSize="2xl"
+            _hover={{ opacity: 0.5 }}>
+            기능
           </Tab>
-          <Tab borderTopRadius="1rem">
-            <Button
-              fontSize="2xl"
-              _hover={{ opacity: 0.5 }}>
-              트러블 슈팅
-            </Button>
+          <Tab
+            borderTopRadius="1rem"
+            fontSize="2xl"
+            _hover={{ opacity: 0.5 }}>
+            트러블 슈팅
           </Tab>
         </TabList>
         <TabPanels>

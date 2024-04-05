@@ -1,7 +1,7 @@
-import { IoLogOutOutline } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
 
 import { Button, Icon, Text, useDisclosure, useToast } from "@chakra-ui/react"
+import { IoLogOutOutline } from "@react-icons/all-files/io5/IoLogOutOutline"
 
 import { LOGOUT_MESSAGE } from "@components/Header/constants/messages"
 

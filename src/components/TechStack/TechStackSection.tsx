@@ -1,5 +1,3 @@
-import { AiFillCloseSquare } from "react-icons/ai"
-
 import {
   Box,
   Button,
@@ -10,6 +8,7 @@ import {
   Text,
   useMediaQuery,
 } from "@chakra-ui/react"
+import { AiFillCloseSquare } from "@react-icons/all-files/ai/AiFillCloseSquare"
 import { Skill } from "api-models"
 
 import CloseButtonTag from "@components/Tag/components/CloseButtonTag"

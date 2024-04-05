@@ -1,7 +1,6 @@
-import { FaGithub } from "react-icons/fa"
-import { TbWorld } from "react-icons/tb"
-
 import { Button, HStack } from "@chakra-ui/react"
+import { FaGithub } from "@react-icons/all-files/fa/FaGithub"
+import { TbWorld } from "@react-icons/all-files/tb/TbWorld"
 
 interface SummaryLinkProps {
   deployUrl: string
@@ -35,7 +34,7 @@ const SummaryLink = ({ deployUrl, githubUrl }: SummaryLinkProps) => {
       {githubUrl && (
         <Button
           leftIcon={<FaGithub />}
-          bgColor="blue.300"
+          bgColor="blue.100"
           onClick={() => handleOpenNewTab(githubUrl)}
           {...SummaryLinkButtonStyle}>
           {"Github"}

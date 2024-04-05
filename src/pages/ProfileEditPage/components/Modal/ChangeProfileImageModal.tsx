@@ -1,5 +1,4 @@
 import { useRef } from "react"
-import { GoPlus } from "react-icons/go"
 
 import {
   Box,
@@ -18,6 +17,7 @@ import {
   Text,
   useMediaQuery,
 } from "@chakra-ui/react"
+import { GoPlus } from "@react-icons/all-files/go/GoPlus"
 
 import useFileUpload from "@pages/ProfileEditPage/hooks/useFileUpload"
 import { ProfileInfo } from "@pages/ProfileEditPage/types/types"

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
-import { IoMdSearch } from "react-icons/io"
 
 import { Box, Button, Center, Icon, useMediaQuery } from "@chakra-ui/react"
+import { IoMdSearch } from "@react-icons/all-files/io/IoMdSearch"
 
 import CommonInput from "@components/Input/CommonInput"
 

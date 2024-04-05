@@ -1,5 +1,6 @@
 import { MouseEventHandler } from "react"
-import { MdCancel } from "react-icons/md"
+
+import { MdCancel } from "@react-icons/all-files/md/MdCancel"
 
 import { CommonTagProps } from "../types/commonTagProps"
 import CommonTag from "./CommonTag"

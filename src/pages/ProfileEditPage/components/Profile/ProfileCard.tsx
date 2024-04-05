@@ -1,6 +1,3 @@
-import { AiFillCaretDown, AiFillEdit } from "react-icons/ai"
-import { FaPlus } from "react-icons/fa6"
-
 import {
   Avatar,
   Box,
@@ -15,6 +12,9 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react"
+import { AiFillCaretDown } from "@react-icons/all-files/ai/AiFillCaretDown"
+import { AiFillEdit } from "@react-icons/all-files/ai/AiFillEdit"
+import { FaPlus } from "@react-icons/all-files/fa/FaPlus"
 
 import { CareerType, JobType, ProfileInfo } from "../../types/types"
 import ChangeNicknameModal from "../Modal/ChangeNicknameModal"

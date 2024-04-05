@@ -1,5 +1,4 @@
 import { useRef } from "react"
-import { IoSearch } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
 
 import {
@@ -10,6 +9,7 @@ import {
   InputRightElement,
   Spacer,
 } from "@chakra-ui/react"
+import { IoSearch } from "@react-icons/all-files/io5/IoSearch"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
 
 import LogoLink from "@components/LogoLink/LogoLink"

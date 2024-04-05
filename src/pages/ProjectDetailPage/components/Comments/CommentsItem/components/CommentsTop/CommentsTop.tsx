@@ -30,7 +30,7 @@ const CommentTop = ({ comment }: CommentTopProps) => {
         </Text>
         {isLargerThan768 && (
           <Text
-            color="grey.500"
+            color="blue.100"
             fontSize="md">
             {dateToTimeago(comment.createdAt)}
           </Text>

@@ -1,7 +1,7 @@
-import { GrPowerReset } from "react-icons/gr"
 import { useNavigate } from "react-router-dom"
 
 import { Center, Icon, IconButton, Text, VStack } from "@chakra-ui/react"
+import { GrPowerReset } from "@react-icons/all-files/gr/GrPowerReset"
 
 interface UncaughtFallbackProps {
   error: Error

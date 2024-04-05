@@ -1,7 +1,4 @@
 import { FieldErrors, UseFormRegister, UseFormSetValue } from "react-hook-form"
-import { FaSquarePen } from "react-icons/fa6"
-import { ImGithub } from "react-icons/im"
-import { MdCancel } from "react-icons/md"
 
 import {
   Box,
@@ -13,6 +10,9 @@ import {
   Textarea,
   useMediaQuery,
 } from "@chakra-ui/react"
+import { FaSquarePen } from "@react-icons/all-files/fa6/FaSquarePen"
+import { ImGithub } from "@react-icons/all-files/im/ImGithub"
+import { MdCancel } from "@react-icons/all-files/md/MdCancel"
 
 import { ErrorMessage } from "@components/ErrorMessage/ErrorMessage"
 import CommonInput from "@components/Input/CommonInput"
@@ -24,6 +24,10 @@ import {
 } from "@pages/ProfileEditPage/constants/validation"
 
 import { ProfileInfo } from "../../types/types"
+
+FaSquarePen
+
+FaSquarePen
 
 interface Introductions {
   aboutMe: string

@@ -1,7 +1,8 @@
 import { useRef } from "react"
-import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md"
 
 import { Box, Image, useMediaQuery } from "@chakra-ui/react"
+import { MdArrowBackIosNew } from "@react-icons/all-files/md/MdArrowBackIosNew"
+import { MdArrowForwardIos } from "@react-icons/all-files/md/MdArrowForwardIos"
 import { ProjectOverViewUrl } from "api-models"
 import "swiper/css"
 import "swiper/css/pagination"
@@ -18,7 +19,6 @@ interface SummaryRightProps {
   overviewImageUrl: ProjectOverViewUrl[]
 }
 const swiperParams = {
-  loop: true,
   pagination: {
     clickable: true,
   },
@@ -43,8 +43,10 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
           {overviewImageUrl?.map((overviewImg) => (
             <SwiperSlide key={overviewImg.id}>
               <Image
+                loading="lazy"
                 src={overviewImg.url}
                 fallbackSrc={noImage}
+                alt="overviewImg"
               />
             </SwiperSlide>
           ))}
@@ -52,7 +54,9 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
       ) : (
         <Image
           src={noImage}
+          loading="lazy"
           fallbackSrc={noImage}
+          alt="defaultOverviewImg"
         />
       )}
       {isLargerThan768 && overviewImageUrl.length > 1 && (

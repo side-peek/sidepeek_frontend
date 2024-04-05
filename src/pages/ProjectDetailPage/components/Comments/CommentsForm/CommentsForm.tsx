@@ -103,7 +103,7 @@ const CommentsForm = ({
                   size="lg"
                   _hover={user ? { opacity: 0.5 } : {}}
                   onChange={handleAnonymous}
-                  color={isAnonymous ? "red.200" : "grey.500"}
+                  color="red.700"
                   colorScheme="red">
                   익명
                 </Checkbox>
@@ -118,11 +118,10 @@ const CommentsForm = ({
             bgColor="blue.100"
             borderRadius="0"
             borderTopRightRadius="1rem"
-            opacity={!isSubmitting && isValid ? "1" : "0.3"}
             color="white"
             fontSize="xl"
             disabled={isSubmitting || !user}
-            cursor={!isSubmitting && isValid ? "pointer" : "default"}
+            cursor={!isSubmitting && isValid ? "pointer" : "not-allowed"}
             type="submit">
             입력
           </Button>

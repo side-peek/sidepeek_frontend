@@ -1,7 +1,7 @@
 import { useEffect } from "react"
-import { IoMdCheckmarkCircle } from "react-icons/io"
 
 import { Button, ButtonProps, Icon, Text, useToast } from "@chakra-ui/react"
+import { IoMdCheckmarkCircle } from "@react-icons/all-files/io/IoMdCheckmarkCircle"
 
 import { DOUBLE_CHECK_MESSAGE } from "@pages/SignUpPage/constants/toastMessages"
 import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
