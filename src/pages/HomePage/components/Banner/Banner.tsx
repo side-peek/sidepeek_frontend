@@ -19,7 +19,7 @@ import "swiper/css/pagination"
 import { Autoplay, Navigation, Pagination } from "swiper/modules"
 import { SwiperSlide } from "swiper/react"
 
-import noImage from "@assets/images/noImage.jpg"
+import noImage from "@assets/images/noImage.webp"
 import sidepeekBlue from "@assets/images/sidepeek_blue.png"
 
 import { CustomSwiper } from "./Banner.style"

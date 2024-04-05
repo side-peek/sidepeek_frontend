@@ -15,7 +15,7 @@ import { IoMdHeart } from "@react-icons/all-files/io/IoMdHeart"
 import { IoMdHeartEmpty } from "@react-icons/all-files/io/IoMdHeartEmpty"
 import { MdRemoveRedEye } from "@react-icons/all-files/md/MdRemoveRedEye"
 
-import noImage from "@assets/images/noImage.jpg"
+import noImage from "@assets/images/noImage.webp"
 
 interface ProjectCardProps {
   imgUrl: string
