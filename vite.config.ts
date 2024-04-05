@@ -14,7 +14,6 @@ export default defineConfig(({ command }) => ({
       ext: ".gz",
     }),
   ],
-  publicDir: command === "serve" ? "public" : false,
   server: {
     proxy: {
       "/api": {
