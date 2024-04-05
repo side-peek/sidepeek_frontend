@@ -2,3 +2,5 @@
 User-agent: *
 Disallow:
 
+Sitemap: https://sidepeek.site/sitemap.xml
+
