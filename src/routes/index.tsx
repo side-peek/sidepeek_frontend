@@ -1,5 +1,5 @@
 import React from "react"
-import { createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter, useRouteError } from "react-router-dom"
 
 import DefaultLayout from "@/routes/layouts/DefaultLayout"
 
@@ -29,6 +29,9 @@ const SignUpPage = React.lazy(() => import("@/pages/SignUpPage/SignUpPage"))
 export const router = createBrowserRouter([
   {
     element: <DefaultLayout />,
+    ErrorBoundary: () => {
+      throw useRouteError()
+    },
     children: [
       {
         index: true,
