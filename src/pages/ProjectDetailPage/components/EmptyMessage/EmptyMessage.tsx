@@ -8,7 +8,7 @@ interface EmptyMessageProps {
 const EmptyMessage = ({ type }: EmptyMessageProps) => {
   return (
     <Text
-      color="grey.500"
+      color="blue.100"
       fontSize="lg">
       {EMPTY_MESSAGE[type]}
     </Text>

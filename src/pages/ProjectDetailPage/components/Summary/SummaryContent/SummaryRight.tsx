@@ -10,7 +10,7 @@ import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules"
 import { SwiperSlide } from "swiper/react"
 import { Swiper as SwiperCore } from "swiper/types"
 
-import noImage from "@assets/images/noImage.jpg"
+import noImage from "@assets/images/noImage.webp"
 
 import { StyledSwiper } from "../../../styles/SwiperSlide.styles"
 import SwiperButton from "./SwiperButton"
@@ -43,7 +43,6 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
           {overviewImageUrl?.map((overviewImg) => (
             <SwiperSlide key={overviewImg.id}>
               <Image
-                loading="lazy"
                 src={overviewImg.url}
                 fallbackSrc={noImage}
                 alt="overviewImg"
@@ -53,8 +52,10 @@ const SummaryRight = ({ overviewImageUrl }: SummaryRightProps) => {
         </StyledSwiper>
       ) : (
         <Image
+          width="100%"
+          height="100%"
+          objectFit="cover"
           src={noImage}
-          loading="lazy"
           fallbackSrc={noImage}
           alt="defaultOverviewImg"
         />
