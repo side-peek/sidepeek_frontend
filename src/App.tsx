@@ -1,5 +1,4 @@
 import { Suspense } from "react"
-import { HelmetProvider } from "react-helmet-async"
 import { RouterProvider } from "react-router-dom"
 
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react"
@@ -35,9 +34,7 @@ const App = () => {
         <ColorModeScript initialColorMode="light" />
         <ErrorBoundaries>
           <Suspense fallback={<FullScreenSpinner />}>
-            <HelmetProvider>
-              <RouterProvider router={router} />
-            </HelmetProvider>
+            <RouterProvider router={router} />
           </Suspense>
         </ErrorBoundaries>
       </ChakraProvider>

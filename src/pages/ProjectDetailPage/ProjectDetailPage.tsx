@@ -2,7 +2,6 @@ import { Box, Fade, Flex } from "@chakra-ui/react"
 
 import FullScreenSpinner from "@components/LoadingComponents/FullScreenSpinner"
 
-import { ProjectDetailPageMetaData } from "../../components/ MetaData/MetaData"
 import Comments from "./components/Comments/Comments"
 import Content from "./components/Content/Content"
 import { ProjectIdProps, withProjectId } from "./components/Hoc/withProjectId"
@@ -18,7 +17,6 @@ const ProjectDetailPage = ({ projectId }: ProjectIdProps) => {
 
   return (
     <Fade in={true}>
-      <ProjectDetailPageMetaData />
       <Box w="100%">
         <Summary projectDetailInfo={projectDetailInfo} />
         <Flex
