@@ -60,7 +60,7 @@ export const router = createBrowserRouter([
     loader: determineRedirectLoader(false),
     children: [
       { index: true, element: <LoginPage /> },
-      { path: ":validation", element: <NicknameSetupPage /> },
+      { path: "validation", element: <NicknameSetupPage /> },
     ],
   },
   {

@@ -36,7 +36,6 @@ export const useNicknameSetup = () => {
     isError,
   } = useGithubLoginQuery({
     code: searchParams.get("code") ?? "",
-    state: searchParams.get("state") ?? "",
   })
 
   const method = useForm<NicknameFormType>()

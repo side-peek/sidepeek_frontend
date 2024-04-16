@@ -170,12 +170,11 @@ declare module "api-models" {
 
   export type postEmailLoginResponseType = AuthResponseType
 
-  export type getGithubLoginPayload = {
+  export type postGithubLoginPayload = {
     code: string
-    state: string
   }
 
-  export type getGithubLoginResponseType = {
+  export type postGithubLoginResponseType = {
     providerType: string
   } & AuthResponseType
 
