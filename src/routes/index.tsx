@@ -3,6 +3,7 @@ import { createBrowserRouter, useRouteError } from "react-router-dom"
 
 import DefaultLayout from "@/routes/layouts/DefaultLayout"
 
+import RootLayout from "./layouts/RootLayout"
 import { determineRedirectLoader } from "./loaders/determineRedirectLoader"
 
 const HomePage = React.lazy(() => import("@/pages/HomePage/HomePage"))
@@ -28,48 +29,53 @@ const SignUpPage = React.lazy(() => import("@/pages/SignUpPage/SignUpPage"))
 
 export const router = createBrowserRouter([
   {
-    element: <DefaultLayout />,
+    element: <RootLayout />,
     ErrorBoundary: () => {
       throw useRouteError()
     },
     children: [
       {
-        index: true,
-        element: <HomePage />,
-      },
-
-      {
-        path: "/project",
+        path: "/",
+        element: <DefaultLayout />,
         children: [
-          { index: true, element: <ProjectListPage /> },
-          { path: ":projectId", element: <ProjectDetailPage /> },
-          { path: "edit", element: <ProjectEditPage /> },
+          {
+            index: true,
+            element: <HomePage />,
+          },
+          {
+            path: "/project",
+            children: [
+              { index: true, element: <ProjectListPage /> },
+              { path: ":projectId", element: <ProjectDetailPage /> },
+              { path: "edit", element: <ProjectEditPage /> },
+            ],
+          },
+          {
+            path: "/profile",
+            children: [
+              { path: ":userId", element: <ProfilePage /> },
+              { path: "edit", element: <ProfileEditPage /> },
+            ],
+          },
         ],
       },
       {
-        path: "/profile",
+        path: "/login",
+        loader: determineRedirectLoader(false),
         children: [
-          { path: ":userId", element: <ProfilePage /> },
-          { path: "edit", element: <ProfileEditPage /> },
+          { index: true, element: <LoginPage /> },
+          { path: "validation", element: <NicknameSetupPage /> },
         ],
       },
+      {
+        path: "/signup",
+        loader: determineRedirectLoader(false),
+        element: <SignUpPage />,
+      },
+      {
+        path: "*",
+        element: <ErrorPage />,
+      },
     ],
-  },
-  {
-    path: "/login",
-    loader: determineRedirectLoader(false),
-    children: [
-      { index: true, element: <LoginPage /> },
-      { path: "validation", element: <NicknameSetupPage /> },
-    ],
-  },
-  {
-    path: "/signup",
-    loader: determineRedirectLoader(false),
-    element: <SignUpPage />,
-  },
-  {
-    path: "*",
-    element: <ErrorPage />,
   },
 ])
