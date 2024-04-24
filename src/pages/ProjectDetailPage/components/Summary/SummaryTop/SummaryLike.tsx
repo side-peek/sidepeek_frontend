@@ -37,7 +37,9 @@ const SummaryLike = ({ count, likeId, projectId }: SummaryLikeProps) => {
         deleteLikeMutation({ likeId })
       }
     } else {
-      postLikeMutation({ projectId: Number(projectId) })
+      if (!likeId) {
+        postLikeMutation({ projectId: Number(projectId) })
+      }
     }
   }, 500)
 
