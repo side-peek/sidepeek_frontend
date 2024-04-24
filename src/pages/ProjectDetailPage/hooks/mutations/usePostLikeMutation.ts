@@ -2,7 +2,7 @@ import { useEffect } from "react"
 
 import { useToast } from "@chakra-ui/react"
 import { postLikePayload } from "api-models"
-import { Project } from "api-models"
+// import { Project } from "api-models"
 import { isAxiosError } from "axios"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
@@ -17,45 +17,46 @@ import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
 import { QUERYKEY } from "@constants/queryKey"
 
-export const usePostLikeMutation = () => {
+export const usePostLikeMutation = (projectId: number) => {
   const queryClient = useQueryClient()
   const toast = useToast(toastOptions)
 
   const { mutate: postLikeMutation, error } = useMutation({
     mutationKey: [QUERYKEY.POST_LIKE],
     mutationFn: (data: postLikePayload) => postLike(data),
-    onMutate: async ({ projectId }) => {
-      await queryClient.cancelQueries({
-        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
-      })
+    // onMutate: async ({ projectId }) => {
+    //   await queryClient.cancelQueries({
+    //     queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
+    //   })
 
-      const previousLikeState = queryClient.getQueryData<Project>([
-        QUERYKEY.PROJECT_DETAIL,
-        projectId,
-      ])
+    //   const previousLikeState = queryClient.getQueryData<Project>([
+    //     QUERYKEY.PROJECT_DETAIL,
+    //     projectId,
+    //   ])
 
-      if (previousLikeState) {
-        const updatedLikeState = {
-          ...previousLikeState,
-          likeId: 99999999,
-          likeCount: previousLikeState.likeCount + 1,
-        }
-        queryClient.setQueryData(
-          [QUERYKEY.PROJECT_DETAIL, projectId],
-          updatedLikeState,
-        )
-      }
+    //   if (previousLikeState) {
+    //     const updatedLikeState = {
+    //       ...previousLikeState,
+    //       likeId: 99999999,
+    //       likeCount: previousLikeState.likeCount + 1,
+    //     }
+    //     queryClient.setQueryData(
+    //       [QUERYKEY.PROJECT_DETAIL, projectId],
+    //       updatedLikeState,
+    //     )
+    //   }
 
-      return { previousLikeState }
-    },
+    //   return { previousLikeState }
+    // },
 
-    onError: (_, __, context) => {
-      queryClient.setQueryData(
-        [QUERYKEY.PROJECT_DETAIL],
-        context?.previousLikeState,
-      )
-    },
-    onSettled: (_, __, { projectId }) => {
+    // onError: (_, __, context) => {
+    //   console.log("에러")
+    //   queryClient.setQueryData(
+    //     [QUERYKEY.PROJECT_DETAIL],
+    //     context?.previousLikeState,
+    //   )
+    // },
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })

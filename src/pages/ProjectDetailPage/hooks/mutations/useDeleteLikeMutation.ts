@@ -2,7 +2,7 @@ import { useEffect } from "react"
 
 import { useToast } from "@chakra-ui/react"
 import { deleteLikePayload } from "api-models"
-import { Project } from "api-models"
+// import { Project } from "api-models"
 import { isAxiosError } from "axios"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
@@ -24,37 +24,37 @@ export const useDeleteLikeMutation = (projectId: number) => {
   const { mutate: deleteLikeMutation, error } = useMutation({
     mutationKey: [QUERYKEY.DELETE_LIKE],
     mutationFn: (data: deleteLikePayload) => deleteLike(data),
-    onMutate: async () => {
-      await queryClient.cancelQueries({
-        queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
-      })
-      const previousLikeState = queryClient.getQueryData<Project>([
-        QUERYKEY.PROJECT_DETAIL,
-        projectId,
-      ])
+    // onMutate: async () => {
+    //   await queryClient.cancelQueries({
+    //     queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
+    //   })
+    //   const previousLikeState = queryClient.getQueryData<Project>([
+    //     QUERYKEY.PROJECT_DETAIL,
+    //     projectId,
+    //   ])
 
-      if (previousLikeState) {
-        const updatedLikeState = {
-          ...previousLikeState,
-          likeId: null,
-          likeCount: previousLikeState.likeCount - 1,
-        }
-        queryClient.setQueryData(
-          [QUERYKEY.PROJECT_DETAIL, projectId],
-          updatedLikeState,
-        )
-      }
+    //   if (previousLikeState) {
+    //     const updatedLikeState = {
+    //       ...previousLikeState,
+    //       likeId: null,
+    //       likeCount: previousLikeState.likeCount - 1,
+    //     }
+    //     queryClient.setQueryData(
+    //       [QUERYKEY.PROJECT_DETAIL, projectId],
+    //       updatedLikeState,
+    //     )
+    //   }
 
-      return { previousLikeState }
-    },
+    //   return { previousLikeState }
+    // },
 
-    onError: (_, __, context) => {
-      queryClient.setQueryData(
-        [QUERYKEY.PROJECT_DETAIL, projectId],
-        context?.previousLikeState,
-      )
-    },
-    onSettled: () => {
+    // onError: (_, __, context) => {
+    //   queryClient.setQueryData(
+    //     [QUERYKEY.PROJECT_DETAIL, projectId],
+    //     context?.previousLikeState,
+    //   )
+    // },
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })

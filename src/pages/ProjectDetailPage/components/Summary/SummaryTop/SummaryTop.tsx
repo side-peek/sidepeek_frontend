@@ -2,17 +2,14 @@ import { Link } from "react-scroll"
 
 import { HStack, useDisclosure, useMediaQuery } from "@chakra-ui/react"
 import { FaRegComment } from "@react-icons/all-files/fa/FaRegComment"
-import { IoMdHeart } from "@react-icons/all-files/io/IoMdHeart"
-import { IoMdHeartEmpty } from "@react-icons/all-files/io/IoMdHeartEmpty"
 import { MdRemoveRedEye } from "@react-icons/all-files/md/MdRemoveRedEye"
 import { useUserInfoData } from "@services/caches/useUserInfoData"
 
-import { useDeleteLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteLikeMutation"
 import { useDeleteProjectMutation } from "@pages/ProjectDetailPage/hooks/mutations/useDeleteProjectMutation"
-import { usePostLikeMutation } from "@pages/ProjectDetailPage/hooks/mutations/usePostLikeMutation"
 
 import DeleteCheckModal from "../../DeleteCheckModal"
 import { ProjectIdProps, withProjectId } from "../../Hoc/withProjectId"
+import SummaryLike from "./SummaryLike"
 import SummaryPopOver from "./SummaryPopOver"
 import SummaryTopIcon from "./SummaryTopIcon"
 
@@ -34,8 +31,6 @@ const SummaryTop = ({
   const [isLargerThan1200] = useMediaQuery(["(min-width: 1200px)"])
   const [isLargerThan768] = useMediaQuery(["(min-width: 768px)"])
 
-  const { postLikeMutation } = usePostLikeMutation()
-  const { deleteLikeMutation } = useDeleteLikeMutation(Number(projectId))
   const { isOpen, onOpen: handleOpenDeleteModal, onClose } = useDisclosure()
 
   const { deleteProjectMutation } = useDeleteProjectMutation()
@@ -61,21 +56,12 @@ const SummaryTop = ({
             fontSize={isLargerThan1200 ? "2.7rem" : "2rem"}
           />
         )}
-
-        <SummaryTopIcon
+        <SummaryLike
           count={likeCount}
           likeId={likeId}
-          aria-label="likeButton"
-          icon={likeId ? <IoMdHeart /> : <IoMdHeartEmpty />}
-          fontSize={isLargerThan1200 ? "2.7rem" : "2rem"}
-          onClick={(likeId: number | null) => {
-            if (likeId) {
-              deleteLikeMutation({ likeId })
-            } else {
-              postLikeMutation({ projectId: Number(projectId) })
-            }
-          }}
+          projectId={projectId}
         />
+
         {isLargerThan768 && (
           <Link
             href="#Comment"
