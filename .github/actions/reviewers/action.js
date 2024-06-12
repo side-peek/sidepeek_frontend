@@ -16,14 +16,14 @@ try {
     pull_number,
   })
 
-  if (response.data.users.length < 2) {
+  // if (response.data.users.length < 2) {
     await octokit.rest.pulls.requestReviewers({
       owner,
       repo,
       pull_number,
       reviewers: reviewers,
     })
-  }
+  // }
 } catch (error) {
   setFailed(error.message)
 }
