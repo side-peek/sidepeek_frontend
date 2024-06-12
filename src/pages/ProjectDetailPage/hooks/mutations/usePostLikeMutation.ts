@@ -17,7 +17,7 @@ import { toastOptions } from "@pages/SignUpPage/constants/toastOptions"
 
 import { QUERYKEY } from "@constants/queryKey"
 
-export const usePostLikeMutation = () => {
+export const usePostLikeMutation = (projectId: number) => {
   const queryClient = useQueryClient()
   const toast = useToast(toastOptions)
 
@@ -34,18 +34,6 @@ export const usePostLikeMutation = () => {
         projectId,
       ])
 
-      if (previousLikeState) {
-        const updatedLikeState = {
-          ...previousLikeState,
-          likeId: 99999999,
-          likeCount: previousLikeState.likeCount + 1,
-        }
-        queryClient.setQueryData(
-          [QUERYKEY.PROJECT_DETAIL, projectId],
-          updatedLikeState,
-        )
-      }
-
       return { previousLikeState }
     },
 
@@ -55,7 +43,7 @@ export const usePostLikeMutation = () => {
         context?.previousLikeState,
       )
     },
-    onSettled: (_, __, { projectId }) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })

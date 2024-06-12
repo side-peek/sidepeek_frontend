@@ -33,18 +33,6 @@ export const useDeleteLikeMutation = (projectId: number) => {
         projectId,
       ])
 
-      if (previousLikeState) {
-        const updatedLikeState = {
-          ...previousLikeState,
-          likeId: null,
-          likeCount: previousLikeState.likeCount - 1,
-        }
-        queryClient.setQueryData(
-          [QUERYKEY.PROJECT_DETAIL, projectId],
-          updatedLikeState,
-        )
-      }
-
       return { previousLikeState }
     },
 
@@ -54,7 +42,7 @@ export const useDeleteLikeMutation = (projectId: number) => {
         context?.previousLikeState,
       )
     },
-    onSettled: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERYKEY.PROJECT_DETAIL, projectId],
       })
