@@ -44,32 +44,6 @@
 </tr>
 </table>
 
-## ⭐ 핵심 기능
-
-### 로그인
-
-<img src="https://github.com/side-peek/sidepeek_frontend/assets/106851561/9a8893c8-f2d1-42ee-9723-849e644092e2" />
-
-### 게시글 작성
-
-<img src="https://github.com/side-peek/sidepeek_frontend/assets/106851561/ea540d14-1706-42be-81a7-83badb5dc354" />
-
-### 게시글 조회
-
-<img src="https://github.com/side-peek/sidepeek_frontend/assets/106851561/5e656b1b-8aba-47ed-83c5-178af930f9b8" />
-
-### 검색 및 필터
-
-<img src="https://github.com/side-peek/sidepeek_frontend/assets/106851561/ced4eddd-7c97-4cd4-beb3-c363ff9d4334" />
-
-### 내 정보(조회)
-
-<img src="https://github.com/side-peek/sidepeek_frontend/assets/106851561/7b6204c2-7752-469a-88fa-4d7e1b4ef981" />
-
-### 내 정보(변경)
-
-<img src="https://github.com/side-peek/sidepeek_frontend/assets/106851561/f7c31a95-b0e4-4851-922a-a6da1c221df8" />
-
 ## 🛠️ 기술 스택
 
 <img src="https://github.com/side-peek/sidepeek_frontend/assets/106851561/43318fb3-dcca-4649-b38a-3595c8b18954" />
