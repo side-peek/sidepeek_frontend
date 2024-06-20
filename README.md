@@ -13,19 +13,19 @@
 <table>
 <tr align="center">
 <td>
-<img src="https://github.com/Whoknow77.png?">
+<img src="https://github.com/Whoknow77.png?" width="100">
 </td>
 <td>
-<img src="https://github.com/hellosonic-r.png?">
+<img src="https://github.com/hellosonic-r.png?" width="100">
 </td>
 <td>
-<img src="https://github.com/wdgWon.png?">
+<img src="https://github.com/wdgWon.png?" width="100">
 </td>
 <td>
-<img src="https://github.com/miloul.png">
+<img src="https://github.com/miloul.png" width="100">
 </td>
 <td>
-<img src="https://github.com/whdgur5717.png?">
+<img src="https://github.com/whdgur5717.png?" width="100">
 </td>
 </tr>
 <tr align="center">
