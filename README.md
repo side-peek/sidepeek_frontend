@@ -58,7 +58,7 @@
 
 - 프로젝트를 진행하면서 새로 알게 된 내용, 문제 해결등을 바탕으로 문서화를 하여 팀 내에서 공유했어요.
 
-    <img src="https://github.com/side-peek/sidepeek_frontend/assets/106851561/ea13aec5-a952-41ec-b832-1244b8743403">
+    <img width="730" alt="image" src="https://github.com/user-attachments/assets/ba6069a0-ac5c-491e-8679-98323d453dde" />
 
 ### 2. 생산성을 높이기 위해 다음과 같은 그라운드 룰을 세우자
 
