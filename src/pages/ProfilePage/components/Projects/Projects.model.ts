@@ -18,6 +18,7 @@ export const useUserProjects = ({
   const { data } = useQuery({
     queryKey: ["projects", userId, type, page, size],
     queryFn: () => getUserProjects({ userId, type, page, size }),
+    staleTime: 1000 * 60 * 5,
   })
   return { data }
 }
